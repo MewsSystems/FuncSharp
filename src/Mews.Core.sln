@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mews.Core", "Mews.Core\Mews.Core.csproj", "{284E38F1-C32A-4091-8A95-33DAB7769248}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mews.Core.Tests", "Mews.Core.Tests\Mews.Core.Tests.csproj", "{7B840ABF-122F-483A-B8BA-D59861A1ED2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{284E38F1-C32A-4091-8A95-33DAB7769248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284E38F1-C32A-4091-8A95-33DAB7769248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284E38F1-C32A-4091-8A95-33DAB7769248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284E38F1-C32A-4091-8A95-33DAB7769248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B840ABF-122F-483A-B8BA-D59861A1ED2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B840ABF-122F-483A-B8BA-D59861A1ED2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B840ABF-122F-483A-B8BA-D59861A1ED2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B840ABF-122F-483A-B8BA-D59861A1ED2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
