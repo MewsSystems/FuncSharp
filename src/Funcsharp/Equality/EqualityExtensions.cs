@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mews.Core.Equality
+namespace Funcsharp.Equality
 {
     /// <summary>
     /// Extensions of .NET equality and objects.

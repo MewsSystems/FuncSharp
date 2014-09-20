@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mews.Core.Equality;
+using Funcsharp.Equality;
 
-namespace Mews.Core.ProductTypes
+namespace Funcsharp.ProductTypes
 {
     /// <summary>
     /// A set of methods available for all types that inherit the IProductType interface. Also provides default implementations
@@ -16,25 +16,22 @@ namespace Mews.Core.ProductTypes
         /// </summary>
         public static string ProductToString(this IProduct product)
         {
-            return ProductToString(product.ProductElements);
+            return ProductToString(product.ProductValues);
         }
 
         /// <summary>
-        /// Returns string representation of a product consisting of the specified product elements.
+        /// Returns string representation of a product consisting of the specified product values.
         /// </summary>
-        public static string ProductToString(IEnumerable<object> productElements)
+        public static string ProductToString(IEnumerable<object> productValues)
         {
             var b = new StringBuilder("(");
 
-            var first = true;
-            foreach (var element in productElements)
+            var prefix = "";
+            foreach (var value in productValues)
             {
-                if (!first)
-                {
-                    b.Append(", ");
-                }
-                b.Append(element == null ? "null" : element.ToString());
-                first = false;
+                b.Append(prefix);
+                b.Append(value == null ? "null" : value.ToString());
+                prefix = ", ";
             }
 
             b.Append(")");
@@ -42,24 +39,24 @@ namespace Mews.Core.ProductTypes
         }
 
         /// <summary>
-        /// Returns hash code of the specified product computed from the product elements.
+        /// Returns hash code of the specified product computed from the product values.
         /// </summary>
         public static int ProductHashCode(this IProduct product)
         {
-            return ProductHashCode(product.ProductElements);
+            return ProductHashCode(product.ProductValues);
         }
 
         /// <summary>
-        /// Returns hash code of a product consisting of the specified product elements.
+        /// Returns hash code of a product consisting of the specified product values.
         /// </summary>
-        public static int ProductHashCode(IEnumerable<object> productElements)
+        public static int ProductHashCode(IEnumerable<object> productValues)
         {
             var result = 19;
-            foreach (var element in productElements)
+            foreach (var value in productValues)
             {
                 unchecked
                 {
-                    result += 41 * (element != null ? element.GetHashCode() : 0);
+                    result += 41 * (value != null ? value.GetHashCode() : 0);
                 }
             }
             return result;
@@ -74,7 +71,7 @@ namespace Mews.Core.ProductTypes
         {
             return
                 p1.FastEquals(p2) ??
-                p1.ProductElements.SequenceEqual(((TProduct)p2).ProductElements);
+                p1.ProductValues.SequenceEqual(((TProduct)p2).ProductValues);
         }
     }
 }

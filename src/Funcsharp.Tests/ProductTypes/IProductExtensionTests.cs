@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Mews.Core.ProductTypes;
+using Funcsharp.ProductTypes;
 using Xunit;
 
-namespace Mews.Core.Tests.ProductTypes
+namespace Funcsharp.Tests.ProductTypes
 {
-    public class IProductTypeExtensionTests
+    public class IProductExtensionTests
     {
         [Fact]
         public void ProductToStringIsCorrect()
@@ -37,12 +37,12 @@ namespace Mews.Core.Tests.ProductTypes
 
     public class SampleProductType : IProduct
     {
-        public SampleProductType(params object[] elements)
+        public SampleProductType(params object[] values)
         {
-            ProductElements = elements;
+            ProductValues = values;
         }
 
-        public IEnumerable<object> ProductElements { get; private set; }
+        public IEnumerable<object> ProductValues { get; private set; }
 
         public override string ToString()
         {

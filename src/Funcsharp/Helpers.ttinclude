@@ -1,0 +1,76 @@
+﻿<#+
+    public int GetDimensionLimit()
+    {
+        return 6;
+    }
+
+    public string Type(int i, string name = "T")
+    {
+        return name + i;
+    }
+
+    public string Types(int i, string name = "T", int? except = null, bool appendComma = false)
+    {
+        return List(i, x => Type(x, name), except: except, appendComma: appendComma);
+    }
+
+    public string TypeBracket(int i, string name = "T", int? except = null)
+    {
+        if (i == 0 || except.HasValue && i == 1)
+        {
+            return "";
+        }
+        return "<" + Types(i, name: name, except: except) + ">";
+    }
+
+    public string VectorType(int i, string name = "T", int? except = null)
+    {
+        var arity = i - (except.HasValue ? 1 : 0);
+        return "Vector" + arity + TypeBracket(i, name: name, except: except);
+    }
+
+    public string Value(int i, string name = "T")
+    {
+        return Type(i, name: name).ToLowerInvariant();
+    }
+
+    public string Values(int i, string name = "T", int? except = null) 
+    {
+        return Types(i, name: name).ToLowerInvariant();
+    }
+
+    public string Parameters(int i, string name = "T", int? except = null, bool appendComma = false)
+    {
+        return List(i, x => Type(x, name: name) + " " + Value(x, name: name), except, appendComma);
+    }
+
+    public string Property(int i, string name = "Value", string accessor = "")
+    {
+        return accessor + name + i;
+    }
+
+    public string Properties(int i, string name = "Value", string accessor = "", int? except = null, bool appendComma = false) 
+    {
+        return List(i, x => Property(x, name, accessor), except, appendComma);
+    }
+
+    public string Indent(int i)
+    {
+        return new String(' ', i);
+    }
+
+    public string List(int i, Func<int, string> itemGenerator, int? except = null, bool appendComma = false)
+    {
+        var numbers = Enumerable.Range(1, i);
+        if (except.HasValue)
+        {
+            numbers = numbers.Except(new[] { except.Value });
+        }
+        var result = String.Join(", ", numbers.Select(itemGenerator));
+        if (appendComma && !String.IsNullOrEmpty(result))
+        {
+            result += ", ";
+        }
+        return result;
+    }
+#>

@@ -7,8 +7,8 @@
     <ProjectGuid>{7B840ABF-122F-483A-B8BA-D59861A1ED2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mews.Core.Tests</RootNamespace>
-    <AssemblyName>Mews.Core.Tests</AssemblyName>
+    <RootNamespace>Funcsharp.Tests</RootNamespace>
+    <AssemblyName>Funcsharp.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,21 +37,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductTypes\IProductTypeExtensionTests.cs" />
+    <Compile Include="Equality\EqualityExtensionsTests.cs" />
+    <Compile Include="Options\OptionTests.cs" />
+    <Compile Include="ProductTypes\IProductExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vectors\VectorExtensionsTests.cs" />
+    <Compile Include="Vectors\VectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mews.Core\Mews.Core.csproj">
+    <ProjectReference Include="..\Funcsharp\Funcsharp.csproj">
       <Project>{284e38f1-c32a-4091-8a95-33dab7769248}</Project>
-      <Name>Mews.Core</Name>
+      <Name>Funcsharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

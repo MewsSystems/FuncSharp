@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mews.Core", "Mews.Core\Mews.Core.csproj", "{284E38F1-C32A-4091-8A95-33DAB7769248}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funcsharp", "Funcsharp\Funcsharp.csproj", "{284E38F1-C32A-4091-8A95-33DAB7769248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mews.Core.Tests", "Mews.Core.Tests\Mews.Core.Tests.csproj", "{7B840ABF-122F-483A-B8BA-D59861A1ED2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funcsharp.Tests", "Funcsharp.Tests\Funcsharp.Tests.csproj", "{7B840ABF-122F-483A-B8BA-D59861A1ED2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

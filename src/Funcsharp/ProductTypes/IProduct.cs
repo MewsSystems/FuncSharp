@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mews.Core.ProductTypes
+namespace Funcsharp.ProductTypes
 {
     /// <summary>
     /// A type that is a compound of other types. Can be understood as a cartesian product of types, e.g. T1 × T2 × T3.
@@ -10,8 +10,8 @@ namespace Mews.Core.ProductTypes
     public interface IProduct
     {
         /// <summary>
-        /// Elements of the product. Should never return null.
+        /// Values of the product. Should never return null.
         /// </summary>
-        IEnumerable<object> ProductElements { get; }
+        IEnumerable<object> ProductValues { get; }
     }
 }
