@@ -1,4 +1,4 @@
-﻿namespace Funcsharp.Equality
+﻿namespace FuncSharp.Equality
 {
     /// <summary>
     /// An equality relation for the specified type.

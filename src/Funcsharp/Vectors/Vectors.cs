@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Funcsharp.Vectors
+namespace FuncSharp.Vectors
 {
     public partial class Vector
     {

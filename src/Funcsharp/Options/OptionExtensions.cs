@@ -1,4 +1,4 @@
-﻿namespace Funcsharp.Options
+﻿namespace FuncSharp.Options
 {
     public static class OptionExtensions
     {

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Funcsharp.Vectors;
+using FuncSharp.Vectors;
 using Xunit;
 
-namespace Funcsharp.Tests.Vectors
+namespace FuncSharp.Tests.Vectors
 {
     public class VectorTests
     {

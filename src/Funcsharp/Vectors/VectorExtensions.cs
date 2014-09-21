@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Funcsharp.Vectors
+namespace FuncSharp.Vectors
 {
     /// <summary>
     /// Extensions of the vectors and conversions of .NET classes to/from vectors.

@@ -7,8 +7,8 @@
     <ProjectGuid>{7B840ABF-122F-483A-B8BA-D59861A1ED2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Funcsharp.Tests</RootNamespace>
-    <AssemblyName>Funcsharp.Tests</AssemblyName>
+    <RootNamespace>FuncSharp.Tests</RootNamespace>
+    <AssemblyName>FuncSharp.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,9 +49,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Funcsharp\Funcsharp.csproj">
+    <ProjectReference Include="..\Funcsharp\FuncSharp.csproj">
       <Project>{284e38f1-c32a-4091-8a95-33dab7769248}</Project>
-      <Name>Funcsharp</Name>
+      <Name>FuncSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

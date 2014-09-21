@@ -1,8 +1,8 @@
 ﻿using System;
-using Funcsharp.Options;
+using FuncSharp.Options;
 using Xunit;
 
-namespace Funcsharp.Tests.Options
+namespace FuncSharp.Tests.Options
 {
     public class OptionTests
     {

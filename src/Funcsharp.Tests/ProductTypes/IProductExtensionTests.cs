@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Funcsharp.ProductTypes;
+using FuncSharp.ProductTypes;
 using Xunit;
 
-namespace Funcsharp.Tests.ProductTypes
+namespace FuncSharp.Tests.ProductTypes
 {
     public class IProductExtensionTests
     {

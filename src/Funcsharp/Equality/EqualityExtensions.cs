@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Funcsharp.Equality
+namespace FuncSharp.Equality
 {
     /// <summary>
     /// Extensions of .NET equality and objects.

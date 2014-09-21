@@ -7,8 +7,8 @@
     <ProjectGuid>{284E38F1-C32A-4091-8A95-33DAB7769248}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Funcsharp</RootNamespace>
-    <AssemblyName>Funcsharp</AssemblyName>
+    <RootNamespace>FuncSharp</RootNamespace>
+    <AssemblyName>FuncSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

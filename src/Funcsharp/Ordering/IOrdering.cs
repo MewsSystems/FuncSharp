@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Funcsharp.Equality;
+using FuncSharp.Equality;
 
-namespace Funcsharp.Ordering
+namespace FuncSharp.Ordering
 {
     /// <summary>
     /// An ordering relation for the specified type.

@@ -1,4 +1,4 @@
-﻿namespace Funcsharp.Intervals
+﻿namespace FuncSharp.Intervals
 {
     public class Bound<T>
     {

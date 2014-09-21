@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Funcsharp.Reflection
+namespace FuncSharp.Reflection
 {
     public static class TypeExtensions
     {

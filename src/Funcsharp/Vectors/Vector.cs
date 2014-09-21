@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Funcsharp.ProductTypes;
+using FuncSharp.ProductTypes;
 
-namespace Funcsharp.Vectors
+namespace FuncSharp.Vectors
 {
     /// <summary>
     /// Base class of all immutable vectors.

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Funcsharp.ProductTypes;
-using Funcsharp.Reflection;
+using FuncSharp.ProductTypes;
+using FuncSharp.Reflection;
 
-namespace Funcsharp.Options
+namespace FuncSharp.Options
 {
     public abstract class Option<TValue> : IProduct
     {

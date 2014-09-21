@@ -1,8 +1,8 @@
 ﻿using System;
-using Funcsharp.Intervals;
+using FuncSharp.Intervals;
 using Xunit;
 
-namespace Funcsharp.Tests.Intervals
+namespace FuncSharp.Tests.Intervals
 {
     public class IntervalTests
     {

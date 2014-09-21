@@ -1,4 +1,4 @@
-﻿namespace Funcsharp.Intervals
+﻿namespace FuncSharp.Intervals
 {
     public enum BoundType
     {

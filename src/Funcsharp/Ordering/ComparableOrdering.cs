@@ -1,7 +1,7 @@
 ﻿using System;
-using Funcsharp.Equality;
+using FuncSharp.Equality;
 
-namespace Funcsharp.Ordering
+namespace FuncSharp.Ordering
 {
     public class ComparableOrdering<T> : IOrdering<T>
         where T : IComparable<T>

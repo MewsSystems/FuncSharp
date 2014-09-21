@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Funcsharp.Options
+namespace FuncSharp.Options
 {
     public class Some<T> : Option<T>
     {

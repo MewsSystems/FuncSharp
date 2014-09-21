@@ -1,7 +1,7 @@
-﻿using Funcsharp.Equality;
+﻿using FuncSharp.Equality;
 using Xunit;
 
-namespace Funcsharp.Tests.ProductTypes
+namespace FuncSharp.Tests.ProductTypes
 {
     public class EqualityExtensionsTests
     {

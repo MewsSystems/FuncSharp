@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Funcsharp.Options;
-using Funcsharp.Ordering;
-using Funcsharp.ProductTypes;
+using FuncSharp.Options;
+using FuncSharp.Ordering;
+using FuncSharp.ProductTypes;
 
-namespace Funcsharp.Intervals
+namespace FuncSharp.Intervals
 {
     public class Interval<T> : IProduct
         where T : IComparable<T>

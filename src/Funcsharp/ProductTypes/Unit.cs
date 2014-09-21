@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Funcsharp.ProductTypes
+namespace FuncSharp.ProductTypes
 {
     /// <summary>
     /// The Unit type (product of zero types). It has only one instance.

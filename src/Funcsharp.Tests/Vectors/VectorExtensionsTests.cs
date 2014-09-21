@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Funcsharp.Vectors.Tests
+namespace FuncSharp.Vectors.Tests
 {
     public class VectorExtensionsTests
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Funcsharp.Equality;
+using FuncSharp.Equality;
 
-namespace Funcsharp.ProductTypes
+namespace FuncSharp.ProductTypes
 {
     /// <summary>
     /// A set of methods available for all types that inherit the IProductType interface. Also provides default implementations

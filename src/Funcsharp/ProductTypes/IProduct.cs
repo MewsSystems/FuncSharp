@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Funcsharp.ProductTypes
+namespace FuncSharp.ProductTypes
 {
     /// <summary>
     /// A type that is a compound of other types. Can be understood as a cartesian product of types, e.g. T1 × T2 × T3.

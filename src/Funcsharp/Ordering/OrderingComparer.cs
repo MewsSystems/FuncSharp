@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Funcsharp.Ordering
+namespace FuncSharp.Ordering
 {
     internal class OrderingComparer<A> : IComparer<A>
     {

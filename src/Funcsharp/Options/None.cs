@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Funcsharp.Options
+namespace FuncSharp.Options
 {
     public class None<T> : Option<T>
     {

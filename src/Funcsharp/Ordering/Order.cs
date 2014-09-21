@@ -1,4 +1,4 @@
-﻿namespace Funcsharp.Ordering
+﻿namespace FuncSharp.Ordering
 {
     public enum Order
     {
