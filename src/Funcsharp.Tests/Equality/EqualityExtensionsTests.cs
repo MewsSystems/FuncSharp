@@ -75,7 +75,6 @@ namespace FuncSharp.Tests.ProductTypes
             {
                 return Id.GetHashCode();
             }
-
             public override bool Equals(object obj)
             {
                 var objTester = obj as EqualityTester;

@@ -71,12 +71,10 @@ namespace FuncSharp.Options
         {
             return this.ProductHashCode();
         }
-
         public override bool Equals(object obj)
         {
             return this.ProductEquals(obj);
         }
-
         public override string ToString()
         {
             return this.ProductToString();

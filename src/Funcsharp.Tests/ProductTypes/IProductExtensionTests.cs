@@ -48,12 +48,10 @@ namespace FuncSharp.Tests.ProductTypes
         {
             return this.ProductToString();
         }
-
         public override int GetHashCode()
         {
             return this.ProductHashCode();
         }
-
         public override bool Equals(object obj)
         {
             return this.ProductEquals(obj);

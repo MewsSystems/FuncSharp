@@ -32,12 +32,10 @@ namespace FuncSharp.ProductTypes
         {
             return 19;
         }
-
         public override bool Equals(object obj)
         {
             return this == obj;
         }
-
         public override string ToString()
         {
             return "()";

@@ -28,35 +28,6 @@ namespace FuncSharp.Vectors
         }
 
         /// <summary>
-        /// Returns hash code of the current vector.
-        /// </summary>
-        public override int GetHashCode()
-        {
-            if (!hashCodeCache.HasValue)
-            {
-                hashCodeCache = this.ProductHashCode();
-            }
-
-            return hashCodeCache.Value;
-        }
-
-        /// <summary>
-        /// Returns whether the current vector is structurally equal to the specified object.
-        /// </summary>
-        public override bool Equals(object obj)
-        {
-            return this.ProductEquals(obj);
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current vector.
-        /// </summary>
-        public override string ToString()
-        {
-            return this.ProductToString();
-        }
-
-        /// <summary>
         /// Returns an enumerator that iterates through the vector values.
         /// </summary>
         IEnumerator<object> IEnumerable<object>.GetEnumerator()
@@ -70,6 +41,24 @@ namespace FuncSharp.Vectors
         IEnumerator IEnumerable.GetEnumerator()
         {
             return (this as IEnumerable<object>).GetEnumerator();
+        }
+
+        public override int GetHashCode()
+        {
+            if (!hashCodeCache.HasValue)
+            {
+                hashCodeCache = this.ProductHashCode();
+            }
+
+            return hashCodeCache.Value;
+        }
+        public override bool Equals(object obj)
+        {
+            return this.ProductEquals(obj);
+        }
+        public override string ToString()
+        {
+            return this.ProductToString();
         }
     }
 }

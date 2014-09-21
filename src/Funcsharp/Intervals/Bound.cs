@@ -1,6 +1,9 @@
-﻿namespace FuncSharp.Intervals
+﻿using System.Collections.Generic;
+using FuncSharp.ProductTypes;
+
+namespace FuncSharp.Intervals
 {
-    public class Bound<T>
+    public class Bound<T> : IProduct
     {
         /// <summary>
         /// Creates a new bound with the specified value and type.
@@ -21,13 +24,45 @@
         /// </summary>
         public BoundType Type { get; private set; }
 
+        /// <summary>
+        /// Values of the bound as a product.
+        /// </summary>
+        public IEnumerable<object> ProductValues
+        {
+            get
+            {
+                yield return Value;
+                yield return Type;
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the bound is open (exclusive).
+        /// </summary>
         public bool IsOpen
         {
             get { return Type == BoundType.Open; }
         }
+
+        /// <summary>
+        /// Returns whether the bound is closed (inclusive).
+        /// </summary>
         public bool IsClosed
         {
             get { return Type == BoundType.Closed; }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ProductHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            return this.ProductEquals(obj);
+        }
+        public override string ToString()
+        {
+            return this.ProductToString();
         }
     }
 

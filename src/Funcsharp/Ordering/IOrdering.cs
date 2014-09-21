@@ -30,7 +30,7 @@ namespace FuncSharp.Ordering
         /// <summary>
         /// Returns whether the first element is greater than the second element.
         /// </summary>
-        public static bool Grater<A>(this IOrdering<A> o, A a1, A a2)
+        public static bool Greater<A>(this IOrdering<A> o, A a1, A a2)
         {
             return !o.LessOrEqual(a1, a2);
         }
