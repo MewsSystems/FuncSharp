@@ -16,7 +16,13 @@ namespace Funcsharp.ProductTypes
         /// </summary>
         public static string ProductToString(this IProduct product)
         {
-            return product.GetType().Name + ProductToString(product.ProductValues);
+            var typeName = product.GetType().Name;
+            var backtickIndex = typeName.IndexOf("`");
+            if (backtickIndex > 0)
+            {
+                typeName = typeName.Substring(0, backtickIndex);
+            }
+            return typeName + ProductToString(product.ProductValues);
         }
 
         /// <summary>
