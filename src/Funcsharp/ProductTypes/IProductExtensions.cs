@@ -16,7 +16,7 @@ namespace Funcsharp.ProductTypes
         /// </summary>
         public static string ProductToString(this IProduct product)
         {
-            return ProductToString(product.ProductValues);
+            return product.GetType().Name + ProductToString(product.ProductValues);
         }
 
         /// <summary>

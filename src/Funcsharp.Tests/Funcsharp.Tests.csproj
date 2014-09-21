@@ -41,6 +41,7 @@
     <Compile Include="Options\OptionTests.cs" />
     <Compile Include="ProductTypes\IProductExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Intervals\IntervalTests.cs" />
     <Compile Include="Vectors\VectorExtensionsTests.cs" />
     <Compile Include="Vectors\VectorTests.cs" />
   </ItemGroup>

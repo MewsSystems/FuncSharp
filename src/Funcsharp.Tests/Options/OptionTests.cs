@@ -13,7 +13,7 @@ namespace Funcsharp.Tests.Options
         }
 
         [Fact]
-        public void CreationWorks()
+        public void CreationTest()
         {
             Assert.IsType<Some<int>>(Option.Create(42));
             Assert.IsType<Some<int>>(Option.Create(42 as int?));
@@ -27,32 +27,51 @@ namespace Funcsharp.Tests.Options
         }
 
         [Fact]
-        public void IsEmptyReturnsCorrectValues()
+        public void IsEmptyTest()
         {
             Assert.False(Option.Create(42).IsEmpty);
             Assert.False(Option.Create(42 as int?).IsEmpty);
-            Assert.True(Option.Create(null as int?).IsEmpty);
-
-            Assert.False(Option.Create(new object()).IsEmpty);
-            Assert.True(Option.Create(null as object).IsEmpty);
-
-            Assert.False(Option.Create("foo").IsEmpty);
-            Assert.True(Option.Create(null as string).IsEmpty);
+            Assert.True(Option.None<int>().IsEmpty);
         }
 
         [Fact]
-        public void ValueWorks()
+        public void GetTest()
         {
-            Assert.Equal(Option.Create(42).Value, 42);
-            Assert.Equal(Option.Create(42 as int?).Value, 42);
-            Assert.Throws<InvalidOperationException>(() => Option.Create(null as int?).Value);
+            Assert.Equal(42, Option.Create(42).Get());
+            Assert.Equal(42, Option.Create(42 as int?).Get());
+            Assert.Throws<InvalidOperationException>(() => Option.None<int>().Get());
+        }
 
-            var o = new object();
-            Assert.Equal(Option.Create(o).Value, o);
-            Assert.Throws<InvalidOperationException>(() => Option.Create(null as object).Value);
+        [Fact]
+        public void GetOrElseTest()
+        {
+            Assert.Equal(42, Option.Create(42).GetOrElse(() => 123));
+            Assert.Equal(123, Option.None<int>().GetOrElse(() => 123));
+        }
 
-            Assert.Equal(Option.Create("foo").Value, "foo");
-            Assert.Throws<InvalidOperationException>(() => Option.Create(null as string).Value);
+        [Fact]
+        public void GetOrDefaultTest()
+        {
+            Assert.Equal(42, Option.Create(42).GetOrDefault());
+            Assert.Equal(0, Option.None<int>().GetOrDefault());
+        }
+
+        [Fact]
+        public void MapTest()
+        {
+            Assert.Equal(84, Option.Create(42).Map(v => v * 2).Get());
+            Assert.Equal("xxxxx", Option.Create(5).Map(v => new String('x', v)).Get());
+            Assert.True(Option.None<int>().Map(v => v * 2).IsEmpty);
+        }
+
+        [Fact]
+        public void FlatMapTest()
+        {
+            Assert.Equal(84, Option.Create(42).FlatMap(v => Option.Create(v * 2)).Get());
+            Assert.True(Option.Create(42).FlatMap(v => Option.None<int>()).IsEmpty);
+
+            Assert.True(Option.None<int>().FlatMap(v => Option.Create(v * 2)).IsEmpty);
+            Assert.True(Option.None<int>().FlatMap(v => Option.None<int>()).IsEmpty);
         }
     }
 }

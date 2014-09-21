@@ -35,13 +35,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Equality\EqualityExtensions.cs" />
+    <Compile Include="Equality\IEquality.cs" />
+    <Compile Include="Options\OptionExtensions.cs" />
     <Compile Include="Options\Some.cs" />
     <Compile Include="Options\None.cs" />
     <Compile Include="Options\Option.cs" />
+    <Compile Include="Ordering\ComparableOrdering.cs" />
+    <Compile Include="Ordering\IOrdering.cs" />
+    <Compile Include="Ordering\Order.cs" />
+    <Compile Include="Ordering\OrderingComparer.cs" />
     <Compile Include="ProductTypes\IProduct.cs" />
     <Compile Include="ProductTypes\IProductExtensions.cs" />
     <Compile Include="ProductTypes\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Intervals\Interval.cs" />
+    <Compile Include="Intervals\Bound.cs" />
+    <Compile Include="Intervals\BoundType.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Vectors\Vector.cs" />
     <Compile Include="Vectors\VectorExtensions.cs">
@@ -69,6 +78,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

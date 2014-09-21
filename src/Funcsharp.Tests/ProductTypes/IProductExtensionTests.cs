@@ -13,9 +13,9 @@ namespace Funcsharp.Tests.ProductTypes
             var p1 = new SampleProductType(1, "foo", null);
             var p2 = new SampleProductType(2, "bar", p1);
 
-            Assert.Equal("()", p0.ToString());
-            Assert.Equal("(1, foo, null)", p1.ToString());
-            Assert.Equal("(2, bar, (1, foo, null))", p2.ToString());
+            Assert.Equal("SampleProductType()", p0.ToString());
+            Assert.Equal("SampleProductType(1, foo, null)", p1.ToString());
+            Assert.Equal("SampleProductType(2, bar, SampleProductType(1, foo, null))", p2.ToString());
         }
 
         [Fact]

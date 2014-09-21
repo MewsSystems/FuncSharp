@@ -1,10 +1,13 @@
-﻿namespace Funcsharp.Options
+﻿using System;
+using System.Collections.Generic;
+
+namespace Funcsharp.Options
 {
     public class Some<T> : Option<T>
     {
         private T value;
 
-        public Some(T value)
+        internal Some(T value)
         {
             this.value = value;
         }
@@ -14,9 +17,29 @@
             get { return false; }
         }
 
-        public override T Value
+        public override IEnumerable<object> ProductValues
         {
-            get { return value; }
+            get { yield return value; }
+        }
+
+        public override T Get()
+        {
+            return value;
+        }
+
+        public override T GetOrElse(Func<T> otherwise)
+        {
+            return value;
+        }
+
+        public override Option<TNewValue> Map<TNewValue>(Func<T, TNewValue> f)
+        {
+            return new Some<TNewValue>(f(value));
+        }
+
+        public override Option<TNewValue> FlatMap<TNewValue>(Func<T, Option<TNewValue>> f)
+        {
+            return f(value);
         }
     }
 }
