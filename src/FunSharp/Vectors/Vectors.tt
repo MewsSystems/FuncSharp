@@ -1,0 +1,80 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../Helpers.ttinclude" #>
+using System.Collections.Generic;
+using System.Linq;
+
+namespace FuncSharp
+{
+    public partial class Vector
+    {
+<#  for (var j = 0; j < GetDimensionLimit(); j++) { #>
+        /// <summary>
+        /// Creates a new <#= j #>-dimensional vector.
+        /// </summary>
+        public static <#= VectorType(j) #> Create<#= TypeBracket(j) #>(<#= Parameters(j) #>)
+        {
+            return new <#= VectorType(j) #>(<#= Values(j) #>);
+        }
+
+<#  } #>
+    }
+
+
+<#  for (var i = 0; i < GetDimensionLimit(); i++) { #>
+    /// <summary>
+    /// A <#= i #>-dimensional strongly-typed immutable vector.
+    /// </summary>
+    public class <#= VectorType(i) #> : Vector
+    {
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional vector.
+        /// </summary>
+        internal Vector<#= i #>(<#= Parameters(i) #>)
+        {
+<#      for (var j = 1; j <= i; j++) { #>
+            <#= Property(j) #> = <#= Value(j) #>;
+<#      } #>
+        }
+<#      for (var j = 1; j <= i; j++) { #>
+
+        /// <summary>
+        /// Value of the vector in the dimension <#= j #>.
+        /// </summary>
+        public <#= Type(j) #> <#= Property(j) #> { get; private set; }
+<#      } #>
+<#      for (var j = 1; j <= i; j++) { #>
+
+        /// <summary>
+        /// The same vector with <#= Property(j) #> omitted.
+        /// </summary>
+        public <#= VectorType(i, except: j) #> ExceptValue<#= j #>
+        {
+            get { return Vector.Create(<#= Properties(i, except: j) #>); }
+        }
+<#      } #>
+
+        /// <summary>
+        /// Values of the vector in order of the dimensions.
+        /// </summary>
+        public override IEnumerable<object> Values
+        {
+            get
+            {
+<#      if (i > 0) { #>
+<#          for (var j = 1; j <= i; j++) { #>
+                yield return <#= Property(j) #>;
+<#          } #>
+<#      } else { #>
+                return Enumerable.Empty<object>();
+<#      } #>
+            }
+        }
+    }
+
+<#  } #>
+}

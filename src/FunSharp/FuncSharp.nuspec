@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>FuncSharp</id>
+    <version>$version$</version>
+    <authors>Honza Široký</authors>
+    <owners>Honza Široký</owners>
+    <projectUrl>https://github.com/siroky/FuncSharp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET library of classes that bring some more advanced functional concepts into C#.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+  </metadata>
+</package>

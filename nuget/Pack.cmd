@@ -1,0 +1,1 @@
+NuGet.exe Pack ../src/FuncSharp/FuncSharp.csproj -Prop Configuration=Release
