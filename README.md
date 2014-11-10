@@ -1,4 +1,4 @@
-# FuncSharp - Functional C#
+# FuncSharp - Functional C&#35;
 
 ### Product Types
 
