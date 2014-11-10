@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="../Helpers.ttinclude" #>
+<#@ include file="../CodeGen/Helpers.ttinclude" #>
 using System.Collections.Generic;
 using System.Linq;
 

@@ -65,7 +65,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Helpers.ttinclude" />
+    <None Include="CodeGen\Helpers.ttinclude" />
     <None Include="Vectors\VectorExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorExtensions.cs</LastGenOutput>
