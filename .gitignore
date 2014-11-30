@@ -5,4 +5,4 @@
 *.[Cc]ache
 *.bak
 *.ncb
-Mews.DataCubes.*.nupkg
+src/packages
