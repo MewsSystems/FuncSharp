@@ -1,5 +1,4 @@
 ﻿using System;
-using FuncSharp;
 using Xunit;
 
 namespace FuncSharp.Tests.Options
@@ -15,15 +14,7 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void CreationTest()
         {
-            Assert.IsType<Some<int>>(Option.Create(42));
-            Assert.IsType<Some<int>>(Option.Create(42 as int?));
-            Assert.IsType<None<int>>(Option.Create(null as int?));
 
-            Assert.IsType<Some<object>>(Option.Create(new object()));
-            Assert.IsType<None<object>>(Option.Create(null as object));
-
-            Assert.IsType<Some<string>>(Option.Create("foo"));
-            Assert.IsType<None<string>>(Option.Create(null as string));
         }
 
         [Fact]
@@ -31,7 +22,13 @@ namespace FuncSharp.Tests.Options
         {
             Assert.False(Option.Create(42).IsEmpty);
             Assert.False(Option.Create(42 as int?).IsEmpty);
-            Assert.True(Option.None<int>().IsEmpty);
+            Assert.True(Option.Create(null as int?).IsEmpty);
+
+            Assert.False(Option.Create(new object()).IsEmpty);
+            Assert.True(Option.Create(null as object).IsEmpty);
+
+            Assert.False(Option.Create("foo").IsEmpty);
+            Assert.True(Option.Create(null as string).IsEmpty);
         }
 
         [Fact]
@@ -40,6 +37,13 @@ namespace FuncSharp.Tests.Options
             Assert.Equal(42, Option.Create(42).Value);
             Assert.Equal(42, Option.Create(42 as int?).Value);
             Assert.Throws<InvalidOperationException>(() => Option.None<int>().Value);
+        }
+
+        [Fact]
+        public void OrElseTest()
+        {
+            Assert.Equal(Option.Some(42), Option.Create(42).OrElse(() => Option.Some(53)));
+            Assert.Equal(Option.Some(42), Option.None<int>().OrElse(() => Option.Some(42)));
         }
 
         [Fact]

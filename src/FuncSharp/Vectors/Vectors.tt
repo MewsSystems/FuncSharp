@@ -24,7 +24,6 @@ namespace FuncSharp
 <#  } #>
     }
 
-
 <#  for (var i = 0; i < GetDimensionLimit(); i++) { #>
     /// <summary>
     /// A <#= i #>-dimensional strongly-typed immutable vector.

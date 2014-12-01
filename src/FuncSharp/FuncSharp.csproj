@@ -36,9 +36,8 @@
   <ItemGroup>
     <Compile Include="Equality\EqualityExtensions.cs" />
     <Compile Include="Equality\IEquality.cs" />
+    <Compile Include="Options\IOption.cs" />
     <Compile Include="Options\OptionExtensions.cs" />
-    <Compile Include="Options\Some.cs" />
-    <Compile Include="Options\None.cs" />
     <Compile Include="Options\Option.cs" />
     <Compile Include="Ordering\ComparableOrdering.cs" />
     <Compile Include="Ordering\IOrdering.cs" />

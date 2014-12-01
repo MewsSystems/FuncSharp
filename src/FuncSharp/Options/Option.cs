@@ -1,77 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
-    public abstract class Option<TValue> : IProduct
+    public static class Option
+    {
+        /// <summary>
+        /// Creates a new option based on the specified value. Returns Some if the value is non-null, 
+        /// None otherwise.
+        /// </summary>
+        public static IOption<T> Create<T>(T value)
+        {
+            if (value != null)
+            {
+                return Some<T>(value);
+            }
+            return None<T>();
+        }
+
+        /// <summary>
+        /// Creates a new option based on the specified value. Returns Some if the value is non-null, 
+        /// None otherwise.
+        /// </summary>
+        public static IOption<T> Create<T>(T? value)
+            where T : struct
+        {
+            if (value.HasValue)
+            {
+                return Some<T>(value.Value);
+            }
+            return None<T>();
+        }
+
+        /// <summary>
+        /// An option with value.
+        /// </summary>
+        public static IOption<T> Some<T>(T value)
+        {
+            return new Some<T>(value);
+        }
+
+        /// <summary>
+        /// An empty option.
+        /// </summary>
+        public static IOption<T> None<T>()
+        {
+            return FuncSharp.None<T>.Instance;
+        }
+    }
+
+    internal abstract class Option<A> : IOption<A>
     {
         /// <summary>
         /// Static initializer ensuring that option of nullable type cannot be constructed.
         /// </summary>
         static Option()
         {
-            var t = typeof(TValue);
+            var t = typeof(A);
             if (t.IsNullable())
             {
                 throw new InvalidOperationException("An option of nullable type " + t + " isn't supported.");
             }
         }
 
-        /// <summary>
-        /// Values of the option.
-        /// </summary>
-        public TValue Value
-        {
-            get { return Get(); }
-        }
+        public abstract A Value { get; }
 
-        /// <summary>
-        /// Returns whether the option contains a value.
-        /// </summary>
+        public abstract bool IsEmpty { get; }
+
         public bool NonEmpty
         {
             get { return !IsEmpty; }
         }
 
-        /// <summary>
-        /// Returns whether the option is empty (doesn't contain any value).
-        /// </summary>
-        public abstract bool IsEmpty { get; }
-
-        /// <summary>
-        /// Values of the option as product type.
-        /// </summary>
         public abstract IEnumerable<object> ProductValues { get; }
-
-        /// <summary>
-        /// Returns value of the option.
-        /// </summary>
-        public abstract TValue Get();
-
-        /// <summary>
-        /// Returns value of the option if it's present. If not, returns value created by the otherwise function.
-        /// </summary>
-        public abstract TValue GetOrElse(Func<TValue> otherwise);
-
-        /// <summary>
-        /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="TValue"/> type.
-        /// </summary>
-        public TValue GetOrDefault()
-        {
-            return GetOrElse(() => default(TValue));
-        }
-
-        /// <summary>
-        /// Maps value of the current option (if present) into a new value using the specified function and 
-        /// returns a new option with that new value.
-        /// </summary>
-        public abstract Option<TNewValue> Map<TNewValue>(Func<TValue, TNewValue> f);
-
-        /// <summary>
-        /// Maps value of the current option (if present) into a new option using the specified function and 
-        /// returns that new option.
-        /// </summary>
-        public abstract Option<TNewValue> FlatMap<TNewValue>(Func<TValue, Option<TNewValue>> f);
 
         public override int GetHashCode()
         {
@@ -87,41 +89,52 @@ namespace FuncSharp
         }
     }
 
-    public static class Option
+    internal class Some<A> : Option<A>
     {
-        /// <summary>
-        /// Creates a new option based on the specified value. Returns Some if the value is non-null, 
-        /// None otherwise.
-        /// </summary>
-        public static Option<T> Create<T>(T value)
+        private A value;
+
+        public Some(A a)
         {
-            if (value != null)
-            {
-                return new Some<T>(value);
-            }
-            return None<T>();
+            value = a;
         }
 
-        /// <summary>
-        /// Creates a new option based on the specified value. Returns Some if the value is non-null, 
-        /// None otherwise.
-        /// </summary>
-        public static Option<T> Create<T>(T? value)
-            where T : struct
+        public override A Value
         {
-            if (value.HasValue)
-            {
-                return new Some<T>(value.Value);
-            }
-            return None<T>();
+            get { return value; }
         }
 
-        /// <summary>
-        /// An empty option.
-        /// </summary>
-        public static None<T> None<T>()
+        public override bool IsEmpty
         {
-            return FuncSharp.None<T>.Instance;
+            get { return false; }
+        }
+
+        public override IEnumerable<object> ProductValues
+        {
+            get { yield return Value; }
+        }
+    }
+
+    internal class None<A> : Option<A>
+    {
+        public static readonly None<A> Instance = new None<A>();
+
+        private None()
+        {
+        }
+
+        public override A Value
+        {
+            get { throw new InvalidOperationException("None does not have a value."); }
+        }
+
+        public override bool IsEmpty
+        {
+            get { return true; }
+        }
+
+        public override IEnumerable<object> ProductValues
+        {
+            get { return Enumerable.Empty<object>(); }
         }
     }
 }

@@ -55,7 +55,6 @@ namespace FuncSharp
 
     }
 
-
     /// <summary>
     /// A 0-dimensional strongly-typed immutable vector.
     /// </summary>
