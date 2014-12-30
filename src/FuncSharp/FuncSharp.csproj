@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\Nothing\Nothing.cs" />
     <Compile Include="Extensions\FuncExtensions.cs">
       <DependentUpon>FuncExtensions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
