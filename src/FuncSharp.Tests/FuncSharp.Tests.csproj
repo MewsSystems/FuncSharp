@@ -37,13 +37,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Equality\EqualityExtensionsTests.cs" />
-    <Compile Include="Options\OptionTests.cs" />
-    <Compile Include="ProductTypes\IProductExtensionTests.cs" />
+    <Compile Include="Extensions\TupleExtensionsTests.cs" />
+    <Compile Include="Extensions\ObjectExtensionsTests.cs" />
+    <Compile Include="DataTypes\Option\OptionTests.cs" />
+    <Compile Include="DataTypes\Product\ProductTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Intervals\IntervalTests.cs" />
-    <Compile Include="Vectors\VectorExtensionsTests.cs" />
-    <Compile Include="Vectors\VectorTests.cs" />
+    <Compile Include="DataTypes\Interval\IntervalTests.cs" />
+    <Compile Include="DataTypes\Vectors\VectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

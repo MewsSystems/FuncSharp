@@ -1,0 +1,55 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../CodeGen/Helpers.ttinclude" #>
+using System;
+
+namespace FuncSharp
+{
+    public static class FuncExtensions
+    {
+<# for (var i = 0; i < Math.Min(16, MaxArity()); i++) { #>
+        /// <summary>
+        /// Converts the specified function to a function that takes <#= i #>-dimensional vector as its only parameter instead of
+        /// <#= i #> parameters. That allows you to abstract over functions with different arity.
+        /// </summary>
+        public static Func<<#= VectorType(i) #>, TResult> Normalized<<#= FuncTypes(i) #>>(this <#= FuncType(i) #> f)
+        {
+            return v => f(<#= Properties(i, accessor: "v.") #>);
+        }
+
+        /// <summary>
+        /// Converts the specified normalized function back to a standard function used in .NET.
+        /// </summary>
+        public static <#= FuncType(i) #> Denormalized<<#= FuncTypes(i) #>>(this Func<<#= VectorType(i) #>, TResult> f)
+        {
+            return (<#= Values(i) #>) => f(Vector.Create(<#= Values(i) #>));
+        }
+<#     if (i > 1) { #>
+        /// <summary>
+        /// Returnd curried version of the specified function.
+        /// </summary>
+        public static <#= CurriedFuncType(i) #> Curried<<#= FuncTypes(i) #>>(this <#= FuncType(i) #> f)
+        {
+            return <#= List(i, x => "t" + x, separator: " => ", appendSeparator: true) #>f(<#= Values(i) #>);
+        }
+
+<#     } #>
+<# } #>
+    }
+}
+
+<#+
+    public string CurriedFuncType(int i, int current = 1)
+    {
+        var resultType = "TResult";
+        if (current < i)
+        {
+            resultType = CurriedFuncType(i, current + 1);
+        }
+        return "Func<T" + current + ", " + resultType + ">";
+    }
+#>

@@ -1,7 +1,7 @@
 ﻿<#+
-    public int GetDimensionLimit()
+    public int MaxArity()
     {
-        return 6;
+        return 10;
     }
 
     public string Type(int i, string name = "T")
@@ -9,9 +9,9 @@
         return name + i;
     }
 
-    public string Types(int i, string name = "T", int? except = null, bool appendComma = false)
+    public string Types(int i, string name = "T", int? except = null, bool appendSeparator = false)
     {
-        return List(i, x => Type(x, name), except: except, appendComma: appendComma);
+        return List(i, x => Type(x, name), except: except, appendSeparator: appendSeparator);
     }
 
     public string TypeBracket(int i, string name = "T", int? except = null)
@@ -29,6 +29,16 @@
         return "Vector" + arity + TypeBracket(i, name: name, except: except);
     }
 
+    public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)
+    {
+        return Types(i, name, except, appendSeparator: true) + resultTypeName;
+    }
+
+    public string FuncType(int i, string resultTypeName = "TResult", string name = "T", int? except = null)
+    {
+        return "Func<" + FuncTypes(i, resultTypeName, name, except) + ">";
+    }
+
     public string Value(int i, string name = "T")
     {
         return Type(i, name: name).ToLowerInvariant();
@@ -39,9 +49,9 @@
         return Types(i, name: name).ToLowerInvariant();
     }
 
-    public string Parameters(int i, string name = "T", int? except = null, bool appendComma = false)
+    public string Parameters(int i, string name = "T", int? except = null, bool appendSeparator = false)
     {
-        return List(i, x => Type(x, name: name) + " " + Value(x, name: name), except, appendComma);
+        return List(i, x => Type(x, name: name) + " " + Value(x, name: name), appendSeparator: appendSeparator);
     }
 
     public string Property(int i, string name = "Value", string accessor = "")
@@ -49,9 +59,9 @@
         return accessor + name + i;
     }
 
-    public string Properties(int i, string name = "Value", string accessor = "", int? except = null, bool appendComma = false) 
+    public string Properties(int i, string name = "Value", string accessor = "", int? except = null, bool appendSeparator = false) 
     {
-        return List(i, x => Property(x, name, accessor), except, appendComma);
+        return List(i, x => Property(x, name, accessor), except, appendSeparator: appendSeparator);
     }
 
     public string Indent(int i)
@@ -59,17 +69,17 @@
         return new String(' ', i);
     }
 
-    public string List(int i, Func<int, string> itemGenerator, int? except = null, bool appendComma = false)
+    public string List(int i, Func<int, string> itemGenerator, int? except = null, string separator = ", ", bool appendSeparator = false)
     {
         var numbers = Enumerable.Range(1, i);
         if (except.HasValue)
         {
             numbers = numbers.Except(new[] { except.Value });
         }
-        var result = String.Join(", ", numbers.Select(itemGenerator));
-        if (appendComma && !String.IsNullOrEmpty(result))
+        var result = String.Join(separator, numbers.Select(itemGenerator));
+        if (appendSeparator && !String.IsNullOrEmpty(result))
         {
-            result += ", ";
+            result += separator;
         }
         return result;
     }

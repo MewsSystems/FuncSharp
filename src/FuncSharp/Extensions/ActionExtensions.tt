@@ -1,0 +1,29 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../CodeGen/Helpers.ttinclude" #>
+using System;
+
+namespace FuncSharp
+{
+    public static class ActionExtensions
+    {
+<#  for (var i = 0; i < Math.Min(16, MaxArity()); i++) { #>
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static <#= FuncType(i, resultTypeName: "Unit") #> ToFunc<#= TypeBracket(i) #>(this Action<#= TypeBracket(i) #> a)
+        {
+            return (<#= Values(i) #>) =>
+            {
+                a(<#= Values(i) #>);
+                return Unit.Value;
+            };
+        }
+
+<# } #>
+    }
+}

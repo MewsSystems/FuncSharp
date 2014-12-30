@@ -1,0 +1,90 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace FuncSharp
+{
+    public partial class Vector
+    {
+<#  for (var i = 0; i < MaxArity(); i++) { #>
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional vector.
+        /// </summary>
+        public static <#= VectorType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
+        {
+            return new <#= VectorType(i) #>(<#= Values(i) #>);
+        }
+
+<#  } #>
+    }
+
+<#  for (var i = 0; i < MaxArity(); i++) { #>
+    /// <summary>
+    /// A <#= i #>-dimensional strongly-typed immutable vector.
+    /// </summary>
+    public class <#= VectorType(i) #> : Vector
+    {
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional vector.
+        /// </summary>
+        internal Vector<#= i #>(<#= Parameters(i) #>)
+        {
+<#      for (var j = 1; j <= i; j++) { #>
+            <#= Property(j) #> = <#= Value(j) #>;
+<#      } #>
+        }
+<#      for (var j = 1; j <= i; j++) { #>
+
+        /// <summary>
+        /// Value of the vector in the dimension <#= j #>.
+        /// </summary>
+        public <#= Type(j) #> <#= Property(j) #> { get; private set; }
+<#      } #>
+<#      for (var j = 1; j <= i; j++) { #>
+
+        /// <summary>
+        /// The same vector with <#= Property(j) #> omitted.
+        /// </summary>
+        public <#= VectorType(i, except: j) #> ExceptValue<#= j #>
+        {
+            get { return Vector.Create(<#= Properties(i, except: j) #>); }
+        }
+<#      } #>
+
+        /// <summary>
+        /// Values of the vector in order of the dimensions.
+        /// </summary>
+        public override IEnumerable<object> Values
+        {
+            get
+            {
+<#      if (i > 0) { #>
+<#          for (var j = 1; j <= i; j++) { #>
+                yield return <#= Property(j) #>;
+<#          } #>
+<#      } else { #>
+                return Enumerable.Empty<object>();
+<#      } #>
+            }
+        }
+<#      if (i > 0 && i < 8) { #>
+
+        /// <summary>
+        /// Converts the vector into a tuple.
+        /// </summary>
+        public Tuple<#= TypeBracket(i) #> ToTuple()
+        {
+            return Tuple.Create(<#= Properties(i) #>);
+        }
+<#      } #>
+    }
+
+<#  } #>
+}
