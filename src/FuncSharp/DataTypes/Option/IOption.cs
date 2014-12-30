@@ -31,19 +31,31 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// If the option is nonempty, invokes the <paramref name="ifSome"/> function and returns its result. Otherwise the option
+        /// is empty and result of the <paramref name="ifEmpty"/> function is returned.
+        /// </summary>
+        public static B Match<A, B>(this IOption<A> option, Func<A, B> ifSome, Func<Unit, B> ifEmpty)
+        {
+            if (option.IsEmpty)
+            {
+                return ifEmpty(Unit.Value);
+            }
+            else
+            {
+                return ifSome(option.Value);
+            }
+        }
+
+        /// <summary>
         /// Returns the option if it's nonempty. Otherwise returns the alternative option.
         /// </summary>
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<IOption<B>> alternative)
             where A : B
         {
-            if (option.IsEmpty)
-            {
-                return alternative();
-            }
-            else
-            {
-                return option as IOption<B>;
-            }
+            return option.Match(
+                a => option as IOption<B>,
+                _ => alternative()
+            );
         }
 
         /// <summary>
@@ -69,14 +81,10 @@ namespace FuncSharp
         /// </summary>
         public static IOption<B> FlatMap<A, B>(this IOption<A> option, Func<A, IOption<B>> f)
         {
-            if (option.IsEmpty)
-            {
-                return Option.None<B>();
-            }
-            else
-            {
-                return f(option.Value);
-            }
+            return option.Match(
+                a => f(a),
+                _ => Option.None<B>()
+            );
         }
 
         /// <summary>
@@ -94,14 +102,10 @@ namespace FuncSharp
         public static A? ToNullable<A>(this IOption<A> option)
             where A : struct
         {
-            if (option.IsEmpty)
-            {
-                return null;
-            }
-            else
-            {
-                return option.Value;
-            }
+            return option.Match<A, A?>(
+                a => option.Value,
+                _ => null
+            );
         }
     }
 }
