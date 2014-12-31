@@ -3,11 +3,11 @@
     /// <summary>
     /// The bottom uninhabited type. Can be e.g. used to denote return type of methods that never return (always throw an exception).
     /// </summary>
-    public sealed class Nothing
+    public sealed class Nothing : Union0
     {
         private Nothing()
+            : base(-1, null)
         {
-
         }
     }
 }

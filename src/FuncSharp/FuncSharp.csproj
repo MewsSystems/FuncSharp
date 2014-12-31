@@ -34,7 +34,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\Nothing\Nothing.cs" />
+    <Compile Include="DataTypes\Sum\Nothing.cs" />
+    <Compile Include="DataTypes\Sum\ISum.cs" />
+    <Compile Include="DataTypes\Sum\Union\Union.cs" />
+    <Compile Include="DataTypes\Sum\Union\Unions.cs">
+      <DependentUpon>Unions.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Extensions\FuncExtensions.cs">
       <DependentUpon>FuncExtensions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -66,8 +73,8 @@
     <Compile Include="DataTypes\Interval\Bound.cs" />
     <Compile Include="DataTypes\Interval\BoundType.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="DataTypes\Vector\Vector.cs" />
-    <Compile Include="DataTypes\Vector\Vectors.cs">
+    <Compile Include="DataTypes\Product\Vector\Vector.cs" />
+    <Compile Include="DataTypes\Product\Vector\Vectors.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Vectors.tt</DependentUpon>
@@ -75,9 +82,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeGen\Helpers.ttinclude" />
-    <None Include="DataTypes\Vector\Vectors.tt">
+    <None Include="DataTypes\Product\Vector\Vectors.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Vectors.cs</LastGenOutput>
+    </None>
+    <None Include="DataTypes\Sum\Union\Unions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Unions.cs</LastGenOutput>
     </None>
     <None Include="Extensions\FuncExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

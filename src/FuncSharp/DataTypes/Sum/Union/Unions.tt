@@ -1,0 +1,66 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../../CodeGen/Helpers.ttinclude" #>
+using System;
+
+namespace FuncSharp
+{
+    public partial class Union
+    {
+<#  for (var i = 1; i < MaxArity(); i++) { #>
+<#      for (var j = 1; j <= i; j++) { #>
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional union with the <#= j #>-th value.
+        /// </summary>
+        public static <#= UnionType(i) #> Create<#= j #>of<#= i #><#= TypeBracket(i) #>(<#= Parameter(j) #>)
+        {
+            return new <#= UnionType(i) #>(<#= j #>, <#= Value(j) #>);
+        }
+
+<#      } #>
+<#  } #>
+    }
+
+<# for (var i = 0; i < MaxArity(); i++) { #>
+    /// <summary>
+    /// A <#= i #>-dimensional union.
+    /// </summary> 
+    public class <#= UnionType(i) #> : Union
+    {
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional union.
+        /// </summary>
+        internal Union<#= i #>(int discriminator, object value)
+            : base(<#= i #>, discriminator, value)
+        {
+        }
+<#      for (var j = 1; j <= i; j++) { #>
+
+        /// <summary>
+        /// Returns whether the union contains the <#= j #>-th value.
+        /// </summary>
+        public bool Is<#= j #>
+        {
+            get { return SumDiscriminator == <#= j #>; }
+        }
+<#      } #>
+<#      if (i > 0) { #>
+
+        public R Match<R>(
+<#= List(i, x => Indent(12) + "Func<T" + x + ", R> if" + x, separator: "," + Environment.NewLine) #>)
+        {
+            switch (SumDiscriminator)
+            {
+<#= List(i, x => Indent(16) + "case " + x + ": return if" + x + "(GetSumValue<T" + x + ">());", separator: Environment.NewLine) #>
+                default: return default(R); // Never happens.
+            }
+        }
+<#      } #>
+    }
+
+<#  } #>
+}

@@ -59,6 +59,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns string representation of the object. If the object is null, return the optionally specified null text.
+        /// </summary>
+        public static string SafeToString(this object o, string nullText = "null")
+        {
+            if (o == null)
+            {
+                return nullText;
+            }
+            return o.ToString();
+        }
+
+        /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
         public static IOption<T> ToOption<T>(this T value)

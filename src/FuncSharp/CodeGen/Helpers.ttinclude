@@ -29,6 +29,11 @@
         return "Vector" + arity + TypeBracket(i, name: name, except: except);
     }
 
+    public string UnionType(int i, string name = "T")
+    {
+        return "Union" + i + TypeBracket(i, name: name);
+    }
+
     public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)
     {
         return Types(i, name, except, appendSeparator: true) + resultTypeName;
@@ -49,9 +54,14 @@
         return Types(i, name: name).ToLowerInvariant();
     }
 
+    public string Parameter(int i, string name = "T")
+    {
+        return Type(i, name: name) + " " + Value(i, name: name);
+    }
+
     public string Parameters(int i, string name = "T", int? except = null, bool appendSeparator = false)
     {
-        return List(i, x => Type(x, name: name) + " " + Value(x, name: name), appendSeparator: appendSeparator);
+        return List(i, x => Parameter(x, name: name), appendSeparator: appendSeparator);
     }
 
     public string Property(int i, string name = "Value", string accessor = "")
