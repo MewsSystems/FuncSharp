@@ -5,361 +5,361 @@ namespace FuncSharp
     public partial class Union
     {
         /// <summary>
-        /// Creates a new 1-dimensional union with the 1-th value.
+        /// Creates a new 1-dimensional union with the first value.
         /// </summary>
-        public static Union1<T1> Create1of1<T1>(T1 t1)
+        public static Union1<T1> CreateFirst<T1>(T1 t1)
         {
             return new Union1<T1>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 2-dimensional union with the 1-th value.
+        /// Creates a new 2-dimensional union with the second value.
         /// </summary>
-        public static Union2<T1, T2> Create1of2<T1, T2>(T1 t1)
+        public static Union2<T1, T2> CreateFirst<T1, T2>(T1 t1)
         {
             return new Union2<T1, T2>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 2-dimensional union with the 2-th value.
+        /// Creates a new 2-dimensional union with the second value.
         /// </summary>
-        public static Union2<T1, T2> Create2of2<T1, T2>(T2 t2)
+        public static Union2<T1, T2> CreateSecond<T1, T2>(T2 t2)
         {
             return new Union2<T1, T2>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 3-dimensional union with the 1-th value.
+        /// Creates a new 3-dimensional union with the third value.
         /// </summary>
-        public static Union3<T1, T2, T3> Create1of3<T1, T2, T3>(T1 t1)
+        public static Union3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 t1)
         {
             return new Union3<T1, T2, T3>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 3-dimensional union with the 2-th value.
+        /// Creates a new 3-dimensional union with the third value.
         /// </summary>
-        public static Union3<T1, T2, T3> Create2of3<T1, T2, T3>(T2 t2)
+        public static Union3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 t2)
         {
             return new Union3<T1, T2, T3>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 3-dimensional union with the 3-th value.
+        /// Creates a new 3-dimensional union with the third value.
         /// </summary>
-        public static Union3<T1, T2, T3> Create3of3<T1, T2, T3>(T3 t3)
+        public static Union3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 t3)
         {
             return new Union3<T1, T2, T3>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional union with the 1-th value.
+        /// Creates a new 4-dimensional union with the fourth value.
         /// </summary>
-        public static Union4<T1, T2, T3, T4> Create1of4<T1, T2, T3, T4>(T1 t1)
+        public static Union4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 t1)
         {
             return new Union4<T1, T2, T3, T4>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional union with the 2-th value.
+        /// Creates a new 4-dimensional union with the fourth value.
         /// </summary>
-        public static Union4<T1, T2, T3, T4> Create2of4<T1, T2, T3, T4>(T2 t2)
+        public static Union4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 t2)
         {
             return new Union4<T1, T2, T3, T4>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional union with the 3-th value.
+        /// Creates a new 4-dimensional union with the fourth value.
         /// </summary>
-        public static Union4<T1, T2, T3, T4> Create3of4<T1, T2, T3, T4>(T3 t3)
+        public static Union4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 t3)
         {
             return new Union4<T1, T2, T3, T4>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional union with the 4-th value.
+        /// Creates a new 4-dimensional union with the fourth value.
         /// </summary>
-        public static Union4<T1, T2, T3, T4> Create4of4<T1, T2, T3, T4>(T4 t4)
+        public static Union4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 t4)
         {
             return new Union4<T1, T2, T3, T4>(4, t4);
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional union with the 1-th value.
+        /// Creates a new 5-dimensional union with the fifth value.
         /// </summary>
-        public static Union5<T1, T2, T3, T4, T5> Create1of5<T1, T2, T3, T4, T5>(T1 t1)
+        public static Union5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 t1)
         {
             return new Union5<T1, T2, T3, T4, T5>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional union with the 2-th value.
+        /// Creates a new 5-dimensional union with the fifth value.
         /// </summary>
-        public static Union5<T1, T2, T3, T4, T5> Create2of5<T1, T2, T3, T4, T5>(T2 t2)
+        public static Union5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 t2)
         {
             return new Union5<T1, T2, T3, T4, T5>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional union with the 3-th value.
+        /// Creates a new 5-dimensional union with the fifth value.
         /// </summary>
-        public static Union5<T1, T2, T3, T4, T5> Create3of5<T1, T2, T3, T4, T5>(T3 t3)
+        public static Union5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 t3)
         {
             return new Union5<T1, T2, T3, T4, T5>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional union with the 4-th value.
+        /// Creates a new 5-dimensional union with the fifth value.
         /// </summary>
-        public static Union5<T1, T2, T3, T4, T5> Create4of5<T1, T2, T3, T4, T5>(T4 t4)
+        public static Union5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 t4)
         {
             return new Union5<T1, T2, T3, T4, T5>(4, t4);
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional union with the 5-th value.
+        /// Creates a new 5-dimensional union with the fifth value.
         /// </summary>
-        public static Union5<T1, T2, T3, T4, T5> Create5of5<T1, T2, T3, T4, T5>(T5 t5)
+        public static Union5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 t5)
         {
             return new Union5<T1, T2, T3, T4, T5>(5, t5);
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional union with the 1-th value.
+        /// Creates a new 6-dimensional union with the sixth value.
         /// </summary>
-        public static Union6<T1, T2, T3, T4, T5, T6> Create1of6<T1, T2, T3, T4, T5, T6>(T1 t1)
+        public static Union6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 t1)
         {
             return new Union6<T1, T2, T3, T4, T5, T6>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional union with the 2-th value.
+        /// Creates a new 6-dimensional union with the sixth value.
         /// </summary>
-        public static Union6<T1, T2, T3, T4, T5, T6> Create2of6<T1, T2, T3, T4, T5, T6>(T2 t2)
+        public static Union6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 t2)
         {
             return new Union6<T1, T2, T3, T4, T5, T6>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional union with the 3-th value.
+        /// Creates a new 6-dimensional union with the sixth value.
         /// </summary>
-        public static Union6<T1, T2, T3, T4, T5, T6> Create3of6<T1, T2, T3, T4, T5, T6>(T3 t3)
+        public static Union6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 t3)
         {
             return new Union6<T1, T2, T3, T4, T5, T6>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional union with the 4-th value.
+        /// Creates a new 6-dimensional union with the sixth value.
         /// </summary>
-        public static Union6<T1, T2, T3, T4, T5, T6> Create4of6<T1, T2, T3, T4, T5, T6>(T4 t4)
+        public static Union6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 t4)
         {
             return new Union6<T1, T2, T3, T4, T5, T6>(4, t4);
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional union with the 5-th value.
+        /// Creates a new 6-dimensional union with the sixth value.
         /// </summary>
-        public static Union6<T1, T2, T3, T4, T5, T6> Create5of6<T1, T2, T3, T4, T5, T6>(T5 t5)
+        public static Union6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 t5)
         {
             return new Union6<T1, T2, T3, T4, T5, T6>(5, t5);
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional union with the 6-th value.
+        /// Creates a new 6-dimensional union with the sixth value.
         /// </summary>
-        public static Union6<T1, T2, T3, T4, T5, T6> Create6of6<T1, T2, T3, T4, T5, T6>(T6 t6)
+        public static Union6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 t6)
         {
             return new Union6<T1, T2, T3, T4, T5, T6>(6, t6);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 1-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create1of7<T1, T2, T3, T4, T5, T6, T7>(T1 t1)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 t1)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 2-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create2of7<T1, T2, T3, T4, T5, T6, T7>(T2 t2)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 t2)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 3-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create3of7<T1, T2, T3, T4, T5, T6, T7>(T3 t3)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 t3)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 4-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create4of7<T1, T2, T3, T4, T5, T6, T7>(T4 t4)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 t4)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(4, t4);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 5-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create5of7<T1, T2, T3, T4, T5, T6, T7>(T5 t5)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 t5)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(5, t5);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 6-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create6of7<T1, T2, T3, T4, T5, T6, T7>(T6 t6)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 t6)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(6, t6);
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional union with the 7-th value.
+        /// Creates a new 7-dimensional union with the seventh value.
         /// </summary>
-        public static Union7<T1, T2, T3, T4, T5, T6, T7> Create7of7<T1, T2, T3, T4, T5, T6, T7>(T7 t7)
+        public static Union7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 t7)
         {
             return new Union7<T1, T2, T3, T4, T5, T6, T7>(7, t7);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 1-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create1of8<T1, T2, T3, T4, T5, T6, T7, T8>(T1 t1)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 t1)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 2-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create2of8<T1, T2, T3, T4, T5, T6, T7, T8>(T2 t2)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 t2)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 3-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create3of8<T1, T2, T3, T4, T5, T6, T7, T8>(T3 t3)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 t3)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 4-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create4of8<T1, T2, T3, T4, T5, T6, T7, T8>(T4 t4)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 t4)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(4, t4);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 5-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create5of8<T1, T2, T3, T4, T5, T6, T7, T8>(T5 t5)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 t5)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(5, t5);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 6-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create6of8<T1, T2, T3, T4, T5, T6, T7, T8>(T6 t6)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 t6)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(6, t6);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 7-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create7of8<T1, T2, T3, T4, T5, T6, T7, T8>(T7 t7)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 t7)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(7, t7);
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional union with the 8-th value.
+        /// Creates a new 8-dimensional union with the eighth value.
         /// </summary>
-        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> Create8of8<T1, T2, T3, T4, T5, T6, T7, T8>(T8 t8)
+        public static Union8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 t8)
         {
             return new Union8<T1, T2, T3, T4, T5, T6, T7, T8>(8, t8);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 1-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create1of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 t1)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 t1)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(1, t1);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 2-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create2of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 t2)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 t2)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(2, t2);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 3-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create3of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 t3)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 t3)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(3, t3);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 4-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create4of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 t4)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 t4)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(4, t4);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 5-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create5of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 t5)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 t5)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(5, t5);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 6-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create6of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 t6)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 t6)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(6, t6);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 7-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create7of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 t7)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 t7)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(7, t7);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 8-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create8of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 t8)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 t8)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(8, t8);
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional union with the 9-th value.
+        /// Creates a new 9-dimensional union with the ninth value.
         /// </summary>
-        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> Create9of9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 t9)
+        public static Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 t9)
         {
             return new Union9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(9, t9);
         }
@@ -394,21 +394,55 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
+        /// <summary>
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1)
+            Func<T1, R> ifFirst)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
+                case 1: return ifFirst(GetSumValue<T1>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v)
+            );
         }
     }
 
@@ -426,31 +460,82 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
+        /// <summary>
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v)
+            );
         }
     }
 
@@ -468,41 +553,109 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
+        /// <summary>
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v)
+            );
         }
     }
 
@@ -520,51 +673,136 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 4-th value.
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is4
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fourth value.
+        /// </summary>
+        public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
+        /// <summary>
+        /// Returns fourth value of the union as an option. The option contains the fourth value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T4> FourthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFourth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T4>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3,
-            Func<T4, R> if4)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
-                case 4: return if4(GetSumValue<T4>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
+                case 4: return ifFourth(GetSumValue<T4>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<T4, R> ifFourth = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v),
+                v => ifFourth == null ? otherwise(v) : ifFourth(v)
+            );
         }
     }
 
@@ -582,61 +820,163 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 4-th value.
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is4
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fourth value.
+        /// </summary>
+        public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 5-th value.
+        /// Returns fourth value of the union as an option. The option contains the fourth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is5
+        public IOption<T4> FourthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFourth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T4>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fifth value.
+        /// </summary>
+        public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
 
+        /// <summary>
+        /// Returns fifth value of the union as an option. The option contains the fifth value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T5> FifthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFifth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T5>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3,
-            Func<T4, R> if4,
-            Func<T5, R> if5)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
-                case 4: return if4(GetSumValue<T4>());
-                case 5: return if5(GetSumValue<T5>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
+                case 4: return ifFourth(GetSumValue<T4>());
+                case 5: return ifFifth(GetSumValue<T5>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<T4, R> ifFourth = null,
+            Func<T5, R> ifFifth = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v),
+                v => ifFourth == null ? otherwise(v) : ifFourth(v),
+                v => ifFifth == null ? otherwise(v) : ifFifth(v)
+            );
         }
     }
 
@@ -654,71 +994,190 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 4-th value.
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is4
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fourth value.
+        /// </summary>
+        public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 5-th value.
+        /// Returns fourth value of the union as an option. The option contains the fourth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is5
+        public IOption<T4> FourthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFourth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T4>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fifth value.
+        /// </summary>
+        public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 6-th value.
+        /// Returns fifth value of the union as an option. The option contains the fifth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is6
+        public IOption<T5> FifthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFifth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T5>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the sixth value.
+        /// </summary>
+        public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
 
+        /// <summary>
+        /// Returns sixth value of the union as an option. The option contains the sixth value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T6> SixthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSixth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T6>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3,
-            Func<T4, R> if4,
-            Func<T5, R> if5,
-            Func<T6, R> if6)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
-                case 4: return if4(GetSumValue<T4>());
-                case 5: return if5(GetSumValue<T5>());
-                case 6: return if6(GetSumValue<T6>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
+                case 4: return ifFourth(GetSumValue<T4>());
+                case 5: return ifFifth(GetSumValue<T5>());
+                case 6: return ifSixth(GetSumValue<T6>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<T4, R> ifFourth = null,
+            Func<T5, R> ifFifth = null,
+            Func<T6, R> ifSixth = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v),
+                v => ifFourth == null ? otherwise(v) : ifFourth(v),
+                v => ifFifth == null ? otherwise(v) : ifFifth(v),
+                v => ifSixth == null ? otherwise(v) : ifSixth(v)
+            );
         }
     }
 
@@ -736,81 +1195,217 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 4-th value.
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is4
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fourth value.
+        /// </summary>
+        public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 5-th value.
+        /// Returns fourth value of the union as an option. The option contains the fourth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is5
+        public IOption<T4> FourthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFourth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T4>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fifth value.
+        /// </summary>
+        public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 6-th value.
+        /// Returns fifth value of the union as an option. The option contains the fifth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is6
+        public IOption<T5> FifthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFifth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T5>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the sixth value.
+        /// </summary>
+        public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 7-th value.
+        /// Returns sixth value of the union as an option. The option contains the sixth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is7
+        public IOption<T6> SixthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSixth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T6>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the seventh value.
+        /// </summary>
+        public bool IsSeventh
         {
             get { return SumDiscriminator == 7; }
         }
 
+        /// <summary>
+        /// Returns seventh value of the union as an option. The option contains the seventh value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T7> SeventhOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSeventh: v => Option.Some(v),
+                    otherwise: _ => Option.None<T7>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3,
-            Func<T4, R> if4,
-            Func<T5, R> if5,
-            Func<T6, R> if6,
-            Func<T7, R> if7)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
-                case 4: return if4(GetSumValue<T4>());
-                case 5: return if5(GetSumValue<T5>());
-                case 6: return if6(GetSumValue<T6>());
-                case 7: return if7(GetSumValue<T7>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
+                case 4: return ifFourth(GetSumValue<T4>());
+                case 5: return ifFifth(GetSumValue<T5>());
+                case 6: return ifSixth(GetSumValue<T6>());
+                case 7: return ifSeventh(GetSumValue<T7>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<T4, R> ifFourth = null,
+            Func<T5, R> ifFifth = null,
+            Func<T6, R> ifSixth = null,
+            Func<T7, R> ifSeventh = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v),
+                v => ifFourth == null ? otherwise(v) : ifFourth(v),
+                v => ifFifth == null ? otherwise(v) : ifFifth(v),
+                v => ifSixth == null ? otherwise(v) : ifSixth(v),
+                v => ifSeventh == null ? otherwise(v) : ifSeventh(v)
+            );
         }
     }
 
@@ -828,91 +1423,244 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 4-th value.
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is4
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fourth value.
+        /// </summary>
+        public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 5-th value.
+        /// Returns fourth value of the union as an option. The option contains the fourth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is5
+        public IOption<T4> FourthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFourth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T4>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fifth value.
+        /// </summary>
+        public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 6-th value.
+        /// Returns fifth value of the union as an option. The option contains the fifth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is6
+        public IOption<T5> FifthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFifth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T5>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the sixth value.
+        /// </summary>
+        public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 7-th value.
+        /// Returns sixth value of the union as an option. The option contains the sixth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is7
+        public IOption<T6> SixthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSixth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T6>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the seventh value.
+        /// </summary>
+        public bool IsSeventh
         {
             get { return SumDiscriminator == 7; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 8-th value.
+        /// Returns seventh value of the union as an option. The option contains the seventh value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is8
+        public IOption<T7> SeventhOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSeventh: v => Option.Some(v),
+                    otherwise: _ => Option.None<T7>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the eighth value.
+        /// </summary>
+        public bool IsEighth
         {
             get { return SumDiscriminator == 8; }
         }
 
+        /// <summary>
+        /// Returns eighth value of the union as an option. The option contains the eighth value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T8> EighthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifEighth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T8>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3,
-            Func<T4, R> if4,
-            Func<T5, R> if5,
-            Func<T6, R> if6,
-            Func<T7, R> if7,
-            Func<T8, R> if8)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
-                case 4: return if4(GetSumValue<T4>());
-                case 5: return if5(GetSumValue<T5>());
-                case 6: return if6(GetSumValue<T6>());
-                case 7: return if7(GetSumValue<T7>());
-                case 8: return if8(GetSumValue<T8>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
+                case 4: return ifFourth(GetSumValue<T4>());
+                case 5: return ifFifth(GetSumValue<T5>());
+                case 6: return ifSixth(GetSumValue<T6>());
+                case 7: return ifSeventh(GetSumValue<T7>());
+                case 8: return ifEighth(GetSumValue<T8>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<T4, R> ifFourth = null,
+            Func<T5, R> ifFifth = null,
+            Func<T6, R> ifSixth = null,
+            Func<T7, R> ifSeventh = null,
+            Func<T8, R> ifEighth = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v),
+                v => ifFourth == null ? otherwise(v) : ifFourth(v),
+                v => ifFifth == null ? otherwise(v) : ifFifth(v),
+                v => ifSixth == null ? otherwise(v) : ifSixth(v),
+                v => ifSeventh == null ? otherwise(v) : ifSeventh(v),
+                v => ifEighth == null ? otherwise(v) : ifEighth(v)
+            );
         }
     }
 
@@ -930,102 +1678,273 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the union contains the 1-th value.
+        /// Returns whether the union contains the first value.
         /// </summary>
-        public bool Is1
+        public bool IsFirst
         {
             get { return SumDiscriminator == 1; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 2-th value.
+        /// Returns first value of the union as an option. The option contains the first value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is2
+        public IOption<T1> FirstOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFirst: v => Option.Some(v),
+                    otherwise: _ => Option.None<T1>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the second value.
+        /// </summary>
+        public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 3-th value.
+        /// Returns second value of the union as an option. The option contains the second value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is3
+        public IOption<T2> SecondOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSecond: v => Option.Some(v),
+                    otherwise: _ => Option.None<T2>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the third value.
+        /// </summary>
+        public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 4-th value.
+        /// Returns third value of the union as an option. The option contains the third value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is4
+        public IOption<T3> ThirdOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifThird: v => Option.Some(v),
+                    otherwise: _ => Option.None<T3>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fourth value.
+        /// </summary>
+        public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 5-th value.
+        /// Returns fourth value of the union as an option. The option contains the fourth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is5
+        public IOption<T4> FourthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFourth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T4>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the fifth value.
+        /// </summary>
+        public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 6-th value.
+        /// Returns fifth value of the union as an option. The option contains the fifth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is6
+        public IOption<T5> FifthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifFifth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T5>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the sixth value.
+        /// </summary>
+        public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 7-th value.
+        /// Returns sixth value of the union as an option. The option contains the sixth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is7
+        public IOption<T6> SixthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSixth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T6>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the seventh value.
+        /// </summary>
+        public bool IsSeventh
         {
             get { return SumDiscriminator == 7; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 8-th value.
+        /// Returns seventh value of the union as an option. The option contains the seventh value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is8
+        public IOption<T7> SeventhOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifSeventh: v => Option.Some(v),
+                    otherwise: _ => Option.None<T7>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the eighth value.
+        /// </summary>
+        public bool IsEighth
         {
             get { return SumDiscriminator == 8; }
         }
 
         /// <summary>
-        /// Returns whether the union contains the 9-th value.
+        /// Returns eighth value of the union as an option. The option contains the eighth value
+        /// or is empty if the union contains different value.
         /// </summary>
-        public bool Is9
+        public IOption<T8> EighthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifEighth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T8>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the union contains the ninth value.
+        /// </summary>
+        public bool IsNinth
         {
             get { return SumDiscriminator == 9; }
         }
 
+        /// <summary>
+        /// Returns ninth value of the union as an option. The option contains the ninth value
+        /// or is empty if the union contains different value.
+        /// </summary>
+        public IOption<T9> NinthOption
+        {
+            get
+            { 
+                return PartialMatch(
+                    ifNinth: v => Option.Some(v),
+                    otherwise: _ => Option.None<T9>()
+                );
+            }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
-            Func<T1, R> if1,
-            Func<T2, R> if2,
-            Func<T3, R> if3,
-            Func<T4, R> if4,
-            Func<T5, R> if5,
-            Func<T6, R> if6,
-            Func<T7, R> if7,
-            Func<T8, R> if8,
-            Func<T9, R> if9)
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth)
         {
             switch (SumDiscriminator)
             {
-                case 1: return if1(GetSumValue<T1>());
-                case 2: return if2(GetSumValue<T2>());
-                case 3: return if3(GetSumValue<T3>());
-                case 4: return if4(GetSumValue<T4>());
-                case 5: return if5(GetSumValue<T5>());
-                case 6: return if6(GetSumValue<T6>());
-                case 7: return if7(GetSumValue<T7>());
-                case 8: return if8(GetSumValue<T8>());
-                case 9: return if9(GetSumValue<T9>());
+                case 1: return ifFirst(GetSumValue<T1>());
+                case 2: return ifSecond(GetSumValue<T2>());
+                case 3: return ifThird(GetSumValue<T3>());
+                case 4: return ifFourth(GetSumValue<T4>());
+                case 5: return ifFifth(GetSumValue<T5>());
+                case 6: return ifSixth(GetSumValue<T6>());
+                case 7: return ifSeventh(GetSumValue<T7>());
+                case 8: return ifEighth(GetSumValue<T8>());
+                case 9: return ifNinth(GetSumValue<T9>());
                 default: return default(R); // Never happens.
             }
+        }
+
+        /// <summary>
+        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        public R PartialMatch<R>(
+            Func<T1, R> ifFirst = null,
+            Func<T2, R> ifSecond = null,
+            Func<T3, R> ifThird = null,
+            Func<T4, R> ifFourth = null,
+            Func<T5, R> ifFifth = null,
+            Func<T6, R> ifSixth = null,
+            Func<T7, R> ifSeventh = null,
+            Func<T8, R> ifEighth = null,
+            Func<T9, R> ifNinth = null,
+            Func<object, R> otherwise = null)
+        {
+            otherwise = otherwise ?? (_ => default(R));
+            return Match(
+                v => ifFirst == null ? otherwise(v) : ifFirst(v),
+                v => ifSecond == null ? otherwise(v) : ifSecond(v),
+                v => ifThird == null ? otherwise(v) : ifThird(v),
+                v => ifFourth == null ? otherwise(v) : ifFourth(v),
+                v => ifFifth == null ? otherwise(v) : ifFifth(v),
+                v => ifSixth == null ? otherwise(v) : ifSixth(v),
+                v => ifSeventh == null ? otherwise(v) : ifSeventh(v),
+                v => ifEighth == null ? otherwise(v) : ifEighth(v),
+                v => ifNinth == null ? otherwise(v) : ifNinth(v)
+            );
         }
     }
 
 }
+

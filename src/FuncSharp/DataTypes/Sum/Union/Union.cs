@@ -13,9 +13,9 @@ namespace FuncSharp
             {
                 throw new ArgumentException("The arity must be a positive number.");
             }
-            if (!(discriminator >= 0 && discriminator < arity))
+            if (!(discriminator > 0 && discriminator <= arity))
             {
-                throw new ArgumentException("The discriminator must be from interval [0, arity).");
+                throw new ArgumentException("The discriminator must be from interval [1, arity].");
             }
 
             SumArity = arity;
