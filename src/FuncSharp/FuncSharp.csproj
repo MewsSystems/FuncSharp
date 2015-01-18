@@ -34,6 +34,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\Option\None.cs" />
+    <Compile Include="DataTypes\Option\Some.cs" />
+    <Compile Include="DataTypes\Sum\Either\Either.cs" />
+    <Compile Include="DataTypes\Sum\Either\IEither.cs" />
+    <Compile Include="DataTypes\Sum\Either\RightEither.cs" />
+    <Compile Include="DataTypes\Sum\Either\LeftEither.cs" />
     <Compile Include="DataTypes\Sum\Nothing.cs" />
     <Compile Include="DataTypes\Sum\ISum.cs" />
     <Compile Include="DataTypes\Sum\Union\Union.cs" />

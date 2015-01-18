@@ -64,11 +64,11 @@ namespace FuncSharp.Tests
             var u1 = Union.CreateFirst<string, int>("foo");
             var u2 = Union.CreateSecond<string, int>(42);
 
-            Assert.Equal(Option.Some("foo"), u1.FirstOption);
-            Assert.Equal(Option.None<int>(), u1.SecondOption);
+            Assert.Equal(Option.Some("foo"), u1.First);
+            Assert.Equal(Option.None<int>(), u1.Second);
 
-            Assert.Equal(Option.None<string>(), u2.FirstOption);
-            Assert.Equal(Option.Some(42), u2.SecondOption);
+            Assert.Equal(Option.None<string>(), u2.First);
+            Assert.Equal(Option.Some(42), u2.Second);
         }
     }
 }

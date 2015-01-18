@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FuncSharp
 {
@@ -73,7 +72,16 @@ namespace FuncSharp
             get { return !IsEmpty; }
         }
 
-        public abstract IEnumerable<object> ProductValues { get; }
+        public IEnumerable<object> ProductValues
+        {
+            get
+            {
+                if (NonEmpty)
+                {
+                    yield return Value;
+                }
+            }
+        }
 
         public override int GetHashCode()
         {
@@ -86,55 +94,6 @@ namespace FuncSharp
         public override string ToString()
         {
             return this.ProductToString();
-        }
-    }
-
-    internal class Some<A> : Option<A>
-    {
-        private A value;
-
-        public Some(A a)
-        {
-            value = a;
-        }
-
-        public override A Value
-        {
-            get { return value; }
-        }
-
-        public override bool IsEmpty
-        {
-            get { return false; }
-        }
-
-        public override IEnumerable<object> ProductValues
-        {
-            get { yield return Value; }
-        }
-    }
-
-    internal class None<A> : Option<A>
-    {
-        public static readonly None<A> Instance = new None<A>();
-
-        private None()
-        {
-        }
-
-        public override A Value
-        {
-            get { throw new InvalidOperationException("None does not have a value."); }
-        }
-
-        public override bool IsEmpty
-        {
-            get { return true; }
-        }
-
-        public override IEnumerable<object> ProductValues
-        {
-            get { return Enumerable.Empty<object>(); }
         }
     }
 }

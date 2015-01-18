@@ -11,5 +11,19 @@ namespace FuncSharp
         {
             return t.IsGenericType && t.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
         }
+
+        /// <summary>
+        /// Returns name of the type stripped from generic parameters.
+        /// </summary>
+        public static string SimpleName(this Type t)
+        {
+            var simpleName = t.Name;
+            var backtickIndex = simpleName.IndexOf("`");
+            if (backtickIndex > 0)
+            {
+                simpleName = simpleName.Substring(0, backtickIndex);
+            }
+            return simpleName;
+        }
     }
 }

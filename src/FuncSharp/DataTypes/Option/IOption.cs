@@ -23,14 +23,6 @@ namespace FuncSharp
     public static class IOptionExtensions
     {
         /// <summary>
-        /// Returns value of the option.
-        /// </summary>
-        public static A Get<A>(this IOption<A> option)
-        {
-            return option.Value;
-        }
-
-        /// <summary>
         /// If the option is nonempty, invokes the <paramref name="ifSome"/> function and returns its result. Otherwise the option
         /// is empty and result of the <paramref name="ifEmpty"/> function is returned.
         /// </summary>
@@ -47,6 +39,34 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns value of the option.
+        /// </summary>
+        public static A Get<A>(this IOption<A> option)
+        {
+            return option.Value;
+        }
+
+        /// <summary>
+        /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.
+        /// </summary>
+        public static A GetOrDefault<A>(this IOption<A> option)
+        {
+            return option.GetOrElse(() => default(A));
+        }
+
+        /// <summary>
+        /// Returns value of the option if it's nonempty. If not, returns value created by the otherwise function.
+        /// </summary>
+        public static B GetOrElse<A, B>(this IOption<A> option, Func<B> otherwise)
+            where A : B
+        {
+            return option.Match(
+                a => a,
+                _ => otherwise()
+            );
+        }
+
+        /// <summary>
         /// Returns the option if it's nonempty. Otherwise returns the alternative option.
         /// </summary>
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<IOption<B>> alternative)
@@ -59,20 +79,12 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns value of the option if it's nonempty. If not, returns value created by the otherwise function.
+        /// Maps value of the current option (if present) into a new value using the specified function and 
+        /// returns a new option with that new value.
         /// </summary>
-        public static B GetOrElse<A, B>(this IOption<A> option, Func<B> otherwise)
-            where A : B
+        public static IOption<B> Map<A, B>(this IOption<A> option, Func<A, B> f)
         {
-            return option.OrElse(() => Option.Some(otherwise())).Value;
-        }
-
-        /// <summary>
-        /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.
-        /// </summary>
-        public static A GetOrDefault<A>(this IOption<A> option)
-        {
-            return option.GetOrElse(() => default(A));
+            return option.FlatMap(a => Option.Some(f(a)));
         }
 
         /// <summary>
@@ -85,15 +97,6 @@ namespace FuncSharp
                 a => f(a),
                 _ => Option.None<B>()
             );
-        }
-
-        /// <summary>
-        /// Maps value of the current option (if present) into a new value using the specified function and 
-        /// returns a new option with that new value.
-        /// </summary>
-        public static IOption<B> Map<A, B>(this IOption<A> option, Func<A, B> f)
-        {
-            return option.FlatMap(a => Option.Some(f(a)));
         }
 
         /// <summary>

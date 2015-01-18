@@ -405,7 +405,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -471,7 +471,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -494,7 +494,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -564,7 +564,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -587,7 +587,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -610,7 +610,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -684,7 +684,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -707,7 +707,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -730,7 +730,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -753,7 +753,7 @@ namespace FuncSharp
         /// Returns fourth value of the union as an option. The option contains the fourth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T4> FourthOption
+        public IOption<T4> Fourth
         {
             get
             { 
@@ -831,7 +831,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -854,7 +854,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -877,7 +877,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -900,7 +900,7 @@ namespace FuncSharp
         /// Returns fourth value of the union as an option. The option contains the fourth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T4> FourthOption
+        public IOption<T4> Fourth
         {
             get
             { 
@@ -923,7 +923,7 @@ namespace FuncSharp
         /// Returns fifth value of the union as an option. The option contains the fifth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T5> FifthOption
+        public IOption<T5> Fifth
         {
             get
             { 
@@ -1005,7 +1005,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -1028,7 +1028,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -1051,7 +1051,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -1074,7 +1074,7 @@ namespace FuncSharp
         /// Returns fourth value of the union as an option. The option contains the fourth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T4> FourthOption
+        public IOption<T4> Fourth
         {
             get
             { 
@@ -1097,7 +1097,7 @@ namespace FuncSharp
         /// Returns fifth value of the union as an option. The option contains the fifth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T5> FifthOption
+        public IOption<T5> Fifth
         {
             get
             { 
@@ -1120,7 +1120,7 @@ namespace FuncSharp
         /// Returns sixth value of the union as an option. The option contains the sixth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T6> SixthOption
+        public IOption<T6> Sixth
         {
             get
             { 
@@ -1206,7 +1206,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -1229,7 +1229,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -1252,7 +1252,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -1275,7 +1275,7 @@ namespace FuncSharp
         /// Returns fourth value of the union as an option. The option contains the fourth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T4> FourthOption
+        public IOption<T4> Fourth
         {
             get
             { 
@@ -1298,7 +1298,7 @@ namespace FuncSharp
         /// Returns fifth value of the union as an option. The option contains the fifth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T5> FifthOption
+        public IOption<T5> Fifth
         {
             get
             { 
@@ -1321,7 +1321,7 @@ namespace FuncSharp
         /// Returns sixth value of the union as an option. The option contains the sixth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T6> SixthOption
+        public IOption<T6> Sixth
         {
             get
             { 
@@ -1344,7 +1344,7 @@ namespace FuncSharp
         /// Returns seventh value of the union as an option. The option contains the seventh value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T7> SeventhOption
+        public IOption<T7> Seventh
         {
             get
             { 
@@ -1434,7 +1434,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -1457,7 +1457,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -1480,7 +1480,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -1503,7 +1503,7 @@ namespace FuncSharp
         /// Returns fourth value of the union as an option. The option contains the fourth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T4> FourthOption
+        public IOption<T4> Fourth
         {
             get
             { 
@@ -1526,7 +1526,7 @@ namespace FuncSharp
         /// Returns fifth value of the union as an option. The option contains the fifth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T5> FifthOption
+        public IOption<T5> Fifth
         {
             get
             { 
@@ -1549,7 +1549,7 @@ namespace FuncSharp
         /// Returns sixth value of the union as an option. The option contains the sixth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T6> SixthOption
+        public IOption<T6> Sixth
         {
             get
             { 
@@ -1572,7 +1572,7 @@ namespace FuncSharp
         /// Returns seventh value of the union as an option. The option contains the seventh value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T7> SeventhOption
+        public IOption<T7> Seventh
         {
             get
             { 
@@ -1595,7 +1595,7 @@ namespace FuncSharp
         /// Returns eighth value of the union as an option. The option contains the eighth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T8> EighthOption
+        public IOption<T8> Eighth
         {
             get
             { 
@@ -1689,7 +1689,7 @@ namespace FuncSharp
         /// Returns first value of the union as an option. The option contains the first value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T1> FirstOption
+        public IOption<T1> First
         {
             get
             { 
@@ -1712,7 +1712,7 @@ namespace FuncSharp
         /// Returns second value of the union as an option. The option contains the second value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T2> SecondOption
+        public IOption<T2> Second
         {
             get
             { 
@@ -1735,7 +1735,7 @@ namespace FuncSharp
         /// Returns third value of the union as an option. The option contains the third value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T3> ThirdOption
+        public IOption<T3> Third
         {
             get
             { 
@@ -1758,7 +1758,7 @@ namespace FuncSharp
         /// Returns fourth value of the union as an option. The option contains the fourth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T4> FourthOption
+        public IOption<T4> Fourth
         {
             get
             { 
@@ -1781,7 +1781,7 @@ namespace FuncSharp
         /// Returns fifth value of the union as an option. The option contains the fifth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T5> FifthOption
+        public IOption<T5> Fifth
         {
             get
             { 
@@ -1804,7 +1804,7 @@ namespace FuncSharp
         /// Returns sixth value of the union as an option. The option contains the sixth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T6> SixthOption
+        public IOption<T6> Sixth
         {
             get
             { 
@@ -1827,7 +1827,7 @@ namespace FuncSharp
         /// Returns seventh value of the union as an option. The option contains the seventh value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T7> SeventhOption
+        public IOption<T7> Seventh
         {
             get
             { 
@@ -1850,7 +1850,7 @@ namespace FuncSharp
         /// Returns eighth value of the union as an option. The option contains the eighth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T8> EighthOption
+        public IOption<T8> Eighth
         {
             get
             { 
@@ -1873,7 +1873,7 @@ namespace FuncSharp
         /// Returns ninth value of the union as an option. The option contains the ninth value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<T9> NinthOption
+        public IOption<T9> Ninth
         {
             get
             { 

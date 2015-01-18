@@ -52,7 +52,7 @@ namespace FuncSharp
         /// Returns <#= GetLowerOrdinal(j) #> value of the union as an option. The option contains the <#= GetLowerOrdinal(j) #> value
         /// or is empty if the union contains different value.
         /// </summary>
-        public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>Option
+        public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
             get
             { 
