@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace FuncSharp.Tests
 {
@@ -24,6 +25,37 @@ namespace FuncSharp.Tests
 
             Assert.False(u2.IsFirst);
             Assert.True(u2.IsSecond);
+        }
+
+        [Fact]
+        public void OptionProjectionIsCorrect()
+        {
+            var u1 = Union.CreateFirst<string, int>("foo");
+            var u2 = Union.CreateSecond<string, int>(42);
+
+            Assert.Equal(Option.Some("foo"), u1.First);
+            Assert.Equal(Option.None<int>(), u1.Second);
+
+            Assert.Equal(Option.None<string>(), u2.First);
+            Assert.Equal(Option.Some(42), u2.Second);
+        }
+
+        [Fact]
+        public void TypedConstructionWorks()
+        {
+            Assert.Equal("foo", Union.Typed<string, int>("foo").First.Value);
+            Assert.Equal(42, Union.Typed<string, int>(42).Second.Value);
+            Assert.Equal(42, Union.Typed<int, int>(42).First.Value);
+            Assert.Throws<ArgumentException>(() => Union.Typed<string, int>(new object()));
+        }
+
+        [Fact]
+        public void TypedSafeConstructionWorks()
+        {
+            Assert.Equal("foo", Union.TypedSafe<string, int>("foo").First.Value);
+            Assert.Equal(42, Union.TypedSafe<string, int>(42).Second.Value);
+            Assert.Equal(42, Union.TypedSafe<int, int>(42).First.Value);
+            Assert.Equal("foo", Union.TypedSafe<int, int>("foo").Third.Value);
         }
 
         [Fact]
@@ -56,19 +88,6 @@ namespace FuncSharp.Tests
 
             Assert.True(u1.PartialMatch(ifSecond: v => true, otherwise: _ => true));
             Assert.True(u2.PartialMatch(ifFirst: v => true, otherwise: _ => true));
-        }
-
-        [Fact]
-        public void OptionProjectionIsCorrect()
-        {
-            var u1 = Union.CreateFirst<string, int>("foo");
-            var u2 = Union.CreateSecond<string, int>(42);
-
-            Assert.Equal(Option.Some("foo"), u1.First);
-            Assert.Equal(Option.None<int>(), u1.Second);
-
-            Assert.Equal(Option.None<string>(), u2.First);
-            Assert.Equal(Option.Some(42), u2.Second);
         }
     }
 }

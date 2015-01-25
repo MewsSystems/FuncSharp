@@ -11,8 +11,8 @@ namespace FuncSharp
 {
     public partial class Union
     {
-<#  for (var i = 1; i < MaxArity(); i++) { #>
-<#      for (var j = 1; j <= i; j++) { #>
+<# for (var i = 1; i < MaxArity(); i++) { #>
+<#     for (var j = 1; j <= i; j++) { #>
         /// <summary>
         /// Creates a new <#= i #>-dimensional union with the <#= GetLowerOrdinal(i) #> value.
         /// </summary>
@@ -21,8 +21,52 @@ namespace FuncSharp
             return new <#= UnionType(i) #>(<#= j #>, <#= Value(j) #>);
         }
 
-<#      } #>
-<#  } #>
+<#     } #>
+<# } #>
+<# for (var i = 0; i < MaxArity(); i++) { #>
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional union as a result of type match. The specified value will be on the first place whose type 
+        /// matches type of the value. If none of the types matches type of the value, throws an exception.
+        /// </summary>
+        public static <#= UnionType(i) #> Typed<#= TypeBracket(i) #>(object value)
+        {
+            return Typed<#= TypeBracket(i) #>(value, v =>
+            {
+                throw new ArgumentException("The value " + v.SafeToString() + " does not match any of the <#= i #> specified types.");
+            });
+        }
+
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional union as a result of type match. The specified value will be on the first place whose type 
+        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function.
+        /// </summary>
+        public static <#= UnionType(i) #> Typed<#= TypeBracket(i) #>(object value, Func<object, <#= UnionType(i) #>> otherwise)
+        {
+<#     for (var j = 1; j <= i; j++) { #>
+            if (value is <#= Type(j) #>)
+            {
+                return Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
+            }
+<#     } #>
+            return otherwise(value);
+        }
+
+<#     if (i + 1 < MaxArity()) { #>
+<#         var safeTypeBracket = "<" + Types(i, appendSeparator: true) + "object>"; #>
+        /// <summary>
+        /// Creates a new <#= i + 1 #>-dimensional union as a result of type match. The specified value will be on the first place whose 
+        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// </summary>
+        public static <#= "Union" + (i + 1) + safeTypeBracket #> TypedSafe<#= TypeBracket(i) #>(object value)
+        {
+            return Typed<#= safeTypeBracket #>(value, v =>
+            {
+                return Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v);
+            });
+        }
+
+<#     } #>
+<# } #>
     }
 
 <# for (var i = 0; i < MaxArity(); i++) { #>
@@ -38,7 +82,7 @@ namespace FuncSharp
             : base(<#= i #>, discriminator, value)
         {
         }
-<#      for (var j = 1; j <= i; j++) { #>
+<#     for (var j = 1; j <= i; j++) { #>
 
         /// <summary>
         /// Returns whether the union contains the <#= GetLowerOrdinal(j) #> value.
@@ -62,8 +106,8 @@ namespace FuncSharp
                 );
             }
         }
-<#      } #>
-<#      if (i > 0) { #>
+<#     } #>
+<#     if (i > 0) { #>
 
         /// <summary>
         /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
@@ -93,10 +137,10 @@ namespace FuncSharp
 <#= Lines(i, x => Indent(16) + "v => " + IfFunction(x) + " == null ? otherwise(v) : " + IfFunction(x) + "(v)", separator: ",") #>
             );
         }
-<#      } #>
+<#     } #>
     }
 
-<#  } #>
+<# } #>
 }
 
 <#+
