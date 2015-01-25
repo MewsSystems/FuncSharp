@@ -131,7 +131,7 @@ namespace FuncSharp
     {
         static Interval()
         {
-            Ordering = new ComparableOrdering<T>();
+            ComparableOrdering = new ComparableOrdering<T>();
         }
 
         /// <summary>
@@ -149,9 +149,17 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Default ordering of comparable values.
+        /// </summary>
+        public static IOrdering<T> ComparableOrdering { get; private set; }
+
+        /// <summary>
         /// Ordering of the interval value domain.
         /// </summary>
-        public static IOrdering<T> Ordering { get; private set; }
+        public virtual IOrdering<T> Ordering
+        {
+            get { return ComparableOrdering; }
+        }
 
         /// <summary>
         /// Lower bound of the interval. None represents an unbounded lower bound.

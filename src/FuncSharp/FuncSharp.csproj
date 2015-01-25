@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Extensions\NullableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TupleExtensions.cs">
       <DependentUpon>TupleExtensions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -85,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Vectors.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\TryParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeGen\Helpers.ttinclude" />
