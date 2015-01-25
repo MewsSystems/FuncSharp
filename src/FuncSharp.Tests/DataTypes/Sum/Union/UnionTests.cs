@@ -41,24 +41,6 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void TypedConstructionWorks()
-        {
-            Assert.Equal("foo", Union.Typed<string, int>("foo").First.Value);
-            Assert.Equal(42, Union.Typed<string, int>(42).Second.Value);
-            Assert.Equal(42, Union.Typed<int, int>(42).First.Value);
-            Assert.Throws<ArgumentException>(() => Union.Typed<string, int>(new object()));
-        }
-
-        [Fact]
-        public void TypedSafeConstructionWorks()
-        {
-            Assert.Equal("foo", Union.TypedSafe<string, int>("foo").First.Value);
-            Assert.Equal(42, Union.TypedSafe<string, int>(42).Second.Value);
-            Assert.Equal(42, Union.TypedSafe<int, int>(42).First.Value);
-            Assert.Equal("foo", Union.TypedSafe<int, int>("foo").Third.Value);
-        }
-
-        [Fact]
         public void MatchWorks()
         {
             var u1 = Union.CreateFirst<string, int>("foo");

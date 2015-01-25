@@ -48,6 +48,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Extensions\ObjectExtensions.cs">
+      <DependentUpon>ObjectExtensions.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Extensions\FuncExtensions.cs">
       <DependentUpon>FuncExtensions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -59,7 +64,6 @@
       <DependentUpon>ActionExtensions.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\NullableExtensions.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TupleExtensions.cs">
       <DependentUpon>TupleExtensions.tt</DependentUpon>
@@ -97,6 +101,10 @@
     <None Include="DataTypes\Sum\Union\Unions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Unions.cs</LastGenOutput>
+    </None>
+    <None Include="Extensions\ObjectExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
     </None>
     <None Include="Extensions\FuncExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

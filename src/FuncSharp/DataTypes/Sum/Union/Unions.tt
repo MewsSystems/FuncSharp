@@ -23,50 +23,6 @@ namespace FuncSharp
 
 <#     } #>
 <# } #>
-<# for (var i = 0; i < MaxArity(); i++) { #>
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional union as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, throws an exception.
-        /// </summary>
-        public static <#= UnionType(i) #> Typed<#= TypeBracket(i) #>(object value)
-        {
-            return Typed<#= TypeBracket(i) #>(value, v =>
-            {
-                throw new ArgumentException("The value " + v.SafeToString() + " does not match any of the <#= i #> specified types.");
-            });
-        }
-
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional union as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function.
-        /// </summary>
-        public static <#= UnionType(i) #> Typed<#= TypeBracket(i) #>(object value, Func<object, <#= UnionType(i) #>> otherwise)
-        {
-<#     for (var j = 1; j <= i; j++) { #>
-            if (value is <#= Type(j) #>)
-            {
-                return Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
-            }
-<#     } #>
-            return otherwise(value);
-        }
-
-<#     if (i + 1 < MaxArity()) { #>
-<#         var safeTypeBracket = "<" + Types(i, appendSeparator: true) + "object>"; #>
-        /// <summary>
-        /// Creates a new <#= i + 1 #>-dimensional union as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
-        /// </summary>
-        public static <#= "Union" + (i + 1) + safeTypeBracket #> TypedSafe<#= TypeBracket(i) #>(object value)
-        {
-            return Typed<#= safeTypeBracket #>(value, v =>
-            {
-                return Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v);
-            });
-        }
-
-<#     } #>
-<# } #>
     }
 
 <# for (var i = 0; i < MaxArity(); i++) { #>

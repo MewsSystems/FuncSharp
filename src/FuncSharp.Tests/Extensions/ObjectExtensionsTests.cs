@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace FuncSharp.Tests
 {
@@ -64,6 +65,24 @@ namespace FuncSharp.Tests
             Assert.False(o1.StructurallyEquals(s));
             Assert.True(t1.StructurallyEquals(t2));
             Assert.False(t1.StructurallyEquals(t3));
+        }
+
+        [Fact]
+        public void AsUnionWorks()
+        {
+            Assert.Equal("foo", "foo".AsUnion<string, int>().First.Value);
+            Assert.Equal(42, 42.AsUnion<string, int>().Second.Value);
+            Assert.Equal(42, 42.AsUnion<int, int>().First.Value);
+            Assert.Throws<ArgumentException>(() => new object().AsUnion<string, int>());
+        }
+
+        [Fact]
+        public void AsSafeUnionWorks()
+        {
+            Assert.Equal("foo", "foo".AsSafeUnion<string, int>().First.Value);
+            Assert.Equal(42, 42.AsSafeUnion<string, int>().Second.Value);
+            Assert.Equal(42, 42.AsSafeUnion<int, int>().First.Value);
+            Assert.Equal("foo", "foo".AsSafeUnion<int, int>().Third.Value);
         }
 
         private class EqualityTester
