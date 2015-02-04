@@ -1,3 +1,2 @@
 language: csharp
-solution: FuncSharp.sln
-before_script: cd src
+solution: ./src/FuncSharp.sln
