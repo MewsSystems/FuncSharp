@@ -28,9 +28,9 @@
         /// <summary>
         /// Canonical representation of the sum.
         /// </summary>
-        public static Vector3<int, int, object> Representation(this ISum sum)
+        public static Product3<int, int, object> Representation(this ISum sum)
         {
-            return Vector.Create(sum.SumArity, sum.SumDiscriminator, sum.SumValue);
+            return Product.Create(sum.SumArity, sum.SumDiscriminator, sum.SumValue);
         }
 
         /// <summary>

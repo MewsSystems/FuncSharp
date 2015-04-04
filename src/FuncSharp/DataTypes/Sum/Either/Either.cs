@@ -1,4 +1,6 @@
-﻿namespace FuncSharp
+﻿using System;
+
+namespace FuncSharp
 {
     public static class Either
     {
@@ -7,7 +9,7 @@
         /// </summary>
         public static IEither<A, B> Left<A, B>(A value)
         {
-            return new LeftEither<A, B>(value);
+            return new Either<A, B>(Sum.CreateFirst<A, B>(value));
         }
 
         /// <summary>
@@ -15,35 +17,66 @@
         /// </summary>
         public static IEither<A, B> Right<A, B>(B value)
         {
-            return new RightEither<A, B>(value);
+            return new Either<A, B>(Sum.CreateSecond<A, B>(value));
         }
     }
 
-    internal abstract class Either<A, B> : IEither<A, B>
+    internal class Either<A, B> : IEither<A, B>
     {
-        public abstract IOption<A> Left { get; }
-        public abstract IOption<B> Right { get; }
+        public Either(Sum2<A, B> representation)
+        {
+            Representation = representation;
+        }
 
         public bool IsLeft
         {
-            get { return Left.NonEmpty; }
+            get { return Representation.IsFirst; }
         }
+
         public bool IsRight
         {
-            get { return Right.NonEmpty; }
+            get { return Representation.IsSecond; }
+        }
+
+        public IOption<A> Left
+        {
+            get { return Representation.First; }
+        }
+
+        public IOption<B> Right
+        {
+            get { return Representation.Second; }
+        }
+
+        public IEither<B, A> Swapped
+        {
+            get
+            {
+                return Match(
+                    r => Either.Left<B, A>(r),
+                    l => Either.Right<B, A>(l)
+                );
+            }
         }
 
         public int SumArity
         {
-            get { return 2; }
+            get { return Representation.SumArity; }
         }
         public int SumDiscriminator
         {
-            get { return this.Match(_ => 1, _ => 2); }
+            get { return Representation.SumDiscriminator; }
         }
         public object SumValue
         {
-            get { return this.Match<A, B, object>(l => l, r => r); }
+            get { return Representation.SumValue; }
+        }
+
+        private Sum2<A, B> Representation { get; set; }
+
+        public R Match<R>(Func<B, R> ifRight, Func<A, R> ifLeft)
+        {
+            return Representation.Match(ifLeft, ifRight);
         }
 
         public override int GetHashCode()
@@ -56,10 +89,7 @@
         }
         public override string ToString()
         {
-            return
-                this.Match(_ => "Left", _ => "Right") + "(" +
-                    SumValue.SafeToString() +
-                ")";
+            return Match(_ => "Left", _ => "Right") + "(" + SumValue.SafeToString() + ")";
         }
     }
 }

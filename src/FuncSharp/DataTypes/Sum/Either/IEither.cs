@@ -23,35 +23,16 @@ namespace FuncSharp
         /// Right value of the either.
         /// </summary>
         IOption<B> Right { get; }
-    }
-
-    public static class IEitherExtensions
-    {
-        /// <summary>
-        /// If the either is left, invokes the <paramref name="ifLeft"/> function and returns its result. Otherwise returns result
-        /// of the <paramref name="ifRight"/> invocation.
-        /// </summary>
-        public static R Match<A, B, R>(this IEither<A, B> either, Func<A, R> ifLeft, Func<B, R> ifRight)
-        {
-            if (either.IsLeft)
-            {
-                return ifLeft(either.Left.Value);
-            }
-            else
-            {
-                return ifRight(either.Right.Value);
-            }
-        }
 
         /// <summary>
         /// Returns an either with the value swapped between left and right.
         /// </summary>
-        public static IEither<B, A> Swap<A, B>(this IEither<A, B> either)
-        {
-            return either.Match(
-                l => Either.Right<B, A>(l),
-                r => Either.Left<B, A>(r)
-            );
-        }
+        IEither<B, A> Swapped { get; }
+
+        /// <summary>
+        /// If the either is left, invokes the <paramref name="ifLeft"/> function and returns its result. Otherwise returns result
+        /// of the <paramref name="ifRight"/> invocation.
+        /// </summary>
+        R Match<R>(Func<B, R> ifRight, Func<A, R> ifLeft);
     }
 }

@@ -1,15 +1,14 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace FuncSharp.Tests
 {
-    public class UnionTests
+    public class SumTests
     {
         [Fact]
         public void ConstructionPreservesValues()
         {
-            var u1 = Union.CreateFirst<string, int>("foo");
-            var u2 = Union.CreateSecond<string, int>(42);
+            var u1 = Sum.CreateFirst<string, int>("foo");
+            var u2 = Sum.CreateSecond<string, int>(42);
 
             Assert.Equal(2, u1.SumArity);
             Assert.Equal(2, u2.SumArity);
@@ -30,8 +29,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void OptionProjectionIsCorrect()
         {
-            var u1 = Union.CreateFirst<string, int>("foo");
-            var u2 = Union.CreateSecond<string, int>(42);
+            var u1 = Sum.CreateFirst<string, int>("foo");
+            var u2 = Sum.CreateSecond<string, int>(42);
 
             Assert.Equal(Option.Some("foo"), u1.First);
             Assert.Equal(Option.None<int>(), u1.Second);
@@ -43,8 +42,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void MatchWorks()
         {
-            var u1 = Union.CreateFirst<string, int>("foo");
-            var u2 = Union.CreateSecond<string, int>(42);
+            var u1 = Sum.CreateFirst<string, int>("foo");
+            var u2 = Sum.CreateSecond<string, int>(42);
 
             Assert.True(u1.Match(v => v == "foo", v => false));
             Assert.True(u2.Match(v => false, v => v == 42));
@@ -53,8 +52,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void PartialMatchWorks()
         {
-            var u1 = Union.CreateFirst<string, int>("foo");
-            var u2 = Union.CreateSecond<string, int>(42);
+            var u1 = Sum.CreateFirst<string, int>("foo");
+            var u2 = Sum.CreateSecond<string, int>(42);
 
             Assert.False(u1.PartialMatch<bool>());
             Assert.False(u2.PartialMatch<bool>());

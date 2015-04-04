@@ -5,15 +5,15 @@ namespace FuncSharp
     /// <summary>
     /// Base class of all disjunction types.
     /// </summary>
-    public abstract partial class Union : ISum
+    public abstract partial class Sum : ISum
     {
-        protected internal Union(int arity, int discriminator, object value)
+        protected internal Sum(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
                 throw new ArgumentException("The arity must be a positive number.");
             }
-            if (!Interval.OpenClosed(0, arity).Contains(discriminator))
+            if (discriminator < 0 || arity < discriminator)
             {
                 throw new ArgumentException("The discriminator must be from interval [1, arity].");
             }

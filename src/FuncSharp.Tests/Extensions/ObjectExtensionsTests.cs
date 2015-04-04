@@ -68,21 +68,21 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void AsUnionWorks()
+        public void AsSumWorks()
         {
-            Assert.Equal("foo", "foo".AsUnion<string, int>().First.Value);
-            Assert.Equal(42, 42.AsUnion<string, int>().Second.Value);
-            Assert.Equal(42, 42.AsUnion<int, int>().First.Value);
-            Assert.Throws<ArgumentException>(() => new object().AsUnion<string, int>());
+            Assert.Equal("foo", "foo".AsTypeSum<string, int>().First.Value);
+            Assert.Equal(42, 42.AsTypeSum<string, int>().Second.Value);
+            Assert.Equal(42, 42.AsTypeSum<int, int>().First.Value);
+            Assert.Throws<ArgumentException>(() => new object().AsTypeSum<string, int>());
         }
 
         [Fact]
-        public void AsSafeUnionWorks()
+        public void AsSafeSumWorks()
         {
-            Assert.Equal("foo", "foo".AsSafeUnion<string, int>().First.Value);
-            Assert.Equal(42, 42.AsSafeUnion<string, int>().Second.Value);
-            Assert.Equal(42, 42.AsSafeUnion<int, int>().First.Value);
-            Assert.Equal("foo", "foo".AsSafeUnion<int, int>().Third.Value);
+            Assert.Equal("foo", "foo".AsSafeTypeSum<string, int>().First.Value);
+            Assert.Equal(42, 42.AsSafeTypeSum<string, int>().Second.Value);
+            Assert.Equal(42, 42.AsSafeTypeSum<int, int>().First.Value);
+            Assert.Equal("foo", "foo".AsSafeTypeSum<int, int>().Third.Value);
         }
 
         private class EqualityTester

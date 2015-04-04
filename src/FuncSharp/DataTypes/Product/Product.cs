@@ -4,17 +4,17 @@ using System.Collections.Generic;
 namespace FuncSharp
 {
     /// <summary>
-    /// Base class of all immutable vectors.
+    /// Base class of all immutable products.
     /// </summary>
-    public abstract partial class Vector : IProduct, IEnumerable<object>
+    public abstract partial class Product : IProduct, IEnumerable<object>
     {
         /// <summary>
-        /// Cached hash code of the vector (which is often used as a key in dictionaries).
+        /// Cached hash code of the product (which is often used as a key in dictionaries).
         /// </summary>
         private int? hashCodeCache = null;
 
         /// <summary>
-        /// Values of the vector.
+        /// Values of the product.
         /// </summary>
         public abstract IEnumerable<object> Values { get; }
 
@@ -27,7 +27,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the vector values.
+        /// Returns an enumerator that iterates through the product values.
         /// </summary>
         IEnumerator<object> IEnumerable<object>.GetEnumerator()
         {
@@ -35,7 +35,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the vector values.
+        /// Returns an enumerator that iterates through the product values.
         /// </summary>
         IEnumerator IEnumerable.GetEnumerator()
         {

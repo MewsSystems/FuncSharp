@@ -13,11 +13,11 @@ namespace FuncSharp
     {
 <#  for (var i = 1; i < Math.Min(8, MaxArity()); i++) { #>
         /// <summary>
-        /// Converts the specified tuple into a vector.
+        /// Converts the specified tuple into a product.
         /// </summary>
-        public static <#= VectorType(i) #> ToVector<#= TypeBracket(i) #>(this Tuple<#= TypeBracket(i) #> t)
+        public static <#= ProductType(i) #> ToProduct<#= TypeBracket(i) #>(this Tuple<#= TypeBracket(i) #> t)
         {
-            return Vector.Create(<#= Properties(i, name: "Item", accessor: "t.") #>);
+            return Product.Create(<#= Properties(i, name: "Item", accessor: "t.") #>);
         }
 
 <# } #>

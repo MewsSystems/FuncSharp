@@ -34,17 +34,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\Option\None.cs" />
-    <Compile Include="DataTypes\Option\Some.cs" />
     <Compile Include="DataTypes\Sum\Either\Either.cs" />
     <Compile Include="DataTypes\Sum\Either\IEither.cs" />
-    <Compile Include="DataTypes\Sum\Either\RightEither.cs" />
-    <Compile Include="DataTypes\Sum\Either\LeftEither.cs" />
     <Compile Include="DataTypes\Sum\Nothing.cs" />
     <Compile Include="DataTypes\Sum\ISum.cs" />
-    <Compile Include="DataTypes\Sum\Union\Union.cs" />
-    <Compile Include="DataTypes\Sum\Union\Unions.cs">
-      <DependentUpon>Unions.tt</DependentUpon>
+    <Compile Include="DataTypes\Sum\Sum.cs" />
+    <Compile Include="DataTypes\Sum\Sums.cs">
+      <DependentUpon>Sums.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -71,8 +67,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="TypeClasses\Equality\IEquality.cs" />
-    <Compile Include="DataTypes\Option\IOption.cs" />
-    <Compile Include="DataTypes\Option\Option.cs" />
+    <Compile Include="DataTypes\Sum\Option\IOption.cs" />
+    <Compile Include="DataTypes\Sum\Option\Option.cs" />
     <Compile Include="TypeClasses\Ordering\Instances\ComparableOrdering.cs" />
     <Compile Include="TypeClasses\Ordering\IOrdering.cs" />
     <Compile Include="TypeClasses\Ordering\Order.cs" />
@@ -84,23 +80,23 @@
     <Compile Include="DataTypes\Interval\Bound.cs" />
     <Compile Include="DataTypes\Interval\BoundType.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="DataTypes\Product\Vector\Vector.cs" />
-    <Compile Include="DataTypes\Product\Vector\Vectors.cs">
+    <Compile Include="DataTypes\Product\Product.cs" />
+    <Compile Include="DataTypes\Product\Products.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Vectors.tt</DependentUpon>
+      <DependentUpon>Products.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\TryParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeGen\Helpers.ttinclude" />
-    <None Include="DataTypes\Product\Vector\Vectors.tt">
+    <None Include="DataTypes\Product\Products.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Vectors.cs</LastGenOutput>
+      <LastGenOutput>Products.cs</LastGenOutput>
     </None>
-    <None Include="DataTypes\Sum\Union\Unions.tt">
+    <None Include="DataTypes\Sum\Sums.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Unions.cs</LastGenOutput>
+      <LastGenOutput>Sums.cs</LastGenOutput>
     </None>
     <None Include="Extensions\ObjectExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

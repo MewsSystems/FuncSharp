@@ -4,21 +4,21 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="../../../CodeGen/Helpers.ttinclude" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
 using System;
 
 namespace FuncSharp
 {
-    public partial class Union
+    public partial class Sum
     {
 <# for (var i = 1; i < MaxArity(); i++) { #>
 <#     for (var j = 1; j <= i; j++) { #>
         /// <summary>
-        /// Creates a new <#= i #>-dimensional union with the <#= GetLowerOrdinal(i) #> value.
+        /// Creates a new <#= i #>-dimensional sum with the <#= GetLowerOrdinal(i) #> value.
         /// </summary>
-        public static <#= UnionType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Parameter(j) #>)
+        public static <#= SumType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Parameter(j) #>)
         {
-            return new <#= UnionType(i) #>(<#= j #>, <#= Value(j) #>);
+            return new <#= SumType(i) #>(<#= j #>, <#= Value(j) #>);
         }
 
 <#     } #>
@@ -27,21 +27,21 @@ namespace FuncSharp
 
 <# for (var i = 0; i < MaxArity(); i++) { #>
     /// <summary>
-    /// A <#= i #>-dimensional union.
+    /// A <#= i #>-dimensional sum.
     /// </summary> 
-    public class <#= UnionType(i) #> : Union
+    public class <#= SumType(i) #> : Sum
     {
         /// <summary>
-        /// Creates a new <#= i #>-dimensional union.
+        /// Creates a new <#= i #>-dimensional sum.
         /// </summary>
-        internal Union<#= i #>(int discriminator, object value)
+        internal Sum<#= i #>(int discriminator, object value)
             : base(<#= i #>, discriminator, value)
         {
         }
 <#     for (var j = 1; j <= i; j++) { #>
 
         /// <summary>
-        /// Returns whether the union contains the <#= GetLowerOrdinal(j) #> value.
+        /// Returns whether the sum contains the <#= GetLowerOrdinal(j) #> value.
         /// </summary>
         public bool Is<#= GetOrdinal(j) #>
         {
@@ -49,8 +49,8 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns <#= GetLowerOrdinal(j) #> value of the union as an option. The option contains the <#= GetLowerOrdinal(j) #> value
-        /// or is empty if the union contains different value.
+        /// Returns <#= GetLowerOrdinal(j) #> value of the sum as an option. The option contains the <#= GetLowerOrdinal(j) #> value
+        /// or is empty if the sum contains different value.
         /// </summary>
         public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
@@ -66,7 +66,7 @@ namespace FuncSharp
 <#     if (i > 0) { #>
 
         /// <summary>
-        /// Returns result of a function that corresponds to the union value. E.g. if the union is the first value, returns result
+        /// Returns result of a function that corresponds to the sum value. E.g. if the sum is the first value, returns result
         /// of the <paramref name="ifFirst" /> function.
         /// </summary>
         public R Match<R>(
@@ -80,7 +80,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns result of a function that corresponds to the union value similarly to match. If the function is null, returns result
+        /// Returns result of a function that corresponds to the sum value similarly to match. If the function is null, returns result
         /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
         /// is null, returns default value of the result type. 
         /// </summary>

@@ -23,15 +23,15 @@
         return "<" + Types(i, name: name, except: except) + ">";
     }
 
-    public string VectorType(int i, string name = "T", int? except = null)
+    public string ProductType(int i, string name = "T", int? except = null)
     {
         var arity = i - (except.HasValue ? 1 : 0);
-        return "Vector" + arity + TypeBracket(i, name: name, except: except);
+        return "Product" + arity + TypeBracket(i, name: name, except: except);
     }
 
-    public string UnionType(int i, string name = "T")
+    public string SumType(int i, string name = "T")
     {
-        return "Union" + i + TypeBracket(i, name: name);
+        return "Sum" + i + TypeBracket(i, name: name);
     }
 
     public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)

@@ -4,7 +4,7 @@ namespace FuncSharp
     /// <summary>
     /// The Unit type (product of zero types). It has only one instance.
     /// </summary>
-    public sealed class Unit : Vector0
+    public sealed class Unit : Product0
     {
         static Unit()
         {
