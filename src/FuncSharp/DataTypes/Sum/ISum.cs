@@ -13,7 +13,7 @@
         int SumArity { get; }
 
         /// <summary>
-        /// Discriminator of the sum type value. Should be in interval [0, SumArity).
+        /// Discriminator of the sum type value. Should be in interval [1, SumArity].
         /// </summary>
         int SumDiscriminator { get; }
 

@@ -13,7 +13,7 @@ namespace FuncSharp
             {
                 throw new ArgumentException("The arity must be a positive number.");
             }
-            if (discriminator < 0 || arity < discriminator)
+            if (discriminator < 1 || arity < discriminator)
             {
                 throw new ArgumentException("The discriminator must be from interval [1, arity].");
             }
