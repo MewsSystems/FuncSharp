@@ -11,33 +11,52 @@ using System.Linq;
 
 namespace FuncSharp
 {
-    public partial class Product
+    /// <summary>
+    /// Base class and factory of canonical product types.
+    /// </summary>
+    public abstract class Product : IProduct
     {
+        public abstract IEnumerable<object> ProductValues { get; }
 <#  for (var i = 0; i < MaxArity(); i++) { #>
+
         /// <summary>
         /// Creates a new <#= i #>-dimensional product.
         /// </summary>
         public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
         {
-            return new <#= ProductType(i) #>(<#= Values(i) #>);
+            return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
+        }
+<#  } #>
+
+        public override int GetHashCode()
+        {
+            return this.ProductHashCode();
         }
 
-<#  } #>
+        public override bool Equals(object obj)
+        {
+            return this.ProductEquals(obj);
+        }
+
+        public override string ToString()
+        {
+            return this.ProductToString();
+        }
     }
 
 <#  for (var i = 0; i < MaxArity(); i++) { #>
     /// <summary>
     /// A <#= i #>-dimensional strongly-typed immutable product.
     /// </summary>
-    public class <#= ProductType(i) #> : Product
+    public class <#= ProductImplType(i) #> : Product, <#= ProductType(i) #>
     {
         /// <summary>
         /// Creates a new <#= i #>-dimensional product.
         /// </summary>
-        internal Product<#= i #>(<#= Parameters(i) #>)
+        public Product<#= i #>(<#= Parameters(i) #>)
         {
 <#      for (var j = 1; j <= i; j++) { #>
-            <#= Property(j) #> = <#= Value(j) #>;
+            <#= ProductProperty(j) #> = <#= Value(j) #>;
 <#      } #>
         }
 <#      for (var j = 1; j <= i; j++) { #>
@@ -45,45 +64,35 @@ namespace FuncSharp
         /// <summary>
         /// Value of the product in the dimension <#= j #>.
         /// </summary>
-        public <#= Type(j) #> <#= Property(j) #> { get; private set; }
+        public <#= Type(j) #> <#= ProductProperty(j) #> { get; private set; }
 <#      } #>
 <#      for (var j = 1; j <= i; j++) { #>
 
         /// <summary>
-        /// The same product with <#= Property(j) #> omitted.
+        /// The same product with <#= ProductProperty(j) #> omitted.
         /// </summary>
         public <#= ProductType(i, except: j) #> ExceptValue<#= j #>
         {
-            get { return Product.Create(<#= Properties(i, except: j) #>); }
+            get { return Product.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
         }
 <#      } #>
 
         /// <summary>
         /// Values of the product in order of the dimensions.
         /// </summary>
-        public override IEnumerable<object> Values
+        public override IEnumerable<object> ProductValues
         {
             get
             {
 <#      if (i > 0) { #>
 <#          for (var j = 1; j <= i; j++) { #>
-                yield return <#= Property(j) #>;
+                yield return <#= ProductProperty(j) #>;
 <#          } #>
 <#      } else { #>
                 return Enumerable.Empty<object>();
 <#      } #>
             }
         }
-<#      if (i > 0 && i < 8) { #>
-
-        /// <summary>
-        /// Converts the product into a tuple.
-        /// </summary>
-        public Tuple<#= TypeBracket(i) #> ToTuple()
-        {
-            return Tuple.Create(<#= Properties(i) #>);
-        }
-<#      } #>
     }
 
 <#  } #>

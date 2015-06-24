@@ -26,7 +26,7 @@ namespace FuncSharp
         }
         public override bool Equals(object obj)
         {
-            return this.ReferentiallyEquals(obj);
+            return this == obj;
         }
         public override string ToString()
         {

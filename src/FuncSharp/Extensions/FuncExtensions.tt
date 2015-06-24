@@ -18,7 +18,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<<#= ProductType(i) #>, TResult> Normalized<<#= FuncTypes(i) #>>(this <#= FuncType(i) #> f)
         {
-            return v => f(<#= Properties(i, accessor: "v.") #>);
+            return p => f(<#= Properties(i, name: "ProductValue", accessor: "p.") #>);
         }
 
         /// <summary>

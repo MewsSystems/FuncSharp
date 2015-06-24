@@ -34,13 +34,23 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\Product\IProductExtensions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IProductExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataTypes\Product\IProduct.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IProduct.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataTypes\Sum\Either\Either.cs" />
     <Compile Include="DataTypes\Sum\Either\IEither.cs" />
+    <Compile Include="DataTypes\Sum\ISumExtensions.cs" />
     <Compile Include="DataTypes\Sum\Nothing.cs" />
     <Compile Include="DataTypes\Sum\ISum.cs" />
-    <Compile Include="DataTypes\Sum\Sum.cs" />
-    <Compile Include="DataTypes\Sum\Sums.cs">
-      <DependentUpon>Sums.tt</DependentUpon>
+    <Compile Include="DataTypes\Sum\Sum.cs">
+      <DependentUpon>Sum.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -73,30 +83,36 @@
     <Compile Include="TypeClasses\Ordering\IOrdering.cs" />
     <Compile Include="TypeClasses\Ordering\Order.cs" />
     <Compile Include="TypeClasses\Ordering\OrderingComparer.cs" />
-    <Compile Include="DataTypes\Product\IProduct.cs" />
     <Compile Include="DataTypes\Product\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataTypes\Interval\Interval.cs" />
     <Compile Include="DataTypes\Interval\Bound.cs" />
     <Compile Include="DataTypes\Interval\BoundType.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="DataTypes\Product\Product.cs" />
-    <Compile Include="DataTypes\Product\Products.cs">
+    <Compile Include="DataTypes\Product\Product.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Products.tt</DependentUpon>
+      <DependentUpon>Product.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\TryParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeGen\Helpers.ttinclude" />
-    <None Include="DataTypes\Product\Products.tt">
+    <None Include="DataTypes\Product\IProductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Products.cs</LastGenOutput>
+      <LastGenOutput>IProductExtensions.cs</LastGenOutput>
     </None>
-    <None Include="DataTypes\Sum\Sums.tt">
+    <None Include="DataTypes\Product\IProduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Sums.cs</LastGenOutput>
+      <LastGenOutput>IProduct.cs</LastGenOutput>
+    </None>
+    <None Include="DataTypes\Product\Product.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Product.cs</LastGenOutput>
+    </None>
+    <None Include="DataTypes\Sum\Sum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Sum.cs</LastGenOutput>
     </None>
     <None Include="Extensions\ObjectExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

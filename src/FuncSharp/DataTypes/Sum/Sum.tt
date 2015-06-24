@@ -9,10 +9,35 @@ using System;
 
 namespace FuncSharp
 {
-    public partial class Sum
+    /// <summary>
+    /// Base class and factory of canonical sum types.
+    /// </summary>
+    public abstract partial class Sum : ISum
     {
+        protected internal Sum(int arity, int discriminator, object value)
+        {
+            if (arity <= 0)
+            {
+                throw new ArgumentException("The arity must be a positive number.");
+            }
+            if (discriminator < 1 || arity < discriminator)
+            {
+                throw new ArgumentException("The discriminator must be from interval [1, arity].");
+            }
+
+            SumArity = arity;
+            SumDiscriminator = discriminator;
+            SumValue = value;
+        }
+
+        public int SumArity { get; private set; }
+
+        public int SumDiscriminator { get; private set; }
+
+        public object SumValue { get; private set; }
 <# for (var i = 1; i < MaxArity(); i++) { #>
 <#     for (var j = 1; j <= i; j++) { #>
+
         /// <summary>
         /// Creates a new <#= i #>-dimensional sum with the <#= GetLowerOrdinal(i) #> value.
         /// </summary>
@@ -20,9 +45,32 @@ namespace FuncSharp
         {
             return new <#= SumType(i) #>(<#= j #>, <#= Value(j) #>);
         }
-
 <#     } #>
 <# } #>
+
+        public override int GetHashCode()
+        {
+            return this.SumHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.SumEquals(obj);
+        }
+
+        public override string ToString()
+        {
+            return this.SumToString();
+        }
+
+        protected T GetSumValue<T>()
+        {
+            if (SumValue is T)
+            {
+                return (T)SumValue;
+            }
+            return default(T);
+        }
     }
 
 <# for (var i = 0; i < MaxArity(); i++) { #>
@@ -55,7 +103,7 @@ namespace FuncSharp
         public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
             get
-            { 
+            {
                 return PartialMatch(
                     if<#= GetOrdinal(j) #>: v => Option.Some(v),
                     otherwise: _ => Option.None<<#= Type(j) #>>()

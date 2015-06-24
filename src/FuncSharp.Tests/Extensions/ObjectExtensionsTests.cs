@@ -31,7 +31,7 @@ namespace FuncSharp.Tests
             Assert.Equal(false.ToOption(), t1.FastEquals(s));
 
             Assert.True(o1.FastEquals(o2).IsEmpty);
-            Assert.True(o1.FastEquals(s).IsEmpty);
+            Assert.True(o1.FastEquals(s).NonEmpty);
             Assert.True(t1.FastEquals(t2).IsEmpty);
             Assert.True(t1.FastEquals(t3).IsEmpty);
         }
@@ -70,19 +70,19 @@ namespace FuncSharp.Tests
         [Fact]
         public void AsSumWorks()
         {
-            Assert.Equal("foo", "foo".AsTypeSum<string, int>().First.Value);
-            Assert.Equal(42, 42.AsTypeSum<string, int>().Second.Value);
-            Assert.Equal(42, 42.AsTypeSum<int, int>().First.Value);
-            Assert.Throws<ArgumentException>(() => new object().AsTypeSum<string, int>());
+            Assert.Equal("foo", "foo".AsSum<string, int>().First.Value);
+            Assert.Equal(42, 42.AsSum<string, int>().Second.Value);
+            Assert.Equal(42, 42.AsSum<int, int>().First.Value);
+            Assert.Throws<ArgumentException>(() => new object().AsSum<string, int>());
         }
 
         [Fact]
         public void AsSafeSumWorks()
         {
-            Assert.Equal("foo", "foo".AsSafeTypeSum<string, int>().First.Value);
-            Assert.Equal(42, 42.AsSafeTypeSum<string, int>().Second.Value);
-            Assert.Equal(42, 42.AsSafeTypeSum<int, int>().First.Value);
-            Assert.Equal("foo", "foo".AsSafeTypeSum<int, int>().Third.Value);
+            Assert.Equal("foo", "foo".AsSafeSum<string, int>().First.Value);
+            Assert.Equal(42, 42.AsSafeSum<string, int>().Second.Value);
+            Assert.Equal(42, 42.AsSafeSum<int, int>().First.Value);
+            Assert.Equal("foo", "foo".AsSafeSum<int, int>().Third.Value);
         }
 
         private class EqualityTester

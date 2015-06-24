@@ -10,9 +10,9 @@ namespace FuncSharp.Tests
         {
             var t = Tuple.Create(42, "foo", true);
             var v = t.ToProduct();
-            Assert.Equal(42, v.Value1);
-            Assert.Equal("foo", v.Value2);
-            Assert.Equal(true, v.Value3);
+            Assert.Equal(42, v.ProductValue1);
+            Assert.Equal("foo", v.ProductValue2);
+            Assert.Equal(true, v.ProductValue3);
         }
     }
 }

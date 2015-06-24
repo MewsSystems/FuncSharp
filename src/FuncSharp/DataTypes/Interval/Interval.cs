@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -126,7 +125,7 @@ namespace FuncSharp
         }
     }
 
-    public class Interval<T> : IProduct
+    public class Interval<T> : Product2<IOption<Bound<T>>, IOption<Bound<T>>>
         where T : IComparable<T>, new()
     {
         static Interval()
@@ -138,10 +137,8 @@ namespace FuncSharp
         /// Creates a new interval with the specified bounds.
         /// </summary>
         public Interval(IOption<Bound<T>> lowerBound = null, IOption<Bound<T>> upperBound = null)
+            : base(lowerBound ?? Option.None<Bound<T>>(), upperBound ?? Option.None<Bound<T>>())
         {
-            LowerBound = lowerBound ?? Option.None<Bound<T>>();
-            UpperBound = upperBound ?? Option.None<Bound<T>>();
-
             IsEmpty = LowerBound.FlatMap(l => UpperBound.Map(u =>
                 Ordering.Less(u.Value, l.Value) ||
                 Ordering.Equal(l.Value, u.Value) && (l.IsOpen || u.IsOpen)
@@ -164,23 +161,17 @@ namespace FuncSharp
         /// <summary>
         /// Lower bound of the interval. None represents an unbounded lower bound.
         /// </summary>
-        public IOption<Bound<T>> LowerBound { get; private set; }
+        public IOption<Bound<T>> LowerBound
+        {
+            get { return ProductValue1; }
+        }
 
         /// <summary>
         /// Upper bound of the interval. None represents an unbounded upper bound.
         /// </summary>
-        public IOption<Bound<T>> UpperBound { get; private set; }
-
-        /// <summary>
-        /// Values of the interval as a product.
-        /// </summary>
-        public IEnumerable<object> ProductValues
+        public IOption<Bound<T>> UpperBound
         {
-            get
-            {
-                yield return LowerBound;
-                yield return UpperBound;
-            }
+            get { return ProductValue2; }
         }
 
         /// <summary>
@@ -248,8 +239,9 @@ namespace FuncSharp
             {
                 return 0;
             }
-            return this.ProductHashCode();
+            return base.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             var interval = obj as Interval<T>;
@@ -258,8 +250,9 @@ namespace FuncSharp
                 return true;
             }
 
-            return this.ProductEquals(obj);
+            return base.Equals(obj);
         }
+
         public override string ToString()
         {
             if (IsEmpty)

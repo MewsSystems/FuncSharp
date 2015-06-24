@@ -1,0 +1,74 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+using System;
+using System.Linq;
+using System.Text;
+
+namespace FuncSharp
+{
+    public static class IProductExtensions
+    {
+        /// <summary>
+        /// Returns hash code of the specified product.
+        /// </summary>
+        public static int ProductHashCode(this IProduct product)
+        {
+            var result = 19;
+            foreach (var value in product.ProductValues)
+            {
+                unchecked
+                {
+                    result += 41 * (value != null ? value.GetHashCode() : 0);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Returns whether the two specified products are structurally equal. Note that two nulls are 
+        /// considered structurally equal products.
+        /// </summary>
+        public static bool ProductEquals(this IProduct p1, object p2)
+        {
+            return p1.FastEquals(p2).GetOrElse(() =>
+                p1.ProductValues.SequenceEqual(((IProduct)p2).ProductValues)
+            );
+        }
+
+        /// <summary>
+        /// Returns string representation of the specified product.
+        /// </summary>
+        public static string ProductToString(this IProduct product)
+        {
+            var b = new StringBuilder(product.GetType().SimpleName() + "(");
+
+            var prefix = "";
+            foreach (var value in product.ProductValues)
+            {
+                b.Append(prefix);
+                b.Append(value.SafeToString());
+                prefix = ", ";
+            }
+
+            b.Append(")");
+            return b.ToString();
+        }
+<#  for (var i = 0; i < MaxArity(); i++) { #>
+<#      if (i > 0 && i < 8) { #>
+
+        /// <summary>
+        /// Converts the product into a tuple.
+        /// </summary>
+        public static Tuple<#= TypeBracket(i) #> ToTuple<#= TypeBracket(i) #>(this <#= ProductType(i) #> p)
+        {
+            return Tuple.Create(<#= Properties(i, name: "ProductValue", accessor: "p.") #>);
+        }
+<#      } #>
+<#  } #>
+    }
+}

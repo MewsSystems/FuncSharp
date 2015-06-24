@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace FuncSharp
 {
     public static class Bound
@@ -21,37 +20,30 @@ namespace FuncSharp
         }
     }
 
-    public class Bound<T> : IProduct
+    public class Bound<T> : Product2<T, BoundType>
     {
         /// <summary>
         /// Creates a new bound with the specified value and type.
         /// </summary>
         internal Bound(T value, BoundType type)
+            : base(value, type)
         {
-            Value = value;
-            Type = type;
         }
 
         /// <summary>
         /// Value of the bound.
         /// </summary>
-        public T Value { get; private set; }
+        public T Value
+        {
+            get { return ProductValue1; }
+        }
 
         /// <summary>
         /// Type of the bound.
         /// </summary>
-        public BoundType Type { get; private set; }
-
-        /// <summary>
-        /// Values of the bound as a product.
-        /// </summary>
-        public IEnumerable<object> ProductValues
+        public BoundType Type
         {
-            get
-            {
-                yield return Value;
-                yield return Type;
-            }
+            get { return ProductValue2; }
         }
 
         /// <summary>
@@ -68,19 +60,6 @@ namespace FuncSharp
         public bool IsClosed
         {
             get { return Type == BoundType.Closed; }
-        }
-
-        public override int GetHashCode()
-        {
-            return this.ProductHashCode();
-        }
-        public override bool Equals(object obj)
-        {
-            return this.ProductEquals(obj);
-        }
-        public override string ToString()
-        {
-            return this.ProductToString();
         }
     }
 }
