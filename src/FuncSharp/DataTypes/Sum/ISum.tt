@@ -1,0 +1,89 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+using System;
+
+namespace FuncSharp
+{
+    /// <summary>
+    /// A type that represents a disjunction of types, choice from multiple different types e.g. T1 or T2 or T3.
+    /// </summary>
+    public interface ISum
+    {
+        /// <summary>
+        /// Arity of the sum type. Should be non-negative.
+        /// </summary>
+        int SumArity { get; }
+
+        /// <summary>
+        /// Discriminator of the sum type value. Should be in interval [1, SumArity].
+        /// </summary>
+        int SumDiscriminator { get; }
+
+        /// <summary>
+        /// Value of the sum type no matter which one of the possible values it is.
+        /// </summary>
+        object SumValue { get; }
+    }
+
+<#  for (var i = 0; i < MaxArity(); i++) { #>
+    /// <summary>
+    /// A <#= i #>-dimensional strongly-typed sum.
+    /// </summary>
+    public interface <#= SumType(i, name: "out T") #> : ISum
+    {
+<#      for (var j = 1; j <= i; j++) { #>
+        /// <summary>
+        /// Returns whether the sum contains the <#= GetLowerOrdinal(j) #> value.
+        /// </summary>
+        bool Is<#= GetOrdinal(j) #> { get; }
+
+        /// <summary>
+        /// Returns <#= GetLowerOrdinal(j) #> value of the sum as an option. The option contains the <#= GetLowerOrdinal(j) #> value
+        /// or is empty if the sum contains different value.
+        /// </summary>
+        IOption<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
+
+<#      } #>
+<#      if (i > 0) { #>
+        /// <summary>
+        /// Returns result of a function that matches the sum value. E.g. if the sum is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
+        R Match<R>(
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>);
+
+        /// <summary>
+        /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
+        /// the <paramref name="ifFirst" /> function.
+        /// </summary>
+        void Match(
+<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x), separator: ",") #>);
+
+        /// <summary>
+        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
+        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, returns default value of the result type. 
+        /// </summary>
+        R PartialMatch<R>(
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x) + " = null", separator: ",") #>,
+            Func<object, R> otherwise = null);
+
+        /// <summary>
+        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
+        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
+        /// is null, does nothing.
+        /// </summary>
+        void PartialMatch(
+<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>,
+            Action<object> otherwise = null);
+
+<#      } #>
+    }
+
+<#  } #>
+}

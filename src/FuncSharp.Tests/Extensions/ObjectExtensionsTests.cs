@@ -30,10 +30,10 @@ namespace FuncSharp.Tests
             Assert.Equal(false.ToOption(), s.FastEquals(o1));
             Assert.Equal(false.ToOption(), t1.FastEquals(s));
 
-            Assert.True(o1.FastEquals(o2).IsEmpty);
-            Assert.True(o1.FastEquals(s).NonEmpty);
-            Assert.True(t1.FastEquals(t2).IsEmpty);
-            Assert.True(t1.FastEquals(t3).IsEmpty);
+            Assert.True(o1.FastEquals(o2).IsNone);
+            Assert.True(o1.FastEquals(s).IsSome);
+            Assert.True(t1.FastEquals(t2).IsNone);
+            Assert.True(t1.FastEquals(t3).IsNone);
         }
 
         [Fact]

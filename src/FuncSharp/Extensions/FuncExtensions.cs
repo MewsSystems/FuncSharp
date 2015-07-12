@@ -5,6 +5,14 @@ namespace FuncSharp
     public static class FuncExtensions
     {
         /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action ToAction(this Func<Unit> f)
+        {
+            return () => f();
+        }
+
+        /// <summary>
         /// Converts the specified function to a function that takes 0-dimensional product as its only parameter instead of
         /// 0 parameters. That allows you to abstract over functions with different arity.
         /// </summary>
@@ -20,6 +28,15 @@ namespace FuncSharp
         {
             return () => f(Product.Create());
         }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1> ToAction<T1>(this Func<T1, Unit> f)
+        {
+            return (t1) => f(t1);
+        }
+
         /// <summary>
         /// Converts the specified function to a function that takes 1-dimensional product as its only parameter instead of
         /// 1 parameters. That allows you to abstract over functions with different arity.
@@ -36,6 +53,15 @@ namespace FuncSharp
         {
             return (t1) => f(Product.Create(t1));
         }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2> ToAction<T1, T2>(this Func<T1, T2, Unit> f)
+        {
+            return (t1, t2) => f(t1, t2);
+        }
+
         /// <summary>
         /// Converts the specified function to a function that takes 2-dimensional product as its only parameter instead of
         /// 2 parameters. That allows you to abstract over functions with different arity.
@@ -52,12 +78,21 @@ namespace FuncSharp
         {
             return (t1, t2) => f(Product.Create(t1, t2));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, TResult>> Curried<T1, T2, TResult>(this Func<T1, T2, TResult> f)
         {
             return t1 => t2 => f(t1, t2);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3> ToAction<T1, T2, T3>(this Func<T1, T2, T3, Unit> f)
+        {
+            return (t1, t2, t3) => f(t1, t2, t3);
         }
 
         /// <summary>
@@ -76,12 +111,21 @@ namespace FuncSharp
         {
             return (t1, t2, t3) => f(Product.Create(t1, t2, t3));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, TResult>>> Curried<T1, T2, T3, TResult>(this Func<T1, T2, T3, TResult> f)
         {
             return t1 => t2 => t3 => f(t1, t2, t3);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3, T4> ToAction<T1, T2, T3, T4>(this Func<T1, T2, T3, T4, Unit> f)
+        {
+            return (t1, t2, t3, t4) => f(t1, t2, t3, t4);
         }
 
         /// <summary>
@@ -100,12 +144,21 @@ namespace FuncSharp
         {
             return (t1, t2, t3, t4) => f(Product.Create(t1, t2, t3, t4));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>> Curried<T1, T2, T3, T4, TResult>(this Func<T1, T2, T3, T4, TResult> f)
         {
             return t1 => t2 => t3 => t4 => f(t1, t2, t3, t4);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3, T4, T5> ToAction<T1, T2, T3, T4, T5>(this Func<T1, T2, T3, T4, T5, Unit> f)
+        {
+            return (t1, t2, t3, t4, t5) => f(t1, t2, t3, t4, t5);
         }
 
         /// <summary>
@@ -124,12 +177,21 @@ namespace FuncSharp
         {
             return (t1, t2, t3, t4, t5) => f(Product.Create(t1, t2, t3, t4, t5));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>> Curried<T1, T2, T3, T4, T5, TResult>(this Func<T1, T2, T3, T4, T5, TResult> f)
         {
             return t1 => t2 => t3 => t4 => t5 => f(t1, t2, t3, t4, t5);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3, T4, T5, T6> ToAction<T1, T2, T3, T4, T5, T6>(this Func<T1, T2, T3, T4, T5, T6, Unit> f)
+        {
+            return (t1, t2, t3, t4, t5, t6) => f(t1, t2, t3, t4, t5, t6);
         }
 
         /// <summary>
@@ -148,12 +210,21 @@ namespace FuncSharp
         {
             return (t1, t2, t3, t4, t5, t6) => f(Product.Create(t1, t2, t3, t4, t5, t6));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, TResult>>>>>> Curried<T1, T2, T3, T4, T5, T6, TResult>(this Func<T1, T2, T3, T4, T5, T6, TResult> f)
         {
             return t1 => t2 => t3 => t4 => t5 => t6 => f(t1, t2, t3, t4, t5, t6);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3, T4, T5, T6, T7> ToAction<T1, T2, T3, T4, T5, T6, T7>(this Func<T1, T2, T3, T4, T5, T6, T7, Unit> f)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7) => f(t1, t2, t3, t4, t5, t6, t7);
         }
 
         /// <summary>
@@ -172,12 +243,21 @@ namespace FuncSharp
         {
             return (t1, t2, t3, t4, t5, t6, t7) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, TResult>>>>>>> Curried<T1, T2, T3, T4, T5, T6, T7, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, TResult> f)
         {
             return t1 => t2 => t3 => t4 => t5 => t6 => t7 => f(t1, t2, t3, t4, t5, t6, t7);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3, T4, T5, T6, T7, T8> ToAction<T1, T2, T3, T4, T5, T6, T7, T8>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, Unit> f)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8) => f(t1, t2, t3, t4, t5, t6, t7, t8);
         }
 
         /// <summary>
@@ -196,12 +276,21 @@ namespace FuncSharp
         {
             return (t1, t2, t3, t4, t5, t6, t7, t8) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>
         public static Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, TResult>>>>>>>> Curried<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> f)
         {
             return t1 => t2 => t3 => t4 => t5 => t6 => t7 => t8 => f(t1, t2, t3, t4, t5, t6, t7, t8);
+        }
+
+        /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> ToAction<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Unit> f)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => f(t1, t2, t3, t4, t5, t6, t7, t8, t9);
         }
 
         /// <summary>
@@ -220,6 +309,7 @@ namespace FuncSharp
         {
             return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9));
         }
+
         /// <summary>
         /// Returnd curried version of the specified function.
         /// </summary>

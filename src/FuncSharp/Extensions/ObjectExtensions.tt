@@ -96,7 +96,7 @@ namespace FuncSharp
         /// Creates a new <#= i + 1 #>-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static <#= "Sum" + (i + 1) + safeTypeBracket #> AsSafeSum<#= TypeBracket(i) #>(this object value)
+        public static <#= "ISum" + (i + 1) + safeTypeBracket #> AsSafeSum<#= TypeBracket(i) #>(this object value)
         {
             return value.AsSum<#= safeTypeBracket #>(v => Sum.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }

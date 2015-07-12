@@ -14,15 +14,15 @@ namespace FuncSharp.Tests
         [Fact]
         public void IsEmptyTest()
         {
-            Assert.False(Option.Create(42).IsEmpty);
-            Assert.False(Option.Create(42 as int?).IsEmpty);
-            Assert.True(Option.Create(null as int?).IsEmpty);
+            Assert.False(Option.Create(42).IsNone);
+            Assert.False(Option.Create(42 as int?).IsNone);
+            Assert.True(Option.Create(null as int?).IsNone);
 
-            Assert.False(Option.Create(new object()).IsEmpty);
-            Assert.True(Option.Create(null as object).IsEmpty);
+            Assert.False(Option.Create(new object()).IsNone);
+            Assert.True(Option.Create(null as object).IsNone);
 
-            Assert.False(Option.Create("foo").IsEmpty);
-            Assert.True(Option.Create(null as string).IsEmpty);
+            Assert.False(Option.Create("foo").IsNone);
+            Assert.True(Option.Create(null as string).IsNone);
         }
 
         [Fact]
@@ -59,17 +59,17 @@ namespace FuncSharp.Tests
         {
             Assert.Equal(84, Option.Create(42).Map(v => v * 2).Value);
             Assert.Equal("xxxxx", Option.Create(5).Map(v => new String('x', v)).Value);
-            Assert.True(Option.None<int>().Map(v => v * 2).IsEmpty);
+            Assert.True(Option.None<int>().Map(v => v * 2).IsNone);
         }
 
         [Fact]
         public void FlatMapTest()
         {
             Assert.Equal(84, Option.Create(42).FlatMap(v => Option.Create(v * 2)).Value);
-            Assert.True(Option.Create(42).FlatMap(v => Option.None<int>()).IsEmpty);
+            Assert.True(Option.Create(42).FlatMap(v => Option.None<int>()).IsNone);
 
-            Assert.True(Option.None<int>().FlatMap(v => Option.Create(v * 2)).IsEmpty);
-            Assert.True(Option.None<int>().FlatMap(v => Option.None<int>()).IsEmpty);
+            Assert.True(Option.None<int>().FlatMap(v => Option.Create(v * 2)).IsNone);
+            Assert.True(Option.None<int>().FlatMap(v => Option.None<int>()).IsNone);
         }
     }
 }

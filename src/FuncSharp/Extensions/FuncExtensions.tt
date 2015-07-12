@@ -13,6 +13,14 @@ namespace FuncSharp
     {
 <# for (var i = 0; i < Math.Min(16, MaxArity()); i++) { #>
         /// <summary>
+        /// Converts the specified function that returns unit into a corresponding action.
+        /// </summary>
+        public static Action<#= TypeBracket(i) #> ToAction<#= TypeBracket(i) #>(this Func<<#= Types(i, appendSeparator: true) #>Unit> f)
+        {
+            return (<#= Values(i) #>) => f(<#= Values(i) #>);
+        }
+
+        /// <summary>
         /// Converts the specified function to a function that takes <#= i #>-dimensional product as its only parameter instead of
         /// <#= i #> parameters. That allows you to abstract over functions with different arity.
         /// </summary>
@@ -28,6 +36,7 @@ namespace FuncSharp
         {
             return (<#= Values(i) #>) => f(Product.Create(<#= Values(i) #>));
         }
+
 <#     if (i > 1) { #>
         /// <summary>
         /// Returnd curried version of the specified function.

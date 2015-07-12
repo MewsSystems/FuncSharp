@@ -12,9 +12,9 @@ namespace FuncSharp
     /// <summary>
     /// Base class and factory of canonical sum types.
     /// </summary>
-    public abstract partial class Sum : ISum
+    public abstract class Sum : ISum
     {
-        protected internal Sum(int arity, int discriminator, object value)
+        internal Sum(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -35,19 +35,19 @@ namespace FuncSharp
         public int SumDiscriminator { get; private set; }
 
         public object SumValue { get; private set; }
+
 <# for (var i = 1; i < MaxArity(); i++) { #>
 <#     for (var j = 1; j <= i; j++) { #>
-
         /// <summary>
         /// Creates a new <#= i #>-dimensional sum with the <#= GetLowerOrdinal(i) #> value.
         /// </summary>
         public static <#= SumType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Parameter(j) #>)
         {
-            return new <#= SumType(i) #>(<#= j #>, <#= Value(j) #>);
+            return new <#= SumTypeImpl(i) #>(<#= j #>, <#= Value(j) #>);
         }
+
 <#     } #>
 <# } #>
-
         public override int GetHashCode()
         {
             return this.SumHashCode();
@@ -75,31 +75,26 @@ namespace FuncSharp
 
 <# for (var i = 0; i < MaxArity(); i++) { #>
     /// <summary>
-    /// A <#= i #>-dimensional sum.
+    /// A <#= i #>-dimensional immutable sum.
     /// </summary> 
-    public class <#= SumType(i) #> : Sum
+    public class <#= SumTypeImpl(i) #> : Sum, <#= SumType(i) #>
     {
         /// <summary>
         /// Creates a new <#= i #>-dimensional sum.
         /// </summary>
+        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+        /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
         internal Sum<#= i #>(int discriminator, object value)
             : base(<#= i #>, discriminator, value)
         {
         }
-<#     for (var j = 1; j <= i; j++) { #>
 
-        /// <summary>
-        /// Returns whether the sum contains the <#= GetLowerOrdinal(j) #> value.
-        /// </summary>
+<#     for (var j = 1; j <= i; j++) { #>
         public bool Is<#= GetOrdinal(j) #>
         {
             get { return SumDiscriminator == <#= j #>; }
         }
 
-        /// <summary>
-        /// Returns <#= GetLowerOrdinal(j) #> value of the sum as an option. The option contains the <#= GetLowerOrdinal(j) #> value
-        /// or is empty if the sum contains different value.
-        /// </summary>
         public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
             get
@@ -110,35 +105,44 @@ namespace FuncSharp
                 );
             }
         }
+
 <#     } #>
 <#     if (i > 0) { #>
-
-        /// <summary>
-        /// Returns result of a function that corresponds to the sum value. E.g. if the sum is the first value, returns result
-        /// of the <paramref name="ifFirst" /> function.
-        /// </summary>
         public R Match<R>(
-<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfFunction(x), separator: ",") #>)
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>)
         {
             switch (SumDiscriminator)
             {
-<#= Lines(i, x => Indent(16) + "case " + x + ": return " + IfFunction(x) + "(GetSumValue<T" + x + ">());") #>
+<#= Lines(i, x => Indent(16) + "case " + x + ": return " + IfIth(x) + "(GetSumValue<T" + x + ">());") #>
                 default: return default(R); // Never happens.
             }
         }
 
-        /// <summary>
-        /// Returns result of a function that corresponds to the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
+        public void Match(
+<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x), separator: ",") #>)
+        {
+            Match(
+<#= Lines(i, x => Indent(16) + IfIth(x) + ".ToFunc()", separator: ",") #>
+            );
+        }
+
         public R PartialMatch<R>(
-<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfFunction(x) + " = null", separator: ",") #>,
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x) + " = null", separator: ",") #>,
             Func<object, R> otherwise = null)
         {
             otherwise = otherwise ?? (_ => default(R));
             return Match(
-<#= Lines(i, x => Indent(16) + "v => " + IfFunction(x) + " == null ? otherwise(v) : " + IfFunction(x) + "(v)", separator: ",") #>
+<#= Lines(i, x => Indent(16) + "v => " + IfIth(x) + " == null ? otherwise(v) : " + IfIth(x) + "(v)", separator: ",") #>
+            );
+        }
+
+        public void PartialMatch(
+<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>,
+            Action<object> otherwise = null)
+        {
+            PartialMatch(
+<#= Lines(i, x => Indent(16) + IfIth(x) + ".ToFunc()", separator: ",") #>,
+                otherwise.ToFunc()
             );
         }
 <#     } #>
@@ -146,11 +150,3 @@ namespace FuncSharp
 
 <# } #>
 }
-
-<#+
-    public string IfFunction(int i)
-    {
-        return "if" + GetOrdinal(i);
-    }
-
-#>

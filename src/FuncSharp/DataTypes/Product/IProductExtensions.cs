@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -11,8 +12,16 @@ namespace FuncSharp
         /// </summary>
         public static int ProductHashCode(this IProduct product)
         {
+            return ProductHashCode(product.ProductValues);
+        }
+
+        /// <summary>
+        /// Returns hash code of the specified product values.
+        /// </summary>
+        public static int ProductHashCode(IEnumerable<object> values)
+        {
             var result = 19;
-            foreach (var value in product.ProductValues)
+            foreach (var value in values)
             {
                 unchecked
                 {
@@ -20,6 +29,14 @@ namespace FuncSharp
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// Returns hash code of the specified product values.
+        /// </summary>
+        public static int ProductHashCode(params object[] values)
+        {
+            return ProductHashCode(values.AsEnumerable());
         }
 
         /// <summary>

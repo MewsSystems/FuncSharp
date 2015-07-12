@@ -184,7 +184,7 @@ namespace FuncSharp
         /// </summary>
         public bool IsLowerBounded
         {
-            get { return LowerBound.NonEmpty; }
+            get { return LowerBound.IsSome; }
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace FuncSharp
         /// </summary>
         public bool IsUpperBounded
         {
-            get { return UpperBound.NonEmpty; }
+            get { return UpperBound.IsSome; }
         }
 
         /// <summary>
@@ -278,11 +278,11 @@ namespace FuncSharp
 
         private IOption<Bound<T>> BoundIntersect(IOption<Bound<T>> bound1, IOption<Bound<T>> bound2, Func<T, T, T> moreRestrictive)
         {
-            if (bound1.IsEmpty)
+            if (bound1.IsNone)
             {
                 return bound2;
             }
-            if (bound2.IsEmpty)
+            if (bound2.IsNone)
             {
                 return bound1;
             }

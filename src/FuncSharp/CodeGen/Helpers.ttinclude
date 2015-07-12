@@ -23,20 +23,30 @@
         return "<" + Types(i, name: name, except: except) + ">";
     }
 
-    public string ProductType(int i, string name = "T", int? except = null, string typeName = "IProduct")
+    public string NaryType(string typeName, int n, string name, int? except = null)
     {
-        var arity = i - (except.HasValue ? 1 : 0);
-        return typeName + arity + TypeBracket(i, name: name, except: except);
+        var arity = n - (except.HasValue ? 1 : 0);
+        return typeName + arity + TypeBracket(n, name: name, except: except);
+    }
+
+    public string ProductType(int i, string name = "T", int? except = null)
+    {
+        return NaryType("IProduct", i, name, except);
     }
 
     public string ProductImplType(int i, string name = "T", int? except = null)
     {
-        return ProductType(i, name, except, "Product");
+        return NaryType("Product", i, name, except);
     }
 
     public string SumType(int i, string name = "T")
     {
-        return "Sum" + i + TypeBracket(i, name: name);
+        return NaryType("ISum", i, name);
+    }
+
+    public string SumTypeImpl(int i, string name = "T")
+    {
+        return NaryType("Sum", i, name);
     }
 
     public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)
@@ -91,7 +101,7 @@
 
     public string List(int i, Func<int, string> itemGenerator, int? except = null, string separator = ", ", bool appendSeparator = false)
     {
-        var numbers = Enumerable.Range(1, i);
+        var numbers = Enumerable.Range(1, Math.Max(0, i));
         if (except.HasValue)
         {
             numbers = numbers.Except(new[] { except.Value });
@@ -136,5 +146,10 @@
     public string GetLowerOrdinal(int i)
     {
         return GetOrdinal(i).ToLowerInvariant();
+    }
+
+    public string IfIth(int i)
+    {
+        return "if" + GetOrdinal(i);
     }
 #>

@@ -5,21 +5,19 @@ namespace FuncSharp
     public static class Option
     {
         /// <summary>
-        /// Creates a new option based on the specified value. Returns Some if the value is non-null, 
-        /// None otherwise.
+        /// Creates a new option based on the specified value. Returns Some if the value is non-null, None otherwise.
         /// </summary>
         public static IOption<A> Create<A>(A value)
         {
             if (value != null)
             {
-                return Some<A>(value);
+                return Some(value);
             }
             return None<A>();
         }
 
         /// <summary>
-        /// Creates a new option based on the specified value. Returns Some if the value is non-null, 
-        /// None otherwise.
+        /// Creates a new option based on the specified value. Returns nonempty option if the value is non-null, empty otherwise.
         /// </summary>
         public static IOption<A> Create<A>(A? value)
             where A : struct
@@ -32,15 +30,15 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// An option with value.
+        /// Creates an option with value.
         /// </summary>
         public static IOption<A> Some<A>(A value)
         {
-            return new Option<A>(Sum.CreateFirst<A, Unit>(value));
+            return new Option<A>(value);
         }
 
         /// <summary>
-        /// An empty option.
+        /// Returns an empty option.
         /// </summary>
         public static IOption<A> None<A>()
         {
@@ -48,7 +46,7 @@ namespace FuncSharp
         }
     }
 
-    internal class Option<A> : IOption<A>
+    internal class Option<A> : Sum2<A, Unit>, IOption<A>
     {
         /// <summary>
         /// Static initializer ensuring that option of nullable type cannot be constructed.
@@ -61,12 +59,17 @@ namespace FuncSharp
                 throw new InvalidOperationException("An option of nullable type " + t + " isn't supported.");
             }
 
-            None = new Option<A>(Sum.CreateSecond<A, Unit>(Unit.Value));
+            None = new Option<A>();
         }
 
-        public Option(Sum2<A, Unit> representation)
+        public Option(A value)
+            : base(1, value)
         {
-            Representation = representation;
+        }
+
+        private Option()
+            : base(2, Unit.Value)
+        {
         }
 
         public static IOption<A> None { get; private set; }
@@ -75,49 +78,27 @@ namespace FuncSharp
         {
             get
             {
-                return Match(
-                    v => v,
-                    _ =>
-                    {
-                        throw new InvalidOperationException("An empty option does not have a value.");
-                    }
-                );
+                if (IsSecond)
+                {
+                    throw new InvalidOperationException("An empty option does not have a value.");
+                }
+                return GetSumValue<A>();
             }
         }
 
-        public bool IsEmpty
+        public bool IsSome
         {
-            get { return Representation.IsSecond; }
+            get { return IsFirst; }
         }
 
-        public bool NonEmpty
+        public bool IsNone
         {
-            get { return !IsEmpty; }
-        }
-
-        public int SumArity
-        {
-            get { return Representation.SumArity; }
-        }
-        public int SumDiscriminator
-        {
-            get { return Representation.SumDiscriminator; }
-        }
-        public object SumValue
-        {
-            get { return Representation.SumValue; }
-        }
-
-        private Sum2<A, Unit> Representation { get; set; }
-
-        public R Match<R>(Func<A, R> ifSome, Func<Unit, R> ifNone)
-        {
-            return Representation.Match(ifSome, ifNone);
+            get { return IsSecond; }
         }
 
         public A GetOrDefault()
         {
-            return this.GetOrElse(() => default(A));
+            return GetSumValue<A>();
         }
 
         public IOption<B> Map<B>(Func<A, B> f)
@@ -133,14 +114,6 @@ namespace FuncSharp
             );
         }
 
-        public override int GetHashCode()
-        {
-            return this.SumHashCode();
-        }
-        public override bool Equals(object obj)
-        {
-            return this.SumEquals(obj);
-        }
         public override string ToString()
         {
             return Match(

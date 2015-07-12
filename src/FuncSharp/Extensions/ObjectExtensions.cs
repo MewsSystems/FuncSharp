@@ -67,7 +67,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum0 AsSum(this object value, Func<object, Sum0> otherwise = null)
+        public static ISum0 AsSum(this object value, Func<object, ISum0> otherwise = null)
         {
             if (otherwise != null)
             {
@@ -80,7 +80,7 @@ namespace FuncSharp
         /// Creates a new 1-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum1<object> AsSafeSum(this object value)
+        public static ISum1<object> AsSafeSum(this object value)
         {
             return value.AsSum<object>(v => Sum.CreateFirst<object>(v));
         }
@@ -90,7 +90,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum1<T1> AsSum<T1>(this object value, Func<object, Sum1<T1>> otherwise = null)
+        public static ISum1<T1> AsSum<T1>(this object value, Func<object, ISum1<T1>> otherwise = null)
         {
             if (value is T1)
             {
@@ -107,7 +107,7 @@ namespace FuncSharp
         /// Creates a new 2-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum2<T1, object> AsSafeSum<T1>(this object value)
+        public static ISum2<T1, object> AsSafeSum<T1>(this object value)
         {
             return value.AsSum<T1, object>(v => Sum.CreateSecond<T1, object>(v));
         }
@@ -117,7 +117,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum2<T1, T2> AsSum<T1, T2>(this object value, Func<object, Sum2<T1, T2>> otherwise = null)
+        public static ISum2<T1, T2> AsSum<T1, T2>(this object value, Func<object, ISum2<T1, T2>> otherwise = null)
         {
             if (value is T1)
             {
@@ -138,7 +138,7 @@ namespace FuncSharp
         /// Creates a new 3-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum3<T1, T2, object> AsSafeSum<T1, T2>(this object value)
+        public static ISum3<T1, T2, object> AsSafeSum<T1, T2>(this object value)
         {
             return value.AsSum<T1, T2, object>(v => Sum.CreateThird<T1, T2, object>(v));
         }
@@ -148,7 +148,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum3<T1, T2, T3> AsSum<T1, T2, T3>(this object value, Func<object, Sum3<T1, T2, T3>> otherwise = null)
+        public static ISum3<T1, T2, T3> AsSum<T1, T2, T3>(this object value, Func<object, ISum3<T1, T2, T3>> otherwise = null)
         {
             if (value is T1)
             {
@@ -173,7 +173,7 @@ namespace FuncSharp
         /// Creates a new 4-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum4<T1, T2, T3, object> AsSafeSum<T1, T2, T3>(this object value)
+        public static ISum4<T1, T2, T3, object> AsSafeSum<T1, T2, T3>(this object value)
         {
             return value.AsSum<T1, T2, T3, object>(v => Sum.CreateFourth<T1, T2, T3, object>(v));
         }
@@ -183,7 +183,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum4<T1, T2, T3, T4> AsSum<T1, T2, T3, T4>(this object value, Func<object, Sum4<T1, T2, T3, T4>> otherwise = null)
+        public static ISum4<T1, T2, T3, T4> AsSum<T1, T2, T3, T4>(this object value, Func<object, ISum4<T1, T2, T3, T4>> otherwise = null)
         {
             if (value is T1)
             {
@@ -212,7 +212,7 @@ namespace FuncSharp
         /// Creates a new 5-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum5<T1, T2, T3, T4, object> AsSafeSum<T1, T2, T3, T4>(this object value)
+        public static ISum5<T1, T2, T3, T4, object> AsSafeSum<T1, T2, T3, T4>(this object value)
         {
             return value.AsSum<T1, T2, T3, T4, object>(v => Sum.CreateFifth<T1, T2, T3, T4, object>(v));
         }
@@ -222,7 +222,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum5<T1, T2, T3, T4, T5> AsSum<T1, T2, T3, T4, T5>(this object value, Func<object, Sum5<T1, T2, T3, T4, T5>> otherwise = null)
+        public static ISum5<T1, T2, T3, T4, T5> AsSum<T1, T2, T3, T4, T5>(this object value, Func<object, ISum5<T1, T2, T3, T4, T5>> otherwise = null)
         {
             if (value is T1)
             {
@@ -255,7 +255,7 @@ namespace FuncSharp
         /// Creates a new 6-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum6<T1, T2, T3, T4, T5, object> AsSafeSum<T1, T2, T3, T4, T5>(this object value)
+        public static ISum6<T1, T2, T3, T4, T5, object> AsSafeSum<T1, T2, T3, T4, T5>(this object value)
         {
             return value.AsSum<T1, T2, T3, T4, T5, object>(v => Sum.CreateSixth<T1, T2, T3, T4, T5, object>(v));
         }
@@ -265,7 +265,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum6<T1, T2, T3, T4, T5, T6> AsSum<T1, T2, T3, T4, T5, T6>(this object value, Func<object, Sum6<T1, T2, T3, T4, T5, T6>> otherwise = null)
+        public static ISum6<T1, T2, T3, T4, T5, T6> AsSum<T1, T2, T3, T4, T5, T6>(this object value, Func<object, ISum6<T1, T2, T3, T4, T5, T6>> otherwise = null)
         {
             if (value is T1)
             {
@@ -302,7 +302,7 @@ namespace FuncSharp
         /// Creates a new 7-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum7<T1, T2, T3, T4, T5, T6, object> AsSafeSum<T1, T2, T3, T4, T5, T6>(this object value)
+        public static ISum7<T1, T2, T3, T4, T5, T6, object> AsSafeSum<T1, T2, T3, T4, T5, T6>(this object value)
         {
             return value.AsSum<T1, T2, T3, T4, T5, T6, object>(v => Sum.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
         }
@@ -312,7 +312,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum7<T1, T2, T3, T4, T5, T6, T7> AsSum<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, Sum7<T1, T2, T3, T4, T5, T6, T7>> otherwise = null)
+        public static ISum7<T1, T2, T3, T4, T5, T6, T7> AsSum<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, ISum7<T1, T2, T3, T4, T5, T6, T7>> otherwise = null)
         {
             if (value is T1)
             {
@@ -353,7 +353,7 @@ namespace FuncSharp
         /// Creates a new 8-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeSum<T1, T2, T3, T4, T5, T6, T7>(this object value)
+        public static ISum8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeSum<T1, T2, T3, T4, T5, T6, T7>(this object value)
         {
             return value.AsSum<T1, T2, T3, T4, T5, T6, T7, object>(v => Sum.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
         }
@@ -363,7 +363,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum8<T1, T2, T3, T4, T5, T6, T7, T8> AsSum<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, Sum8<T1, T2, T3, T4, T5, T6, T7, T8>> otherwise = null)
+        public static ISum8<T1, T2, T3, T4, T5, T6, T7, T8> AsSum<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, ISum8<T1, T2, T3, T4, T5, T6, T7, T8>> otherwise = null)
         {
             if (value is T1)
             {
@@ -408,7 +408,7 @@ namespace FuncSharp
         /// Creates a new 9-dimensional sum as a result of type match. The specified value will be on the first place whose 
         /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
         /// </summary>
-        public static Sum9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeSum<T1, T2, T3, T4, T5, T6, T7, T8>(this object value)
+        public static ISum9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeSum<T1, T2, T3, T4, T5, T6, T7, T8>(this object value)
         {
             return value.AsSum<T1, T2, T3, T4, T5, T6, T7, T8, object>(v => Sum.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
         }
@@ -418,7 +418,7 @@ namespace FuncSharp
         /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
         /// when the otherwise function is null, throws an exception.
         /// </summary>
-        public static Sum9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsSum<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, Sum9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> otherwise = null)
+        public static ISum9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsSum<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, ISum9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> otherwise = null)
         {
             if (value is T1)
             {

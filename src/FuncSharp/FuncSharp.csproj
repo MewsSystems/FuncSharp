@@ -34,6 +34,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypes\Definite\Definite.cs" />
+    <Compile Include="DataTypes\Definite\IDefinite.cs" />
     <Compile Include="DataTypes\Product\IProductExtensions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -44,11 +46,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IProduct.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTypes\Sum\Either\Either.cs" />
-    <Compile Include="DataTypes\Sum\Either\IEither.cs" />
-    <Compile Include="DataTypes\Sum\ISumExtensions.cs" />
+    <Compile Include="DataTypes\Sum\ISum.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataTypes\Sum\ISumExtensions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISumExtensions.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataTypes\Sum\Nothing.cs" />
-    <Compile Include="DataTypes\Sum\ISum.cs" />
     <Compile Include="DataTypes\Sum\Sum.cs">
       <DependentUpon>Sum.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -77,8 +85,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="TypeClasses\Equality\IEquality.cs" />
-    <Compile Include="DataTypes\Sum\Option\IOption.cs" />
-    <Compile Include="DataTypes\Sum\Option\Option.cs" />
+    <Compile Include="DataTypes\Option\IOption.cs" />
+    <Compile Include="DataTypes\Option\Option.cs" />
     <Compile Include="TypeClasses\Ordering\Instances\ComparableOrdering.cs" />
     <Compile Include="TypeClasses\Ordering\IOrdering.cs" />
     <Compile Include="TypeClasses\Ordering\Order.cs" />
@@ -109,6 +117,14 @@
     <None Include="DataTypes\Product\Product.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Product.cs</LastGenOutput>
+    </None>
+    <None Include="DataTypes\Sum\ISum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ISum.cs</LastGenOutput>
+    </None>
+    <None Include="DataTypes\Sum\ISumExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ISumExtensions.cs</LastGenOutput>
     </None>
     <None Include="DataTypes\Sum\Sum.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -41,7 +41,7 @@
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TupleExtensionsTests.cs" />
     <Compile Include="Extensions\ObjectExtensionsTests.cs" />
-    <Compile Include="DataTypes\Sum\Option\OptionTests.cs" />
+    <Compile Include="DataTypes\Option\OptionTests.cs" />
     <Compile Include="DataTypes\Product\ProductTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataTypes\Interval\IntervalTests.cs" />

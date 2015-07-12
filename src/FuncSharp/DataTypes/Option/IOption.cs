@@ -2,28 +2,22 @@
 
 namespace FuncSharp
 {
-    public interface IOption<out A> : ISum
+    public interface IOption<out A> : ISum2<A, Unit>
     {
         /// <summary>
-        /// Value of the option.
+        /// Returns whether the option contains a value.
         /// </summary>
-        A Value { get; }
+        bool IsSome { get; }
 
         /// <summary>
         /// Returns whether the option is empty (doesn't contain any value).
         /// </summary>
-        bool IsEmpty { get; }
+        bool IsNone { get; }
 
         /// <summary>
-        /// Returns whether the option contains a value.
+        /// Value of the option.
         /// </summary>
-        bool NonEmpty { get; }
-
-        /// <summary>
-        /// If the option is nonempty, invokes the <paramref name="ifSome"/> function and returns its result. Otherwise the option
-        /// is empty and result of the <paramref name="ifEmpty"/> function is returned.
-        /// </summary>
-        R Match<R>(Func<A, R> ifSome, Func<Unit, R> ifNone);
+        A Value { get; }
 
         /// <summary>
         /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.
