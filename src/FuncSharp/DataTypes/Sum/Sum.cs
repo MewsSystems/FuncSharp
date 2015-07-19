@@ -7,7 +7,7 @@ namespace FuncSharp
     /// </summary>
     public abstract class Sum : ISum
     {
-        internal Sum(int arity, int discriminator, object value)
+        public Sum(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -424,7 +424,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum0(int discriminator, object value)
+        public Sum0(int discriminator, object value)
             : base(0, discriminator, value)
         {
         }
@@ -441,7 +441,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum1(int discriminator, object value)
+        public Sum1(int discriminator, object value)
             : base(1, discriminator, value)
         {
         }
@@ -456,8 +456,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -511,7 +511,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum2(int discriminator, object value)
+        public Sum2(int discriminator, object value)
             : base(2, discriminator, value)
         {
         }
@@ -526,8 +526,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -542,8 +542,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -605,7 +605,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum3(int discriminator, object value)
+        public Sum3(int discriminator, object value)
             : base(3, discriminator, value)
         {
         }
@@ -620,8 +620,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -636,8 +636,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -652,8 +652,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -723,7 +723,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum4(int discriminator, object value)
+        public Sum4(int discriminator, object value)
             : base(4, discriminator, value)
         {
         }
@@ -738,8 +738,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -754,8 +754,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -770,8 +770,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -786,8 +786,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFourth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T4>()
+                    ifFourth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T4>()
                 );
             }
         }
@@ -865,7 +865,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum5(int discriminator, object value)
+        public Sum5(int discriminator, object value)
             : base(5, discriminator, value)
         {
         }
@@ -880,8 +880,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -896,8 +896,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -912,8 +912,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -928,8 +928,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFourth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T4>()
+                    ifFourth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T4>()
                 );
             }
         }
@@ -944,8 +944,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFifth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T5>()
+                    ifFifth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T5>()
                 );
             }
         }
@@ -1031,7 +1031,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum6(int discriminator, object value)
+        public Sum6(int discriminator, object value)
             : base(6, discriminator, value)
         {
         }
@@ -1046,8 +1046,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -1062,8 +1062,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -1078,8 +1078,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -1094,8 +1094,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFourth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T4>()
+                    ifFourth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T4>()
                 );
             }
         }
@@ -1110,8 +1110,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFifth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T5>()
+                    ifFifth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T5>()
                 );
             }
         }
@@ -1126,8 +1126,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSixth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T6>()
+                    ifSixth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T6>()
                 );
             }
         }
@@ -1221,7 +1221,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum7(int discriminator, object value)
+        public Sum7(int discriminator, object value)
             : base(7, discriminator, value)
         {
         }
@@ -1236,8 +1236,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -1252,8 +1252,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -1268,8 +1268,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -1284,8 +1284,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFourth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T4>()
+                    ifFourth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T4>()
                 );
             }
         }
@@ -1300,8 +1300,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFifth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T5>()
+                    ifFifth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T5>()
                 );
             }
         }
@@ -1316,8 +1316,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSixth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T6>()
+                    ifSixth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T6>()
                 );
             }
         }
@@ -1332,8 +1332,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSeventh: v => Option.Some(v),
-                    otherwise: _ => Option.None<T7>()
+                    ifSeventh: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T7>()
                 );
             }
         }
@@ -1435,7 +1435,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum8(int discriminator, object value)
+        public Sum8(int discriminator, object value)
             : base(8, discriminator, value)
         {
         }
@@ -1450,8 +1450,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -1466,8 +1466,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -1482,8 +1482,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -1498,8 +1498,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFourth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T4>()
+                    ifFourth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T4>()
                 );
             }
         }
@@ -1514,8 +1514,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFifth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T5>()
+                    ifFifth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T5>()
                 );
             }
         }
@@ -1530,8 +1530,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSixth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T6>()
+                    ifSixth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T6>()
                 );
             }
         }
@@ -1546,8 +1546,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSeventh: v => Option.Some(v),
-                    otherwise: _ => Option.None<T7>()
+                    ifSeventh: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T7>()
                 );
             }
         }
@@ -1562,8 +1562,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifEighth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T8>()
+                    ifEighth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T8>()
                 );
             }
         }
@@ -1673,7 +1673,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum9(int discriminator, object value)
+        public Sum9(int discriminator, object value)
             : base(9, discriminator, value)
         {
         }
@@ -1688,8 +1688,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFirst: v => Option.Some(v),
-                    otherwise: _ => Option.None<T1>()
+                    ifFirst: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T1>()
                 );
             }
         }
@@ -1704,8 +1704,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSecond: v => Option.Some(v),
-                    otherwise: _ => Option.None<T2>()
+                    ifSecond: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T2>()
                 );
             }
         }
@@ -1720,8 +1720,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifThird: v => Option.Some(v),
-                    otherwise: _ => Option.None<T3>()
+                    ifThird: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T3>()
                 );
             }
         }
@@ -1736,8 +1736,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFourth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T4>()
+                    ifFourth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T4>()
                 );
             }
         }
@@ -1752,8 +1752,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifFifth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T5>()
+                    ifFifth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T5>()
                 );
             }
         }
@@ -1768,8 +1768,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSixth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T6>()
+                    ifSixth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T6>()
                 );
             }
         }
@@ -1784,8 +1784,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifSeventh: v => Option.Some(v),
-                    otherwise: _ => Option.None<T7>()
+                    ifSeventh: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T7>()
                 );
             }
         }
@@ -1800,8 +1800,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifEighth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T8>()
+                    ifEighth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T8>()
                 );
             }
         }
@@ -1816,8 +1816,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    ifNinth: v => Option.Some(v),
-                    otherwise: _ => Option.None<T9>()
+                    ifNinth: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<T9>()
                 );
             }
         }

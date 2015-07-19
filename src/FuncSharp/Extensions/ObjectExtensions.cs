@@ -39,7 +39,7 @@ namespace FuncSharp
                 return false.ToOption();
             }
 
-            return Option.None<bool>();
+            return Option.Empty<bool>();
         }
 
         /// <summary>

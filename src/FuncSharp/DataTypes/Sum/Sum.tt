@@ -14,7 +14,7 @@ namespace FuncSharp
     /// </summary>
     public abstract class Sum : ISum
     {
-        internal Sum(int arity, int discriminator, object value)
+        public Sum(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -84,7 +84,7 @@ namespace FuncSharp
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        internal Sum<#= i #>(int discriminator, object value)
+        public Sum<#= i #>(int discriminator, object value)
             : base(<#= i #>, discriminator, value)
         {
         }

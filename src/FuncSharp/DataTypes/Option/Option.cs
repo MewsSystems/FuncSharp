@@ -5,34 +5,34 @@ namespace FuncSharp
     public static class Option
     {
         /// <summary>
-        /// Creates a new option based on the specified value. Returns Some if the value is non-null, None otherwise.
+        /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
         public static IOption<A> Create<A>(A value)
         {
             if (value != null)
             {
-                return Some(value);
+                return Valued(value);
             }
-            return None<A>();
+            return Empty<A>();
         }
 
         /// <summary>
-        /// Creates a new option based on the specified value. Returns nonempty option if the value is non-null, empty otherwise.
+        /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
         public static IOption<A> Create<A>(A? value)
             where A : struct
         {
             if (value.HasValue)
             {
-                return Some<A>(value.Value);
+                return Valued<A>(value.Value);
             }
-            return None<A>();
+            return Empty<A>();
         }
 
         /// <summary>
-        /// Creates an option with value.
+        /// Returns an option with the specified value.
         /// </summary>
-        public static IOption<A> Some<A>(A value)
+        public static IOption<A> Valued<A>(A value)
         {
             return new Option<A>(value);
         }
@@ -40,9 +40,9 @@ namespace FuncSharp
         /// <summary>
         /// Returns an empty option.
         /// </summary>
-        public static IOption<A> None<A>()
+        public static IOption<A> Empty<A>()
         {
-            return Option<A>.None;
+            return Option<A>.Empty;
         }
     }
 
@@ -59,7 +59,7 @@ namespace FuncSharp
                 throw new InvalidOperationException("An option of nullable type " + t + " isn't supported.");
             }
 
-            None = new Option<A>();
+            Empty = new Option<A>();
         }
 
         public Option(A value)
@@ -72,7 +72,7 @@ namespace FuncSharp
         {
         }
 
-        public static IOption<A> None { get; private set; }
+        public static IOption<A> Empty { get; private set; }
 
         public A Value
         {
@@ -86,12 +86,12 @@ namespace FuncSharp
             }
         }
 
-        public bool IsSome
+        public bool HasValue
         {
             get { return IsFirst; }
         }
 
-        public bool IsNone
+        public bool IsEmpty
         {
             get { return IsSecond; }
         }
@@ -103,22 +103,22 @@ namespace FuncSharp
 
         public IOption<B> Map<B>(Func<A, B> f)
         {
-            return FlatMap(a => Option.Some(f(a)));
+            return FlatMap(a => Option.Valued(f(a)));
         }
 
         public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)
         {
             return Match(
                 a => f(a),
-                _ => Option.None<B>()
+                _ => Option.Empty<B>()
             );
         }
 
         public override string ToString()
         {
             return Match(
-                v => "Some(" + v.SafeToString() + ")",
-                _ => "None"
+                v => "Value(" + v.SafeToString() + ")",
+                _ => "Empty"
             );
         }
     }

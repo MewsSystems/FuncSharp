@@ -7,12 +7,12 @@ namespace FuncSharp
         /// <summary>
         /// Returns whether the option contains a value.
         /// </summary>
-        bool IsSome { get; }
+        bool HasValue { get; }
 
         /// <summary>
         /// Returns whether the option is empty (doesn't contain any value).
         /// </summary>
-        bool IsNone { get; }
+        bool IsEmpty { get; }
 
         /// <summary>
         /// Value of the option.
@@ -40,7 +40,16 @@ namespace FuncSharp
     public static class IOptionExtensions
     {
         /// <summary>
-        /// Returns value of the option if it's nonempty. If not, returns value created by the otherwise function.
+        /// Returns value of the option if it has value. If not, returns the <paramref name="otherwise"/>.
+        /// </summary>
+        public static B GetOrElse<A, B>(this IOption<A> option, B otherwise)
+            where A : B
+        {
+            return option.GetOrElse(() => otherwise);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns value created by the otherwise function.
         /// </summary>
         public static B GetOrElse<A, B>(this IOption<A> option, Func<B> otherwise)
             where A : B
@@ -52,7 +61,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns the option if it's nonempty. Otherwise returns the alternative option.
+        /// Returns the option if it has value. Otherwise returns the alternative option.
         /// </summary>
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<IOption<B>> alternative)
             where A : B

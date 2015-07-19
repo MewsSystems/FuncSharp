@@ -84,25 +84,44 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TypeClasses\Equality\IEquality.cs" />
+    <Compile Include="Traits\ITraitExtensions.cs" />
+    <Compile Include="Traits\ITrait.cs" />
+    <Compile Include="Traits\TraitDataStorage.cs" />
+    <Compile Include="TypeClasses\Definitions\Algebra\IAlgebra.cs" />
+    <Compile Include="TypeClasses\Definitions\Algebra\IAlgebraExtensions.cs" />
     <Compile Include="DataTypes\Option\IOption.cs" />
     <Compile Include="DataTypes\Option\Option.cs" />
-    <Compile Include="TypeClasses\Ordering\Instances\ComparableOrdering.cs" />
-    <Compile Include="TypeClasses\Ordering\IOrdering.cs" />
-    <Compile Include="TypeClasses\Ordering\Order.cs" />
-    <Compile Include="TypeClasses\Ordering\OrderingComparer.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\Intervals\IntervalSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrderingIntervalExtensions.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Partial\PartialOrderingComparer.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Partial\IPartialOrderingExtensions.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrderingIntervalSetExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\TotalOrderingData.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Partial\IPartialOrdering.cs" />
+    <Compile Include="TypeClasses\Instances\Ordering\Total\Intervals\IntervalOrdering.cs" />
+    <Compile Include="TypeClasses\Instances\Ordering\Total\Intervals\IntervalLimitOrderings.cs" />
+    <Compile Include="TypeClasses\Instances\Ordering\Total\Intervals\IntervalLimitRestrictivenessOrdering.cs" />
+    <Compile Include="TypeClasses\Instances\Ordering\Total\ComparableOrdering.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrdering.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrderingExtensions.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Order.cs" />
     <Compile Include="DataTypes\Product\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataTypes\Interval\Interval.cs" />
-    <Compile Include="DataTypes\Interval\Bound.cs" />
-    <Compile Include="DataTypes\Interval\BoundType.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\Intervals\Interval.cs" />
+    <Compile Include="TypeClasses\Definitions\Ordering\Total\Intervals\IntervalLimit.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="DataTypes\Product\Product.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Product.tt</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\TryParser.cs" />
+    <Compile Include="Extensions\Utilities\TryParser.cs" />
+    <Compile Include="TypeClasses\Instances\Ordering\Total\ReversedOrdering.cs" />
+    <Compile Include="TypeClasses\Instances\Ordering\Total\TotalOrdering.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeGen\Helpers.ttinclude" />
@@ -146,6 +165,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TupleExtensions.cs</LastGenOutput>
     </None>
+    <None Include="FuncSharp.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

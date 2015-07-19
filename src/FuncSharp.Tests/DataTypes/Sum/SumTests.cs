@@ -32,11 +32,11 @@ namespace FuncSharp.Tests
             var u1 = Sum.CreateFirst<string, int>("foo");
             var u2 = Sum.CreateSecond<string, int>(42);
 
-            Assert.Equal(Option.Some("foo"), u1.First);
-            Assert.Equal(Option.None<int>(), u1.Second);
+            Assert.Equal(Option.Valued("foo"), u1.First);
+            Assert.Equal(Option.Empty<int>(), u1.Second);
 
-            Assert.Equal(Option.None<string>(), u2.First);
-            Assert.Equal(Option.Some(42), u2.Second);
+            Assert.Equal(Option.Empty<string>(), u2.First);
+            Assert.Equal(Option.Valued(42), u2.Second);
         }
 
         [Fact]
