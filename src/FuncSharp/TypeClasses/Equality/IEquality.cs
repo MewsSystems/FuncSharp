@@ -1,9 +1,9 @@
 ﻿namespace FuncSharp
 {
     /// <summary>
-    /// An universal algebra over the specified type.
+    /// An implementation of equality for the specified type.
     /// </summary>
-    public interface IAlgebra<A>
+    public interface IEquality<A>
     {
         /// <summary>
         /// Returns whether the two specified elements are equal.

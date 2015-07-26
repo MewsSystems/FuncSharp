@@ -45,7 +45,7 @@ namespace FuncSharp
         /// </summary>
         public static bool ProductEquals(this IProduct p1, object p2)
         {
-            return p1.FastEquals(p2).GetOrElse(() =>
+            return p1.FastEquals(p2).GetOrElse(_ =>
                 p1.ProductValues.SequenceEqual(((IProduct)p2).ProductValues)
             );
         }

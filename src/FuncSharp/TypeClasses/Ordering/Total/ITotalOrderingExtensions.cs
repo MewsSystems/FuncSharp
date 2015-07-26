@@ -80,7 +80,7 @@ namespace FuncSharp
         /// </summary>
         public static ITotalOrdering<A> Reverse<A>(this ITotalOrdering<A> ordering)
         {
-            return new ReversedOrdering<A>(ordering);
+            return new TotalOrdering<A>(ordering.Greater, ordering.Equal);
         }
     }
 }

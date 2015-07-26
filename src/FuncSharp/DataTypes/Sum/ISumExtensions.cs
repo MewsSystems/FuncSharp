@@ -47,7 +47,7 @@ namespace FuncSharp
         /// </summary>
         public static bool SumEquals(this ISum s1, object s2)
         {
-            return s1.FastEquals(s2).GetOrElse(() =>
+            return s1.FastEquals(s2).GetOrElse(_ =>
                 s1.SumRepresentation().Equals(((ISum)s2).SumRepresentation())
             );
         }

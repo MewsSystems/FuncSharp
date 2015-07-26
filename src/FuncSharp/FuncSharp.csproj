@@ -87,32 +87,39 @@
     <Compile Include="Traits\ITraitExtensions.cs" />
     <Compile Include="Traits\ITrait.cs" />
     <Compile Include="Traits\TraitDataStorage.cs" />
-    <Compile Include="TypeClasses\Definitions\Algebra\IAlgebra.cs" />
-    <Compile Include="TypeClasses\Definitions\Algebra\IAlgebraExtensions.cs" />
+    <Compile Include="TypeClasses\Enumeration\IEnumeration.cs" />
+    <Compile Include="TypeClasses\Enumeration\IEnumerationExtensions.cs" />
+    <Compile Include="TypeClasses\Equality\IEquality.cs" />
+    <Compile Include="TypeClasses\Equality\IEqualityExtensions.cs" />
     <Compile Include="DataTypes\Option\IOption.cs" />
     <Compile Include="DataTypes\Option\Option.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\Intervals\IntervalSet.cs">
+    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalSet.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrderingIntervalExtensions.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Partial\PartialOrderingComparer.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Partial\IPartialOrderingExtensions.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrderingIntervalSetExtensions.cs">
+    <Compile Include="TypeClasses\Ordering\Total\ITotalOrderingIntervalExtensions.cs" />
+    <Compile Include="TypeClasses\Ordering\Partial\PartialOrderingComparer.cs" />
+    <Compile Include="TypeClasses\Ordering\Partial\IPartialOrderingExtensions.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\ITotalOrderingIntervalSetExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\TotalOrderingData.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Partial\IPartialOrdering.cs" />
-    <Compile Include="TypeClasses\Instances\Ordering\Total\Intervals\IntervalOrdering.cs" />
-    <Compile Include="TypeClasses\Instances\Ordering\Total\Intervals\IntervalLimitOrderings.cs" />
-    <Compile Include="TypeClasses\Instances\Ordering\Total\Intervals\IntervalLimitRestrictivenessOrdering.cs" />
-    <Compile Include="TypeClasses\Instances\Ordering\Total\ComparableOrdering.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrdering.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\ITotalOrderingExtensions.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Order.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\TotalOrderingData.cs" />
+    <Compile Include="TypeClasses\Ordering\Partial\IPartialOrdering.cs" />
+    <Compile Include="TypeClasses\Integers.cs" />
+    <Compile Include="TypeClasses\DateTimes.cs" />
+    <Compile Include="TypeClasses\Dates.cs" />
+    <Compile Include="TypeClasses\Enumeration\Enumeration.cs" />
+    <Compile Include="TypeClasses\Equality\Equality.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalOrdering.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalLimitOrderings.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalLimitRestrictivenessOrdering.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\ComparableOrdering.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\ITotalOrdering.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\ITotalOrderingExtensions.cs" />
+    <Compile Include="TypeClasses\Ordering\Order.cs" />
     <Compile Include="DataTypes\Product\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\Intervals\Interval.cs" />
-    <Compile Include="TypeClasses\Definitions\Ordering\Total\Intervals\IntervalLimit.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\Intervals\Interval.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalLimit.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="DataTypes\Product\Product.cs">
       <AutoGen>True</AutoGen>
@@ -120,8 +127,7 @@
       <DependentUpon>Product.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\Utilities\TryParser.cs" />
-    <Compile Include="TypeClasses\Instances\Ordering\Total\ReversedOrdering.cs" />
-    <Compile Include="TypeClasses\Instances\Ordering\Total\TotalOrdering.cs" />
+    <Compile Include="TypeClasses\Ordering\Total\TotalOrdering.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeGen\Helpers.ttinclude" />

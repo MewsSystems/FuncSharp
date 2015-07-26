@@ -13,9 +13,10 @@ namespace FuncSharp
         /// </summary>
         internal IntervalSet(ITotalOrdering<A> ordering, IEnumerable<Interval<A>> disjointIntervals)
         {
-            var orderedIntervals = ordering.GetIntervalOrdering().Order(disjointIntervals.Where(i => i.IsNonEmpty)).ToArray();
+            Ordering = ordering;
 
             // Check that all intervals belong to the underlying space and that they are disjoint.        
+            var orderedIntervals = ordering.GetIntervalOrdering().Order(disjointIntervals.Where(i => i.IsNonEmpty)).ToArray();
             for (var i = 0; i < orderedIntervals.Length; i++)
             {
                 Ordering.Check(orderedIntervals[i], () => new ArgumentException("The " + i + "th interval uses different ordering."));
@@ -29,9 +30,7 @@ namespace FuncSharp
                 }
             }
 
-            Ordering = ordering;
             Intervals = orderedIntervals;
-
             productValues = new object[] { Ordering }.Concat(Intervals).ToList();
         }
 

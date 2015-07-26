@@ -149,6 +149,22 @@ namespace FuncSharp
             return ordering.Intersect(interval1, interval2).IsNonEmpty;
         }
 
+        /// <summary>
+        /// Returns closure of the interval (the same interval with all bounds closed).
+        /// </summary>
+        public static Interval<A> Closure<A>(this ITotalOrdering<A> ordering, Interval<A> interval)
+        {
+            if (interval.IsEmpty)
+            {
+                return interval;
+            }
+
+            return ordering.Interval(
+                interval.LowerBound.Map(b => IntervalLimit.Closed(b)).GetOrElse(interval.LowerLimit),
+                interval.UpperBound.Map(b => IntervalLimit.Closed(b)).GetOrElse(interval.UpperLimit)
+            );
+        }
+
         internal static void Check<A>(this ITotalOrdering<A> ordering, Interval<A> interval, Func<Exception> exceptionCreator)
         {
             if (!ordering.Equals(interval.Ordering))

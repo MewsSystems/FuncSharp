@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -35,6 +36,12 @@ namespace FuncSharp
         /// returns that new option.
         /// </summary>
         IOption<B> FlatMap<B>(Func<A, IOption<B>> f);
+
+        /// <summary>
+        /// Returns a nenumerable with the option value. If the option is empty, returns empty enumerable.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<A> ToEnumerable();
     }
 
     public static class IOptionExtensions
@@ -45,30 +52,30 @@ namespace FuncSharp
         public static B GetOrElse<A, B>(this IOption<A> option, B otherwise)
             where A : B
         {
-            return option.GetOrElse(() => otherwise);
+            return option.GetOrElse(_ => otherwise);
         }
 
         /// <summary>
         /// Returns value of the option if it has value. If not, returns value created by the otherwise function.
         /// </summary>
-        public static B GetOrElse<A, B>(this IOption<A> option, Func<B> otherwise)
+        public static B GetOrElse<A, B>(this IOption<A> option, Func<Unit, B> otherwise)
             where A : B
         {
             return option.Match(
                 a => a,
-                _ => otherwise()
+                _ => otherwise(Unit.Value)
             );
         }
 
         /// <summary>
         /// Returns the option if it has value. Otherwise returns the alternative option.
         /// </summary>
-        public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<IOption<B>> alternative)
+        public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<Unit, IOption<B>> alternative)
             where A : B
         {
             return option.Match<IOption<B>>(
                 _ => option as IOption<B>,
-                _ => alternative()
+                _ => alternative(Unit.Value)
             );
         }
 

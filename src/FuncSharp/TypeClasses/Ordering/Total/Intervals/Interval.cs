@@ -125,6 +125,10 @@
             {
                 return "Ø";
             }
+            if (UpperBound.Equals(LowerBound) && IsBounded)
+            {
+                return "[" + UpperBound.Value + "]";
+            }
 
             return
                 (LowerLimit.IsOpen ? "(" : "[") +

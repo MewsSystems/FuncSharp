@@ -7,11 +7,35 @@ namespace FuncSharp
     public static class ITotalOrderingIntervalSetExtensions
     {
         /// <summary>
+        /// Creates a new empty intervsal set.
+        /// </summary>
+        public static IntervalSet<A> EmptyIntervalSet<A>(this ITotalOrdering<A> ordering)
+        {
+            return new IntervalSet<A>(ordering, Enumerable.Empty<Interval<A>>());
+        }
+
+        /// <summary>
         /// Creates a new interval set consisting only of the specified interval.
         /// </summary>
         public static IntervalSet<A> IntervalSet<A>(this ITotalOrdering<A> ordering, Interval<A> interval)
         {
             return new IntervalSet<A>(ordering, new[] { interval });
+        }
+
+        /// <summary>
+        /// Creates a new interval set from the specified collection of intervals.
+        /// </summary>
+        public static IntervalSet<A> IntervalSet<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> intervals)
+        {
+            return intervals.Aggregate(ordering.EmptyIntervalSet(), (s, i) => ordering.Union(s, i));
+        }
+
+        /// <summary>
+        /// Creates a new interval set from the specified collection of intervals.
+        /// </summary>
+        public static IntervalSet<A> IntervalSet<A>(this ITotalOrdering<A> ordering, params Interval<A>[] intervals)
+        {
+            return ordering.IntervalSet(intervals.AsEnumerable());
         }
 
         /// <summary>
@@ -55,7 +79,8 @@ namespace FuncSharp
         {
             ordering.Check(set1, set2);
 
-            return ordering.IntervalSet(set1.Intervals.SelectMany(i => ordering.Intersect(set2.Intervals, i)));
+            var intersection = set1.Intervals.SelectMany(i => ordering.Intersect(set2.Intervals, i));
+            return new IntervalSet<A>(ordering, intersection);
         }
 
         /// <summary>
@@ -81,7 +106,27 @@ namespace FuncSharp
         {
             ordering.Check(set1, set2);
 
-            return ordering.IntervalSet(set1.Intervals.Aggregate(set2.Intervals, (r, i) => ordering.Union(r, i)));
+            var union = set1.Intervals.Aggregate(set2.Intervals, (r, i) => ordering.Union(r, i));
+            return new IntervalSet<A>(ordering, union);
+        }
+
+        /// <summary>
+        /// Returns the complementary interval set, i.e. interval set representing all values that are not in the 
+        /// specified interval.
+        /// </summary>
+        public static IntervalSet<A> Complement<A>(this ITotalOrdering<A> ordering, Interval<A> interval)
+        {
+            if (interval.IsEmpty)
+            {
+                return ordering.IntervalSet(ordering.UnboundedInterval());
+            }
+
+            var lowerLimit = interval.LowerLimit;
+            var upperLimit = interval.UpperLimit;
+            var lowerComplement = lowerLimit.Bound.Map(b => ordering.Interval(upperLimit: IntervalLimit.Create(b, lowerLimit.IsClosed)));
+            var upperComplement = upperLimit.Bound.Map(b => ordering.Interval(lowerLimit: IntervalLimit.Create(b, upperLimit.IsClosed)));
+
+            return ordering.IntervalSet(lowerComplement.ToEnumerable().Concat(upperComplement.ToEnumerable()));
         }
 
         internal static void Check<A>(this ITotalOrdering<A> ordering, IntervalSet<A> set, Func<Exception> exceptionCreator)
@@ -104,11 +149,6 @@ namespace FuncSharp
             ordering.Check(set2, () => new ArgumentException("The second interval set uses different ordering."));
         }
 
-        private static IntervalSet<A> IntervalSet<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> disjointIntervals)
-        {
-            return new IntervalSet<A>(ordering, disjointIntervals);
-        }
-
         private static IEnumerable<Interval<A>> Intersect<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> intervals, Interval<A> interval)
         {
             return intervals.Select(i => ordering.Intersect(i, interval)).ToList();
@@ -116,19 +156,24 @@ namespace FuncSharp
 
         private static IEnumerable<Interval<A>> Union<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> intervals, Interval<A> interval)
         {
-            var intersectedIntervals = intervals.Where(i => ordering.Intersects(i, interval)).ToList();
-            var otherIntervals = intervals.Except(intersectedIntervals);
+            // An interval should be merged together with another interval if either closure of the interval intersects the second
+            // interval or if closure of the second interval intersects the first interval.
+            var unionIntervals = intervals.Where(i =>
+                ordering.Intersects(ordering.Closure(i), interval) ||
+                ordering.Intersects(i, ordering.Closure(interval))
+            ).ToList();
+            var otherIntervals = intervals.Except(unionIntervals);
 
             // Create a union interval from the intersectced intervals and the target interval. The union interval will replace
             // the intersected intervals.
             var data = ordering.GetTraitData();
             var unionInterval = interval;
-            if (intersectedIntervals.Any())
+            if (unionIntervals.Any())
             {
                 // Union with the intervals is the first 
                 unionInterval = ordering.Interval(
-                    data.LimitOrderings.LowerRestrictiveness.Min(interval.LowerLimit, intersectedIntervals.First().LowerLimit),
-                    data.LimitOrderings.UpperRestrictiveness.Min(interval.UpperLimit, intersectedIntervals.Last().UpperLimit)
+                    data.LimitOrderings.LowerRestrictiveness.Min(interval.LowerLimit, unionIntervals.First().LowerLimit),
+                    data.LimitOrderings.UpperRestrictiveness.Min(interval.UpperLimit, unionIntervals.Last().UpperLimit)
                 );
             }
 

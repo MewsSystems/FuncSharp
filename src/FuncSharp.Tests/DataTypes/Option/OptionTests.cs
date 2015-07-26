@@ -36,15 +36,15 @@ namespace FuncSharp.Tests
         [Fact]
         public void OrElseTest()
         {
-            Assert.Equal(Option.Valued(42), Option.Create(42).OrElse(() => Option.Create(53)));
-            Assert.Equal(Option.Valued(42), Option.Empty<int>().OrElse(() => Option.Create(42)));
+            Assert.Equal(Option.Valued(42), Option.Create(42).OrElse(_ => Option.Create(53)));
+            Assert.Equal(Option.Valued(42), Option.Empty<int>().OrElse(_ => Option.Create(42)));
         }
 
         [Fact]
         public void GetOrElseTest()
         {
-            Assert.Equal(42, Option.Create(42).GetOrElse(() => 123));
-            Assert.Equal(123, Option.Empty<int>().GetOrElse(() => 123));
+            Assert.Equal(42, Option.Create(42).GetOrElse(_ => 123));
+            Assert.Equal(123, Option.Empty<int>().GetOrElse(_ => 123));
         }
 
         [Fact]

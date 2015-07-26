@@ -4,7 +4,7 @@
     /// A partial ordering for the specified type.
     /// </summary>
     /// <typeparam name="A">Type for which the ordering relation is implemented.</typeparam>
-    public interface IPartialOrdering<A> : IAlgebra<A>
+    public interface IPartialOrdering<A> : IEquality<A>
     {
         /// <summary>
         /// Returns whether the first element is less than the second element.

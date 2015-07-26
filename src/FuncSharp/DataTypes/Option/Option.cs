@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
@@ -111,6 +113,13 @@ namespace FuncSharp
             return Match(
                 a => f(a),
                 _ => Option.Empty<B>()
+            );
+        }
+        public IEnumerable<A> ToEnumerable()
+        {
+            return Match(
+                a => new[] { a },
+                _ => Enumerable.Empty<A>()
             );
         }
 

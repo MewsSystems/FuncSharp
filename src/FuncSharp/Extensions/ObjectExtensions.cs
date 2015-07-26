@@ -11,7 +11,7 @@ namespace FuncSharp
         /// </summary>
         public static bool StructurallyEquals(this object o1, object o2)
         {
-            return o1.FastEquals(o2).GetOrElse(() => o1.Equals(o2));
+            return o1.FastEquals(o2).GetOrElse(_ => o1.Equals(o2));
         }
 
         /// <summary>
