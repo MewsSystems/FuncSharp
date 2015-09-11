@@ -1,8 +1,10 @@
 # FuncSharp - Functional C&#35;
 
-A library with main purpose to reduce some boilerplate code from C# programs and introduce stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.
+A library with main purpose to reduce some boilerplate code from C# programs and introduce stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Download from NuGet:
 
-**Get it from NuGet: ** `Install-Package FuncSharp`
+```
+Install-Package FuncSharp
+```
 
 ## Contents
 
