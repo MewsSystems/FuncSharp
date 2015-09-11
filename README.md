@@ -45,7 +45,7 @@ class User : Product3<string, string, DateTime>
 }
 ```
 
-A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particulary useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore **FuncSharp** contains conversions between `Action`s and `Func`tions returning the `Unit` value.
+A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particulary useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
 
 #### Sum
 
