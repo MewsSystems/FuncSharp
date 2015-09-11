@@ -14,7 +14,7 @@ Install-Package FuncSharp
     - [Product](#product)
     - [Sum](#sum)
 - [Traits](#traits)
-- [Type Classes](#typeclasses)
+- [Type Classes](#type-classes)
     - [Equality](#equality)
     - [Enumeration](#enumeration)
     - [Ordering](#ordering)
