@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FuncSharp.DataTypes.Definite
+namespace FuncSharp
 {
     public static class Definite
     {

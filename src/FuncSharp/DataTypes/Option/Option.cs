@@ -115,6 +115,7 @@ namespace FuncSharp
                 _ => Option.Empty<B>()
             );
         }
+
         public IEnumerable<A> ToEnumerable()
         {
             return Match(

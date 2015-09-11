@@ -1,4 +1,4 @@
-﻿namespace FuncSharp.DataTypes.Definite
+﻿namespace FuncSharp
 {
     /// <summary>
     /// A container for value that is definitely not null.

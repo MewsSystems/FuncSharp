@@ -55,6 +55,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Turns the specified value into a definite. Throws an exception if the value is null. 
+        /// </summary>
+        public static IDefinite<T> ToDefinite<T>(this T value)
+        {
+            return Definite.Create(value);    
+        }
+
+        /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
         public static IOption<T> ToOption<T>(this T value)

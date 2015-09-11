@@ -46,7 +46,7 @@ namespace FuncSharp
                 return false.ToOption();
             }
 
-            return Option.None<bool>();
+            return Option.Empty<bool>();
         }
 
         /// <summary>
@@ -59,6 +59,14 @@ namespace FuncSharp
                 return nullText;
             }
             return o.ToString();
+        }
+
+        /// <summary>
+        /// Turns the specified value into a definite. Throws an exception if the value is null. 
+        /// </summary>
+        public static IDefinite<T> ToDefinite<T>(this T value)
+        {
+            return Definite.Create(value);    
         }
 
         /// <summary>
