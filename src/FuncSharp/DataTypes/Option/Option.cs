@@ -100,7 +100,7 @@ namespace FuncSharp
 
         public A GetOrDefault()
         {
-            return GetSumValue<A>();
+            return this.GetOrElse(default(A));
         }
 
         public IOption<B> Map<B>(Func<A, B> f)

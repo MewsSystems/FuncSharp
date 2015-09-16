@@ -49,6 +49,11 @@
         return NaryType("Sum", i, name);
     }
 
+    public string DataCubeType(int i)
+    {
+        return "DataCube" + i + "<" + Types(i, name: "P", appendSeparator: true) + "TValue>";
+    }
+
     public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)
     {
         return Types(i, name, except, appendSeparator: true) + resultTypeName;
