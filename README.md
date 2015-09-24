@@ -56,7 +56,7 @@ A sum of zero types (a choice from no types) is also a well known type - in **Fu
 
 #### Morphisms
 
-Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a consise representation of a bidirectlional mapping that is in .NET traditionally represented as two dictionaries.
+Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a consise representation of a bidirectlional mapping that is in .NET traditionally represented as a pair of dictionaries.
 
 ## Traits
 
