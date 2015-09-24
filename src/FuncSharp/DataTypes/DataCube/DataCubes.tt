@@ -17,6 +17,9 @@ namespace FuncSharp
     /// </summary>
     public class <#= DataCubeType(i) #> : DataCube<<#= ProductType(i, name: "P") #>, TValue>
     {
+        /// <summary>
+        /// Creates an empty <#= i #>-dimensional data cube. 
+        /// </summary>
         public DataCube<#= i #>()
         {
 <#      for (var j = 1; j <= i; j++) { #>
@@ -24,6 +27,34 @@ namespace FuncSharp
 <#      } #>
         }
 
+        /// <summary>
+        /// Creates a <#= i #>-dimensional data cube filled with the specified data. If multiple values with the same position
+        /// appear among the initial data, last one is used.
+        /// </summary>
+        public DataCube<#= i #>(IEnumerable<IProduct2<<#= ProductType(i, name: "P") #>, TValue>> initialData)
+            : this()
+        {
+            foreach (var d in initialData)
+            {
+                Set(d.ProductValue1, d.ProductValue2);
+            }
+        }
+
+<#      if (i > 0) { #>
+        /// <summary>
+        /// Creates a <#= i #>-dimensional data cube filled with the specified data. If multiple values with the same position
+        /// appear among the initial data, last one is used.
+        /// </summary>
+        public DataCube<#= i #>(IEnumerable<IProduct<#= i + 1 #><<#= Types(i, name: "P") #>, TValue>> initialData)
+            : this()
+        {
+            foreach (var d in initialData)
+            {
+                Set(d.ExceptValue<#= i + 1 #>, d.ProductValue<#= i + 1 #>);
+            }
+        }
+
+<#      } #>
 <#      if (i == 0) { #>
         /// <summary>
         /// The only value in the cube.
@@ -49,6 +80,14 @@ namespace FuncSharp
 
 <#      } #>
         /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<<#= Types(i, name: "P", appendSeparator: true) #>TValue> a)
+        {
+            ForEach((position, value) => a(<#= Properties(i, name: "ProductValue", accessor: "position.", appendSeparator: true) #>value));
+        }
+
+        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(<#= Parameters(i, name: "P") #>)
@@ -72,7 +111,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(<#= Values(i, name: "P") #>), setter);
         }
-
+        
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -81,7 +120,6 @@ namespace FuncSharp
 <#      for (var j = 1; j <= i; j++) { #>
             AddDomain(Domain<#= j #>Counts, position.ProductValue<#= j #>);
 <#      } #>
-
             return base.Set(position, value);
         }
 
@@ -97,18 +135,42 @@ namespace FuncSharp
         /// Sets value at the specified position. If there is value already present at that position, updates it with the
         /// result of the <paramref name="updater"/> function which is given the present value and the new value.
         /// </summary>
-        public void SetOrElseUpdate(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue, TValue> updater)
+        public TValue SetOrElseUpdate(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue, TValue> updater)
         {
-            SetOrElseUpdate(Product.Create(<#= Values(i, name: "P") #>), value, updater);
+            return SetOrElseUpdate(Product.Create(<#= Values(i, name: "P") #>), value, updater);
+        }
+<#      for (var j = 1; j <= i; j++) { #>
+
+        /// <summary>
+        /// Transforms the current <#= i #>-dimensional cube into a <#= i - 1 #>-dimensional cube by excluding the dimension <#= j #>.
+        /// All values whose position differ just in dimension <#= j #> (their positions without dimension <#= j #> are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension <#= j #>.
+        /// </summary>
+        public <#= DataCubeType(i, except: j) #> RollUpDimension<#= j #>(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<<#= DataCubeType(i, except: j) #>, <#= ProductType(i, name: "P", except: j) #>>(
+                position => position.ExceptValue<#= j #>, 
+                aggregator
+            );
         }
 
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// Slices the current cube in the dimension <#= j #>. The slices are <#= i - 1 #>-dimensional cubes without dimension <#= j #> of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
         /// </summary>
-        public void ForEach(Action<<#= Types(i, name: "P", appendSeparator: true) #>TValue> a)
+        public DataCube1<<#= Type(j, name: "P") #>, <#= DataCubeType(i, except: j) #>> SliceDimension<#= j #>()
         {
-            ForEach((position, value) => a(<#= Properties(i, name: "ProductValue", accessor: "position.", appendSeparator: true) #>value));
+            var slices = new DataCube1<<#= Type(j, name: "P") #>, <#= DataCubeType(i, except: j) #>>();
+            ForEach((position, value) =>
+            {
+                var slice = slices.GetOrElseSet(position.ProductValue<#= j #>, () => new <#= DataCubeType(i, except: j) #>());
+                slice.Set(position.ExceptValue<#= j #>, value);
+            });
+            return slices;
         }
+<#      } #>
     }
 
 <# } #>

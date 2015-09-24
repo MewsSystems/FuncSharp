@@ -37,6 +37,17 @@ namespace FuncSharp
         private Dictionary<TPosition, TValue> Index { get; set; }
 
         /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<TPosition, TValue> a)
+        {
+            foreach (var kv in Index)
+            {
+                a(kv.Key, kv.Value);
+            }
+        }
+
+        /// <summary>
         /// Returns whether the cube is empty.
         /// </summary>
         /// <returns></returns>
@@ -94,17 +105,6 @@ namespace FuncSharp
                 v => updater(v, value),
                 _ => value
             ));
-        }
-
-        /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<TPosition, TValue> a)
-        {
-            foreach (var kv in Index)
-            {
-                a(kv.Key, kv.Value);
-            }
         }
 
         /// <summary>
