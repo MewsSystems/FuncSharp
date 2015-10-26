@@ -495,8 +495,8 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -588,9 +588,9 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -705,10 +705,10 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -846,11 +846,11 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                ifFourth == null ? null : ifFourth.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -1011,12 +1011,12 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                ifFourth == null ? null : ifFourth.ToFunc(),
+                ifFifth == null ? null : ifFifth.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -1200,13 +1200,13 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                ifFourth == null ? null : ifFourth.ToFunc(),
+                ifFifth == null ? null : ifFifth.ToFunc(),
+                ifSixth == null ? null : ifSixth.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -1413,14 +1413,14 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                ifSeventh.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                ifFourth == null ? null : ifFourth.ToFunc(),
+                ifFifth == null ? null : ifFifth.ToFunc(),
+                ifSixth == null ? null : ifSixth.ToFunc(),
+                ifSeventh == null ? null : ifSeventh.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -1650,15 +1650,15 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                ifSeventh.ToFunc(),
-                ifEighth.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                ifFourth == null ? null : ifFourth.ToFunc(),
+                ifFifth == null ? null : ifFifth.ToFunc(),
+                ifSixth == null ? null : ifSixth.ToFunc(),
+                ifSeventh == null ? null : ifSeventh.ToFunc(),
+                ifEighth == null ? null : ifEighth.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }
@@ -1911,16 +1911,16 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                ifSeventh.ToFunc(),
-                ifEighth.ToFunc(),
-                ifNinth.ToFunc(),
-                otherwise.ToFunc()
+                ifFirst == null ? null : ifFirst.ToFunc(),
+                ifSecond == null ? null : ifSecond.ToFunc(),
+                ifThird == null ? null : ifThird.ToFunc(),
+                ifFourth == null ? null : ifFourth.ToFunc(),
+                ifFifth == null ? null : ifFifth.ToFunc(),
+                ifSixth == null ? null : ifSixth.ToFunc(),
+                ifSeventh == null ? null : ifSeventh.ToFunc(),
+                ifEighth == null ? null : ifEighth.ToFunc(),
+                ifNinth == null ? null : ifNinth.ToFunc(),
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
     }

@@ -100,8 +100,8 @@ namespace FuncSharp
             get
             {
                 return PartialMatch(
-                    if<#= GetOrdinal(j) #>: v => Option.Some(v),
-                    otherwise: _ => Option.None<<#= Type(j) #>>()
+                    if<#= GetOrdinal(j) #>: v => Option.Valued(v),
+                    otherwise: _ => Option.Empty<<#= Type(j) #>>()
                 );
             }
         }
@@ -141,8 +141,8 @@ namespace FuncSharp
             Action<object> otherwise = null)
         {
             PartialMatch(
-<#= Lines(i, x => Indent(16) + IfIth(x) + ".ToFunc()", separator: ",") #>,
-                otherwise.ToFunc()
+<#= Lines(i, x => Indent(16) + IfIth(x) + " == null ? null : "  + IfIth(x) + ".ToFunc()", separator: ",") #>,
+                otherwise == null ? null : otherwise.ToFunc()
             );
         }
 <#     } #>
