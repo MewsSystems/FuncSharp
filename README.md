@@ -13,6 +13,7 @@ Install-Package FuncSharp
     - [Definite](#definite)
     - [Product](#product)
     - [Sum](#sum)
+    - [Morphisms](#morphisms)
 - [Traits](#traits)
 - [Type Classes](#type-classes)
     - [Equality](#equality)
@@ -52,6 +53,10 @@ A direct consequence of product types is the `Unit` type that can be understood 
 Similarly to product types, **FuncSharp** also comes equipped with extensible definition and canonical implementation of sum types (coproduct types). They represent a strongly typed alternative, e.g. either `bool`, `string` or `int` value. Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the sum type become identified by compiler as a an error. One application of this principle can for example be implementation of strongly-typed enums. Adding a new value to the enum would immediately introduce compile time errors, which would force the programmer to fix all places that use the enum.
 
 A sum of zero types (a choice from no types) is also a well known type - in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
+
+#### Morphisms
+
+Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a consise representation of a bidirectlional mapping that is in .NET traditionally represented as a pair of dictionaries.
 
 ## Traits
 
