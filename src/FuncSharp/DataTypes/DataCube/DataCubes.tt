@@ -171,6 +171,11 @@ namespace FuncSharp
             return slices;
         }
 <#      } #>
+
+        protected override <#= ProductType(i, name: "P") #> ToCanonicalPosition(<#= ProductType(i, name: "P") #> position)
+        {
+            return position.ToCanonicalProduct();
+        }
     }
 
 <# } #>

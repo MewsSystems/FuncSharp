@@ -42,6 +42,10 @@ namespace FuncSharp
         <#= ProductType(i, except: j) #> ExceptValue<#= j #> { get; }
 
 <#      } #>
+        /// <summary>
+        /// Converts the product into the canonical implementation.
+        /// </summary>
+        <#= ProductType(i) #> ToCanonicalProduct();
     }
 
 <#  } #>

@@ -61,7 +61,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(TPosition position)
         {
-            return Index.ContainsKey(position);
+            return Index.ContainsKey(ToCanonicalPosition(position));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace FuncSharp
         public IOption<TValue> Get(TPosition position)
         {
             TValue result;
-            if (Index.TryGetValue(position, out result))
+            if (Index.TryGetValue(ToCanonicalPosition(position), out result))
             {
                 return Option.Valued(result);
             }
@@ -91,7 +91,7 @@ namespace FuncSharp
         /// </summary>
         public virtual TValue Set(TPosition position, TValue value)
         {
-            Index[position] = value;
+            Index[ToCanonicalPosition(position)] = value;
             return value;
         }
 
@@ -144,5 +144,7 @@ namespace FuncSharp
                 rangeCounts[key] = count - 1;
             }
         }
+
+        protected abstract TPosition ToCanonicalPosition(TPosition position);
     }
 }

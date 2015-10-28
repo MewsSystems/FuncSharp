@@ -94,6 +94,11 @@ namespace FuncSharp
         {
             return SetOrElseUpdate(Product.Create(), value, updater);
         }
+
+        protected override IProduct0 ToCanonicalPosition(IProduct0 position)
+        {
+            return position.ToCanonicalProduct();
+        }
     }
 
     /// <summary>
@@ -232,6 +237,11 @@ namespace FuncSharp
                 slice.Set(position.ExceptValue1, value);
             });
             return slices;
+        }
+
+        protected override IProduct1<P1> ToCanonicalPosition(IProduct1<P1> position)
+        {
+            return position.ToCanonicalProduct();
         }
     }
 
@@ -413,6 +423,11 @@ namespace FuncSharp
                 slice.Set(position.ExceptValue2, value);
             });
             return slices;
+        }
+
+        protected override IProduct2<P1, P2> ToCanonicalPosition(IProduct2<P1, P2> position)
+        {
+            return position.ToCanonicalProduct();
         }
     }
 
@@ -636,6 +651,11 @@ namespace FuncSharp
                 slice.Set(position.ExceptValue3, value);
             });
             return slices;
+        }
+
+        protected override IProduct3<P1, P2, P3> ToCanonicalPosition(IProduct3<P1, P2, P3> position)
+        {
+            return position.ToCanonicalProduct();
         }
     }
 
@@ -901,6 +921,11 @@ namespace FuncSharp
                 slice.Set(position.ExceptValue4, value);
             });
             return slices;
+        }
+
+        protected override IProduct4<P1, P2, P3, P4> ToCanonicalPosition(IProduct4<P1, P2, P3, P4> position)
+        {
+            return position.ToCanonicalProduct();
         }
     }
 

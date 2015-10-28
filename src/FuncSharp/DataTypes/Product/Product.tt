@@ -20,7 +20,7 @@ namespace FuncSharp
 <#  for (var i = 0; i < MaxArity(); i++) { #>
 
         /// <summary>
-        /// Creates a new <#= i #>-dimensional product.
+        /// Creates a new <#= i #>-dimensional canonical product.
         /// </summary>
         public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
         {
@@ -92,6 +92,16 @@ namespace FuncSharp
                 return Enumerable.Empty<object>();
 <#      } #>
             }
+        }
+
+        public <#= ProductType(i) #> ToCanonicalProduct()
+        {
+            if (Equals(GetType(), typeof(<#= ProductImplType(i) #>)))
+            {
+                return this;
+            }
+
+            return Create(<#= Properties(i, name: "ProductValue") #>);
         }
     }
 
