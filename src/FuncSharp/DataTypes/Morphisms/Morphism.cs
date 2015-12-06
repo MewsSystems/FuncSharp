@@ -43,8 +43,13 @@ namespace FuncSharp
         /// </summary>
         public static IMorphism<A, C> Compose<A, B, C>(IMorphism<A, B> m1, IMorphism<B, C> m2)
         {
-            var mappings = m1.Domain.Select(a => m1.Apply(a).FlatMap(b => m2.Apply(b).Map(c => Product.Create(a, c))));
-            return Create(mappings.SelectMany(m => m.ToEnumerable()));
+            var mappings = m1.Domain.Select(a =>
+            {
+                var bo = m1.Apply(a);
+                var co = bo.FlatMap(b => m2.Apply(b));
+                return co.Map(c => Product.Create(a, c));
+            });
+            return Create(mappings.Flatten());
         }
     }
 

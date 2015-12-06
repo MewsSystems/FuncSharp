@@ -73,6 +73,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs">
       <DependentUpon>ObjectExtensions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
