@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FuncSharp
@@ -10,14 +11,14 @@ namespace FuncSharp
             return options.SelectMany(o => o.ToEnumerable());
         }
 
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> e)
+        public static IOption<T> FirstOption<T>(this IEnumerable<T> e, Func<T, bool> predicate = null)
         {
-            return e.FirstOrDefault().ToOption();
+            return e.FirstOrDefault(predicate ?? (t => true)).ToOption();
         }
 
-        public static IOption<T> LastOption<T>(this IEnumerable<T> e)
+        public static IOption<T> LastOption<T>(this IEnumerable<T> e, Func<T, bool> predicate = null)
         {
-            return e.LastOrDefault().ToOption();
+            return e.LastOrDefault(predicate ?? (t => true)).ToOption();
         }
     }
 }
