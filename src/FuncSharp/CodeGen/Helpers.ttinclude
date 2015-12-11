@@ -48,10 +48,10 @@
     {
         return NaryType("Sum", i, name);
     }
-
-    public string DataCubeType(int i, int? except = null)
+    
+    public string DataCubeType(int i, int? except = null, string positionTypeName = "P")
     {
-        return "DataCube" + (i - (except.HasValue ? 1 : 0)) + "<" + Types(i, name: "P", except: except, appendSeparator: true) + "TValue>";
+        return "DataCube" + (i - (except.HasValue ? 1 : 0)) + "<" + Types(i, name: positionTypeName, except: except, appendSeparator: true) + "TValue>";
     }
 
     public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)

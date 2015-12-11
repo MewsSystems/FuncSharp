@@ -139,7 +139,20 @@ namespace FuncSharp
         {
             return SetOrElseUpdate(Product.Create(<#= Values(i, name: "P") #>), value, updater);
         }
-<#      for (var j = 1; j <= i; j++) { #>
+<#      for (var j = 0; j <= i; j++) { #>
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public <#= DataCubeType(j, positionTypeName: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, <#= ProductType(j, name: "Q") #>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionTypeName: "Q") #>>(positionMapper, aggregator);
+        }
+<#          if (j > 0) { #>
 
         /// <summary>
         /// Transforms the current <#= i #>-dimensional cube into a <#= i - 1 #>-dimensional cube by excluding the dimension <#= j #>.
@@ -149,10 +162,7 @@ namespace FuncSharp
         /// </summary>
         public <#= DataCubeType(i, except: j) #> RollUpDimension<#= j #>(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<<#= DataCubeType(i, except: j) #>, <#= ProductType(i, name: "P", except: j) #>>(
-                position => position.ExceptValue<#= j #>, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue<#= j #>, aggregator);
         }
 
         /// <summary>
@@ -170,8 +180,12 @@ namespace FuncSharp
             });
             return slices;
         }
+<#          } #>
 <#      } #>
 
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
         protected override <#= ProductType(i, name: "P") #> ToCanonicalPosition(<#= ProductType(i, name: "P") #> position)
         {
             return position.ToCanonicalProduct();

@@ -114,7 +114,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public TNewCube Transform<TNewCube, TNewPosition>(Func<TPosition, TNewPosition> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public TNewCube Transform<TNewPosition, TNewCube>(Func<TPosition, TNewPosition> positionMapper, Func<TValue, TValue, TValue> aggregator)
             where TNewCube : DataCube<TNewPosition, TValue>, new()
             where TNewPosition : IProduct
         {

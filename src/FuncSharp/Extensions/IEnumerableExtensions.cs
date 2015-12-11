@@ -9,5 +9,15 @@ namespace FuncSharp
         {
             return options.SelectMany(o => o.ToEnumerable());
         }
+
+        public static IOption<T> FirstOption<T>(this IEnumerable<T> e)
+        {
+            return e.FirstOrDefault().ToOption();
+        }
+
+        public static IOption<T> LastOption<T>(this IEnumerable<T> e)
+        {
+            return e.LastOrDefault().ToOption();
+        }
     }
 }

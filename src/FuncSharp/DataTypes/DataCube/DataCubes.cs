@@ -95,6 +95,21 @@ namespace FuncSharp
             return SetOrElseUpdate(Product.Create(), value, updater);
         }
 
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct0, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
         protected override IProduct0 ToCanonicalPosition(IProduct0 position)
         {
             return position.ToCanonicalProduct();
@@ -210,6 +225,30 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct1<P1>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct1<P1>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 1-dimensional cube into a 0-dimensional cube by excluding the dimension 1.
         /// All values whose position differ just in dimension 1 (their positions without dimension 1 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -217,10 +256,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube0<TValue> RollUpDimension1(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube0<TValue>, IProduct0>(
-                position => position.ExceptValue1, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue1, aggregator);
         }
 
         /// <summary>
@@ -239,6 +275,9 @@ namespace FuncSharp
             return slices;
         }
 
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
         protected override IProduct1<P1> ToCanonicalPosition(IProduct1<P1> position)
         {
             return position.ToCanonicalProduct();
@@ -366,6 +405,30 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct2<P1, P2>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct2<P1, P2>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 2-dimensional cube into a 1-dimensional cube by excluding the dimension 1.
         /// All values whose position differ just in dimension 1 (their positions without dimension 1 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -373,10 +436,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube1<P2, TValue> RollUpDimension1(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube1<P2, TValue>, IProduct1<P2>>(
-                position => position.ExceptValue1, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue1, aggregator);
         }
 
         /// <summary>
@@ -396,6 +456,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct2<P1, P2>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 2-dimensional cube into a 1-dimensional cube by excluding the dimension 2.
         /// All values whose position differ just in dimension 2 (their positions without dimension 2 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -403,10 +475,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube1<P1, TValue> RollUpDimension2(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube1<P1, TValue>, IProduct1<P1>>(
-                position => position.ExceptValue2, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue2, aggregator);
         }
 
         /// <summary>
@@ -425,6 +494,9 @@ namespace FuncSharp
             return slices;
         }
 
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
         protected override IProduct2<P1, P2> ToCanonicalPosition(IProduct2<P1, P2> position)
         {
             return position.ToCanonicalProduct();
@@ -564,6 +636,30 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct3<P1, P2, P3>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct3<P1, P2, P3>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 3-dimensional cube into a 2-dimensional cube by excluding the dimension 1.
         /// All values whose position differ just in dimension 1 (their positions without dimension 1 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -571,10 +667,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube2<P2, P3, TValue> RollUpDimension1(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube2<P2, P3, TValue>, IProduct2<P2, P3>>(
-                position => position.ExceptValue1, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue1, aggregator);
         }
 
         /// <summary>
@@ -594,6 +687,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct3<P1, P2, P3>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 3-dimensional cube into a 2-dimensional cube by excluding the dimension 2.
         /// All values whose position differ just in dimension 2 (their positions without dimension 2 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -601,10 +706,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube2<P1, P3, TValue> RollUpDimension2(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube2<P1, P3, TValue>, IProduct2<P1, P3>>(
-                position => position.ExceptValue2, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue2, aggregator);
         }
 
         /// <summary>
@@ -624,6 +726,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct3<P1, P2, P3>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 3-dimensional cube into a 2-dimensional cube by excluding the dimension 3.
         /// All values whose position differ just in dimension 3 (their positions without dimension 3 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -631,10 +745,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube2<P1, P2, TValue> RollUpDimension3(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube2<P1, P2, TValue>, IProduct2<P1, P2>>(
-                position => position.ExceptValue3, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue3, aggregator);
         }
 
         /// <summary>
@@ -653,6 +764,9 @@ namespace FuncSharp
             return slices;
         }
 
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
         protected override IProduct3<P1, P2, P3> ToCanonicalPosition(IProduct3<P1, P2, P3> position)
         {
             return position.ToCanonicalProduct();
@@ -804,6 +918,30 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct4<P1, P2, P3, P4>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct4<P1, P2, P3, P4>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 4-dimensional cube into a 3-dimensional cube by excluding the dimension 1.
         /// All values whose position differ just in dimension 1 (their positions without dimension 1 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -811,10 +949,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube3<P2, P3, P4, TValue> RollUpDimension1(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube3<P2, P3, P4, TValue>, IProduct3<P2, P3, P4>>(
-                position => position.ExceptValue1, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue1, aggregator);
         }
 
         /// <summary>
@@ -834,6 +969,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct4<P1, P2, P3, P4>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 4-dimensional cube into a 3-dimensional cube by excluding the dimension 2.
         /// All values whose position differ just in dimension 2 (their positions without dimension 2 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -841,10 +988,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube3<P1, P3, P4, TValue> RollUpDimension2(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube3<P1, P3, P4, TValue>, IProduct3<P1, P3, P4>>(
-                position => position.ExceptValue2, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue2, aggregator);
         }
 
         /// <summary>
@@ -864,6 +1008,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct4<P1, P2, P3, P4>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 4-dimensional cube into a 3-dimensional cube by excluding the dimension 3.
         /// All values whose position differ just in dimension 3 (their positions without dimension 3 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -871,10 +1027,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube3<P1, P2, P4, TValue> RollUpDimension3(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube3<P1, P2, P4, TValue>, IProduct3<P1, P2, P4>>(
-                position => position.ExceptValue3, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue3, aggregator);
         }
 
         /// <summary>
@@ -894,6 +1047,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct4<P1, P2, P3, P4>, IProduct4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
         /// Transforms the current 4-dimensional cube into a 3-dimensional cube by excluding the dimension 4.
         /// All values whose position differ just in dimension 4 (their positions without dimension 4 are the same) are 
         /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
@@ -901,10 +1066,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube3<P1, P2, P3, TValue> RollUpDimension4(Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<DataCube3<P1, P2, P3, TValue>, IProduct3<P1, P2, P3>>(
-                position => position.ExceptValue4, 
-                aggregator
-            );
+            return Transform(p => p.ExceptValue4, aggregator);
         }
 
         /// <summary>
@@ -923,6 +1085,9 @@ namespace FuncSharp
             return slices;
         }
 
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
         protected override IProduct4<P1, P2, P3, P4> ToCanonicalPosition(IProduct4<P1, P2, P3, P4> position)
         {
             return position.ToCanonicalProduct();
