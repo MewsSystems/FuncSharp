@@ -1,0 +1,42 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+namespace FuncSharp
+{
+<# for (var i = 0; i < MaxStructureArity(); i++) { #>
+    /// <summary>
+    /// A <#= i #>-dimensional relation.
+    /// </summary>
+    public class Relation<#= i #><#= TypeBracket(i) #> : Relation<<#= ProductType(i) #>, <#= DataCubeType(i, positionType: "T", valueType: "Unit") #>>
+    {
+        /// <summary>
+        /// Creates an empty <#= i #>-dimensional relation.
+        /// </summary>
+        public Relation<#= i #>()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Returns whether the relation contains the specified product.
+        /// </summary>
+        public bool Contains(<#= Parameters(i, name: "T") #>)
+        {
+            return Contains(Product.Create(<#= Values(i, name: "T") #>));
+        }
+
+        /// <summary>
+        /// Adds the specified product to the relation.
+        /// </summary>
+        public void Add(<#= Parameters(i, name: "T") #>)
+        {
+            Add(Product.Create(<#= Values(i, name: "T") #>));
+        }
+    }
+
+<# } #>
+}

@@ -127,7 +127,7 @@
             }
             if (UpperBound.Equals(LowerBound) && IsBounded)
             {
-                return "[" + UpperBound.Value + "]";
+                return "[" + UpperBound.Get() + "]";
             }
 
             return

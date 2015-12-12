@@ -11,7 +11,7 @@ namespace FuncSharp
         /// </summary>
         public static TotalOrderingData<A> GetTraitData<A>(this ITotalOrdering<A> ordering)
         {
-            return ordering.GetTraitData(() =>
+            return ordering.GetTraitData(_ =>
             {
                 var limitOrderings = new IntervalLimitOrderings<A>(ordering);
                 var intervalOrdering = new IntervalOrdering<A>(limitOrderings);

@@ -14,29 +14,19 @@ namespace FuncSharp
         /// Returns data stored for the specified trait interface. If nothing is stored yet, creates the data using the specified
         /// <paramref name="dataCreator"/> and returns them.
         /// </summary>
-        public TData Get<TTraitInterface, TData>(Func<TData> dataCreator)
+        public TData Get<TTraitInterface, TData>(Func<Unit, TData> dataCreator)
             where TData : class
         {
-            object data = null;
-            if (dataByTraitTypes.TryGetValue(typeof(TTraitInterface), out data))
-            {
-                var traitData = data as TData;
-                if (data == null)
+            var traitType = typeof(TTraitInterface);
+            return dataByTraitTypes.Get(traitType).Match(
+                data => data.As<TData>().Get(_ => new ArgumentException("TData is invalid. The trait already contains data of different type for the specified trait interface.")),
+                _ =>
                 {
-                    throw new ArgumentException("TData is invalid. The trait already contains data of different type for the specified trait interface.");
+                    var data = dataCreator(_).ToOption().Get(__ => new ArgumentException("The created data must not be null."));
+                    dataByTraitTypes.Add(traitType, data);
+                    return data;
                 }
-                return traitData;
-            }
-            else
-            {
-                var traitData = dataCreator();
-                if (traitData == null)
-                {
-                    throw new ArgumentException("The created data must not be null.");
-                }
-                dataByTraitTypes.Add(typeof(TTraitInterface), traitData);
-                return traitData;
-            }
+            );
         }
     }
 }

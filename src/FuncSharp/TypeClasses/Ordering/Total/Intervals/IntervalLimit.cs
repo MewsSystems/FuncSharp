@@ -58,7 +58,7 @@
         /// </summary>
         public bool IsBounded
         {
-            get { return Bound.HasValue; }
+            get { return !Bound.IsEmpty; }
         }
 
         /// <summary>

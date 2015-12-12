@@ -165,18 +165,18 @@ namespace FuncSharp
             );
         }
 
-        internal static void Check<A>(this ITotalOrdering<A> ordering, Interval<A> interval, Func<Exception> exceptionCreator)
+        internal static void Check<A>(this ITotalOrdering<A> ordering, Interval<A> interval, Func<Unit, Exception> otherwise)
         {
             if (!ordering.Equals(interval.Ordering))
             {
-                throw exceptionCreator();
+                throw otherwise(Unit.Value);
             }
         }
 
         internal static void Check<A>(this ITotalOrdering<A> ordering, Interval<A> interval1, Interval<A> interval2)
         {
-            ordering.Check(interval1, () => new ArgumentException("The first interval uses different ordering."));
-            ordering.Check(interval2, () => new ArgumentException("The second interval uses different ordering."));
+            ordering.Check(interval1, _ => new ArgumentException("The first interval uses different ordering."));
+            ordering.Check(interval2, _ => new ArgumentException("The second interval uses different ordering."));
         }
     }
 }

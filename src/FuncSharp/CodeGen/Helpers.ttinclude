@@ -4,6 +4,11 @@
         return 10;
     }
 
+    public int MaxStructureArity()
+    {
+        return 5;
+    }
+
     public string Type(int i, string name = "T")
     {
         return name + i;
@@ -49,9 +54,9 @@
         return NaryType("Sum", i, name);
     }
     
-    public string DataCubeType(int i, int? except = null, string positionTypeName = "P")
+    public string DataCubeType(int i, int? except = null, string positionType = "P", string valueType = "TValue")
     {
-        return "DataCube" + (i - (except.HasValue ? 1 : 0)) + "<" + Types(i, name: positionTypeName, except: except, appendSeparator: true) + "TValue>";
+        return "DataCube" + (i - (except.HasValue ? 1 : 0)) + "<" + Types(i, name: positionType, except: except, appendSeparator: true) + valueType + ">";
     }
 
     public string FuncTypes(int i, string resultTypeName = "TResult", string name = "T", int? except = null)

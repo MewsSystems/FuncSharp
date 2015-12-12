@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\FuncSharp.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,10 +44,10 @@
     </Compile>
     <Compile Include="DataTypes\Definite\Definite.cs" />
     <Compile Include="DataTypes\Definite\IDefinite.cs" />
-    <Compile Include="DataTypes\Morphisms\IIsoMorphism.cs" />
-    <Compile Include="DataTypes\Morphisms\IMorphism.cs" />
-    <Compile Include="DataTypes\Morphisms\IsoMorphism.cs" />
-    <Compile Include="DataTypes\Morphisms\Morphism.cs" />
+    <Compile Include="DataTypes\Morphism\IIsoMorphism.cs" />
+    <Compile Include="DataTypes\Morphism\IMorphism.cs" />
+    <Compile Include="DataTypes\Morphism\IsoMorphism.cs" />
+    <Compile Include="DataTypes\Morphism\Morphism.cs" />
     <Compile Include="DataTypes\Option\IOptionExtensions.cs" />
     <Compile Include="DataTypes\Product\IProductExtensions.cs">
       <AutoGen>True</AutoGen>
@@ -57,6 +58,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IProduct.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataTypes\Relation\Relation.cs" />
+    <Compile Include="DataTypes\Relation\Relations.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Relations.tt</DependentUpon>
     </Compile>
     <Compile Include="DataTypes\Sum\ISum.cs">
       <AutoGen>True</AutoGen>
@@ -74,6 +81,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Extensions\IDictionaryExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs">
       <DependentUpon>ObjectExtensions.tt</DependentUpon>
@@ -139,7 +147,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Product.tt</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\Utilities\TryParser.cs" />
+    <Compile Include="Extensions\Utilities\Tryer.cs" />
     <Compile Include="TypeClasses\Ordering\Total\TotalOrdering.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +202,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataCubes.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataTypes\Relation\Relations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Relations.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

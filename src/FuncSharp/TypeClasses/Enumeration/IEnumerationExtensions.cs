@@ -21,8 +21,8 @@ namespace FuncSharp
             }
 
             var values = new List<A>();
-            var max = interval.UpperLimit.IsOpen ? interval.UpperBound.Value : enumeration.Successor(interval.UpperBound.Value);
-            var value = interval.LowerLimit.IsOpen ? enumeration.Successor(interval.LowerBound.Value) : interval.LowerBound.Value;
+            var max = interval.UpperLimit.IsOpen ? interval.UpperBound.Get() : enumeration.Successor(interval.UpperBound.Get());
+            var value = interval.LowerLimit.IsOpen ? enumeration.Successor(interval.LowerBound.Get()) : interval.LowerBound.Get();
             while (enumeration.NonEqual(value, max))
             {
                 values.Add(value);

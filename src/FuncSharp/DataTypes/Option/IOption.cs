@@ -6,19 +6,14 @@ namespace FuncSharp
     public interface IOption<out A> : ISum2<A, Unit>
     {
         /// <summary>
-        /// Returns whether the option contains a value.
-        /// </summary>
-        bool HasValue { get; }
-
-        /// <summary>
         /// Returns whether the option is empty (doesn't contain any value).
         /// </summary>
         bool IsEmpty { get; }
 
         /// <summary>
-        /// Value of the option.
+        /// Returns value of the option if not empty.
         /// </summary>
-        A Value { get; }
+        A Get(Func<Unit, Exception> otherwise = null);
 
         /// <summary>
         /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.

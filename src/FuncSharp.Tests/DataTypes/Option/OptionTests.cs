@@ -28,9 +28,9 @@ namespace FuncSharp.Tests
         [Fact]
         public void ValueTest()
         {
-            Assert.Equal(42, Option.Create(42).Value);
-            Assert.Equal(42, Option.Create(42 as int?).Value);
-            Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Value);
+            Assert.Equal(42, Option.Create(42).Get());
+            Assert.Equal(42, Option.Create(42 as int?).Get());
+            Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get());
         }
 
         [Fact]
@@ -57,15 +57,15 @@ namespace FuncSharp.Tests
         [Fact]
         public void MapTest()
         {
-            Assert.Equal(84, Option.Create(42).Map(v => v * 2).Value);
-            Assert.Equal("xxxxx", Option.Create(5).Map(v => new String('x', v)).Value);
+            Assert.Equal(84, Option.Create(42).Map(v => v * 2).Get());
+            Assert.Equal("xxxxx", Option.Create(5).Map(v => new String('x', v)).Get());
             Assert.True(Option.Empty<int>().Map(v => v * 2).IsEmpty);
         }
 
         [Fact]
         public void FlatMapTest()
         {
-            Assert.Equal(84, Option.Create(42).FlatMap(v => Option.Create(v * 2)).Value);
+            Assert.Equal(84, Option.Create(42).FlatMap(v => Option.Create(v * 2)).Get());
             Assert.True(Option.Create(42).FlatMap(v => Option.Empty<int>()).IsEmpty);
 
             Assert.True(Option.Empty<int>().FlatMap(v => Option.Create(v * 2)).IsEmpty);

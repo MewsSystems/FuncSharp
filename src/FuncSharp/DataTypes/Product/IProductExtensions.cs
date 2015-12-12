@@ -43,11 +43,14 @@ namespace FuncSharp
         /// Returns whether the two specified products are structurally equal. Note that two nulls are 
         /// considered structurally equal products.
         /// </summary>
-        public static bool ProductEquals(this IProduct p1, object p2)
+        public static bool ProductEquals(this IProduct p1, object that)
         {
-            return p1.FastEquals(p2).GetOrElse(_ =>
-                p1.ProductValues.SequenceEqual(((IProduct)p2).ProductValues)
-            );
+            var p2 = that as IProduct;
+            if (p1 != null && p2 != null && p1.GetType() == p2.GetType())
+            {
+                return p1.ProductValues.SequenceEqual(p2.ProductValues);
+            }
+            return p1 == that;
         }
 
         /// <summary>

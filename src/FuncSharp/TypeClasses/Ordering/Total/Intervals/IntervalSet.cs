@@ -19,7 +19,7 @@ namespace FuncSharp
             var orderedIntervals = ordering.GetIntervalOrdering().Order(disjointIntervals.Where(i => i.IsNonEmpty)).ToArray();
             for (var i = 0; i < orderedIntervals.Length; i++)
             {
-                Ordering.Check(orderedIntervals[i], () => new ArgumentException("The " + i + "th interval uses different ordering."));
+                Ordering.Check(orderedIntervals[i], _ => new ArgumentException("The " + i + "th interval uses different ordering."));
 
                 if (i + 1 < orderedIntervals.Length)
                 {

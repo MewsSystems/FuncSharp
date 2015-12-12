@@ -45,11 +45,14 @@ namespace FuncSharp
         /// Returns whether the two specified sums are structurally equal. Note that two nulls are 
         /// considered structurally equal sums.
         /// </summary>
-        public static bool SumEquals(this ISum s1, object s2)
+        public static bool SumEquals(this ISum s1, object that)
         {
-            return s1.FastEquals(s2).GetOrElse(_ =>
-                s1.SumRepresentation().Equals(((ISum)s2).SumRepresentation())
-            );
+            var s2 = that as ISum;
+            if (s1 != null && s2 != null && s1.GetType() == s2.GetType())
+            {
+                return s1.SumRepresentation().Equals(s2.SumRepresentation());
+            }
+            return s1 == that;
         }
 
         /// <summary>

@@ -76,26 +76,24 @@ namespace FuncSharp
 
         public static IOption<A> Empty { get; private set; }
 
-        public A Value
-        {
-            get
-            {
-                if (IsSecond)
-                {
-                    throw new InvalidOperationException("An empty option does not have a value.");
-                }
-                return GetSumValue<A>();
-            }
-        }
-
-        public bool HasValue
-        {
-            get { return IsFirst; }
-        }
-
         public bool IsEmpty
         {
             get { return IsSecond; }
+        }
+
+        public A Get(Func<Unit, Exception> otherwise = null)
+        {
+            return this.GetOrElse<A, A>(_ =>
+            {
+                if (otherwise != null)
+                {
+                    throw otherwise(_);
+                }
+                else
+                {
+                    throw new InvalidOperationException("An empty option does not have a value.");
+                }
+            });
         }
 
         public A GetOrDefault()

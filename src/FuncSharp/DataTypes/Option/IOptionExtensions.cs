@@ -44,7 +44,7 @@ namespace FuncSharp
             where A : struct
         {
             return option.Match<A?>(
-                a => option.Value,
+                a => a,
                 _ => null
             );
         }

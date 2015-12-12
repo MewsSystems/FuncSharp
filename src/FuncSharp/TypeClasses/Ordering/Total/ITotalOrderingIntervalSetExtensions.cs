@@ -129,24 +129,24 @@ namespace FuncSharp
             return ordering.IntervalSet(lowerComplement.ToEnumerable().Concat(upperComplement.ToEnumerable()));
         }
 
-        internal static void Check<A>(this ITotalOrdering<A> ordering, IntervalSet<A> set, Func<Exception> exceptionCreator)
+        internal static void Check<A>(this ITotalOrdering<A> ordering, IntervalSet<A> set, Func<Unit, Exception> otherwise)
         {
             if (!ordering.Equals(set.Ordering))
             {
-                throw exceptionCreator();
+                throw otherwise(Unit.Value);
             }
         }
 
         internal static void Check<A>(this ITotalOrdering<A> ordering, IntervalSet<A> set, Interval<A> interval)
         {
-            ordering.Check(set, () => new ArgumentException("The interval set uses different ordering."));
-            ordering.Check(interval, () => new ArgumentException("The interval uses different ordering."));
+            ordering.Check(set, _ => new ArgumentException("The interval set uses different ordering."));
+            ordering.Check(interval, _ => new ArgumentException("The interval uses different ordering."));
         }
 
         internal static void Check<A>(this ITotalOrdering<A> ordering, IntervalSet<A> set1, IntervalSet<A> set2)
         {
-            ordering.Check(set1, () => new ArgumentException("The first interval set uses different ordering."));
-            ordering.Check(set2, () => new ArgumentException("The second interval set uses different ordering."));
+            ordering.Check(set1, _ => new ArgumentException("The first interval set uses different ordering."));
+            ordering.Check(set2, _ => new ArgumentException("The second interval set uses different ordering."));
         }
 
         private static IEnumerable<Interval<A>> Intersect<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> intervals, Interval<A> interval)
