@@ -20,10 +20,6 @@ namespace FuncSharp
     /// </summary>
     public interface IProduct0 : IProduct
     {
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct0 ToCanonicalProduct();
     }
 
     /// <summary>
@@ -41,10 +37,6 @@ namespace FuncSharp
         /// </summary>
         IProduct0 ExceptValue1 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct1<T1> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -72,10 +64,6 @@ namespace FuncSharp
         /// </summary>
         IProduct1<T1> ExceptValue2 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct2<T1, T2> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -113,10 +101,6 @@ namespace FuncSharp
         /// </summary>
         IProduct2<T1, T2> ExceptValue3 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct3<T1, T2, T3> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -164,10 +148,6 @@ namespace FuncSharp
         /// </summary>
         IProduct3<T1, T2, T3> ExceptValue4 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct4<T1, T2, T3, T4> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -225,10 +205,6 @@ namespace FuncSharp
         /// </summary>
         IProduct4<T1, T2, T3, T4> ExceptValue5 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct5<T1, T2, T3, T4, T5> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -296,10 +272,6 @@ namespace FuncSharp
         /// </summary>
         IProduct5<T1, T2, T3, T4, T5> ExceptValue6 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct6<T1, T2, T3, T4, T5, T6> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -377,10 +349,6 @@ namespace FuncSharp
         /// </summary>
         IProduct6<T1, T2, T3, T4, T5, T6> ExceptValue7 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct7<T1, T2, T3, T4, T5, T6, T7> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -468,10 +436,6 @@ namespace FuncSharp
         /// </summary>
         IProduct7<T1, T2, T3, T4, T5, T6, T7> ExceptValue8 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> ToCanonicalProduct();
     }
 
     /// <summary>
@@ -569,10 +533,6 @@ namespace FuncSharp
         /// </summary>
         IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> ExceptValue9 { get; }
 
-        /// <summary>
-        /// Converts the product into the canonical implementation.
-        /// </summary>
-        IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> ToCanonicalProduct();
     }
 
 }

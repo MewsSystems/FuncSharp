@@ -112,7 +112,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct0 ToCanonicalPosition(IProduct0 position)
         {
-            return position.ToCanonicalProduct();
+            return Product.Create(position);
         }
     }
 
@@ -280,7 +280,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct1<P1> ToCanonicalPosition(IProduct1<P1> position)
         {
-            return position.ToCanonicalProduct();
+            return Product.Create(position);
         }
     }
 
@@ -499,7 +499,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct2<P1, P2> ToCanonicalPosition(IProduct2<P1, P2> position)
         {
-            return position.ToCanonicalProduct();
+            return Product.Create(position);
         }
     }
 
@@ -769,7 +769,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct3<P1, P2, P3> ToCanonicalPosition(IProduct3<P1, P2, P3> position)
         {
-            return position.ToCanonicalProduct();
+            return Product.Create(position);
         }
     }
 
@@ -1090,7 +1090,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct4<P1, P2, P3, P4> ToCanonicalPosition(IProduct4<P1, P2, P3, P4> position)
         {
-            return position.ToCanonicalProduct();
+            return Product.Create(position);
         }
     }
 

@@ -245,5 +245,15 @@ namespace FuncSharp
             Assert.Equal(30, oneSlice.Get(1, 0).Get());
             Assert.Equal(40, oneSlice.Get(1, 1).Get());
         }
+
+        [Fact]
+        public void PositionSubtypeWorks()
+        {
+            var c = new DataCube2<object, object, int>();
+            c.Set("foo", true, 42);
+
+            Assert.True(c.Contains("foo", true));
+            Assert.True(c.Contains(Product.Create("foo", true as object)));
+        }
     }
 }

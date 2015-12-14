@@ -204,10 +204,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataTypes\Relation\Relations.tt">
+    <None Include="DataTypes\Relation\Relations.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Relations.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

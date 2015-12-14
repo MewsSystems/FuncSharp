@@ -188,7 +188,7 @@ namespace FuncSharp
         /// </summary>
         protected override <#= ProductType(i, name: "P") #> ToCanonicalPosition(<#= ProductType(i, name: "P") #> position)
         {
-            return position.ToCanonicalProduct();
+            return Product.Create(position);
         }
     }
 

@@ -26,6 +26,19 @@ namespace FuncSharp
         {
             return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
         }
+
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional canonical product.
+        /// </summary>
+        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
+        {
+            if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
+            {
+                return p;
+            }
+
+            return Create(<#= Properties(i, name: "p.ProductValue") #>);
+        }
 <#  } #>
 
         public override int GetHashCode()
@@ -92,16 +105,6 @@ namespace FuncSharp
                 return Enumerable.Empty<object>();
 <#      } #>
             }
-        }
-
-        public <#= ProductType(i) #> ToCanonicalProduct()
-        {
-            if (Equals(GetType(), typeof(<#= ProductImplType(i) #>)))
-            {
-                return this;
-            }
-
-            return Create(<#= Properties(i, name: "ProductValue") #>);
         }
     }
 
