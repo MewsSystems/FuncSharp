@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>FuncSharp</id>
-    <version>0.4.7</version>
+    <version>0.4.8</version>
     <authors>Honza Široký</authors>
     <owners>Honza Široký</owners>
     <projectUrl>https://github.com/siroky/FuncSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A .NET library of classes that bring some more advanced functional concepts into C#.</description>
-    <releaseNotes>Improved FirstOption and LastOption extensions.</releaseNotes>
+    <releaseNotes>Added multidimensional relations, several extension methods.</releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
 </package>

@@ -19,6 +19,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns whether the cube is empty.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get { return !Index.Any(); }
+        }
+
+        /// <summary>
         /// Positions of all values stored in the cube.
         /// </summary>
         public IEnumerable<TPosition> Positions
@@ -48,15 +56,6 @@ namespace FuncSharp
             {
                 a(kv.Key, kv.Value);
             }
-        }
-
-        /// <summary>
-        /// Returns whether the cube is empty.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsEmpty()
-        {
-            return !Index.Any();
         }
 
         /// <summary>

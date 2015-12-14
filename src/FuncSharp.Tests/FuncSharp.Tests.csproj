@@ -40,7 +40,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\Morphisms\MorphismTests.cs" />
+    <Compile Include="DataTypes\DataCube\DataCubeTests.cs" />
+    <Compile Include="DataTypes\Morphism\MorphismTests.cs" />
     <Compile Include="DataTypes\Sum\SumTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TupleExtensionsTests.cs" />
