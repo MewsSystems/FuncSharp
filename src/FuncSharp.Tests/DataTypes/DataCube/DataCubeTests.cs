@@ -190,6 +190,32 @@ namespace FuncSharp
         }
 
         [Fact]
+        public void MultiTransformWorks()
+        {
+            var c = new DataCube2<int, int, int>();
+            c.Set(0, 0, 1);
+            c.Set(0, 1, 10);
+            c.Set(1, 0, 100);
+            c.Set(1, 1, 1000);
+
+            // Transforms each position to all "lower" positions.
+            var transformed = c.Transform(
+                p =>
+                {
+                    var range1 = Enumerable.Range(0, p.ProductValue1 + 1);
+                    var range2 = Enumerable.Range(0, p.ProductValue2 + 1);
+                    return range1.SelectMany(r1 => range2.Select(r2 => Product.Create(r1, r2)));
+                },
+                (a, b) => a + b
+            );
+
+            Assert.Equal(1111, transformed.Get(0, 0).Get());
+            Assert.Equal(1010, transformed.Get(0, 1).Get());
+            Assert.Equal(1100, transformed.Get(1, 0).Get());
+            Assert.Equal(1000, transformed.Get(1, 1).Get());
+        }
+
+        [Fact]
         public void RollUpDimensionWorks()
         {
             var c = new DataCube3<int, int, int, int>();

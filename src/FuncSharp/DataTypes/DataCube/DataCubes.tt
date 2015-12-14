@@ -143,12 +143,24 @@ namespace FuncSharp
 
         /// <summary>
         /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
-        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
         /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
         public <#= DataCubeType(j, positionType: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, <#= ProductType(j, name: "Q") #>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(p => new[] { positionMapper(p) }, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public <#= DataCubeType(j, positionType: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, IEnumerable<<#= ProductType(j, name: "Q") #>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
         }

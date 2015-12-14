@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FuncSharp
 {
@@ -111,13 +112,45 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public TNewCube Transform<TNewPosition, TNewCube>(Func<TPosition, TNewPosition> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public TNewCube Transform<TNewPosition, TNewCube>(Func<TPosition, IEnumerable<TNewPosition>> positionMapper, Func<TValue, TValue, TValue> aggregator)
             where TNewCube : DataCube<TNewPosition, TValue>, new()
             where TNewPosition : IProduct
         {
             var result = new TNewCube();
-            ForEach((position, value) => result.SetOrElseUpdate(positionMapper(position), value, aggregator));
+            ForEach((position, value) =>
+            {
+                foreach (var newPosition in positionMapper(position))
+                {
+                    result.SetOrElseUpdate(newPosition, value, aggregator);
+                }
+            });
             return result;
+        }
+
+        public override string ToString()
+        {
+            var result = new StringBuilder("DataCube(");
+            if (!IsEmpty)
+            {
+                result.AppendLine();
+
+                var isFirst = true;
+                ForEach((position, value) =>
+                {
+                    if (!isFirst)
+                    {
+                        result.Append(",");
+                    }
+                    isFirst = false;
+
+                    result.AppendLine();
+                    result.Append("   " + position.ToString() + " → " + value.SafeToString());
+                });
+                result.AppendLine();
+            }
+            result.Append(")");
+
+            return result.ToString();
         }
 
         protected void AddDomain<P>(Dictionary<IProduct1<P>, int> rangeCounts, P value)
