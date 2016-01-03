@@ -114,7 +114,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct0, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<IProduct0, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
         }
@@ -255,7 +255,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct1<P1>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<IProduct1<P1>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
         }
@@ -279,7 +279,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct1<P1>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct1<P1>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
@@ -459,7 +459,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct2<P1, P2>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<IProduct2<P1, P2>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
         }
@@ -483,7 +483,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct2<P1, P2>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct2<P1, P2>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
@@ -534,7 +534,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct2<P1, P2>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct2<P1, P2>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
@@ -726,7 +726,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
         }
@@ -750,7 +750,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
@@ -801,7 +801,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
@@ -852,7 +852,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
@@ -1056,7 +1056,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
         }
@@ -1080,7 +1080,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
@@ -1131,7 +1131,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
@@ -1182,7 +1182,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
@@ -1233,7 +1233,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }

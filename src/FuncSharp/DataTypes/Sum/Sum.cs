@@ -419,16 +419,10 @@ namespace FuncSharp
     /// </summary> 
     public class Sum0 : Sum, ISum0
     {
-        /// <summary>
-        /// Creates a new 0-dimensional sum.
-        /// </summary>
-        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
-        /// <param name="value">Value of the sum on the position defined by the discriminator.</param>
-        public Sum0(int discriminator, object value)
-            : base(0, discriminator, value)
+        private Sum0()
+            : base(0, 0, null)
         {
         }
-
     }
 
     /// <summary>
@@ -453,13 +447,7 @@ namespace FuncSharp
 
         public IOption<T1> First
         {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
         }
 
         public R Match<R>(
@@ -468,36 +456,17 @@ namespace FuncSharp
             switch (SumDiscriminator)
             {
                 case 1: return ifFirst(GetSumValue<T1>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst)
+            Action<T1> ifFirst = null)
         {
-            Match(
-                ifFirst.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v)
-            );
-        }
-
-        public void PartialMatch(
-            Action<T1> ifFirst = null,
-            Action<object> otherwise = null)
-        {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+            }
         }
     }
 
@@ -520,32 +489,18 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
         public IOption<T2> Second
         {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
         }
 
         public R Match<R>(
@@ -556,42 +511,19 @@ namespace FuncSharp
             {
                 case 1: return ifFirst(GetSumValue<T1>());
                 case 2: return ifSecond(GetSumValue<T2>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
-            Action<T2> ifSecond = null,
-            Action<object> otherwise = null)
+            Action<T2> ifSecond = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+            }
         }
     }
 
@@ -614,48 +546,26 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
         public IOption<T3> Third
         {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
         }
 
         public R Match<R>(
@@ -668,48 +578,21 @@ namespace FuncSharp
                 case 1: return ifFirst(GetSumValue<T1>());
                 case 2: return ifSecond(GetSumValue<T2>());
                 case 3: return ifThird(GetSumValue<T3>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
-            Action<T3> ifThird = null,
-            Action<object> otherwise = null)
+            Action<T3> ifThird = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+            }
         }
     }
 
@@ -732,64 +615,34 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
-
-        public IOption<T3> Third
-        {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
-        }
-
         public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
+        }
         public IOption<T4> Fourth
         {
-            get
-            {
-                return PartialMatch(
-                    ifFourth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T4>()
-                );
-            }
+            get { return IsFourth ? Option.Valued(GetSumValue<T4>()) : Option.Empty<T4>(); }
         }
 
         public R Match<R>(
@@ -804,54 +657,23 @@ namespace FuncSharp
                 case 2: return ifSecond(GetSumValue<T2>());
                 case 3: return ifThird(GetSumValue<T3>());
                 case 4: return ifFourth(GetSumValue<T4>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v),
-                v => ifFourth == null ? otherwise(v) : ifFourth(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
-            Action<T4> ifFourth = null,
-            Action<object> otherwise = null)
+            Action<T4> ifFourth = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                ifFourth == null ? null : ifFourth.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetSumValue<T4>()); } break;
+            }
         }
     }
 
@@ -874,80 +696,42 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
-
-        public IOption<T3> Third
-        {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
-        }
-
         public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
-
-        public IOption<T4> Fourth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFourth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T4>()
-                );
-            }
-        }
-
         public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetSumValue<T4>()) : Option.Empty<T4>(); }
+        }
         public IOption<T5> Fifth
         {
-            get
-            {
-                return PartialMatch(
-                    ifFifth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T5>()
-                );
-            }
+            get { return IsFifth ? Option.Valued(GetSumValue<T5>()) : Option.Empty<T5>(); }
         }
 
         public R Match<R>(
@@ -964,60 +748,25 @@ namespace FuncSharp
                 case 3: return ifThird(GetSumValue<T3>());
                 case 4: return ifFourth(GetSumValue<T4>());
                 case 5: return ifFifth(GetSumValue<T5>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v),
-                v => ifFourth == null ? otherwise(v) : ifFourth(v),
-                v => ifFifth == null ? otherwise(v) : ifFifth(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
-            Action<T5> ifFifth = null,
-            Action<object> otherwise = null)
+            Action<T5> ifFifth = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                ifFourth == null ? null : ifFourth.ToFunc(),
-                ifFifth == null ? null : ifFifth.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetSumValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetSumValue<T5>()); } break;
+            }
         }
     }
 
@@ -1040,96 +789,50 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
-
-        public IOption<T3> Third
-        {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
-        }
-
         public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
-
-        public IOption<T4> Fourth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFourth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T4>()
-                );
-            }
-        }
-
         public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
-
-        public IOption<T5> Fifth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFifth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T5>()
-                );
-            }
-        }
-
         public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetSumValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetSumValue<T5>()) : Option.Empty<T5>(); }
+        }
         public IOption<T6> Sixth
         {
-            get
-            {
-                return PartialMatch(
-                    ifSixth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T6>()
-                );
-            }
+            get { return IsSixth ? Option.Valued(GetSumValue<T6>()) : Option.Empty<T6>(); }
         }
 
         public R Match<R>(
@@ -1148,66 +851,27 @@ namespace FuncSharp
                 case 4: return ifFourth(GetSumValue<T4>());
                 case 5: return ifFifth(GetSumValue<T5>());
                 case 6: return ifSixth(GetSumValue<T6>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v),
-                v => ifFourth == null ? otherwise(v) : ifFourth(v),
-                v => ifFifth == null ? otherwise(v) : ifFifth(v),
-                v => ifSixth == null ? otherwise(v) : ifSixth(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null,
-            Action<T6> ifSixth = null,
-            Action<object> otherwise = null)
+            Action<T6> ifSixth = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                ifFourth == null ? null : ifFourth.ToFunc(),
-                ifFifth == null ? null : ifFifth.ToFunc(),
-                ifSixth == null ? null : ifSixth.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetSumValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetSumValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetSumValue<T6>()); } break;
+            }
         }
     }
 
@@ -1230,112 +894,58 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
-
-        public IOption<T3> Third
-        {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
-        }
-
         public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
-
-        public IOption<T4> Fourth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFourth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T4>()
-                );
-            }
-        }
-
         public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
-
-        public IOption<T5> Fifth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFifth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T5>()
-                );
-            }
-        }
-
         public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
-
-        public IOption<T6> Sixth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSixth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T6>()
-                );
-            }
-        }
-
         public bool IsSeventh
         {
             get { return SumDiscriminator == 7; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetSumValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetSumValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetSumValue<T6>()) : Option.Empty<T6>(); }
+        }
         public IOption<T7> Seventh
         {
-            get
-            {
-                return PartialMatch(
-                    ifSeventh: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T7>()
-                );
-            }
+            get { return IsSeventh ? Option.Valued(GetSumValue<T7>()) : Option.Empty<T7>(); }
         }
 
         public R Match<R>(
@@ -1356,72 +966,29 @@ namespace FuncSharp
                 case 5: return ifFifth(GetSumValue<T5>());
                 case 6: return ifSixth(GetSumValue<T6>());
                 case 7: return ifSeventh(GetSumValue<T7>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth,
-            Action<T7> ifSeventh)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                ifSeventh.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<T7, R> ifSeventh = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v),
-                v => ifFourth == null ? otherwise(v) : ifFourth(v),
-                v => ifFifth == null ? otherwise(v) : ifFifth(v),
-                v => ifSixth == null ? otherwise(v) : ifSixth(v),
-                v => ifSeventh == null ? otherwise(v) : ifSeventh(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null,
-            Action<T7> ifSeventh = null,
-            Action<object> otherwise = null)
+            Action<T7> ifSeventh = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                ifFourth == null ? null : ifFourth.ToFunc(),
-                ifFifth == null ? null : ifFifth.ToFunc(),
-                ifSixth == null ? null : ifSixth.ToFunc(),
-                ifSeventh == null ? null : ifSeventh.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetSumValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetSumValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetSumValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetSumValue<T7>()); } break;
+            }
         }
     }
 
@@ -1444,128 +1011,66 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
-
-        public IOption<T3> Third
-        {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
-        }
-
         public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
-
-        public IOption<T4> Fourth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFourth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T4>()
-                );
-            }
-        }
-
         public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
-
-        public IOption<T5> Fifth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFifth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T5>()
-                );
-            }
-        }
-
         public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
-
-        public IOption<T6> Sixth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSixth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T6>()
-                );
-            }
-        }
-
         public bool IsSeventh
         {
             get { return SumDiscriminator == 7; }
         }
-
-        public IOption<T7> Seventh
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSeventh: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T7>()
-                );
-            }
-        }
-
         public bool IsEighth
         {
             get { return SumDiscriminator == 8; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetSumValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetSumValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetSumValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetSumValue<T7>()) : Option.Empty<T7>(); }
+        }
         public IOption<T8> Eighth
         {
-            get
-            {
-                return PartialMatch(
-                    ifEighth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T8>()
-                );
-            }
+            get { return IsEighth ? Option.Valued(GetSumValue<T8>()) : Option.Empty<T8>(); }
         }
 
         public R Match<R>(
@@ -1588,57 +1093,11 @@ namespace FuncSharp
                 case 6: return ifSixth(GetSumValue<T6>());
                 case 7: return ifSeventh(GetSumValue<T7>());
                 case 8: return ifEighth(GetSumValue<T8>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth,
-            Action<T7> ifSeventh,
-            Action<T8> ifEighth)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                ifSeventh.ToFunc(),
-                ifEighth.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<T7, R> ifSeventh = null,
-            Func<T8, R> ifEighth = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v),
-                v => ifFourth == null ? otherwise(v) : ifFourth(v),
-                v => ifFifth == null ? otherwise(v) : ifFifth(v),
-                v => ifSixth == null ? otherwise(v) : ifSixth(v),
-                v => ifSeventh == null ? otherwise(v) : ifSeventh(v),
-                v => ifEighth == null ? otherwise(v) : ifEighth(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
@@ -1646,20 +1105,19 @@ namespace FuncSharp
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null,
-            Action<T8> ifEighth = null,
-            Action<object> otherwise = null)
+            Action<T8> ifEighth = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                ifFourth == null ? null : ifFourth.ToFunc(),
-                ifFifth == null ? null : ifFifth.ToFunc(),
-                ifSixth == null ? null : ifSixth.ToFunc(),
-                ifSeventh == null ? null : ifSeventh.ToFunc(),
-                ifEighth == null ? null : ifEighth.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetSumValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetSumValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetSumValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetSumValue<T7>()); } break;
+                case 8: if (ifEighth != null) { ifEighth(GetSumValue<T8>()); } break;
+            }
         }
     }
 
@@ -1682,144 +1140,74 @@ namespace FuncSharp
         {
             get { return SumDiscriminator == 1; }
         }
-
-        public IOption<T1> First
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFirst: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T1>()
-                );
-            }
-        }
-
         public bool IsSecond
         {
             get { return SumDiscriminator == 2; }
         }
-
-        public IOption<T2> Second
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSecond: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T2>()
-                );
-            }
-        }
-
         public bool IsThird
         {
             get { return SumDiscriminator == 3; }
         }
-
-        public IOption<T3> Third
-        {
-            get
-            {
-                return PartialMatch(
-                    ifThird: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T3>()
-                );
-            }
-        }
-
         public bool IsFourth
         {
             get { return SumDiscriminator == 4; }
         }
-
-        public IOption<T4> Fourth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFourth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T4>()
-                );
-            }
-        }
-
         public bool IsFifth
         {
             get { return SumDiscriminator == 5; }
         }
-
-        public IOption<T5> Fifth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifFifth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T5>()
-                );
-            }
-        }
-
         public bool IsSixth
         {
             get { return SumDiscriminator == 6; }
         }
-
-        public IOption<T6> Sixth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSixth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T6>()
-                );
-            }
-        }
-
         public bool IsSeventh
         {
             get { return SumDiscriminator == 7; }
         }
-
-        public IOption<T7> Seventh
-        {
-            get
-            {
-                return PartialMatch(
-                    ifSeventh: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T7>()
-                );
-            }
-        }
-
         public bool IsEighth
         {
             get { return SumDiscriminator == 8; }
         }
-
-        public IOption<T8> Eighth
-        {
-            get
-            {
-                return PartialMatch(
-                    ifEighth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T8>()
-                );
-            }
-        }
-
         public bool IsNinth
         {
             get { return SumDiscriminator == 9; }
         }
 
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetSumValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetSumValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetSumValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetSumValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetSumValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetSumValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetSumValue<T7>()) : Option.Empty<T7>(); }
+        }
+        public IOption<T8> Eighth
+        {
+            get { return IsEighth ? Option.Valued(GetSumValue<T8>()) : Option.Empty<T8>(); }
+        }
         public IOption<T9> Ninth
         {
-            get
-            {
-                return PartialMatch(
-                    ifNinth: v => Option.Valued(v),
-                    otherwise: _ => Option.Empty<T9>()
-                );
-            }
+            get { return IsNinth ? Option.Valued(GetSumValue<T9>()) : Option.Empty<T9>(); }
         }
 
         public R Match<R>(
@@ -1844,61 +1232,11 @@ namespace FuncSharp
                 case 7: return ifSeventh(GetSumValue<T7>());
                 case 8: return ifEighth(GetSumValue<T8>());
                 case 9: return ifNinth(GetSumValue<T9>());
-                default: return default(R); // Never happens.
+                default: return default(R);
             }
         }
 
         public void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth,
-            Action<T7> ifSeventh,
-            Action<T8> ifEighth,
-            Action<T9> ifNinth)
-        {
-            Match(
-                ifFirst.ToFunc(),
-                ifSecond.ToFunc(),
-                ifThird.ToFunc(),
-                ifFourth.ToFunc(),
-                ifFifth.ToFunc(),
-                ifSixth.ToFunc(),
-                ifSeventh.ToFunc(),
-                ifEighth.ToFunc(),
-                ifNinth.ToFunc()
-            );
-        }
-
-        public R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<T7, R> ifSeventh = null,
-            Func<T8, R> ifEighth = null,
-            Func<T9, R> ifNinth = null,
-            Func<object, R> otherwise = null)
-        {
-            otherwise = otherwise ?? (_ => default(R));
-            return Match(
-                v => ifFirst == null ? otherwise(v) : ifFirst(v),
-                v => ifSecond == null ? otherwise(v) : ifSecond(v),
-                v => ifThird == null ? otherwise(v) : ifThird(v),
-                v => ifFourth == null ? otherwise(v) : ifFourth(v),
-                v => ifFifth == null ? otherwise(v) : ifFifth(v),
-                v => ifSixth == null ? otherwise(v) : ifSixth(v),
-                v => ifSeventh == null ? otherwise(v) : ifSeventh(v),
-                v => ifEighth == null ? otherwise(v) : ifEighth(v),
-                v => ifNinth == null ? otherwise(v) : ifNinth(v)
-            );
-        }
-
-        public void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
@@ -1907,21 +1245,20 @@ namespace FuncSharp
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null,
             Action<T8> ifEighth = null,
-            Action<T9> ifNinth = null,
-            Action<object> otherwise = null)
+            Action<T9> ifNinth = null)
         {
-            PartialMatch(
-                ifFirst == null ? null : ifFirst.ToFunc(),
-                ifSecond == null ? null : ifSecond.ToFunc(),
-                ifThird == null ? null : ifThird.ToFunc(),
-                ifFourth == null ? null : ifFourth.ToFunc(),
-                ifFifth == null ? null : ifFifth.ToFunc(),
-                ifSixth == null ? null : ifSixth.ToFunc(),
-                ifSeventh == null ? null : ifSeventh.ToFunc(),
-                ifEighth == null ? null : ifEighth.ToFunc(),
-                ifNinth == null ? null : ifNinth.ToFunc(),
-                otherwise == null ? null : otherwise.ToFunc()
-            );
+            switch (SumDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetSumValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetSumValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetSumValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetSumValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetSumValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetSumValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetSumValue<T7>()); } break;
+                case 8: if (ifEighth != null) { ifEighth(GetSumValue<T8>()); } break;
+                case 9: if (ifNinth != null) { ifNinth(GetSumValue<T9>()); } break;
+            }
         }
     }
 

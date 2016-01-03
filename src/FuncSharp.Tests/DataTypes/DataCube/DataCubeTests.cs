@@ -199,7 +199,7 @@ namespace FuncSharp
             c.Set(1, 1, 1000);
 
             // Transforms each position to all "lower" positions.
-            var transformed = c.Transform(
+            var transformed = c.MultiTransform(
                 p =>
                 {
                     var range1 = Enumerable.Range(0, p.ProductValue1 + 1);

@@ -59,28 +59,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x), separator: ",") #>);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x) + " = null", separator: ",") #>,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
-<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>,
-            Action<object> otherwise = null);
+<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>);
 
 <#      } #>
     }

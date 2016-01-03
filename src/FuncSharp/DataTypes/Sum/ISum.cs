@@ -55,28 +55,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
-            Action<T1> ifFirst = null,
-            Action<object> otherwise = null);
+            Action<T1> ifFirst = null);
 
     }
 
@@ -117,31 +99,11 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
-            Action<T2> ifSecond = null,
-            Action<object> otherwise = null);
+            Action<T2> ifSecond = null);
 
     }
 
@@ -194,34 +156,12 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
-            Action<T3> ifThird = null,
-            Action<object> otherwise = null);
+            Action<T3> ifThird = null);
 
     }
 
@@ -286,37 +226,13 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
-            Action<T4> ifFourth = null,
-            Action<object> otherwise = null);
+            Action<T4> ifFourth = null);
 
     }
 
@@ -393,40 +309,14 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
-            Action<T5> ifFifth = null,
-            Action<object> otherwise = null);
+            Action<T5> ifFifth = null);
 
     }
 
@@ -515,43 +405,15 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null,
-            Action<T6> ifSixth = null,
-            Action<object> otherwise = null);
+            Action<T6> ifSixth = null);
 
     }
 
@@ -652,46 +514,16 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth,
-            Action<T7> ifSeventh);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<T7, R> ifSeventh = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null,
-            Action<T7> ifSeventh = null,
-            Action<object> otherwise = null);
+            Action<T7> ifSeventh = null);
 
     }
 
@@ -804,40 +636,9 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth,
-            Action<T7> ifSeventh,
-            Action<T8> ifEighth);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<T7, R> ifSeventh = null,
-            Func<T8, R> ifEighth = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
@@ -845,8 +646,7 @@ namespace FuncSharp
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null,
-            Action<T8> ifEighth = null,
-            Action<object> otherwise = null);
+            Action<T8> ifEighth = null);
 
     }
 
@@ -971,42 +771,9 @@ namespace FuncSharp
 
         /// <summary>
         /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
-        /// the <paramref name="ifFirst" /> function.
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-            Action<T1> ifFirst,
-            Action<T2> ifSecond,
-            Action<T3> ifThird,
-            Action<T4> ifFourth,
-            Action<T5> ifFifth,
-            Action<T6> ifSixth,
-            Action<T7> ifSeventh,
-            Action<T8> ifEighth,
-            Action<T9> ifNinth);
-
-        /// <summary>
-        /// Returns result of a function that matches the sum value similarly to match. If the function is null, returns result
-        /// of the <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, returns default value of the result type. 
-        /// </summary>
-        R PartialMatch<R>(
-            Func<T1, R> ifFirst = null,
-            Func<T2, R> ifSecond = null,
-            Func<T3, R> ifThird = null,
-            Func<T4, R> ifFourth = null,
-            Func<T5, R> ifFifth = null,
-            Func<T6, R> ifSixth = null,
-            Func<T7, R> ifSeventh = null,
-            Func<T8, R> ifEighth = null,
-            Func<T9, R> ifNinth = null,
-            Func<object, R> otherwise = null);
-
-        /// <summary>
-        /// Executes the function that matches the sum value similarly to match. If the function is null, executes the the 
-        /// <paramref name="otherwise">otherwise</paramref> function. If the <paramref name="otherwise">otherwise</paramref> function 
-        /// is null, does nothing.
-        /// </summary>
-        void PartialMatch(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
@@ -1015,8 +782,7 @@ namespace FuncSharp
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null,
             Action<T8> ifEighth = null,
-            Action<T9> ifNinth = null,
-            Action<object> otherwise = null);
+            Action<T9> ifNinth = null);
 
     }
 

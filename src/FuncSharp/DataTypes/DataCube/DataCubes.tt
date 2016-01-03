@@ -160,7 +160,7 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public <#= DataCubeType(j, positionType: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, IEnumerable<<#= ProductType(j, name: "Q") #>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public <#= DataCubeType(j, positionType: "Q") #> MultiTransform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, IEnumerable<<#= ProductType(j, name: "Q") #>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
             return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
         }
