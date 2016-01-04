@@ -63,9 +63,6 @@ namespace FuncSharp
     /// </summary>
     public class <#= ProductImplType(i) #> : Product, <#= ProductType(i) #>
     {
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional product.
-        /// </summary>
         public Product<#= i #>(<#= Parameters(i) #>)
         {
 <#      for (var j = 1; j <= i; j++) { #>
@@ -74,25 +71,16 @@ namespace FuncSharp
         }
 <#      for (var j = 1; j <= i; j++) { #>
 
-        /// <summary>
-        /// Value of the product in the dimension <#= j #>.
-        /// </summary>
         public <#= Type(j) #> <#= ProductProperty(j) #> { get; private set; }
 <#      } #>
 <#      for (var j = 1; j <= i; j++) { #>
 
-        /// <summary>
-        /// The same product with <#= ProductProperty(j) #> omitted.
-        /// </summary>
         public <#= ProductType(i, except: j) #> ExceptValue<#= j #>
         {
             get { return Product.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
         }
 <#      } #>
 
-        /// <summary>
-        /// Values of the product in order of the dimensions.
-        /// </summary>
         public override IEnumerable<object> ProductValues
         {
             get
@@ -105,6 +93,11 @@ namespace FuncSharp
                 return Enumerable.Empty<object>();
 <#      } #>
             }
+        }
+
+        public R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f)
+        {
+            return f(<#= Properties(i, name: "ProductValue") #>);
         }
     }
 

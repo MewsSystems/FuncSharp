@@ -33,6 +33,7 @@
         /// </summary>
         public void Add(TProduct product)
         {
+            new Nothing
             Representation.Set(product, Unit.Value);
         }
     }

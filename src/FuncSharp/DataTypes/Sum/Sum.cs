@@ -419,7 +419,7 @@ namespace FuncSharp
     /// </summary> 
     public class Sum0 : Sum, ISum0
     {
-        private Sum0()
+        protected Sum0()
             : base(0, 0, null)
         {
         }

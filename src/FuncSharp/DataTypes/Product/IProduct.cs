@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -10,7 +11,7 @@ namespace FuncSharp
     public interface IProduct
     {
         /// <summary>
-        /// Values of the product. Should never return null.
+        /// Values of the product.
         /// </summary>
         IEnumerable<object> ProductValues { get; }
     }
@@ -20,6 +21,11 @@ namespace FuncSharp
     /// </summary>
     public interface IProduct0 : IProduct
     {
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<R> f);
     }
 
     /// <summary>
@@ -37,6 +43,11 @@ namespace FuncSharp
         /// </summary>
         IProduct0 ExceptValue1 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, R> f);
     }
 
     /// <summary>
@@ -64,6 +75,11 @@ namespace FuncSharp
         /// </summary>
         IProduct1<T1> ExceptValue2 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, R> f);
     }
 
     /// <summary>
@@ -101,6 +117,11 @@ namespace FuncSharp
         /// </summary>
         IProduct2<T1, T2> ExceptValue3 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, R> f);
     }
 
     /// <summary>
@@ -148,6 +169,11 @@ namespace FuncSharp
         /// </summary>
         IProduct3<T1, T2, T3> ExceptValue4 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, R> f);
     }
 
     /// <summary>
@@ -205,6 +231,11 @@ namespace FuncSharp
         /// </summary>
         IProduct4<T1, T2, T3, T4> ExceptValue5 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, R> f);
     }
 
     /// <summary>
@@ -272,6 +303,11 @@ namespace FuncSharp
         /// </summary>
         IProduct5<T1, T2, T3, T4, T5> ExceptValue6 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, R> f);
     }
 
     /// <summary>
@@ -349,6 +385,11 @@ namespace FuncSharp
         /// </summary>
         IProduct6<T1, T2, T3, T4, T5, T6> ExceptValue7 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, R> f);
     }
 
     /// <summary>
@@ -436,6 +477,11 @@ namespace FuncSharp
         /// </summary>
         IProduct7<T1, T2, T3, T4, T5, T6, T7> ExceptValue8 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f);
     }
 
     /// <summary>
@@ -533,6 +579,11 @@ namespace FuncSharp
         /// </summary>
         IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> ExceptValue9 { get; }
 
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f);
     }
 
 }

@@ -7,7 +7,7 @@
     public sealed class Nothing : Sum0
     {
         private Nothing()
-            : base(-1, null)
+            : base()
         {
         }
     }

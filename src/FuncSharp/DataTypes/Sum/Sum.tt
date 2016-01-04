@@ -123,7 +123,7 @@ namespace FuncSharp
             }
         }
 <#    } else { #>
-        private Sum0()
+        protected Sum0()
             : base(0, 0, null)
         {
         }

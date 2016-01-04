@@ -99,6 +99,7 @@
       <DependentUpon>ActionExtensions.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions\NullableExtensions.cs" />
+    <Compile Include="Extensions\BooleanExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TupleExtensions.cs">
       <DependentUpon>TupleExtensions.tt</DependentUpon>
