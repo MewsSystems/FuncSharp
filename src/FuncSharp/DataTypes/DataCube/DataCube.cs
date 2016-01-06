@@ -112,7 +112,23 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public TNewCube Transform<TNewPosition, TNewCube>(Func<TPosition, IEnumerable<TNewPosition>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public TNewCube Transform<TNewPosition, TNewCube>(Func<TPosition, TNewPosition> positionMapper, Func<TValue, TValue, TValue> aggregator)
+            where TNewCube : DataCube<TNewPosition, TValue>, new()
+            where TNewPosition : IProduct
+        {
+            var result = new TNewCube();
+            ForEach((position, value) => result.SetOrElseUpdate(positionMapper(position), value, aggregator));
+            return result;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps positions of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public TNewCube MultiTransform<TNewPosition, TNewCube>(Func<TPosition, IEnumerable<TNewPosition>> positionMapper, Func<TValue, TValue, TValue> aggregator)
             where TNewCube : DataCube<TNewPosition, TValue>, new()
             where TNewPosition : IProduct
         {

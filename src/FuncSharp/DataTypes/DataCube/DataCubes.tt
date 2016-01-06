@@ -150,7 +150,7 @@ namespace FuncSharp
         /// </summary>
         public <#= DataCubeType(j, positionType: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, <#= ProductType(j, name: "Q") #>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(p => new[] { positionMapper(p) }, aggregator);
+            return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace FuncSharp
         /// </summary>
         public <#= DataCubeType(j, positionType: "Q") #> MultiTransform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, IEnumerable<<#= ProductType(j, name: "Q") #>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
+            return MultiTransform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
         }
 <#          if (j > 0) { #>
 
