@@ -12,53 +12,53 @@ namespace FuncSharp
     /// <summary>
     /// A type that represents a disjunction of types, choice from multiple different types e.g. T1 or T2 or T3.
     /// </summary>
-    public interface ISum
+    public interface ICoproduct
     {
         /// <summary>
-        /// Arity of the sum type. Should be non-negative.
+        /// Arity of the coproduct type. Should be non-negative.
         /// </summary>
-        int SumArity { get; }
+        int CoproductArity { get; }
 
         /// <summary>
-        /// Discriminator of the sum type value. Should be in interval [1, SumArity].
+        /// Discriminator of the coproduct type value. Should be in interval [1, CoproductArity].
         /// </summary>
-        int SumDiscriminator { get; }
+        int CoproductDiscriminator { get; }
 
         /// <summary>
-        /// Value of the sum type no matter which one of the possible values it is.
+        /// Value of the coproduct type no matter which one of the possible values it is.
         /// </summary>
-        object SumValue { get; }
+        object CoproductValue { get; }
     }
 
 <#  for (var i = 0; i < MaxArity(); i++) { #>
     /// <summary>
-    /// A <#= i #>-dimensional strongly-typed sum.
+    /// A <#= i #>-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface <#= SumType(i, name: "out T") #> : ISum
+    public interface <#= CoproductType(i, name: "out T") #> : ICoproduct
     {
 <#      for (var j = 1; j <= i; j++) { #>
         /// <summary>
-        /// Returns whether the sum contains the <#= GetLowerOrdinal(j) #> value.
+        /// Returns whether the coproduct contains the <#= GetLowerOrdinal(j) #> value.
         /// </summary>
         bool Is<#= GetOrdinal(j) #> { get; }
 
         /// <summary>
-        /// Returns <#= GetLowerOrdinal(j) #> value of the sum as an option. The option contains the <#= GetLowerOrdinal(j) #> value
-        /// or is empty if the sum contains different value.
+        /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #> 
+        /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
 
 <#      } #>
 <#      if (i > 0) { #>
         /// <summary>
-        /// Returns result of a function that matches the sum value. E.g. if the sum is the first value, returns result
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
         /// of the <paramref name="ifFirst" /> function.
         /// </summary>
         R Match<R>(
 <#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>);
 
         /// <summary>
-        /// Executes the function that matches the sum value. E.g. if the sum is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(

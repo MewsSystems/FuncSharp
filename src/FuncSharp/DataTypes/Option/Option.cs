@@ -48,7 +48,7 @@ namespace FuncSharp
         }
     }
 
-    internal class Option<A> : Sum2<A, Unit>, IOption<A>
+    internal class Option<A> : Coproduct2<A, Unit>, IOption<A>
     {
         /// <summary>
         /// Static initializer ensuring that option of nullable type cannot be constructed.

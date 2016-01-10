@@ -42,11 +42,11 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 0-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 0-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum0 AsSum(this object value, Func<object, ISum0> otherwise = null)
+        public static ICoproduct0 AsCoproduct(this object value, Func<object, ICoproduct0> otherwise = null)
         {
             if (otherwise != null)
             {
@@ -56,24 +56,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 1-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 1-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum1<object> AsSafeSum(this object value)
+        public static ICoproduct1<object> AsSafeCoproduct(this object value)
         {
-            return value.AsSum<object>(v => Sum.CreateFirst<object>(v));
+            return value.AsCoproduct<object>(v => Coproduct.CreateFirst<object>(v));
         }
 
         /// <summary>
-        /// Creates a new 1-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 1-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum1<T1> AsSum<T1>(this object value, Func<object, ISum1<T1>> otherwise = null)
+        public static ICoproduct1<T1> AsCoproduct<T1>(this object value, Func<object, ICoproduct1<T1>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1>((T1)value);
+                return Coproduct.CreateFirst<T1>((T1)value);
             }
             if (otherwise != null)
             {
@@ -83,28 +84,29 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 2-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 2-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum2<T1, object> AsSafeSum<T1>(this object value)
+        public static ICoproduct2<T1, object> AsSafeCoproduct<T1>(this object value)
         {
-            return value.AsSum<T1, object>(v => Sum.CreateSecond<T1, object>(v));
+            return value.AsCoproduct<T1, object>(v => Coproduct.CreateSecond<T1, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 2-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 2-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum2<T1, T2> AsSum<T1, T2>(this object value, Func<object, ISum2<T1, T2>> otherwise = null)
+        public static ICoproduct2<T1, T2> AsCoproduct<T1, T2>(this object value, Func<object, ICoproduct2<T1, T2>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2>((T1)value);
+                return Coproduct.CreateFirst<T1, T2>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2>((T2)value);
+                return Coproduct.CreateSecond<T1, T2>((T2)value);
             }
             if (otherwise != null)
             {
@@ -114,32 +116,33 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 3-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 3-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum3<T1, T2, object> AsSafeSum<T1, T2>(this object value)
+        public static ICoproduct3<T1, T2, object> AsSafeCoproduct<T1, T2>(this object value)
         {
-            return value.AsSum<T1, T2, object>(v => Sum.CreateThird<T1, T2, object>(v));
+            return value.AsCoproduct<T1, T2, object>(v => Coproduct.CreateThird<T1, T2, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 3-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 3-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum3<T1, T2, T3> AsSum<T1, T2, T3>(this object value, Func<object, ISum3<T1, T2, T3>> otherwise = null)
+        public static ICoproduct3<T1, T2, T3> AsCoproduct<T1, T2, T3>(this object value, Func<object, ICoproduct3<T1, T2, T3>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3>((T3)value);
             }
             if (otherwise != null)
             {
@@ -149,36 +152,37 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 4-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum4<T1, T2, T3, object> AsSafeSum<T1, T2, T3>(this object value)
+        public static ICoproduct4<T1, T2, T3, object> AsSafeCoproduct<T1, T2, T3>(this object value)
         {
-            return value.AsSum<T1, T2, T3, object>(v => Sum.CreateFourth<T1, T2, T3, object>(v));
+            return value.AsCoproduct<T1, T2, T3, object>(v => Coproduct.CreateFourth<T1, T2, T3, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 4-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum4<T1, T2, T3, T4> AsSum<T1, T2, T3, T4>(this object value, Func<object, ISum4<T1, T2, T3, T4>> otherwise = null)
+        public static ICoproduct4<T1, T2, T3, T4> AsCoproduct<T1, T2, T3, T4>(this object value, Func<object, ICoproduct4<T1, T2, T3, T4>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3, T4>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3, T4>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3, T4>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3, T4>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3, T4>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3, T4>((T3)value);
             }
             if (value is T4)
             {
-                return Sum.CreateFourth<T1, T2, T3, T4>((T4)value);
+                return Coproduct.CreateFourth<T1, T2, T3, T4>((T4)value);
             }
             if (otherwise != null)
             {
@@ -188,40 +192,41 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 5-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum5<T1, T2, T3, T4, object> AsSafeSum<T1, T2, T3, T4>(this object value)
+        public static ICoproduct5<T1, T2, T3, T4, object> AsSafeCoproduct<T1, T2, T3, T4>(this object value)
         {
-            return value.AsSum<T1, T2, T3, T4, object>(v => Sum.CreateFifth<T1, T2, T3, T4, object>(v));
+            return value.AsCoproduct<T1, T2, T3, T4, object>(v => Coproduct.CreateFifth<T1, T2, T3, T4, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 5-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum5<T1, T2, T3, T4, T5> AsSum<T1, T2, T3, T4, T5>(this object value, Func<object, ISum5<T1, T2, T3, T4, T5>> otherwise = null)
+        public static ICoproduct5<T1, T2, T3, T4, T5> AsCoproduct<T1, T2, T3, T4, T5>(this object value, Func<object, ICoproduct5<T1, T2, T3, T4, T5>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3, T4, T5>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3, T4, T5>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3, T4, T5>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5>((T3)value);
             }
             if (value is T4)
             {
-                return Sum.CreateFourth<T1, T2, T3, T4, T5>((T4)value);
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5>((T4)value);
             }
             if (value is T5)
             {
-                return Sum.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
             }
             if (otherwise != null)
             {
@@ -231,44 +236,45 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 6-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum6<T1, T2, T3, T4, T5, object> AsSafeSum<T1, T2, T3, T4, T5>(this object value)
+        public static ICoproduct6<T1, T2, T3, T4, T5, object> AsSafeCoproduct<T1, T2, T3, T4, T5>(this object value)
         {
-            return value.AsSum<T1, T2, T3, T4, T5, object>(v => Sum.CreateSixth<T1, T2, T3, T4, T5, object>(v));
+            return value.AsCoproduct<T1, T2, T3, T4, T5, object>(v => Coproduct.CreateSixth<T1, T2, T3, T4, T5, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 6-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum6<T1, T2, T3, T4, T5, T6> AsSum<T1, T2, T3, T4, T5, T6>(this object value, Func<object, ISum6<T1, T2, T3, T4, T5, T6>> otherwise = null)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> AsCoproduct<T1, T2, T3, T4, T5, T6>(this object value, Func<object, ICoproduct6<T1, T2, T3, T4, T5, T6>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3, T4, T5, T6>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3, T4, T5, T6>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3, T4, T5, T6>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6>((T3)value);
             }
             if (value is T4)
             {
-                return Sum.CreateFourth<T1, T2, T3, T4, T5, T6>((T4)value);
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6>((T4)value);
             }
             if (value is T5)
             {
-                return Sum.CreateFifth<T1, T2, T3, T4, T5, T6>((T5)value);
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6>((T5)value);
             }
             if (value is T6)
             {
-                return Sum.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
             }
             if (otherwise != null)
             {
@@ -278,48 +284,49 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 7-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum7<T1, T2, T3, T4, T5, T6, object> AsSafeSum<T1, T2, T3, T4, T5, T6>(this object value)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6>(this object value)
         {
-            return value.AsSum<T1, T2, T3, T4, T5, T6, object>(v => Sum.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
+            return value.AsCoproduct<T1, T2, T3, T4, T5, T6, object>(v => Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 7-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum7<T1, T2, T3, T4, T5, T6, T7> AsSum<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, ISum7<T1, T2, T3, T4, T5, T6, T7>> otherwise = null)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> AsCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3, T4, T5, T6, T7>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3, T4, T5, T6, T7>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3, T4, T5, T6, T7>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7>((T3)value);
             }
             if (value is T4)
             {
-                return Sum.CreateFourth<T1, T2, T3, T4, T5, T6, T7>((T4)value);
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7>((T4)value);
             }
             if (value is T5)
             {
-                return Sum.CreateFifth<T1, T2, T3, T4, T5, T6, T7>((T5)value);
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7>((T5)value);
             }
             if (value is T6)
             {
-                return Sum.CreateSixth<T1, T2, T3, T4, T5, T6, T7>((T6)value);
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7>((T6)value);
             }
             if (value is T7)
             {
-                return Sum.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
             }
             if (otherwise != null)
             {
@@ -329,52 +336,53 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 8-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeSum<T1, T2, T3, T4, T5, T6, T7>(this object value)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value)
         {
-            return value.AsSum<T1, T2, T3, T4, T5, T6, T7, object>(v => Sum.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
+            return value.AsCoproduct<T1, T2, T3, T4, T5, T6, T7, object>(v => Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 8-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum8<T1, T2, T3, T4, T5, T6, T7, T8> AsSum<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, ISum8<T1, T2, T3, T4, T5, T6, T7, T8>> otherwise = null)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
             }
             if (value is T4)
             {
-                return Sum.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
             }
             if (value is T5)
             {
-                return Sum.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
             }
             if (value is T6)
             {
-                return Sum.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
             }
             if (value is T7)
             {
-                return Sum.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
             }
             if (value is T8)
             {
-                return Sum.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
             }
             if (otherwise != null)
             {
@@ -384,56 +392,57 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new 9-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static ISum9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeSum<T1, T2, T3, T4, T5, T6, T7, T8>(this object value)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value)
         {
-            return value.AsSum<T1, T2, T3, T4, T5, T6, T7, T8, object>(v => Sum.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
+            return value.AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, object>(v => Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new 9-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static ISum9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsSum<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, ISum9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> otherwise = null)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> otherwise = null)
         {
             if (value is T1)
             {
-                return Sum.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T1)value);
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T1)value);
             }
             if (value is T2)
             {
-                return Sum.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T2)value);
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T2)value);
             }
             if (value is T3)
             {
-                return Sum.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T3)value);
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T3)value);
             }
             if (value is T4)
             {
-                return Sum.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T4)value);
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T4)value);
             }
             if (value is T5)
             {
-                return Sum.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T5)value);
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T5)value);
             }
             if (value is T6)
             {
-                return Sum.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T6)value);
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T6)value);
             }
             if (value is T7)
             {
-                return Sum.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T7)value);
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T7)value);
             }
             if (value is T8)
             {
-                return Sum.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T8)value);
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T8)value);
             }
             if (value is T9)
             {
-                return Sum.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
             }
             if (otherwise != null)
             {

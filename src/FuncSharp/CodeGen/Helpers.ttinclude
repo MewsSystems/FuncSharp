@@ -44,14 +44,14 @@
         return NaryType("Product", i, name, except);
     }
 
-    public string SumType(int i, string name = "T")
+    public string CoproductType(int i, string name = "T")
     {
-        return NaryType("ISum", i, name);
+        return NaryType("ICoproduct", i, name);
     }
 
-    public string SumTypeImpl(int i, string name = "T")
+    public string CoproductTypeImpl(int i, string name = "T")
     {
-        return NaryType("Sum", i, name);
+        return NaryType("Coproduct", i, name);
     }
     
     public string DataCubeType(int i, int? except = null, string positionType = "P", string valueType = "TValue")

@@ -50,16 +50,16 @@ namespace FuncSharp
 
 <# for (var i = 0; i < MaxArity(); i++) { #>
         /// <summary>
-        /// Creates a new <#= i #>-dimensional sum as a result of type match. The specified value will be on the first place whose type 
-        /// matches type of the value. If none of the types matches type of the value, returns result of the otherwise function. In case
-        /// when the otherwise function is null, throws an exception.
+        /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
+        /// function. In case when the otherwise function is null, throws an exception.
         /// </summary>
-        public static <#= SumType(i) #> AsSum<#= TypeBracket(i) #>(this object value, Func<object, <#= SumType(i) #>> otherwise = null)
+        public static <#= CoproductType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductType(i) #>> otherwise = null)
         {
 <#     for (var j = 1; j <= i; j++) { #>
             if (value is <#= Type(j) #>)
             {
-                return Sum.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
+                return Coproduct.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
             }
 <#     } #>
             if (otherwise != null)
@@ -72,12 +72,13 @@ namespace FuncSharp
 <#     if (i + 1 < MaxArity()) { #>
 <#         var safeTypeBracket = "<" + Types(i, appendSeparator: true) + "object>"; #>
         /// <summary>
-        /// Creates a new <#= i + 1 #>-dimensional sum as a result of type match. The specified value will be on the first place whose 
-        /// type matches type of the value. If none of the types matches type of the value, then the value will be placed in the last place.
+        /// Creates a new <#= i + 1 #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
         /// </summary>
-        public static <#= "ISum" + (i + 1) + safeTypeBracket #> AsSafeSum<#= TypeBracket(i) #>(this object value)
+        public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
         {
-            return value.AsSum<#= safeTypeBracket #>(v => Sum.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
+            return value.AsCoproduct<#= safeTypeBracket #>(v => Coproduct.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }
 
 <#     } #>

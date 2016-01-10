@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FuncSharp
 {
-    public interface IOption<out A> : ISum2<A, Unit>
+    public interface IOption<out A> : ICoproduct2<A, Unit>
     {
         /// <summary>
         /// Returns whether the option is empty (doesn't contain any value).

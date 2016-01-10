@@ -65,19 +65,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Relations.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTypes\Sum\ISum.cs">
+    <Compile Include="DataTypes\Coproduct\ICoproduct.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ISum.tt</DependentUpon>
+      <DependentUpon>ICoproduct.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTypes\Sum\ISumExtensions.cs">
+    <Compile Include="DataTypes\Coproduct\ICoproductExtensions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ISumExtensions.tt</DependentUpon>
+      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTypes\Sum\Nothing.cs" />
-    <Compile Include="DataTypes\Sum\Sum.cs">
-      <DependentUpon>Sum.tt</DependentUpon>
+    <Compile Include="DataTypes\Coproduct\Nothing.cs" />
+    <Compile Include="DataTypes\Coproduct\Coproduct.cs">
+      <DependentUpon>Coproduct.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -165,17 +165,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Product.cs</LastGenOutput>
     </None>
-    <None Include="DataTypes\Sum\ISum.tt">
+    <None Include="DataTypes\Coproduct\ICoproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ISum.cs</LastGenOutput>
+      <LastGenOutput>ICoproduct.cs</LastGenOutput>
     </None>
-    <None Include="DataTypes\Sum\ISumExtensions.tt">
+    <None Include="DataTypes\Coproduct\ICoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ISumExtensions.cs</LastGenOutput>
+      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
     </None>
-    <None Include="DataTypes\Sum\Sum.tt">
+    <None Include="DataTypes\Coproduct\Coproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Sum.cs</LastGenOutput>
+      <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
     <None Include="Extensions\ObjectExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

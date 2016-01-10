@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="DataTypes\DataCube\DataCubeTests.cs" />
     <Compile Include="DataTypes\Morphism\MorphismTests.cs" />
-    <Compile Include="DataTypes\Sum\SumTests.cs" />
+    <Compile Include="DataTypes\Coproduct\CoproductTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TupleExtensionsTests.cs" />
     <Compile Include="Extensions\ObjectExtensionsTests.cs" />
