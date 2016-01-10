@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -31,6 +32,15 @@ namespace FuncSharp
         public static IProduct3<int, int, object> CoproductRepresentation(this ICoproduct c)
         {
             return Product.Create(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
+        }
+
+        /// <summary>
+        /// Returns value of the coproduct converted to the specified type.
+        /// </summary>
+        public static T Get<T>(this ICoproduct c, Func<Unit, Exception> otherwise = null)
+            where T : class
+        {
+            return c.CoproductValue.As<T>().Get(otherwise);
         }
 
         /// <summary>
