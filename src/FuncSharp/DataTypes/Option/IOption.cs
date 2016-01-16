@@ -11,6 +11,11 @@ namespace FuncSharp
         bool IsEmpty { get; }
 
         /// <summary>
+        /// Returns whether the option is not empty (contain a value).
+        /// </summary>
+        bool NonEmpty { get; }
+
+        /// <summary>
         /// Returns value of the option if not empty.
         /// </summary>
         A Get(Func<Unit, Exception> otherwise = null);
@@ -25,6 +30,13 @@ namespace FuncSharp
         /// returns a new option with that new value.
         /// </summary>
         IOption<B> Map<B>(Func<A, B> f);
+
+        /// <summary>
+        /// Maps value of the current option (if present) into a new value using the specified function and 
+        /// returns a new option with that new value.
+        /// </summary>
+        IOption<B> Map<B>(Func<A, B?> f)
+            where B : struct;
 
         /// <summary>
         /// Maps value of the current option (if present) into a new option using the specified function and 

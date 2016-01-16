@@ -81,6 +81,11 @@ namespace FuncSharp
             get { return IsSecond; }
         }
 
+        public bool NonEmpty
+        {
+            get { return IsFirst; }
+        }
+
         public A Get(Func<Unit, Exception> otherwise = null)
         {
             return this.GetOrElse<A, A>(_ =>
@@ -104,6 +109,12 @@ namespace FuncSharp
         public IOption<B> Map<B>(Func<A, B> f)
         {
             return FlatMap(a => Option.Valued(f(a)));
+        }
+
+        public IOption<B> Map<B>(Func<A, B?> f)
+            where B : struct
+        {
+            return FlatMap(a => f(a).ToOption());
         }
 
         public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)
