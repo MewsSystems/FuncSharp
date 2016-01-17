@@ -55,8 +55,8 @@ Similarly to product types, **FuncSharp** also comes equipped with extensible de
 
 ```cs
 class Leaf { }
-class Node<A> : IProduct3<A, Leaf, Leaf> { /* Constructor, getters. */ }
-class Tree<A> : ICoproduct2<Node<A>, Leaf> { /* Constructor. */ }
+class Node<A> : Product3<A, Leaf, Leaf> { /* Constructor, getters. */ }
+class Tree<A> : Coproduct2<Node<A>, Leaf> { /* Constructor. */ }
 
 int LeafCount<A>(Tree<A> tree)
 {
