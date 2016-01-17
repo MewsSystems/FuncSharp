@@ -51,7 +51,21 @@ A direct consequence of product types is the `Unit` type that can be understood 
 
 #### Coproduct
 
-Similarly to product types, **FuncSharp** also comes equipped with extensible definition and canonical implementation of [coproduct types](https://en.wikipedia.org/wiki/Tagged_union) (also called sum or union types). They represent a strongly typed alternative, e.g. "value that is either `bool`, `string` or `int`". Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the coproduct type become identified by compiler as a an error. One application of this principle can for example be implementation of strongly-typed enums. Adding a new value to the enum would immediately introduce compile time errors, which would force the programmer to fix all places that use the enum.
+Similarly to product types, **FuncSharp** also comes equipped with extensible definition and canonical implementation of [coproduct types](https://en.wikipedia.org/wiki/Tagged_union) (also called sum or union types). They represent a strongly typed alternative, e.g. "value that is either `bool`, `string` or `int`". Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the coproduct type become identified by compiler as a an error. A simplified example how to represent trees using coproduct types and how to calculate leaf count of a tree:
+
+```cs
+class Leaf { }
+class Node<A> : IProduct3<A, Leaf, Leaf> { /* Constructor, getters. */ }
+class Tree<A> : ICoproduct2<Node<A>, Leaf> { /* Constructor. */ }
+
+int LeafCount<A>(Tree<A> tree)
+{
+    return tree.Match(
+        node => LeafCount(node.Left) + LeafCount(node.Right),
+        leaf => 1
+    );
+}
+```
 
 A coproduct of zero types (a choice from no types) is also a well known type - in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
 
