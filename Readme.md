@@ -8,8 +8,8 @@ Install-Package FuncSharp
 
 ## Contents
 
-- [Data Types](#data-types): [Option](#option), [Definite](#definite), [Product](#product), [Coproduct](#coproduct), [Morphism](#morphism), [DataCube](#datacube)
-- [Type Classes](#type-classes): [Equality](#equality), [Enumeration](#enumeration), [Ordering](#ordering)
+- [Data Types](#data-types) - [Option](#option), [Definite](#definite), [Product](#product), [Coproduct](#coproduct), [Morphism](#morphism), [DataCube](#datacube)
+- [Type Classes](#type-classes) - [Equality](#equality), [Enumeration](#enumeration), [Ordering](#ordering)
 - [Traits](#traits)
 
 ## Data Types
