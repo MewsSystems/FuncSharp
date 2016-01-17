@@ -1,6 +1,6 @@
 # FuncSharp - Functional C&#35;
 
-A library with main purpose to reduce some boilerplate code from C# programs and introduce stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Download from [NuGet](https://www.nuget.org/packages/FuncSharp/):
+A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Download from [NuGet](https://www.nuget.org/packages/FuncSharp/):
 
 ```
 Install-Package FuncSharp
@@ -12,8 +12,9 @@ Install-Package FuncSharp
     - [Option](#option)
     - [Definite](#definite)
     - [Product](#product)
-    - [Sum](#sum)
-    - [Morphisms](#morphisms)
+    - [Coproduct](#coproduct)
+    - [Morphism](#morphism)
+    - [DataCube](#datacube)
 - [Traits](#traits)
 - [Type Classes](#type-classes)
     - [Equality](#equality)
@@ -48,15 +49,28 @@ class User : Product3<string, string, DateTime>
 
 A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particulary useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
 
-#### Sum
+#### Coproduct
 
-Similarly to product types, **FuncSharp** also comes equipped with extensible definition and canonical implementation of sum types (coproduct types). They represent a strongly typed alternative, e.g. either `bool`, `string` or `int` value. Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the sum type become identified by compiler as a an error. One application of this principle can for example be implementation of strongly-typed enums. Adding a new value to the enum would immediately introduce compile time errors, which would force the programmer to fix all places that use the enum.
+Similarly to product types, **FuncSharp** also comes equipped with extensible definition and canonical implementation of coproduct types (also called sum or union types). They represent a strongly typed alternative, e.g. "value that is either `bool`, `string` or `int`". Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the coproduct type become identified by compiler as a an error. One application of this principle can for example be implementation of strongly-typed enums. Adding a new value to the enum would immediately introduce compile time errors, which would force the programmer to fix all places that use the enum.
 
-A sum of zero types (a choice from no types) is also a well known type - in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
+A coproduct of zero types (a choice from no types) is also a well known type - in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
 
-#### Morphisms
+#### Morphism
 
 Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a consise representation of a bidirectlional mapping that is in .NET traditionally represented as a pair of dictionaries.
+
+#### DataCube
+
+DataCubes represent sets of data indexed by a multidimensional index. E.g. a two-dimensional data cube is roughly equivalent to `Dictionary<Tuple2<P1, P2>, TValue>`. However data cubes are much more friendlier to work with, they provide nicer API than dictionary and offer many more advanced operations like slicing, aggregations, transformations, filtering etc. As a simple example, consider this [punch card](https://github.com/siroky/FuncSharp/graphs/punch-card). One may construct it from a collection of commits and represent it in memory as follows:
+
+```cs
+var punchCard = new DataCube2<Day, Hour, int>();
+foreach (var commit in commits)
+{
+    punchCard.SetOrElseUpdate(commit.Day, commit.Hour, 1, (sum, _) => sum + 1);
+}
+var dailyTotals = punchCard.RollUpDimension2((a, b) => a + b); // DataCube1<Day, int>
+```
 
 ## Traits
 
