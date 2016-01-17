@@ -96,6 +96,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube0<TValue> Where(Func<IProduct0, TValue, bool> predicate)
+        {
+            return Where<DataCube0<TValue>>(predicate);
+        }
+
+        /// <summary>
         /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
         /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
         /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
@@ -234,6 +242,14 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1), value, updater);
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube1<P1, TValue> Where(Func<IProduct1<P1>, TValue, bool> predicate)
+        {
+            return Where<DataCube1<P1, TValue>>(predicate);
         }
 
         /// <summary>
@@ -438,6 +454,14 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1, p2), value, updater);
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube2<P1, P2, TValue> Where(Func<IProduct2<P1, P2>, TValue, bool> predicate)
+        {
+            return Where<DataCube2<P1, P2, TValue>>(predicate);
         }
 
         /// <summary>
@@ -705,6 +729,14 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1, p2, p3), value, updater);
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube3<P1, P2, P3, TValue> Where(Func<IProduct3<P1, P2, P3>, TValue, bool> predicate)
+        {
+            return Where<DataCube3<P1, P2, P3, TValue>>(predicate);
         }
 
         /// <summary>
@@ -1035,6 +1067,14 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1, p2, p3, p4), value, updater);
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube4<P1, P2, P3, P4, TValue> Where(Func<IProduct4<P1, P2, P3, P4>, TValue, bool> predicate)
+        {
+            return Where<DataCube4<P1, P2, P3, P4, TValue>>(predicate);
         }
 
         /// <summary>

@@ -139,6 +139,14 @@ namespace FuncSharp
         {
             return SetOrElseUpdate(Product.Create(<#= Values(i, name: "P") #>), value, updater);
         }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public <#= DataCubeType(i) #> Where(Func<<#= ProductType(i, name: "P") #>, TValue, bool> predicate)
+        {
+            return Where<<#= DataCubeType(i) #>>(predicate);
+        }
 <#      for (var j = 0; j <= i; j++) { #>
 
         /// <summary>

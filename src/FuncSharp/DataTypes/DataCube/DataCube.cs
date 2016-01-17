@@ -28,6 +28,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns whether the cube is not empty.
+        /// </summary>
+        public bool NonEmpty
+        {
+            get { return !IsEmpty; }
+        }
+
+        /// <summary>
         /// Positions of all values stored in the cube.
         /// </summary>
         public IEnumerable<TPosition> Positions
@@ -47,17 +55,6 @@ namespace FuncSharp
         /// Values in the cube indexed by their positions.
         /// </summary>
         private Dictionary<TPosition, TValue> Index { get; set; }
-
-        /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<TPosition, TValue> a)
-        {
-            foreach (var kv in Index)
-            {
-                a(kv.Key, kv.Value);
-            }
-        }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -103,6 +100,44 @@ namespace FuncSharp
                 v => updater(v, value),
                 _ => value
             ));
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<TPosition, TValue> a)
+        {
+            foreach (var kv in Index)
+            {
+                a(kv.Key, kv.Value);
+            }
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<TPosition, TValue, T> f)
+        {
+            var result = new List<T>();
+            ForEach((position, value) => result.Add(f(position, value)));
+            return result;
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public TNewCube Where<TNewCube>(Func<TPosition, TValue, bool> predicate)
+            where TNewCube : DataCube<TPosition, TValue>, new()
+        {
+            var result = new TNewCube();
+            ForEach((p, v) =>
+            {
+                if (predicate(p, v))
+                {
+                    result.Set(p, v);
+                }
+            });
+            return result;
         }
 
         /// <summary>
