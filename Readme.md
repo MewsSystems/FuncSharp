@@ -38,7 +38,7 @@ class User : Product3<string, string, DateTime>
 }
 ```
 
-A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particulary useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
+A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particularly useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
 
 #### Coproduct
 
@@ -62,7 +62,7 @@ A coproduct of zero types (a choice from no types) is also a well known type - i
 
 #### Morphism
 
-Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a consise representation of a bidirectlional mapping that is in .NET traditionally represented as a pair of dictionaries.
+Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a concise representation of a bidirectional mapping that is in .NET traditionally represented as a pair of dictionaries.
 
 #### DataCube
 
@@ -97,4 +97,4 @@ Generic representation of an interval and interval set may seem simple on the fi
 
 ## Traits
 
-A trait can be understood as a plain C# interface enahnced with data and some implementation. It is a well-known pattern how to enhance interfaces with implementation. Simply create extension methods that take the interface type as the first `this` parameter. However it is not possible to create extension properties not fields and that's where **FuncSharp** comes handy. By extending `ITrait<TData>`, your interface becomes capable of data storage and retrieval, so the extension methods do not have to compute everything from scratch.
+A trait can be understood as a plain C# interface enhanced with data and some implementation. It is a well-known pattern how to enhance interfaces with implementation. Simply create extension methods that take the interface type as the first `this` parameter. However it is not possible to create extension properties not fields and that's where **FuncSharp** comes handy. By extending `ITrait<TData>`, your interface becomes capable of data storage and retrieval, so the extension methods do not have to compute everything from scratch.
