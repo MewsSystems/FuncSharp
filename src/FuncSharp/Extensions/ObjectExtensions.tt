@@ -51,10 +51,10 @@ namespace FuncSharp
 <# for (var i = 0; i < MaxArity(); i++) { #>
         /// <summary>
         /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static <#= CoproductType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductType(i) #>> otherwise = null)
+        public static <#= CoproductType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
 <#     for (var j = 1; j <= i; j++) { #>
             if (value is <#= Type(j) #>)
@@ -62,9 +62,13 @@ namespace FuncSharp
                 return Coproduct.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
             }
 <#     } #>
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified types.");
         }

@@ -43,14 +43,18 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 0-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct0 AsCoproduct(this object value, Func<object, ICoproduct0> otherwise = null)
+        public static ICoproduct0 AsCoproduct(this object value, Func<object, ICoproduct0> fallback = null, Func<Unit, Exception> otherwise = null)
         {
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 0 specified types.");
         }
@@ -67,18 +71,22 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 1-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct1<T1> AsCoproduct<T1>(this object value, Func<object, ICoproduct1<T1>> otherwise = null)
+        public static ICoproduct1<T1> AsCoproduct<T1>(this object value, Func<object, ICoproduct1<T1>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
                 return Coproduct.CreateFirst<T1>((T1)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified types.");
         }
@@ -95,10 +103,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 2-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct2<T1, T2> AsCoproduct<T1, T2>(this object value, Func<object, ICoproduct2<T1, T2>> otherwise = null)
+        public static ICoproduct2<T1, T2> AsCoproduct<T1, T2>(this object value, Func<object, ICoproduct2<T1, T2>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -108,9 +116,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateSecond<T1, T2>((T2)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified types.");
         }
@@ -127,10 +139,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 3-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> AsCoproduct<T1, T2, T3>(this object value, Func<object, ICoproduct3<T1, T2, T3>> otherwise = null)
+        public static ICoproduct3<T1, T2, T3> AsCoproduct<T1, T2, T3>(this object value, Func<object, ICoproduct3<T1, T2, T3>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -144,9 +156,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateThird<T1, T2, T3>((T3)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified types.");
         }
@@ -163,10 +179,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 4-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> AsCoproduct<T1, T2, T3, T4>(this object value, Func<object, ICoproduct4<T1, T2, T3, T4>> otherwise = null)
+        public static ICoproduct4<T1, T2, T3, T4> AsCoproduct<T1, T2, T3, T4>(this object value, Func<object, ICoproduct4<T1, T2, T3, T4>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -184,9 +200,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateFourth<T1, T2, T3, T4>((T4)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified types.");
         }
@@ -203,10 +223,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 5-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> AsCoproduct<T1, T2, T3, T4, T5>(this object value, Func<object, ICoproduct5<T1, T2, T3, T4, T5>> otherwise = null)
+        public static ICoproduct5<T1, T2, T3, T4, T5> AsCoproduct<T1, T2, T3, T4, T5>(this object value, Func<object, ICoproduct5<T1, T2, T3, T4, T5>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -228,9 +248,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified types.");
         }
@@ -247,10 +271,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> AsCoproduct<T1, T2, T3, T4, T5, T6>(this object value, Func<object, ICoproduct6<T1, T2, T3, T4, T5, T6>> otherwise = null)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> AsCoproduct<T1, T2, T3, T4, T5, T6>(this object value, Func<object, ICoproduct6<T1, T2, T3, T4, T5, T6>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -276,9 +300,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified types.");
         }
@@ -295,10 +323,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> AsCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> otherwise = null)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> AsCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -328,9 +356,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified types.");
         }
@@ -347,10 +379,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> otherwise = null)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -384,9 +416,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified types.");
         }
@@ -403,10 +439,10 @@ namespace FuncSharp
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the otherwise 
-        /// function. In case when the otherwise function is null, throws an exception.
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> otherwise = null)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (value is T1)
             {
@@ -444,9 +480,13 @@ namespace FuncSharp
             {
                 return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
             }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
             if (otherwise != null)
             {
-                return otherwise(value);
+                throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified types.");
         }

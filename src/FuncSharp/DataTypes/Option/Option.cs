@@ -65,12 +65,11 @@ namespace FuncSharp
         }
 
         public Option(A value)
-            : base(1, value)
+            : base(value)
         {
         }
-
         private Option()
-            : base(2, Unit.Value)
+            : base(Unit.Value)
         {
         }
 

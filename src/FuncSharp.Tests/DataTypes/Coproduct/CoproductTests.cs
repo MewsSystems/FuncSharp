@@ -7,23 +7,30 @@ namespace FuncSharp.Tests
         [Fact]
         public void ConstructionPreservesValues()
         {
-            var u1 = Coproduct.CreateFirst<string, int>("foo");
-            var u2 = Coproduct.CreateSecond<string, int>(42);
+            var c1 = Coproduct.CreateFirst<string, int>("foo");
+            var c2 = Coproduct.CreateSecond<string, int>(42);
+            var c3 = Coproduct.CreateSecond<string, string>("bar");
 
-            Assert.Equal(2, u1.CoproductArity);
-            Assert.Equal(2, u2.CoproductArity);
+            Assert.Equal(2, c1.CoproductArity);
+            Assert.Equal(2, c2.CoproductArity);
+            Assert.Equal(2, c3.CoproductArity);
 
-            Assert.Equal(1, u1.CoproductDiscriminator);
-            Assert.Equal(2, u2.CoproductDiscriminator);
+            Assert.Equal(1, c1.CoproductDiscriminator);
+            Assert.Equal(2, c2.CoproductDiscriminator);
+            Assert.Equal(2, c2.CoproductDiscriminator);
 
-            Assert.Equal("foo", u1.CoproductValue);
-            Assert.Equal(42, u2.CoproductValue);
+            Assert.Equal("foo", c1.CoproductValue);
+            Assert.Equal(42, c2.CoproductValue);
+            Assert.Equal("bar", c3.CoproductValue);
 
-            Assert.True(u1.IsFirst);
-            Assert.False(u1.IsSecond);
+            Assert.True(c1.IsFirst);
+            Assert.False(c1.IsSecond);
 
-            Assert.False(u2.IsFirst);
-            Assert.True(u2.IsSecond);
+            Assert.False(c2.IsFirst);
+            Assert.True(c2.IsSecond);
+
+            Assert.False(c3.IsFirst);
+            Assert.True(c3.IsSecond);
         }
 
         [Fact]

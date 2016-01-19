@@ -32,361 +32,361 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 1-dimensional coproduct with the first value.
         /// </summary>
-        public static ICoproduct1<T1> CreateFirst<T1>(T1 t1)
+        public static ICoproduct1<T1> CreateFirst<T1>(T1 value)
         {
-            return new Coproduct1<T1>(1, t1);
+            return new Coproduct1<T1>(value);
         }
 
         /// <summary>
         /// Creates a new 2-dimensional coproduct with the second value.
         /// </summary>
-        public static ICoproduct2<T1, T2> CreateFirst<T1, T2>(T1 t1)
+        public static ICoproduct2<T1, T2> CreateFirst<T1, T2>(T1 value)
         {
-            return new Coproduct2<T1, T2>(1, t1);
+            return new Coproduct2<T1, T2>(value);
         }
 
         /// <summary>
         /// Creates a new 2-dimensional coproduct with the second value.
         /// </summary>
-        public static ICoproduct2<T1, T2> CreateSecond<T1, T2>(T2 t2)
+        public static ICoproduct2<T1, T2> CreateSecond<T1, T2>(T2 value)
         {
-            return new Coproduct2<T1, T2>(2, t2);
+            return new Coproduct2<T1, T2>(value);
         }
 
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the third value.
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 t1)
+        public static ICoproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 value)
         {
-            return new Coproduct3<T1, T2, T3>(1, t1);
+            return new Coproduct3<T1, T2, T3>(value);
         }
 
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the third value.
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 t2)
+        public static ICoproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 value)
         {
-            return new Coproduct3<T1, T2, T3>(2, t2);
+            return new Coproduct3<T1, T2, T3>(value);
         }
 
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the third value.
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 t3)
+        public static ICoproduct3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 value)
         {
-            return new Coproduct3<T1, T2, T3>(3, t3);
+            return new Coproduct3<T1, T2, T3>(value);
         }
 
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 t1)
+        public static ICoproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 value)
         {
-            return new Coproduct4<T1, T2, T3, T4>(1, t1);
+            return new Coproduct4<T1, T2, T3, T4>(value);
         }
 
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 t2)
+        public static ICoproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 value)
         {
-            return new Coproduct4<T1, T2, T3, T4>(2, t2);
+            return new Coproduct4<T1, T2, T3, T4>(value);
         }
 
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 t3)
+        public static ICoproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 value)
         {
-            return new Coproduct4<T1, T2, T3, T4>(3, t3);
+            return new Coproduct4<T1, T2, T3, T4>(value);
         }
 
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 t4)
+        public static ICoproduct4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 value)
         {
-            return new Coproduct4<T1, T2, T3, T4>(4, t4);
+            return new Coproduct4<T1, T2, T3, T4>(value);
         }
 
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 t1)
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 value)
         {
-            return new Coproduct5<T1, T2, T3, T4, T5>(1, t1);
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
 
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 t2)
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 value)
         {
-            return new Coproduct5<T1, T2, T3, T4, T5>(2, t2);
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
 
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 t3)
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 value)
         {
-            return new Coproduct5<T1, T2, T3, T4, T5>(3, t3);
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
 
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 t4)
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 value)
         {
-            return new Coproduct5<T1, T2, T3, T4, T5>(4, t4);
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
 
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 t5)
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 value)
         {
-            return new Coproduct5<T1, T2, T3, T4, T5>(5, t5);
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 t1)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 value)
         {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(1, t1);
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 t2)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 value)
         {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(2, t2);
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 t3)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 value)
         {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(3, t3);
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 t4)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 value)
         {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(4, t4);
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 t5)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 value)
         {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(5, t5);
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
 
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 t6)
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 value)
         {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(6, t6);
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 t1)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(1, t1);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 t2)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(2, t2);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 t3)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(3, t3);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 t4)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(4, t4);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 t5)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(5, t5);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 t6)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(6, t6);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 t7)
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 value)
         {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(7, t7);
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 t1)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(1, t1);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 t2)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(2, t2);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 t3)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(3, t3);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 t4)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(4, t4);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 t5)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(5, t5);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 t6)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(6, t6);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 t7)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(7, t7);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 t8)
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
         {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(8, t8);
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 t1)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(1, t1);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 t2)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(2, t2);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 t3)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(3, t3);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 t4)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(4, t4);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 t5)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(5, t5);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 t6)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(6, t6);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 t7)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(7, t7);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 t8)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(8, t8);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 t9)
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
         {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(9, t9);
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
 
         public override int GetHashCode()
@@ -431,11 +431,28 @@ namespace FuncSharp
     public class Coproduct1<T1> : Coproduct, ICoproduct1<T1>
     {
         /// <summary>
+        /// Creates a new 1-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct1(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 1-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct1(ICoproduct1<T1> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 1-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct1(int discriminator, object value)
+        protected Coproduct1(int discriminator, object value)
             : base(1, discriminator, value)
         {
         }
@@ -476,11 +493,36 @@ namespace FuncSharp
     public class Coproduct2<T1, T2> : Coproduct, ICoproduct2<T1, T2>
     {
         /// <summary>
+        /// Creates a new 2-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct2(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 2-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct2(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 2-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct2(ICoproduct2<T1, T2> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 2-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct2(int discriminator, object value)
+        protected Coproduct2(int discriminator, object value)
             : base(2, discriminator, value)
         {
         }
@@ -533,11 +575,44 @@ namespace FuncSharp
     public class Coproduct3<T1, T2, T3> : Coproduct, ICoproduct3<T1, T2, T3>
     {
         /// <summary>
+        /// Creates a new 3-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct3(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 3-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct3(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 3-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct3(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 3-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct3(ICoproduct3<T1, T2, T3> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 3-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct3(int discriminator, object value)
+        protected Coproduct3(int discriminator, object value)
             : base(3, discriminator, value)
         {
         }
@@ -602,11 +677,52 @@ namespace FuncSharp
     public class Coproduct4<T1, T2, T3, T4> : Coproduct, ICoproduct4<T1, T2, T3, T4>
     {
         /// <summary>
+        /// Creates a new 4-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct4(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct4(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct4(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct4(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct4(ICoproduct4<T1, T2, T3, T4> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 4-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct4(int discriminator, object value)
+        protected Coproduct4(int discriminator, object value)
             : base(4, discriminator, value)
         {
         }
@@ -683,11 +799,60 @@ namespace FuncSharp
     public class Coproduct5<T1, T2, T3, T4, T5> : Coproduct, ICoproduct5<T1, T2, T3, T4, T5>
     {
         /// <summary>
+        /// Creates a new 5-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct5(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct5(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct5(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct5(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct5(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct5(ICoproduct5<T1, T2, T3, T4, T5> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 5-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct5(int discriminator, object value)
+        protected Coproduct5(int discriminator, object value)
             : base(5, discriminator, value)
         {
         }
@@ -776,11 +941,68 @@ namespace FuncSharp
     public class Coproduct6<T1, T2, T3, T4, T5, T6> : Coproduct, ICoproduct6<T1, T2, T3, T4, T5, T6>
     {
         /// <summary>
+        /// Creates a new 6-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct6(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct6(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct6(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct6(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct6(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct6(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct6(ICoproduct6<T1, T2, T3, T4, T5, T6> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 6-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct6(int discriminator, object value)
+        protected Coproduct6(int discriminator, object value)
             : base(6, discriminator, value)
         {
         }
@@ -881,11 +1103,76 @@ namespace FuncSharp
     public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : Coproduct, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>
     {
         /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct7(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct7(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct7(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct7(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct7(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct7(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct7(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct7(ICoproduct7<T1, T2, T3, T4, T5, T6, T7> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 7-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct7(int discriminator, object value)
+        protected Coproduct7(int discriminator, object value)
             : base(7, discriminator, value)
         {
         }
@@ -998,11 +1285,84 @@ namespace FuncSharp
     public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : Coproduct, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct8(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct8(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct8(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct8(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct8(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct8(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct8(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct8(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct8(ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 8-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct8(int discriminator, object value)
+        protected Coproduct8(int discriminator, object value)
             : base(8, discriminator, value)
         {
         }
@@ -1127,11 +1487,92 @@ namespace FuncSharp
     public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : Coproduct, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
         /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct9(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct9(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct9(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct9(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct9(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct9(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct9(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct9(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the specified value on the ninth position.
+        /// </summary>
+        public Coproduct9(T9 ninthValue)
+            : this(9, ninthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct9(ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
         /// Creates a new 9-dimensional coproduct.
         /// </summary>
         /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
         /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
-        public Coproduct9(int discriminator, object value)
+        protected Coproduct9(int discriminator, object value)
             : base(9, discriminator, value)
         {
         }
