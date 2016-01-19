@@ -27,7 +27,7 @@ Install-Package FuncSharp
 
 Extensible definition of [product types](http://en.wikipedia.org/wiki/Product_type) with canonical implementation that can be used when implementing a custom product type or that can replace standard `Tuple`s which you cannot abstract over, nor enumerate their values. By extending the `Product[N]` from **FuncSharp**, one gets correct structural hash code, structural equality and nice `ToString` method for free. The final implementation of a custom product type is therefore as boilerplate-less as possible.
 
-In order to implement a custom product type, you need to inherit the `Product[N]` class where `[N]` stands for arity of the product. A constructor needs to be defined and it is often good to define named getters on top of the standard product projections (e.g. `ProductValue1`). But this is not obligatory. A custom product type representing a user can be seen on the following example:
+You can create canonical product instances using the `Product.Create` function. In order to implement a custom product type, you need to inherit the `Product[N]` class where `[N]` stands for arity of the product. A constructor needs to be defined and it is often good to define named getters on top of the standard product projections (e.g. `ProductValue1`). But this is not obligatory. A custom product type representing a user can be seen on the following example:
 
 ```C#
 class User : Product3<string, string, DateTime>
@@ -45,12 +45,18 @@ A direct consequence of product types is the `Unit` type that can be understood 
 
 ### Coproduct
 
-Similarly to product types, **FuncSharp** also comes equipped with extensible definition and canonical implementation of [coproduct types](https://en.wikipedia.org/wiki/Tagged_union) (also called sum or union types). They represent a strongly typed alternative, e.g. "value that is either `bool`, `string` or `int`". Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the coproduct type become identified by compiler as a an error. A simplified example how to represent trees using coproduct types and how to calculate leaf count of a tree:
+Similarly to product types, **FuncSharp** also contains extensible definition and canonical implementation of [coproduct types](https://en.wikipedia.org/wiki/Tagged_union) (also called sum or union types). They represent a strongly typed alternative, e.g. "value that is either `bool`, `string` or `int`". Their main advantage over standard class hierarchy is, that the usage is compile time checked. So if you decide to add or remove an alternative, all places that use the coproduct type become identified by compiler as an error. 
+
+Canonical coproducts can be created using `Coproduct.Create[Nth]` function where `[Nth]` stands for e.g. `First` or `Second` depending on which alternative should be created. Size of the new coproduct is inferred from the type arguments. Custom coproduct types are even simpler. Just inherit `Coproduct[N]` where `[N]` stands for arity (count of alternatives) and implement constructors for each alternative. A simplified example how to represent trees using coproduct types and how to calculate leaf count of can be seen on the following snippet:
 
 ```cs
 class Leaf { }
-class Node<A> : Product3<A, Leaf, Leaf> { /* Constructor, getters. */ }
-class Tree<A> : Coproduct2<Node<A>, Leaf> { /* Constructor. */ }
+class Node<A> : Product3<A, Tree<A>, Tree<A>> { /* Constructor, getters for value, left subtree and right subtree. */ }
+class Tree<A> : Coproduct2<Node<A>, Leaf>
+{
+    public Tree(Node<A> node) : base(node) { }
+    public Tree(Leaf leaf) : base(leaf) { }
+}
 
 int LeafCount<A>(Tree<A> tree)
 {
@@ -61,7 +67,7 @@ int LeafCount<A>(Tree<A> tree)
 }
 ```
 
-A coproduct of zero types (a choice from no types) is also a well known type - in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
+A coproduct of zero types (a choice from no types) is also a well known type, in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
 
 ### Option
 
