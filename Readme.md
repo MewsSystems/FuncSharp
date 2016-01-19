@@ -51,7 +51,7 @@ Canonical coproducts can be created using `Coproduct.Create[Nth]` function where
 
 ```cs
 class Leaf { }
-class Node<A> : Product3<A, Tree<A>, Tree<A>> { /* Constructor, getters for value, left subtree and right subtree. */ }
+class Node<A> : Product3<A, Tree<A>, Tree<A>> { /* Constructor, getters for value, left and right subtree. */ }
 class Tree<A> : Coproduct2<Node<A>, Leaf>
 {
     public Tree(Node<A> node) : base(node) { }
