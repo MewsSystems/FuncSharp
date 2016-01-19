@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
@@ -128,6 +130,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns whether the two intervals have intersection.
+        /// </summary>
+        public static bool Intersects<A>(this ITotalOrdering<A> ordering, Interval<A> interval1, Interval<A> interval2)
+        {
+            return ordering.Intersect(interval1, interval2).IsNonEmpty;
+        }
+
+        /// <summary>
         /// Returns intersection of the two intervals.
         /// </summary>
         public static Interval<A> Intersect<A>(this ITotalOrdering<A> ordering, Interval<A> interval1, Interval<A> interval2)
@@ -142,11 +152,12 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the two intervals have intersection.
+        /// Returns intersection of the specified intervals.
         /// </summary>
-        public static bool Intersects<A>(this ITotalOrdering<A> ordering, Interval<A> interval1, Interval<A> interval2)
+        public static Interval<A> Intersect<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> intervals)
+            where A : new()
         {
-            return ordering.Intersect(interval1, interval2).IsNonEmpty;
+            return intervals.Aggregate(ordering.EmptyInterval(), (i1, i2) => ordering.Intersect(i1, i2));
         }
 
         /// <summary>

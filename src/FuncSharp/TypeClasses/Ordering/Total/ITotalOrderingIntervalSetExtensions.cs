@@ -84,11 +84,27 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns intersection of the specified interval sets.
+        /// </summary>
+        public static IntervalSet<A> Intersect<A>(this ITotalOrdering<A> ordering, IEnumerable<IntervalSet<A>> sets)
+        {
+            return sets.Aggregate(ordering.EmptyIntervalSet(), (s1, s2) => ordering.Intersect(s1, s2));
+        }
+
+        /// <summary>
         /// Returns union of the two intervals.
         /// </summary>
         public static IntervalSet<A> Union<A>(this ITotalOrdering<A> ordering, Interval<A> interval1, Interval<A> interval2)
         {
             return ordering.Union(ordering.IntervalSet(interval1), interval2);
+        }
+
+        /// <summary>
+        /// Returns union of the specified intervals.
+        /// </summary>
+        public static IntervalSet<A> Union<A>(this ITotalOrdering<A> ordering, IEnumerable<Interval<A>> intervals)
+        {
+            return ordering.IntervalSet(intervals);
         }
 
         /// <summary>
@@ -108,6 +124,14 @@ namespace FuncSharp
 
             var union = set1.Intervals.Aggregate(set2.Intervals, (r, i) => ordering.Union(r, i));
             return new IntervalSet<A>(ordering, union);
+        }
+
+        /// <summary>
+        /// Returns union of the specified interval sets.
+        /// </summary>
+        public static IntervalSet<A> Union<A>(this ITotalOrdering<A> ordering, IEnumerable<IntervalSet<A>> sets)
+        {
+            return sets.Aggregate(ordering.EmptyIntervalSet(), (s1, s2) => ordering.Union(s1, s2));
         }
 
         /// <summary>
