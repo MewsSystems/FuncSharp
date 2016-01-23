@@ -80,14 +80,6 @@ namespace FuncSharp
 
 <#      } #>
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<<#= Types(i, name: "P", appendSeparator: true) #>TValue> a)
-        {
-            ForEach((position, value) => a(<#= Properties(i, name: "ProductValue", accessor: "position.", appendSeparator: true) #>value));
-        }
-
-        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(<#= Parameters(i, name: "P") #>)
@@ -138,6 +130,30 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(<#= Values(i, name: "P") #>), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<<#= Types(i, name: "P", appendSeparator: true) #>TValue> a)
+        {
+            ForEach((p, v) => a(<#= Properties(i, name: "ProductValue", accessor: "p.", appendSeparator: true) #>v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<<#= Types(i, name: "P", appendSeparator: true) #>TValue, T> f)
+        {
+            return Select((p, v) => f(<#= Properties(i, name: "ProductValue", accessor: "p.", appendSeparator: true) #>v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<<#= Types(i, name: "P", appendSeparator: true) #>TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(<#= Properties(i, name: "ProductValue", accessor: "p.", appendSeparator: true) #>v));
         }
 
         /// <summary>
@@ -193,10 +209,10 @@ namespace FuncSharp
         public DataCube1<<#= Type(j, name: "P") #>, <#= DataCubeType(i, except: j) #>> SliceDimension<#= j #>()
         {
             var slices = new DataCube1<<#= Type(j, name: "P") #>, <#= DataCubeType(i, except: j) #>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue<#= j #>, _ => new <#= DataCubeType(i, except: j) #>());
-                slice.Set(position.ExceptValue<#= j #>, value);
+                var slice = slices.GetOrElseSet(p.ProductValue<#= j #>, _ => new <#= DataCubeType(i, except: j) #>());
+                slice.Set(p.ExceptValue<#= j #>, v);
             });
             return slices;
         }

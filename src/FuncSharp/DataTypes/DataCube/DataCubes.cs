@@ -38,14 +38,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<TValue> a)
-        {
-            ForEach((position, value) => a(value));
-        }
-
-        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains()
@@ -93,6 +85,30 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<TValue> a)
+        {
+            ForEach((p, v) => a(v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<TValue, T> f)
+        {
+            return Select((p, v) => f(v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(v));
         }
 
         /// <summary>
@@ -186,14 +202,6 @@ namespace FuncSharp
         private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
 
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<P1, TValue> a)
-        {
-            ForEach((position, value) => a(position.ProductValue1, value));
-        }
-
-        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1)
@@ -242,6 +250,30 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<P1, TValue> a)
+        {
+            ForEach((p, v) => a(p.ProductValue1, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<P1, TValue, T> f)
+        {
+            return Select((p, v) => f(p.ProductValue1, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<P1, TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(p.ProductValue1, v));
         }
 
         /// <summary>
@@ -319,10 +351,10 @@ namespace FuncSharp
         public DataCube1<P1, DataCube0<TValue>> SliceDimension1()
         {
             var slices = new DataCube1<P1, DataCube0<TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue1, _ => new DataCube0<TValue>());
-                slice.Set(position.ExceptValue1, value);
+                var slice = slices.GetOrElseSet(p.ProductValue1, _ => new DataCube0<TValue>());
+                slice.Set(p.ExceptValue1, v);
             });
             return slices;
         }
@@ -397,14 +429,6 @@ namespace FuncSharp
         private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
 
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<P1, P2, TValue> a)
-        {
-            ForEach((position, value) => a(position.ProductValue1, position.ProductValue2, value));
-        }
-
-        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2)
@@ -454,6 +478,30 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1, p2), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<P1, P2, TValue> a)
+        {
+            ForEach((p, v) => a(p.ProductValue1, p.ProductValue2, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<P1, P2, TValue, T> f)
+        {
+            return Select((p, v) => f(p.ProductValue1, p.ProductValue2, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<P1, P2, TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, v));
         }
 
         /// <summary>
@@ -531,10 +579,10 @@ namespace FuncSharp
         public DataCube1<P1, DataCube1<P2, TValue>> SliceDimension1()
         {
             var slices = new DataCube1<P1, DataCube1<P2, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue1, _ => new DataCube1<P2, TValue>());
-                slice.Set(position.ExceptValue1, value);
+                var slice = slices.GetOrElseSet(p.ProductValue1, _ => new DataCube1<P2, TValue>());
+                slice.Set(p.ExceptValue1, v);
             });
             return slices;
         }
@@ -582,10 +630,10 @@ namespace FuncSharp
         public DataCube1<P2, DataCube1<P1, TValue>> SliceDimension2()
         {
             var slices = new DataCube1<P2, DataCube1<P1, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue2, _ => new DataCube1<P1, TValue>());
-                slice.Set(position.ExceptValue2, value);
+                var slice = slices.GetOrElseSet(p.ProductValue2, _ => new DataCube1<P1, TValue>());
+                slice.Set(p.ExceptValue2, v);
             });
             return slices;
         }
@@ -671,14 +719,6 @@ namespace FuncSharp
         private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
 
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<P1, P2, P3, TValue> a)
-        {
-            ForEach((position, value) => a(position.ProductValue1, position.ProductValue2, position.ProductValue3, value));
-        }
-
-        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3)
@@ -729,6 +769,30 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1, p2, p3), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<P1, P2, P3, TValue> a)
+        {
+            ForEach((p, v) => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<P1, P2, P3, TValue, T> f)
+        {
+            return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, v));
         }
 
         /// <summary>
@@ -806,10 +870,10 @@ namespace FuncSharp
         public DataCube1<P1, DataCube2<P2, P3, TValue>> SliceDimension1()
         {
             var slices = new DataCube1<P1, DataCube2<P2, P3, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue1, _ => new DataCube2<P2, P3, TValue>());
-                slice.Set(position.ExceptValue1, value);
+                var slice = slices.GetOrElseSet(p.ProductValue1, _ => new DataCube2<P2, P3, TValue>());
+                slice.Set(p.ExceptValue1, v);
             });
             return slices;
         }
@@ -857,10 +921,10 @@ namespace FuncSharp
         public DataCube1<P2, DataCube2<P1, P3, TValue>> SliceDimension2()
         {
             var slices = new DataCube1<P2, DataCube2<P1, P3, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue2, _ => new DataCube2<P1, P3, TValue>());
-                slice.Set(position.ExceptValue2, value);
+                var slice = slices.GetOrElseSet(p.ProductValue2, _ => new DataCube2<P1, P3, TValue>());
+                slice.Set(p.ExceptValue2, v);
             });
             return slices;
         }
@@ -908,10 +972,10 @@ namespace FuncSharp
         public DataCube1<P3, DataCube2<P1, P2, TValue>> SliceDimension3()
         {
             var slices = new DataCube1<P3, DataCube2<P1, P2, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue3, _ => new DataCube2<P1, P2, TValue>());
-                slice.Set(position.ExceptValue3, value);
+                var slice = slices.GetOrElseSet(p.ProductValue3, _ => new DataCube2<P1, P2, TValue>());
+                slice.Set(p.ExceptValue3, v);
             });
             return slices;
         }
@@ -1008,14 +1072,6 @@ namespace FuncSharp
         private Dictionary<IProduct1<P4>, int> Domain4Counts { get; set; }
 
         /// <summary>
-        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
-        /// </summary>
-        public void ForEach(Action<P1, P2, P3, P4, TValue> a)
-        {
-            ForEach((position, value) => a(position.ProductValue1, position.ProductValue2, position.ProductValue3, position.ProductValue4, value));
-        }
-
-        /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4)
@@ -1067,6 +1123,30 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Product.Create(p1, p2, p3, p4), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<P1, P2, P3, P4, TValue> a)
+        {
+            ForEach((p, v) => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<P1, P2, P3, P4, TValue, T> f)
+        {
+            return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, P4, TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, v));
         }
 
         /// <summary>
@@ -1144,10 +1224,10 @@ namespace FuncSharp
         public DataCube1<P1, DataCube3<P2, P3, P4, TValue>> SliceDimension1()
         {
             var slices = new DataCube1<P1, DataCube3<P2, P3, P4, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue1, _ => new DataCube3<P2, P3, P4, TValue>());
-                slice.Set(position.ExceptValue1, value);
+                var slice = slices.GetOrElseSet(p.ProductValue1, _ => new DataCube3<P2, P3, P4, TValue>());
+                slice.Set(p.ExceptValue1, v);
             });
             return slices;
         }
@@ -1195,10 +1275,10 @@ namespace FuncSharp
         public DataCube1<P2, DataCube3<P1, P3, P4, TValue>> SliceDimension2()
         {
             var slices = new DataCube1<P2, DataCube3<P1, P3, P4, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue2, _ => new DataCube3<P1, P3, P4, TValue>());
-                slice.Set(position.ExceptValue2, value);
+                var slice = slices.GetOrElseSet(p.ProductValue2, _ => new DataCube3<P1, P3, P4, TValue>());
+                slice.Set(p.ExceptValue2, v);
             });
             return slices;
         }
@@ -1246,10 +1326,10 @@ namespace FuncSharp
         public DataCube1<P3, DataCube3<P1, P2, P4, TValue>> SliceDimension3()
         {
             var slices = new DataCube1<P3, DataCube3<P1, P2, P4, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue3, _ => new DataCube3<P1, P2, P4, TValue>());
-                slice.Set(position.ExceptValue3, value);
+                var slice = slices.GetOrElseSet(p.ProductValue3, _ => new DataCube3<P1, P2, P4, TValue>());
+                slice.Set(p.ExceptValue3, v);
             });
             return slices;
         }
@@ -1297,10 +1377,10 @@ namespace FuncSharp
         public DataCube1<P4, DataCube3<P1, P2, P3, TValue>> SliceDimension4()
         {
             var slices = new DataCube1<P4, DataCube3<P1, P2, P3, TValue>>();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                var slice = slices.GetOrElseSet(position.ProductValue4, _ => new DataCube3<P1, P2, P3, TValue>());
-                slice.Set(position.ExceptValue4, value);
+                var slice = slices.GetOrElseSet(p.ProductValue4, _ => new DataCube3<P1, P2, P3, TValue>());
+                slice.Set(p.ExceptValue4, v);
             });
             return slices;
         }

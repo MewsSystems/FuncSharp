@@ -119,7 +119,17 @@ namespace FuncSharp
         public IEnumerable<T> Select<T>(Func<TPosition, TValue, T> f)
         {
             var result = new List<T>();
-            ForEach((position, value) => result.Add(f(position, value)));
+            ForEach((p, v) => result.Add(f(p, v)));
+            return result;
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<TPosition, TValue, IEnumerable<T>> f)
+        {
+            var result = new List<T>();
+            ForEach((p, v) => result.AddRange(f(p, v)));
             return result;
         }
 
@@ -152,7 +162,7 @@ namespace FuncSharp
             where TNewPosition : IProduct
         {
             var result = new TNewCube();
-            ForEach((position, value) => result.SetOrElseUpdate(positionMapper(position), value, aggregator));
+            ForEach((p, v) => result.SetOrElseUpdate(positionMapper(p), v, aggregator));
             return result;
         }
 
@@ -168,11 +178,11 @@ namespace FuncSharp
             where TNewPosition : IProduct
         {
             var result = new TNewCube();
-            ForEach((position, value) =>
+            ForEach((p, v) =>
             {
-                foreach (var newPosition in positionMapper(position))
+                foreach (var newPosition in positionMapper(p))
                 {
-                    result.SetOrElseUpdate(newPosition, value, aggregator);
+                    result.SetOrElseUpdate(newPosition, v, aggregator);
                 }
             });
             return result;
@@ -186,7 +196,7 @@ namespace FuncSharp
                 result.AppendLine();
 
                 var isFirst = true;
-                ForEach((position, value) =>
+                ForEach((p, v) =>
                 {
                     if (!isFirst)
                     {
@@ -195,7 +205,7 @@ namespace FuncSharp
                     isFirst = false;
 
                     result.AppendLine();
-                    result.Append("   " + position.ToString() + " → " + value.SafeToString());
+                    result.Append("   " + p.ToString() + " → " + v.SafeToString());
                 });
                 result.AppendLine();
             }
