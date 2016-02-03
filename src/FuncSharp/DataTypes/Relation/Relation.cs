@@ -1,4 +1,6 @@
-﻿namespace FuncSharp
+﻿using System.Collections.Generic;
+
+namespace FuncSharp
 {
     /// <summary>
     /// General representation of a relation.
@@ -34,6 +36,17 @@
         public void Add(TProduct product)
         {
             Representation.Set(product, Unit.Value);
+        }
+
+        /// <summary>
+        /// Adds the specified products to the relation.
+        /// </summary>
+        public void Add(IEnumerable<TProduct> products)
+        {
+            foreach (var product in products)
+            {
+                Add(product);
+            }
         }
     }
 }
