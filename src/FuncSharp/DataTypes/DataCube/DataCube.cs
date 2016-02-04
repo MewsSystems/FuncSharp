@@ -134,6 +134,16 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Transforms each value in the cube into a key and value and returns a dictionary with those pairs.
+        /// </summary>
+        public Dictionary<K, V> ToDictionary<K, V>(Func<TPosition, TValue, K> key, Func<TPosition, TValue, V> value)
+        {
+            var result = new Dictionary<K, V>();
+            ForEach((p, v) => result.Add(key(p, v), value(p, v)));
+            return result;
+        }
+
+        /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
         public TNewCube Where<TNewCube>(Func<TPosition, TValue, bool> predicate)
