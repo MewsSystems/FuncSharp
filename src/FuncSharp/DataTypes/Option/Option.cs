@@ -124,6 +124,14 @@ namespace FuncSharp
             );
         }
 
+        public IOption<A> Where(Func<A, bool> predicate)
+        {
+            return FlatMap(a => predicate(a).Match(
+                t => this,
+                f => Option.Empty<A>()
+            ));
+        }
+
         public IEnumerable<A> ToEnumerable()
         {
             return Match(
