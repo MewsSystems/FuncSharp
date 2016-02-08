@@ -50,17 +50,8 @@ namespace FuncSharp
 
     internal class Option<A> : Coproduct2<A, Unit>, IOption<A>
     {
-        /// <summary>
-        /// Static initializer ensuring that option of nullable type cannot be constructed.
-        /// </summary>
         static Option()
         {
-            var t = typeof(A);
-            if (t.IsNullable())
-            {
-                throw new InvalidOperationException("An option of nullable type " + t + " isn't supported.");
-            }
-
             Empty = new Option<A>();
         }
 
@@ -68,6 +59,7 @@ namespace FuncSharp
             : base(value)
         {
         }
+
         private Option()
             : base(Unit.Value)
         {

@@ -6,12 +6,6 @@ namespace FuncSharp.Tests
     public class OptionTests
     {
         [Fact]
-        public void OptionOfNullableIsNotSupported()
-        {
-            Assert.Throws<TypeInitializationException>(() => Option.Empty<int?>());
-        }
-
-        [Fact]
         public void IsEmptyTest()
         {
             Assert.False(42.ToOption().IsEmpty);

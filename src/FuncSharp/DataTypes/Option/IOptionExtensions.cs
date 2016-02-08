@@ -38,6 +38,23 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns the value of the outer option or an empty opion.
+        /// </summary>
+        public static IOption<A> Flatten<A>(this IOption<IOption<A>> option)
+        {
+            return option.FlatMap(o => o);
+        }
+
+        /// <summary>
+        /// Turns the option of nullable into an option.
+        /// </summary>
+        public static IOption<A> Flatten<A>(this IOption<A?> option)
+            where A : struct
+        {
+            return option.FlatMap(a => a.ToOption());
+        }
+
+        /// <summary>
         /// Turns the option into a nullable value.
         /// </summary>
         public static A? ToNullable<A>(this IOption<A> option)
