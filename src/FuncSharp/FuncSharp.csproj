@@ -42,8 +42,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataCubes.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataTypes\Definite\Definite.cs" />
-    <Compile Include="DataTypes\Definite\IDefinite.cs" />
     <Compile Include="DataTypes\Morphism\IIsoMorphism.cs" />
     <Compile Include="DataTypes\Morphism\IMorphism.cs" />
     <Compile Include="DataTypes\Morphism\IsoMorphism.cs" />
@@ -128,9 +126,9 @@
     </Compile>
     <Compile Include="TypeClasses\Ordering\Total\TotalOrderingData.cs" />
     <Compile Include="TypeClasses\Ordering\Partial\IPartialOrdering.cs" />
-    <Compile Include="TypeClasses\Integers.cs" />
-    <Compile Include="TypeClasses\DateTimes.cs" />
-    <Compile Include="TypeClasses\Dates.cs" />
+    <Compile Include="TypeClasses\Instances\Integers.cs" />
+    <Compile Include="TypeClasses\Instances\DateTimes.cs" />
+    <Compile Include="TypeClasses\Instances\Dates.cs" />
     <Compile Include="TypeClasses\Enumeration\Enumeration.cs" />
     <Compile Include="TypeClasses\Equality\Equality.cs" />
     <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalOrdering.cs" />
@@ -212,6 +210,7 @@
       <LastGenOutput>Relations.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

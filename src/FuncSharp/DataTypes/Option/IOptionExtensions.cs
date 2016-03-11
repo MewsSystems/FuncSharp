@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
@@ -52,6 +54,14 @@ namespace FuncSharp
             where A : struct
         {
             return option.FlatMap(a => a.ToOption());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty enumerable.
+        /// </summary>
+        public static IEnumerable<A> Flatten<A>(this IOption<IEnumerable<A>> option)
+        {
+            return option.GetOrElse(_ => Enumerable.Empty<A>());
         }
 
         /// <summary>

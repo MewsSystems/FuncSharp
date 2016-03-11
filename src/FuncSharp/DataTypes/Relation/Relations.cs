@@ -22,11 +22,11 @@
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add()
+        public bool Set()
         {
-            Add(Product.Create());
+            return Set(Product.Create());
         }
     }
 
@@ -52,11 +52,11 @@
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add(T1 t1)
+        public bool Set(T1 t1)
         {
-            Add(Product.Create(t1));
+            return Set(Product.Create(t1));
         }
     }
 
@@ -82,11 +82,11 @@
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add(T1 t1, T2 t2)
+        public bool Set(T1 t1, T2 t2)
         {
-            Add(Product.Create(t1, t2));
+            return Set(Product.Create(t1, t2));
         }
     }
 
@@ -112,11 +112,11 @@
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add(T1 t1, T2 t2, T3 t3)
+        public bool Set(T1 t1, T2 t2, T3 t3)
         {
-            Add(Product.Create(t1, t2, t3));
+            return Set(Product.Create(t1, t2, t3));
         }
     }
 
@@ -142,11 +142,11 @@
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add(T1 t1, T2 t2, T3 t3, T4 t4)
+        public bool Set(T1 t1, T2 t2, T3 t3, T4 t4)
         {
-            Add(Product.Create(t1, t2, t3, t4));
+            return Set(Product.Create(t1, t2, t3, t4));
         }
     }
 

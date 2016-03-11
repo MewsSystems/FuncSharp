@@ -30,11 +30,11 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add(<#= Parameters(i, name: "T") #>)
+        public bool Set(<#= Parameters(i, name: "T") #>)
         {
-            Add(Product.Create(<#= Values(i, name: "T") #>));
+            return Set(Product.Create(<#= Values(i, name: "T") #>));
         }
     }
 

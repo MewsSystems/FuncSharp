@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -8,6 +6,10 @@ namespace FuncSharp
     {
         public static IOption<V> Get<K, V>(this IDictionary<K, V> dictionary, K key)
         {
+            if (Equals(key, null))
+            {
+                return Option.Empty<V>();
+            }
             return new Tryer<K, V>(dictionary.TryGetValue).Invoke(key);
         }
     }

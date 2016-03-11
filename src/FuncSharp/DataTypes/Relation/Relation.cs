@@ -31,21 +31,27 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Adds the specified product to the relation.
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public void Add(TProduct product)
+        public bool Set(TProduct product)
         {
-            Representation.Set(product, Unit.Value);
+            var added = true;
+            Representation.SetOrElseUpdate(product, Unit.Value, (unit, _) =>
+            {
+                added = false;
+                return unit;
+            });
+            return added;
         }
 
         /// <summary>
         /// Adds the specified products to the relation.
         /// </summary>
-        public void Add(IEnumerable<TProduct> products)
+        public void Set(IEnumerable<TProduct> products)
         {
             foreach (var product in products)
             {
-                Add(product);
+                Set(product);
             }
         }
     }
