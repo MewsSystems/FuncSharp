@@ -12,7 +12,6 @@ Install-Package FuncSharp
     - [Product](#product)
     - [Coproduct](#coproduct)
     - [Option](#option)
-    - [Definite](#definite)
     - [Morphism](#morphism)
     - [DataCube](#datacube)
 - [Type Classes](#type-classes)
@@ -74,10 +73,6 @@ A coproduct of zero types (a choice from no types) is also a well known type, in
 ### Option
 
 An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy.
-
-### Definite
-
-**FuncSharp** also contains type `IDefinite<A>` that states for a value that is known not to be null. Together with `IOption<A>`, you may gradually change class APIs from using just reference types to using only `IOption<A>` and `IDefinite<A>` and therefore avoid repetitive null checks everywhere.
 
 ### Morphism
 
