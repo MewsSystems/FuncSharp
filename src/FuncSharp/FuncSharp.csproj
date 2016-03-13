@@ -81,7 +81,7 @@
     </Compile>
     <Compile Include="DataTypes\Try\ITry.cs" />
     <Compile Include="DataTypes\Try\Try.cs" />
-    <Compile Include="Extensions\IDictionaryExtensions.cs" />
+    <Compile Include="Extensions\IReadOnlyDictionaryExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs">
       <DependentUpon>ObjectExtensions.tt</DependentUpon>

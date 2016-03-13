@@ -7,63 +7,63 @@ namespace FuncSharp
     {
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, byte>(Byte.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, byte>(Byte.TryParse, s, style, format);
         }
 
         public static IOption<short> ToShort(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, short>(Int16.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, short>(Int16.TryParse, s, style, format);
         }
 
         public static IOption<int> ToInt(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, int>(Int32.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, int>(Int32.TryParse, s, style, format);
         }
 
         public static IOption<long> ToLong(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, long>(Int64.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, long>(Int64.TryParse, s, style, format);
         }
 
         public static IOption<float> ToFloat(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, float>(Single.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, float>(Single.TryParse, s, style, format);
         }
 
         public static IOption<double> ToDouble(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, double>(Double.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, double>(Double.TryParse, s, style, format);
         }
 
         public static IOption<decimal> ToDecimal(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
-            return new Tryer<string, NumberStyles, IFormatProvider, decimal>(Decimal.TryParse).Invoke(s, style, format);
+            return Tryer.Invoke<string, NumberStyles, IFormatProvider, decimal>(Decimal.TryParse, s, style, format);
         }
 
         public static IOption<bool> ToBool(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
-            return new Tryer<string, bool>(Boolean.TryParse).Invoke(s);
+            return Tryer.Invoke<string, bool>(Boolean.TryParse, s);
         }
 
         public static IOption<DateTime> ToDateTime(this string s, IFormatProvider format = null, DateTimeStyles style = DateTimeStyles.None)
         {
-            return new Tryer<string, IFormatProvider, DateTimeStyles, DateTime>(DateTime.TryParse).Invoke(s, format, style);
+            return Tryer.Invoke<string, IFormatProvider, DateTimeStyles, DateTime>(DateTime.TryParse, s, format, style);
         }
 
         public static IOption<TimeSpan> ToTimeSpan(this string s, IFormatProvider format = null)
         {
-            return new Tryer<string, IFormatProvider, TimeSpan>(TimeSpan.TryParse).Invoke(s, format);
+            return Tryer.Invoke<string, IFormatProvider, TimeSpan>(TimeSpan.TryParse, s, format);
         }
 
         public static IOption<TEnum> ToEnum<TEnum>(this string s, bool ignoreCase = false)
             where TEnum : struct
         {
-            return new Tryer<string, bool, TEnum>(Enum.TryParse<TEnum>).Invoke(s, ignoreCase);
+            return Tryer.Invoke<string, bool, TEnum>(Enum.TryParse<TEnum>, s, ignoreCase);
         }
 
         public static IOption<Guid> ToGuid(this string s)
         {
-            return new Tryer<string, Guid>(Guid.TryParse).Invoke(s);
+            return Tryer.Invoke<string, Guid>(Guid.TryParse, s);
         }
     }
 }
