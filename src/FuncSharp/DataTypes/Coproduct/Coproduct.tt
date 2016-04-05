@@ -141,6 +141,13 @@ namespace FuncSharp
 <#= Lines(i, x => Indent(16) + "case " + x + ": if (" + IfIth(x) + " != null) { " + IfIth(x) + "(GetCoproductValue<T" + x + ">()); } break;") #>
             }
         }
+
+<#    for (var j = 1; j <= i; j++) { #>
+        public static implicit operator <#= CoproductTypeImpl(i) #>(T<#= j #> val)
+        {
+            return new <#= CoproductTypeImpl(i) #>(val);
+        }
+<#    } #>
 <#    } else { #>
         protected Coproduct0()
             : base(0, 0, null)

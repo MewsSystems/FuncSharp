@@ -485,6 +485,11 @@ namespace FuncSharp
                 case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
             }
         }
+
+        public static implicit operator Coproduct1<T1>(T1 val)
+        {
+            return new Coproduct1<T1>(val);
+        }
     }
 
     /// <summary>
@@ -566,6 +571,15 @@ namespace FuncSharp
                 case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
                 case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct2<T1, T2>(T1 val)
+        {
+            return new Coproduct2<T1, T2>(val);
+        }
+        public static implicit operator Coproduct2<T1, T2>(T2 val)
+        {
+            return new Coproduct2<T1, T2>(val);
         }
     }
 
@@ -668,6 +682,19 @@ namespace FuncSharp
                 case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
                 case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct3<T1, T2, T3>(T1 val)
+        {
+            return new Coproduct3<T1, T2, T3>(val);
+        }
+        public static implicit operator Coproduct3<T1, T2, T3>(T2 val)
+        {
+            return new Coproduct3<T1, T2, T3>(val);
+        }
+        public static implicit operator Coproduct3<T1, T2, T3>(T3 val)
+        {
+            return new Coproduct3<T1, T2, T3>(val);
         }
     }
 
@@ -790,6 +817,23 @@ namespace FuncSharp
                 case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
                 case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct4<T1, T2, T3, T4>(T1 val)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(val);
+        }
+        public static implicit operator Coproduct4<T1, T2, T3, T4>(T2 val)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(val);
+        }
+        public static implicit operator Coproduct4<T1, T2, T3, T4>(T3 val)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(val);
+        }
+        public static implicit operator Coproduct4<T1, T2, T3, T4>(T4 val)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(val);
         }
     }
 
@@ -932,6 +976,27 @@ namespace FuncSharp
                 case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
                 case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct5<T1, T2, T3, T4, T5>(T1 val)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(val);
+        }
+        public static implicit operator Coproduct5<T1, T2, T3, T4, T5>(T2 val)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(val);
+        }
+        public static implicit operator Coproduct5<T1, T2, T3, T4, T5>(T3 val)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(val);
+        }
+        public static implicit operator Coproduct5<T1, T2, T3, T4, T5>(T4 val)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(val);
+        }
+        public static implicit operator Coproduct5<T1, T2, T3, T4, T5>(T5 val)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(val);
         }
     }
 
@@ -1094,6 +1159,31 @@ namespace FuncSharp
                 case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
                 case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct6<T1, T2, T3, T4, T5, T6>(T1 val)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(val);
+        }
+        public static implicit operator Coproduct6<T1, T2, T3, T4, T5, T6>(T2 val)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(val);
+        }
+        public static implicit operator Coproduct6<T1, T2, T3, T4, T5, T6>(T3 val)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(val);
+        }
+        public static implicit operator Coproduct6<T1, T2, T3, T4, T5, T6>(T4 val)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(val);
+        }
+        public static implicit operator Coproduct6<T1, T2, T3, T4, T5, T6>(T5 val)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(val);
+        }
+        public static implicit operator Coproduct6<T1, T2, T3, T4, T5, T6>(T6 val)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(val);
         }
     }
 
@@ -1276,6 +1366,35 @@ namespace FuncSharp
                 case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
                 case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T1 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
+        }
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T2 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
+        }
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T3 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
+        }
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T4 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
+        }
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T5 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
+        }
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T6 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
+        }
+        public static implicit operator Coproduct7<T1, T2, T3, T4, T5, T6, T7>(T7 val)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(val);
         }
     }
 
@@ -1478,6 +1597,39 @@ namespace FuncSharp
                 case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
                 case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T1 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T2 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T3 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T4 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T5 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T6 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T7 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
+        }
+        public static implicit operator Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(T8 val)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(val);
         }
     }
 
@@ -1700,6 +1852,43 @@ namespace FuncSharp
                 case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
                 case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
             }
+        }
+
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
+        }
+        public static implicit operator Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 val)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(val);
         }
     }
 
