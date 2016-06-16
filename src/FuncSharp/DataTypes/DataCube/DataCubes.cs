@@ -32,8 +32,8 @@ namespace FuncSharp
         /// <summary>
         /// The only value in the cube.
         /// </summary>
-        public IOption<TValue> Value 
-        { 
+        public IOption<TValue> Value
+        {
             get { return Get(); }
         }
 
@@ -61,7 +61,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(), setter);
         }
-        
+
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -76,6 +76,15 @@ namespace FuncSharp
         public TValue Set(TValue value)
         {
             return Set(Product.Create(), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(), value, otherwise);
         }
 
         /// <summary>
@@ -225,7 +234,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1), setter);
         }
-        
+
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -241,6 +250,15 @@ namespace FuncSharp
         public TValue Set(P1 p1, TValue value)
         {
             return Set(Product.Create(p1), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(P1 p1, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(p1), value, otherwise);
         }
 
         /// <summary>
@@ -452,7 +470,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1, p2), setter);
         }
-        
+
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -469,6 +487,15 @@ namespace FuncSharp
         public TValue Set(P1 p1, P2 p2, TValue value)
         {
             return Set(Product.Create(p1, p2), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(P1 p1, P2 p2, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(p1, p2), value, otherwise);
         }
 
         /// <summary>
@@ -742,7 +769,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1, p2, p3), setter);
         }
-        
+
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -760,6 +787,15 @@ namespace FuncSharp
         public TValue Set(P1 p1, P2 p2, P3 p3, TValue value)
         {
             return Set(Product.Create(p1, p2, p3), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(p1, p2, p3), value, otherwise);
         }
 
         /// <summary>
@@ -1095,7 +1131,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1, p2, p3, p4), setter);
         }
-        
+
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -1114,6 +1150,15 @@ namespace FuncSharp
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, TValue value)
         {
             return Set(Product.Create(p1, p2, p3, p4), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(p1, p2, p3, p4), value, otherwise);
         }
 
         /// <summary>

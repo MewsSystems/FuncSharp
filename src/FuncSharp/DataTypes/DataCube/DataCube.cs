@@ -91,15 +91,24 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public virtual TValue SetOrElse(TPosition position, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return Get(position).Match(
+                v => otherwise(v),
+                _ => Set(position, value)
+            );
+        }
+
+        /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, updates it with the
         /// result of the <paramref name="updater"/> function which is given the present value and the new value.
         /// </summary>
         public virtual TValue SetOrElseUpdate(TPosition position, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return Set(position, Get(position).Match(
-                v => updater(v, value),
-                _ => value
-            ));
+            return SetOrElse(position, value, v => Set(position, updater(v, value)));
         }
 
         /// <summary>
