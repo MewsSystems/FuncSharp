@@ -5,6 +5,15 @@ namespace FuncSharp
 {
     public static class StringExtensions
     {
+        public static IOption<string> ToNonEmptyOption(this string s)
+        {
+            if (String.IsNullOrEmpty(s))
+            {
+                return Option.Empty<string>();
+            }
+            return s.ToOption();
+        }
+
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return Tryer.Invoke<string, NumberStyles, IFormatProvider, byte>(Byte.TryParse, s, style, format);
