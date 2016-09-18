@@ -17,23 +17,10 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a 0-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube0(IEnumerable<IProduct2<IProduct0, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ProductValue1, d.ProductValue2);
-            }
-        }
-
-        /// <summary>
         /// The only value in the cube.
         /// </summary>
-        public IOption<TValue> Value
-        {
+        public IOption<TValue> Value 
+        { 
             get { return Get(); }
         }
 
@@ -61,7 +48,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(), setter);
         }
-
+        
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -175,32 +162,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a 1-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube1(IEnumerable<IProduct2<IProduct1<P1>, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ProductValue1, d.ProductValue2);
-            }
-        }
-
-        /// <summary>
-        /// Creates a 1-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube1(IEnumerable<IProduct2<P1, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ExceptValue2, d.ProductValue2);
-            }
-        }
-
-        /// <summary>
         /// Positions of values in the first dimension (domain of that dimension).
         /// </summary>
         public IEnumerable<P1> Domain1
@@ -234,7 +195,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1), setter);
         }
-
+        
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -401,32 +362,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a 2-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube2(IEnumerable<IProduct2<IProduct2<P1, P2>, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ProductValue1, d.ProductValue2);
-            }
-        }
-
-        /// <summary>
-        /// Creates a 2-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube2(IEnumerable<IProduct3<P1, P2, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ExceptValue3, d.ProductValue3);
-            }
-        }
-
-        /// <summary>
         /// Positions of values in the first dimension (domain of that dimension).
         /// </summary>
         public IEnumerable<P1> Domain1
@@ -470,7 +405,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1, p2), setter);
         }
-
+        
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -690,32 +625,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a 3-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube3(IEnumerable<IProduct2<IProduct3<P1, P2, P3>, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ProductValue1, d.ProductValue2);
-            }
-        }
-
-        /// <summary>
-        /// Creates a 3-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube3(IEnumerable<IProduct4<P1, P2, P3, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ExceptValue4, d.ProductValue4);
-            }
-        }
-
-        /// <summary>
         /// Positions of values in the first dimension (domain of that dimension).
         /// </summary>
         public IEnumerable<P1> Domain1
@@ -769,7 +678,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1, p2, p3), setter);
         }
-
+        
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -1042,32 +951,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a 4-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube4(IEnumerable<IProduct2<IProduct4<P1, P2, P3, P4>, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ProductValue1, d.ProductValue2);
-            }
-        }
-
-        /// <summary>
-        /// Creates a 4-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube4(IEnumerable<IProduct5<P1, P2, P3, P4, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ExceptValue5, d.ProductValue5);
-            }
-        }
-
-        /// <summary>
         /// Positions of values in the first dimension (domain of that dimension).
         /// </summary>
         public IEnumerable<P1> Domain1
@@ -1131,7 +1014,7 @@ namespace FuncSharp
         {
             return GetOrElseSet(Product.Create(p1, p2, p3, p4), setter);
         }
-
+        
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
@@ -1434,6 +1317,971 @@ namespace FuncSharp
         /// Returns canonical position corresponding to the specified product.
         /// </summary>
         protected override IProduct4<P1, P2, P3, P4> ToCanonicalPosition(IProduct4<P1, P2, P3, P4> position)
+        {
+            return Product.Create(position);
+        }
+    }
+
+    /// <summary>
+    /// A 5-dimensional data cube.
+    /// </summary>
+    public class DataCube5<P1, P2, P3, P4, P5, TValue> : DataCube<IProduct5<P1, P2, P3, P4, P5>, TValue>
+    {
+        /// <summary>
+        /// Creates an empty 5-dimensional data cube. 
+        /// </summary>
+        public DataCube5()
+        {
+            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
+            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
+            Domain3Counts = new Dictionary<IProduct1<P3>, int>();
+            Domain4Counts = new Dictionary<IProduct1<P4>, int>();
+            Domain5Counts = new Dictionary<IProduct1<P5>, int>();
+        }
+
+        /// <summary>
+        /// Positions of values in the first dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P1> Domain1
+        {
+            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the second dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P2> Domain2
+        {
+            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the third dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P3> Domain3
+        {
+            get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the fourth dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P4> Domain4
+        {
+            get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the fifth dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P5> Domain5
+        {
+            get { return Domain5Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+
+        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
+
+        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; set; }
+
+        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; set; }
+
+        /// <summary>
+        /// Returns whether the cube contains a value at the specified position.
+        /// </summary>
+        public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+        {
+            return Contains(Product.Create(p1, p2, p3, p4, p5));
+        }
+
+        /// <summary>
+        /// Returns value at the specified position.
+        /// </summary>
+        public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+        {
+            return Get(Product.Create(p1, p2, p3, p4, p5));
+        }
+
+        /// <summary>
+        /// Returns value at the specified position. If there is no value present, sets the position to value generated by 
+        /// the <paramref name="setter"/> function and returns the newly generated value.
+        /// </summary>
+        public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, Func<Unit, TValue> setter)
+        {
+            return GetOrElseSet(Product.Create(p1, p2, p3, p4, p5), setter);
+        }
+        
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, overwrites it.
+        /// </summary>
+        public override TValue Set(IProduct5<P1, P2, P3, P4, P5> position, TValue value)
+        {
+            AddDomain(Domain1Counts, position.ProductValue1);
+            AddDomain(Domain2Counts, position.ProductValue2);
+            AddDomain(Domain3Counts, position.ProductValue3);
+            AddDomain(Domain4Counts, position.ProductValue4);
+            AddDomain(Domain5Counts, position.ProductValue5);
+            return base.Set(position, value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, overwrites it.
+        /// </summary>
+        public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value)
+        {
+            return Set(Product.Create(p1, p2, p3, p4, p5), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(p1, p2, p3, p4, p5), value, otherwise);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue, TValue> updater)
+        {
+            return SetOrElseUpdate(Product.Create(p1, p2, p3, p4, p5), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<P1, P2, P3, P4, P5, TValue> a)
+        {
+            ForEach((p, v) => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<P1, P2, P3, P4, P5, TValue, T> f)
+        {
+            return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, P4, P5, TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, v));
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube5<P1, P2, P3, P4, P5, TValue> Where(Func<IProduct5<P1, P2, P3, P4, P5>, TValue, bool> predicate)
+        {
+            return Where<DataCube5<P1, P2, P3, P4, P5, TValue>>(predicate);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> MultiTransform(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 5-dimensional cube into a 4-dimensional cube by excluding the dimension 1.
+        /// All values whose position differ just in dimension 1 (their positions without dimension 1 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 1.
+        /// </summary>
+        public DataCube4<P2, P3, P4, P5, TValue> RollUpDimension1(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue1, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 1. The slices are 4-dimensional cubes without dimension 1 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P1, DataCube4<P2, P3, P4, P5, TValue>> SliceDimension1()
+        {
+            var slices = new DataCube1<P1, DataCube4<P2, P3, P4, P5, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue1, _ => new DataCube4<P2, P3, P4, P5, TValue>());
+                slice.Set(p.ExceptValue1, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 5-dimensional cube into a 4-dimensional cube by excluding the dimension 2.
+        /// All values whose position differ just in dimension 2 (their positions without dimension 2 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 2.
+        /// </summary>
+        public DataCube4<P1, P3, P4, P5, TValue> RollUpDimension2(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue2, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 2. The slices are 4-dimensional cubes without dimension 2 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P2, DataCube4<P1, P3, P4, P5, TValue>> SliceDimension2()
+        {
+            var slices = new DataCube1<P2, DataCube4<P1, P3, P4, P5, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue2, _ => new DataCube4<P1, P3, P4, P5, TValue>());
+                slice.Set(p.ExceptValue2, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 5-dimensional cube into a 4-dimensional cube by excluding the dimension 3.
+        /// All values whose position differ just in dimension 3 (their positions without dimension 3 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 3.
+        /// </summary>
+        public DataCube4<P1, P2, P4, P5, TValue> RollUpDimension3(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue3, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 3. The slices are 4-dimensional cubes without dimension 3 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P3, DataCube4<P1, P2, P4, P5, TValue>> SliceDimension3()
+        {
+            var slices = new DataCube1<P3, DataCube4<P1, P2, P4, P5, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue3, _ => new DataCube4<P1, P2, P4, P5, TValue>());
+                slice.Set(p.ExceptValue3, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 5-dimensional cube into a 4-dimensional cube by excluding the dimension 4.
+        /// All values whose position differ just in dimension 4 (their positions without dimension 4 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 4.
+        /// </summary>
+        public DataCube4<P1, P2, P3, P5, TValue> RollUpDimension4(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue4, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 4. The slices are 4-dimensional cubes without dimension 4 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P4, DataCube4<P1, P2, P3, P5, TValue>> SliceDimension4()
+        {
+            var slices = new DataCube1<P4, DataCube4<P1, P2, P3, P5, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue4, _ => new DataCube4<P1, P2, P3, P5, TValue>());
+                slice.Set(p.ExceptValue4, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> Transform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct5<Q1, Q2, Q3, Q4, Q5>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct5<Q1, Q2, Q3, Q4, Q5>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 5-dimensional cube into a 4-dimensional cube by excluding the dimension 5.
+        /// All values whose position differ just in dimension 5 (their positions without dimension 5 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 5.
+        /// </summary>
+        public DataCube4<P1, P2, P3, P4, TValue> RollUpDimension5(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue5, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 5. The slices are 4-dimensional cubes without dimension 5 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P5, DataCube4<P1, P2, P3, P4, TValue>> SliceDimension5()
+        {
+            var slices = new DataCube1<P5, DataCube4<P1, P2, P3, P4, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue5, _ => new DataCube4<P1, P2, P3, P4, TValue>());
+                slice.Set(p.ExceptValue5, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
+        protected override IProduct5<P1, P2, P3, P4, P5> ToCanonicalPosition(IProduct5<P1, P2, P3, P4, P5> position)
+        {
+            return Product.Create(position);
+        }
+    }
+
+    /// <summary>
+    /// A 6-dimensional data cube.
+    /// </summary>
+    public class DataCube6<P1, P2, P3, P4, P5, P6, TValue> : DataCube<IProduct6<P1, P2, P3, P4, P5, P6>, TValue>
+    {
+        /// <summary>
+        /// Creates an empty 6-dimensional data cube. 
+        /// </summary>
+        public DataCube6()
+        {
+            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
+            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
+            Domain3Counts = new Dictionary<IProduct1<P3>, int>();
+            Domain4Counts = new Dictionary<IProduct1<P4>, int>();
+            Domain5Counts = new Dictionary<IProduct1<P5>, int>();
+            Domain6Counts = new Dictionary<IProduct1<P6>, int>();
+        }
+
+        /// <summary>
+        /// Positions of values in the first dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P1> Domain1
+        {
+            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the second dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P2> Domain2
+        {
+            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the third dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P3> Domain3
+        {
+            get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the fourth dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P4> Domain4
+        {
+            get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the fifth dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P5> Domain5
+        {
+            get { return Domain5Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        /// <summary>
+        /// Positions of values in the sixth dimension (domain of that dimension).
+        /// </summary>
+        public IEnumerable<P6> Domain6
+        {
+            get { return Domain6Counts.Keys.Select(p => p.ProductValue1); }
+        }
+
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+
+        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
+
+        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; set; }
+
+        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; set; }
+
+        private Dictionary<IProduct1<P6>, int> Domain6Counts { get; set; }
+
+        /// <summary>
+        /// Returns whether the cube contains a value at the specified position.
+        /// </summary>
+        public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
+        {
+            return Contains(Product.Create(p1, p2, p3, p4, p5, p6));
+        }
+
+        /// <summary>
+        /// Returns value at the specified position.
+        /// </summary>
+        public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
+        {
+            return Get(Product.Create(p1, p2, p3, p4, p5, p6));
+        }
+
+        /// <summary>
+        /// Returns value at the specified position. If there is no value present, sets the position to value generated by 
+        /// the <paramref name="setter"/> function and returns the newly generated value.
+        /// </summary>
+        public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, Func<Unit, TValue> setter)
+        {
+            return GetOrElseSet(Product.Create(p1, p2, p3, p4, p5, p6), setter);
+        }
+        
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, overwrites it.
+        /// </summary>
+        public override TValue Set(IProduct6<P1, P2, P3, P4, P5, P6> position, TValue value)
+        {
+            AddDomain(Domain1Counts, position.ProductValue1);
+            AddDomain(Domain2Counts, position.ProductValue2);
+            AddDomain(Domain3Counts, position.ProductValue3);
+            AddDomain(Domain4Counts, position.ProductValue4);
+            AddDomain(Domain5Counts, position.ProductValue5);
+            AddDomain(Domain6Counts, position.ProductValue6);
+            return base.Set(position, value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, overwrites it.
+        /// </summary>
+        public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value)
+        {
+            return Set(Product.Create(p1, p2, p3, p4, p5, p6), value);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, returns result of the
+        /// <paramref name="otherwise"/> function which is invoked with the current value.
+        /// </summary>
+        public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue> otherwise)
+        {
+            return SetOrElse(Product.Create(p1, p2, p3, p4, p5, p6), value, otherwise);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue, TValue> updater)
+        {
+            return SetOrElseUpdate(Product.Create(p1, p2, p3, p4, p5, p6), value, updater);
+        }
+
+        /// <summary>
+        /// For each value in the cube, invokes the specified function passing in the position and the stored value.
+        /// </summary>
+        public void ForEach(Action<P1, P2, P3, P4, P5, P6, TValue> a)
+        {
+            ForEach((p, v) => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> Select<T>(Func<P1, P2, P3, P4, P5, P6, TValue, T> f)
+        {
+            return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, v));
+        }
+
+        /// <summary>
+        /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
+        /// </summary>
+        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, P4, P5, P6, TValue, IEnumerable<T>> f)
+        {
+            return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, v));
+        }
+
+        /// <summary>
+        /// Returns a new cube containing only the values that pass the specified predicate.
+        /// </summary>
+        public DataCube6<P1, P2, P3, P4, P5, P6, TValue> Where(Func<IProduct6<P1, P2, P3, P4, P5, P6>, TValue, bool> predicate)
+        {
+            return Where<DataCube6<P1, P2, P3, P4, P5, P6, TValue>>(predicate);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> Transform(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube0<TValue> MultiTransform(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 6-dimensional cube into a 5-dimensional cube by excluding the dimension 1.
+        /// All values whose position differ just in dimension 1 (their positions without dimension 1 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 1.
+        /// </summary>
+        public DataCube5<P2, P3, P4, P5, P6, TValue> RollUpDimension1(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue1, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 1. The slices are 5-dimensional cubes without dimension 1 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P1, DataCube5<P2, P3, P4, P5, P6, TValue>> SliceDimension1()
+        {
+            var slices = new DataCube1<P1, DataCube5<P2, P3, P4, P5, P6, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue1, _ => new DataCube5<P2, P3, P4, P5, P6, TValue>());
+                slice.Set(p.ExceptValue1, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 6-dimensional cube into a 5-dimensional cube by excluding the dimension 2.
+        /// All values whose position differ just in dimension 2 (their positions without dimension 2 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 2.
+        /// </summary>
+        public DataCube5<P1, P3, P4, P5, P6, TValue> RollUpDimension2(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue2, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 2. The slices are 5-dimensional cubes without dimension 2 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P2, DataCube5<P1, P3, P4, P5, P6, TValue>> SliceDimension2()
+        {
+            var slices = new DataCube1<P2, DataCube5<P1, P3, P4, P5, P6, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue2, _ => new DataCube5<P1, P3, P4, P5, P6, TValue>());
+                slice.Set(p.ExceptValue2, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 6-dimensional cube into a 5-dimensional cube by excluding the dimension 3.
+        /// All values whose position differ just in dimension 3 (their positions without dimension 3 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 3.
+        /// </summary>
+        public DataCube5<P1, P2, P4, P5, P6, TValue> RollUpDimension3(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue3, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 3. The slices are 5-dimensional cubes without dimension 3 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P3, DataCube5<P1, P2, P4, P5, P6, TValue>> SliceDimension3()
+        {
+            var slices = new DataCube1<P3, DataCube5<P1, P2, P4, P5, P6, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue3, _ => new DataCube5<P1, P2, P4, P5, P6, TValue>());
+                slice.Set(p.ExceptValue3, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 6-dimensional cube into a 5-dimensional cube by excluding the dimension 4.
+        /// All values whose position differ just in dimension 4 (their positions without dimension 4 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 4.
+        /// </summary>
+        public DataCube5<P1, P2, P3, P5, P6, TValue> RollUpDimension4(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue4, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 4. The slices are 5-dimensional cubes without dimension 4 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P4, DataCube5<P1, P2, P3, P5, P6, TValue>> SliceDimension4()
+        {
+            var slices = new DataCube1<P4, DataCube5<P1, P2, P3, P5, P6, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue4, _ => new DataCube5<P1, P2, P3, P5, P6, TValue>());
+                slice.Set(p.ExceptValue4, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> Transform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct5<Q1, Q2, Q3, Q4, Q5>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct5<Q1, Q2, Q3, Q4, Q5>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 6-dimensional cube into a 5-dimensional cube by excluding the dimension 5.
+        /// All values whose position differ just in dimension 5 (their positions without dimension 5 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 5.
+        /// </summary>
+        public DataCube5<P1, P2, P3, P4, P6, TValue> RollUpDimension5(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue5, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 5. The slices are 5-dimensional cubes without dimension 5 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P5, DataCube5<P1, P2, P3, P4, P6, TValue>> SliceDimension5()
+        {
+            var slices = new DataCube1<P5, DataCube5<P1, P2, P3, P4, P6, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue5, _ => new DataCube5<P1, P2, P3, P4, P6, TValue>());
+                slice.Set(p.ExceptValue5, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into position 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue> Transform<Q1, Q2, Q3, Q4, Q5, Q6>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform<IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>, DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current cube into a new cube. The transformation is directed by two functions. 
+        /// The <paramref name="positionMapper"/> maps position of values in the current cube into positions 
+        /// in the new cube. If there are multiple values in the current cube, whose positions are mapped onto 
+        /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
+        /// aggregate all the colliding values into one value.
+        /// </summary>
+        public DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5, Q6>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        {
+            return MultiTransform<IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>, DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue>>(positionMapper, aggregator);
+        }
+
+        /// <summary>
+        /// Transforms the current 6-dimensional cube into a 5-dimensional cube by excluding the dimension 6.
+        /// All values whose position differ just in dimension 6 (their positions without dimension 6 are the same) are 
+        /// aggregated using the <paramref name="aggregator"/> function into one value. This value is stored into the new cube with the 
+        /// position without dimension 6.
+        /// </summary>
+        public DataCube5<P1, P2, P3, P4, P5, TValue> RollUpDimension6(Func<TValue, TValue, TValue> aggregator)
+        {
+            return Transform(p => p.ExceptValue6, aggregator);
+        }
+
+        /// <summary>
+        /// Slices the current cube in the dimension 6. The slices are 5-dimensional cubes without dimension 6 of
+        /// the current cube. Returns a new 1-dimensional cube where the values are the slices and the positions are values in 
+        /// the sliced dimension.
+        /// </summary>
+        public DataCube1<P6, DataCube5<P1, P2, P3, P4, P5, TValue>> SliceDimension6()
+        {
+            var slices = new DataCube1<P6, DataCube5<P1, P2, P3, P4, P5, TValue>>();
+            ForEach((p, v) =>
+            {
+                var slice = slices.GetOrElseSet(p.ProductValue6, _ => new DataCube5<P1, P2, P3, P4, P5, TValue>());
+                slice.Set(p.ExceptValue6, v);
+            });
+            return slices;
+        }
+
+        /// <summary>
+        /// Returns canonical position corresponding to the specified product.
+        /// </summary>
+        protected override IProduct6<P1, P2, P3, P4, P5, P6> ToCanonicalPosition(IProduct6<P1, P2, P3, P4, P5, P6> position)
         {
             return Product.Create(position);
         }

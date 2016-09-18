@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace FuncSharp
 {
-<# for (var i = 0; i < MaxStructureArity(); i++) { #>
+<# for (var i = 0; i <= MaxStructureArity(); i++) { #>
     /// <summary>
     /// A <#= i #>-dimensional data cube.
     /// </summary>
@@ -27,34 +27,6 @@ namespace FuncSharp
 <#      } #>
         }
 
-        /// <summary>
-        /// Creates a <#= i #>-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube<#= i #>(IEnumerable<IProduct2<<#= ProductType(i, name: "P") #>, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ProductValue1, d.ProductValue2);
-            }
-        }
-
-<#      if (i > 0) { #>
-        /// <summary>
-        /// Creates a <#= i #>-dimensional data cube filled with the specified data. If multiple values with the same position
-        /// appear among the initial data, last one is used.
-        /// </summary>
-        public DataCube<#= i #>(IEnumerable<IProduct<#= i + 1 #><<#= Types(i, name: "P") #>, TValue>> initialData)
-            : this()
-        {
-            foreach (var d in initialData)
-            {
-                Set(d.ExceptValue<#= i + 1 #>, d.ProductValue<#= i + 1 #>);
-            }
-        }
-
-<#      } #>
 <#      if (i == 0) { #>
         /// <summary>
         /// The only value in the cube.

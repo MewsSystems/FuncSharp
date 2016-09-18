@@ -7,7 +7,7 @@
 <#@ include file="../../CodeGen/Helpers.ttinclude" #>
 namespace FuncSharp
 {
-<# for (var i = 0; i < MaxStructureArity(); i++) { #>
+<# for (var i = 0; i <= MaxStructureArity(); i++) { #>
     /// <summary>
     /// A <#= i #>-dimensional relation.
     /// </summary>

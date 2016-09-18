@@ -1,4 +1,11 @@
-﻿using System;
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,150 +17,27 @@ namespace FuncSharp
     /// </summary>
     public abstract class DataCube
     {
+<#  for (var i = 1; i <= MaxStructureArity(); i++) { #>
         /// <summary>
-        /// Creates a new 1-dimensional data cube.
+        /// Creates a new <#= i #>-dimensional data cube.
         /// </summary>
-        public static DataCube1<P1, TValue> Create<T, P1, TValue>(
+        public static <#= DataCubeType(i) #> Create<T, <#= Types(i, name: "P") #>, TValue>(
             IEnumerable<T> source,
-            Func<T, P1> p1,
+<#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
             Func<T, TValue> value)
         {
-            var dataCube = new DataCube1<P1, TValue>();
+            var dataCube = new <#= DataCubeType(i) #>();
             foreach (var v in source)
             {
                 dataCube.Set(
-                    p1(v),
+<#= Lines(i, x => Indent(20) + "p" + x + "(v)", separator: ",") #>,
                     value(v)
                 );
             }
             return dataCube;
         }
 
-        /// <summary>
-        /// Creates a new 2-dimensional data cube.
-        /// </summary>
-        public static DataCube2<P1, P2, TValue> Create<T, P1, P2, TValue>(
-            IEnumerable<T> source,
-            Func<T, P1> p1,
-            Func<T, P2> p2,
-            Func<T, TValue> value)
-        {
-            var dataCube = new DataCube2<P1, P2, TValue>();
-            foreach (var v in source)
-            {
-                dataCube.Set(
-                    p1(v),
-                    p2(v),
-                    value(v)
-                );
-            }
-            return dataCube;
-        }
-
-        /// <summary>
-        /// Creates a new 3-dimensional data cube.
-        /// </summary>
-        public static DataCube3<P1, P2, P3, TValue> Create<T, P1, P2, P3, TValue>(
-            IEnumerable<T> source,
-            Func<T, P1> p1,
-            Func<T, P2> p2,
-            Func<T, P3> p3,
-            Func<T, TValue> value)
-        {
-            var dataCube = new DataCube3<P1, P2, P3, TValue>();
-            foreach (var v in source)
-            {
-                dataCube.Set(
-                    p1(v),
-                    p2(v),
-                    p3(v),
-                    value(v)
-                );
-            }
-            return dataCube;
-        }
-
-        /// <summary>
-        /// Creates a new 4-dimensional data cube.
-        /// </summary>
-        public static DataCube4<P1, P2, P3, P4, TValue> Create<T, P1, P2, P3, P4, TValue>(
-            IEnumerable<T> source,
-            Func<T, P1> p1,
-            Func<T, P2> p2,
-            Func<T, P3> p3,
-            Func<T, P4> p4,
-            Func<T, TValue> value)
-        {
-            var dataCube = new DataCube4<P1, P2, P3, P4, TValue>();
-            foreach (var v in source)
-            {
-                dataCube.Set(
-                    p1(v),
-                    p2(v),
-                    p3(v),
-                    p4(v),
-                    value(v)
-                );
-            }
-            return dataCube;
-        }
-
-        /// <summary>
-        /// Creates a new 5-dimensional data cube.
-        /// </summary>
-        public static DataCube5<P1, P2, P3, P4, P5, TValue> Create<T, P1, P2, P3, P4, P5, TValue>(
-            IEnumerable<T> source,
-            Func<T, P1> p1,
-            Func<T, P2> p2,
-            Func<T, P3> p3,
-            Func<T, P4> p4,
-            Func<T, P5> p5,
-            Func<T, TValue> value)
-        {
-            var dataCube = new DataCube5<P1, P2, P3, P4, P5, TValue>();
-            foreach (var v in source)
-            {
-                dataCube.Set(
-                    p1(v),
-                    p2(v),
-                    p3(v),
-                    p4(v),
-                    p5(v),
-                    value(v)
-                );
-            }
-            return dataCube;
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional data cube.
-        /// </summary>
-        public static DataCube6<P1, P2, P3, P4, P5, P6, TValue> Create<T, P1, P2, P3, P4, P5, P6, TValue>(
-            IEnumerable<T> source,
-            Func<T, P1> p1,
-            Func<T, P2> p2,
-            Func<T, P3> p3,
-            Func<T, P4> p4,
-            Func<T, P5> p5,
-            Func<T, P6> p6,
-            Func<T, TValue> value)
-        {
-            var dataCube = new DataCube6<P1, P2, P3, P4, P5, P6, TValue>();
-            foreach (var v in source)
-            {
-                dataCube.Set(
-                    p1(v),
-                    p2(v),
-                    p3(v),
-                    p4(v),
-                    p5(v),
-                    p6(v),
-                    value(v)
-                );
-            }
-            return dataCube;
-        }
-
+<#  } #>
     }
 
     /// <summary>

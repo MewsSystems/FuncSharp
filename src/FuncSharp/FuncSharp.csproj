@@ -37,7 +37,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes\DataCube\DataCube.cs" />
+    <Compile Include="DataTypes\DataCube\DataCube.cs">
+      <DependentUpon>DataCube.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="DataTypes\DataCube\DataCubes.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,8 +86,12 @@
     </Compile>
     <Compile Include="DataTypes\Try\ITry.cs" />
     <Compile Include="DataTypes\Try\Try.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs">
+      <DependentUpon>IEnumerableExtensions.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Extensions\IReadOnlyDictionaryExtensions.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs">
       <DependentUpon>ObjectExtensions.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -211,7 +219,18 @@
       <LastGenOutput>Relations.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="DataTypes\DataCube\DataCube.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataCube.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Extensions\IEnumerableExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnumerableExtensions.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

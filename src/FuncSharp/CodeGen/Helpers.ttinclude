@@ -6,7 +6,7 @@
 
     public int MaxStructureArity()
     {
-        return 5;
+        return 6;
     }
 
     public string Type(int i, string name = "T")

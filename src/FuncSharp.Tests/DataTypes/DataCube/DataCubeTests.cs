@@ -125,6 +125,21 @@ namespace FuncSharp
         }
 
         [Fact]
+        public void CreateWorks()
+        {
+            var c = DataCube.Create(Enumerable.Range(1, 3),
+                i => i,
+                i => -i,
+                i => i.ToString()
+            );
+
+            Assert.Equal(3, c.Values.Count());
+            Assert.Equal("1", c.Get(1, -1).Get());
+            Assert.Equal("2", c.Get(2, -2).Get());
+            Assert.Equal("3", c.Get(3, -3).Get());
+        }
+
+        [Fact]
         public void GetOrElseSetWorks()
         {
             var c = new DataCube2<int, string, int>();
