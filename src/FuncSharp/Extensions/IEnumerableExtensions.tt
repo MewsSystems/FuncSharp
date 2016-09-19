@@ -55,7 +55,7 @@ namespace FuncSharp
         /// Coverts the source to a new <#= i #>-dimensional data cube.
         /// </summary>
         public static <#= DataCubeType(i) #> ToDataCube<T, <#= Types(i, name: "P") #>, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
 <#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
             Func<T, TValue> value)
         {

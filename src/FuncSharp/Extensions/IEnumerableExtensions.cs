@@ -47,7 +47,7 @@ namespace FuncSharp
         /// Coverts the source to a new 1-dimensional data cube.
         /// </summary>
         public static DataCube1<P1, TValue> ToDataCube<T, P1, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, TValue> value)
         {
@@ -58,7 +58,7 @@ namespace FuncSharp
         /// Coverts the source to a new 2-dimensional data cube.
         /// </summary>
         public static DataCube2<P1, P2, TValue> ToDataCube<T, P1, P2, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
             Func<T, TValue> value)
@@ -70,7 +70,7 @@ namespace FuncSharp
         /// Coverts the source to a new 3-dimensional data cube.
         /// </summary>
         public static DataCube3<P1, P2, P3, TValue> ToDataCube<T, P1, P2, P3, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
             Func<T, P3> p3,
@@ -83,7 +83,7 @@ namespace FuncSharp
         /// Coverts the source to a new 4-dimensional data cube.
         /// </summary>
         public static DataCube4<P1, P2, P3, P4, TValue> ToDataCube<T, P1, P2, P3, P4, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
             Func<T, P3> p3,
@@ -97,7 +97,7 @@ namespace FuncSharp
         /// Coverts the source to a new 5-dimensional data cube.
         /// </summary>
         public static DataCube5<P1, P2, P3, P4, P5, TValue> ToDataCube<T, P1, P2, P3, P4, P5, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
             Func<T, P3> p3,
@@ -112,7 +112,7 @@ namespace FuncSharp
         /// Coverts the source to a new 6-dimensional data cube.
         /// </summary>
         public static DataCube6<P1, P2, P3, P4, P5, P6, TValue> ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
-            IEnumerable<T> source,
+            this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
             Func<T, P3> p3,
