@@ -50,7 +50,7 @@ namespace FuncSharp
         IOption<A> Where(Func<A, bool> predicate);
 
         /// <summary>
-        /// Returns a nenumerable with the option value. If the option is empty, returns empty enumerable.
+        /// Returns an enumerable with the option value. If the option is empty, returns empty enumerable.
         /// </summary>
         /// <returns></returns>
         IEnumerable<A> ToEnumerable();
