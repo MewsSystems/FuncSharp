@@ -58,7 +58,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Funcsharp\FuncSharp.csproj">
+    <ProjectReference Include="..\FuncSharp\FuncSharp.csproj">
       <Project>{284e38f1-c32a-4091-8a95-33dab7769248}</Project>
       <Name>FuncSharp</Name>
     </ProjectReference>
