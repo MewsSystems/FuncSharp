@@ -49,7 +49,7 @@
     </Compile>
     <Compile Include="DataTypes\Morphism\IIsoMorphism.cs" />
     <Compile Include="DataTypes\Morphism\IMorphism.cs" />
-    <Compile Include="DataTypes\Morphism\IsoMorphism.cs" />
+    <Compile Include="DataTypes\Morphism\Isorphism.cs" />
     <Compile Include="DataTypes\Morphism\Morphism.cs" />
     <Compile Include="DataTypes\Option\IOptionExtensions.cs" />
     <Compile Include="DataTypes\Product\IProductExtensions.cs">
