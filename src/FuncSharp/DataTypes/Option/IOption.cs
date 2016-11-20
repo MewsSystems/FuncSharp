@@ -50,11 +50,6 @@ namespace FuncSharp
         IOption<B> FlatMap<B>(Func<A, IOption<B>> f);
 
         /// <summary>
-        /// Retuns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
-        /// </summary>
-        IOption<A> Where(Func<A, bool> predicate);
-
-        /// <summary>
         /// Returns an enumerable with the option value. If the option is empty, returns empty enumerable.
         /// </summary>
         /// <returns></returns>

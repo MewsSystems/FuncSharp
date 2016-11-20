@@ -65,6 +65,43 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Maps value of the current option (if present) into a new value using the specified function and
+        /// returns a new option with that new value.
+        /// </summary>
+        public static IOption<B> Select<A, B>(this IOption<A> option, Func<A, B> f)
+        {
+            return option.Map(f);
+        }
+
+        /// <summary>
+        /// Maps value of the current option (if present) into a new option using the specified function and
+        /// returns that new option.
+        /// </summary>
+        public static IOption<B> SelectMany<A, B>(this IOption<A> option, Func<A, IOption<B>> f)
+        {
+            return option.FlatMap(f);
+        }
+
+        /// <summary>
+        /// Maps the current value to a new option using the specified function and combines values of both of the options.
+        /// </summary>
+        public static IOption<B> SelectMany<A, X, B>(this IOption<A> option, Func<A, IOption<X>> f, Func<A, X, B> compose)
+        {
+            return option.FlatMap(a => f(a).Map(x => compose(a, x)));
+        }
+
+        /// <summary>
+        /// Retuns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
+        /// </summary>
+        public static IOption<A> Where<A>(this IOption<A> option, Func<A, bool> predicate)
+        {
+            return option.FlatMap(a => predicate(a).Match(
+                t => option,
+                f => Option.Empty<A>()
+            ));
+        }
+
+        /// <summary>
         /// Turns the option into a nullable value.
         /// </summary>
         public static A? ToNullable<A>(this IOption<A> option)

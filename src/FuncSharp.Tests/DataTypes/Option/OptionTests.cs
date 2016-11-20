@@ -72,5 +72,32 @@ namespace FuncSharp.Tests
             Assert.True(Option.Empty<int>().FlatMap(v => (v * 2).ToOption()).IsEmpty);
             Assert.True(Option.Empty<int>().FlatMap(v => Option.Empty<int>()).IsEmpty);
         }
+
+        [Fact]
+        public void LinqTest()
+        {
+            var sum =
+                from x in 1.ToOption()
+                from y in 2.ToOption()
+                from z in 3.ToOption()
+                select x + y + z;
+
+            Assert.Equal(6.ToOption(), sum);
+
+            var emptySum =
+                from x in 1.ToOption()
+                from y in Option.Empty<int>()
+                select x + y;
+
+            Assert.Equal(Option.Empty<int>(), emptySum);
+
+            var filteredSum =
+                from x in 1.ToOption()
+                from y in 2.ToOption()
+                where x > 100
+                select x + y;
+
+            Assert.Equal(Option.Empty<int>(), filteredSum);
+        }
     }
 }
