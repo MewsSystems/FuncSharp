@@ -74,8 +74,8 @@ namespace FuncSharp
             Range = Mappings.Values.Distinct().ToList();
         }
 
-        public IEnumerable<A> Domain { get; private set; }
-        public IEnumerable<B> Range { get; private set; }
+        public IEnumerable<A> Domain { get; }
+        public IEnumerable<B> Range { get; }
 
         private DataCube1<A, B> Mappings { get; set; }
 

@@ -85,6 +85,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DataTypes\Try\ITry.cs" />
+    <Compile Include="DataTypes\Try\ITryExtensions.cs" />
     <Compile Include="DataTypes\Try\Try.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs">
       <DependentUpon>IEnumerableExtensions.tt</DependentUpon>

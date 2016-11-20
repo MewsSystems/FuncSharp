@@ -5,49 +5,65 @@ namespace FuncSharp
     public static class Try
     {
         /// <summary>
-        /// Creates a new try with a successful result.
+        /// Create a new try with the result of the specified function while converting exceptions of the specified type
+        /// into erroneous result.
         /// </summary>
-        public static ITry<TSuccess> Success<TSuccess>(TSuccess success)
+        public static ITry<A> Create<A, TException>(Func<Unit, A> f)
+            where TException : Exception
         {
-            return new Try<TSuccess>(success);
+            try
+            {
+                return Success(f(Unit.Value));
+            }
+            catch (TException e)
+            {
+                return Error<A>(e);
+            }
         }
 
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static ITry<TSuccess, TException> Success<TSuccess, TException>(TSuccess success)
-            where TException : Exception
+        public static ITry<A> Success<A>(A success)
         {
-            return new Try<TSuccess, TException>(success);
+            return new Try<A>(success);
+        }
+
+        /// <summary>
+        /// Creates a new try with a successful result.
+        /// </summary>
+        public static ITry<A, TError> Success<A, TError>(A success)
+            where TError : Exception
+        {
+            return new Try<A, TError>(success);
         }
 
         /// <summary>
         /// Creates a new try with an exception result.
         /// </summary>
-        public static ITry<TSuccess> Exception<TSuccess>(Exception exception)
+        public static ITry<A> Error<A>(Exception exception)
         {
-            return new Try<TSuccess>(exception);
+            return new Try<A>(exception);
         }
 
         /// <summary>
         /// Creates a new try with an exception result.
         /// </summary>
-        public static ITry<TSuccess, TException> Exception<TSuccess, TException>(TException exception)
-            where TException : Exception
+        public static ITry<A, TError> Error<A, TError>(TError exception)
+            where TError : Exception
         {
-            return new Try<TSuccess, TException>(exception);
+            return new Try<A, TError>(exception);
         }
     }
 
-    public class Try<TSuccess, TException> : Coproduct2<TSuccess, TException>, ITry<TSuccess, TException>
-        where TException : Exception
+    internal class Try<A, TError> : Coproduct2<A, TError>, ITry<A, TError>
     {
-        public Try(TSuccess success)
+        public Try(A success)
             : base(success)
         {
         }
 
-        public Try(TException exception)
+        public Try(TError exception)
             : base(exception)
         {
         }
@@ -57,33 +73,25 @@ namespace FuncSharp
             get { return IsFirst; }
         }
 
-        public bool IsException
+        public bool IsError
         {
             get { return IsSecond; }
         }
 
-        public IOption<TSuccess> Success
+        public IOption<A> Success
         {
             get { return First; }
         }
 
-        public IOption<TException> Exception
+        public IOption<TError> Error
         {
             get { return Second; }
         }
-
-        public TSuccess Get()
-        {
-            return Match(
-                s => s,
-                e => { throw e; }
-            );
-        }
     }
 
-    public class Try<TSuccess> : Try<TSuccess, Exception>, ITry<TSuccess>
+    internal class Try<A> : Try<A, Exception>, ITry<A>
     {
-        public Try(TSuccess success)
+        public Try(A success)
             : base(success)
         {
         }
@@ -93,16 +101,24 @@ namespace FuncSharp
         {
         }
 
-        public ITry<TNewSuccess> MapSuccess<TNewSuccess>(Func<TSuccess, TNewSuccess> f)
+        public A Get()
         {
-            return FlatMapSuccess(s => Try.Success(f(s)));
+            return Match(
+                s => s,
+                e => { throw e; }
+            );
         }
 
-        public ITry<TNewSuccess> FlatMapSuccess<TNewSuccess>(Func<TSuccess, ITry<TNewSuccess>> f)
+        public ITry<B> MapSuccess<B>(Func<A, B> f)
+        {
+            return FlatMapSuccess(s => f(s).ToTry());
+        }
+
+        public ITry<B> FlatMapSuccess<B>(Func<A, ITry<B>> f)
         {
             return Match(
                 s => f(s),
-                e => Try.Exception<TNewSuccess>(e)
+                e => Try.Error<B>(e)
             );
         }
     }

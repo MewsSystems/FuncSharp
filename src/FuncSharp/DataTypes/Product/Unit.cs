@@ -18,7 +18,7 @@ namespace FuncSharp
         /// <summary>
         /// The only instance of the Unit type.
         /// </summary>
-        public static Unit Value { get; private set; }
+        public static Unit Value { get; }
 
         public override int GetHashCode()
         {

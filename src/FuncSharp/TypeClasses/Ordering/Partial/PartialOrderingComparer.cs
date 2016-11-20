@@ -10,7 +10,7 @@ namespace FuncSharp
             Multiplier = order == Order.Ascending ? 1 : -1;
         }
 
-        public IPartialOrdering<A> Ordering { get; private set; }
+        public IPartialOrdering<A> Ordering { get; }
 
         private int Multiplier { get; set; }
 

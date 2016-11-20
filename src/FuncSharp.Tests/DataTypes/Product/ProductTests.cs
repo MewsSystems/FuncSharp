@@ -116,7 +116,7 @@ namespace FuncSharp.Tests
             ProductValues = values;
         }
 
-        public IEnumerable<object> ProductValues { get; private set; }
+        public IEnumerable<object> ProductValues { get; }
 
         public override string ToString()
         {

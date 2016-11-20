@@ -3,10 +3,9 @@
 namespace FuncSharp
 {
     /// <summary>
-    /// Result of an operation that may either succeed or fail with an exception.
+    /// Result of an operation that may either succeed or fail with an error.
     /// </summary>
-    public interface ITry<out TSuccess, out TException> : ICoproduct2<TSuccess, TException>
-        where TException : Exception
+    public interface ITry<out A, out TError> : ICoproduct2<A, TError>
     {
         /// <summary>
         /// Returns whether the result is a success.
@@ -16,37 +15,37 @@ namespace FuncSharp
         /// <summary>
         /// Returns whether the result is an exception.
         /// </summary>
-        bool IsException { get; }
+        bool IsError { get; }
 
         /// <summary>
         /// Returns the successful result.
         /// </summary>
-        IOption<TSuccess> Success { get; }
+        IOption<A> Success { get; }
 
         /// <summary>
-        /// Returns the exception result.
+        /// Returns the error result.
         /// </summary>
-        IOption<TException> Exception { get; }
-
-        /// <summary>
-        /// If the result is success, returns it. Otherwise throws the exception result.
-        /// </summary>
-        TSuccess Get();
+        IOption<TError> Error { get; }
     }
 
     /// <summary>
     /// Result of an operation that may either succeed or fail with an exception.
     /// </summary>
-    public interface ITry<out TSuccess> : ITry<TSuccess, Exception>
+    public interface ITry<out A> : ITry<A, Exception>
     {
+        /// <summary>
+        /// If the result is success, returns it. Otherwise throws the exception result.
+        /// </summary>
+        A Get();
+
         /// <summary>
         /// Maps the successful result to a new successful result.
         /// </summary>
-        ITry<TNewSuccess> MapSuccess<TNewSuccess>(Func<TSuccess, TNewSuccess> f);
+        ITry<B> MapSuccess<B>(Func<A, B> f);
 
         /// <summary>
         /// Maps the successful result to a new try.
         /// </summary>
-        ITry<TNewSuccess> FlatMapSuccess<TNewSuccess>(Func<TSuccess, ITry<TNewSuccess>> f);
+        ITry<B> FlatMapSuccess<B>(Func<A, ITry<B>> f);
     }
 }

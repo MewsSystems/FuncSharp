@@ -11,6 +11,6 @@ namespace FuncSharp
             Inverse = Morphism.Create(mappings.Select(m => Product.Create(m.ProductValue2, m.ProductValue1)));
         }
 
-        public IMorphism<B, A> Inverse { get; private set; }
+        public IMorphism<B, A> Inverse { get; }
     }
 }

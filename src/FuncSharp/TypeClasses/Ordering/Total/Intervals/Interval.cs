@@ -57,7 +57,7 @@
         /// <summary>
         /// Returns whether the interval is empty.
         /// </summary>
-        public bool IsEmpty { get; private set; }
+        public bool IsEmpty { get; }
 
         /// <summary>
         /// Returns whether the interval is non empty.

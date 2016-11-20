@@ -65,7 +65,7 @@ namespace FuncSharp
         {
         }
 
-        public static IOption<A> Empty { get; private set; }
+        public static IOption<A> Empty { get; }
 
         public bool IsEmpty
         {
@@ -90,6 +90,14 @@ namespace FuncSharp
                     throw new InvalidOperationException("An empty option does not have a value.");
                 }
             });
+        }
+
+        public ITry<A> ToTry(Func<Unit, Exception> otherwise)
+        {
+            return Match(
+                a => a.ToTry(),
+                _ => otherwise(_).ToTry<A>()
+            );
         }
 
         public A GetOrDefault()

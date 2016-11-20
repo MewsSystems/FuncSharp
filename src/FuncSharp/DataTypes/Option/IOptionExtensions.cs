@@ -33,7 +33,7 @@ namespace FuncSharp
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<Unit, IOption<B>> alternative)
             where A : B
         {
-            return option.Match<IOption<B>>(
+            return option.Match(
                 _ => option as IOption<B>,
                 _ => alternative(Unit.Value)
             );

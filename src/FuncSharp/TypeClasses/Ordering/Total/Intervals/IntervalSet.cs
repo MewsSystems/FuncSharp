@@ -37,12 +37,12 @@ namespace FuncSharp
         /// <summary>
         /// Ordering of the underlying values.
         /// </summary>
-        public ITotalOrdering<A> Ordering { get; private set; }
+        public ITotalOrdering<A> Ordering { get; }
 
         /// <summary>
         /// Intervals that the interval set consists of.
         /// </summary>
-        public IEnumerable<Interval<A>> Intervals { get; private set; }
+        public IEnumerable<Interval<A>> Intervals { get; }
 
         /// <summary>
         /// Returns whether the interval set is empty.

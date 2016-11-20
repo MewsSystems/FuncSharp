@@ -270,7 +270,7 @@ namespace FuncSharp
             ProductValue1 = t1;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
         public IProduct0 ExceptValue1
         {
@@ -302,9 +302,9 @@ namespace FuncSharp
             ProductValue2 = t2;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
         public IProduct1<T2> ExceptValue1
         {
@@ -343,11 +343,11 @@ namespace FuncSharp
             ProductValue3 = t3;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
         public IProduct2<T2, T3> ExceptValue1
         {
@@ -393,13 +393,13 @@ namespace FuncSharp
             ProductValue4 = t4;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
-        public T4 ProductValue4 { get; private set; }
+        public T4 ProductValue4 { get; }
 
         public IProduct3<T2, T3, T4> ExceptValue1
         {
@@ -452,15 +452,15 @@ namespace FuncSharp
             ProductValue5 = t5;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
-        public T4 ProductValue4 { get; private set; }
+        public T4 ProductValue4 { get; }
 
-        public T5 ProductValue5 { get; private set; }
+        public T5 ProductValue5 { get; }
 
         public IProduct4<T2, T3, T4, T5> ExceptValue1
         {
@@ -520,17 +520,17 @@ namespace FuncSharp
             ProductValue6 = t6;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
-        public T4 ProductValue4 { get; private set; }
+        public T4 ProductValue4 { get; }
 
-        public T5 ProductValue5 { get; private set; }
+        public T5 ProductValue5 { get; }
 
-        public T6 ProductValue6 { get; private set; }
+        public T6 ProductValue6 { get; }
 
         public IProduct5<T2, T3, T4, T5, T6> ExceptValue1
         {
@@ -597,19 +597,19 @@ namespace FuncSharp
             ProductValue7 = t7;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
-        public T4 ProductValue4 { get; private set; }
+        public T4 ProductValue4 { get; }
 
-        public T5 ProductValue5 { get; private set; }
+        public T5 ProductValue5 { get; }
 
-        public T6 ProductValue6 { get; private set; }
+        public T6 ProductValue6 { get; }
 
-        public T7 ProductValue7 { get; private set; }
+        public T7 ProductValue7 { get; }
 
         public IProduct6<T2, T3, T4, T5, T6, T7> ExceptValue1
         {
@@ -683,21 +683,21 @@ namespace FuncSharp
             ProductValue8 = t8;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
-        public T4 ProductValue4 { get; private set; }
+        public T4 ProductValue4 { get; }
 
-        public T5 ProductValue5 { get; private set; }
+        public T5 ProductValue5 { get; }
 
-        public T6 ProductValue6 { get; private set; }
+        public T6 ProductValue6 { get; }
 
-        public T7 ProductValue7 { get; private set; }
+        public T7 ProductValue7 { get; }
 
-        public T8 ProductValue8 { get; private set; }
+        public T8 ProductValue8 { get; }
 
         public IProduct7<T2, T3, T4, T5, T6, T7, T8> ExceptValue1
         {
@@ -778,23 +778,23 @@ namespace FuncSharp
             ProductValue9 = t9;
         }
 
-        public T1 ProductValue1 { get; private set; }
+        public T1 ProductValue1 { get; }
 
-        public T2 ProductValue2 { get; private set; }
+        public T2 ProductValue2 { get; }
 
-        public T3 ProductValue3 { get; private set; }
+        public T3 ProductValue3 { get; }
 
-        public T4 ProductValue4 { get; private set; }
+        public T4 ProductValue4 { get; }
 
-        public T5 ProductValue5 { get; private set; }
+        public T5 ProductValue5 { get; }
 
-        public T6 ProductValue6 { get; private set; }
+        public T6 ProductValue6 { get; }
 
-        public T7 ProductValue7 { get; private set; }
+        public T7 ProductValue7 { get; }
 
-        public T8 ProductValue8 { get; private set; }
+        public T8 ProductValue8 { get; }
 
-        public T9 ProductValue9 { get; private set; }
+        public T9 ProductValue9 { get; }
 
         public IProduct8<T2, T3, T4, T5, T6, T7, T8, T9> ExceptValue1
         {

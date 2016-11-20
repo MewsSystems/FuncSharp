@@ -30,11 +30,11 @@ namespace FuncSharp
             CoproductValue = value;
         }
 
-        public int CoproductArity { get; private set; }
+        public int CoproductArity { get; }
 
-        public int CoproductDiscriminator { get; private set; }
+        public int CoproductDiscriminator { get; }
 
-        public object CoproductValue { get; private set; }
+        public object CoproductValue { get; }
 
 <# for (var i = 1; i < MaxArity(); i++) { #>
 <#    for (var j = 1; j <= i; j++) { #>

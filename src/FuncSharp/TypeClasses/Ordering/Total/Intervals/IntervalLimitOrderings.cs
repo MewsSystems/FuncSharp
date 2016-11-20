@@ -8,8 +8,8 @@
             UpperRestrictiveness = new InetrvalLimitRestrictivenessOrdering<A>(valueOrdering.Reverse());
         }
 
-        public ITotalOrdering<IntervalLimit<A>> LowerRestrictiveness { get; private set; }
+        public ITotalOrdering<IntervalLimit<A>> LowerRestrictiveness { get; }
 
-        public ITotalOrdering<IntervalLimit<A>> UpperRestrictiveness { get; private set; }
+        public ITotalOrdering<IntervalLimit<A>> UpperRestrictiveness { get; }
     }
 }

@@ -23,11 +23,11 @@ namespace FuncSharp
             CoproductValue = value;
         }
 
-        public int CoproductArity { get; private set; }
+        public int CoproductArity { get; }
 
-        public int CoproductDiscriminator { get; private set; }
+        public int CoproductDiscriminator { get; }
 
-        public object CoproductValue { get; private set; }
+        public object CoproductValue { get; }
 
         /// <summary>
         /// Creates a new 1-dimensional coproduct with the first value.

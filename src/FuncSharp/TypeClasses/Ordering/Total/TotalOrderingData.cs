@@ -8,8 +8,8 @@
             IntervalOrdering = intervalOrdering;
         }
 
-        public IntervalLimitOrderings<A> LimitOrderings { get; private set; }
+        public IntervalLimitOrderings<A> LimitOrderings { get; }
 
-        public ITotalOrdering<Interval<A>> IntervalOrdering { get; private set; }
+        public ITotalOrdering<Interval<A>> IntervalOrdering { get; }
     }
 }

@@ -71,7 +71,7 @@ namespace FuncSharp
         }
 <#      for (var j = 1; j <= i; j++) { #>
 
-        public <#= Type(j) #> <#= ProductProperty(j) #> { get; private set; }
+        public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
 <#      } #>
 <#      for (var j = 1; j <= i; j++) { #>
 

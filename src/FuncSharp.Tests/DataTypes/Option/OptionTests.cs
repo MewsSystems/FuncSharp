@@ -20,7 +20,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void ValueTest()
+        public void GetTest()
         {
             Assert.Equal(42, 42.ToOption().Get());
             Assert.Equal(42, (42 as int?).ToOption().Get());

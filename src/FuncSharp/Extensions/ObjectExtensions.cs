@@ -7,10 +7,10 @@ namespace FuncSharp
         /// <summary>
         /// Casts the specified object to the given type.
         /// </summary>
-        public static IOption<T> As<T>(this object o)
-            where T : class
+        public static IOption<A> As<A>(this object o)
+            where A : class
         {
-            return (o as T).ToOption();
+            return (o as A).ToOption();
         }
 
         /// <summary>
@@ -28,9 +28,25 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
-        public static IOption<T> ToOption<T>(this T value)
+        public static IOption<A> ToOption<A>(this A value)
         {
             return Option.Create(value);
+        }
+
+        /// <summary>
+        /// Turns the specified value into a successful try.
+        /// </summary>
+        public static ITry<A> ToTry<A>(this A value)
+        {
+            return Try.Success(value);
+        }
+
+        /// <summary>
+        /// Turns the specified exception into a try.
+        /// </summary>
+        public static ITry<A> ToTry<A>(this Exception e)
+        {
+            return Try.Error<A>(e);
         }
 
         /// <summary>

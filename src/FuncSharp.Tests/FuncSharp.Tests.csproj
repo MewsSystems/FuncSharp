@@ -44,6 +44,7 @@
     <Compile Include="DataTypes\DataCube\DataCubeTests.cs" />
     <Compile Include="DataTypes\Morphism\MorphismTests.cs" />
     <Compile Include="DataTypes\Coproduct\CoproductTests.cs" />
+    <Compile Include="DataTypes\Try\TryTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TupleExtensionsTests.cs" />
     <Compile Include="Extensions\ObjectExtensionsTests.cs" />
