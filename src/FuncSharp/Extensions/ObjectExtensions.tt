@@ -53,10 +53,20 @@ namespace FuncSharp
         /// </summary>
         public static ITry<A> ToTry<A>(this Exception e)
         {
-            return Try.Exception<A>(e);
+            return Try.Error<A>(e);
         }
 
-<# for (var i = 2; i < MaxArity(); i++) { #>
+<# for (var i = 1; i < MaxArity(); i++) { #>
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<<#= Types(i) #>, TResult>(
+            this object value,
+<#= Lines(i, j => Indent(12) + Parameter(j) + ", Func<" + Type(j) + ", TResult> f" + j, separator: ",") #>)
+        {
+            return value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
+        }
+
         /// <summary>
         /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
@@ -103,7 +113,7 @@ namespace FuncSharp
             {
                 throw otherwise(Unit.Value);
             }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified types.");
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
 
 <#     if (i + 1 < MaxArity()) { #>

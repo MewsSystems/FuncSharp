@@ -8,38 +8,6 @@ namespace FuncSharp
     public static class IProductExtensions
     {
         /// <summary>
-        /// Returns hash code of the specified product.
-        /// </summary>
-        public static int ProductHashCode(this IProduct product)
-        {
-            return ProductHashCode(product.ProductValues);
-        }
-
-        /// <summary>
-        /// Returns hash code of the specified product values.
-        /// </summary>
-        public static int ProductHashCode(IEnumerable<object> values)
-        {
-            var result = 19;
-            foreach (var value in values)
-            {
-                unchecked
-                {
-                    result += 41 * (value != null ? value.GetHashCode() : 0);
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// Returns hash code of the specified product values.
-        /// </summary>
-        public static int ProductHashCode(params object[] values)
-        {
-            return ProductHashCode(values.AsEnumerable());
-        }
-
-        /// <summary>
         /// Returns whether the two specified products are structurally equal. Note that two nulls are 
         /// considered structurally equal products.
         /// </summary>

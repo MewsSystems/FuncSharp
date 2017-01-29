@@ -223,7 +223,7 @@ namespace FuncSharp
 
         public override int GetHashCode()
         {
-            return this.ProductHashCode();
+            return Structural.HashCode(ProductValues);
         }
 
         public override bool Equals(object obj)

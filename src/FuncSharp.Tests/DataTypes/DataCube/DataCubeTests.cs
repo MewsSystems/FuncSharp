@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Xunit;
 
-namespace FuncSharp
+namespace FuncSharp.Tests
 {
     public class DataCubeTests
     {

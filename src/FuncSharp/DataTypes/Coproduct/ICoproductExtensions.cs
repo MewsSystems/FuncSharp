@@ -48,7 +48,7 @@ namespace FuncSharp
         /// </summary>
         public static int CoproductHashCode(this ICoproduct c)
         {
-            return IProductExtensions.ProductHashCode(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
+            return Structural.HashCode(new[] { c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue });
         }
 
         /// <summary>

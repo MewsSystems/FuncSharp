@@ -9,21 +9,21 @@ namespace FuncSharp.Tests
         [Fact]
         public void ProductToStringIsCorrect()
         {
-            var p0 = new SampleProductType();
-            var p1 = new SampleProductType(1, "foo", null);
-            var p2 = new SampleProductType(2, "bar", p1);
+            var p0 = Product.Create();
+            var p1 = Product.Create(1, "foo", null as object);
+            var p2 = Product.Create(2, "bar", p1);
 
-            Assert.Equal("SampleProductType()", p0.ToString());
-            Assert.Equal("SampleProductType(1, foo, null)", p1.ToString());
-            Assert.Equal("SampleProductType(2, bar, SampleProductType(1, foo, null))", p2.ToString());
+            Assert.Equal("Product0()", p0.ToString());
+            Assert.Equal("Product3(1, foo, null)", p1.ToString());
+            Assert.Equal("Product3(2, bar, Product3(1, foo, null))", p2.ToString());
         }
 
         [Fact]
         public void ProductHashCodeIsNotTrivial()
         {
-            var p1 = new SampleProductType(1, "foo", true, null);
-            var p2 = new SampleProductType(2, "bar", false, new object());
-            var p3 = new SampleProductType(3, "baz", true, new object());
+            var p1 = Product.Create(1, "foo", true, null as object);
+            var p2 = Product.Create(2, "bar", false, new object());
+            var p3 = Product.Create(3, "baz", true, new object());
 
             var h1 = p1.GetHashCode();
             var h2 = p2.GetHashCode();
@@ -106,29 +106,6 @@ namespace FuncSharp.Tests
             Assert.Equal(42, t.Item1);
             Assert.Equal("foo", t.Item2);
             Assert.Equal(true, t.Item3);
-        }
-    }
-
-    public class SampleProductType : IProduct
-    {
-        public SampleProductType(params object[] values)
-        {
-            ProductValues = values;
-        }
-
-        public IEnumerable<object> ProductValues { get; }
-
-        public override string ToString()
-        {
-            return this.ProductToString();
-        }
-        public override int GetHashCode()
-        {
-            return this.ProductHashCode();
-        }
-        public override bool Equals(object obj)
-        {
-            return this.ProductEquals(obj);
         }
     }
 }
