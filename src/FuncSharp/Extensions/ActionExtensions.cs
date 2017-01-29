@@ -124,5 +124,77 @@ namespace FuncSharp
             };
         }
 
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Unit> ToFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> a)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) =>
+            {
+                a(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+                return Unit.Value;
+            };
+        }
+
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Unit> ToFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> a)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) =>
+            {
+                a(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
+                return Unit.Value;
+            };
+        }
+
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Unit> ToFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> a)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) =>
+            {
+                a(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
+                return Unit.Value;
+            };
+        }
+
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Unit> ToFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> a)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) =>
+            {
+                a(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                return Unit.Value;
+            };
+        }
+
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Unit> ToFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> a)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) =>
+            {
+                a(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
+                return Unit.Value;
+            };
+        }
+
+        /// <summary>
+        /// Converts the specified action to a function returning a unit.
+        /// </summary>
+        public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Unit> ToFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> a)
+        {
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) =>
+            {
+                a(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
+                return Unit.Value;
+            };
+        }
+
     }
 }

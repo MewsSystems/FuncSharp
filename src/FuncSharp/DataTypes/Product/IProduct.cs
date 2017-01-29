@@ -586,4 +586,826 @@ namespace FuncSharp
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f);
     }
 
+    /// <summary>
+    /// A 10-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct10<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue1 omitted.
+        /// </summary>
+        IProduct9<T2, T3, T4, T5, T6, T7, T8, T9, T10> ExceptValue1 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue2 omitted.
+        /// </summary>
+        IProduct9<T1, T3, T4, T5, T6, T7, T8, T9, T10> ExceptValue2 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue3 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T4, T5, T6, T7, T8, T9, T10> ExceptValue3 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue4 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T5, T6, T7, T8, T9, T10> ExceptValue4 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue5 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T4, T6, T7, T8, T9, T10> ExceptValue5 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue6 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T4, T5, T7, T8, T9, T10> ExceptValue6 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue7 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T4, T5, T6, T8, T9, T10> ExceptValue7 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue8 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T4, T5, T6, T7, T9, T10> ExceptValue8 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue9 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T10> ExceptValue9 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue10 omitted.
+        /// </summary>
+        IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> ExceptValue10 { get; }
+
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f);
+    }
+
+    /// <summary>
+    /// A 11-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct11<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 11.
+        /// </summary>
+        T11 ProductValue11 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue1 omitted.
+        /// </summary>
+        IProduct10<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue1 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue2 omitted.
+        /// </summary>
+        IProduct10<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue2 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue3 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue3 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue4 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11> ExceptValue4 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue5 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11> ExceptValue5 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue6 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11> ExceptValue6 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue7 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11> ExceptValue7 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue8 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11> ExceptValue8 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue9 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11> ExceptValue9 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue10 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11> ExceptValue10 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue11 omitted.
+        /// </summary>
+        IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> ExceptValue11 { get; }
+
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f);
+    }
+
+    /// <summary>
+    /// A 12-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct12<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 11.
+        /// </summary>
+        T11 ProductValue11 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 12.
+        /// </summary>
+        T12 ProductValue12 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue1 omitted.
+        /// </summary>
+        IProduct11<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue1 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue2 omitted.
+        /// </summary>
+        IProduct11<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue2 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue3 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue3 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue4 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue4 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue5 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12> ExceptValue5 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue6 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12> ExceptValue6 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue7 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12> ExceptValue7 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue8 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12> ExceptValue8 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue9 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12> ExceptValue9 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue10 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12> ExceptValue10 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue11 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12> ExceptValue11 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue12 omitted.
+        /// </summary>
+        IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue12 { get; }
+
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f);
+    }
+
+    /// <summary>
+    /// A 13-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct13<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 11.
+        /// </summary>
+        T11 ProductValue11 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 12.
+        /// </summary>
+        T12 ProductValue12 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 13.
+        /// </summary>
+        T13 ProductValue13 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue1 omitted.
+        /// </summary>
+        IProduct12<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue1 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue2 omitted.
+        /// </summary>
+        IProduct12<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue2 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue3 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue3 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue4 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue4 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue5 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue5 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue6 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13> ExceptValue6 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue7 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13> ExceptValue7 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue8 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13> ExceptValue8 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue9 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13> ExceptValue9 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue10 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13> ExceptValue10 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue11 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13> ExceptValue11 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue12 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13> ExceptValue12 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue13 omitted.
+        /// </summary>
+        IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue13 { get; }
+
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R> f);
+    }
+
+    /// <summary>
+    /// A 14-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct14<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 11.
+        /// </summary>
+        T11 ProductValue11 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 12.
+        /// </summary>
+        T12 ProductValue12 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 13.
+        /// </summary>
+        T13 ProductValue13 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 14.
+        /// </summary>
+        T14 ProductValue14 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue1 omitted.
+        /// </summary>
+        IProduct13<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue1 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue2 omitted.
+        /// </summary>
+        IProduct13<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue2 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue3 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue3 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue4 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue4 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue5 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue5 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue6 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue6 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue7 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14> ExceptValue7 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue8 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14> ExceptValue8 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue9 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14> ExceptValue9 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue10 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14> ExceptValue10 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue11 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14> ExceptValue11 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue12 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14> ExceptValue12 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue13 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14> ExceptValue13 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue14 omitted.
+        /// </summary>
+        IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue14 { get; }
+
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R> f);
+    }
+
+    /// <summary>
+    /// A 15-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct15<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 11.
+        /// </summary>
+        T11 ProductValue11 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 12.
+        /// </summary>
+        T12 ProductValue12 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 13.
+        /// </summary>
+        T13 ProductValue13 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 14.
+        /// </summary>
+        T14 ProductValue14 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 15.
+        /// </summary>
+        T15 ProductValue15 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue1 omitted.
+        /// </summary>
+        IProduct14<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue1 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue2 omitted.
+        /// </summary>
+        IProduct14<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue2 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue3 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue3 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue4 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue4 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue5 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue5 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue6 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue6 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue7 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue7 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue8 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15> ExceptValue8 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue9 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14, T15> ExceptValue9 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue10 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14, T15> ExceptValue10 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue11 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14, T15> ExceptValue11 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue12 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14, T15> ExceptValue12 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue13 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14, T15> ExceptValue13 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue14 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T15> ExceptValue14 { get; }
+
+        /// <summary>
+        /// The same product with ProductValue15 omitted.
+        /// </summary>
+        IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue15 { get; }
+
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
+        R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R> f);
+    }
+
 }

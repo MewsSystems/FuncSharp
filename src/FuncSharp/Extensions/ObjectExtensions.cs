@@ -50,16 +50,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Matches the value with the specified parameters and returns result of the corresponding function.
-        /// </summary>
-        public static TResult Match<T1, TResult>(
-            this object value,
-            T1 t1, Func<T1, TResult> f1)
-        {
-            return value.AsCoproduct(t1).Match(f1);
-        }
-
-        /// <summary>
         /// Creates a new 1-dimensional coproduct as a result of type match. The specified value will be on the first place 
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
@@ -127,12 +117,16 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, TResult>(
+        public static TResult Match<T1, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
-            T2 t2, Func<T2, TResult> f2)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2).Match(f1, f2);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1).Match(f1);
+            }
+            return value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -211,13 +205,17 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, TResult>(
+        public static TResult Match<T1, T2, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
-            T3 t3, Func<T3, TResult> f3)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2).Match(f1, f2);
+            }
+            return value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -304,14 +302,18 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, TResult>(
+        public static TResult Match<T1, T2, T3, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
-            T4 t4, Func<T4, TResult> f4)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -406,15 +408,19 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, TResult>(
+        public static TResult Match<T1, T2, T3, T4, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
             T4 t4, Func<T4, TResult> f4,
-            T5 t5, Func<T5, TResult> f5)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -517,16 +523,20 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, TResult>(
+        public static TResult Match<T1, T2, T3, T4, T5, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
             T4 t4, Func<T4, TResult> f4,
             T5 t5, Func<T5, TResult> f5,
-            T6 t6, Func<T6, TResult> f6)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -637,7 +647,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, TResult>(
+        public static TResult Match<T1, T2, T3, T4, T5, T6, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
@@ -645,9 +655,13 @@ namespace FuncSharp
             T4 t4, Func<T4, TResult> f4,
             T5 t5, Func<T5, TResult> f5,
             T6 t6, Func<T6, TResult> f6,
-            T7 t7, Func<T7, TResult> f7)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -766,7 +780,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
@@ -775,9 +789,13 @@ namespace FuncSharp
             T5 t5, Func<T5, TResult> f5,
             T6 t6, Func<T6, TResult> f6,
             T7 t7, Func<T7, TResult> f7,
-            T8 t8, Func<T8, TResult> f8)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -904,7 +922,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
             this object value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
@@ -914,9 +932,13 @@ namespace FuncSharp
             T6 t6, Func<T6, TResult> f6,
             T7 t7, Func<T7, TResult> f7,
             T8 t8, Func<T8, TResult> f8,
-            T9 t9, Func<T9, TResult> f9)
+            Func<Unit, TResult> otherwise = null)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(Unit.Value));
         }
 
         /// <summary>
@@ -1026,6 +1048,1101 @@ namespace FuncSharp
                 throw otherwise(Unit.Value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value)
+        {
+            return value.AsCoproduct(v => Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
+        /// the value will be placed in the last place.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9)
+        {
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, null, v => Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
+            this object value,
+            T1 t1, Func<T1, TResult> f1,
+            T2 t2, Func<T2, TResult> f2,
+            T3 t3, Func<T3, TResult> f3,
+            T4 t4, Func<T4, TResult> f4,
+            T5 t5, Func<T5, TResult> f5,
+            T6 t6, Func<T6, TResult> f6,
+            T7 t7, Func<T7, TResult> f7,
+            T8 t8, Func<T8, TResult> f8,
+            T9 t9, Func<T9, TResult> f9,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(Unit.Value));
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, Func<object, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (value is T1)
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T1)value);
+            }
+            if (value is T2)
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T2)value);
+            }
+            if (value is T3)
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T3)value);
+            }
+            if (value is T4)
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T4)value);
+            }
+            if (value is T5)
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T5)value);
+            }
+            if (value is T6)
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T6)value);
+            }
+            if (value is T7)
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T7)value);
+            }
+            if (value is T8)
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T8)value);
+            }
+            if (value is T9)
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T9)value);
+            }
+            if (value is T10)
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T10)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified types.");
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
+        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
+        /// the otherwise function).
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, Func<object, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (Equals(value, t1))
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T1)value);
+            }
+            if (Equals(value, t2))
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T2)value);
+            }
+            if (Equals(value, t3))
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T3)value);
+            }
+            if (Equals(value, t4))
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T4)value);
+            }
+            if (Equals(value, t5))
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T5)value);
+            }
+            if (Equals(value, t6))
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T6)value);
+            }
+            if (Equals(value, t7))
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T7)value);
+            }
+            if (Equals(value, t8))
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T8)value);
+            }
+            if (Equals(value, t9))
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T9)value);
+            }
+            if (Equals(value, t10))
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T10)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value)
+        {
+            return value.AsCoproduct(v => Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
+        /// the value will be placed in the last place.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10)
+        {
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, null, v => Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
+            this object value,
+            T1 t1, Func<T1, TResult> f1,
+            T2 t2, Func<T2, TResult> f2,
+            T3 t3, Func<T3, TResult> f3,
+            T4 t4, Func<T4, TResult> f4,
+            T5 t5, Func<T5, TResult> f5,
+            T6 t6, Func<T6, TResult> f6,
+            T7 t7, Func<T7, TResult> f7,
+            T8 t8, Func<T8, TResult> f8,
+            T9 t9, Func<T9, TResult> f9,
+            T10 t10, Func<T10, TResult> f10,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(Unit.Value));
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, Func<object, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (value is T1)
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T1)value);
+            }
+            if (value is T2)
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T2)value);
+            }
+            if (value is T3)
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T3)value);
+            }
+            if (value is T4)
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T4)value);
+            }
+            if (value is T5)
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T5)value);
+            }
+            if (value is T6)
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T6)value);
+            }
+            if (value is T7)
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T7)value);
+            }
+            if (value is T8)
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T8)value);
+            }
+            if (value is T9)
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T9)value);
+            }
+            if (value is T10)
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T10)value);
+            }
+            if (value is T11)
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T11)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified types.");
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
+        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
+        /// the otherwise function).
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, Func<object, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (Equals(value, t1))
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T1)value);
+            }
+            if (Equals(value, t2))
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T2)value);
+            }
+            if (Equals(value, t3))
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T3)value);
+            }
+            if (Equals(value, t4))
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T4)value);
+            }
+            if (Equals(value, t5))
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T5)value);
+            }
+            if (Equals(value, t6))
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T6)value);
+            }
+            if (Equals(value, t7))
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T7)value);
+            }
+            if (Equals(value, t8))
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T8)value);
+            }
+            if (Equals(value, t9))
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T9)value);
+            }
+            if (Equals(value, t10))
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T10)value);
+            }
+            if (Equals(value, t11))
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T11)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value)
+        {
+            return value.AsCoproduct(v => Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
+        /// the value will be placed in the last place.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11)
+        {
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, null, v => Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
+            this object value,
+            T1 t1, Func<T1, TResult> f1,
+            T2 t2, Func<T2, TResult> f2,
+            T3 t3, Func<T3, TResult> f3,
+            T4 t4, Func<T4, TResult> f4,
+            T5 t5, Func<T5, TResult> f5,
+            T6 t6, Func<T6, TResult> f6,
+            T7 t7, Func<T7, TResult> f7,
+            T8 t8, Func<T8, TResult> f8,
+            T9 t9, Func<T9, TResult> f9,
+            T10 t10, Func<T10, TResult> f10,
+            T11 t11, Func<T11, TResult> f11,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(Unit.Value));
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, Func<object, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (value is T1)
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T1)value);
+            }
+            if (value is T2)
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T2)value);
+            }
+            if (value is T3)
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T3)value);
+            }
+            if (value is T4)
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T4)value);
+            }
+            if (value is T5)
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T5)value);
+            }
+            if (value is T6)
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T6)value);
+            }
+            if (value is T7)
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T7)value);
+            }
+            if (value is T8)
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T8)value);
+            }
+            if (value is T9)
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T9)value);
+            }
+            if (value is T10)
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T10)value);
+            }
+            if (value is T11)
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T11)value);
+            }
+            if (value is T12)
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T12)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified types.");
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
+        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
+        /// the otherwise function).
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, Func<object, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (Equals(value, t1))
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T1)value);
+            }
+            if (Equals(value, t2))
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T2)value);
+            }
+            if (Equals(value, t3))
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T3)value);
+            }
+            if (Equals(value, t4))
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T4)value);
+            }
+            if (Equals(value, t5))
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T5)value);
+            }
+            if (Equals(value, t6))
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T6)value);
+            }
+            if (Equals(value, t7))
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T7)value);
+            }
+            if (Equals(value, t8))
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T8)value);
+            }
+            if (Equals(value, t9))
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T9)value);
+            }
+            if (Equals(value, t10))
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T10)value);
+            }
+            if (Equals(value, t11))
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T11)value);
+            }
+            if (Equals(value, t12))
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T12)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value)
+        {
+            return value.AsCoproduct(v => Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
+        /// the value will be placed in the last place.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12)
+        {
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, null, v => Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
+            this object value,
+            T1 t1, Func<T1, TResult> f1,
+            T2 t2, Func<T2, TResult> f2,
+            T3 t3, Func<T3, TResult> f3,
+            T4 t4, Func<T4, TResult> f4,
+            T5 t5, Func<T5, TResult> f5,
+            T6 t6, Func<T6, TResult> f6,
+            T7 t7, Func<T7, TResult> f7,
+            T8 t8, Func<T8, TResult> f8,
+            T9 t9, Func<T9, TResult> f9,
+            T10 t10, Func<T10, TResult> f10,
+            T11 t11, Func<T11, TResult> f11,
+            T12 t12, Func<T12, TResult> f12,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(Unit.Value));
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, Func<object, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (value is T1)
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T1)value);
+            }
+            if (value is T2)
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T2)value);
+            }
+            if (value is T3)
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T3)value);
+            }
+            if (value is T4)
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T4)value);
+            }
+            if (value is T5)
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T5)value);
+            }
+            if (value is T6)
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T6)value);
+            }
+            if (value is T7)
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T7)value);
+            }
+            if (value is T8)
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T8)value);
+            }
+            if (value is T9)
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T9)value);
+            }
+            if (value is T10)
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T10)value);
+            }
+            if (value is T11)
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T11)value);
+            }
+            if (value is T12)
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T12)value);
+            }
+            if (value is T13)
+            {
+                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T13)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified types.");
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
+        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
+        /// the otherwise function).
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, Func<object, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (Equals(value, t1))
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T1)value);
+            }
+            if (Equals(value, t2))
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T2)value);
+            }
+            if (Equals(value, t3))
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T3)value);
+            }
+            if (Equals(value, t4))
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T4)value);
+            }
+            if (Equals(value, t5))
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T5)value);
+            }
+            if (Equals(value, t6))
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T6)value);
+            }
+            if (Equals(value, t7))
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T7)value);
+            }
+            if (Equals(value, t8))
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T8)value);
+            }
+            if (Equals(value, t9))
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T9)value);
+            }
+            if (Equals(value, t10))
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T10)value);
+            }
+            if (Equals(value, t11))
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T11)value);
+            }
+            if (Equals(value, t12))
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T12)value);
+            }
+            if (Equals(value, t13))
+            {
+                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T13)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value)
+        {
+            return value.AsCoproduct(v => Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
+        /// the value will be placed in the last place.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13)
+        {
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, null, v => Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
+            this object value,
+            T1 t1, Func<T1, TResult> f1,
+            T2 t2, Func<T2, TResult> f2,
+            T3 t3, Func<T3, TResult> f3,
+            T4 t4, Func<T4, TResult> f4,
+            T5 t5, Func<T5, TResult> f5,
+            T6 t6, Func<T6, TResult> f6,
+            T7 t7, Func<T7, TResult> f7,
+            T8 t8, Func<T8, TResult> f8,
+            T9 t9, Func<T9, TResult> f9,
+            T10 t10, Func<T10, TResult> f10,
+            T11 t11, Func<T11, TResult> f11,
+            T12 t12, Func<T12, TResult> f12,
+            T13 t13, Func<T13, TResult> f13,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(Unit.Value));
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, Func<object, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (value is T1)
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T1)value);
+            }
+            if (value is T2)
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T2)value);
+            }
+            if (value is T3)
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T3)value);
+            }
+            if (value is T4)
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T4)value);
+            }
+            if (value is T5)
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T5)value);
+            }
+            if (value is T6)
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T6)value);
+            }
+            if (value is T7)
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T7)value);
+            }
+            if (value is T8)
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T8)value);
+            }
+            if (value is T9)
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T9)value);
+            }
+            if (value is T10)
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T10)value);
+            }
+            if (value is T11)
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T11)value);
+            }
+            if (value is T12)
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T12)value);
+            }
+            if (value is T13)
+            {
+                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T13)value);
+            }
+            if (value is T14)
+            {
+                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T14)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified types.");
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
+        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
+        /// the otherwise function).
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, Func<object, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (Equals(value, t1))
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T1)value);
+            }
+            if (Equals(value, t2))
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T2)value);
+            }
+            if (Equals(value, t3))
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T3)value);
+            }
+            if (Equals(value, t4))
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T4)value);
+            }
+            if (Equals(value, t5))
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T5)value);
+            }
+            if (Equals(value, t6))
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T6)value);
+            }
+            if (Equals(value, t7))
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T7)value);
+            }
+            if (Equals(value, t8))
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T8)value);
+            }
+            if (Equals(value, t9))
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T9)value);
+            }
+            if (Equals(value, t10))
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T10)value);
+            }
+            if (Equals(value, t11))
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T11)value);
+            }
+            if (Equals(value, t12))
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T12)value);
+            }
+            if (Equals(value, t13))
+            {
+                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T13)value);
+            }
+            if (Equals(value, t14))
+            {
+                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T14)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
+        /// the last place.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value)
+        {
+            return value.AsCoproduct(v => Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
+        /// the value will be placed in the last place.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14)
+        {
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, null, v => Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
+            this object value,
+            T1 t1, Func<T1, TResult> f1,
+            T2 t2, Func<T2, TResult> f2,
+            T3 t3, Func<T3, TResult> f3,
+            T4 t4, Func<T4, TResult> f4,
+            T5 t5, Func<T5, TResult> f5,
+            T6 t6, Func<T6, TResult> f6,
+            T7 t7, Func<T7, TResult> f7,
+            T8 t8, Func<T8, TResult> f8,
+            T9 t9, Func<T9, TResult> f9,
+            T10 t10, Func<T10, TResult> f10,
+            T11 t11, Func<T11, TResult> f11,
+            T12 t12, Func<T12, TResult> f12,
+            T13 t13, Func<T13, TResult> f13,
+            T14 t14, Func<T14, TResult> f14,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+            }
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(Unit.Value));
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct as a result of type match. The specified value will be on the first place 
+        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
+        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this object value, Func<object, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (value is T1)
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T1)value);
+            }
+            if (value is T2)
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T2)value);
+            }
+            if (value is T3)
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T3)value);
+            }
+            if (value is T4)
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T4)value);
+            }
+            if (value is T5)
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T5)value);
+            }
+            if (value is T6)
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T6)value);
+            }
+            if (value is T7)
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T7)value);
+            }
+            if (value is T8)
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T8)value);
+            }
+            if (value is T9)
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T9)value);
+            }
+            if (value is T10)
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T10)value);
+            }
+            if (value is T11)
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T11)value);
+            }
+            if (value is T12)
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T12)value);
+            }
+            if (value is T13)
+            {
+                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T13)value);
+            }
+            if (value is T14)
+            {
+                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T14)value);
+            }
+            if (value is T15)
+            {
+                return Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T15)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified types.");
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct as a result of value match against the parameters. The specified value will
+        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
+        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
+        /// the otherwise function).
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, Func<object, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> fallback = null, Func<Unit, Exception> otherwise = null)
+        {
+            if (Equals(value, t1))
+            {
+                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T1)value);
+            }
+            if (Equals(value, t2))
+            {
+                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T2)value);
+            }
+            if (Equals(value, t3))
+            {
+                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T3)value);
+            }
+            if (Equals(value, t4))
+            {
+                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T4)value);
+            }
+            if (Equals(value, t5))
+            {
+                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T5)value);
+            }
+            if (Equals(value, t6))
+            {
+                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T6)value);
+            }
+            if (Equals(value, t7))
+            {
+                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T7)value);
+            }
+            if (Equals(value, t8))
+            {
+                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T8)value);
+            }
+            if (Equals(value, t9))
+            {
+                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T9)value);
+            }
+            if (Equals(value, t10))
+            {
+                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T10)value);
+            }
+            if (Equals(value, t11))
+            {
+                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T11)value);
+            }
+            if (Equals(value, t12))
+            {
+                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T12)value);
+            }
+            if (Equals(value, t13))
+            {
+                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T13)value);
+            }
+            if (Equals(value, t14))
+            {
+                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T14)value);
+            }
+            if (Equals(value, t15))
+            {
+                return Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T15)value);
+            }
+            if (fallback != null)
+            {
+                return fallback(value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
     }

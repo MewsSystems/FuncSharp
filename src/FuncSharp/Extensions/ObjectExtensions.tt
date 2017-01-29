@@ -58,16 +58,6 @@ namespace FuncSharp
 
 <# for (var i = 1; i < MaxArity(); i++) { #>
         /// <summary>
-        /// Matches the value with the specified parameters and returns result of the corresponding function.
-        /// </summary>
-        public static TResult Match<<#= Types(i) #>, TResult>(
-            this object value,
-<#= Lines(i, j => Indent(12) + Parameter(j) + ", Func<" + Type(j) + ", TResult> f" + j, separator: ",") #>)
-        {
-            return value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
-        }
-
-        /// <summary>
         /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
@@ -136,6 +126,21 @@ namespace FuncSharp
         public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
         {
             return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
+        }
+
+        /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding function.
+        /// </summary>
+        public static TResult Match<<#= Types(i) #>, TResult>(
+            this object value,
+<#= Lines(i, j => Indent(12) + Parameter(j) + ", Func<" + Type(j) + ", TResult> f" + j, separator: ",") #>,
+            Func<Unit, TResult> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
+            }
+            return value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
         }
 
 <#     } #>

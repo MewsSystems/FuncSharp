@@ -16,6 +16,11 @@ namespace FuncSharp.Tests
                 0, _ => "foo",
                 1, _ => "bar"
             ));
+            Assert.Equal("baz", 2.Match(
+                0, _ => "foo",
+                1, _ => "bar",
+                _ => "baz"
+            ));
             Assert.Throws<ArgumentException>(() => 2.Match(
                 0, _ => "foo",
                 1, _ => "bar"

@@ -180,4 +180,34 @@
         }
     }
 
+    /// <summary>
+    /// A 6-dimensional relation.
+    /// </summary>
+    public class Relation6<T1, T2, T3, T4, T5, T6> : Relation<IProduct6<T1, T2, T3, T4, T5, T6>, DataCube6<T1, T2, T3, T4, T5, T6, Unit>>
+    {
+        /// <summary>
+        /// Creates an empty 6-dimensional relation.
+        /// </summary>
+        public Relation6()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Returns whether the relation contains the specified product.
+        /// </summary>
+        public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+        {
+            return Contains(Product.Create(t1, t2, t3, t4, t5, t6));
+        }
+
+        /// <summary>
+        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// </summary>
+        public bool Set(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+        {
+            return Set(Product.Create(t1, t2, t3, t4, t5, t6));
+        }
+    }
+
 }
