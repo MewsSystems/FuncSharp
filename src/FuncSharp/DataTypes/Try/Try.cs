@@ -22,6 +22,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Create a new try with the result of the specified function while converting all exceptions into erroneous result.
+        /// </summary>
+        public static ITry<A> Create<A>(Func<Unit, A> f)
+        {
+            return Try.Create<A, Exception>(f);
+        }
+
+        /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
         public static ITry<A> Success<A>(A success)
