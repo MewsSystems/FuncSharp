@@ -155,7 +155,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
             }
-            value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
+            }
         }
 
 <#     } #>

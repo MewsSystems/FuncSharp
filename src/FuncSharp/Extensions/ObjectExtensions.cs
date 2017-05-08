@@ -141,7 +141,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1).Match(f1);
             }
-            value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -246,7 +249,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2).Match(f1, f2);
             }
-            value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -361,7 +367,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
             }
-            value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -486,7 +495,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -621,7 +633,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -766,7 +781,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -921,7 +939,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -1086,7 +1107,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -1261,7 +1285,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -1446,7 +1473,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -1641,7 +1671,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -1846,7 +1879,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -2061,7 +2097,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
@@ -2286,7 +2325,10 @@ namespace FuncSharp
             {
                 value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
             }
-            value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(Unit.Value));
+            else
+            {
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(Unit.Value));
+            }
         }
 
         /// <summary>
