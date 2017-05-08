@@ -143,6 +143,21 @@ namespace FuncSharp
             return value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
         }
 
+        /// <summary>
+        /// Matches the value with the specified parameters and executes the corresponding function.
+        /// </summary>
+        public static void Match<<#= Types(i) #>>(
+            this object value,
+<#= Lines(i, j => Indent(12) + Parameter(j) + ", Action<" + Type(j) + "> f" + j, separator: ",") #>,
+            Action<Unit> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
+            }
+            value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
+        }
+
 <#     } #>
 <# } #>
     }
