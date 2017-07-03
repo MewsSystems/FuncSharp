@@ -17,7 +17,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= ProductType(i) #> ToProduct<#= TypeBracket(i) #>(this Tuple<#= TypeBracket(i) #> t)
         {
-            return Product.Create(<#= Properties(i, name: "Item", accessor: "t.") #>);
+            return Product<#= i #>.Create(<#= Properties(i, name: "Item", accessor: "t.") #>);
         }
 
 <# } #>

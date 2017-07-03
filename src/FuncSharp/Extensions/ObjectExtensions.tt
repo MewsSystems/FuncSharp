@@ -67,7 +67,7 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (value is <#= Type(j) #>)
             {
-                return Coproduct.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
+                return Coproduct<#= i #>.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
             }
 <#     } #>
             if (fallback != null)
@@ -92,7 +92,7 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                return Coproduct.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
+                return Coproduct<#= i #>.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
             }
 <#     } #>
             if (fallback != null)
@@ -115,7 +115,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
+            return value.AsCoproduct(v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
         {
-            return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
+            return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }
 
         /// <summary>

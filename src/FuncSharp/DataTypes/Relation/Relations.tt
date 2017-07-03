@@ -26,7 +26,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(<#= Parameters(i, name: "T") #>)
         {
-            return Contains(Product.Create(<#= Values(i, name: "T") #>));
+            return Contains(Product<#= i #>.Create(<#= Values(i, name: "T") #>));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace FuncSharp
         /// </summary>
         public bool Set(<#= Parameters(i, name: "T") #>)
         {
-            return Set(Product.Create(<#= Values(i, name: "T") #>));
+            return Set(Product<#= i #>.Create(<#= Values(i, name: "T") #>));
         }
     }
 

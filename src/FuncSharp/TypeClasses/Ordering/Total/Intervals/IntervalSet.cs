@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FuncSharp
 {
-    public class IntervalSet<A> : Product
+    public class IntervalSet<A> : ProductBase
     {
         private IEnumerable<object> productValues;
 

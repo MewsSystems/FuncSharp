@@ -18,7 +18,7 @@
         /// </summary>
         public bool Contains()
         {
-            return Contains(Product.Create());
+            return Contains(Product0.Create());
         }
 
         /// <summary>
@@ -26,7 +26,7 @@
         /// </summary>
         public bool Set()
         {
-            return Set(Product.Create());
+            return Set(Product0.Create());
         }
     }
 
@@ -48,7 +48,7 @@
         /// </summary>
         public bool Contains(T1 t1)
         {
-            return Contains(Product.Create(t1));
+            return Contains(Product1.Create(t1));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@
         /// </summary>
         public bool Set(T1 t1)
         {
-            return Set(Product.Create(t1));
+            return Set(Product1.Create(t1));
         }
     }
 
@@ -78,7 +78,7 @@
         /// </summary>
         public bool Contains(T1 t1, T2 t2)
         {
-            return Contains(Product.Create(t1, t2));
+            return Contains(Product2.Create(t1, t2));
         }
 
         /// <summary>
@@ -86,7 +86,7 @@
         /// </summary>
         public bool Set(T1 t1, T2 t2)
         {
-            return Set(Product.Create(t1, t2));
+            return Set(Product2.Create(t1, t2));
         }
     }
 
@@ -108,7 +108,7 @@
         /// </summary>
         public bool Contains(T1 t1, T2 t2, T3 t3)
         {
-            return Contains(Product.Create(t1, t2, t3));
+            return Contains(Product3.Create(t1, t2, t3));
         }
 
         /// <summary>
@@ -116,7 +116,7 @@
         /// </summary>
         public bool Set(T1 t1, T2 t2, T3 t3)
         {
-            return Set(Product.Create(t1, t2, t3));
+            return Set(Product3.Create(t1, t2, t3));
         }
     }
 
@@ -138,7 +138,7 @@
         /// </summary>
         public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4)
         {
-            return Contains(Product.Create(t1, t2, t3, t4));
+            return Contains(Product4.Create(t1, t2, t3, t4));
         }
 
         /// <summary>
@@ -146,7 +146,7 @@
         /// </summary>
         public bool Set(T1 t1, T2 t2, T3 t3, T4 t4)
         {
-            return Set(Product.Create(t1, t2, t3, t4));
+            return Set(Product4.Create(t1, t2, t3, t4));
         }
     }
 
@@ -168,7 +168,7 @@
         /// </summary>
         public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
         {
-            return Contains(Product.Create(t1, t2, t3, t4, t5));
+            return Contains(Product5.Create(t1, t2, t3, t4, t5));
         }
 
         /// <summary>
@@ -176,7 +176,7 @@
         /// </summary>
         public bool Set(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
         {
-            return Set(Product.Create(t1, t2, t3, t4, t5));
+            return Set(Product5.Create(t1, t2, t3, t4, t5));
         }
     }
 
@@ -198,7 +198,7 @@
         /// </summary>
         public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
-            return Contains(Product.Create(t1, t2, t3, t4, t5, t6));
+            return Contains(Product6.Create(t1, t2, t3, t4, t5, t6));
         }
 
         /// <summary>
@@ -206,7 +206,7 @@
         /// </summary>
         public bool Set(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
-            return Set(Product.Create(t1, t2, t3, t4, t5, t6));
+            return Set(Product6.Create(t1, t2, t3, t4, t5, t6));
         }
     }
 

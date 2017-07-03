@@ -34,7 +34,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= FuncType(i) #> Denormalized<<#= FuncTypes(i) #>>(this Func<<#= ProductType(i) #>, TResult> f)
         {
-            return (<#= Values(i) #>) => f(Product.Create(<#= Values(i) #>));
+            return (<#= Values(i) #>) => f(Product<#= i #>.Create(<#= Values(i) #>));
         }
 
 <#     if (i > 1) { #>

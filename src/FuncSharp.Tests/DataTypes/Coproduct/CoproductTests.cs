@@ -7,9 +7,9 @@ namespace FuncSharp.Tests
         [Fact]
         public void ConstructionPreservesValues()
         {
-            var c1 = Coproduct.CreateFirst<string, int>("foo");
-            var c2 = Coproduct.CreateSecond<string, int>(42);
-            var c3 = Coproduct.CreateSecond<string, string>("bar");
+            var c1 = Coproduct2.CreateFirst<string, int>("foo");
+            var c2 = Coproduct2.CreateSecond<string, int>(42);
+            var c3 = Coproduct2.CreateSecond<string, string>("bar");
 
             Assert.Equal(2, c1.CoproductArity);
             Assert.Equal(2, c2.CoproductArity);
@@ -36,8 +36,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void OptionProjectionIsCorrect()
         {
-            var u1 = Coproduct.CreateFirst<string, int>("foo");
-            var u2 = Coproduct.CreateSecond<string, int>(42);
+            var u1 = Coproduct2.CreateFirst<string, int>("foo");
+            var u2 = Coproduct2.CreateSecond<string, int>(42);
 
             Assert.Equal(Option.Valued("foo"), u1.First);
             Assert.Equal(Option.Empty<int>(), u1.Second);
@@ -49,8 +49,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void MatchWorks()
         {
-            var u1 = Coproduct.CreateFirst<string, int>("foo");
-            var u2 = Coproduct.CreateSecond<string, int>(42);
+            var u1 = Coproduct2.CreateFirst<string, int>("foo");
+            var u2 = Coproduct2.CreateSecond<string, int>(42);
 
             Assert.True(u1.Match(v => v == "foo", v => false));
             Assert.True(u2.Match(v => false, v => v == 42));

@@ -11,7 +11,7 @@ namespace FuncSharp
         /// </summary>
         public static IMorphism<A, A> Identity<A>(IEnumerable<A> values)
         {
-            return Create(values.Select(v => Product.Create(v, v)));
+            return Create(values.Select(v => Product2.Create(v, v)));
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace FuncSharp
             {
                 var bo = m1.Apply(a);
                 var co = bo.FlatMap(b => m2.Apply(b));
-                return co.Map(c => Product.Create(a, c));
+                return co.Map(c => Product2.Create(a, c));
             });
             return Create(mappings.Flatten());
         }

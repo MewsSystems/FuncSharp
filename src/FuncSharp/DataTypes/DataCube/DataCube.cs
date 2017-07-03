@@ -386,7 +386,7 @@ namespace FuncSharp
 
         protected void AddDomain<P>(Dictionary<IProduct1<P>, int> rangeCounts, P value)
         {
-            var key = Product.Create(value);
+            var key = Product1.Create(value);
             var count = 0;
             rangeCounts.TryGetValue(key, out count);
             rangeCounts[key] = count + 1;
@@ -394,7 +394,7 @@ namespace FuncSharp
 
         protected void RemoveDomain<P>(Dictionary<IProduct1<P>, int> rangeCounts, P value)
         {
-            var key = Product.Create(value);
+            var key = Product1.Create(value);
             var count = rangeCounts[key];
             if (count == 1)
             {

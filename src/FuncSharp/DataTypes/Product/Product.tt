@@ -14,10 +14,93 @@ namespace FuncSharp
     /// <summary>
     /// Base class and factory of canonical product types.
     /// </summary>
-    public abstract class Product : IProduct
+    public abstract class ProductBase : IProduct
     {
         public abstract IEnumerable<object> ProductValues { get; }
+
+        public override int GetHashCode()
+        {
+            return Structural.HashCode(ProductValues);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.ProductEquals(obj);
+        }
+
+        public override string ToString()
+        {
+            return this.ProductToString();
+        }
+    }
+
 <#  for (var i = 0; i < MaxArity(); i++) { #>
+<#      if (i > 0) { #>
+    /// <summary>
+    /// A factory for <#= i #>-dimensional strongly-typed immutable products.
+    /// </summary>
+    public static class Product<#= i #>
+    {
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional canonical product.
+        /// </summary>
+        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
+        {
+            return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
+        }
+
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional canonical product.
+        /// </summary>
+        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
+        {
+            if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
+            {
+                return p;
+            }
+
+            return Create(<#= Properties(i, name: "p.ProductValue") #>);
+        }
+    }
+
+<#      } #>
+    /// <summary>
+    /// A <#= i #>-dimensional strongly-typed immutable product.
+    /// </summary>
+    public class <#= ProductImplType(i) #> : ProductBase, <#= ProductType(i) #>
+    {
+        public Product<#= i #>(<#= Parameters(i) #>)
+        {
+<#      for (var j = 1; j <= i; j++) { #>
+            <#= ProductProperty(j) #> = <#= Value(j) #>;
+<#      } #>
+        }
+<#      for (var j = 1; j <= i; j++) { #>
+
+        public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
+<#      } #>
+<#      for (var j = 1; j <= i; j++) { #>
+
+        public <#= ProductType(i, except: j) #> ExceptValue<#= j #>
+        {
+            get { return Product<#= i - 1 #>.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
+        }
+<#      } #>
+
+        public override IEnumerable<object> ProductValues
+        {
+            get
+            {
+<#      if (i > 0) { #>
+<#          for (var j = 1; j <= i; j++) { #>
+                yield return <#= ProductProperty(j) #>;
+<#          } #>
+<#      } else { #>
+                return Enumerable.Empty<object>();
+<#      } #>
+            }
+        }
+<#      if (i == 0) { #>
 
         /// <summary>
         /// Creates a new <#= i #>-dimensional canonical product.
@@ -39,61 +122,7 @@ namespace FuncSharp
 
             return Create(<#= Properties(i, name: "p.ProductValue") #>);
         }
-<#  } #>
-
-        public override int GetHashCode()
-        {
-            return Structural.HashCode(ProductValues);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.ProductEquals(obj);
-        }
-
-        public override string ToString()
-        {
-            return this.ProductToString();
-        }
-    }
-
-<#  for (var i = 0; i < MaxArity(); i++) { #>
-    /// <summary>
-    /// A <#= i #>-dimensional strongly-typed immutable product.
-    /// </summary>
-    public class <#= ProductImplType(i) #> : Product, <#= ProductType(i) #>
-    {
-        public Product<#= i #>(<#= Parameters(i) #>)
-        {
-<#      for (var j = 1; j <= i; j++) { #>
-            <#= ProductProperty(j) #> = <#= Value(j) #>;
 <#      } #>
-        }
-<#      for (var j = 1; j <= i; j++) { #>
-
-        public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
-<#      } #>
-<#      for (var j = 1; j <= i; j++) { #>
-
-        public <#= ProductType(i, except: j) #> ExceptValue<#= j #>
-        {
-            get { return Product.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
-        }
-<#      } #>
-
-        public override IEnumerable<object> ProductValues
-        {
-            get
-            {
-<#      if (i > 0) { #>
-<#          for (var j = 1; j <= i; j++) { #>
-                yield return <#= ProductProperty(j) #>;
-<#          } #>
-<#      } else { #>
-                return Enumerable.Empty<object>();
-<#      } #>
-            }
-        }
 
         public R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f)
         {

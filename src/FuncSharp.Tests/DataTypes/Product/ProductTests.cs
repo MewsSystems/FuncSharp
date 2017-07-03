@@ -9,9 +9,9 @@ namespace FuncSharp.Tests
         [Fact]
         public void ProductToStringIsCorrect()
         {
-            var p0 = Product.Create();
-            var p1 = Product.Create(1, "foo", null as object);
-            var p2 = Product.Create(2, "bar", p1);
+            var p0 = Product0.Create();
+            var p1 = Product3.Create(1, "foo", null as object);
+            var p2 = Product3.Create(2, "bar", p1);
 
             Assert.Equal("Product0()", p0.ToString());
             Assert.Equal("Product3(1, foo, null)", p1.ToString());
@@ -21,9 +21,9 @@ namespace FuncSharp.Tests
         [Fact]
         public void ProductHashCodeIsNotTrivial()
         {
-            var p1 = Product.Create(1, "foo", true, null as object);
-            var p2 = Product.Create(2, "bar", false, new object());
-            var p3 = Product.Create(3, "baz", true, new object());
+            var p1 = Product4.Create(1, "foo", true, null as object);
+            var p2 = Product4.Create(2, "bar", false, new object());
+            var p3 = Product4.Create(3, "baz", true, new object());
 
             var h1 = p1.GetHashCode();
             var h2 = p2.GetHashCode();
@@ -37,7 +37,7 @@ namespace FuncSharp.Tests
         [Fact]
         public void ConstructionPreservesValues()
         {
-            var p1 = Product.Create(42, "foo");
+            var p1 = Product2.Create(42, "foo");
             Assert.Equal(42, p1.ProductValue1);
             Assert.Equal("foo", p1.ProductValue2);
         }
@@ -45,7 +45,7 @@ namespace FuncSharp.Tests
         [Fact]
         public void ValueColllectionIsCorrect()
         {
-            var p1 = Product.Create("foo", 42, "bar");
+            var p1 = Product3.Create("foo", 42, "bar");
             Assert.NotNull(p1.ProductValues);
             Assert.Equal(3, p1.ProductValues.Count());
             Assert.Equal("foo", p1.ProductValues.ElementAt(0));
@@ -56,7 +56,7 @@ namespace FuncSharp.Tests
         [Fact]
         public void ExceptValueExcludesCorrectValue()
         {
-            var p = Product.Create("foo", "bar", "baz");
+            var p = Product3.Create("foo", "bar", "baz");
 
             var p1 = p.ExceptValue1;
             Assert.Equal("bar", p1.ProductValue1);
@@ -70,9 +70,9 @@ namespace FuncSharp.Tests
         [Fact]
         public void EqualsIsStructural()
         {
-            var p1 = Product.Create("foo", "bar");
-            var p2 = Product.Create("foo", "bar");
-            var p3 = Product.Create(12345, 67890);
+            var p1 = Product2.Create("foo", "bar");
+            var p2 = Product2.Create("foo", "bar");
+            var p3 = Product2.Create(12345, 67890);
 
             Assert.True(p1.Equals(p2));
             Assert.False(p1.Equals(p3));
@@ -81,8 +81,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void ZeroDimensionalProductsAreAlwaysEqual()
         {
-            var p1 = Product.Create();
-            var p2 = Product.Create();
+            var p1 = Product0.Create();
+            var p2 = Product0.Create();
 
             Assert.True(p1.Equals(p2));
         }
@@ -90,9 +90,9 @@ namespace FuncSharp.Tests
         [Fact]
         public void HashCodeDependsOnStructure()
         {
-            var p1 = Product.Create("foo", "bar");
-            var p2 = Product.Create("foo", "bar");
-            var p3 = Product.Create(12345, 67890);
+            var p1 = Product2.Create("foo", "bar");
+            var p2 = Product2.Create("foo", "bar");
+            var p3 = Product2.Create(12345, 67890);
 
             Assert.True(p1.GetHashCode() == p2.GetHashCode());
             Assert.False(p1.GetHashCode() == p3.GetHashCode());
@@ -101,7 +101,7 @@ namespace FuncSharp.Tests
         [Fact]
         public void ConversionToTupleWorks()
         {
-            var p = Product.Create(42, "foo", true);
+            var p = Product3.Create(42, "foo", true);
             var t = p.ToTuple();
             Assert.Equal(42, t.Item1);
             Assert.Equal("foo", t.Item2);

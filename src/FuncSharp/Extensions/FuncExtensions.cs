@@ -26,7 +26,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<TResult> Denormalized<TResult>(this Func<IProduct0, TResult> f)
         {
-            return () => f(Product.Create());
+            return () => f(Product0.Create());
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, TResult> Denormalized<T1, TResult>(this Func<IProduct1<T1>, TResult> f)
         {
-            return (t1) => f(Product.Create(t1));
+            return (t1) => f(Product1.Create(t1));
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, TResult> Denormalized<T1, T2, TResult>(this Func<IProduct2<T1, T2>, TResult> f)
         {
-            return (t1, t2) => f(Product.Create(t1, t2));
+            return (t1, t2) => f(Product2.Create(t1, t2));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, TResult> Denormalized<T1, T2, T3, TResult>(this Func<IProduct3<T1, T2, T3>, TResult> f)
         {
-            return (t1, t2, t3) => f(Product.Create(t1, t2, t3));
+            return (t1, t2, t3) => f(Product3.Create(t1, t2, t3));
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, TResult> Denormalized<T1, T2, T3, T4, TResult>(this Func<IProduct4<T1, T2, T3, T4>, TResult> f)
         {
-            return (t1, t2, t3, t4) => f(Product.Create(t1, t2, t3, t4));
+            return (t1, t2, t3, t4) => f(Product4.Create(t1, t2, t3, t4));
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, TResult> Denormalized<T1, T2, T3, T4, T5, TResult>(this Func<IProduct5<T1, T2, T3, T4, T5>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5) => f(Product.Create(t1, t2, t3, t4, t5));
+            return (t1, t2, t3, t4, t5) => f(Product5.Create(t1, t2, t3, t4, t5));
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, TResult> Denormalized<T1, T2, T3, T4, T5, T6, TResult>(this Func<IProduct6<T1, T2, T3, T4, T5, T6>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6) => f(Product.Create(t1, t2, t3, t4, t5, t6));
+            return (t1, t2, t3, t4, t5, t6) => f(Product6.Create(t1, t2, t3, t4, t5, t6));
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, TResult>(this Func<IProduct7<T1, T2, T3, T4, T5, T6, T7>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7));
+            return (t1, t2, t3, t4, t5, t6, t7) => f(Product7.Create(t1, t2, t3, t4, t5, t6, t7));
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this Func<IProduct8<T1, T2, T3, T4, T5, T6, T7, T8>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8));
+            return (t1, t2, t3, t4, t5, t6, t7, t8) => f(Product8.Create(t1, t2, t3, t4, t5, t6, t7, t8));
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this Func<IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9) => f(Product9.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9));
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(this Func<IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) => f(Product10.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(this Func<IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) => f(Product11.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(this Func<IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) => f(Product12.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12));
         }
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(this Func<IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) => f(Product13.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13));
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(this Func<IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) => f(Product14.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14));
         }
 
         /// <summary>
@@ -505,7 +505,7 @@ namespace FuncSharp
         /// </summary>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Denormalized<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(this Func<IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, TResult> f)
         {
-            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) => f(Product.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
+            return (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) => f(Product15.Create(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15));
         }
 
         /// <summary>

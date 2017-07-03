@@ -56,7 +56,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(<#= Parameters(i, name: "P") #>)
         {
-            return Contains(Product.Create(<#= Values(i, name: "P") #>));
+            return Contains(Product<#= i #>.Create(<#= Values(i, name: "P") #>));
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(<#= Parameters(i, name: "P") #>)
         {
-            return Get(Product.Create(<#= Values(i, name: "P") #>));
+            return Get(Product<#= i #>.Create(<#= Values(i, name: "P") #>));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(<#= Parameters(i, name: "P", appendSeparator: true) #>Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(<#= Values(i, name: "P") #>), setter);
+            return GetOrElseSet(Product<#= i #>.Create(<#= Values(i, name: "P") #>), setter);
         }
         
         /// <summary>
@@ -92,7 +92,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value)
         {
-            return Set(Product.Create(<#= Values(i, name: "P") #>), value);
+            return Set(Product<#= i #>.Create(<#= Values(i, name: "P") #>), value);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(<#= Values(i, name: "P") #>), value, otherwise);
+            return SetOrElse(Product<#= i #>.Create(<#= Values(i, name: "P") #>), value, otherwise);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(<#= Values(i, name: "P") #>), value, updater);
+            return SetOrElseUpdate(Product<#= i #>.Create(<#= Values(i, name: "P") #>), value, updater);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace FuncSharp
         /// </summary>
         protected override <#= ProductType(i, name: "P") #> ToCanonicalPosition(<#= ProductType(i, name: "P") #> position)
         {
-            return Product.Create(position);
+            return Product<#= i #>.Create(position);
         }
     }
 

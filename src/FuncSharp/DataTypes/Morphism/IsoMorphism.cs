@@ -8,7 +8,7 @@ namespace FuncSharp
         public IsoMorphism(IEnumerable<IProduct2<A, B>> mappings)
             : base(mappings)
         {
-            Inverse = Morphism.Create(mappings.Select(m => Product.Create(m.ProductValue2, m.ProductValue1)));
+            Inverse = Morphism.Create(mappings.Select(m => Product2.Create(m.ProductValue2, m.ProductValue1)));
         }
 
         public IMorphism<B, A> Inverse { get; }

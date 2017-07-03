@@ -58,7 +58,7 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1>((T1)value);
+                return Coproduct1.CreateFirst<T1>((T1)value);
             }
             if (fallback != null)
             {
@@ -81,7 +81,7 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1>((T1)value);
+                return Coproduct1.CreateFirst<T1>((T1)value);
             }
             if (fallback != null)
             {
@@ -101,7 +101,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct2<T1, object> AsSafeCoproduct<T1>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateSecond<T1, object>(v));
+            return value.AsCoproduct(v => Coproduct2.CreateSecond<T1, object>(v));
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct2<T1, object> AsSafeCoproduct<T1>(this object value, T1 t1)
         {
-            return value.AsCoproduct(t1, null, v => Coproduct.CreateSecond<T1, object>(v));
+            return value.AsCoproduct(t1, null, v => Coproduct2.CreateSecond<T1, object>(v));
         }
 
         /// <summary>
@@ -156,11 +156,11 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2>((T1)value);
+                return Coproduct2.CreateFirst<T1, T2>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2>((T2)value);
+                return Coproduct2.CreateSecond<T1, T2>((T2)value);
             }
             if (fallback != null)
             {
@@ -183,11 +183,11 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2>((T1)value);
+                return Coproduct2.CreateFirst<T1, T2>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2>((T2)value);
+                return Coproduct2.CreateSecond<T1, T2>((T2)value);
             }
             if (fallback != null)
             {
@@ -207,7 +207,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct3<T1, T2, object> AsSafeCoproduct<T1, T2>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateThird<T1, T2, object>(v));
+            return value.AsCoproduct(v => Coproduct3.CreateThird<T1, T2, object>(v));
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct3<T1, T2, object> AsSafeCoproduct<T1, T2>(this object value, T1 t1, T2 t2)
         {
-            return value.AsCoproduct(t1, t2, null, v => Coproduct.CreateThird<T1, T2, object>(v));
+            return value.AsCoproduct(t1, t2, null, v => Coproduct3.CreateThird<T1, T2, object>(v));
         }
 
         /// <summary>
@@ -264,15 +264,15 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3>((T1)value);
+                return Coproduct3.CreateFirst<T1, T2, T3>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3>((T2)value);
+                return Coproduct3.CreateSecond<T1, T2, T3>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3>((T3)value);
+                return Coproduct3.CreateThird<T1, T2, T3>((T3)value);
             }
             if (fallback != null)
             {
@@ -295,15 +295,15 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3>((T1)value);
+                return Coproduct3.CreateFirst<T1, T2, T3>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3>((T2)value);
+                return Coproduct3.CreateSecond<T1, T2, T3>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3>((T3)value);
+                return Coproduct3.CreateThird<T1, T2, T3>((T3)value);
             }
             if (fallback != null)
             {
@@ -323,7 +323,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct4<T1, T2, T3, object> AsSafeCoproduct<T1, T2, T3>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateFourth<T1, T2, T3, object>(v));
+            return value.AsCoproduct(v => Coproduct4.CreateFourth<T1, T2, T3, object>(v));
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct4<T1, T2, T3, object> AsSafeCoproduct<T1, T2, T3>(this object value, T1 t1, T2 t2, T3 t3)
         {
-            return value.AsCoproduct(t1, t2, t3, null, v => Coproduct.CreateFourth<T1, T2, T3, object>(v));
+            return value.AsCoproduct(t1, t2, t3, null, v => Coproduct4.CreateFourth<T1, T2, T3, object>(v));
         }
 
         /// <summary>
@@ -382,19 +382,19 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4>((T1)value);
+                return Coproduct4.CreateFirst<T1, T2, T3, T4>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4>((T2)value);
+                return Coproduct4.CreateSecond<T1, T2, T3, T4>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4>((T3)value);
+                return Coproduct4.CreateThird<T1, T2, T3, T4>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4>((T4)value);
+                return Coproduct4.CreateFourth<T1, T2, T3, T4>((T4)value);
             }
             if (fallback != null)
             {
@@ -417,19 +417,19 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4>((T1)value);
+                return Coproduct4.CreateFirst<T1, T2, T3, T4>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4>((T2)value);
+                return Coproduct4.CreateSecond<T1, T2, T3, T4>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4>((T3)value);
+                return Coproduct4.CreateThird<T1, T2, T3, T4>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4>((T4)value);
+                return Coproduct4.CreateFourth<T1, T2, T3, T4>((T4)value);
             }
             if (fallback != null)
             {
@@ -449,7 +449,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct5<T1, T2, T3, T4, object> AsSafeCoproduct<T1, T2, T3, T4>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateFifth<T1, T2, T3, T4, object>(v));
+            return value.AsCoproduct(v => Coproduct5.CreateFifth<T1, T2, T3, T4, object>(v));
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct5<T1, T2, T3, T4, object> AsSafeCoproduct<T1, T2, T3, T4>(this object value, T1 t1, T2 t2, T3 t3, T4 t4)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, null, v => Coproduct.CreateFifth<T1, T2, T3, T4, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, null, v => Coproduct5.CreateFifth<T1, T2, T3, T4, object>(v));
         }
 
         /// <summary>
@@ -510,23 +510,23 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5>((T1)value);
+                return Coproduct5.CreateFirst<T1, T2, T3, T4, T5>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5>((T2)value);
+                return Coproduct5.CreateSecond<T1, T2, T3, T4, T5>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5>((T3)value);
+                return Coproduct5.CreateThird<T1, T2, T3, T4, T5>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5>((T4)value);
+                return Coproduct5.CreateFourth<T1, T2, T3, T4, T5>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
+                return Coproduct5.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
             }
             if (fallback != null)
             {
@@ -549,23 +549,23 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5>((T1)value);
+                return Coproduct5.CreateFirst<T1, T2, T3, T4, T5>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5>((T2)value);
+                return Coproduct5.CreateSecond<T1, T2, T3, T4, T5>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5>((T3)value);
+                return Coproduct5.CreateThird<T1, T2, T3, T4, T5>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5>((T4)value);
+                return Coproduct5.CreateFourth<T1, T2, T3, T4, T5>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
+                return Coproduct5.CreateFifth<T1, T2, T3, T4, T5>((T5)value);
             }
             if (fallback != null)
             {
@@ -585,7 +585,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, object> AsSafeCoproduct<T1, T2, T3, T4, T5>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateSixth<T1, T2, T3, T4, T5, object>(v));
+            return value.AsCoproduct(v => Coproduct6.CreateSixth<T1, T2, T3, T4, T5, object>(v));
         }
 
         /// <summary>
@@ -595,7 +595,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, object> AsSafeCoproduct<T1, T2, T3, T4, T5>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, null, v => Coproduct.CreateSixth<T1, T2, T3, T4, T5, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, null, v => Coproduct6.CreateSixth<T1, T2, T3, T4, T5, object>(v));
         }
 
         /// <summary>
@@ -648,27 +648,27 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6>((T1)value);
+                return Coproduct6.CreateFirst<T1, T2, T3, T4, T5, T6>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6>((T2)value);
+                return Coproduct6.CreateSecond<T1, T2, T3, T4, T5, T6>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6>((T3)value);
+                return Coproduct6.CreateThird<T1, T2, T3, T4, T5, T6>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6>((T4)value);
+                return Coproduct6.CreateFourth<T1, T2, T3, T4, T5, T6>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6>((T5)value);
+                return Coproduct6.CreateFifth<T1, T2, T3, T4, T5, T6>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
+                return Coproduct6.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
             }
             if (fallback != null)
             {
@@ -691,27 +691,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6>((T1)value);
+                return Coproduct6.CreateFirst<T1, T2, T3, T4, T5, T6>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6>((T2)value);
+                return Coproduct6.CreateSecond<T1, T2, T3, T4, T5, T6>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6>((T3)value);
+                return Coproduct6.CreateThird<T1, T2, T3, T4, T5, T6>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6>((T4)value);
+                return Coproduct6.CreateFourth<T1, T2, T3, T4, T5, T6>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6>((T5)value);
+                return Coproduct6.CreateFifth<T1, T2, T3, T4, T5, T6>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
+                return Coproduct6.CreateSixth<T1, T2, T3, T4, T5, T6>((T6)value);
             }
             if (fallback != null)
             {
@@ -731,7 +731,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
+            return value.AsCoproduct(v => Coproduct7.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
         }
 
         /// <summary>
@@ -741,7 +741,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, null, v => Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, null, v => Coproduct7.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
         }
 
         /// <summary>
@@ -796,31 +796,31 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7>((T1)value);
+                return Coproduct7.CreateFirst<T1, T2, T3, T4, T5, T6, T7>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7>((T2)value);
+                return Coproduct7.CreateSecond<T1, T2, T3, T4, T5, T6, T7>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7>((T3)value);
+                return Coproduct7.CreateThird<T1, T2, T3, T4, T5, T6, T7>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7>((T4)value);
+                return Coproduct7.CreateFourth<T1, T2, T3, T4, T5, T6, T7>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7>((T5)value);
+                return Coproduct7.CreateFifth<T1, T2, T3, T4, T5, T6, T7>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7>((T6)value);
+                return Coproduct7.CreateSixth<T1, T2, T3, T4, T5, T6, T7>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
+                return Coproduct7.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
             }
             if (fallback != null)
             {
@@ -843,31 +843,31 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7>((T1)value);
+                return Coproduct7.CreateFirst<T1, T2, T3, T4, T5, T6, T7>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7>((T2)value);
+                return Coproduct7.CreateSecond<T1, T2, T3, T4, T5, T6, T7>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7>((T3)value);
+                return Coproduct7.CreateThird<T1, T2, T3, T4, T5, T6, T7>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7>((T4)value);
+                return Coproduct7.CreateFourth<T1, T2, T3, T4, T5, T6, T7>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7>((T5)value);
+                return Coproduct7.CreateFifth<T1, T2, T3, T4, T5, T6, T7>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7>((T6)value);
+                return Coproduct7.CreateSixth<T1, T2, T3, T4, T5, T6, T7>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
+                return Coproduct7.CreateSeventh<T1, T2, T3, T4, T5, T6, T7>((T7)value);
             }
             if (fallback != null)
             {
@@ -887,7 +887,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
+            return value.AsCoproduct(v => Coproduct8.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
         }
 
         /// <summary>
@@ -897,7 +897,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, null, v => Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, null, v => Coproduct8.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
         }
 
         /// <summary>
@@ -954,35 +954,35 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+                return Coproduct8.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+                return Coproduct8.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+                return Coproduct8.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+                return Coproduct8.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+                return Coproduct8.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+                return Coproduct8.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+                return Coproduct8.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
+                return Coproduct8.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
             }
             if (fallback != null)
             {
@@ -1005,35 +1005,35 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
+                return Coproduct8.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
+                return Coproduct8.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
+                return Coproduct8.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
+                return Coproduct8.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
+                return Coproduct8.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
+                return Coproduct8.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
+                return Coproduct8.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
+                return Coproduct8.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>((T8)value);
             }
             if (fallback != null)
             {
@@ -1053,7 +1053,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
+            return value.AsCoproduct(v => Coproduct9.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
         }
 
         /// <summary>
@@ -1063,7 +1063,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, null, v => Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, null, v => Coproduct9.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
         }
 
         /// <summary>
@@ -1122,39 +1122,39 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T1)value);
+                return Coproduct9.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T2)value);
+                return Coproduct9.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T3)value);
+                return Coproduct9.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T4)value);
+                return Coproduct9.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T5)value);
+                return Coproduct9.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T6)value);
+                return Coproduct9.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T7)value);
+                return Coproduct9.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T8)value);
+                return Coproduct9.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
+                return Coproduct9.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
             }
             if (fallback != null)
             {
@@ -1177,39 +1177,39 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T1)value);
+                return Coproduct9.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T2)value);
+                return Coproduct9.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T3)value);
+                return Coproduct9.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T4)value);
+                return Coproduct9.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T5)value);
+                return Coproduct9.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T6)value);
+                return Coproduct9.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T7)value);
+                return Coproduct9.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T8)value);
+                return Coproduct9.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
+                return Coproduct9.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>((T9)value);
             }
             if (fallback != null)
             {
@@ -1229,7 +1229,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
+            return value.AsCoproduct(v => Coproduct10.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
         }
 
         /// <summary>
@@ -1239,7 +1239,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, null, v => Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, null, v => Coproduct10.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
         }
 
         /// <summary>
@@ -1300,43 +1300,43 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T1)value);
+                return Coproduct10.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T2)value);
+                return Coproduct10.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T3)value);
+                return Coproduct10.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T4)value);
+                return Coproduct10.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T5)value);
+                return Coproduct10.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T6)value);
+                return Coproduct10.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T7)value);
+                return Coproduct10.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T8)value);
+                return Coproduct10.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T9)value);
+                return Coproduct10.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T9)value);
             }
             if (value is T10)
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T10)value);
+                return Coproduct10.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T10)value);
             }
             if (fallback != null)
             {
@@ -1359,43 +1359,43 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T1)value);
+                return Coproduct10.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T2)value);
+                return Coproduct10.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T3)value);
+                return Coproduct10.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T4)value);
+                return Coproduct10.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T5)value);
+                return Coproduct10.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T6)value);
+                return Coproduct10.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T7)value);
+                return Coproduct10.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T8)value);
+                return Coproduct10.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T9)value);
+                return Coproduct10.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T9)value);
             }
             if (Equals(value, t10))
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T10)value);
+                return Coproduct10.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>((T10)value);
             }
             if (fallback != null)
             {
@@ -1415,7 +1415,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
+            return value.AsCoproduct(v => Coproduct11.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
         }
 
         /// <summary>
@@ -1425,7 +1425,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, null, v => Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, null, v => Coproduct11.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
         }
 
         /// <summary>
@@ -1488,47 +1488,47 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T1)value);
+                return Coproduct11.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T2)value);
+                return Coproduct11.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T3)value);
+                return Coproduct11.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T4)value);
+                return Coproduct11.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T5)value);
+                return Coproduct11.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T6)value);
+                return Coproduct11.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T7)value);
+                return Coproduct11.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T8)value);
+                return Coproduct11.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T9)value);
+                return Coproduct11.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T9)value);
             }
             if (value is T10)
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T10)value);
+                return Coproduct11.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T10)value);
             }
             if (value is T11)
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T11)value);
+                return Coproduct11.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T11)value);
             }
             if (fallback != null)
             {
@@ -1551,47 +1551,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T1)value);
+                return Coproduct11.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T2)value);
+                return Coproduct11.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T3)value);
+                return Coproduct11.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T4)value);
+                return Coproduct11.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T5)value);
+                return Coproduct11.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T6)value);
+                return Coproduct11.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T7)value);
+                return Coproduct11.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T8)value);
+                return Coproduct11.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T9)value);
+                return Coproduct11.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T9)value);
             }
             if (Equals(value, t10))
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T10)value);
+                return Coproduct11.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T10)value);
             }
             if (Equals(value, t11))
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T11)value);
+                return Coproduct11.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>((T11)value);
             }
             if (fallback != null)
             {
@@ -1611,7 +1611,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
+            return value.AsCoproduct(v => Coproduct12.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
         }
 
         /// <summary>
@@ -1621,7 +1621,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, null, v => Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, null, v => Coproduct12.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
         }
 
         /// <summary>
@@ -1686,51 +1686,51 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T1)value);
+                return Coproduct12.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T2)value);
+                return Coproduct12.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T3)value);
+                return Coproduct12.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T4)value);
+                return Coproduct12.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T5)value);
+                return Coproduct12.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T6)value);
+                return Coproduct12.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T7)value);
+                return Coproduct12.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T8)value);
+                return Coproduct12.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T9)value);
+                return Coproduct12.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T9)value);
             }
             if (value is T10)
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T10)value);
+                return Coproduct12.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T10)value);
             }
             if (value is T11)
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T11)value);
+                return Coproduct12.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T11)value);
             }
             if (value is T12)
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T12)value);
+                return Coproduct12.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T12)value);
             }
             if (fallback != null)
             {
@@ -1753,51 +1753,51 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T1)value);
+                return Coproduct12.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T2)value);
+                return Coproduct12.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T3)value);
+                return Coproduct12.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T4)value);
+                return Coproduct12.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T5)value);
+                return Coproduct12.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T6)value);
+                return Coproduct12.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T7)value);
+                return Coproduct12.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T8)value);
+                return Coproduct12.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T9)value);
+                return Coproduct12.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T9)value);
             }
             if (Equals(value, t10))
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T10)value);
+                return Coproduct12.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T10)value);
             }
             if (Equals(value, t11))
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T11)value);
+                return Coproduct12.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T11)value);
             }
             if (Equals(value, t12))
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T12)value);
+                return Coproduct12.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>((T12)value);
             }
             if (fallback != null)
             {
@@ -1817,7 +1817,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
+            return value.AsCoproduct(v => Coproduct13.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
         }
 
         /// <summary>
@@ -1827,7 +1827,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, null, v => Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, null, v => Coproduct13.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
         }
 
         /// <summary>
@@ -1894,55 +1894,55 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T1)value);
+                return Coproduct13.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T2)value);
+                return Coproduct13.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T3)value);
+                return Coproduct13.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T4)value);
+                return Coproduct13.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T5)value);
+                return Coproduct13.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T6)value);
+                return Coproduct13.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T7)value);
+                return Coproduct13.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T8)value);
+                return Coproduct13.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T9)value);
+                return Coproduct13.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T9)value);
             }
             if (value is T10)
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T10)value);
+                return Coproduct13.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T10)value);
             }
             if (value is T11)
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T11)value);
+                return Coproduct13.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T11)value);
             }
             if (value is T12)
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T12)value);
+                return Coproduct13.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T12)value);
             }
             if (value is T13)
             {
-                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T13)value);
+                return Coproduct13.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T13)value);
             }
             if (fallback != null)
             {
@@ -1965,55 +1965,55 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T1)value);
+                return Coproduct13.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T2)value);
+                return Coproduct13.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T3)value);
+                return Coproduct13.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T4)value);
+                return Coproduct13.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T5)value);
+                return Coproduct13.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T6)value);
+                return Coproduct13.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T7)value);
+                return Coproduct13.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T8)value);
+                return Coproduct13.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T9)value);
+                return Coproduct13.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T9)value);
             }
             if (Equals(value, t10))
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T10)value);
+                return Coproduct13.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T10)value);
             }
             if (Equals(value, t11))
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T11)value);
+                return Coproduct13.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T11)value);
             }
             if (Equals(value, t12))
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T12)value);
+                return Coproduct13.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T12)value);
             }
             if (Equals(value, t13))
             {
-                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T13)value);
+                return Coproduct13.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>((T13)value);
             }
             if (fallback != null)
             {
@@ -2033,7 +2033,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
+            return value.AsCoproduct(v => Coproduct14.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
         }
 
         /// <summary>
@@ -2043,7 +2043,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, null, v => Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, null, v => Coproduct14.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
         }
 
         /// <summary>
@@ -2112,59 +2112,59 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T1)value);
+                return Coproduct14.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T2)value);
+                return Coproduct14.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T3)value);
+                return Coproduct14.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T4)value);
+                return Coproduct14.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T5)value);
+                return Coproduct14.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T6)value);
+                return Coproduct14.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T7)value);
+                return Coproduct14.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T8)value);
+                return Coproduct14.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T9)value);
+                return Coproduct14.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T9)value);
             }
             if (value is T10)
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T10)value);
+                return Coproduct14.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T10)value);
             }
             if (value is T11)
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T11)value);
+                return Coproduct14.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T11)value);
             }
             if (value is T12)
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T12)value);
+                return Coproduct14.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T12)value);
             }
             if (value is T13)
             {
-                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T13)value);
+                return Coproduct14.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T13)value);
             }
             if (value is T14)
             {
-                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T14)value);
+                return Coproduct14.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T14)value);
             }
             if (fallback != null)
             {
@@ -2187,59 +2187,59 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T1)value);
+                return Coproduct14.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T2)value);
+                return Coproduct14.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T3)value);
+                return Coproduct14.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T4)value);
+                return Coproduct14.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T5)value);
+                return Coproduct14.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T6)value);
+                return Coproduct14.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T7)value);
+                return Coproduct14.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T8)value);
+                return Coproduct14.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T9)value);
+                return Coproduct14.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T9)value);
             }
             if (Equals(value, t10))
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T10)value);
+                return Coproduct14.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T10)value);
             }
             if (Equals(value, t11))
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T11)value);
+                return Coproduct14.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T11)value);
             }
             if (Equals(value, t12))
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T12)value);
+                return Coproduct14.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T12)value);
             }
             if (Equals(value, t13))
             {
-                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T13)value);
+                return Coproduct14.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T13)value);
             }
             if (Equals(value, t14))
             {
-                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T14)value);
+                return Coproduct14.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>((T14)value);
             }
             if (fallback != null)
             {
@@ -2259,7 +2259,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value)
         {
-            return value.AsCoproduct(v => Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
+            return value.AsCoproduct(v => Coproduct15.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
         }
 
         /// <summary>
@@ -2269,7 +2269,7 @@ namespace FuncSharp
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14)
         {
-            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, null, v => Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
+            return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, null, v => Coproduct15.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
         }
 
         /// <summary>
@@ -2340,63 +2340,63 @@ namespace FuncSharp
         {
             if (value is T1)
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T1)value);
+                return Coproduct15.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T1)value);
             }
             if (value is T2)
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T2)value);
+                return Coproduct15.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T2)value);
             }
             if (value is T3)
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T3)value);
+                return Coproduct15.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T3)value);
             }
             if (value is T4)
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T4)value);
+                return Coproduct15.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T4)value);
             }
             if (value is T5)
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T5)value);
+                return Coproduct15.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T5)value);
             }
             if (value is T6)
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T6)value);
+                return Coproduct15.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T6)value);
             }
             if (value is T7)
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T7)value);
+                return Coproduct15.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T7)value);
             }
             if (value is T8)
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T8)value);
+                return Coproduct15.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T8)value);
             }
             if (value is T9)
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T9)value);
+                return Coproduct15.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T9)value);
             }
             if (value is T10)
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T10)value);
+                return Coproduct15.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T10)value);
             }
             if (value is T11)
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T11)value);
+                return Coproduct15.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T11)value);
             }
             if (value is T12)
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T12)value);
+                return Coproduct15.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T12)value);
             }
             if (value is T13)
             {
-                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T13)value);
+                return Coproduct15.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T13)value);
             }
             if (value is T14)
             {
-                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T14)value);
+                return Coproduct15.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T14)value);
             }
             if (value is T15)
             {
-                return Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T15)value);
+                return Coproduct15.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T15)value);
             }
             if (fallback != null)
             {
@@ -2419,63 +2419,63 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return Coproduct.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T1)value);
+                return Coproduct15.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T1)value);
             }
             if (Equals(value, t2))
             {
-                return Coproduct.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T2)value);
+                return Coproduct15.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T2)value);
             }
             if (Equals(value, t3))
             {
-                return Coproduct.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T3)value);
+                return Coproduct15.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T3)value);
             }
             if (Equals(value, t4))
             {
-                return Coproduct.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T4)value);
+                return Coproduct15.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T4)value);
             }
             if (Equals(value, t5))
             {
-                return Coproduct.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T5)value);
+                return Coproduct15.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T5)value);
             }
             if (Equals(value, t6))
             {
-                return Coproduct.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T6)value);
+                return Coproduct15.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T6)value);
             }
             if (Equals(value, t7))
             {
-                return Coproduct.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T7)value);
+                return Coproduct15.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T7)value);
             }
             if (Equals(value, t8))
             {
-                return Coproduct.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T8)value);
+                return Coproduct15.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T8)value);
             }
             if (Equals(value, t9))
             {
-                return Coproduct.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T9)value);
+                return Coproduct15.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T9)value);
             }
             if (Equals(value, t10))
             {
-                return Coproduct.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T10)value);
+                return Coproduct15.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T10)value);
             }
             if (Equals(value, t11))
             {
-                return Coproduct.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T11)value);
+                return Coproduct15.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T11)value);
             }
             if (Equals(value, t12))
             {
-                return Coproduct.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T12)value);
+                return Coproduct15.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T12)value);
             }
             if (Equals(value, t13))
             {
-                return Coproduct.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T13)value);
+                return Coproduct15.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T13)value);
             }
             if (Equals(value, t14))
             {
-                return Coproduct.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T14)value);
+                return Coproduct15.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T14)value);
             }
             if (Equals(value, t15))
             {
-                return Coproduct.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T15)value);
+                return Coproduct15.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>((T15)value);
             }
             if (fallback != null)
             {

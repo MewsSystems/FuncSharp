@@ -45,16 +45,16 @@ namespace FuncSharp.Tests
 
             c.Set(1, "foo", 42);
             Assert.Equal(1, c.Positions.Count());
-            Assert.True(c.Positions.Contains(Product.Create(1, "foo")));
+            Assert.True(c.Positions.Contains(Product2.Create(1, "foo")));
 
             c.Set(1, "foo", 43);
             Assert.Equal(1, c.Positions.Count());
-            Assert.True(c.Positions.Contains(Product.Create(1, "foo")));
+            Assert.True(c.Positions.Contains(Product2.Create(1, "foo")));
 
             c.Set(2, "bar", 123);
             Assert.Equal(2, c.Positions.Count());
-            Assert.True(c.Positions.Contains(Product.Create(1, "foo")));
-            Assert.True(c.Positions.Contains(Product.Create(2, "bar")));
+            Assert.True(c.Positions.Contains(Product2.Create(1, "foo")));
+            Assert.True(c.Positions.Contains(Product2.Create(2, "bar")));
         }
 
         [Fact]
@@ -113,14 +113,14 @@ namespace FuncSharp.Tests
             var c = new DataCube2<int, string, int>();
 
             c.Set(1, "foo", 42);
-            Assert.True(c.Contains(Product.Create(1, "foo")));
+            Assert.True(c.Contains(Product2.Create(1, "foo")));
             Assert.True(c.Contains(1, "foo"));
 
             c.Set(2, "bar", 123);
-            Assert.True(c.Contains(Product.Create(2, "bar")));
+            Assert.True(c.Contains(Product2.Create(2, "bar")));
             Assert.True(c.Contains(2, "bar"));
 
-            Assert.False(c.Contains(Product.Create(1, "bar")));
+            Assert.False(c.Contains(Product2.Create(1, "bar")));
             Assert.False(c.Contains(1, "bar"));
         }
 
@@ -145,12 +145,12 @@ namespace FuncSharp.Tests
             var c = new DataCube2<int, string, int>();
             c.Set(1, "foo", 42);
 
-            Assert.Equal(42, c.GetOrElseSet(Product.Create(1, "foo"), _ => 123));
+            Assert.Equal(42, c.GetOrElseSet(Product2.Create(1, "foo"), _ => 123));
             Assert.Equal(42, c.Get(1, "foo").Get());
             Assert.Equal(42, c.GetOrElseSet(1, "foo", _ => 123));
             Assert.Equal(42, c.Get(1, "foo").Get());
 
-            Assert.Equal(123, c.GetOrElseSet(Product.Create(2, "bar"), _ => 123));
+            Assert.Equal(123, c.GetOrElseSet(Product2.Create(2, "bar"), _ => 123));
             Assert.Equal(123, c.Get(2, "bar").Get());
             Assert.Equal(456, c.GetOrElseSet(3, "baz", _ => 456));
             Assert.Equal(456, c.Get(3, "baz").Get());
@@ -192,13 +192,13 @@ namespace FuncSharp.Tests
             c.Set(1, 1, 0, 30);
             c.Set(1, 1, 1, 40);
 
-            var sum = c.Transform(_ => Product.Create(), (a, b) => a + b);
+            var sum = c.Transform(_ => Product0.Create(), (a, b) => a + b);
             Assert.Equal(1 + 2 + 3 + 4 + 10 + 20 + 30 + 40, sum.Value.Get());
 
-            var product = c.Transform(_ => Product.Create(), (a, b) => a * b);
+            var product = c.Transform(_ => Product0.Create(), (a, b) => a * b);
             Assert.Equal(1 * 2 * 3 * 4 * 10 * 20 * 30 * 40, product.Value.Get());
 
-            var firstDimensionSums = c.Transform(p => Product.Create(p.ProductValue1), (a, b) => a + b);
+            var firstDimensionSums = c.Transform(p => Product1.Create(p.ProductValue1), (a, b) => a + b);
             Assert.Equal(2, firstDimensionSums.Values.Count());
             Assert.Equal(1 + 2 + 3 + 4, firstDimensionSums.Get(0).Get());
             Assert.Equal(10 + 20 + 30 + 40, firstDimensionSums.Get(1).Get());
@@ -219,7 +219,7 @@ namespace FuncSharp.Tests
                 {
                     var range1 = Enumerable.Range(0, p.ProductValue1 + 1);
                     var range2 = Enumerable.Range(0, p.ProductValue2 + 1);
-                    return range1.SelectMany(r1 => range2.Select(r2 => Product.Create(r1, r2)));
+                    return range1.SelectMany(r1 => range2.Select(r2 => Product2.Create(r1, r2)));
                 },
                 (a, b) => a + b
             );
@@ -294,7 +294,7 @@ namespace FuncSharp.Tests
             c.Set("foo", true, 42);
 
             Assert.True(c.Contains("foo", true));
-            Assert.True(c.Contains(Product.Create("foo", true as object)));
+            Assert.True(c.Contains(Product2.Create("foo", true as object)));
         }
     }
 }

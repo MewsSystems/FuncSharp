@@ -12,9 +12,9 @@ namespace FuncSharp
     /// <summary>
     /// Base class and factory of canonical coproduct types.
     /// </summary>
-    public abstract class Coproduct : ICoproduct
+    public abstract class CoproductBase : ICoproduct
     {
-        public Coproduct(int arity, int discriminator, object value)
+        public CoproductBase(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -36,18 +36,6 @@ namespace FuncSharp
 
         public object CoproductValue { get; }
 
-<# for (var i = 1; i < MaxArity(); i++) { #>
-<#    for (var j = 1; j <= i; j++) { #>
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional coproduct with the <#= GetLowerOrdinal(i) #> value.
-        /// </summary>
-        public static <#= CoproductType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Type(j) #> value)
-        {
-            return new <#= CoproductTypeImpl(i) #>(value);
-        }
-
-<#    } #>
-<# } #>
         public override int GetHashCode()
         {
             return this.CoproductHashCode();
@@ -74,10 +62,29 @@ namespace FuncSharp
     }
 
 <# for (var i = 0; i < MaxArity(); i++) { #>
+<#     if (i > 0) { #>
+    /// <summary>
+    /// Factory for <#= i #>-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct<#= i #>
+    {
+<#         for (var j = 1; j <= i; j++) { #>
+        /// <summary>
+        /// Creates a new <#= i #>-dimensional coproduct with the <#= GetLowerOrdinal(i) #> value.
+        /// </summary>
+        public static <#= CoproductType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Type(j) #> value)
+        {
+            return new <#= CoproductTypeImpl(i) #>(value);
+        }
+
+<#        } #>
+    }
+
+<#     } #>
     /// <summary>
     /// A <#= i #>-dimensional immutable coproduct.
     /// </summary> 
-    public class <#= CoproductTypeImpl(i) #> : Coproduct, <#= CoproductType(i) #>
+    public class <#= CoproductTypeImpl(i) #> : CoproductBase, <#= CoproductType(i) #>
     {
 <#    if (i > 0) { #>
 <#    for (var j = 1; j <= i; j++) { #>

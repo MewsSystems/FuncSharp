@@ -5,9 +5,9 @@ namespace FuncSharp
     /// <summary>
     /// Base class and factory of canonical coproduct types.
     /// </summary>
-    public abstract class Coproduct : ICoproduct
+    public abstract class CoproductBase : ICoproduct
     {
-        public Coproduct(int arity, int discriminator, object value)
+        public CoproductBase(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -28,966 +28,6 @@ namespace FuncSharp
         public int CoproductDiscriminator { get; }
 
         public object CoproductValue { get; }
-
-        /// <summary>
-        /// Creates a new 1-dimensional coproduct with the first value.
-        /// </summary>
-        public static ICoproduct1<T1> CreateFirst<T1>(T1 value)
-        {
-            return new Coproduct1<T1>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 2-dimensional coproduct with the second value.
-        /// </summary>
-        public static ICoproduct2<T1, T2> CreateFirst<T1, T2>(T1 value)
-        {
-            return new Coproduct2<T1, T2>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 2-dimensional coproduct with the second value.
-        /// </summary>
-        public static ICoproduct2<T1, T2> CreateSecond<T1, T2>(T2 value)
-        {
-            return new Coproduct2<T1, T2>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 3-dimensional coproduct with the third value.
-        /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 value)
-        {
-            return new Coproduct3<T1, T2, T3>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 3-dimensional coproduct with the third value.
-        /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 value)
-        {
-            return new Coproduct3<T1, T2, T3>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 3-dimensional coproduct with the third value.
-        /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 value)
-        {
-            return new Coproduct3<T1, T2, T3>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
-        /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 value)
-        {
-            return new Coproduct4<T1, T2, T3, T4>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
-        /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 value)
-        {
-            return new Coproduct4<T1, T2, T3, T4>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
-        /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 value)
-        {
-            return new Coproduct4<T1, T2, T3, T4>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
-        /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 value)
-        {
-            return new Coproduct4<T1, T2, T3, T4>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
-        /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 value)
-        {
-            return new Coproduct5<T1, T2, T3, T4, T5>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
-        /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 value)
-        {
-            return new Coproduct5<T1, T2, T3, T4, T5>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
-        /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 value)
-        {
-            return new Coproduct5<T1, T2, T3, T4, T5>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
-        /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 value)
-        {
-            return new Coproduct5<T1, T2, T3, T4, T5>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
-        /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 value)
-        {
-            return new Coproduct5<T1, T2, T3, T4, T5>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
-        /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 value)
-        {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
-        /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 value)
-        {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
-        /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 value)
-        {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
-        /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 value)
-        {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
-        /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 value)
-        {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
-        /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 value)
-        {
-            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
-        /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 value)
-        {
-            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
-        /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
-        {
-            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
-        /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
-        {
-            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
-        /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
-        {
-            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
-        /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
-        {
-            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
-        /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
-        {
-            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
-        /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
-        {
-            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
-        /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
-        {
-            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
-
-        /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
-        /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
-        {
-            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
-        }
 
         public override int GetHashCode()
         {
@@ -1017,7 +57,7 @@ namespace FuncSharp
     /// <summary>
     /// A 0-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct0 : Coproduct, ICoproduct0
+    public class Coproduct0 : CoproductBase, ICoproduct0
     {
         protected Coproduct0()
             : base(0, 0, null)
@@ -1026,9 +66,24 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 1-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct1
+    {
+        /// <summary>
+        /// Creates a new 1-dimensional coproduct with the first value.
+        /// </summary>
+        public static ICoproduct1<T1> CreateFirst<T1>(T1 value)
+        {
+            return new Coproduct1<T1>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 1-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct1<T1> : Coproduct, ICoproduct1<T1>
+    public class Coproduct1<T1> : CoproductBase, ICoproduct1<T1>
     {
         /// <summary>
         /// Creates a new 1-dimensional coproduct with the specified value on the first position.
@@ -1088,9 +143,32 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 2-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct2
+    {
+        /// <summary>
+        /// Creates a new 2-dimensional coproduct with the second value.
+        /// </summary>
+        public static ICoproduct2<T1, T2> CreateFirst<T1, T2>(T1 value)
+        {
+            return new Coproduct2<T1, T2>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 2-dimensional coproduct with the second value.
+        /// </summary>
+        public static ICoproduct2<T1, T2> CreateSecond<T1, T2>(T2 value)
+        {
+            return new Coproduct2<T1, T2>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 2-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct2<T1, T2> : Coproduct, ICoproduct2<T1, T2>
+    public class Coproduct2<T1, T2> : CoproductBase, ICoproduct2<T1, T2>
     {
         /// <summary>
         /// Creates a new 2-dimensional coproduct with the specified value on the first position.
@@ -1170,9 +248,40 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 3-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct3
+    {
+        /// <summary>
+        /// Creates a new 3-dimensional coproduct with the third value.
+        /// </summary>
+        public static ICoproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 value)
+        {
+            return new Coproduct3<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 3-dimensional coproduct with the third value.
+        /// </summary>
+        public static ICoproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 value)
+        {
+            return new Coproduct3<T1, T2, T3>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 3-dimensional coproduct with the third value.
+        /// </summary>
+        public static ICoproduct3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 value)
+        {
+            return new Coproduct3<T1, T2, T3>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 3-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct3<T1, T2, T3> : Coproduct, ICoproduct3<T1, T2, T3>
+    public class Coproduct3<T1, T2, T3> : CoproductBase, ICoproduct3<T1, T2, T3>
     {
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the specified value on the first position.
@@ -1272,9 +381,48 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 4-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct4
+    {
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// </summary>
+        public static ICoproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 value)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// </summary>
+        public static ICoproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 value)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// </summary>
+        public static ICoproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 value)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// </summary>
+        public static ICoproduct4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 value)
+        {
+            return new Coproduct4<T1, T2, T3, T4>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 4-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct4<T1, T2, T3, T4> : Coproduct, ICoproduct4<T1, T2, T3, T4>
+    public class Coproduct4<T1, T2, T3, T4> : CoproductBase, ICoproduct4<T1, T2, T3, T4>
     {
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the specified value on the first position.
@@ -1394,9 +542,56 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 5-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct5
+    {
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// </summary>
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 value)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// </summary>
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 value)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// </summary>
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 value)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// </summary>
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 value)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// </summary>
+        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 value)
+        {
+            return new Coproduct5<T1, T2, T3, T4, T5>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 5-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct5<T1, T2, T3, T4, T5> : Coproduct, ICoproduct5<T1, T2, T3, T4, T5>
+    public class Coproduct5<T1, T2, T3, T4, T5> : CoproductBase, ICoproduct5<T1, T2, T3, T4, T5>
     {
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the specified value on the first position.
@@ -1536,9 +731,64 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 6-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct6
+    {
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 value)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 value)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 value)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 value)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 value)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 value)
+        {
+            return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 6-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct6<T1, T2, T3, T4, T5, T6> : Coproduct, ICoproduct6<T1, T2, T3, T4, T5, T6>
+    public class Coproduct6<T1, T2, T3, T4, T5, T6> : CoproductBase, ICoproduct6<T1, T2, T3, T4, T5, T6>
     {
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the specified value on the first position.
@@ -1698,9 +948,72 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 7-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct7
+    {
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 value)
+        {
+            return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 7-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : Coproduct, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>
+    public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : CoproductBase, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>
     {
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the specified value on the first position.
@@ -1880,9 +1193,80 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 8-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct8
+    {
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
+        {
+            return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 8-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : Coproduct, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>
+    public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : CoproductBase, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the specified value on the first position.
@@ -2082,9 +1466,88 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 9-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct9
+    {
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
+        {
+            return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 9-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : Coproduct, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
+    public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : CoproductBase, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the specified value on the first position.
@@ -2304,9 +1767,96 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 10-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct10
+    {
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
+        {
+            return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 10-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : Coproduct, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
+    public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : CoproductBase, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     {
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the specified value on the first position.
@@ -2546,9 +2096,104 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 11-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct11
+    {
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
+        {
+            return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 11-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : Coproduct, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
+    public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : CoproductBase, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     {
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the specified value on the first position.
@@ -2808,9 +2453,112 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 12-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct12
+    {
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
+        {
+            return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 12-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : Coproduct, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
+    public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : CoproductBase, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     {
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the specified value on the first position.
@@ -3090,9 +2838,120 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 13-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct13
+    {
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
+        {
+            return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 13-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : Coproduct, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
+    public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : CoproductBase, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     {
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the specified value on the first position.
@@ -3392,9 +3251,128 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 14-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct14
+    {
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
+        {
+            return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 14-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : Coproduct, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
+    public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : CoproductBase, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     {
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the specified value on the first position.
@@ -3714,9 +3692,136 @@ namespace FuncSharp
     }
 
     /// <summary>
+    /// Factory for 15-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct15
+    {
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
+        {
+            return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
+        }
+
+    }
+
+    /// <summary>
     /// A 15-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : Coproduct, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
+    public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : CoproductBase, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     {
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the specified value on the first position.

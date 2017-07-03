@@ -29,7 +29,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains()
         {
-            return Contains(Product.Create());
+            return Contains(Product0.Create());
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get()
         {
-            return Get(Product.Create());
+            return Get(Product0.Create());
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(), setter);
+            return GetOrElseSet(Product0.Create(), setter);
         }
         
         /// <summary>
@@ -62,7 +62,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(TValue value)
         {
-            return Set(Product.Create(), value);
+            return Set(Product0.Create(), value);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(), value, otherwise);
+            return SetOrElse(Product0.Create(), value, otherwise);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(), value, updater);
+            return SetOrElseUpdate(Product0.Create(), value, updater);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct0 ToCanonicalPosition(IProduct0 position)
         {
-            return Product.Create(position);
+            return Product0.Create(position);
         }
     }
 
@@ -176,7 +176,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(P1 p1)
         {
-            return Contains(Product.Create(p1));
+            return Contains(Product1.Create(p1));
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1)
         {
-            return Get(Product.Create(p1));
+            return Get(Product1.Create(p1));
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(p1), setter);
+            return GetOrElseSet(Product1.Create(p1), setter);
         }
         
         /// <summary>
@@ -210,7 +210,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, TValue value)
         {
-            return Set(Product.Create(p1), value);
+            return Set(Product1.Create(p1), value);
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(p1), value, otherwise);
+            return SetOrElse(Product1.Create(p1), value, otherwise);
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(p1), value, updater);
+            return SetOrElseUpdate(Product1.Create(p1), value, updater);
         }
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct1<P1> ToCanonicalPosition(IProduct1<P1> position)
         {
-            return Product.Create(position);
+            return Product1.Create(position);
         }
     }
 
@@ -386,7 +386,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(P1 p1, P2 p2)
         {
-            return Contains(Product.Create(p1, p2));
+            return Contains(Product2.Create(p1, p2));
         }
 
         /// <summary>
@@ -394,7 +394,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2)
         {
-            return Get(Product.Create(p1, p2));
+            return Get(Product2.Create(p1, p2));
         }
 
         /// <summary>
@@ -403,7 +403,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(p1, p2), setter);
+            return GetOrElseSet(Product2.Create(p1, p2), setter);
         }
         
         /// <summary>
@@ -421,7 +421,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, TValue value)
         {
-            return Set(Product.Create(p1, p2), value);
+            return Set(Product2.Create(p1, p2), value);
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(p1, p2), value, otherwise);
+            return SetOrElse(Product2.Create(p1, p2), value, otherwise);
         }
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(p1, p2), value, updater);
+            return SetOrElseUpdate(Product2.Create(p1, p2), value, updater);
         }
 
         /// <summary>
@@ -605,7 +605,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct2<P1, P2> ToCanonicalPosition(IProduct2<P1, P2> position)
         {
-            return Product.Create(position);
+            return Product2.Create(position);
         }
     }
 
@@ -659,7 +659,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3)
         {
-            return Contains(Product.Create(p1, p2, p3));
+            return Contains(Product3.Create(p1, p2, p3));
         }
 
         /// <summary>
@@ -667,7 +667,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3)
         {
-            return Get(Product.Create(p1, p2, p3));
+            return Get(Product3.Create(p1, p2, p3));
         }
 
         /// <summary>
@@ -676,7 +676,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(p1, p2, p3), setter);
+            return GetOrElseSet(Product3.Create(p1, p2, p3), setter);
         }
         
         /// <summary>
@@ -695,7 +695,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, TValue value)
         {
-            return Set(Product.Create(p1, p2, p3), value);
+            return Set(Product3.Create(p1, p2, p3), value);
         }
 
         /// <summary>
@@ -704,7 +704,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(p1, p2, p3), value, otherwise);
+            return SetOrElse(Product3.Create(p1, p2, p3), value, otherwise);
         }
 
         /// <summary>
@@ -713,7 +713,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(p1, p2, p3), value, updater);
+            return SetOrElseUpdate(Product3.Create(p1, p2, p3), value, updater);
         }
 
         /// <summary>
@@ -930,7 +930,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct3<P1, P2, P3> ToCanonicalPosition(IProduct3<P1, P2, P3> position)
         {
-            return Product.Create(position);
+            return Product3.Create(position);
         }
     }
 
@@ -995,7 +995,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            return Contains(Product.Create(p1, p2, p3, p4));
+            return Contains(Product4.Create(p1, p2, p3, p4));
         }
 
         /// <summary>
@@ -1003,7 +1003,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            return Get(Product.Create(p1, p2, p3, p4));
+            return Get(Product4.Create(p1, p2, p3, p4));
         }
 
         /// <summary>
@@ -1012,7 +1012,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(p1, p2, p3, p4), setter);
+            return GetOrElseSet(Product4.Create(p1, p2, p3, p4), setter);
         }
         
         /// <summary>
@@ -1032,7 +1032,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, TValue value)
         {
-            return Set(Product.Create(p1, p2, p3, p4), value);
+            return Set(Product4.Create(p1, p2, p3, p4), value);
         }
 
         /// <summary>
@@ -1041,7 +1041,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(p1, p2, p3, p4), value, otherwise);
+            return SetOrElse(Product4.Create(p1, p2, p3, p4), value, otherwise);
         }
 
         /// <summary>
@@ -1050,7 +1050,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(p1, p2, p3, p4), value, updater);
+            return SetOrElseUpdate(Product4.Create(p1, p2, p3, p4), value, updater);
         }
 
         /// <summary>
@@ -1318,7 +1318,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct4<P1, P2, P3, P4> ToCanonicalPosition(IProduct4<P1, P2, P3, P4> position)
         {
-            return Product.Create(position);
+            return Product4.Create(position);
         }
     }
 
@@ -1394,7 +1394,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
-            return Contains(Product.Create(p1, p2, p3, p4, p5));
+            return Contains(Product5.Create(p1, p2, p3, p4, p5));
         }
 
         /// <summary>
@@ -1402,7 +1402,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
-            return Get(Product.Create(p1, p2, p3, p4, p5));
+            return Get(Product5.Create(p1, p2, p3, p4, p5));
         }
 
         /// <summary>
@@ -1411,7 +1411,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(p1, p2, p3, p4, p5), setter);
+            return GetOrElseSet(Product5.Create(p1, p2, p3, p4, p5), setter);
         }
         
         /// <summary>
@@ -1432,7 +1432,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value)
         {
-            return Set(Product.Create(p1, p2, p3, p4, p5), value);
+            return Set(Product5.Create(p1, p2, p3, p4, p5), value);
         }
 
         /// <summary>
@@ -1441,7 +1441,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(p1, p2, p3, p4, p5), value, otherwise);
+            return SetOrElse(Product5.Create(p1, p2, p3, p4, p5), value, otherwise);
         }
 
         /// <summary>
@@ -1450,7 +1450,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(p1, p2, p3, p4, p5), value, updater);
+            return SetOrElseUpdate(Product5.Create(p1, p2, p3, p4, p5), value, updater);
         }
 
         /// <summary>
@@ -1769,7 +1769,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct5<P1, P2, P3, P4, P5> ToCanonicalPosition(IProduct5<P1, P2, P3, P4, P5> position)
         {
-            return Product.Create(position);
+            return Product5.Create(position);
         }
     }
 
@@ -1856,7 +1856,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
-            return Contains(Product.Create(p1, p2, p3, p4, p5, p6));
+            return Contains(Product6.Create(p1, p2, p3, p4, p5, p6));
         }
 
         /// <summary>
@@ -1864,7 +1864,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
-            return Get(Product.Create(p1, p2, p3, p4, p5, p6));
+            return Get(Product6.Create(p1, p2, p3, p4, p5, p6));
         }
 
         /// <summary>
@@ -1873,7 +1873,7 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product.Create(p1, p2, p3, p4, p5, p6), setter);
+            return GetOrElseSet(Product6.Create(p1, p2, p3, p4, p5, p6), setter);
         }
         
         /// <summary>
@@ -1895,7 +1895,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value)
         {
-            return Set(Product.Create(p1, p2, p3, p4, p5, p6), value);
+            return Set(Product6.Create(p1, p2, p3, p4, p5, p6), value);
         }
 
         /// <summary>
@@ -1904,7 +1904,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product.Create(p1, p2, p3, p4, p5, p6), value, otherwise);
+            return SetOrElse(Product6.Create(p1, p2, p3, p4, p5, p6), value, otherwise);
         }
 
         /// <summary>
@@ -1913,7 +1913,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product.Create(p1, p2, p3, p4, p5, p6), value, updater);
+            return SetOrElseUpdate(Product6.Create(p1, p2, p3, p4, p5, p6), value, updater);
         }
 
         /// <summary>
@@ -2283,7 +2283,7 @@ namespace FuncSharp
         /// </summary>
         protected override IProduct6<P1, P2, P3, P4, P5, P6> ToCanonicalPosition(IProduct6<P1, P2, P3, P4, P5, P6> position)
         {
-            return Product.Create(position);
+            return Product6.Create(position);
         }
     }
 
