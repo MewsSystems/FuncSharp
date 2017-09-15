@@ -30,7 +30,7 @@ namespace FuncSharp
         /// </summary>
         public static IProduct3<int, int, object> CoproductRepresentation(this ICoproduct c)
         {
-            return Product.Create(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
+            return Product3.Create(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
         }
 
         /// <summary>

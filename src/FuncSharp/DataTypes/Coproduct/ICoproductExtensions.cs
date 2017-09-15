@@ -21,7 +21,11 @@ namespace FuncSharp
             { 12, "Twelfth" },
             { 13, "Thirteenth" },
             { 14, "Fourteenth" },
-            { 15, "Fifteenth" }
+            { 15, "Fifteenth" },
+            { 16, "Sixteenth" },
+            { 17, "Seventeenth" },
+            { 18, "Eighteenth" },
+            { 19, "Nineteenth" }
         };
 
         /// <summary>

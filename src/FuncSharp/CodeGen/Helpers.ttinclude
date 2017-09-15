@@ -1,12 +1,56 @@
 ﻿<#+
     public int MaxArity()
     {
-        return 16;
+        return 20;
     }
 
     public int MaxStructureArity()
     {
         return 6;
+    }
+
+    public int MaxFuncArity()
+    {
+        return 6;
+    }
+
+    public string GetOrdinal(int i)
+    {
+        var ordinals = new[]
+        {
+            "Zeroth",
+            "First",
+            "Second",
+            "Third",
+            "Fourth",
+            "Fifth",
+            "Sixth",
+            "Seventh",
+            "Eighth",
+            "Ninth",
+            "Tenth",
+            "Eleventh",
+            "Twelfth",
+            "Thirteenth",
+            "Fourteenth",
+            "Fifteenth",
+            "Sixteenth",
+            "Seventeenth",
+            "Eighteenth",
+            "Nineteenth",
+            "Twentieth",
+        };
+
+        if (i < ordinals.Count())
+        {
+            return ordinals[i];
+        }
+        return "???";
+    }
+
+    public string GetLowerOrdinal(int i)
+    {
+        return GetOrdinal(i).ToLowerInvariant();
     }
 
     public string Type(int i, string name = "T")
@@ -127,41 +171,6 @@
     public string Lines(int i, Func<int, string> itemGenerator, int? except = null, string separator = "", bool appendSeparator = false)
     {
         return List(i, itemGenerator, except, separator + Environment.NewLine, appendSeparator);
-    }
-
-    public string GetOrdinal(int i)
-    {
-        var ordinals = new[]
-        {
-            "Zeroth",
-            "First",
-            "Second",
-            "Third",
-            "Fourth",
-            "Fifth",
-            "Sixth",
-            "Seventh",
-            "Eighth",
-            "Ninth",
-            "Tenth",
-            "Eleventh",
-            "Twelfth",
-            "Thirteenth",
-            "Fourteenth",
-            "Fifteenth",
-            "Sixteenth"
-        };
-
-        if (i < ordinals.Count())
-        {
-            return ordinals[i];
-        }
-        return "???";
-    }
-
-    public string GetLowerOrdinal(int i)
-    {
-        return GetOrdinal(i).ToLowerInvariant();
     }
 
     public string IfIth(int i)

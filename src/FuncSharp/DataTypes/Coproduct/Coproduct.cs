@@ -4160,4 +4160,2160 @@ namespace FuncSharp
         }
     }
 
+    /// <summary>
+    /// Factory for 16-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct16
+    {
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value)
+        {
+            return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
+        }
+
+    }
+
+    /// <summary>
+    /// A 16-dimensional immutable coproduct.
+    /// </summary> 
+    public class Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : CoproductBase, ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
+    {
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct16(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct16(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct16(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct16(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct16(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct16(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct16(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct16(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the ninth position.
+        /// </summary>
+        public Coproduct16(T9 ninthValue)
+            : this(9, ninthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the tenth position.
+        /// </summary>
+        public Coproduct16(T10 tenthValue)
+            : this(10, tenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the eleventh position.
+        /// </summary>
+        public Coproduct16(T11 eleventhValue)
+            : this(11, eleventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the twelfth position.
+        /// </summary>
+        public Coproduct16(T12 twelfthValue)
+            : this(12, twelfthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the thirteenth position.
+        /// </summary>
+        public Coproduct16(T13 thirteenthValue)
+            : this(13, thirteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the fourteenth position.
+        /// </summary>
+        public Coproduct16(T14 fourteenthValue)
+            : this(14, fourteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the fifteenth position.
+        /// </summary>
+        public Coproduct16(T15 fifteenthValue)
+            : this(15, fifteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct with the specified value on the sixteenth position.
+        /// </summary>
+        public Coproduct16(T16 sixteenthValue)
+            : this(16, sixteenthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct16(ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 16-dimensional coproduct.
+        /// </summary>
+        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+        /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
+        protected Coproduct16(int discriminator, object value)
+            : base(16, discriminator, value)
+        {
+        }
+
+        public bool IsFirst
+        {
+            get { return CoproductDiscriminator == 1; }
+        }
+        public bool IsSecond
+        {
+            get { return CoproductDiscriminator == 2; }
+        }
+        public bool IsThird
+        {
+            get { return CoproductDiscriminator == 3; }
+        }
+        public bool IsFourth
+        {
+            get { return CoproductDiscriminator == 4; }
+        }
+        public bool IsFifth
+        {
+            get { return CoproductDiscriminator == 5; }
+        }
+        public bool IsSixth
+        {
+            get { return CoproductDiscriminator == 6; }
+        }
+        public bool IsSeventh
+        {
+            get { return CoproductDiscriminator == 7; }
+        }
+        public bool IsEighth
+        {
+            get { return CoproductDiscriminator == 8; }
+        }
+        public bool IsNinth
+        {
+            get { return CoproductDiscriminator == 9; }
+        }
+        public bool IsTenth
+        {
+            get { return CoproductDiscriminator == 10; }
+        }
+        public bool IsEleventh
+        {
+            get { return CoproductDiscriminator == 11; }
+        }
+        public bool IsTwelfth
+        {
+            get { return CoproductDiscriminator == 12; }
+        }
+        public bool IsThirteenth
+        {
+            get { return CoproductDiscriminator == 13; }
+        }
+        public bool IsFourteenth
+        {
+            get { return CoproductDiscriminator == 14; }
+        }
+        public bool IsFifteenth
+        {
+            get { return CoproductDiscriminator == 15; }
+        }
+        public bool IsSixteenth
+        {
+            get { return CoproductDiscriminator == 16; }
+        }
+
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+        }
+        public IOption<T8> Eighth
+        {
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+        }
+        public IOption<T9> Ninth
+        {
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+        }
+        public IOption<T10> Tenth
+        {
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+        }
+        public IOption<T11> Eleventh
+        {
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+        }
+        public IOption<T12> Twelfth
+        {
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+        }
+        public IOption<T13> Thirteenth
+        {
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+        }
+        public IOption<T14> Fourteenth
+        {
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+        }
+        public IOption<T15> Fifteenth
+        {
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+        }
+        public IOption<T16> Sixteenth
+        {
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+        }
+
+        public R Match<R>(
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth,
+            Func<T10, R> ifTenth,
+            Func<T11, R> ifEleventh,
+            Func<T12, R> ifTwelfth,
+            Func<T13, R> ifThirteenth,
+            Func<T14, R> ifFourteenth,
+            Func<T15, R> ifFifteenth,
+            Func<T16, R> ifSixteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return ifFirst(GetCoproductValue<T1>());
+                case 2: return ifSecond(GetCoproductValue<T2>());
+                case 3: return ifThird(GetCoproductValue<T3>());
+                case 4: return ifFourth(GetCoproductValue<T4>());
+                case 5: return ifFifth(GetCoproductValue<T5>());
+                case 6: return ifSixth(GetCoproductValue<T6>());
+                case 7: return ifSeventh(GetCoproductValue<T7>());
+                case 8: return ifEighth(GetCoproductValue<T8>());
+                case 9: return ifNinth(GetCoproductValue<T9>());
+                case 10: return ifTenth(GetCoproductValue<T10>());
+                case 11: return ifEleventh(GetCoproductValue<T11>());
+                case 12: return ifTwelfth(GetCoproductValue<T12>());
+                case 13: return ifThirteenth(GetCoproductValue<T13>());
+                case 14: return ifFourteenth(GetCoproductValue<T14>());
+                case 15: return ifFifteenth(GetCoproductValue<T15>());
+                case 16: return ifSixteenth(GetCoproductValue<T16>());
+                default: return default(R);
+            }
+        }
+
+        public void Match(
+            Action<T1> ifFirst = null,
+            Action<T2> ifSecond = null,
+            Action<T3> ifThird = null,
+            Action<T4> ifFourth = null,
+            Action<T5> ifFifth = null,
+            Action<T6> ifSixth = null,
+            Action<T7> ifSeventh = null,
+            Action<T8> ifEighth = null,
+            Action<T9> ifNinth = null,
+            Action<T10> ifTenth = null,
+            Action<T11> ifEleventh = null,
+            Action<T12> ifTwelfth = null,
+            Action<T13> ifThirteenth = null,
+            Action<T14> ifFourteenth = null,
+            Action<T15> ifFifteenth = null,
+            Action<T16> ifSixteenth = null)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
+                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
+                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
+                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
+                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
+                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
+                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
+                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
+                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
+                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Factory for 17-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct17
+    {
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T1 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T2 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T3 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T4 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T5 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T6 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T7 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T8 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T9 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T10 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T11 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T12 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T13 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T14 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T15 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T16 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T17 value)
+        {
+            return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
+        }
+
+    }
+
+    /// <summary>
+    /// A 17-dimensional immutable coproduct.
+    /// </summary> 
+    public class Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : CoproductBase, ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
+    {
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct17(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct17(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct17(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct17(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct17(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct17(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct17(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct17(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the ninth position.
+        /// </summary>
+        public Coproduct17(T9 ninthValue)
+            : this(9, ninthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the tenth position.
+        /// </summary>
+        public Coproduct17(T10 tenthValue)
+            : this(10, tenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the eleventh position.
+        /// </summary>
+        public Coproduct17(T11 eleventhValue)
+            : this(11, eleventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the twelfth position.
+        /// </summary>
+        public Coproduct17(T12 twelfthValue)
+            : this(12, twelfthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the thirteenth position.
+        /// </summary>
+        public Coproduct17(T13 thirteenthValue)
+            : this(13, thirteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the fourteenth position.
+        /// </summary>
+        public Coproduct17(T14 fourteenthValue)
+            : this(14, fourteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the fifteenth position.
+        /// </summary>
+        public Coproduct17(T15 fifteenthValue)
+            : this(15, fifteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the sixteenth position.
+        /// </summary>
+        public Coproduct17(T16 sixteenthValue)
+            : this(16, sixteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct with the specified value on the seventeenth position.
+        /// </summary>
+        public Coproduct17(T17 seventeenthValue)
+            : this(17, seventeenthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct17(ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 17-dimensional coproduct.
+        /// </summary>
+        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+        /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
+        protected Coproduct17(int discriminator, object value)
+            : base(17, discriminator, value)
+        {
+        }
+
+        public bool IsFirst
+        {
+            get { return CoproductDiscriminator == 1; }
+        }
+        public bool IsSecond
+        {
+            get { return CoproductDiscriminator == 2; }
+        }
+        public bool IsThird
+        {
+            get { return CoproductDiscriminator == 3; }
+        }
+        public bool IsFourth
+        {
+            get { return CoproductDiscriminator == 4; }
+        }
+        public bool IsFifth
+        {
+            get { return CoproductDiscriminator == 5; }
+        }
+        public bool IsSixth
+        {
+            get { return CoproductDiscriminator == 6; }
+        }
+        public bool IsSeventh
+        {
+            get { return CoproductDiscriminator == 7; }
+        }
+        public bool IsEighth
+        {
+            get { return CoproductDiscriminator == 8; }
+        }
+        public bool IsNinth
+        {
+            get { return CoproductDiscriminator == 9; }
+        }
+        public bool IsTenth
+        {
+            get { return CoproductDiscriminator == 10; }
+        }
+        public bool IsEleventh
+        {
+            get { return CoproductDiscriminator == 11; }
+        }
+        public bool IsTwelfth
+        {
+            get { return CoproductDiscriminator == 12; }
+        }
+        public bool IsThirteenth
+        {
+            get { return CoproductDiscriminator == 13; }
+        }
+        public bool IsFourteenth
+        {
+            get { return CoproductDiscriminator == 14; }
+        }
+        public bool IsFifteenth
+        {
+            get { return CoproductDiscriminator == 15; }
+        }
+        public bool IsSixteenth
+        {
+            get { return CoproductDiscriminator == 16; }
+        }
+        public bool IsSeventeenth
+        {
+            get { return CoproductDiscriminator == 17; }
+        }
+
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+        }
+        public IOption<T8> Eighth
+        {
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+        }
+        public IOption<T9> Ninth
+        {
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+        }
+        public IOption<T10> Tenth
+        {
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+        }
+        public IOption<T11> Eleventh
+        {
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+        }
+        public IOption<T12> Twelfth
+        {
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+        }
+        public IOption<T13> Thirteenth
+        {
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+        }
+        public IOption<T14> Fourteenth
+        {
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+        }
+        public IOption<T15> Fifteenth
+        {
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+        }
+        public IOption<T16> Sixteenth
+        {
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+        }
+        public IOption<T17> Seventeenth
+        {
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+        }
+
+        public R Match<R>(
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth,
+            Func<T10, R> ifTenth,
+            Func<T11, R> ifEleventh,
+            Func<T12, R> ifTwelfth,
+            Func<T13, R> ifThirteenth,
+            Func<T14, R> ifFourteenth,
+            Func<T15, R> ifFifteenth,
+            Func<T16, R> ifSixteenth,
+            Func<T17, R> ifSeventeenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return ifFirst(GetCoproductValue<T1>());
+                case 2: return ifSecond(GetCoproductValue<T2>());
+                case 3: return ifThird(GetCoproductValue<T3>());
+                case 4: return ifFourth(GetCoproductValue<T4>());
+                case 5: return ifFifth(GetCoproductValue<T5>());
+                case 6: return ifSixth(GetCoproductValue<T6>());
+                case 7: return ifSeventh(GetCoproductValue<T7>());
+                case 8: return ifEighth(GetCoproductValue<T8>());
+                case 9: return ifNinth(GetCoproductValue<T9>());
+                case 10: return ifTenth(GetCoproductValue<T10>());
+                case 11: return ifEleventh(GetCoproductValue<T11>());
+                case 12: return ifTwelfth(GetCoproductValue<T12>());
+                case 13: return ifThirteenth(GetCoproductValue<T13>());
+                case 14: return ifFourteenth(GetCoproductValue<T14>());
+                case 15: return ifFifteenth(GetCoproductValue<T15>());
+                case 16: return ifSixteenth(GetCoproductValue<T16>());
+                case 17: return ifSeventeenth(GetCoproductValue<T17>());
+                default: return default(R);
+            }
+        }
+
+        public void Match(
+            Action<T1> ifFirst = null,
+            Action<T2> ifSecond = null,
+            Action<T3> ifThird = null,
+            Action<T4> ifFourth = null,
+            Action<T5> ifFifth = null,
+            Action<T6> ifSixth = null,
+            Action<T7> ifSeventh = null,
+            Action<T8> ifEighth = null,
+            Action<T9> ifNinth = null,
+            Action<T10> ifTenth = null,
+            Action<T11> ifEleventh = null,
+            Action<T12> ifTwelfth = null,
+            Action<T13> ifThirteenth = null,
+            Action<T14> ifFourteenth = null,
+            Action<T15> ifFifteenth = null,
+            Action<T16> ifSixteenth = null,
+            Action<T17> ifSeventeenth = null)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
+                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
+                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
+                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
+                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
+                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
+                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
+                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
+                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
+                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
+                case 17: if (ifSeventeenth != null) { ifSeventeenth(GetCoproductValue<T17>()); } break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Factory for 18-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct18
+    {
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T1 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T2 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T3 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T4 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T5 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T6 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T7 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T8 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T9 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T10 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T11 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T12 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T13 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T14 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T15 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T16 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T17 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T18 value)
+        {
+            return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
+        }
+
+    }
+
+    /// <summary>
+    /// A 18-dimensional immutable coproduct.
+    /// </summary> 
+    public class Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : CoproductBase, ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
+    {
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct18(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct18(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct18(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct18(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct18(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct18(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct18(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct18(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the ninth position.
+        /// </summary>
+        public Coproduct18(T9 ninthValue)
+            : this(9, ninthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the tenth position.
+        /// </summary>
+        public Coproduct18(T10 tenthValue)
+            : this(10, tenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the eleventh position.
+        /// </summary>
+        public Coproduct18(T11 eleventhValue)
+            : this(11, eleventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the twelfth position.
+        /// </summary>
+        public Coproduct18(T12 twelfthValue)
+            : this(12, twelfthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the thirteenth position.
+        /// </summary>
+        public Coproduct18(T13 thirteenthValue)
+            : this(13, thirteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the fourteenth position.
+        /// </summary>
+        public Coproduct18(T14 fourteenthValue)
+            : this(14, fourteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the fifteenth position.
+        /// </summary>
+        public Coproduct18(T15 fifteenthValue)
+            : this(15, fifteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the sixteenth position.
+        /// </summary>
+        public Coproduct18(T16 sixteenthValue)
+            : this(16, sixteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the seventeenth position.
+        /// </summary>
+        public Coproduct18(T17 seventeenthValue)
+            : this(17, seventeenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct with the specified value on the eighteenth position.
+        /// </summary>
+        public Coproduct18(T18 eighteenthValue)
+            : this(18, eighteenthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct18(ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 18-dimensional coproduct.
+        /// </summary>
+        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+        /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
+        protected Coproduct18(int discriminator, object value)
+            : base(18, discriminator, value)
+        {
+        }
+
+        public bool IsFirst
+        {
+            get { return CoproductDiscriminator == 1; }
+        }
+        public bool IsSecond
+        {
+            get { return CoproductDiscriminator == 2; }
+        }
+        public bool IsThird
+        {
+            get { return CoproductDiscriminator == 3; }
+        }
+        public bool IsFourth
+        {
+            get { return CoproductDiscriminator == 4; }
+        }
+        public bool IsFifth
+        {
+            get { return CoproductDiscriminator == 5; }
+        }
+        public bool IsSixth
+        {
+            get { return CoproductDiscriminator == 6; }
+        }
+        public bool IsSeventh
+        {
+            get { return CoproductDiscriminator == 7; }
+        }
+        public bool IsEighth
+        {
+            get { return CoproductDiscriminator == 8; }
+        }
+        public bool IsNinth
+        {
+            get { return CoproductDiscriminator == 9; }
+        }
+        public bool IsTenth
+        {
+            get { return CoproductDiscriminator == 10; }
+        }
+        public bool IsEleventh
+        {
+            get { return CoproductDiscriminator == 11; }
+        }
+        public bool IsTwelfth
+        {
+            get { return CoproductDiscriminator == 12; }
+        }
+        public bool IsThirteenth
+        {
+            get { return CoproductDiscriminator == 13; }
+        }
+        public bool IsFourteenth
+        {
+            get { return CoproductDiscriminator == 14; }
+        }
+        public bool IsFifteenth
+        {
+            get { return CoproductDiscriminator == 15; }
+        }
+        public bool IsSixteenth
+        {
+            get { return CoproductDiscriminator == 16; }
+        }
+        public bool IsSeventeenth
+        {
+            get { return CoproductDiscriminator == 17; }
+        }
+        public bool IsEighteenth
+        {
+            get { return CoproductDiscriminator == 18; }
+        }
+
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+        }
+        public IOption<T8> Eighth
+        {
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+        }
+        public IOption<T9> Ninth
+        {
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+        }
+        public IOption<T10> Tenth
+        {
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+        }
+        public IOption<T11> Eleventh
+        {
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+        }
+        public IOption<T12> Twelfth
+        {
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+        }
+        public IOption<T13> Thirteenth
+        {
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+        }
+        public IOption<T14> Fourteenth
+        {
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+        }
+        public IOption<T15> Fifteenth
+        {
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+        }
+        public IOption<T16> Sixteenth
+        {
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+        }
+        public IOption<T17> Seventeenth
+        {
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+        }
+        public IOption<T18> Eighteenth
+        {
+            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
+        }
+
+        public R Match<R>(
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth,
+            Func<T10, R> ifTenth,
+            Func<T11, R> ifEleventh,
+            Func<T12, R> ifTwelfth,
+            Func<T13, R> ifThirteenth,
+            Func<T14, R> ifFourteenth,
+            Func<T15, R> ifFifteenth,
+            Func<T16, R> ifSixteenth,
+            Func<T17, R> ifSeventeenth,
+            Func<T18, R> ifEighteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return ifFirst(GetCoproductValue<T1>());
+                case 2: return ifSecond(GetCoproductValue<T2>());
+                case 3: return ifThird(GetCoproductValue<T3>());
+                case 4: return ifFourth(GetCoproductValue<T4>());
+                case 5: return ifFifth(GetCoproductValue<T5>());
+                case 6: return ifSixth(GetCoproductValue<T6>());
+                case 7: return ifSeventh(GetCoproductValue<T7>());
+                case 8: return ifEighth(GetCoproductValue<T8>());
+                case 9: return ifNinth(GetCoproductValue<T9>());
+                case 10: return ifTenth(GetCoproductValue<T10>());
+                case 11: return ifEleventh(GetCoproductValue<T11>());
+                case 12: return ifTwelfth(GetCoproductValue<T12>());
+                case 13: return ifThirteenth(GetCoproductValue<T13>());
+                case 14: return ifFourteenth(GetCoproductValue<T14>());
+                case 15: return ifFifteenth(GetCoproductValue<T15>());
+                case 16: return ifSixteenth(GetCoproductValue<T16>());
+                case 17: return ifSeventeenth(GetCoproductValue<T17>());
+                case 18: return ifEighteenth(GetCoproductValue<T18>());
+                default: return default(R);
+            }
+        }
+
+        public void Match(
+            Action<T1> ifFirst = null,
+            Action<T2> ifSecond = null,
+            Action<T3> ifThird = null,
+            Action<T4> ifFourth = null,
+            Action<T5> ifFifth = null,
+            Action<T6> ifSixth = null,
+            Action<T7> ifSeventh = null,
+            Action<T8> ifEighth = null,
+            Action<T9> ifNinth = null,
+            Action<T10> ifTenth = null,
+            Action<T11> ifEleventh = null,
+            Action<T12> ifTwelfth = null,
+            Action<T13> ifThirteenth = null,
+            Action<T14> ifFourteenth = null,
+            Action<T15> ifFifteenth = null,
+            Action<T16> ifSixteenth = null,
+            Action<T17> ifSeventeenth = null,
+            Action<T18> ifEighteenth = null)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
+                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
+                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
+                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
+                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
+                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
+                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
+                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
+                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
+                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
+                case 17: if (ifSeventeenth != null) { ifSeventeenth(GetCoproductValue<T17>()); } break;
+                case 18: if (ifEighteenth != null) { ifEighteenth(GetCoproductValue<T18>()); } break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Factory for 19-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct19
+    {
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T1 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T2 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T3 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T4 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T5 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T6 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T7 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T8 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T9 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T10 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T11 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T12 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T13 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T14 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T15 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T16 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T17 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T18 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T19 value)
+        {
+            return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
+        }
+
+    }
+
+    /// <summary>
+    /// A 19-dimensional immutable coproduct.
+    /// </summary> 
+    public class Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : CoproductBase, ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
+    {
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct19(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct19(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct19(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct19(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct19(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct19(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct19(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct19(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the ninth position.
+        /// </summary>
+        public Coproduct19(T9 ninthValue)
+            : this(9, ninthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the tenth position.
+        /// </summary>
+        public Coproduct19(T10 tenthValue)
+            : this(10, tenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the eleventh position.
+        /// </summary>
+        public Coproduct19(T11 eleventhValue)
+            : this(11, eleventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the twelfth position.
+        /// </summary>
+        public Coproduct19(T12 twelfthValue)
+            : this(12, twelfthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the thirteenth position.
+        /// </summary>
+        public Coproduct19(T13 thirteenthValue)
+            : this(13, thirteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the fourteenth position.
+        /// </summary>
+        public Coproduct19(T14 fourteenthValue)
+            : this(14, fourteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the fifteenth position.
+        /// </summary>
+        public Coproduct19(T15 fifteenthValue)
+            : this(15, fifteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the sixteenth position.
+        /// </summary>
+        public Coproduct19(T16 sixteenthValue)
+            : this(16, sixteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the seventeenth position.
+        /// </summary>
+        public Coproduct19(T17 seventeenthValue)
+            : this(17, seventeenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the eighteenth position.
+        /// </summary>
+        public Coproduct19(T18 eighteenthValue)
+            : this(18, eighteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct with the specified value on the nineteenth position.
+        /// </summary>
+        public Coproduct19(T19 nineteenthValue)
+            : this(19, nineteenthValue)
+        {
+        }
+
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct19(ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 19-dimensional coproduct.
+        /// </summary>
+        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+        /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
+        protected Coproduct19(int discriminator, object value)
+            : base(19, discriminator, value)
+        {
+        }
+
+        public bool IsFirst
+        {
+            get { return CoproductDiscriminator == 1; }
+        }
+        public bool IsSecond
+        {
+            get { return CoproductDiscriminator == 2; }
+        }
+        public bool IsThird
+        {
+            get { return CoproductDiscriminator == 3; }
+        }
+        public bool IsFourth
+        {
+            get { return CoproductDiscriminator == 4; }
+        }
+        public bool IsFifth
+        {
+            get { return CoproductDiscriminator == 5; }
+        }
+        public bool IsSixth
+        {
+            get { return CoproductDiscriminator == 6; }
+        }
+        public bool IsSeventh
+        {
+            get { return CoproductDiscriminator == 7; }
+        }
+        public bool IsEighth
+        {
+            get { return CoproductDiscriminator == 8; }
+        }
+        public bool IsNinth
+        {
+            get { return CoproductDiscriminator == 9; }
+        }
+        public bool IsTenth
+        {
+            get { return CoproductDiscriminator == 10; }
+        }
+        public bool IsEleventh
+        {
+            get { return CoproductDiscriminator == 11; }
+        }
+        public bool IsTwelfth
+        {
+            get { return CoproductDiscriminator == 12; }
+        }
+        public bool IsThirteenth
+        {
+            get { return CoproductDiscriminator == 13; }
+        }
+        public bool IsFourteenth
+        {
+            get { return CoproductDiscriminator == 14; }
+        }
+        public bool IsFifteenth
+        {
+            get { return CoproductDiscriminator == 15; }
+        }
+        public bool IsSixteenth
+        {
+            get { return CoproductDiscriminator == 16; }
+        }
+        public bool IsSeventeenth
+        {
+            get { return CoproductDiscriminator == 17; }
+        }
+        public bool IsEighteenth
+        {
+            get { return CoproductDiscriminator == 18; }
+        }
+        public bool IsNineteenth
+        {
+            get { return CoproductDiscriminator == 19; }
+        }
+
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+        }
+        public IOption<T8> Eighth
+        {
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+        }
+        public IOption<T9> Ninth
+        {
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+        }
+        public IOption<T10> Tenth
+        {
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+        }
+        public IOption<T11> Eleventh
+        {
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+        }
+        public IOption<T12> Twelfth
+        {
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+        }
+        public IOption<T13> Thirteenth
+        {
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+        }
+        public IOption<T14> Fourteenth
+        {
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+        }
+        public IOption<T15> Fifteenth
+        {
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+        }
+        public IOption<T16> Sixteenth
+        {
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+        }
+        public IOption<T17> Seventeenth
+        {
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+        }
+        public IOption<T18> Eighteenth
+        {
+            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
+        }
+        public IOption<T19> Nineteenth
+        {
+            get { return IsNineteenth ? Option.Valued(GetCoproductValue<T19>()) : Option.Empty<T19>(); }
+        }
+
+        public R Match<R>(
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth,
+            Func<T10, R> ifTenth,
+            Func<T11, R> ifEleventh,
+            Func<T12, R> ifTwelfth,
+            Func<T13, R> ifThirteenth,
+            Func<T14, R> ifFourteenth,
+            Func<T15, R> ifFifteenth,
+            Func<T16, R> ifSixteenth,
+            Func<T17, R> ifSeventeenth,
+            Func<T18, R> ifEighteenth,
+            Func<T19, R> ifNineteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return ifFirst(GetCoproductValue<T1>());
+                case 2: return ifSecond(GetCoproductValue<T2>());
+                case 3: return ifThird(GetCoproductValue<T3>());
+                case 4: return ifFourth(GetCoproductValue<T4>());
+                case 5: return ifFifth(GetCoproductValue<T5>());
+                case 6: return ifSixth(GetCoproductValue<T6>());
+                case 7: return ifSeventh(GetCoproductValue<T7>());
+                case 8: return ifEighth(GetCoproductValue<T8>());
+                case 9: return ifNinth(GetCoproductValue<T9>());
+                case 10: return ifTenth(GetCoproductValue<T10>());
+                case 11: return ifEleventh(GetCoproductValue<T11>());
+                case 12: return ifTwelfth(GetCoproductValue<T12>());
+                case 13: return ifThirteenth(GetCoproductValue<T13>());
+                case 14: return ifFourteenth(GetCoproductValue<T14>());
+                case 15: return ifFifteenth(GetCoproductValue<T15>());
+                case 16: return ifSixteenth(GetCoproductValue<T16>());
+                case 17: return ifSeventeenth(GetCoproductValue<T17>());
+                case 18: return ifEighteenth(GetCoproductValue<T18>());
+                case 19: return ifNineteenth(GetCoproductValue<T19>());
+                default: return default(R);
+            }
+        }
+
+        public void Match(
+            Action<T1> ifFirst = null,
+            Action<T2> ifSecond = null,
+            Action<T3> ifThird = null,
+            Action<T4> ifFourth = null,
+            Action<T5> ifFifth = null,
+            Action<T6> ifSixth = null,
+            Action<T7> ifSeventh = null,
+            Action<T8> ifEighth = null,
+            Action<T9> ifNinth = null,
+            Action<T10> ifTenth = null,
+            Action<T11> ifEleventh = null,
+            Action<T12> ifTwelfth = null,
+            Action<T13> ifThirteenth = null,
+            Action<T14> ifFourteenth = null,
+            Action<T15> ifFifteenth = null,
+            Action<T16> ifSixteenth = null,
+            Action<T17> ifSeventeenth = null,
+            Action<T18> ifEighteenth = null,
+            Action<T19> ifNineteenth = null)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
+                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
+                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
+                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
+                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
+                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
+                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
+                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
+                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
+                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
+                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
+                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
+                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
+                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
+                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
+                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
+                case 17: if (ifSeventeenth != null) { ifSeventeenth(GetCoproductValue<T17>()); } break;
+                case 18: if (ifEighteenth != null) { ifEighteenth(GetCoproductValue<T18>()); } break;
+                case 19: if (ifNineteenth != null) { ifNineteenth(GetCoproductValue<T19>()); } break;
+            }
+        }
+    }
+
 }

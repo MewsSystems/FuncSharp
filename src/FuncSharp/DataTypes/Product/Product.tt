@@ -123,11 +123,13 @@ namespace FuncSharp
             return Create(<#= Properties(i, name: "p.ProductValue") #>);
         }
 <#      } #>
+<#      if (i <= MaxFuncArity()) { #>
 
         public R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f)
         {
             return f(<#= Properties(i, name: "ProductValue") #>);
         }
+<#      } #>
     }
 
 <#  } #>
