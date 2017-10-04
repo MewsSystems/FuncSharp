@@ -67,6 +67,10 @@ namespace FuncSharp
         public static IOption<TEnum> ToEnum<TEnum>(this string s, bool ignoreCase = false)
             where TEnum : struct
         {
+            if (s == null || s.Contains(","))
+            {
+                return Option.Empty<TEnum>();
+            }
             return Tryer.Invoke<string, bool, TEnum>(Enum.TryParse<TEnum>, s, ignoreCase);
         }
 
