@@ -82,7 +82,7 @@ Simplistic implementation of finite morphisms between two types. Isomorphisms ca
 
 ### DataCube
 
-DataCubes represent sets of data indexed by a multidimensional index. E.g. a two-dimensional data cube is roughly equivalent to `Dictionary<Tuple2<P1, P2>, TValue>`. However data cubes are much more friendlier to work with, they provide nicer API than dictionary and offer many more advanced operations like slicing, aggregations, transformations, filtering etc. As a simple example, consider this [punch card](https://github.com/siroky/FuncSharp/graphs/punch-card). One may construct it from a collection of commits and represent it in memory as follows:
+DataCubes represent sets of data indexed by a multidimensional index. E.g. a two-dimensional data cube is roughly equivalent to `Dictionary<Tuple2<P1, P2>, TValue>`. However data cubes are much more friendlier to work with, they provide nicer API than dictionary and offer many more advanced operations like slicing, aggregations, transformations, filtering etc. As a simple example, consider data structure representing counts of commits each hour and day of week. One may construct it from a collection of commits and represent it in memory as follows:
 
 ```cs
 var punchCard = new DataCube2<Day, Hour, int>();
