@@ -19,12 +19,7 @@ namespace FuncSharp
         /// </summary>
         public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
-            var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
-            if (data.Count == 0)
-            {
-                return Option.Empty<T>();
-            }
-            return Option.Valued(data.First());
+            return source.FirstOrDefault(predicate ?? (t => true)).ToOption();
         }
 
         /// <summary>
@@ -32,7 +27,7 @@ namespace FuncSharp
         /// </summary>
         public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
-            return source.Reverse().FirstOption(predicate);
+            return source.LastOrDefault(predicate ?? (t => true)).ToOption();
         }
 
         /// <summary>
@@ -47,7 +42,7 @@ namespace FuncSharp
             }
             return data.FirstOption();
         }
-
+        
         /// <summary>
         /// Coverts the source to a new 1-dimensional data cube.
         /// </summary>

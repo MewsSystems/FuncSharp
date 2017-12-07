@@ -21,6 +21,7 @@ namespace FuncSharp.Tests
                 1, _ => "bar",
                 _ => "baz"
             ));
+            Assert.True(DateTimeKind.Utc.Match(DateTimeKind.Utc, _ => true));
             Assert.Throws<ArgumentException>(() => 2.Match(
                 0, _ => "foo",
                 1, _ => "bar"
