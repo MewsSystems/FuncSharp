@@ -6,8 +6,6 @@ A C# library with main purpose to reduce boilerplate code and avoid bugs thanks 
 Install-Package FuncSharp
 ```
 
-[![Build Status](https://travis-ci.org/siroky/FuncSharp.svg?branch=develop)](https://travis-ci.org/siroky/FuncSharp)
-
 ## Contents
 
 - [Data Types](#data-types)
