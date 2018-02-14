@@ -13,7 +13,7 @@ namespace FuncSharp
 
         public TraitDataStorage TraitDataStorage { get; }
 
-        private Func<A, A, bool> LessImpl { get; set; }
+        private Func<A, A, bool> LessImpl { get; }
 
         public bool Less(A a1, A a2)
         {

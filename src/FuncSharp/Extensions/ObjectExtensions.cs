@@ -117,25 +117,25 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1).Match(f1);
             }
-            return value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1>(
-            this object value,
+        public static void Match<TValue, T1>(
+            this TValue value,
             T1 t1, Action<T1> f1,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -143,7 +143,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
             }
         }
 
@@ -223,27 +223,27 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2).Match(f1, f2);
             }
-            return value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2>(
-            this object value,
+        public static void Match<TValue, T1, T2>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -251,7 +251,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
             }
         }
 
@@ -339,29 +339,29 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
             }
-            return value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -369,7 +369,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
             }
         }
 
@@ -465,31 +465,31 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
             T4 t4, Func<T4, TResult> f4,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
             T4 t4, Action<T4> f4,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -497,7 +497,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
             }
         }
 
@@ -601,33 +601,33 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
             T4 t4, Func<T4, TResult> f4,
             T5 t5, Func<T5, TResult> f5,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
             T4 t4, Action<T4> f4,
             T5 t5, Action<T5> f5,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -635,7 +635,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
             }
         }
 
@@ -747,35 +747,35 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
             T4 t4, Func<T4, TResult> f4,
             T5 t5, Func<T5, TResult> f5,
             T6 t6, Func<T6, TResult> f6,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
             T4 t4, Action<T4> f4,
             T5 t5, Action<T5> f5,
             T6 t6, Action<T6> f6,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -783,7 +783,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
             }
         }
 
@@ -903,8 +903,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -912,20 +912,20 @@ namespace FuncSharp
             T5 t5, Func<T5, TResult> f5,
             T6 t6, Func<T6, TResult> f6,
             T7 t7, Func<T7, TResult> f7,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -933,7 +933,7 @@ namespace FuncSharp
             T5 t5, Action<T5> f5,
             T6 t6, Action<T6> f6,
             T7 t7, Action<T7> f7,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -941,7 +941,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
             }
         }
 
@@ -1069,8 +1069,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -1079,20 +1079,20 @@ namespace FuncSharp
             T6 t6, Func<T6, TResult> f6,
             T7 t7, Func<T7, TResult> f7,
             T8 t8, Func<T8, TResult> f8,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -1101,7 +1101,7 @@ namespace FuncSharp
             T6 t6, Action<T6> f6,
             T7 t7, Action<T7> f7,
             T8 t8, Action<T8> f8,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -1109,7 +1109,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
             }
         }
 
@@ -1245,8 +1245,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -1256,20 +1256,20 @@ namespace FuncSharp
             T7 t7, Func<T7, TResult> f7,
             T8 t8, Func<T8, TResult> f8,
             T9 t9, Func<T9, TResult> f9,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -1279,7 +1279,7 @@ namespace FuncSharp
             T7 t7, Action<T7> f7,
             T8 t8, Action<T8> f8,
             T9 t9, Action<T9> f9,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -1287,7 +1287,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
             }
         }
 
@@ -1431,8 +1431,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -1443,20 +1443,20 @@ namespace FuncSharp
             T8 t8, Func<T8, TResult> f8,
             T9 t9, Func<T9, TResult> f9,
             T10 t10, Func<T10, TResult> f10,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -1467,7 +1467,7 @@ namespace FuncSharp
             T8 t8, Action<T8> f8,
             T9 t9, Action<T9> f9,
             T10 t10, Action<T10> f10,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -1475,7 +1475,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
             }
         }
 
@@ -1627,8 +1627,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -1640,20 +1640,20 @@ namespace FuncSharp
             T9 t9, Func<T9, TResult> f9,
             T10 t10, Func<T10, TResult> f10,
             T11 t11, Func<T11, TResult> f11,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -1665,7 +1665,7 @@ namespace FuncSharp
             T9 t9, Action<T9> f9,
             T10 t10, Action<T10> f10,
             T11 t11, Action<T11> f11,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -1673,7 +1673,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
             }
         }
 
@@ -1833,8 +1833,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -1847,20 +1847,20 @@ namespace FuncSharp
             T10 t10, Func<T10, TResult> f10,
             T11 t11, Func<T11, TResult> f11,
             T12 t12, Func<T12, TResult> f12,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -1873,7 +1873,7 @@ namespace FuncSharp
             T10 t10, Action<T10> f10,
             T11 t11, Action<T11> f11,
             T12 t12, Action<T12> f12,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -1881,7 +1881,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
             }
         }
 
@@ -2049,8 +2049,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -2064,20 +2064,20 @@ namespace FuncSharp
             T11 t11, Func<T11, TResult> f11,
             T12 t12, Func<T12, TResult> f12,
             T13 t13, Func<T13, TResult> f13,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -2091,7 +2091,7 @@ namespace FuncSharp
             T11 t11, Action<T11> f11,
             T12 t12, Action<T12> f12,
             T13 t13, Action<T13> f13,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -2099,7 +2099,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
             }
         }
 
@@ -2275,8 +2275,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -2291,20 +2291,20 @@ namespace FuncSharp
             T12 t12, Func<T12, TResult> f12,
             T13 t13, Func<T13, TResult> f13,
             T14 t14, Func<T14, TResult> f14,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -2319,7 +2319,7 @@ namespace FuncSharp
             T12 t12, Action<T12> f12,
             T13 t13, Action<T13> f13,
             T14 t14, Action<T14> f14,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -2327,7 +2327,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
             }
         }
 
@@ -2511,8 +2511,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -2528,20 +2528,20 @@ namespace FuncSharp
             T13 t13, Func<T13, TResult> f13,
             T14 t14, Func<T14, TResult> f14,
             T15 t15, Func<T15, TResult> f15,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -2557,7 +2557,7 @@ namespace FuncSharp
             T13 t13, Action<T13> f13,
             T14 t14, Action<T14> f14,
             T15 t15, Action<T15> f15,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -2565,7 +2565,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
             }
         }
 
@@ -2757,8 +2757,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -2775,20 +2775,20 @@ namespace FuncSharp
             T14 t14, Func<T14, TResult> f14,
             T15 t15, Func<T15, TResult> f15,
             T16 t16, Func<T16, TResult> f16,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -2805,7 +2805,7 @@ namespace FuncSharp
             T14 t14, Action<T14> f14,
             T15 t15, Action<T15> f15,
             T16 t16, Action<T16> f16,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -2813,7 +2813,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
             }
         }
 
@@ -3013,8 +3013,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -3032,20 +3032,20 @@ namespace FuncSharp
             T15 t15, Func<T15, TResult> f15,
             T16 t16, Func<T16, TResult> f16,
             T17 t17, Func<T17, TResult> f17,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -3063,7 +3063,7 @@ namespace FuncSharp
             T15 t15, Action<T15> f15,
             T16 t16, Action<T16> f16,
             T17 t17, Action<T17> f17,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -3071,7 +3071,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
             }
         }
 
@@ -3279,8 +3279,8 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, TResult>(
-            this object value,
+        public static TResult Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, TResult>(
+            this TValue value,
             T1 t1, Func<T1, TResult> f1,
             T2 t2, Func<T2, TResult> f2,
             T3 t3, Func<T3, TResult> f3,
@@ -3299,20 +3299,20 @@ namespace FuncSharp
             T16 t16, Func<T16, TResult> f16,
             T17 t17, Func<T17, TResult> f17,
             T18 t18, Func<T18, TResult> f18,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(
-            this object value,
+        public static void Match<TValue, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(
+            this TValue value,
             T1 t1, Action<T1> f1,
             T2 t2, Action<T2> f2,
             T3 t3, Action<T3> f3,
@@ -3331,7 +3331,7 @@ namespace FuncSharp
             T16 t16, Action<T16> f16,
             T17 t17, Action<T17> f17,
             T18 t18, Action<T18> f18,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -3339,7 +3339,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
             }
         }
 

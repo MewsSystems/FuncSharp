@@ -9,7 +9,7 @@ namespace FuncSharp
             EqualImpl = equal ?? ((a1, a2) => a1.Equals(a2));
         }
 
-        public Func<A, A, bool> EqualImpl { get; set; }
+        public Func<A, A, bool> EqualImpl { get; }
 
         public virtual bool Equal(A a1, A a2)
         {

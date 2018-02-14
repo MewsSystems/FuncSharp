@@ -1,4 +1,6 @@
-﻿namespace FuncSharp
+﻿using System;
+
+namespace FuncSharp
 {
     /// <summary>
     /// A 0-dimensional relation.
@@ -58,6 +60,14 @@
         {
             return Set(Product1.Create(t1));
         }
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<T1> a)
+        {
+            ForEach(p => a(p.ProductValue1));
+        }
     }
 
     /// <summary>
@@ -87,6 +97,14 @@
         public bool Set(T1 t1, T2 t2)
         {
             return Set(Product2.Create(t1, t2));
+        }
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<T1, T2> a)
+        {
+            ForEach(p => a(p.ProductValue1, p.ProductValue2));
         }
     }
 
@@ -118,6 +136,14 @@
         {
             return Set(Product3.Create(t1, t2, t3));
         }
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<T1, T2, T3> a)
+        {
+            ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3));
+        }
     }
 
     /// <summary>
@@ -147,6 +173,14 @@
         public bool Set(T1 t1, T2 t2, T3 t3, T4 t4)
         {
             return Set(Product4.Create(t1, t2, t3, t4));
+        }
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<T1, T2, T3, T4> a)
+        {
+            ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4));
         }
     }
 
@@ -178,6 +212,14 @@
         {
             return Set(Product5.Create(t1, t2, t3, t4, t5));
         }
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<T1, T2, T3, T4, T5> a)
+        {
+            ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5));
+        }
     }
 
     /// <summary>
@@ -207,6 +249,14 @@
         public bool Set(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
             return Set(Product6.Create(t1, t2, t3, t4, t5, t6));
+        }
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<T1, T2, T3, T4, T5, T6> a)
+        {
+            ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6));
         }
     }
 

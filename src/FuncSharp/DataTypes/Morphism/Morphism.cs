@@ -77,7 +77,7 @@ namespace FuncSharp
         public IEnumerable<A> Domain { get; }
         public IEnumerable<B> Range { get; }
 
-        private DataCube1<A, B> Mappings { get; set; }
+        private DataCube1<A, B> Mappings { get; }
 
         public IOption<B> Apply(A source)
         {

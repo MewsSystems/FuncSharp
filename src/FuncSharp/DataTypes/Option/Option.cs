@@ -6,6 +6,22 @@ namespace FuncSharp
 {
     public static class Option
     {
+        static Option()
+        {
+            True = true.ToOption();
+            False = false.ToOption();
+        }
+
+        /// <summary>
+        /// True value as an option.
+        /// </summary>
+        public static IOption<bool> True { get; }
+
+        /// <summary>
+        /// False value as an option.
+        /// </summary>
+        public static IOption<bool> False { get; }
+
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>

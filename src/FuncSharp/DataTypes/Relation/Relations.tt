@@ -5,6 +5,8 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="../../CodeGen/Helpers.ttinclude" #>
+using System;
+
 namespace FuncSharp
 {
 <# for (var i = 0; i <= MaxStructureArity(); i++) { #>
@@ -36,6 +38,16 @@ namespace FuncSharp
         {
             return Set(Product<#= i #>.Create(<#= Values(i, name: "T") #>));
         }
+<#      if (i > 0) { #>
+
+		/// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<#= TypeBracket(i) #> a)
+        {
+            ForEach(p => a(<#= Properties(i, name: "ProductValue", accessor: "p.") #>));
+        }
+<#      } #>
     }
 
 <# } #>

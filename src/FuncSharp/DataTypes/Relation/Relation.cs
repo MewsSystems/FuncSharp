@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -20,7 +21,7 @@ namespace FuncSharp
         /// <summary>
         /// Internal representation of the relation.
         /// </summary>
-        private TDataCube Representation { get; set; }
+        private TDataCube Representation { get; }
 
         /// <summary>
         /// Returns whether the relation contains the specified product.
@@ -53,6 +54,14 @@ namespace FuncSharp
             {
                 Set(product);
             }
+        }
+
+        /// <summary>
+        /// For each relation, invokes the specified function.
+        /// </summary>
+        public void ForEach(Action<TProduct> a)
+        {
+            Representation.ForEach((p, _) => a(p));
         }
     }
 }

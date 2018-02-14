@@ -131,25 +131,25 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<<#= Types(i) #>, TResult>(
-            this object value,
+        public static TResult Match<TValue, <#= Types(i) #>, TResult>(
+            this TValue value,
 <#= Lines(i, j => Indent(12) + Parameter(j) + ", Func<" + Type(j) + ", TResult> f" + j, separator: ",") #>,
-            Func<Unit, TResult> otherwise = null)
+            Func<TValue, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
                 return value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
             }
-            return value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
+            return value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
         }
 
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<<#= Types(i) #>>(
-            this object value,
+        public static void Match<TValue, <#= Types(i) #>>(
+            this TValue value,
 <#= Lines(i, j => Indent(12) + Parameter(j) + ", Action<" + Type(j) + "> f" + j, separator: ",") #>,
-            Action<Unit> otherwise = null)
+            Action<TValue> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -157,7 +157,7 @@ namespace FuncSharp
             }
             else
             {
-                value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(Unit.Value));
+                value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
             }
         }
 

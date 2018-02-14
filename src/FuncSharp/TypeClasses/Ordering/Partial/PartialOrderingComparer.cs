@@ -12,7 +12,7 @@ namespace FuncSharp
 
         public IPartialOrdering<A> Ordering { get; }
 
-        private int Multiplier { get; set; }
+        private int Multiplier { get; }
 
         public int Compare(A x, A y)
         {

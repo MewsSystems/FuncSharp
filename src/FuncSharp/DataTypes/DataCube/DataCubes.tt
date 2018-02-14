@@ -48,7 +48,7 @@ namespace FuncSharp
 
 <#      } #>
 <#      for (var j = 1; j <= i; j++) { #>
-        private Dictionary<IProduct1<P<#= j #>>, int> Domain<#= j #>Counts { get; set; }
+        private Dictionary<IProduct1<P<#= j #>>, int> Domain<#= j #>Counts { get; }
 
 <#      } #>
         /// <summary>

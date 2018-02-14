@@ -12,7 +12,7 @@ namespace FuncSharp
 
         public TraitDataStorage TraitDataStorage { get; }
 
-        private Func<A, A> SuccessorImpl { get; set; }
+        private Func<A, A> SuccessorImpl { get; }
 
         public A Successor(A a)
         {

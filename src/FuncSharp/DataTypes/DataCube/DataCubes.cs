@@ -169,7 +169,7 @@ namespace FuncSharp
             get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -377,9 +377,9 @@ namespace FuncSharp
             get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -648,11 +648,11 @@ namespace FuncSharp
             get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
+        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -982,13 +982,13 @@ namespace FuncSharp
             get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
+        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
 
-        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; set; }
+        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -1379,15 +1379,15 @@ namespace FuncSharp
             get { return Domain5Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
+        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
 
-        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; set; }
+        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; }
 
-        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; set; }
+        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -1839,17 +1839,17 @@ namespace FuncSharp
             get { return Domain6Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; set; }
+        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; set; }
+        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; set; }
+        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
 
-        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; set; }
+        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; }
 
-        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; set; }
+        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; }
 
-        private Dictionary<IProduct1<P6>, int> Domain6Counts { get; set; }
+        private Dictionary<IProduct1<P6>, int> Domain6Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.

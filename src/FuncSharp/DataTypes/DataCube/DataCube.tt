@@ -89,7 +89,7 @@ namespace FuncSharp
         /// <summary>
         /// Values in the cube indexed by their positions.
         /// </summary>
-        private Dictionary<TPosition, TValue> Index { get; set; }
+        private Dictionary<TPosition, TValue> Index { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
