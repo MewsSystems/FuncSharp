@@ -160,7 +160,6 @@ namespace FuncSharp
     /// General representation of a data cube.
     /// </summary>
     public abstract class DataCube<TPosition, TValue> : DataCube
-        where TPosition : IProduct
     {
         /// <summary>
         /// Creates a new empty data cube.
@@ -212,7 +211,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(TPosition position)
         {
-            return Index.ContainsKey(ToCanonicalPosition(position));
+            return Index.ContainsKey(position);
         }
 
         /// <summary>
@@ -220,7 +219,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(TPosition position)
         {
-            return Index.Get(ToCanonicalPosition(position));
+            return Index.Get(position);
         }
 
         /// <summary>
@@ -237,7 +236,7 @@ namespace FuncSharp
         /// </summary>
         public virtual TValue Set(TPosition position, TValue value)
         {
-            Index[ToCanonicalPosition(position)] = value;
+            Index[position] = value;
             return value;
         }
 
@@ -329,7 +328,6 @@ namespace FuncSharp
         /// </summary>
         public TNewCube Transform<TNewPosition, TNewCube>(Func<TPosition, TNewPosition> positionMapper, Func<TValue, TValue, TValue> aggregator)
             where TNewCube : DataCube<TNewPosition, TValue>, new()
-            where TNewPosition : IProduct
         {
             var result = new TNewCube();
             ForEach((p, v) => result.SetOrElseUpdate(positionMapper(p), v, aggregator));
@@ -345,7 +343,6 @@ namespace FuncSharp
         /// </summary>
         public TNewCube MultiTransform<TNewPosition, TNewCube>(Func<TPosition, IEnumerable<TNewPosition>> positionMapper, Func<TValue, TValue, TValue> aggregator)
             where TNewCube : DataCube<TNewPosition, TValue>, new()
-            where TNewPosition : IProduct
         {
             var result = new TNewCube();
             ForEach((p, v) =>
@@ -383,18 +380,18 @@ namespace FuncSharp
 
             return result.ToString();
         }
-
-        protected void AddDomain<P>(Dictionary<IProduct1<P>, int> rangeCounts, P value)
+        
+        protected void AddDomain<P>(Dictionary<Position1<P>, int> rangeCounts, P value)
         {
-            var key = Product1.Create(value);
+            var key = Position1.Create(value);
             var count = 0;
             rangeCounts.TryGetValue(key, out count);
             rangeCounts[key] = count + 1;
         }
 
-        protected void RemoveDomain<P>(Dictionary<IProduct1<P>, int> rangeCounts, P value)
+        protected void RemoveDomain<P>(Dictionary<Position1<P>, int> rangeCounts, P value)
         {
-            var key = Product1.Create(value);
+            var key = Position1.Create(value);
             var count = rangeCounts[key];
             if (count == 1)
             {
@@ -405,7 +402,5 @@ namespace FuncSharp
                 rangeCounts[key] = count - 1;
             }
         }
-
-        protected abstract TPosition ToCanonicalPosition(TPosition position);
     }
 }

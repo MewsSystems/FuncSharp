@@ -47,6 +47,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataCubes.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataTypes\DataCube\Position.cs">
+      <DependentUpon>Position.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="DataTypes\Morphism\IIsoMorphism.cs" />
     <Compile Include="DataTypes\Morphism\IMorphism.cs" />
     <Compile Include="DataTypes\Morphism\IsoMorphism.cs" />
@@ -231,6 +236,12 @@
     <None Include="Extensions\IEnumerableExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IEnumerableExtensions.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataTypes\DataCube\Position.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Position.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

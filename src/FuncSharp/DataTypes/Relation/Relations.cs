@@ -5,7 +5,7 @@ namespace FuncSharp
     /// <summary>
     /// A 0-dimensional relation.
     /// </summary>
-    public class Relation0 : Relation<IProduct0, DataCube0<Unit>>
+    public class Relation0 : Relation<Position0, DataCube0<Unit>>
     {
         /// <summary>
         /// Creates an empty 0-dimensional relation.
@@ -16,26 +16,26 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
         public bool Contains()
         {
-            return Contains(Product0.Create());
+            return Contains(Position0.Create());
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
         public bool Set()
         {
-            return Set(Product0.Create());
+            return Set(Position0.Create());
         }
     }
 
     /// <summary>
     /// A 1-dimensional relation.
     /// </summary>
-    public class Relation1<T1> : Relation<IProduct1<T1>, DataCube1<T1, Unit>>
+    public class Relation1<P1> : Relation<Position1<P1>, DataCube1<P1, Unit>>
     {
         /// <summary>
         /// Creates an empty 1-dimensional relation.
@@ -46,25 +46,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
-        public bool Contains(T1 t1)
+        public bool Contains(P1 p1)
         {
-            return Contains(Product1.Create(t1));
+            return Contains(Position1.Create(p1));
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public bool Set(T1 t1)
+        public bool Set(P1 p1)
         {
-            return Set(Product1.Create(t1));
+            return Set(Position1.Create(p1));
         }
 
-		/// <summary>
+        /// <summary>
         /// For each relation, invokes the specified function.
         /// </summary>
-        public void ForEach(Action<T1> a)
+        public void ForEach(Action<P1> a)
         {
             ForEach(p => a(p.ProductValue1));
         }
@@ -73,7 +73,7 @@ namespace FuncSharp
     /// <summary>
     /// A 2-dimensional relation.
     /// </summary>
-    public class Relation2<T1, T2> : Relation<IProduct2<T1, T2>, DataCube2<T1, T2, Unit>>
+    public class Relation2<P1, P2> : Relation<Position2<P1, P2>, DataCube2<P1, P2, Unit>>
     {
         /// <summary>
         /// Creates an empty 2-dimensional relation.
@@ -84,25 +84,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
-        public bool Contains(T1 t1, T2 t2)
+        public bool Contains(P1 p1, P2 p2)
         {
-            return Contains(Product2.Create(t1, t2));
+            return Contains(Position2.Create(p1, p2));
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public bool Set(T1 t1, T2 t2)
+        public bool Set(P1 p1, P2 p2)
         {
-            return Set(Product2.Create(t1, t2));
+            return Set(Position2.Create(p1, p2));
         }
 
-		/// <summary>
+        /// <summary>
         /// For each relation, invokes the specified function.
         /// </summary>
-        public void ForEach(Action<T1, T2> a)
+        public void ForEach(Action<P1, P2> a)
         {
             ForEach(p => a(p.ProductValue1, p.ProductValue2));
         }
@@ -111,7 +111,7 @@ namespace FuncSharp
     /// <summary>
     /// A 3-dimensional relation.
     /// </summary>
-    public class Relation3<T1, T2, T3> : Relation<IProduct3<T1, T2, T3>, DataCube3<T1, T2, T3, Unit>>
+    public class Relation3<P1, P2, P3> : Relation<Position3<P1, P2, P3>, DataCube3<P1, P2, P3, Unit>>
     {
         /// <summary>
         /// Creates an empty 3-dimensional relation.
@@ -122,25 +122,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
-        public bool Contains(T1 t1, T2 t2, T3 t3)
+        public bool Contains(P1 p1, P2 p2, P3 p3)
         {
-            return Contains(Product3.Create(t1, t2, t3));
+            return Contains(Position3.Create(p1, p2, p3));
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public bool Set(T1 t1, T2 t2, T3 t3)
+        public bool Set(P1 p1, P2 p2, P3 p3)
         {
-            return Set(Product3.Create(t1, t2, t3));
+            return Set(Position3.Create(p1, p2, p3));
         }
 
-		/// <summary>
+        /// <summary>
         /// For each relation, invokes the specified function.
         /// </summary>
-        public void ForEach(Action<T1, T2, T3> a)
+        public void ForEach(Action<P1, P2, P3> a)
         {
             ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3));
         }
@@ -149,7 +149,7 @@ namespace FuncSharp
     /// <summary>
     /// A 4-dimensional relation.
     /// </summary>
-    public class Relation4<T1, T2, T3, T4> : Relation<IProduct4<T1, T2, T3, T4>, DataCube4<T1, T2, T3, T4, Unit>>
+    public class Relation4<P1, P2, P3, P4> : Relation<Position4<P1, P2, P3, P4>, DataCube4<P1, P2, P3, P4, Unit>>
     {
         /// <summary>
         /// Creates an empty 4-dimensional relation.
@@ -160,25 +160,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
-        public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4)
+        public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            return Contains(Product4.Create(t1, t2, t3, t4));
+            return Contains(Position4.Create(p1, p2, p3, p4));
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public bool Set(T1 t1, T2 t2, T3 t3, T4 t4)
+        public bool Set(P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            return Set(Product4.Create(t1, t2, t3, t4));
+            return Set(Position4.Create(p1, p2, p3, p4));
         }
 
-		/// <summary>
+        /// <summary>
         /// For each relation, invokes the specified function.
         /// </summary>
-        public void ForEach(Action<T1, T2, T3, T4> a)
+        public void ForEach(Action<P1, P2, P3, P4> a)
         {
             ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4));
         }
@@ -187,7 +187,7 @@ namespace FuncSharp
     /// <summary>
     /// A 5-dimensional relation.
     /// </summary>
-    public class Relation5<T1, T2, T3, T4, T5> : Relation<IProduct5<T1, T2, T3, T4, T5>, DataCube5<T1, T2, T3, T4, T5, Unit>>
+    public class Relation5<P1, P2, P3, P4, P5> : Relation<Position5<P1, P2, P3, P4, P5>, DataCube5<P1, P2, P3, P4, P5, Unit>>
     {
         /// <summary>
         /// Creates an empty 5-dimensional relation.
@@ -198,25 +198,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
-        public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+        public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
-            return Contains(Product5.Create(t1, t2, t3, t4, t5));
+            return Contains(Position5.Create(p1, p2, p3, p4, p5));
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public bool Set(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+        public bool Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
-            return Set(Product5.Create(t1, t2, t3, t4, t5));
+            return Set(Position5.Create(p1, p2, p3, p4, p5));
         }
 
-		/// <summary>
+        /// <summary>
         /// For each relation, invokes the specified function.
         /// </summary>
-        public void ForEach(Action<T1, T2, T3, T4, T5> a)
+        public void ForEach(Action<P1, P2, P3, P4, P5> a)
         {
             ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5));
         }
@@ -225,7 +225,7 @@ namespace FuncSharp
     /// <summary>
     /// A 6-dimensional relation.
     /// </summary>
-    public class Relation6<T1, T2, T3, T4, T5, T6> : Relation<IProduct6<T1, T2, T3, T4, T5, T6>, DataCube6<T1, T2, T3, T4, T5, T6, Unit>>
+    public class Relation6<P1, P2, P3, P4, P5, P6> : Relation<Position6<P1, P2, P3, P4, P5, P6>, DataCube6<P1, P2, P3, P4, P5, P6, Unit>>
     {
         /// <summary>
         /// Creates an empty 6-dimensional relation.
@@ -236,25 +236,25 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns whether the relation contains the specified product.
+        /// Returns whether the relation contains the specified position.
         /// </summary>
-        public bool Contains(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+        public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
-            return Contains(Product6.Create(t1, t2, t3, t4, t5, t6));
+            return Contains(Position6.Create(p1, p2, p3, p4, p5, p6));
         }
 
         /// <summary>
-        /// Adds the specified product to the relation. Returns true if it was added, false if it was already present.
+        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
         /// </summary>
-        public bool Set(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+        public bool Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
-            return Set(Product6.Create(t1, t2, t3, t4, t5, t6));
+            return Set(Position6.Create(p1, p2, p3, p4, p5, p6));
         }
 
-		/// <summary>
+        /// <summary>
         /// For each relation, invokes the specified function.
         /// </summary>
-        public void ForEach(Action<T1, T2, T3, T4, T5, T6> a)
+        public void ForEach(Action<P1, P2, P3, P4, P5, P6> a)
         {
             ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6));
         }

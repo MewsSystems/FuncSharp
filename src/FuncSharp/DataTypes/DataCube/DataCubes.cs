@@ -7,7 +7,7 @@ namespace FuncSharp
     /// <summary>
     /// A 0-dimensional data cube.
     /// </summary>
-    public class DataCube0<TValue> : DataCube<IProduct0, TValue>
+    public class DataCube0<TValue> : DataCube<Position0, TValue>
     {
         /// <summary>
         /// Creates an empty 0-dimensional data cube. 
@@ -29,7 +29,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains()
         {
-            return Contains(Product0.Create());
+            return Contains(Position0.Create());
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get()
         {
-            return Get(Product0.Create());
+            return Get(Position0.Create());
         }
 
         /// <summary>
@@ -46,13 +46,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product0.Create(), setter);
+            return GetOrElseSet(Position0.Create(), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct0 position, TValue value)
+        public override TValue Set(Position0 position, TValue value)
         {
             return base.Set(position, value);
         }
@@ -62,7 +62,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(TValue value)
         {
-            return Set(Product0.Create(), value);
+            return Set(Position0.Create(), value);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product0.Create(), value, otherwise);
+            return SetOrElse(Position0.Create(), value, otherwise);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product0.Create(), value, updater);
+            return SetOrElseUpdate(Position0.Create(), value, updater);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube0<TValue> Where(Func<IProduct0, TValue, bool> predicate)
+        public DataCube0<TValue> Where(Func<Position0, TValue, bool> predicate)
         {
             return Where<DataCube0<TValue>>(predicate);
         }
@@ -122,9 +122,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct0, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position0, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -134,31 +134,23 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct0, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position0, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
-        }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct0 ToCanonicalPosition(IProduct0 position)
-        {
-            return Product0.Create(position);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
     }
 
     /// <summary>
     /// A 1-dimensional data cube.
     /// </summary>
-    public class DataCube1<P1, TValue> : DataCube<IProduct1<P1>, TValue>
+    public class DataCube1<P1, TValue> : DataCube<Position1<P1>, TValue>
     {
         /// <summary>
         /// Creates an empty 1-dimensional data cube. 
         /// </summary>
         public DataCube1()
         {
-            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
+            Domain1Counts = new Dictionary<Position1<P1>, int>();
         }
 
         /// <summary>
@@ -169,14 +161,14 @@ namespace FuncSharp
             get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
+        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1)
         {
-            return Contains(Product1.Create(p1));
+            return Contains(Position1.Create(p1));
         }
 
         /// <summary>
@@ -184,7 +176,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1)
         {
-            return Get(Product1.Create(p1));
+            return Get(Position1.Create(p1));
         }
 
         /// <summary>
@@ -193,13 +185,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product1.Create(p1), setter);
+            return GetOrElseSet(Position1.Create(p1), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct1<P1> position, TValue value)
+        public override TValue Set(Position1<P1> position, TValue value)
         {
             AddDomain(Domain1Counts, position.ProductValue1);
             return base.Set(position, value);
@@ -210,7 +202,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, TValue value)
         {
-            return Set(Product1.Create(p1), value);
+            return Set(Position1.Create(p1), value);
         }
 
         /// <summary>
@@ -219,7 +211,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product1.Create(p1), value, otherwise);
+            return SetOrElse(Position1.Create(p1), value, otherwise);
         }
 
         /// <summary>
@@ -228,7 +220,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product1.Create(p1), value, updater);
+            return SetOrElseUpdate(Position1.Create(p1), value, updater);
         }
 
         /// <summary>
@@ -258,7 +250,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube1<P1, TValue> Where(Func<IProduct1<P1>, TValue, bool> predicate)
+        public DataCube1<P1, TValue> Where(Func<Position1<P1>, TValue, bool> predicate)
         {
             return Where<DataCube1<P1, TValue>>(predicate);
         }
@@ -270,9 +262,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct1<P1>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position1<P1>, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -282,9 +274,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct1<P1>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position1<P1>, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -294,9 +286,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct1<P1>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<Position1<P1>, Position1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return Transform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -306,9 +298,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct1<P1>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<Position1<P1>, IEnumerable<Position1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -337,28 +329,20 @@ namespace FuncSharp
             });
             return slices;
         }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct1<P1> ToCanonicalPosition(IProduct1<P1> position)
-        {
-            return Product1.Create(position);
-        }
     }
 
     /// <summary>
     /// A 2-dimensional data cube.
     /// </summary>
-    public class DataCube2<P1, P2, TValue> : DataCube<IProduct2<P1, P2>, TValue>
+    public class DataCube2<P1, P2, TValue> : DataCube<Position2<P1, P2>, TValue>
     {
         /// <summary>
         /// Creates an empty 2-dimensional data cube. 
         /// </summary>
         public DataCube2()
         {
-            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
-            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
+            Domain1Counts = new Dictionary<Position1<P1>, int>();
+            Domain2Counts = new Dictionary<Position1<P2>, int>();
         }
 
         /// <summary>
@@ -377,16 +361,16 @@ namespace FuncSharp
             get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
+        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
+        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2)
         {
-            return Contains(Product2.Create(p1, p2));
+            return Contains(Position2.Create(p1, p2));
         }
 
         /// <summary>
@@ -394,7 +378,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2)
         {
-            return Get(Product2.Create(p1, p2));
+            return Get(Position2.Create(p1, p2));
         }
 
         /// <summary>
@@ -403,13 +387,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product2.Create(p1, p2), setter);
+            return GetOrElseSet(Position2.Create(p1, p2), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct2<P1, P2> position, TValue value)
+        public override TValue Set(Position2<P1, P2> position, TValue value)
         {
             AddDomain(Domain1Counts, position.ProductValue1);
             AddDomain(Domain2Counts, position.ProductValue2);
@@ -421,7 +405,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, TValue value)
         {
-            return Set(Product2.Create(p1, p2), value);
+            return Set(Position2.Create(p1, p2), value);
         }
 
         /// <summary>
@@ -430,7 +414,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product2.Create(p1, p2), value, otherwise);
+            return SetOrElse(Position2.Create(p1, p2), value, otherwise);
         }
 
         /// <summary>
@@ -439,7 +423,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product2.Create(p1, p2), value, updater);
+            return SetOrElseUpdate(Position2.Create(p1, p2), value, updater);
         }
 
         /// <summary>
@@ -469,7 +453,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube2<P1, P2, TValue> Where(Func<IProduct2<P1, P2>, TValue, bool> predicate)
+        public DataCube2<P1, P2, TValue> Where(Func<Position2<P1, P2>, TValue, bool> predicate)
         {
             return Where<DataCube2<P1, P2, TValue>>(predicate);
         }
@@ -481,9 +465,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct2<P1, P2>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position2<P1, P2>, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -493,9 +477,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct2<P1, P2>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position2<P1, P2>, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -505,9 +489,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct2<P1, P2>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<Position2<P1, P2>, Position1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return Transform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -517,9 +501,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct2<P1, P2>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<Position2<P1, P2>, IEnumerable<Position1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -556,9 +540,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct2<P1, P2>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<Position2<P1, P2>, Position2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return Transform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -568,9 +552,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct2<P1, P2>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<Position2<P1, P2>, IEnumerable<Position2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -599,29 +583,21 @@ namespace FuncSharp
             });
             return slices;
         }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct2<P1, P2> ToCanonicalPosition(IProduct2<P1, P2> position)
-        {
-            return Product2.Create(position);
-        }
     }
 
     /// <summary>
     /// A 3-dimensional data cube.
     /// </summary>
-    public class DataCube3<P1, P2, P3, TValue> : DataCube<IProduct3<P1, P2, P3>, TValue>
+    public class DataCube3<P1, P2, P3, TValue> : DataCube<Position3<P1, P2, P3>, TValue>
     {
         /// <summary>
         /// Creates an empty 3-dimensional data cube. 
         /// </summary>
         public DataCube3()
         {
-            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
-            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
-            Domain3Counts = new Dictionary<IProduct1<P3>, int>();
+            Domain1Counts = new Dictionary<Position1<P1>, int>();
+            Domain2Counts = new Dictionary<Position1<P2>, int>();
+            Domain3Counts = new Dictionary<Position1<P3>, int>();
         }
 
         /// <summary>
@@ -648,18 +624,18 @@ namespace FuncSharp
             get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
+        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
+        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
+        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3)
         {
-            return Contains(Product3.Create(p1, p2, p3));
+            return Contains(Position3.Create(p1, p2, p3));
         }
 
         /// <summary>
@@ -667,7 +643,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3)
         {
-            return Get(Product3.Create(p1, p2, p3));
+            return Get(Position3.Create(p1, p2, p3));
         }
 
         /// <summary>
@@ -676,13 +652,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product3.Create(p1, p2, p3), setter);
+            return GetOrElseSet(Position3.Create(p1, p2, p3), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct3<P1, P2, P3> position, TValue value)
+        public override TValue Set(Position3<P1, P2, P3> position, TValue value)
         {
             AddDomain(Domain1Counts, position.ProductValue1);
             AddDomain(Domain2Counts, position.ProductValue2);
@@ -695,7 +671,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, TValue value)
         {
-            return Set(Product3.Create(p1, p2, p3), value);
+            return Set(Position3.Create(p1, p2, p3), value);
         }
 
         /// <summary>
@@ -704,7 +680,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product3.Create(p1, p2, p3), value, otherwise);
+            return SetOrElse(Position3.Create(p1, p2, p3), value, otherwise);
         }
 
         /// <summary>
@@ -713,7 +689,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product3.Create(p1, p2, p3), value, updater);
+            return SetOrElseUpdate(Position3.Create(p1, p2, p3), value, updater);
         }
 
         /// <summary>
@@ -743,7 +719,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube3<P1, P2, P3, TValue> Where(Func<IProduct3<P1, P2, P3>, TValue, bool> predicate)
+        public DataCube3<P1, P2, P3, TValue> Where(Func<Position3<P1, P2, P3>, TValue, bool> predicate)
         {
             return Where<DataCube3<P1, P2, P3, TValue>>(predicate);
         }
@@ -755,9 +731,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct3<P1, P2, P3>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position3<P1, P2, P3>, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -767,9 +743,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position3<P1, P2, P3>, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -779,9 +755,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct3<P1, P2, P3>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<Position3<P1, P2, P3>, Position1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return Transform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -791,9 +767,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<Position3<P1, P2, P3>, IEnumerable<Position1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -830,9 +806,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct3<P1, P2, P3>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<Position3<P1, P2, P3>, Position2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return Transform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -842,9 +818,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<Position3<P1, P2, P3>, IEnumerable<Position2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -881,9 +857,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct3<P1, P2, P3>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<Position3<P1, P2, P3>, Position3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return Transform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -893,9 +869,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct3<P1, P2, P3>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<Position3<P1, P2, P3>, IEnumerable<Position3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -924,30 +900,22 @@ namespace FuncSharp
             });
             return slices;
         }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct3<P1, P2, P3> ToCanonicalPosition(IProduct3<P1, P2, P3> position)
-        {
-            return Product3.Create(position);
-        }
     }
 
     /// <summary>
     /// A 4-dimensional data cube.
     /// </summary>
-    public class DataCube4<P1, P2, P3, P4, TValue> : DataCube<IProduct4<P1, P2, P3, P4>, TValue>
+    public class DataCube4<P1, P2, P3, P4, TValue> : DataCube<Position4<P1, P2, P3, P4>, TValue>
     {
         /// <summary>
         /// Creates an empty 4-dimensional data cube. 
         /// </summary>
         public DataCube4()
         {
-            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
-            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
-            Domain3Counts = new Dictionary<IProduct1<P3>, int>();
-            Domain4Counts = new Dictionary<IProduct1<P4>, int>();
+            Domain1Counts = new Dictionary<Position1<P1>, int>();
+            Domain2Counts = new Dictionary<Position1<P2>, int>();
+            Domain3Counts = new Dictionary<Position1<P3>, int>();
+            Domain4Counts = new Dictionary<Position1<P4>, int>();
         }
 
         /// <summary>
@@ -982,20 +950,20 @@ namespace FuncSharp
             get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
+        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
+        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
+        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
 
-        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; }
+        private Dictionary<Position1<P4>, int> Domain4Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            return Contains(Product4.Create(p1, p2, p3, p4));
+            return Contains(Position4.Create(p1, p2, p3, p4));
         }
 
         /// <summary>
@@ -1003,7 +971,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4)
         {
-            return Get(Product4.Create(p1, p2, p3, p4));
+            return Get(Position4.Create(p1, p2, p3, p4));
         }
 
         /// <summary>
@@ -1012,13 +980,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product4.Create(p1, p2, p3, p4), setter);
+            return GetOrElseSet(Position4.Create(p1, p2, p3, p4), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct4<P1, P2, P3, P4> position, TValue value)
+        public override TValue Set(Position4<P1, P2, P3, P4> position, TValue value)
         {
             AddDomain(Domain1Counts, position.ProductValue1);
             AddDomain(Domain2Counts, position.ProductValue2);
@@ -1032,7 +1000,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, TValue value)
         {
-            return Set(Product4.Create(p1, p2, p3, p4), value);
+            return Set(Position4.Create(p1, p2, p3, p4), value);
         }
 
         /// <summary>
@@ -1041,7 +1009,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product4.Create(p1, p2, p3, p4), value, otherwise);
+            return SetOrElse(Position4.Create(p1, p2, p3, p4), value, otherwise);
         }
 
         /// <summary>
@@ -1050,7 +1018,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product4.Create(p1, p2, p3, p4), value, updater);
+            return SetOrElseUpdate(Position4.Create(p1, p2, p3, p4), value, updater);
         }
 
         /// <summary>
@@ -1080,7 +1048,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube4<P1, P2, P3, P4, TValue> Where(Func<IProduct4<P1, P2, P3, P4>, TValue, bool> predicate)
+        public DataCube4<P1, P2, P3, P4, TValue> Where(Func<Position4<P1, P2, P3, P4>, TValue, bool> predicate)
         {
             return Where<DataCube4<P1, P2, P3, P4, TValue>>(predicate);
         }
@@ -1092,9 +1060,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct4<P1, P2, P3, P4>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position4<P1, P2, P3, P4>, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1104,9 +1072,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position4<P1, P2, P3, P4>, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1116,9 +1084,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct4<P1, P2, P3, P4>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<Position4<P1, P2, P3, P4>, Position1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return Transform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1128,9 +1096,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<Position4<P1, P2, P3, P4>, IEnumerable<Position1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1167,9 +1135,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct4<P1, P2, P3, P4>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<Position4<P1, P2, P3, P4>, Position2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return Transform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1179,9 +1147,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<Position4<P1, P2, P3, P4>, IEnumerable<Position2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1218,9 +1186,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct4<P1, P2, P3, P4>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<Position4<P1, P2, P3, P4>, Position3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return Transform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1230,9 +1198,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<Position4<P1, P2, P3, P4>, IEnumerable<Position3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1269,9 +1237,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct4<P1, P2, P3, P4>, IProduct4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<Position4<P1, P2, P3, P4>, Position4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+            return Transform<Position4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1281,9 +1249,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<IProduct4<P1, P2, P3, P4>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<Position4<P1, P2, P3, P4>, IEnumerable<Position4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1312,31 +1280,23 @@ namespace FuncSharp
             });
             return slices;
         }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct4<P1, P2, P3, P4> ToCanonicalPosition(IProduct4<P1, P2, P3, P4> position)
-        {
-            return Product4.Create(position);
-        }
     }
 
     /// <summary>
     /// A 5-dimensional data cube.
     /// </summary>
-    public class DataCube5<P1, P2, P3, P4, P5, TValue> : DataCube<IProduct5<P1, P2, P3, P4, P5>, TValue>
+    public class DataCube5<P1, P2, P3, P4, P5, TValue> : DataCube<Position5<P1, P2, P3, P4, P5>, TValue>
     {
         /// <summary>
         /// Creates an empty 5-dimensional data cube. 
         /// </summary>
         public DataCube5()
         {
-            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
-            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
-            Domain3Counts = new Dictionary<IProduct1<P3>, int>();
-            Domain4Counts = new Dictionary<IProduct1<P4>, int>();
-            Domain5Counts = new Dictionary<IProduct1<P5>, int>();
+            Domain1Counts = new Dictionary<Position1<P1>, int>();
+            Domain2Counts = new Dictionary<Position1<P2>, int>();
+            Domain3Counts = new Dictionary<Position1<P3>, int>();
+            Domain4Counts = new Dictionary<Position1<P4>, int>();
+            Domain5Counts = new Dictionary<Position1<P5>, int>();
         }
 
         /// <summary>
@@ -1379,22 +1339,22 @@ namespace FuncSharp
             get { return Domain5Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
+        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
+        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
+        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
 
-        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; }
+        private Dictionary<Position1<P4>, int> Domain4Counts { get; }
 
-        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; }
+        private Dictionary<Position1<P5>, int> Domain5Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
-            return Contains(Product5.Create(p1, p2, p3, p4, p5));
+            return Contains(Position5.Create(p1, p2, p3, p4, p5));
         }
 
         /// <summary>
@@ -1402,7 +1362,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
-            return Get(Product5.Create(p1, p2, p3, p4, p5));
+            return Get(Position5.Create(p1, p2, p3, p4, p5));
         }
 
         /// <summary>
@@ -1411,13 +1371,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product5.Create(p1, p2, p3, p4, p5), setter);
+            return GetOrElseSet(Position5.Create(p1, p2, p3, p4, p5), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct5<P1, P2, P3, P4, P5> position, TValue value)
+        public override TValue Set(Position5<P1, P2, P3, P4, P5> position, TValue value)
         {
             AddDomain(Domain1Counts, position.ProductValue1);
             AddDomain(Domain2Counts, position.ProductValue2);
@@ -1432,7 +1392,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value)
         {
-            return Set(Product5.Create(p1, p2, p3, p4, p5), value);
+            return Set(Position5.Create(p1, p2, p3, p4, p5), value);
         }
 
         /// <summary>
@@ -1441,7 +1401,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product5.Create(p1, p2, p3, p4, p5), value, otherwise);
+            return SetOrElse(Position5.Create(p1, p2, p3, p4, p5), value, otherwise);
         }
 
         /// <summary>
@@ -1450,7 +1410,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product5.Create(p1, p2, p3, p4, p5), value, updater);
+            return SetOrElseUpdate(Position5.Create(p1, p2, p3, p4, p5), value, updater);
         }
 
         /// <summary>
@@ -1480,7 +1440,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube5<P1, P2, P3, P4, P5, TValue> Where(Func<IProduct5<P1, P2, P3, P4, P5>, TValue, bool> predicate)
+        public DataCube5<P1, P2, P3, P4, P5, TValue> Where(Func<Position5<P1, P2, P3, P4, P5>, TValue, bool> predicate)
         {
             return Where<DataCube5<P1, P2, P3, P4, P5, TValue>>(predicate);
         }
@@ -1492,9 +1452,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position5<P1, P2, P3, P4, P5>, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1504,9 +1464,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position5<P1, P2, P3, P4, P5>, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1516,9 +1476,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<Position5<P1, P2, P3, P4, P5>, Position1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return Transform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1528,9 +1488,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<Position5<P1, P2, P3, P4, P5>, IEnumerable<Position1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1567,9 +1527,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<Position5<P1, P2, P3, P4, P5>, Position2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return Transform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1579,9 +1539,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<Position5<P1, P2, P3, P4, P5>, IEnumerable<Position2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1618,9 +1578,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<Position5<P1, P2, P3, P4, P5>, Position3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return Transform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1630,9 +1590,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<Position5<P1, P2, P3, P4, P5>, IEnumerable<Position3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1669,9 +1629,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<Position5<P1, P2, P3, P4, P5>, Position4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+            return Transform<Position4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1681,9 +1641,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<Position5<P1, P2, P3, P4, P5>, IEnumerable<Position4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1720,9 +1680,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> Transform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct5<P1, P2, P3, P4, P5>, IProduct5<Q1, Q2, Q3, Q4, Q5>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> Transform<Q1, Q2, Q3, Q4, Q5>(Func<Position5<P1, P2, P3, P4, P5>, Position5<Q1, Q2, Q3, Q4, Q5>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+            return Transform<Position5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1732,9 +1692,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct5<P1, P2, P3, P4, P5>, IEnumerable<IProduct5<Q1, Q2, Q3, Q4, Q5>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5>(Func<Position5<P1, P2, P3, P4, P5>, IEnumerable<Position5<Q1, Q2, Q3, Q4, Q5>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1763,32 +1723,24 @@ namespace FuncSharp
             });
             return slices;
         }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct5<P1, P2, P3, P4, P5> ToCanonicalPosition(IProduct5<P1, P2, P3, P4, P5> position)
-        {
-            return Product5.Create(position);
-        }
     }
 
     /// <summary>
     /// A 6-dimensional data cube.
     /// </summary>
-    public class DataCube6<P1, P2, P3, P4, P5, P6, TValue> : DataCube<IProduct6<P1, P2, P3, P4, P5, P6>, TValue>
+    public class DataCube6<P1, P2, P3, P4, P5, P6, TValue> : DataCube<Position6<P1, P2, P3, P4, P5, P6>, TValue>
     {
         /// <summary>
         /// Creates an empty 6-dimensional data cube. 
         /// </summary>
         public DataCube6()
         {
-            Domain1Counts = new Dictionary<IProduct1<P1>, int>();
-            Domain2Counts = new Dictionary<IProduct1<P2>, int>();
-            Domain3Counts = new Dictionary<IProduct1<P3>, int>();
-            Domain4Counts = new Dictionary<IProduct1<P4>, int>();
-            Domain5Counts = new Dictionary<IProduct1<P5>, int>();
-            Domain6Counts = new Dictionary<IProduct1<P6>, int>();
+            Domain1Counts = new Dictionary<Position1<P1>, int>();
+            Domain2Counts = new Dictionary<Position1<P2>, int>();
+            Domain3Counts = new Dictionary<Position1<P3>, int>();
+            Domain4Counts = new Dictionary<Position1<P4>, int>();
+            Domain5Counts = new Dictionary<Position1<P5>, int>();
+            Domain6Counts = new Dictionary<Position1<P6>, int>();
         }
 
         /// <summary>
@@ -1839,24 +1791,24 @@ namespace FuncSharp
             get { return Domain6Counts.Keys.Select(p => p.ProductValue1); }
         }
 
-        private Dictionary<IProduct1<P1>, int> Domain1Counts { get; }
+        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
 
-        private Dictionary<IProduct1<P2>, int> Domain2Counts { get; }
+        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
 
-        private Dictionary<IProduct1<P3>, int> Domain3Counts { get; }
+        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
 
-        private Dictionary<IProduct1<P4>, int> Domain4Counts { get; }
+        private Dictionary<Position1<P4>, int> Domain4Counts { get; }
 
-        private Dictionary<IProduct1<P5>, int> Domain5Counts { get; }
+        private Dictionary<Position1<P5>, int> Domain5Counts { get; }
 
-        private Dictionary<IProduct1<P6>, int> Domain6Counts { get; }
+        private Dictionary<Position1<P6>, int> Domain6Counts { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
         /// </summary>
         public bool Contains(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
-            return Contains(Product6.Create(p1, p2, p3, p4, p5, p6));
+            return Contains(Position6.Create(p1, p2, p3, p4, p5, p6));
         }
 
         /// <summary>
@@ -1864,7 +1816,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
-            return Get(Product6.Create(p1, p2, p3, p4, p5, p6));
+            return Get(Position6.Create(p1, p2, p3, p4, p5, p6));
         }
 
         /// <summary>
@@ -1873,13 +1825,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product6.Create(p1, p2, p3, p4, p5, p6), setter);
+            return GetOrElseSet(Position6.Create(p1, p2, p3, p4, p5, p6), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(IProduct6<P1, P2, P3, P4, P5, P6> position, TValue value)
+        public override TValue Set(Position6<P1, P2, P3, P4, P5, P6> position, TValue value)
         {
             AddDomain(Domain1Counts, position.ProductValue1);
             AddDomain(Domain2Counts, position.ProductValue2);
@@ -1895,7 +1847,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value)
         {
-            return Set(Product6.Create(p1, p2, p3, p4, p5, p6), value);
+            return Set(Position6.Create(p1, p2, p3, p4, p5, p6), value);
         }
 
         /// <summary>
@@ -1904,7 +1856,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product6.Create(p1, p2, p3, p4, p5, p6), value, otherwise);
+            return SetOrElse(Position6.Create(p1, p2, p3, p4, p5, p6), value, otherwise);
         }
 
         /// <summary>
@@ -1913,7 +1865,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product6.Create(p1, p2, p3, p4, p5, p6), value, updater);
+            return SetOrElseUpdate(Position6.Create(p1, p2, p3, p4, p5, p6), value, updater);
         }
 
         /// <summary>
@@ -1943,7 +1895,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public DataCube6<P1, P2, P3, P4, P5, P6, TValue> Where(Func<IProduct6<P1, P2, P3, P4, P5, P6>, TValue, bool> predicate)
+        public DataCube6<P1, P2, P3, P4, P5, P6, TValue> Where(Func<Position6<P1, P2, P3, P4, P5, P6>, TValue, bool> predicate)
         {
             return Where<DataCube6<P1, P2, P3, P4, P5, P6, TValue>>(predicate);
         }
@@ -1955,9 +1907,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> Transform(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct0> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> Transform(Func<Position6<P1, P2, P3, P4, P5, P6>, Position0> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return Transform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1967,9 +1919,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube0<TValue> MultiTransform(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube0<TValue> MultiTransform(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position0>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct0, DataCube0<TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position0, DataCube0<TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1979,9 +1931,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> Transform<Q1>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> Transform<Q1>(Func<Position6<P1, P2, P3, P4, P5, P6>, Position1<Q1>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return Transform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -1991,9 +1943,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube1<Q1, TValue> MultiTransform<Q1>(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position1<Q1>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position1<Q1>, DataCube1<Q1, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2030,9 +1982,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> Transform<Q1, Q2>(Func<Position6<P1, P2, P3, P4, P5, P6>, Position2<Q1, Q2>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return Transform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2042,9 +1994,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube2<Q1, Q2, TValue> MultiTransform<Q1, Q2>(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position2<Q1, Q2>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position2<Q1, Q2>, DataCube2<Q1, Q2, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2081,9 +2033,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> Transform<Q1, Q2, Q3>(Func<Position6<P1, P2, P3, P4, P5, P6>, Position3<Q1, Q2, Q3>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return Transform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2093,9 +2045,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube3<Q1, Q2, Q3, TValue> MultiTransform<Q1, Q2, Q3>(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position3<Q1, Q2, Q3>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position3<Q1, Q2, Q3>, DataCube3<Q1, Q2, Q3, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2132,9 +2084,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> Transform<Q1, Q2, Q3, Q4>(Func<Position6<P1, P2, P3, P4, P5, P6>, Position4<Q1, Q2, Q3, Q4>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+            return Transform<Position4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2144,9 +2096,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube4<Q1, Q2, Q3, Q4, TValue> MultiTransform<Q1, Q2, Q3, Q4>(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position4<Q1, Q2, Q3, Q4>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position4<Q1, Q2, Q3, Q4>, DataCube4<Q1, Q2, Q3, Q4, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2183,9 +2135,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> Transform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct5<Q1, Q2, Q3, Q4, Q5>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> Transform<Q1, Q2, Q3, Q4, Q5>(Func<Position6<P1, P2, P3, P4, P5, P6>, Position5<Q1, Q2, Q3, Q4, Q5>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+            return Transform<Position5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2195,9 +2147,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct5<Q1, Q2, Q3, Q4, Q5>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube5<Q1, Q2, Q3, Q4, Q5, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5>(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position5<Q1, Q2, Q3, Q4, Q5>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position5<Q1, Q2, Q3, Q4, Q5>, DataCube5<Q1, Q2, Q3, Q4, Q5, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2234,9 +2186,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue> Transform<Q1, Q2, Q3, Q4, Q5, Q6>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue> Transform<Q1, Q2, Q3, Q4, Q5, Q6>(Func<Position6<P1, P2, P3, P4, P5, P6>, Position6<Q1, Q2, Q3, Q4, Q5, Q6>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>, DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue>>(positionMapper, aggregator);
+            return Transform<Position6<Q1, Q2, Q3, Q4, Q5, Q6>, DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2246,9 +2198,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5, Q6>(Func<IProduct6<P1, P2, P3, P4, P5, P6>, IEnumerable<IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue> MultiTransform<Q1, Q2, Q3, Q4, Q5, Q6>(Func<Position6<P1, P2, P3, P4, P5, P6>, IEnumerable<Position6<Q1, Q2, Q3, Q4, Q5, Q6>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<IProduct6<Q1, Q2, Q3, Q4, Q5, Q6>, DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue>>(positionMapper, aggregator);
+            return MultiTransform<Position6<Q1, Q2, Q3, Q4, Q5, Q6>, DataCube6<Q1, Q2, Q3, Q4, Q5, Q6, TValue>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -2276,14 +2228,6 @@ namespace FuncSharp
                 slice.Set(p.ExceptValue6, v);
             });
             return slices;
-        }
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override IProduct6<P1, P2, P3, P4, P5, P6> ToCanonicalPosition(IProduct6<P1, P2, P3, P4, P5, P6> position)
-        {
-            return Product6.Create(position);
         }
     }
 

@@ -11,9 +11,11 @@ namespace FuncSharp
     {
         public abstract IEnumerable<object> ProductValues { get; }
 
+        private int? HashCode { get; set; }
+
         public override int GetHashCode()
         {
-            return Structural.HashCode(ProductValues);
+            return HashCode ?? (HashCode = Structural.HashCode(ProductValues)).Value;
         }
 
         public override bool Equals(object obj)
@@ -110,11 +112,6 @@ namespace FuncSharp
 
         public T1 ProductValue1 { get; }
 
-        public IProduct0 ExceptValue1
-        {
-            get { return Product0.Create(); }
-        }
-
         public override IEnumerable<object> ProductValues
         {
             get
@@ -170,16 +167,6 @@ namespace FuncSharp
         public T1 ProductValue1 { get; }
 
         public T2 ProductValue2 { get; }
-
-        public IProduct1<T2> ExceptValue1
-        {
-            get { return Product1.Create(ProductValue2); }
-        }
-
-        public IProduct1<T1> ExceptValue2
-        {
-            get { return Product1.Create(ProductValue1); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -240,21 +227,6 @@ namespace FuncSharp
         public T2 ProductValue2 { get; }
 
         public T3 ProductValue3 { get; }
-
-        public IProduct2<T2, T3> ExceptValue1
-        {
-            get { return Product2.Create(ProductValue2, ProductValue3); }
-        }
-
-        public IProduct2<T1, T3> ExceptValue2
-        {
-            get { return Product2.Create(ProductValue1, ProductValue3); }
-        }
-
-        public IProduct2<T1, T2> ExceptValue3
-        {
-            get { return Product2.Create(ProductValue1, ProductValue2); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -319,26 +291,6 @@ namespace FuncSharp
         public T3 ProductValue3 { get; }
 
         public T4 ProductValue4 { get; }
-
-        public IProduct3<T2, T3, T4> ExceptValue1
-        {
-            get { return Product3.Create(ProductValue2, ProductValue3, ProductValue4); }
-        }
-
-        public IProduct3<T1, T3, T4> ExceptValue2
-        {
-            get { return Product3.Create(ProductValue1, ProductValue3, ProductValue4); }
-        }
-
-        public IProduct3<T1, T2, T4> ExceptValue3
-        {
-            get { return Product3.Create(ProductValue1, ProductValue2, ProductValue4); }
-        }
-
-        public IProduct3<T1, T2, T3> ExceptValue4
-        {
-            get { return Product3.Create(ProductValue1, ProductValue2, ProductValue3); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -407,31 +359,6 @@ namespace FuncSharp
         public T4 ProductValue4 { get; }
 
         public T5 ProductValue5 { get; }
-
-        public IProduct4<T2, T3, T4, T5> ExceptValue1
-        {
-            get { return Product4.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5); }
-        }
-
-        public IProduct4<T1, T3, T4, T5> ExceptValue2
-        {
-            get { return Product4.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5); }
-        }
-
-        public IProduct4<T1, T2, T4, T5> ExceptValue3
-        {
-            get { return Product4.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5); }
-        }
-
-        public IProduct4<T1, T2, T3, T5> ExceptValue4
-        {
-            get { return Product4.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5); }
-        }
-
-        public IProduct4<T1, T2, T3, T4> ExceptValue5
-        {
-            get { return Product4.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -504,36 +431,6 @@ namespace FuncSharp
         public T5 ProductValue5 { get; }
 
         public T6 ProductValue6 { get; }
-
-        public IProduct5<T2, T3, T4, T5, T6> ExceptValue1
-        {
-            get { return Product5.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6); }
-        }
-
-        public IProduct5<T1, T3, T4, T5, T6> ExceptValue2
-        {
-            get { return Product5.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6); }
-        }
-
-        public IProduct5<T1, T2, T4, T5, T6> ExceptValue3
-        {
-            get { return Product5.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6); }
-        }
-
-        public IProduct5<T1, T2, T3, T5, T6> ExceptValue4
-        {
-            get { return Product5.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6); }
-        }
-
-        public IProduct5<T1, T2, T3, T4, T6> ExceptValue5
-        {
-            get { return Product5.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6); }
-        }
-
-        public IProduct5<T1, T2, T3, T4, T5> ExceptValue6
-        {
-            get { return Product5.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -611,41 +508,6 @@ namespace FuncSharp
 
         public T7 ProductValue7 { get; }
 
-        public IProduct6<T2, T3, T4, T5, T6, T7> ExceptValue1
-        {
-            get { return Product6.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7); }
-        }
-
-        public IProduct6<T1, T3, T4, T5, T6, T7> ExceptValue2
-        {
-            get { return Product6.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7); }
-        }
-
-        public IProduct6<T1, T2, T4, T5, T6, T7> ExceptValue3
-        {
-            get { return Product6.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7); }
-        }
-
-        public IProduct6<T1, T2, T3, T5, T6, T7> ExceptValue4
-        {
-            get { return Product6.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7); }
-        }
-
-        public IProduct6<T1, T2, T3, T4, T6, T7> ExceptValue5
-        {
-            get { return Product6.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7); }
-        }
-
-        public IProduct6<T1, T2, T3, T4, T5, T7> ExceptValue6
-        {
-            get { return Product6.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7); }
-        }
-
-        public IProduct6<T1, T2, T3, T4, T5, T6> ExceptValue7
-        {
-            get { return Product6.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6); }
-        }
-
         public override IEnumerable<object> ProductValues
         {
             get
@@ -720,46 +582,6 @@ namespace FuncSharp
         public T7 ProductValue7 { get; }
 
         public T8 ProductValue8 { get; }
-
-        public IProduct7<T2, T3, T4, T5, T6, T7, T8> ExceptValue1
-        {
-            get { return Product7.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8); }
-        }
-
-        public IProduct7<T1, T3, T4, T5, T6, T7, T8> ExceptValue2
-        {
-            get { return Product7.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8); }
-        }
-
-        public IProduct7<T1, T2, T4, T5, T6, T7, T8> ExceptValue3
-        {
-            get { return Product7.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8); }
-        }
-
-        public IProduct7<T1, T2, T3, T5, T6, T7, T8> ExceptValue4
-        {
-            get { return Product7.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8); }
-        }
-
-        public IProduct7<T1, T2, T3, T4, T6, T7, T8> ExceptValue5
-        {
-            get { return Product7.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8); }
-        }
-
-        public IProduct7<T1, T2, T3, T4, T5, T7, T8> ExceptValue6
-        {
-            get { return Product7.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8); }
-        }
-
-        public IProduct7<T1, T2, T3, T4, T5, T6, T8> ExceptValue7
-        {
-            get { return Product7.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8); }
-        }
-
-        public IProduct7<T1, T2, T3, T4, T5, T6, T7> ExceptValue8
-        {
-            get { return Product7.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -839,51 +661,6 @@ namespace FuncSharp
         public T8 ProductValue8 { get; }
 
         public T9 ProductValue9 { get; }
-
-        public IProduct8<T2, T3, T4, T5, T6, T7, T8, T9> ExceptValue1
-        {
-            get { return Product8.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T3, T4, T5, T6, T7, T8, T9> ExceptValue2
-        {
-            get { return Product8.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T4, T5, T6, T7, T8, T9> ExceptValue3
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T3, T5, T6, T7, T8, T9> ExceptValue4
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T3, T4, T6, T7, T8, T9> ExceptValue5
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T3, T4, T5, T7, T8, T9> ExceptValue6
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T3, T4, T5, T6, T8, T9> ExceptValue7
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T3, T4, T5, T6, T7, T9> ExceptValue8
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9); }
-        }
-
-        public IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> ExceptValue9
-        {
-            get { return Product8.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -967,56 +744,6 @@ namespace FuncSharp
         public T9 ProductValue9 { get; }
 
         public T10 ProductValue10 { get; }
-
-        public IProduct9<T2, T3, T4, T5, T6, T7, T8, T9, T10> ExceptValue1
-        {
-            get { return Product9.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T3, T4, T5, T6, T7, T8, T9, T10> ExceptValue2
-        {
-            get { return Product9.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T4, T5, T6, T7, T8, T9, T10> ExceptValue3
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T5, T6, T7, T8, T9, T10> ExceptValue4
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T4, T6, T7, T8, T9, T10> ExceptValue5
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T4, T5, T7, T8, T9, T10> ExceptValue6
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T4, T5, T6, T8, T9, T10> ExceptValue7
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T4, T5, T6, T7, T9, T10> ExceptValue8
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T10> ExceptValue9
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10); }
-        }
-
-        public IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> ExceptValue10
-        {
-            get { return Product9.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -1104,61 +831,6 @@ namespace FuncSharp
         public T10 ProductValue10 { get; }
 
         public T11 ProductValue11 { get; }
-
-        public IProduct10<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue1
-        {
-            get { return Product10.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue2
-        {
-            get { return Product10.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue3
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11> ExceptValue4
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11> ExceptValue5
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11> ExceptValue6
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11> ExceptValue7
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11> ExceptValue8
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11> ExceptValue9
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11> ExceptValue10
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11); }
-        }
-
-        public IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> ExceptValue11
-        {
-            get { return Product10.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -1250,66 +922,6 @@ namespace FuncSharp
         public T11 ProductValue11 { get; }
 
         public T12 ProductValue12 { get; }
-
-        public IProduct11<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue1
-        {
-            get { return Product11.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue2
-        {
-            get { return Product11.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue3
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue4
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12> ExceptValue5
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12> ExceptValue6
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12> ExceptValue7
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12> ExceptValue8
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12> ExceptValue9
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12> ExceptValue10
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12> ExceptValue11
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12); }
-        }
-
-        public IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> ExceptValue12
-        {
-            get { return Product11.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -1405,71 +1017,6 @@ namespace FuncSharp
         public T12 ProductValue12 { get; }
 
         public T13 ProductValue13 { get; }
-
-        public IProduct12<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue1
-        {
-            get { return Product12.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue2
-        {
-            get { return Product12.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue3
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue4
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue5
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13> ExceptValue6
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13> ExceptValue7
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13> ExceptValue8
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13> ExceptValue9
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13> ExceptValue10
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13> ExceptValue11
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13> ExceptValue12
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13); }
-        }
-
-        public IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> ExceptValue13
-        {
-            get { return Product12.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -1569,76 +1116,6 @@ namespace FuncSharp
         public T13 ProductValue13 { get; }
 
         public T14 ProductValue14 { get; }
-
-        public IProduct13<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue1
-        {
-            get { return Product13.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue2
-        {
-            get { return Product13.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue3
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue4
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue5
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue6
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14> ExceptValue7
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14> ExceptValue8
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14> ExceptValue9
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14> ExceptValue10
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14> ExceptValue11
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14> ExceptValue12
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14> ExceptValue13
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue14); }
-        }
-
-        public IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> ExceptValue14
-        {
-            get { return Product13.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -1742,81 +1219,6 @@ namespace FuncSharp
         public T14 ProductValue14 { get; }
 
         public T15 ProductValue15 { get; }
-
-        public IProduct14<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue1
-        {
-            get { return Product14.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue2
-        {
-            get { return Product14.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue3
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue4
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue5
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue6
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue7
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15> ExceptValue8
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14, T15> ExceptValue9
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14, T15> ExceptValue10
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14, T15> ExceptValue11
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14, T15> ExceptValue12
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14, T15> ExceptValue13
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue14, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T15> ExceptValue14
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue15); }
-        }
-
-        public IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> ExceptValue15
-        {
-            get { return Product14.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -1924,86 +1326,6 @@ namespace FuncSharp
         public T15 ProductValue15 { get; }
 
         public T16 ProductValue16 { get; }
-
-        public IProduct15<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue1
-        {
-            get { return Product15.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue2
-        {
-            get { return Product15.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue3
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue4
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue5
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue6
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue7
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue8
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14, T15, T16> ExceptValue9
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14, T15, T16> ExceptValue10
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14, T15, T16> ExceptValue11
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14, T15, T16> ExceptValue12
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14, T15, T16> ExceptValue13
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue14, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T15, T16> ExceptValue14
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue15, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T16> ExceptValue15
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue16); }
-        }
-
-        public IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> ExceptValue16
-        {
-            get { return Product15.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -2115,91 +1437,6 @@ namespace FuncSharp
         public T16 ProductValue16 { get; }
 
         public T17 ProductValue17 { get; }
-
-        public IProduct16<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue1
-        {
-            get { return Product16.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue2
-        {
-            get { return Product16.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue3
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue4
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue5
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue6
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue7
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue8
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue9
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14, T15, T16, T17> ExceptValue10
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14, T15, T16, T17> ExceptValue11
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14, T15, T16, T17> ExceptValue12
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14, T15, T16, T17> ExceptValue13
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T15, T16, T17> ExceptValue14
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue15, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T16, T17> ExceptValue15
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue16, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T17> ExceptValue16
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue17); }
-        }
-
-        public IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> ExceptValue17
-        {
-            get { return Product16.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -2315,96 +1552,6 @@ namespace FuncSharp
         public T17 ProductValue17 { get; }
 
         public T18 ProductValue18 { get; }
-
-        public IProduct17<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue1
-        {
-            get { return Product17.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue2
-        {
-            get { return Product17.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue3
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue4
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue5
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue6
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue7
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue8
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue9
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue10
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14, T15, T16, T17, T18> ExceptValue11
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14, T15, T16, T17, T18> ExceptValue12
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14, T15, T16, T17, T18> ExceptValue13
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T15, T16, T17, T18> ExceptValue14
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T16, T17, T18> ExceptValue15
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue16, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T17, T18> ExceptValue16
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue17, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T18> ExceptValue17
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue18); }
-        }
-
-        public IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> ExceptValue18
-        {
-            get { return Product17.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17); }
-        }
 
         public override IEnumerable<object> ProductValues
         {
@@ -2524,101 +1671,6 @@ namespace FuncSharp
         public T18 ProductValue18 { get; }
 
         public T19 ProductValue19 { get; }
-
-        public IProduct18<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue1
-        {
-            get { return Product18.Create(ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue2
-        {
-            get { return Product18.Create(ProductValue1, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue3
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue4
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue5
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue6
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue7
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue8
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue9
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T11, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue10
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T12, T13, T14, T15, T16, T17, T18, T19> ExceptValue11
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T13, T14, T15, T16, T17, T18, T19> ExceptValue12
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T14, T15, T16, T17, T18, T19> ExceptValue13
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T15, T16, T17, T18, T19> ExceptValue14
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T16, T17, T18, T19> ExceptValue15
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue16, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T17, T18, T19> ExceptValue16
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue17, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T18, T19> ExceptValue17
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue18, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T19> ExceptValue18
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue19); }
-        }
-
-        public IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> ExceptValue19
-        {
-            get { return Product18.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18); }
-        }
 
         public override IEnumerable<object> ProductValues
         {

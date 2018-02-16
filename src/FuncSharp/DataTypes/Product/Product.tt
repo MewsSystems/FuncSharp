@@ -18,9 +18,11 @@ namespace FuncSharp
     {
         public abstract IEnumerable<object> ProductValues { get; }
 
+        private int? HashCode { get; set; }
+
         public override int GetHashCode()
         {
-            return Structural.HashCode(ProductValues);
+            return HashCode ?? (HashCode = Structural.HashCode(ProductValues)).Value;
         }
 
         public override bool Equals(object obj)
@@ -78,13 +80,6 @@ namespace FuncSharp
 <#      for (var j = 1; j <= i; j++) { #>
 
         public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
-<#      } #>
-<#      for (var j = 1; j <= i; j++) { #>
-
-        public <#= ProductType(i, except: j) #> ExceptValue<#= j #>
-        {
-            get { return Product<#= i - 1 #>.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
-        }
 <#      } #>
 
         public override IEnumerable<object> ProductValues

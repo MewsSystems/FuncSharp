@@ -15,7 +15,7 @@ namespace FuncSharp
     /// <summary>
     /// A <#= i #>-dimensional data cube.
     /// </summary>
-    public class <#= DataCubeType(i) #> : DataCube<<#= ProductType(i, name: "P") #>, TValue>
+    public class <#= DataCubeType(i) #> : DataCube<<#= PositionType(i) #>, TValue>
     {
         /// <summary>
         /// Creates an empty <#= i #>-dimensional data cube. 
@@ -23,7 +23,7 @@ namespace FuncSharp
         public DataCube<#= i #>()
         {
 <#      for (var j = 1; j <= i; j++) { #>
-            Domain<#= j #>Counts = new Dictionary<IProduct1<P<#= j #>>, int>();
+            Domain<#= j #>Counts = new Dictionary<Position1<P<#= j #>>, int>();
 <#      } #>
         }
 
@@ -48,7 +48,7 @@ namespace FuncSharp
 
 <#      } #>
 <#      for (var j = 1; j <= i; j++) { #>
-        private Dictionary<IProduct1<P<#= j #>>, int> Domain<#= j #>Counts { get; }
+        private Dictionary<Position1<P<#= j #>>, int> Domain<#= j #>Counts { get; }
 
 <#      } #>
         /// <summary>
@@ -56,7 +56,7 @@ namespace FuncSharp
         /// </summary>
         public bool Contains(<#= Parameters(i, name: "P") #>)
         {
-            return Contains(Product<#= i #>.Create(<#= Values(i, name: "P") #>));
+            return Contains(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FuncSharp
         /// </summary>
         public IOption<TValue> Get(<#= Parameters(i, name: "P") #>)
         {
-            return Get(Product<#= i #>.Create(<#= Values(i, name: "P") #>));
+            return Get(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
         }
 
         /// <summary>
@@ -73,13 +73,13 @@ namespace FuncSharp
         /// </summary>
         public TValue GetOrElseSet(<#= Parameters(i, name: "P", appendSeparator: true) #>Func<Unit, TValue> setter)
         {
-            return GetOrElseSet(Product<#= i #>.Create(<#= Values(i, name: "P") #>), setter);
+            return GetOrElseSet(Position<#= i #>.Create(<#= Values(i, name: "P") #>), setter);
         }
         
         /// <summary>
         /// Sets value at the specified position. If there is value already present at that position, overwrites it.
         /// </summary>
-        public override TValue Set(<#= ProductType(i, name: "P") #> position, TValue value)
+        public override TValue Set(<#= PositionType(i, name: "P") #> position, TValue value)
         {
 <#      for (var j = 1; j <= i; j++) { #>
             AddDomain(Domain<#= j #>Counts, position.ProductValue<#= j #>);
@@ -92,7 +92,7 @@ namespace FuncSharp
         /// </summary>
         public TValue Set(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value)
         {
-            return Set(Product<#= i #>.Create(<#= Values(i, name: "P") #>), value);
+            return Set(Position<#= i #>.Create(<#= Values(i, name: "P") #>), value);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElse(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue> otherwise)
         {
-            return SetOrElse(Product<#= i #>.Create(<#= Values(i, name: "P") #>), value, otherwise);
+            return SetOrElse(Position<#= i #>.Create(<#= Values(i, name: "P") #>), value, otherwise);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace FuncSharp
         /// </summary>
         public TValue SetOrElseUpdate(<#= Parameters(i, name: "P", appendSeparator: true) #>TValue value, Func<TValue, TValue, TValue> updater)
         {
-            return SetOrElseUpdate(Product<#= i #>.Create(<#= Values(i, name: "P") #>), value, updater);
+            return SetOrElseUpdate(Position<#= i #>.Create(<#= Values(i, name: "P") #>), value, updater);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a new cube containing only the values that pass the specified predicate.
         /// </summary>
-        public <#= DataCubeType(i) #> Where(Func<<#= ProductType(i, name: "P") #>, TValue, bool> predicate)
+        public <#= DataCubeType(i) #> Where(Func<<#= PositionType(i) #>, TValue, bool> predicate)
         {
             return Where<<#= DataCubeType(i) #>>(predicate);
         }
@@ -153,9 +153,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public <#= DataCubeType(j, positionType: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, <#= ProductType(j, name: "Q") #>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public <#= DataCubeType(j, positionType: "Q") #> Transform<#= TypeBracket(j, name: "Q") #>(Func<<#= PositionType(i) #>, <#= PositionType(j, name: "Q") #>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return Transform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
+            return Transform<<#= PositionType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
         }
 
         /// <summary>
@@ -165,9 +165,9 @@ namespace FuncSharp
         /// the same position in the new cube, then the <paramref name="aggregator"/> function is used to 
         /// aggregate all the colliding values into one value.
         /// </summary>
-        public <#= DataCubeType(j, positionType: "Q") #> MultiTransform<#= TypeBracket(j, name: "Q") #>(Func<<#= ProductType(i, name: "P") #>, IEnumerable<<#= ProductType(j, name: "Q") #>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
+        public <#= DataCubeType(j, positionType: "Q") #> MultiTransform<#= TypeBracket(j, name: "Q") #>(Func<<#= PositionType(i) #>, IEnumerable<<#= PositionType(j, name: "Q") #>>> positionMapper, Func<TValue, TValue, TValue> aggregator)
         {
-            return MultiTransform<<#= ProductType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
+            return MultiTransform<<#= PositionType(j, name: "Q") #>, <#= DataCubeType(j, positionType: "Q") #>>(positionMapper, aggregator);
         }
 <#          if (j > 0) { #>
 
@@ -199,14 +199,6 @@ namespace FuncSharp
         }
 <#          } #>
 <#      } #>
-
-        /// <summary>
-        /// Returns canonical position corresponding to the specified product.
-        /// </summary>
-        protected override <#= ProductType(i, name: "P") #> ToCanonicalPosition(<#= ProductType(i, name: "P") #> position)
-        {
-            return Product<#= i #>.Create(position);
-        }
     }
 
 <# } #>

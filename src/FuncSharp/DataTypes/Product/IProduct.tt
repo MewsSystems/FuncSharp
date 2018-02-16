@@ -36,13 +36,6 @@ namespace FuncSharp
         <#= Type(j) #> <#= ProductProperty(j) #> { get; }
 
 <#      } #>
-<#      for (var j = 1; j <= i; j++) { #>
-        /// <summary>
-        /// The same product with <#= ProductProperty(j) #> omitted.
-        /// </summary>
-        <#= ProductType(i, except: j) #> ExceptValue<#= j #> { get; }
-
-<#      } #>
 <#      if (i <= MaxFuncArity()) { #>
 
         /// <summary>
