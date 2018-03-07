@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FuncSharp
 {
@@ -27,12 +28,27 @@ namespace FuncSharp
 
         public override bool Equals(object obj)
         {
-            return this.ProductEquals(obj);
+            var p = obj as IProduct;
+			return
+				p != null &&
+				Equals(GetType(), p.GetType()) &&
+				ProductValues.SequenceEqual(p.ProductValues);
         }
 
         public override string ToString()
         {
-            return this.ProductToString();
+            var b = new StringBuilder(GetType().SimpleName() + "(");
+
+            var prefix = "";
+            foreach (var value in ProductValues)
+            {
+                b.Append(prefix);
+                b.Append(value.SafeToString());
+                prefix = ", ";
+            }
+
+            b.Append(")");
+            return b.ToString();
         }
     }
 
@@ -125,6 +141,23 @@ namespace FuncSharp
             return f(<#= Properties(i, name: "ProductValue") #>);
         }
 <#      } #>
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(<#= Properties(i, name: "ProductValue") #>);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as <#= ProductType(i) #>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+<#          for (var j = 1; j <= i; j++) { #>
+                Equals(<#= ProductProperty(j) #>, p.<#= ProductProperty(j) #>) &&
+<#          } #>
+                true;
+        }
     }
 
 <#  } #>

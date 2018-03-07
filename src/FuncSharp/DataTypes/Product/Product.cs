@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FuncSharp
 {
@@ -20,12 +21,27 @@ namespace FuncSharp
 
         public override bool Equals(object obj)
         {
-            return this.ProductEquals(obj);
+            var p = obj as IProduct;
+			return
+				p != null &&
+				Equals(GetType(), p.GetType()) &&
+				ProductValues.SequenceEqual(p.ProductValues);
         }
 
         public override string ToString()
         {
-            return this.ProductToString();
+            var b = new StringBuilder(GetType().SimpleName() + "(");
+
+            var prefix = "";
+            foreach (var value in ProductValues)
+            {
+                b.Append(prefix);
+                b.Append(value.SafeToString());
+                prefix = ", ";
+            }
+
+            b.Append(")");
+            return b.ToString();
         }
     }
 
@@ -70,6 +86,20 @@ namespace FuncSharp
         public R Match<R>(Func<R> f)
         {
             return f();
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode();
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct0;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                true;
         }
     }
 
@@ -123,6 +153,21 @@ namespace FuncSharp
         public R Match<R>(Func<T1, R> f)
         {
             return f(ProductValue1);
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct1<T1>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                true;
         }
     }
 
@@ -180,6 +225,22 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, R> f)
         {
             return f(ProductValue1, ProductValue2);
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct2<T1, T2>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                true;
         }
     }
 
@@ -241,6 +302,23 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3);
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct3<T1, T2, T3>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                true;
         }
     }
 
@@ -306,6 +384,24 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4);
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct4<T1, T2, T3, T4>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                true;
         }
     }
 
@@ -375,6 +471,25 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, T5, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5);
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct5<T1, T2, T3, T4, T5>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                true;
         }
     }
 
@@ -449,6 +564,26 @@ namespace FuncSharp
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6);
         }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct6<T1, T2, T3, T4, T5, T6>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                true;
+        }
     }
 
     /// <summary>
@@ -520,6 +655,27 @@ namespace FuncSharp
                 yield return ProductValue6;
                 yield return ProductValue7;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct7<T1, T2, T3, T4, T5, T6, T7>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                true;
         }
     }
 
@@ -596,6 +752,28 @@ namespace FuncSharp
                 yield return ProductValue7;
                 yield return ProductValue8;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct8<T1, T2, T3, T4, T5, T6, T7, T8>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                true;
         }
     }
 
@@ -676,6 +854,29 @@ namespace FuncSharp
                 yield return ProductValue8;
                 yield return ProductValue9;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                true;
         }
     }
 
@@ -760,6 +961,30 @@ namespace FuncSharp
                 yield return ProductValue9;
                 yield return ProductValue10;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                true;
         }
     }
 
@@ -848,6 +1073,31 @@ namespace FuncSharp
                 yield return ProductValue10;
                 yield return ProductValue11;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                true;
         }
     }
 
@@ -940,6 +1190,32 @@ namespace FuncSharp
                 yield return ProductValue11;
                 yield return ProductValue12;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                true;
         }
     }
 
@@ -1036,6 +1312,33 @@ namespace FuncSharp
                 yield return ProductValue12;
                 yield return ProductValue13;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                true;
         }
     }
 
@@ -1136,6 +1439,34 @@ namespace FuncSharp
                 yield return ProductValue13;
                 yield return ProductValue14;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                Equals(ProductValue14, p.ProductValue14) &&
+                true;
         }
     }
 
@@ -1240,6 +1571,35 @@ namespace FuncSharp
                 yield return ProductValue14;
                 yield return ProductValue15;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                Equals(ProductValue14, p.ProductValue14) &&
+                Equals(ProductValue15, p.ProductValue15) &&
+                true;
         }
     }
 
@@ -1348,6 +1708,36 @@ namespace FuncSharp
                 yield return ProductValue15;
                 yield return ProductValue16;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                Equals(ProductValue14, p.ProductValue14) &&
+                Equals(ProductValue15, p.ProductValue15) &&
+                Equals(ProductValue16, p.ProductValue16) &&
+                true;
         }
     }
 
@@ -1460,6 +1850,37 @@ namespace FuncSharp
                 yield return ProductValue16;
                 yield return ProductValue17;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                Equals(ProductValue14, p.ProductValue14) &&
+                Equals(ProductValue15, p.ProductValue15) &&
+                Equals(ProductValue16, p.ProductValue16) &&
+                Equals(ProductValue17, p.ProductValue17) &&
+                true;
         }
     }
 
@@ -1576,6 +1997,38 @@ namespace FuncSharp
                 yield return ProductValue17;
                 yield return ProductValue18;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                Equals(ProductValue14, p.ProductValue14) &&
+                Equals(ProductValue15, p.ProductValue15) &&
+                Equals(ProductValue16, p.ProductValue16) &&
+                Equals(ProductValue17, p.ProductValue17) &&
+                Equals(ProductValue18, p.ProductValue18) &&
+                true;
         }
     }
 
@@ -1696,6 +2149,39 @@ namespace FuncSharp
                 yield return ProductValue18;
                 yield return ProductValue19;
             }
+        }
+
+        public override int GetHashCode()
+        {
+		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16, ProductValue17, ProductValue18, ProductValue19);
+		}
+
+        public override bool Equals(object obj)
+        {
+		    var p = obj as IProduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>;
+            return
+			    p != null &&
+				Equals(GetType(), p.GetType()) &&
+                Equals(ProductValue1, p.ProductValue1) &&
+                Equals(ProductValue2, p.ProductValue2) &&
+                Equals(ProductValue3, p.ProductValue3) &&
+                Equals(ProductValue4, p.ProductValue4) &&
+                Equals(ProductValue5, p.ProductValue5) &&
+                Equals(ProductValue6, p.ProductValue6) &&
+                Equals(ProductValue7, p.ProductValue7) &&
+                Equals(ProductValue8, p.ProductValue8) &&
+                Equals(ProductValue9, p.ProductValue9) &&
+                Equals(ProductValue10, p.ProductValue10) &&
+                Equals(ProductValue11, p.ProductValue11) &&
+                Equals(ProductValue12, p.ProductValue12) &&
+                Equals(ProductValue13, p.ProductValue13) &&
+                Equals(ProductValue14, p.ProductValue14) &&
+                Equals(ProductValue15, p.ProductValue15) &&
+                Equals(ProductValue16, p.ProductValue16) &&
+                Equals(ProductValue17, p.ProductValue17) &&
+                Equals(ProductValue18, p.ProductValue18) &&
+                Equals(ProductValue19, p.ProductValue19) &&
+                true;
         }
     }
 

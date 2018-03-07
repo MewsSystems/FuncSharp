@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
@@ -18,6 +19,14 @@ namespace FuncSharp
                 }
                 return result;
             }
+        }
+
+        /// <summary>
+        /// Calculates structural hashcode of the specified values.
+        /// </summary>
+        public static int HashCode(params object[] values)
+        {
+            return HashCode(values.AsEnumerable());
         }
     }
 }
