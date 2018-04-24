@@ -21,6 +21,18 @@ namespace FuncSharp
             return source.SelectMany(o => o.ToEnumerable());
         }
 
+		/// <summary>
+        /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
+        /// </summary>
+		public static IOption<IEnumerable<T>> ToNonEmptyOption<T>(this IEnumerable<T> source)
+        {
+            if (source == null || !source.Any())
+            {
+                return Option.Empty<IEnumerable<T>>();
+            }
+            return source.ToOption();
+        }
+
         /// <summary>
         /// Returns first value or an empty option. 
         /// </summary>
