@@ -1,0 +1,36 @@
+<Project>
+  <PropertyGroup>
+
+    <PackageId>FuncSharp</PackageId>
+    <Description>A .NET library of classes that bring some more advanced functional concepts into C#.</Description>
+    <VersionPrefix>0.9.2.0</VersionPrefix>
+    <Authors>Honza Široký</Authors>
+    <PackageTags>FuncSharp, Functional C#</PackageTags>
+    <Copyright>Copyright © 2018</Copyright>
+
+    <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <PackageReleaseNotes>Added ToNonEmptyOption for collections.</PackageReleaseNotes>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
+
+    <NoWarn>$(NoWarn);CS1591</NoWarn>    
+
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>     
+
+    <GenerateAssemblyTitleAttribute>true</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>true</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>true</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>true</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+
+  </PropertyGroup>
+</Project>
