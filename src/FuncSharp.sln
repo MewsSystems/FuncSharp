@@ -1,11 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp", "FuncSharp\FuncSharp.csproj", "{284E38F1-C32A-4091-8A95-33DAB7769248}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp", "FuncSharp\FuncSharp.csproj", "{284E38F1-C32A-4091-8A95-33DAB7769248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp.Tests", "FuncSharp.Tests\FuncSharp.Tests.csproj", "{7B840ABF-122F-483A-B8BA-D59861A1ED2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Tests", "FuncSharp.Tests\FuncSharp.Tests.csproj", "{7B840ABF-122F-483A-B8BA-D59861A1ED2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F2F7A48B-F4B8-48B4-BC56-D5D271F0837C}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\.travis.yml = ..\.travis.yml
+		..\common.props = ..\common.props
+		..\License.txt = ..\License.txt
+		..\Readme.md = ..\Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3955628F-0DA3-44EF-9176-915BF55FE249}
 	EndGlobalSection
 EndGlobal
