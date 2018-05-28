@@ -33,13 +33,13 @@ namespace FuncSharp.Tests
                 Product2.Create(3, false)
             );
             Assert.Equal(3, m.Domain.Count());
-            Assert.True(m.Domain.Contains(1));
-            Assert.True(m.Domain.Contains(2));
-            Assert.True(m.Domain.Contains(3));
+            Assert.Contains(1, m.Domain);
+            Assert.Contains(2, m.Domain);
+            Assert.Contains(3, m.Domain);
 
             Assert.Equal(2, m.Range.Count());
-            Assert.True(m.Range.Contains(true));
-            Assert.True(m.Range.Contains(false));
+            Assert.Contains(true, m.Range);
+            Assert.Contains(false, m.Range);
         }
 
         [Fact]

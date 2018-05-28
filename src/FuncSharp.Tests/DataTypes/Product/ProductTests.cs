@@ -91,7 +91,7 @@ namespace FuncSharp.Tests
             var t = p.ToTuple();
             Assert.Equal(42, t.Item1);
             Assert.Equal("foo", t.Item2);
-            Assert.Equal(true, t.Item3);
+            Assert.True(t.Item3);
         }
     }
 }

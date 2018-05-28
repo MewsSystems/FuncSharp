@@ -8,6 +8,71 @@ namespace FuncSharp
     public static class IProductExtensions
     {
         /// <summary>
+        /// Returns hash code of the specified product.
+        /// </summary>
+        public static int ProductHashCode(this IProduct product)
+        {
+            return ProductHashCode(product.ProductValues);
+        }
+
+        /// <summary>
+        /// Returns hash code of the specified product values.
+        /// </summary>
+        public static int ProductHashCode(IEnumerable<object> values)
+        {
+            var result = 19;
+            foreach (var value in values)
+            {
+                unchecked
+                {
+                    result += 41 * (value != null ? value.GetHashCode() : 0);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Returns hash code of the specified product values.
+        /// </summary>
+        public static int ProductHashCode(params object[] values)
+        {
+            return ProductHashCode(values.AsEnumerable());
+        }
+
+        /// <summary>
+        /// Returns whether the two specified products are structurally equal. Note that two nulls are 
+        /// considered structurally equal products.
+        /// </summary>
+        public static bool ProductEquals(this IProduct p1, object that)
+        {
+            var p2 = that as IProduct;
+            if (p1 != null && p2 != null && p1.GetType() == p2.GetType())
+            {
+                return p1.ProductValues.SequenceEqual(p2.ProductValues);
+            }
+            return p1 == that;
+        }
+
+        /// <summary>
+        /// Returns string representation of the specified product.
+        /// </summary>
+        public static string ProductToString(this IProduct product)
+        {
+            var b = new StringBuilder(product.GetType().SimpleName() + "(");
+
+            var prefix = "";
+            foreach (var value in product.ProductValues)
+            {
+                b.Append(prefix);
+                b.Append(value.SafeToString());
+                prefix = ", ";
+            }
+
+            b.Append(")");
+            return b.ToString();
+        }
+
+        /// <summary>
         /// Converts the product into a tuple.
         /// </summary>
         public static Tuple<T1> ToTuple<T1>(this IProduct1<T1> p)
