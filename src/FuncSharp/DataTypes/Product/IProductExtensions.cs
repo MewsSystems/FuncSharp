@@ -7,7 +7,6 @@ namespace FuncSharp
 {
     public static class IProductExtensions
     {
-
         /// <summary>
         /// Converts the product into a tuple.
         /// </summary>
@@ -63,5 +62,6 @@ namespace FuncSharp
         {
             return Tuple.Create(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, p.ProductValue7);
         }
+
     }
 }
