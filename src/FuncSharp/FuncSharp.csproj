@@ -2,7 +2,6 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -148,6 +147,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TupleExtensions.tt</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
