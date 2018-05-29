@@ -15,8 +15,4 @@
     <ProjectReference Include="..\FuncSharp\FuncSharp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
 </Project>

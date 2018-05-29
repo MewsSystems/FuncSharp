@@ -3,7 +3,7 @@
 
     <PackageId>FuncSharp</PackageId>
     <Description>A .NET library of classes that bring some more advanced functional concepts into C#.</Description>
-    <VersionPrefix>0.9.2.0</VersionPrefix>
+    <VersionPrefix>0.9.3.0</VersionPrefix>
     <Authors>Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#</PackageTags>
     <Copyright>Copyright © 2018</Copyright>
