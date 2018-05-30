@@ -3,9 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp", "FuncSharp\FuncSharp.csproj", "{15BF2557-15C2-49D5-AAD2-359D10E647B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp", "FuncSharp\FuncSharp.csproj", "{15BF2557-15C2-49D5-AAD2-359D10E647B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp.Tests", "FuncSharp.Tests\FuncSharp.Tests.csproj", "{AF10BBEC-20C9-474E-864A-4597B6C9278A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Tests", "FuncSharp.Tests\FuncSharp.Tests.csproj", "{AF10BBEC-20C9-474E-864A-4597B6C9278A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectData", "ProjectData", "{EA1CB2DB-0243-40CA-A8E8-A3B0BA2C178D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\.travis.yml = ..\.travis.yml
+		..\common.props = ..\common.props
+		..\License.txt = ..\License.txt
+		..\Readme.md = ..\Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
