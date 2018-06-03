@@ -44,17 +44,17 @@ namespace FuncSharp.Tests
             Assert.Empty(c.Positions);
 
             c.Set(1, "foo", 42);
-            Assert.Equal(1, c.Positions.Count());
-            Assert.True(c.Positions.Contains(Position2.Create(1, "foo")));
+            Assert.Single(c.Positions);
+            Assert.Contains(Position2.Create(1, "foo"), c.Positions);
 
             c.Set(1, "foo", 43);
-            Assert.Equal(1, c.Positions.Count());
-            Assert.True(c.Positions.Contains(Position2.Create(1, "foo")));
+            Assert.Single(c.Positions);
+            Assert.Contains(Position2.Create(1, "foo"), c.Positions);
 
             c.Set(2, "bar", 123);
             Assert.Equal(2, c.Positions.Count());
-            Assert.True(c.Positions.Contains(Position2.Create(1, "foo")));
-            Assert.True(c.Positions.Contains(Position2.Create(2, "bar")));
+            Assert.Contains(Position2.Create(1, "foo"), c.Positions);
+            Assert.Contains(Position2.Create(2, "bar"), c.Positions);
         }
 
         [Fact]
@@ -64,17 +64,17 @@ namespace FuncSharp.Tests
             Assert.Empty(c.Values);
 
             c.Set(1, "foo", 42);
-            Assert.Equal(1, c.Values.Count());
-            Assert.True(c.Values.Contains(42));
+            Assert.Single(c.Values);
+            Assert.Contains(42, c.Values);
 
             c.Set(1, "foo", 43);
-            Assert.Equal(1, c.Values.Count());
-            Assert.True(c.Values.Contains(43));
+            Assert.Single(c.Values);
+            Assert.Contains(43, c.Values);
 
             c.Set(2, "bar", 123);
             Assert.Equal(2, c.Values.Count());
-            Assert.True(c.Values.Contains(43));
-            Assert.True(c.Values.Contains(123));
+            Assert.Contains(43, c.Values);
+            Assert.Contains(123, c.Values);
         }
 
         [Fact]
@@ -85,26 +85,26 @@ namespace FuncSharp.Tests
             Assert.Empty(c.Domain2);
 
             c.Set(1, "foo", 42);
-            Assert.Equal(1, c.Domain1.Count());
-            Assert.True(c.Domain1.Contains(1));
-            Assert.Equal(1, c.Domain2.Count());
-            Assert.True(c.Domain2.Contains("foo"));
+            Assert.Single(c.Domain1);
+            Assert.Contains(1, c.Domain1);
+            Assert.Single(c.Domain2);
+            Assert.Contains("foo", c.Domain2);
 
             c.Set(2, "bar", 123);
             Assert.Equal(2, c.Domain1.Count());
-            Assert.True(c.Domain1.Contains(1));
-            Assert.True(c.Domain1.Contains(2));
+            Assert.Contains(1, c.Domain1);
+            Assert.Contains(2, c.Domain1);
             Assert.Equal(2, c.Domain2.Count());
-            Assert.True(c.Domain2.Contains("foo"));
-            Assert.True(c.Domain2.Contains("bar"));
+            Assert.Contains("foo", c.Domain2);
+            Assert.Contains("bar", c.Domain2);
 
             c.Set(1, "bar", -42);
             Assert.Equal(2, c.Domain1.Count());
-            Assert.True(c.Domain1.Contains(1));
-            Assert.True(c.Domain1.Contains(2));
+            Assert.Contains(1, c.Domain1);
+            Assert.Contains(2, c.Domain1);
             Assert.Equal(2, c.Domain2.Count());
-            Assert.True(c.Domain2.Contains("foo"));
-            Assert.True(c.Domain2.Contains("bar"));
+            Assert.Contains("foo", c.Domain2);
+            Assert.Contains("bar", c.Domain2);
         }
 
         [Fact]
