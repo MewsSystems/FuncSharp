@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectData", "ProjectData"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 		..\.travis.yml = ..\.travis.yml
-		..\common.props = ..\common.props
 		..\License.txt = ..\License.txt
 		..\Readme.md = ..\Readme.md
+        FuncSharp.props = FuncSharp.props
 	EndProjectSection
 EndProject
 Global

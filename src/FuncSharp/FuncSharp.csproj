@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props"></Import>
+  <Import Project="..\FuncSharp.props"></Import>
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
