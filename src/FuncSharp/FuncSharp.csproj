@@ -1,255 +1,154 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props"></Import>
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{284E38F1-C32A-4091-8A95-33DAB7769248}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FuncSharp</RootNamespace>
-    <AssemblyName>FuncSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+  	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\FuncSharp.XML</DocumentationFile>
-    <NoWarn>1591</NoWarn>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DataTypes\DataCube\DataCube.cs">
-      <DependentUpon>DataCube.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="DataTypes\DataCube\DataCubes.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataCubes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataTypes\DataCube\Position.cs">
-      <DependentUpon>Position.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="DataTypes\Morphism\IIsoMorphism.cs" />
-    <Compile Include="DataTypes\Morphism\IMorphism.cs" />
-    <Compile Include="DataTypes\Morphism\IsoMorphism.cs" />
-    <Compile Include="DataTypes\Morphism\Morphism.cs" />
-    <Compile Include="DataTypes\Option\IOptionExtensions.cs" />
-    <Compile Include="DataTypes\Product\IProductExtensions.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IProductExtensions.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataTypes\Product\IProduct.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IProduct.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataTypes\Relation\Relation.cs" />
-    <Compile Include="DataTypes\Relation\Relations.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Relations.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataTypes\Coproduct\ICoproduct.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ICoproduct.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataTypes\Coproduct\ICoproductExtensions.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataTypes\Coproduct\Nothing.cs" />
-    <Compile Include="DataTypes\Coproduct\Coproduct.cs">
-      <DependentUpon>Coproduct.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="DataTypes\Try\ITry.cs" />
-    <Compile Include="DataTypes\Try\ITryExtensions.cs" />
-    <Compile Include="DataTypes\Try\Try.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs">
-      <DependentUpon>IEnumerableExtensions.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Extensions\IReadOnlyDictionaryExtensions.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs">
-      <DependentUpon>ObjectExtensions.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Extensions\FuncExtensions.cs">
-      <DependentUpon>FuncExtensions.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Extensions\ActionExtensions.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ActionExtensions.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\NullableExtensions.cs" />
-    <Compile Include="Extensions\BooleanExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\TupleExtensions.cs">
-      <DependentUpon>TupleExtensions.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Extensions\Utilities\Structural.cs" />
-    <Compile Include="Traits\ITraitExtensions.cs" />
-    <Compile Include="Traits\ITrait.cs" />
-    <Compile Include="Traits\TraitDataStorage.cs" />
-    <Compile Include="TypeClasses\Enumeration\IEnumeration.cs" />
-    <Compile Include="TypeClasses\Enumeration\IEnumerationExtensions.cs" />
-    <Compile Include="TypeClasses\Equality\IEquality.cs" />
-    <Compile Include="TypeClasses\Equality\IEqualityExtensions.cs" />
-    <Compile Include="DataTypes\Option\IOption.cs" />
-    <Compile Include="DataTypes\Option\Option.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalSet.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TypeClasses\Ordering\Total\ITotalOrderingIntervalExtensions.cs" />
-    <Compile Include="TypeClasses\Ordering\Partial\PartialOrderingComparer.cs" />
-    <Compile Include="TypeClasses\Ordering\Partial\IPartialOrderingExtensions.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\ITotalOrderingIntervalSetExtensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TypeClasses\Ordering\Total\TotalOrderingData.cs" />
-    <Compile Include="TypeClasses\Ordering\Partial\IPartialOrdering.cs" />
-    <Compile Include="TypeClasses\Instances\Integers.cs" />
-    <Compile Include="TypeClasses\Instances\DateTimes.cs" />
-    <Compile Include="TypeClasses\Instances\Dates.cs" />
-    <Compile Include="TypeClasses\Enumeration\Enumeration.cs" />
-    <Compile Include="TypeClasses\Equality\Equality.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalOrdering.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalLimitOrderings.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalLimitRestrictivenessOrdering.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\ComparableOrdering.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\ITotalOrdering.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\ITotalOrderingExtensions.cs" />
-    <Compile Include="TypeClasses\Ordering\Order.cs" />
-    <Compile Include="DataTypes\Product\Unit.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\Intervals\Interval.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\Intervals\IntervalLimit.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="DataTypes\Product\Product.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Product.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\Utilities\Tryer.cs" />
-    <Compile Include="TypeClasses\Ordering\Total\TotalOrdering.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CodeGen\Helpers.ttinclude" />
-    <None Include="DataTypes\Product\IProductExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IProductExtensions.cs</LastGenOutput>
-    </None>
-    <None Include="DataTypes\Product\IProduct.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IProduct.cs</LastGenOutput>
-    </None>
-    <None Include="DataTypes\Product\Product.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Product.cs</LastGenOutput>
-    </None>
-    <None Include="DataTypes\Coproduct\ICoproduct.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproduct.cs</LastGenOutput>
-    </None>
-    <None Include="DataTypes\Coproduct\ICoproductExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
-    </None>
-    <None Include="DataTypes\Coproduct\Coproduct.tt">
+    <None Update="DataTypes\Coproduct\Coproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
-    <None Include="Extensions\ObjectExtensions.tt">
+    <None Update="DataTypes\Coproduct\ICoproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
+      <LastGenOutput>ICoproduct.cs</LastGenOutput>
     </None>
-    <None Include="Extensions\FuncExtensions.tt">
+    <None Update="DataTypes\Coproduct\ICoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FuncExtensions.cs</LastGenOutput>
+      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
     </None>
-    <None Include="Extensions\ActionExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ActionExtensions.cs</LastGenOutput>
-    </None>
-    <None Include="Extensions\TupleExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TupleExtensions.cs</LastGenOutput>
-    </None>
-    <None Include="FuncSharp.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataTypes\DataCube\DataCubes.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataCubes.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataTypes\Relation\Relations.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Relations.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataTypes\DataCube\DataCube.tt">
+    <None Update="DataTypes\DataCube\DataCube.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataCube.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Extensions\IEnumerableExtensions.tt">
+    <None Update="DataTypes\DataCube\DataCubes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IEnumerableExtensions.cs</LastGenOutput>
+      <LastGenOutput>DataCubes.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataTypes\DataCube\Position.tt">
+    <None Update="DataTypes\DataCube\Position.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Position.cs</LastGenOutput>
     </None>
+    <None Update="DataTypes\Product\IProduct.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IProduct.cs</LastGenOutput>
+    </None>
+    <None Update="DataTypes\Product\IProductExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IProductExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="DataTypes\Product\Product.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Product.cs</LastGenOutput>
+    </None>
+    <None Update="DataTypes\Relation\Relations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Relations.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\ActionExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ActionExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\FuncExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FuncExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\IEnumerableExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnumerableExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\ObjectExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\TupleExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TupleExtensions.cs</LastGenOutput>
+    </None>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DataTypes\Coproduct\Coproduct.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Coproduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Coproduct\ICoproduct.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ICoproduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Coproduct\ICoproductExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\DataCube\DataCube.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCube.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\DataCube\DataCubes.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataCubes.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\DataCube\Position.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Position.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Product\IProduct.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IProduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Product\IProductExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IProductExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Product\Product.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Product.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Relation\Relations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Relations.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\ActionExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ActionExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\FuncExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FuncExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\IEnumerableExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IEnumerableExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\ObjectExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ObjectExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\TupleExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TupleExtensions.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

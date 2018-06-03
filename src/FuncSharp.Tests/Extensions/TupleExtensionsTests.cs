@@ -12,7 +12,7 @@ namespace FuncSharp.Tests
             var v = t.ToProduct();
             Assert.Equal(42, v.ProductValue1);
             Assert.Equal("foo", v.ProductValue2);
-            Assert.Equal(true, v.ProductValue3);
+            Assert.True(v.ProductValue3);
         }
     }
 }

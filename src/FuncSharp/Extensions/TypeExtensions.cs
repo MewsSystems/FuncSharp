@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace FuncSharp
 {
@@ -9,7 +10,7 @@ namespace FuncSharp
         /// </summary>
         public static bool IsNullable(this Type t)
         {
-            return t.IsGenericType && t.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
+            return t.GetTypeInfo().IsGenericType && t.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
         }
 
         /// <summary>
