@@ -5,20 +5,41 @@ namespace FuncSharp
     public static class Try
     {
         /// <summary>
+        /// Tries the specified action and returns its result if it succeeds. Otherwise in case of the specified exception,
+        /// returns result of the recovery function.
+        /// </summary>
+        public static A Catch<A, TException>(Func<Unit, A> action, Func<TException, A> recovery)
+            where TException : Exception
+        {
+            try
+            {
+                return action(Unit.Value);
+            }
+            catch (TException e)
+            {
+                return recovery(e);
+            }
+        }
+
+        /// <summary>
+        /// Tries the specified action and returns its result if it succeeds. Otherwise returns result of the recovery function.
+        /// </summary>
+        public static A Catch<A>(Func<Unit, A> action, Func<Exception, A> recover)
+        {
+            return Catch<A, Exception>(action, recover);
+        }
+
+        /// <summary>
         /// Create a new try with the result of the specified function while converting exceptions of the specified type
         /// into erroneous result.
         /// </summary>
         public static ITry<A> Create<A, TException>(Func<Unit, A> f)
             where TException : Exception
         {
-            try
-            {
-                return Success(f(Unit.Value));
-            }
-            catch (TException e)
-            {
-                return Error<A>(e);
-            }
+            return Catch(
+                _ => Success(f(Unit.Value)),
+                e => Error<A>(e)
+            );
         }
 
         /// <summary>
@@ -26,7 +47,7 @@ namespace FuncSharp
         /// </summary>
         public static ITry<A> Create<A>(Func<Unit, A> f)
         {
-            return Try.Create<A, Exception>(f);
+            return Create<A, Exception>(f);
         }
 
         /// <summary>

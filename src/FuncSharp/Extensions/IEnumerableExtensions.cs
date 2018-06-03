@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,14 +15,15 @@ namespace FuncSharp
             return source.SelectMany(o => o.ToEnumerable());
         }
 
-		/// <summary>
+        /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
-		public static IOption<IEnumerable<T>> ToNonEmptyOption<T>(this IEnumerable<T> source)
+        public static IOption<T> ToNonEmptyOption<T>(this T source)
+            where T : IEnumerable
         {
-            if (source == null || !source.Any())
+            if (source == null || !source.OfType<object>().Any())
             {
-                return Option.Empty<IEnumerable<T>>();
+                return Option.Empty<T>();
             }
             return source.ToOption();
         }

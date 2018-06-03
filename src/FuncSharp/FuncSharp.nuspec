@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>FuncSharp</id>
-    <version>0.9.2.0</version>
+    <version>0.9.4.0</version>
     <authors>Honza Široký</authors>
     <owners>Honza Široký</owners>
     <projectUrl>https://github.com/siroky/FuncSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A .NET library of classes that bring some more advanced functional concepts into C#.</description>
-    <releaseNotes>Added ToNonEmptyOption for collections.</releaseNotes>
+    <releaseNotes>Added Try.Catch.</releaseNotes>
     <copyright>Copyright 2018</copyright>
   </metadata>
 </package>
