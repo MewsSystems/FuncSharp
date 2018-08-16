@@ -131,10 +131,10 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
-        public static TResult Match<TValue, <#= Types(i) #>, TResult>(
-            this TValue value,
-<#= Lines(i, j => Indent(12) + Parameter(j) + ", Func<" + Type(j) + ", TResult> f" + j, separator: ",") #>,
-            Func<TValue, TResult> otherwise = null)
+        public static TResult Match<T, TResult>(
+            this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, TResult> f" + j, separator: ",") #>,
+            Func<T, TResult> otherwise = null)
         {
             if (otherwise == null)
             {
@@ -146,10 +146,10 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
-        public static void Match<TValue, <#= Types(i) #>>(
-            this TValue value,
-<#= Lines(i, j => Indent(12) + Parameter(j) + ", Action<" + Type(j) + "> f" + j, separator: ",") #>,
-            Action<TValue> otherwise = null)
+        public static void Match<T>(
+            this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Action<T> f" + j, separator: ",") #>,
+            Action<T> otherwise = null)
         {
             if (otherwise == null)
             {
