@@ -1,5 +1,7 @@
 # FuncSharp - Functional C&#35;
 
+[![Build Status](https://dev.azure.com/siroky/FuncSharp/_apis/build/status/siroky.FuncSharp)](https://dev.azure.com/siroky/FuncSharp/_build/latest?definitionId=1)
+
 A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Download from [NuGet](https://www.nuget.org/packages/FuncSharp/):
 
 ```
