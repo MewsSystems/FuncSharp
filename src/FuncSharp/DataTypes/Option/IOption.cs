@@ -26,11 +26,6 @@ namespace FuncSharp
         A GetOrDefault();
 
         /// <summary>
-        /// Returns value of the option as successful try if not empty. Otherwise an erroneous try.
-        /// </summary>
-        ITry<A> ToTry(Func<Unit, Exception> otherwise);
-
-        /// <summary>
         /// Maps value of the current option (if present) into a new value using the specified function and 
         /// returns a new option with that new value.
         /// </summary>

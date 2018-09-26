@@ -83,15 +83,5 @@ namespace FuncSharp.Tests
             Assert.True(p1.GetHashCode() == p2.GetHashCode());
             Assert.False(p1.GetHashCode() == p3.GetHashCode());
         }
-
-        [Fact]
-        public void ConversionToTupleWorks()
-        {
-            var p = Product3.Create(42, "foo", true);
-            var t = p.ToTuple();
-            Assert.Equal(42, t.Item1);
-            Assert.Equal("foo", t.Item2);
-            Assert.True(t.Item3);
-        }
     }
 }

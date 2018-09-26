@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace FuncSharp
 {
@@ -8,7 +8,7 @@ namespace FuncSharp
     /// </summary>
     public class TraitDataStorage
     {
-        private Dictionary<Type, object> dataByTraitTypes = new Dictionary<Type, object>();
+        private ConcurrentDictionary<Type, object> dataByTraitTypes = new ConcurrentDictionary<Type, object>();
 
         /// <summary>
         /// Returns data stored for the specified trait interface. If nothing is stored yet, creates the data using the specified
@@ -18,15 +18,8 @@ namespace FuncSharp
             where TData : class
         {
             var traitType = typeof(TTraitInterface);
-            return dataByTraitTypes.Get(traitType).Match(
-                data => data.As<TData>().Get(_ => new ArgumentException("TData is invalid. The trait already contains data of different type for the specified trait interface.")),
-                _ =>
-                {
-                    var data = dataCreator(_).ToOption().Get(__ => new ArgumentException("The created data must not be null."));
-                    dataByTraitTypes.Add(traitType, data);
-                    return data;
-                }
-            );
+            var data = dataByTraitTypes.GetOrAdd(traitType, t => dataCreator(Unit.Value).ToOption().Get(_ => new ArgumentException("The created data must not be null.")));
+            return data.As<TData>().Get(_ => new ArgumentException("TData is invalid. The trait already contains data of different type for the specified trait interface."));
         }
     }
 }

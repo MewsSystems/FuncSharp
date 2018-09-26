@@ -108,14 +108,6 @@ namespace FuncSharp
             });
         }
 
-        public ITry<A> ToTry(Func<Unit, Exception> otherwise)
-        {
-            return Match(
-                a => a.ToTry(),
-                _ => otherwise(_).ToTry<A>()
-            );
-        }
-
         public A GetOrDefault()
         {
             return this.GetOrElse(default(A));

@@ -1,0 +1,201 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace FuncSharp
+{
+    public static class Try
+    {
+        /// <summary>
+        /// Tries the specified action and returns its result if it succeeds. Otherwise in case of the specified exception,
+        /// returns result of the recovery function.
+        /// </summary>
+        public static A Catch<A, E>(Func<Unit, A> action, Func<E, A> recover)
+            where E : Exception
+        {
+            try
+            {
+                return action(Unit.Value);
+            }
+            catch (E e)
+            {
+                return recover(e);
+            }
+        }
+
+        /// <summary>
+        /// Create a new try with the result of the specified function while converting exceptions of the specified type
+        /// into erroneous result.
+        /// </summary>
+        public static ITry<A> Create<A, E>(Func<Unit, A> f)
+            where E : Exception
+        {
+            return Catch<ITry<A>, Exception>(
+                _ => Success(f(Unit.Value)),
+                e => Error<A>(e)
+            );
+        }
+
+        /// <summary>
+        /// Creates a new try with a successful result.
+        /// </summary>
+        public static ITry<A, E> Success<A, E>(A success)
+        {
+            return new Try<A, E>(success);
+        }
+
+        /// <summary>
+        /// Creates a new try with a successful result.
+        /// </summary>
+        public static ITry<A> Success<A>(A success)
+        {
+            return new Try<A>(success);
+        }
+
+        /// <summary>
+        /// Creates a new try with an error result.
+        /// </summary>
+        public static ITry<A, E> Error<A, E>(E error)
+        {
+            return new Try<A, E>(error);
+        }
+
+        /// <summary>
+        /// Creates a new try with an exception result.
+        /// </summary>
+        public static ITry<A> Error<A>(Exception exception)
+        {
+            return new Try<A>(exception);
+        }
+<#  for (var i = 2; i < MaxFuncArity(); i++) { #>
+
+        /// <summary>
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the exceptions into error result.
+        /// </summary>
+        public static ITry<R> Aggregate<<#= Types(i) #>, R>(<#= List(i, x => $"ITry<{Type(x)}> t{x}") #>, Func<<#= Types(i) #>, R> f)
+        {
+            if (<#= List(i, x => $"t{x}.IsError", separator: " || ") #>)
+            {
+                var exceptions = new[] { <#= List(i, x => $"t{x}.Exceptions.Flatten()") #> };
+                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+            }
+            return Try.Success(f(<#= List(i, x => $"t{x}.Get()") #>));
+        }
+<#  } #>
+    }
+
+    internal class Try<A, E> : Coproduct2<A, E>, ITry<A, E>
+    {
+        public Try(A success)
+            : base(success)
+        {
+        }
+
+        public Try(E error)
+            : base(error)
+        {
+        }
+
+        public bool IsSuccess
+        {
+            get { return IsFirst; }
+        }
+
+        public bool IsError
+        {
+            get { return IsSecond; }
+        }
+
+        public IOption<A> Success
+        {
+            get { return First; }
+        }
+
+        public IOption<E> Error
+        {
+            get { return Second; }
+        }
+
+        public ITry<B, E> Map<B>(Func<A, B> f)
+        {
+            return Match(
+                s => Try.Success<B, E>(f(s)),
+                e => Try.Error<B, E>(e)
+            );
+        }
+
+        public ITry<A, F> MapError<F>(Func<E, F> f)
+        {
+            return Match(
+                s => Try.Success<A, F>(s),
+                e => Try.Error<A, F>(f(e))
+            );
+        }
+    }
+
+    internal class Try<A> : Try<A, Exception>, ITry<A>
+    {
+        public Try(A success)
+            : base(success)
+        {
+        }
+
+        public Try(Exception exception)
+            : base(exception)
+        {
+        }
+
+        public IOption<IEnumerable<Exception>> Exceptions
+        {
+            get { return Error.Map(e => GetExceptions(e)); }
+        }
+
+        public A Get()
+        {
+            return Match(
+                s => s,
+                e => throw e
+            );
+        }
+
+        public new ITry<B> Map<B>(Func<A, B> f)
+        {
+            return Match(
+                s => Try.Success<B>(f(s)),
+                e => Try.Error<B>(e)
+            );
+        }
+
+        public ITry<A> MapError(Func<Exception, Exception> f)
+        {
+            return Match(
+                s => Try.Success<A>(s),
+                e => Try.Error<A>(f(e))
+            );
+        }
+
+        public R Match<R>(Func<A, R> ifFirst, Func<IEnumerable<Exception>, R> ifSecond)
+        {
+            return Match(
+                s => ifFirst(s),
+                e => ifSecond(GetExceptions(e))
+            );
+        }
+
+        private IEnumerable<Exception> GetExceptions(Exception exception)
+        {
+            if (exception is AggregateException aggregateException)
+            {
+                return aggregateException.InnerExceptions;
+            }
+            return new[] { exception };
+        }
+    }
+}

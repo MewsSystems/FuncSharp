@@ -11,7 +11,7 @@
 
     public int MaxFuncArity()
     {
-        return 6;
+        return 16;
     }
 
     public string GetOrdinal(int i)

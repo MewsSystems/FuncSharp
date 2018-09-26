@@ -21,9 +21,8 @@ namespace FuncSharp
 
         public override bool Equals(object obj)
         {
-            var p = obj as IProduct;
 			return
-				p != null &&
+				obj is IProduct p &&
 				Equals(GetType(), p.GetType()) &&
 				ProductValues.SequenceEqual(p.ProductValues);
         }
@@ -657,6 +656,11 @@ namespace FuncSharp
             }
         }
 
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
+        }
+
         public override int GetHashCode()
         {
 		    return Structural.HashCode(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
@@ -752,6 +756,11 @@ namespace FuncSharp
                 yield return ProductValue7;
                 yield return ProductValue8;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8);
         }
 
         public override int GetHashCode()
@@ -854,6 +863,11 @@ namespace FuncSharp
                 yield return ProductValue8;
                 yield return ProductValue9;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9);
         }
 
         public override int GetHashCode()
@@ -961,6 +975,11 @@ namespace FuncSharp
                 yield return ProductValue9;
                 yield return ProductValue10;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10);
         }
 
         public override int GetHashCode()
@@ -1073,6 +1092,11 @@ namespace FuncSharp
                 yield return ProductValue10;
                 yield return ProductValue11;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11);
         }
 
         public override int GetHashCode()
@@ -1190,6 +1214,11 @@ namespace FuncSharp
                 yield return ProductValue11;
                 yield return ProductValue12;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12);
         }
 
         public override int GetHashCode()
@@ -1312,6 +1341,11 @@ namespace FuncSharp
                 yield return ProductValue12;
                 yield return ProductValue13;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13);
         }
 
         public override int GetHashCode()
@@ -1439,6 +1473,11 @@ namespace FuncSharp
                 yield return ProductValue13;
                 yield return ProductValue14;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14);
         }
 
         public override int GetHashCode()
@@ -1571,6 +1610,11 @@ namespace FuncSharp
                 yield return ProductValue14;
                 yield return ProductValue15;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15);
         }
 
         public override int GetHashCode()
@@ -1708,6 +1752,11 @@ namespace FuncSharp
                 yield return ProductValue15;
                 yield return ProductValue16;
             }
+        }
+
+        public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, R> f)
+        {
+            return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8, ProductValue9, ProductValue10, ProductValue11, ProductValue12, ProductValue13, ProductValue14, ProductValue15, ProductValue16);
         }
 
         public override int GetHashCode()

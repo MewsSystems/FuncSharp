@@ -28,9 +28,8 @@ namespace FuncSharp
 
         public override bool Equals(object obj)
         {
-            var p = obj as IProduct;
 			return
-				p != null &&
+				obj is IProduct p &&
 				Equals(GetType(), p.GetType()) &&
 				ProductValues.SequenceEqual(p.ProductValues);
         }

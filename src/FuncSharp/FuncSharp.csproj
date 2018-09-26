@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
   
     <PackageId>FuncSharp</PackageId>
@@ -12,7 +12,7 @@
     <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <PackageReleaseNotes>Added .NET Core support.</PackageReleaseNotes>
+    <PackageReleaseNotes>Typesafe Match.</PackageReleaseNotes>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
@@ -36,6 +36,7 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
+  	<Version>0.10.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -67,10 +68,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IProduct.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Product\IProductExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IProductExtensions.cs</LastGenOutput>
-    </None>
     <None Update="DataTypes\Product\Product.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Product.cs</LastGenOutput>
@@ -78,6 +75,10 @@
     <None Update="DataTypes\Relation\Relations.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Relations.cs</LastGenOutput>
+    </None>
+    <None Update="DataTypes\Try\Try.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Try.cs</LastGenOutput>
     </None>
     <None Update="Extensions\ActionExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -141,11 +142,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IProduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Product\IProductExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IProductExtensions.tt</DependentUpon>
-    </Compile>
     <Compile Update="DataTypes\Product\Product.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -155,6 +151,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Relations.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataTypes\Try\Try.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Try.tt</DependentUpon>
     </Compile>
     <Compile Update="Extensions\ActionExtensions.cs">
       <DesignTime>True</DesignTime>

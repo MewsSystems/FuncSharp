@@ -110,8 +110,7 @@
 
         public override bool Equals(object obj)
         {
-            var interval = obj as Interval<A>;
-            if (interval != null && IsEmpty && interval.IsEmpty)
+            if (obj is Interval<A> interval && IsEmpty && interval.IsEmpty)
             {
                 return Ordering.Equals(interval.Ordering);
             }
