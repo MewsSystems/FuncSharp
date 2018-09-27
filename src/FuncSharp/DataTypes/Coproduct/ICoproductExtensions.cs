@@ -58,8 +58,7 @@ namespace FuncSharp
         /// </summary>
         public static bool CoproductEquals(this ICoproduct c1, object that)
         {
-            var c2 = that as ICoproduct;
-            if (c1 != null && c2 != null && c1.GetType() == c2.GetType())
+            if (that is ICoproduct c2 && c1 != null && c2 != null && c1.GetType() == c2.GetType())
             {
                 return c1.CoproductRepresentation().Equals(c2.CoproductRepresentation());
             }

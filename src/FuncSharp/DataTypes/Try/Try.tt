@@ -184,7 +184,7 @@ namespace FuncSharp
             );
         }
 
-		public ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f)
+        public ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f)
         {
             return MapError(e => new[] { f(e) });
         }
