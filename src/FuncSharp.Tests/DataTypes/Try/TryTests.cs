@@ -30,8 +30,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void MapError()
         {
-            Assert.Equal(42, Success.MapError(e => new InvalidOperationException("foo", e)).Get());
-            Assert.Throws<InvalidOperationException>(() => Exception.MapError(e => new InvalidOperationException("foo", e)).Get());
+            Assert.Equal(42, Success.MapError(e => new InvalidOperationException("foo", e.First())).Get());
+            Assert.Throws<InvalidOperationException>(() => Exception.MapError(e => new InvalidOperationException("foo", e.First())).Get());
         }
 
         [Fact]
@@ -44,14 +44,14 @@ namespace FuncSharp.Tests
 
             var a2 = Try.Aggregate(Success, Exception, Product2.Create);
             Assert.True(a2.IsError);
-            Assert.Single(a2.Exceptions.Get());
-            Assert.True(a2.Exceptions.Get().First() is NotImplementedException);
-            Assert.Throws<AggregateException>(() => a2.Get());
+            Assert.Single(a2.Error.Get());
+            Assert.True(a2.Error.Get().First() is NotImplementedException);
+            Assert.Throws<NotImplementedException>(() => a2.Get());
 
             var a3 = Try.Aggregate(Exception, Exception, Product2.Create);
             Assert.True(a3.IsError);
-            Assert.Equal(2, a3.Exceptions.Get().Count());
-            Assert.True(a3.Exceptions.Get().All(e => e is NotImplementedException));
+            Assert.Equal(2, a3.Error.Get().Count());
+            Assert.True(a3.Error.Get().All(e => e is NotImplementedException));
             Assert.Throws<AggregateException>(() => a3.Get());
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
@@ -65,6 +65,14 @@ namespace FuncSharp
         /// </summary>
         public static ITry<A> Error<A>(Exception exception)
         {
+            return new Try<A>(new[] { exception });
+        }
+
+        /// <summary>
+        /// Creates a new try with an exception result.
+        /// </summary>
+        public static ITry<A> Error<A>(IEnumerable<Exception> exception)
+        {
             return new Try<A>(exception);
         }
 
@@ -75,8 +83,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get()));
         }
@@ -88,8 +96,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get()));
         }
@@ -101,8 +109,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get()));
         }
@@ -114,8 +122,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get()));
         }
@@ -127,8 +135,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get()));
         }
@@ -140,8 +148,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get()));
         }
@@ -153,8 +161,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get()));
         }
@@ -166,8 +174,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get()));
         }
@@ -179,8 +187,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError || t10.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten(), t10.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get(), t10.Get()));
         }
@@ -192,8 +200,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError || t10.IsError || t11.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten(), t10.Exceptions.Flatten(), t11.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get(), t10.Get(), t11.Get()));
         }
@@ -205,8 +213,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError || t10.IsError || t11.IsError || t12.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten(), t10.Exceptions.Flatten(), t11.Exceptions.Flatten(), t12.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get(), t10.Get(), t11.Get(), t12.Get()));
         }
@@ -218,8 +226,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError || t10.IsError || t11.IsError || t12.IsError || t13.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten(), t10.Exceptions.Flatten(), t11.Exceptions.Flatten(), t12.Exceptions.Flatten(), t13.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get(), t10.Get(), t11.Get(), t12.Get(), t13.Get()));
         }
@@ -231,8 +239,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError || t10.IsError || t11.IsError || t12.IsError || t13.IsError || t14.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten(), t10.Exceptions.Flatten(), t11.Exceptions.Flatten(), t12.Exceptions.Flatten(), t13.Exceptions.Flatten(), t14.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error, t14.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get(), t10.Get(), t11.Get(), t12.Get(), t13.Get(), t14.Get()));
         }
@@ -244,8 +252,8 @@ namespace FuncSharp
         {
             if (t1.IsError || t2.IsError || t3.IsError || t4.IsError || t5.IsError || t6.IsError || t7.IsError || t8.IsError || t9.IsError || t10.IsError || t11.IsError || t12.IsError || t13.IsError || t14.IsError || t15.IsError)
             {
-                var exceptions = new[] { t1.Exceptions.Flatten(), t2.Exceptions.Flatten(), t3.Exceptions.Flatten(), t4.Exceptions.Flatten(), t5.Exceptions.Flatten(), t6.Exceptions.Flatten(), t7.Exceptions.Flatten(), t8.Exceptions.Flatten(), t9.Exceptions.Flatten(), t10.Exceptions.Flatten(), t11.Exceptions.Flatten(), t12.Exceptions.Flatten(), t13.Exceptions.Flatten(), t14.Exceptions.Flatten(), t15.Exceptions.Flatten() };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error, t14.Error, t15.Error };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(t1.Get(), t2.Get(), t3.Get(), t4.Get(), t5.Get(), t6.Get(), t7.Get(), t8.Get(), t9.Get(), t10.Get(), t11.Get(), t12.Get(), t13.Get(), t14.Get(), t15.Get()));
         }
@@ -300,28 +308,23 @@ namespace FuncSharp
         }
     }
 
-    internal class Try<A> : Try<A, Exception>, ITry<A>
+    internal class Try<A> : Try<A, IEnumerable<Exception>>, ITry<A>
     {
         public Try(A success)
             : base(success)
         {
         }
 
-        public Try(Exception exception)
-            : base(exception)
+        public Try(IEnumerable<Exception> exceptions)
+            : base(exceptions)
         {
-        }
-
-        public IOption<IEnumerable<Exception>> Exceptions
-        {
-            get { return Error.Map(e => GetExceptions(e)); }
         }
 
         public A Get()
         {
             return Match(
                 s => s,
-                e => throw e
+                e => throw e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception)
             );
         }
 
@@ -333,7 +336,7 @@ namespace FuncSharp
             );
         }
 
-        public ITry<A> MapError(Func<Exception, Exception> f)
+        public ITry<A> MapError(Func<IEnumerable<Exception>, IEnumerable<Exception>> f)
         {
             return Match(
                 s => Try.Success<A>(s),
@@ -341,21 +344,9 @@ namespace FuncSharp
             );
         }
 
-        public R Match<R>(Func<A, R> ifFirst, Func<IEnumerable<Exception>, R> ifSecond)
+		public ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f)
         {
-            return Match(
-                s => ifFirst(s),
-                e => ifSecond(GetExceptions(e))
-            );
-        }
-
-        private IEnumerable<Exception> GetExceptions(Exception exception)
-        {
-            if (exception is AggregateException aggregateException)
-            {
-                return aggregateException.InnerExceptions;
-            }
-            return new[] { exception };
+            return MapError(e => new[] { f(e) });
         }
     }
 }

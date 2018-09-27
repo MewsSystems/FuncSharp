@@ -6,8 +6,8 @@
 <#@ output extension=".cs" #>
 <#@ include file="../../CodeGen/Helpers.ttinclude" #>
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FuncSharp
 {
@@ -72,6 +72,14 @@ namespace FuncSharp
         /// </summary>
         public static ITry<A> Error<A>(Exception exception)
         {
+            return new Try<A>(new[] { exception });
+        }
+
+        /// <summary>
+        /// Creates a new try with an exception result.
+        /// </summary>
+        public static ITry<A> Error<A>(IEnumerable<Exception> exception)
+        {
             return new Try<A>(exception);
         }
 <#  for (var i = 2; i < MaxFuncArity(); i++) { #>
@@ -83,8 +91,8 @@ namespace FuncSharp
         {
             if (<#= List(i, x => $"t{x}.IsError", separator: " || ") #>)
             {
-                var exceptions = new[] { <#= List(i, x => $"t{x}.Exceptions.Flatten()") #> };
-                return Try.Error<R>(new AggregateException(exceptions.SelectMany(e => e)));
+                var errors = new[] { <#= List(i, x => $"t{x}.Error") #> };
+                return Try.Error<R>(errors.SelectMany(e => e.Flatten()).ToList());
             }
             return Try.Success(f(<#= List(i, x => $"t{x}.Get()") #>));
         }
@@ -140,28 +148,23 @@ namespace FuncSharp
         }
     }
 
-    internal class Try<A> : Try<A, Exception>, ITry<A>
+    internal class Try<A> : Try<A, IEnumerable<Exception>>, ITry<A>
     {
         public Try(A success)
             : base(success)
         {
         }
 
-        public Try(Exception exception)
-            : base(exception)
+        public Try(IEnumerable<Exception> exceptions)
+            : base(exceptions)
         {
-        }
-
-        public IOption<IEnumerable<Exception>> Exceptions
-        {
-            get { return Error.Map(e => GetExceptions(e)); }
         }
 
         public A Get()
         {
             return Match(
                 s => s,
-                e => throw e
+                e => throw e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception)
             );
         }
 
@@ -173,7 +176,7 @@ namespace FuncSharp
             );
         }
 
-        public ITry<A> MapError(Func<Exception, Exception> f)
+        public ITry<A> MapError(Func<IEnumerable<Exception>, IEnumerable<Exception>> f)
         {
             return Match(
                 s => Try.Success<A>(s),
@@ -181,21 +184,9 @@ namespace FuncSharp
             );
         }
 
-        public R Match<R>(Func<A, R> ifFirst, Func<IEnumerable<Exception>, R> ifSecond)
+		public ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f)
         {
-            return Match(
-                s => ifFirst(s),
-                e => ifSecond(GetExceptions(e))
-            );
-        }
-
-        private IEnumerable<Exception> GetExceptions(Exception exception)
-        {
-            if (exception is AggregateException aggregateException)
-            {
-                return aggregateException.InnerExceptions;
-            }
-            return new[] { exception };
+            return MapError(e => new[] { f(e) });
         }
     }
 }

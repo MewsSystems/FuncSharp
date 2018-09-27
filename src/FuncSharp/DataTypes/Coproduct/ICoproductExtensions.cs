@@ -45,15 +45,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns value of the coproduct converted to the specified type.
-        /// </summary>
-        public static T Get<T>(this ICoproduct c, Func<Unit, Exception> otherwise = null)
-            where T : class
-        {
-            return c.CoproductValue.As<T>().Get(otherwise);
-        }
-
-        /// <summary>
         /// Returns hash code of the specified coproduct.
         /// </summary>
         public static int CoproductHashCode(this ICoproduct c)
@@ -67,7 +58,8 @@ namespace FuncSharp
         /// </summary>
         public static bool CoproductEquals(this ICoproduct c1, object that)
         {
-            if (that is ICoproduct c2 && c1 != null && c2 != null && c1.GetType() == c2.GetType())
+            var c2 = that as ICoproduct;
+            if (c1 != null && c2 != null && c1.GetType() == c2.GetType())
             {
                 return c1.CoproductRepresentation().Equals(c2.CoproductRepresentation());
             }
