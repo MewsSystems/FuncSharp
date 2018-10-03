@@ -112,5 +112,16 @@ namespace FuncSharp
                 _ => null
             );
         }
+
+        /// <summary>
+        /// Turns the option into a try using the exception in case of empty option.
+        /// </summary>
+        public static ITry<A> ToTry<A>(this IOption<A> option, Func<Unit, Exception> e)
+        {
+            return option.Match(
+                val => Try.Success(val),
+                _ => Try.Error<A>(e(Unit.Value))
+            );
+        }
     }
 }
