@@ -77,7 +77,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, Func<E, E, E> errorAggregate, Func<T1, T2, T> success, Func<E, T> error)
         {
@@ -90,7 +90,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T> success, Func<E, T> error)
         {
@@ -103,7 +103,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T> success, Func<E, T> error)
         {
@@ -116,7 +116,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T> success, Func<E, T> error)
         {
@@ -129,7 +129,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T> success, Func<E, T> error)
         {
@@ -142,7 +142,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T> success, Func<E, T> error)
         {
@@ -155,7 +155,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T> success, Func<E, T> error)
         {
@@ -168,7 +168,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T> success, Func<E, T> error)
         {
@@ -181,7 +181,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, ITry<T10, E> t10, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T> success, Func<E, T> error)
         {
@@ -194,7 +194,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, ITry<T10, E> t10, ITry<T11, E> t11, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T> success, Func<E, T> error)
         {
@@ -207,7 +207,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, ITry<T10, E> t10, ITry<T11, E> t11, ITry<T12, E> t12, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T> success, Func<E, T> error)
         {
@@ -220,7 +220,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, ITry<T10, E> t10, ITry<T11, E> t11, ITry<T12, E> t12, ITry<T13, E> t13, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T> success, Func<E, T> error)
         {
@@ -233,7 +233,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, ITry<T10, E> t10, ITry<T11, E> t11, ITry<T12, E> t12, ITry<T13, E> t13, ITry<T14, E> t14, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T> success, Func<E, T> error)
         {
@@ -246,7 +246,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using given error aggregate and calls error function.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, ITry<T3, E> t3, ITry<T4, E> t4, ITry<T5, E> t5, ITry<T6, E> t6, ITry<T7, E> t7, ITry<T8, E> t8, ITry<T9, E> t9, ITry<T10, E> t10, ITry<T11, E> t11, ITry<T12, E> t12, ITry<T13, E> t13, ITry<T14, E> t14, ITry<T15, E> t15, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T> success, Func<E, T> error)
         {
