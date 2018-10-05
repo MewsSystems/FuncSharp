@@ -2,7 +2,7 @@
   <PropertyGroup>
   
     <PackageId>FuncSharp</PackageId>
-    <Description>A .NET library of classes that bring some more advanced functional concepts into C#.</Description>
+    <Description>Option.ToTry.</Description>
     <VersionPrefix>0.10.0</VersionPrefix>
     <Authors>Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#</PackageTags>
@@ -12,7 +12,7 @@
     <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <PackageReleaseNotes>Improved Try.</PackageReleaseNotes>
+    <PackageReleaseNotes>Further Try extensions.</PackageReleaseNotes>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
@@ -36,7 +36,7 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.0.0</Version>
+  	<Version>1.1.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

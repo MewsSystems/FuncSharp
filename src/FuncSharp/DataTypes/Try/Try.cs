@@ -37,6 +37,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Create a new try with the result of the specified function while converting all exceptions into erroneous result.
+        /// </summary>
+        public static ITry<A> Create<A>(Func<Unit, A> f)
+        {
+            return Create<A, Exception>(f);
+        }
+
+        /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
         public static ITry<A, E> Success<A, E>(A success)
@@ -327,21 +335,28 @@ namespace FuncSharp
                 e => throw e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception)
             );
         }
-
-        public new ITry<B> Map<B>(Func<A, B> f)
+        
+        public ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g)
         {
             return Match(
                 s => Try.Success<B>(f(s)),
-                e => Try.Error<B>(e)
+                e => Try.Error<B>(g(e))
             );
+        }
+
+        public ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, Exception> g)
+        {
+            return Map(f, e => new[] { g(e) });
+        }
+
+        public new ITry<B> Map<B>(Func<A, B> f)
+        {
+            return Map(f, e => e);
         }
 
         public ITry<A> MapError(Func<IEnumerable<Exception>, IEnumerable<Exception>> f)
         {
-            return Match(
-                s => Try.Success<A>(s),
-                e => Try.Error<A>(f(e))
-            );
+            return Map(s => s, f);
         }
 
         public ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f)

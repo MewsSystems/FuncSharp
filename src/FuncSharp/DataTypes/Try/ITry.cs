@@ -50,6 +50,16 @@ namespace FuncSharp
         A Get();
 
         /// <summary>
+        /// Maps the successful result to a new successful result and erroneous result into new erroneous result.
+        /// </summary>
+        ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g);
+
+        /// <summary>
+        /// Maps the successful result to a new successful result and erroneous result into new erroneous result.
+        /// </summary>
+        ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, Exception> g);
+
+        /// <summary>
         /// Maps the successful result to a new successful result.
         /// </summary>
         new ITry<B> Map<B>(Func<A, B> f);

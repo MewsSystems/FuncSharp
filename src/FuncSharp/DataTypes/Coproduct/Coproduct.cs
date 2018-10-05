@@ -29,17 +29,13 @@ namespace FuncSharp
 
         public object CoproductValue { get; }
 
-        public T GetCoproductValue<T>(Func<Unit, Exception> otherwise = null)
+        public T GetCoproductValue<T>()
         {
             if (CoproductValue is T value)
             {
                 return value;
             }
-            if (otherwise != null)
-            {
-                throw otherwise(Unit.Value);
-            }
-            throw new InvalidOperationException("The coproduct value does not match the specified type.");
+            return default(T);
         }
 
         public override int GetHashCode()
