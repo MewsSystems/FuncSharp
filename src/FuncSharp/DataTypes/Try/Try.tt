@@ -104,8 +104,6 @@ namespace FuncSharp
             }
             return success(<#= List(i, x => $"t{x}.Success.Get()") #>);
         }
-<#  } #> 
-<#  for (var i = 2; i < MaxFuncArity(); i++) { #>
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
@@ -114,8 +112,6 @@ namespace FuncSharp
         {
             return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Try.Success<R, IEnumerable<E>>(f(<#= List(i, x => $"s{x}") #>)), Try.Error<R, IEnumerable<E>>);
         }
-<#  } #>
-<#  for (var i = 2; i < MaxFuncArity(); i++) { #>
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
