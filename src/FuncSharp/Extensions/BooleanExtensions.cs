@@ -8,5 +8,17 @@ namespace FuncSharp
         {
             return b ? ifTrue(Unit.Value) : ifFalse(Unit.Value);
         }
+
+        public static void Match(this bool b, Action<Unit> ifTrue, Action<Unit> ifFalse)
+        {
+            if (b)
+            {
+                ifTrue(Unit.Value);
+            }
+            else
+            {
+                ifFalse(Unit.Value);
+            }
+        }
     }
 }
