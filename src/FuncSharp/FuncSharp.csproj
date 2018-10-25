@@ -2,7 +2,7 @@
   <PropertyGroup>
   
     <PackageId>FuncSharp</PackageId>
-    <Description>Option.ToTry.</Description>
+    <Description>Added Try.Aggregate for collections.</Description>
     <VersionPrefix>0.10.0</VersionPrefix>
     <Authors>Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#</PackageTags>
@@ -36,7 +36,8 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.2.0</Version>
+  	<Version>1.2.2</Version>
+  	<AssemblyVersion>1.2.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

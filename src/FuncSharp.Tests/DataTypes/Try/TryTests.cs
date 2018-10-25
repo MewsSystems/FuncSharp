@@ -53,6 +53,15 @@ namespace FuncSharp.Tests
             Assert.Equal(2, a3.Error.Get().Count());
             Assert.True(a3.Error.Get().All(e => e is NotImplementedException));
             Assert.Throws<AggregateException>(() => a3.Get());
+
+            var a4 = Try.Aggregate(new[] { Success, Success, Success });
+            Assert.True(a4.IsSuccess);
+            Assert.True(a4.Get().SequenceEqual(new[] { 42, 42, 42}));
+
+            var a5 = Try.Aggregate(new[] { Success, Exception, Success, Exception });
+            Assert.True(a5.IsError);
+            Assert.Equal(2, a5.Error.Get().Count());
+            Assert.True(a5.Error.Get().All(e => e is NotImplementedException));
         }
     }
 }

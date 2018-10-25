@@ -90,6 +90,19 @@ namespace FuncSharp
         {
             return new Try<A>(exception);
         }
+
+        /// <summary>
+        /// Aggregates a collection of tries into a try of collection.
+        /// </summary>
+        public static ITry<IEnumerable<A>> Aggregate<A>(IEnumerable<ITry<A>> tries)
+        {
+            if (tries.All(t => t.IsSuccess))
+            {
+                return Success(tries.Select(t => t.Success).Flatten().ToList());
+            }
+
+            return Error<IEnumerable<A>>(tries.SelectMany(t => t.Error.Flatten()).ToList());
+        }
 <#  for (var i = 2; i < MaxFuncArity(); i++) { #>
 
         /// <summary>
@@ -97,12 +110,13 @@ namespace FuncSharp
         /// </summary>
         public static T Aggregate<<#= Types(i) #>, T, E>(<#= List(i, x => $"ITry<{Type(x)}, E> t{x}") #>, Func<E, E, E> errorAggregate, Func<<#= Types(i) #>, T> success, Func<E, T> error)
         {
-            if (<#= List(i, x => $"t{x}.IsError", separator: " || ") #>)
+            if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
             {
-                var errors = new[] { <#= List(i, x => $"t{x}.Error") #> };
-                return error(errors.Flatten().Aggregate(errorAggregate));
+                return success(<#= List(i, x => $"t{x}.Success.Get()") #>);
             }
-            return success(<#= List(i, x => $"t{x}.Success.Get()") #>);
+
+            var errors = new[] { <#= List(i, x => $"t{x}.Error") #> };
+            return error(errors.Flatten().Aggregate(errorAggregate));
         }
 
         /// <summary>
@@ -110,7 +124,7 @@ namespace FuncSharp
         /// </summary>
         public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i) #>, R, E>(<#= List(i, x => $"ITry<T{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i) #>, R> f)
         {
-            return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Try.Success<R, IEnumerable<E>>(f(<#= List(i, x => $"s{x}") #>)), Try.Error<R, IEnumerable<E>>);
+            return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(f(<#= List(i, x => $"s{x}") #>)), Error<R, IEnumerable<E>>);
         }
 
         /// <summary>
@@ -118,7 +132,7 @@ namespace FuncSharp
         /// </summary>
         public static ITry<R> Aggregate<<#= Types(i) #>, R>(<#= List(i, x => $"ITry<T{x}> t{x}") #>, Func<<#= Types(i) #>, R> f)
         {
-            return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Try.Success<R>(f(<#= List(i, x => $"s{x}") #>)), Try.Error<R>);
+            return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Success<R>(f(<#= List(i, x => $"s{x}") #>)), Error<R>);
         }
 <#  } #>  
     }
