@@ -85,6 +85,27 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Aggregates the tries if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// </summary>
+        public static ITry<IEnumerable<T>, IEnumerable<E>> Aggregate<T, E>(params ITry<T, E>[] tries)
+        {
+            return Aggregate(tries.ToList());
+        }
+
+        /// <summary>
+        /// Aggregates the tries if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// </summary>
+        public static ITry<IEnumerable<T>, IEnumerable<E>> Aggregate<T, E>(IEnumerable<ITry<T, E>> tries)
+        {
+            var allTries = tries.ToList();
+            var errors = allTries.Select(t => t.Error).Flatten().ToList();
+            return errors.Any().Match( 
+                _ => Try.Success<IEnumerable<T>, IEnumerable<E>>(allTries.Select(t => t.Success).Flatten()),
+                f => Try.Error<IEnumerable<T>, IEnumerable<E>>(errors)
+            );
+        }
+
+        /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
         public static T Aggregate<T1, T2, T, E>(ITry<T1, E> t1, ITry<T2, E> t2, Func<E, E, E> errorAggregate, Func<T1, T2, T> success, Func<E, T> error)
