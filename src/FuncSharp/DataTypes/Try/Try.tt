@@ -233,5 +233,10 @@ namespace FuncSharp
         {
             return MapError(e => new[] { f(e) });
         }
+
+		public ITry<A> MapError(Func<Exception, Exception> f)
+        {
+            return MapError(exceptions => exceptions.Select(f).ToList());
+        }
     }
 }

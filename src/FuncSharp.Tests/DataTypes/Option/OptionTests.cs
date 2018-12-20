@@ -44,8 +44,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void GetOrDefaultTest()
         {
-            Assert.Equal(42, 42.ToOption().GetOrDefault());
-            Assert.Equal(0, Option.Empty<int>().GetOrDefault());
+            Assert.Equal(42, 42.ToOption().GetOrZero());
+            Assert.Equal(0, Option.Empty<int>().GetOrZero());
         }
 
         [Fact]

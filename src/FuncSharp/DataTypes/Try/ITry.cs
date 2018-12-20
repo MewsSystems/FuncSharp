@@ -73,5 +73,10 @@ namespace FuncSharp
         /// Maps the exception result to a new exception result.
         /// </summary>
         ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f);
+
+        /// <summary>
+        /// Maps all the exceptions to new exceptions.
+        /// </summary>
+        ITry<A> MapError(Func<Exception, Exception> f);
     }
 }

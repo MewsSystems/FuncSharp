@@ -7,6 +7,31 @@ namespace FuncSharp
     public static class IOptionExtensions
     {
         /// <summary>
+        /// Returns value of the option if it has value. If not, returns null.
+        /// </summary>
+        public static A GetOrNull<A>(this IOption<A> option)
+            where A : class
+        {
+            return option.GetOrElse<A, A>(_ => null);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static int GetOrZero(this IOption<int> option)
+        {
+            return option.GetOrElse(0);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns false.
+        /// </summary>
+        public static bool GetOrFalse(this IOption<bool> option)
+        {
+            return option.GetOrElse(false);
+        }
+
+        /// <summary>
         /// Returns value of the option if it has value. If not, returns the <paramref name="otherwise"/>.
         /// </summary>
         public static B GetOrElse<A, B>(this IOption<A> option, B otherwise)
@@ -99,6 +124,17 @@ namespace FuncSharp
                 t => option,
                 f => Option.Empty<A>()
             ));
+        }
+
+        /// <summary>
+        /// Retuns true if value of the option matches the specified predicate. Otherwise returns false.
+        /// </summary>
+        public static bool Is<A>(this IOption<A> option, Func<A, bool> predicate)
+        {
+            return option.Match(
+                a => predicate(a),
+                _ => false
+            );
         }
 
         /// <summary>

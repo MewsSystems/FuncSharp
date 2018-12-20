@@ -11,7 +11,7 @@
             IsEmpty = LowerBound.FlatMap(l => UpperBound.Map(u =>
                 Ordering.Greater(l, u) ||
                 Ordering.Equal(l, u) && (LowerLimit.IsOpen || UpperLimit.IsOpen)
-            )).GetOrDefault();
+            )).GetOrFalse();
         }
 
         /// <summary>

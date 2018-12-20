@@ -2,7 +2,7 @@
   <PropertyGroup>
   
     <PackageId>FuncSharp</PackageId>
-    <Description>Added Try.Aggregate for collections.</Description>
+    <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.</Description>
     <VersionPrefix>0.10.0</VersionPrefix>
     <Authors>Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#</PackageTags>
@@ -12,7 +12,7 @@
     <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <PackageReleaseNotes>Further Try extensions.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed Option.GetOrDefault and introduced GetOrNull, GetOrZero and GetOrFalse.</PackageReleaseNotes>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
@@ -36,8 +36,8 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.2.2</Version>
-  	<AssemblyVersion>1.2.2.0</AssemblyVersion>
+  	<Version>1.4.0</Version>
+  	<AssemblyVersion>1.4.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
