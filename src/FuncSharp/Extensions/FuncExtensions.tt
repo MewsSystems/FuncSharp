@@ -11,7 +11,7 @@ namespace FuncSharp
 {
     public static class FuncExtensions
     {
-<# for (var i = 0; i < Math.Min(16, MaxArity()); i++) { #>
+<# for (var i = 0; i < Math.Min(16, MaxProductArity()); i++) { #>
         /// <summary>
         /// Converts the specified function that returns unit into a corresponding action.
         /// </summary>

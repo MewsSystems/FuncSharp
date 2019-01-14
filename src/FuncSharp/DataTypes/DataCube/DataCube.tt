@@ -265,26 +265,9 @@ namespace FuncSharp
             return result.ToString();
         }
         
-        protected void AddDomain<P>(Dictionary<Position1<P>, int> rangeCounts, P value)
+        protected void AddDomain<P>(HashSet<ValueTuple<P>> domainValues, P value)
         {
-            var key = Position1.Create(value);
-            var count = 0;
-            rangeCounts.TryGetValue(key, out count);
-            rangeCounts[key] = count + 1;
-        }
-
-        protected void RemoveDomain<P>(Dictionary<Position1<P>, int> rangeCounts, P value)
-        {
-            var key = Position1.Create(value);
-            var count = rangeCounts[key];
-            if (count == 1)
-            {
-                rangeCounts.Remove(key);
-            }
-            else
-            {
-                rangeCounts[key] = count - 1;
-            }
+            domainValues.Add(ValueTuple.Create(value));
         }
     }
 }

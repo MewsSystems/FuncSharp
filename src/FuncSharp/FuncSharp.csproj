@@ -12,7 +12,7 @@
     <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <PackageReleaseNotes>Removed Option.GetOrDefault and introduced GetOrNull, GetOrZero and GetOrFalse.</PackageReleaseNotes>
+    <PackageReleaseNotes>Product performance improvements.</PackageReleaseNotes>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
@@ -36,8 +36,8 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.4.0</Version>
-  	<AssemblyVersion>1.4.0.0</AssemblyVersion>
+  	<Version>1.5.0</Version>
+  	<AssemblyVersion>1.5.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -96,10 +96,6 @@
     <None Update="Extensions\ObjectExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
-    </None>
-    <None Update="Extensions\TupleExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TupleExtensions.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -177,11 +173,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ObjectExtensions.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Extensions\TupleExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>TupleExtensions.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

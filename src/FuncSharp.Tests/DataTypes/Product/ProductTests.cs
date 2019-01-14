@@ -43,7 +43,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void ValueColllectionIsCorrect()
+        public void ValueCollectionIsCorrect()
         {
             var p1 = Product3.Create("foo", 42, "bar");
             Assert.NotNull(p1.ProductValues);

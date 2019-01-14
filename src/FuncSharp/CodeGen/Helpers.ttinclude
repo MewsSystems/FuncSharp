@@ -4,6 +4,11 @@
         return 20;
     }
 
+    public int MaxProductArity()
+    {
+        return 8;
+    }
+
     public int MaxStructureArity()
     {
         return 6;

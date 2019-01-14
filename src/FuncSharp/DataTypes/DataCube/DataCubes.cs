@@ -150,7 +150,7 @@ namespace FuncSharp
         /// </summary>
         public DataCube1()
         {
-            Domain1Counts = new Dictionary<Position1<P1>, int>();
+            Domain1Values = new HashSet<ValueTuple<P1>>();
         }
 
         /// <summary>
@@ -158,10 +158,10 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P1> Domain1
         {
-            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain1Values.Select(v => v.Item1); }
         }
 
-        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
+        private HashSet<ValueTuple<P1>> Domain1Values { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -193,7 +193,7 @@ namespace FuncSharp
         /// </summary>
         public override TValue Set(Position1<P1> position, TValue value)
         {
-            AddDomain(Domain1Counts, position.ProductValue1);
+            AddDomain(Domain1Values, position.ProductValue1);
             return base.Set(position, value);
         }
 
@@ -341,8 +341,8 @@ namespace FuncSharp
         /// </summary>
         public DataCube2()
         {
-            Domain1Counts = new Dictionary<Position1<P1>, int>();
-            Domain2Counts = new Dictionary<Position1<P2>, int>();
+            Domain1Values = new HashSet<ValueTuple<P1>>();
+            Domain2Values = new HashSet<ValueTuple<P2>>();
         }
 
         /// <summary>
@@ -350,7 +350,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P1> Domain1
         {
-            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain1Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -358,12 +358,12 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P2> Domain2
         {
-            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain2Values.Select(v => v.Item1); }
         }
 
-        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
+        private HashSet<ValueTuple<P1>> Domain1Values { get; }
 
-        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
+        private HashSet<ValueTuple<P2>> Domain2Values { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -395,8 +395,8 @@ namespace FuncSharp
         /// </summary>
         public override TValue Set(Position2<P1, P2> position, TValue value)
         {
-            AddDomain(Domain1Counts, position.ProductValue1);
-            AddDomain(Domain2Counts, position.ProductValue2);
+            AddDomain(Domain1Values, position.ProductValue1);
+            AddDomain(Domain2Values, position.ProductValue2);
             return base.Set(position, value);
         }
 
@@ -595,9 +595,9 @@ namespace FuncSharp
         /// </summary>
         public DataCube3()
         {
-            Domain1Counts = new Dictionary<Position1<P1>, int>();
-            Domain2Counts = new Dictionary<Position1<P2>, int>();
-            Domain3Counts = new Dictionary<Position1<P3>, int>();
+            Domain1Values = new HashSet<ValueTuple<P1>>();
+            Domain2Values = new HashSet<ValueTuple<P2>>();
+            Domain3Values = new HashSet<ValueTuple<P3>>();
         }
 
         /// <summary>
@@ -605,7 +605,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P1> Domain1
         {
-            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain1Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -613,7 +613,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P2> Domain2
         {
-            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain2Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -621,14 +621,14 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P3> Domain3
         {
-            get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain3Values.Select(v => v.Item1); }
         }
 
-        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
+        private HashSet<ValueTuple<P1>> Domain1Values { get; }
 
-        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
+        private HashSet<ValueTuple<P2>> Domain2Values { get; }
 
-        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
+        private HashSet<ValueTuple<P3>> Domain3Values { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -660,9 +660,9 @@ namespace FuncSharp
         /// </summary>
         public override TValue Set(Position3<P1, P2, P3> position, TValue value)
         {
-            AddDomain(Domain1Counts, position.ProductValue1);
-            AddDomain(Domain2Counts, position.ProductValue2);
-            AddDomain(Domain3Counts, position.ProductValue3);
+            AddDomain(Domain1Values, position.ProductValue1);
+            AddDomain(Domain2Values, position.ProductValue2);
+            AddDomain(Domain3Values, position.ProductValue3);
             return base.Set(position, value);
         }
 
@@ -912,10 +912,10 @@ namespace FuncSharp
         /// </summary>
         public DataCube4()
         {
-            Domain1Counts = new Dictionary<Position1<P1>, int>();
-            Domain2Counts = new Dictionary<Position1<P2>, int>();
-            Domain3Counts = new Dictionary<Position1<P3>, int>();
-            Domain4Counts = new Dictionary<Position1<P4>, int>();
+            Domain1Values = new HashSet<ValueTuple<P1>>();
+            Domain2Values = new HashSet<ValueTuple<P2>>();
+            Domain3Values = new HashSet<ValueTuple<P3>>();
+            Domain4Values = new HashSet<ValueTuple<P4>>();
         }
 
         /// <summary>
@@ -923,7 +923,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P1> Domain1
         {
-            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain1Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -931,7 +931,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P2> Domain2
         {
-            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain2Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -939,7 +939,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P3> Domain3
         {
-            get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain3Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -947,16 +947,16 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P4> Domain4
         {
-            get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain4Values.Select(v => v.Item1); }
         }
 
-        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
+        private HashSet<ValueTuple<P1>> Domain1Values { get; }
 
-        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
+        private HashSet<ValueTuple<P2>> Domain2Values { get; }
 
-        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
+        private HashSet<ValueTuple<P3>> Domain3Values { get; }
 
-        private Dictionary<Position1<P4>, int> Domain4Counts { get; }
+        private HashSet<ValueTuple<P4>> Domain4Values { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -988,10 +988,10 @@ namespace FuncSharp
         /// </summary>
         public override TValue Set(Position4<P1, P2, P3, P4> position, TValue value)
         {
-            AddDomain(Domain1Counts, position.ProductValue1);
-            AddDomain(Domain2Counts, position.ProductValue2);
-            AddDomain(Domain3Counts, position.ProductValue3);
-            AddDomain(Domain4Counts, position.ProductValue4);
+            AddDomain(Domain1Values, position.ProductValue1);
+            AddDomain(Domain2Values, position.ProductValue2);
+            AddDomain(Domain3Values, position.ProductValue3);
+            AddDomain(Domain4Values, position.ProductValue4);
             return base.Set(position, value);
         }
 
@@ -1292,11 +1292,11 @@ namespace FuncSharp
         /// </summary>
         public DataCube5()
         {
-            Domain1Counts = new Dictionary<Position1<P1>, int>();
-            Domain2Counts = new Dictionary<Position1<P2>, int>();
-            Domain3Counts = new Dictionary<Position1<P3>, int>();
-            Domain4Counts = new Dictionary<Position1<P4>, int>();
-            Domain5Counts = new Dictionary<Position1<P5>, int>();
+            Domain1Values = new HashSet<ValueTuple<P1>>();
+            Domain2Values = new HashSet<ValueTuple<P2>>();
+            Domain3Values = new HashSet<ValueTuple<P3>>();
+            Domain4Values = new HashSet<ValueTuple<P4>>();
+            Domain5Values = new HashSet<ValueTuple<P5>>();
         }
 
         /// <summary>
@@ -1304,7 +1304,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P1> Domain1
         {
-            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain1Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1312,7 +1312,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P2> Domain2
         {
-            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain2Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1320,7 +1320,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P3> Domain3
         {
-            get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain3Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1328,7 +1328,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P4> Domain4
         {
-            get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain4Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1336,18 +1336,18 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P5> Domain5
         {
-            get { return Domain5Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain5Values.Select(v => v.Item1); }
         }
 
-        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
+        private HashSet<ValueTuple<P1>> Domain1Values { get; }
 
-        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
+        private HashSet<ValueTuple<P2>> Domain2Values { get; }
 
-        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
+        private HashSet<ValueTuple<P3>> Domain3Values { get; }
 
-        private Dictionary<Position1<P4>, int> Domain4Counts { get; }
+        private HashSet<ValueTuple<P4>> Domain4Values { get; }
 
-        private Dictionary<Position1<P5>, int> Domain5Counts { get; }
+        private HashSet<ValueTuple<P5>> Domain5Values { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -1379,11 +1379,11 @@ namespace FuncSharp
         /// </summary>
         public override TValue Set(Position5<P1, P2, P3, P4, P5> position, TValue value)
         {
-            AddDomain(Domain1Counts, position.ProductValue1);
-            AddDomain(Domain2Counts, position.ProductValue2);
-            AddDomain(Domain3Counts, position.ProductValue3);
-            AddDomain(Domain4Counts, position.ProductValue4);
-            AddDomain(Domain5Counts, position.ProductValue5);
+            AddDomain(Domain1Values, position.ProductValue1);
+            AddDomain(Domain2Values, position.ProductValue2);
+            AddDomain(Domain3Values, position.ProductValue3);
+            AddDomain(Domain4Values, position.ProductValue4);
+            AddDomain(Domain5Values, position.ProductValue5);
             return base.Set(position, value);
         }
 
@@ -1735,12 +1735,12 @@ namespace FuncSharp
         /// </summary>
         public DataCube6()
         {
-            Domain1Counts = new Dictionary<Position1<P1>, int>();
-            Domain2Counts = new Dictionary<Position1<P2>, int>();
-            Domain3Counts = new Dictionary<Position1<P3>, int>();
-            Domain4Counts = new Dictionary<Position1<P4>, int>();
-            Domain5Counts = new Dictionary<Position1<P5>, int>();
-            Domain6Counts = new Dictionary<Position1<P6>, int>();
+            Domain1Values = new HashSet<ValueTuple<P1>>();
+            Domain2Values = new HashSet<ValueTuple<P2>>();
+            Domain3Values = new HashSet<ValueTuple<P3>>();
+            Domain4Values = new HashSet<ValueTuple<P4>>();
+            Domain5Values = new HashSet<ValueTuple<P5>>();
+            Domain6Values = new HashSet<ValueTuple<P6>>();
         }
 
         /// <summary>
@@ -1748,7 +1748,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P1> Domain1
         {
-            get { return Domain1Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain1Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1756,7 +1756,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P2> Domain2
         {
-            get { return Domain2Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain2Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1764,7 +1764,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P3> Domain3
         {
-            get { return Domain3Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain3Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1772,7 +1772,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P4> Domain4
         {
-            get { return Domain4Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain4Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1780,7 +1780,7 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P5> Domain5
         {
-            get { return Domain5Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain5Values.Select(v => v.Item1); }
         }
 
         /// <summary>
@@ -1788,20 +1788,20 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P6> Domain6
         {
-            get { return Domain6Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain6Values.Select(v => v.Item1); }
         }
 
-        private Dictionary<Position1<P1>, int> Domain1Counts { get; }
+        private HashSet<ValueTuple<P1>> Domain1Values { get; }
 
-        private Dictionary<Position1<P2>, int> Domain2Counts { get; }
+        private HashSet<ValueTuple<P2>> Domain2Values { get; }
 
-        private Dictionary<Position1<P3>, int> Domain3Counts { get; }
+        private HashSet<ValueTuple<P3>> Domain3Values { get; }
 
-        private Dictionary<Position1<P4>, int> Domain4Counts { get; }
+        private HashSet<ValueTuple<P4>> Domain4Values { get; }
 
-        private Dictionary<Position1<P5>, int> Domain5Counts { get; }
+        private HashSet<ValueTuple<P5>> Domain5Values { get; }
 
-        private Dictionary<Position1<P6>, int> Domain6Counts { get; }
+        private HashSet<ValueTuple<P6>> Domain6Values { get; }
 
         /// <summary>
         /// Returns whether the cube contains a value at the specified position.
@@ -1833,12 +1833,12 @@ namespace FuncSharp
         /// </summary>
         public override TValue Set(Position6<P1, P2, P3, P4, P5, P6> position, TValue value)
         {
-            AddDomain(Domain1Counts, position.ProductValue1);
-            AddDomain(Domain2Counts, position.ProductValue2);
-            AddDomain(Domain3Counts, position.ProductValue3);
-            AddDomain(Domain4Counts, position.ProductValue4);
-            AddDomain(Domain5Counts, position.ProductValue5);
-            AddDomain(Domain6Counts, position.ProductValue6);
+            AddDomain(Domain1Values, position.ProductValue1);
+            AddDomain(Domain2Values, position.ProductValue2);
+            AddDomain(Domain3Values, position.ProductValue3);
+            AddDomain(Domain4Values, position.ProductValue4);
+            AddDomain(Domain5Values, position.ProductValue5);
+            AddDomain(Domain6Values, position.ProductValue6);
             return base.Set(position, value);
         }
 

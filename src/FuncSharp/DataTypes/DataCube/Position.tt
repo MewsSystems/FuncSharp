@@ -7,7 +7,7 @@
 <#@ include file="../../CodeGen/Helpers.ttinclude" #>
 namespace FuncSharp
 {
-<#  for (var i = 0; i < MaxArity(); i++) { #>
+<#  for (var i = 0; i <= MaxProductArity(); i++) { #>
 <#      if (i > 0) { #>
     /// <summary>
     /// A factory for <#= i #>-dimensional data cube positions.

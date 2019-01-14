@@ -23,7 +23,7 @@ namespace FuncSharp
         public DataCube<#= i #>()
         {
 <#      for (var j = 1; j <= i; j++) { #>
-            Domain<#= j #>Counts = new Dictionary<Position1<P<#= j #>>, int>();
+            Domain<#= j #>Values = new HashSet<ValueTuple<P<#= j #>>>();
 <#      } #>
         }
 
@@ -43,12 +43,12 @@ namespace FuncSharp
         /// </summary>
         public IEnumerable<P<#= j #>> Domain<#= j #>
         {
-            get { return Domain<#= j #>Counts.Keys.Select(p => p.ProductValue1); }
+            get { return Domain<#= j #>Values.Select(v => v.Item1); }
         }
 
 <#      } #>
 <#      for (var j = 1; j <= i; j++) { #>
-        private Dictionary<Position1<P<#= j #>>, int> Domain<#= j #>Counts { get; }
+        private HashSet<ValueTuple<P<#= j #>>> Domain<#= j #>Values { get; }
 
 <#      } #>
         /// <summary>
@@ -82,7 +82,7 @@ namespace FuncSharp
         public override TValue Set(<#= PositionType(i, name: "P") #> position, TValue value)
         {
 <#      for (var j = 1; j <= i; j++) { #>
-            AddDomain(Domain<#= j #>Counts, position.ProductValue<#= j #>);
+            AddDomain(Domain<#= j #>Values, position.ProductValue<#= j #>);
 <#      } #>
             return base.Set(position, value);
         }

@@ -23,15 +23,12 @@ namespace FuncSharp
 
         public override int GetHashCode()
         {
-            return HashCode ?? (HashCode = Structural.HashCode(ProductValues)).Value;
+            return HashCode ?? (HashCode = ProductHashCode()).Value;
         }
 
         public override bool Equals(object obj)
         {
-			return
-				obj is IProduct p &&
-				Equals(GetType(), p.GetType()) &&
-				ProductValues.SequenceEqual(p.ProductValues);
+            return ProductEquals(obj);
         }
 
         public override string ToString()
@@ -49,9 +46,13 @@ namespace FuncSharp
             b.Append(")");
             return b.ToString();
         }
+
+        protected abstract int ProductHashCode();
+
+        protected abstract bool ProductEquals(object obj);
     }
 
-<#  for (var i = 0; i < MaxArity(); i++) { #>
+<#  for (var i = 0; i <= MaxProductArity(); i++) { #>
 <#      if (i > 0) { #>
     /// <summary>
     /// A factory for <#= i #>-dimensional strongly-typed immutable products.
@@ -141,21 +142,19 @@ namespace FuncSharp
         }
 <#      } #>
 
-        public override int GetHashCode()
+        protected override int ProductHashCode()
         {
-		    return Structural.HashCode(<#= Properties(i, name: "ProductValue") #>);
-		}
+            return ValueTuple.Create(<#= Properties(i, name: "ProductValue") #>).GetHashCode();
+        }
 
-        public override bool Equals(object obj)
+        protected override bool ProductEquals(object obj)
         {
-		    var p = obj as <#= ProductType(i) #>;
             return
-			    p != null &&
-				Equals(GetType(), p.GetType()) &&
+                obj is <#= ProductType(i) #> p &&
 <#          for (var j = 1; j <= i; j++) { #>
                 Equals(<#= ProductProperty(j) #>, p.<#= ProductProperty(j) #>) &&
 <#          } #>
-                true;
+                Equals(GetType(), p.GetType());
         }
     }
 

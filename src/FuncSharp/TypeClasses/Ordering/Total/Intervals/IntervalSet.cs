@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FuncSharp
 {
-    public class IntervalSet<A> : ProductBase
+    public class IntervalSet<A>
     {
         private IEnumerable<object> productValues;
 
@@ -58,11 +58,6 @@ namespace FuncSharp
         public bool IsNonEmpty
         {
             get { return !IsEmpty; }
-        }
-
-        public override IEnumerable<object> ProductValues
-        {
-            get { return productValues; }
         }
 
         public override string ToString()
