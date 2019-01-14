@@ -24,6 +24,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static decimal GetOrZero(this IOption<decimal> option)
+        {
+            return option.GetOrElse(0m);
+        }
+
+        /// <summary>
         /// Returns value of the option if it has value. If not, returns false.
         /// </summary>
         public static bool GetOrFalse(this IOption<bool> option)
