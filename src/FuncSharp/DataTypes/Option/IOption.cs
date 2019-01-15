@@ -21,6 +21,12 @@ namespace FuncSharp
         A Get(Func<Unit, Exception> otherwise = null);
 
         /// <summary>
+        /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.
+        /// </summary>
+        [Obsolete("Use GetOrZero, GetOrNull or GetOrElse instead.")]
+        A GetOrDefault();
+
+        /// <summary>
         /// Maps value of the current option (if present) into a new value using the specified function and 
         /// returns a new option with that new value.
         /// </summary>
