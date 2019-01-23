@@ -30,7 +30,7 @@ namespace FuncSharp
         public static ITry<A, E> Create<A, E>(Func<Unit, A> f)
             where E : Exception
         {
-            return Catch<ITry<A>, E>(
+            return Catch<ITry<A, E>, E>(
                 _ => Success<A, E>(f(Unit.Value)),
                 e => Error<A, E>(e)
             );
@@ -41,7 +41,10 @@ namespace FuncSharp
         /// </summary>
         public static ITry<A> Create<A>(Func<Unit, A> f)
         {
-            return Create<A, Exception>(f);
+            return Catch<ITry<A>, Exception>(
+                _ => Success(f(Unit.Value)),
+                e => Error<A>(e)
+            );
         }
 
         /// <summary>
@@ -89,12 +92,41 @@ namespace FuncSharp
         /// </summary>
         public static ITry<IEnumerable<A>> Aggregate<A>(IEnumerable<ITry<A>> tries)
         {
-            if (tries.All(t => t.IsSuccess))
+            var enumeratedTries = tries.ToList();
+            if (enumeratedTries.All(t => t.IsSuccess))
             {
-                return Success(tries.Select(t => t.Success).Flatten().ToList());
+                return Success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
             }
 
-            return Error<IEnumerable<A>>(tries.SelectMany(t => t.Error.Flatten()).ToList());
+            return Error<IEnumerable<A>>(enumeratedTries.SelectMany(t => t.Error.Flatten()).ToList());
+        }
+
+        /// <summary>
+        /// Aggregates a collection of tries into a try of collection.
+        /// </summary>
+        public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, E>> tries)
+        {
+            var enumeratedTries = tries.ToList();
+            if (enumeratedTries.All(t => t.IsSuccess))
+            {
+                return Success<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.Select(t => t.Success).Flatten().ToList());
+            }
+
+            return Error<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.Select(t => t.Error).Flatten().ToList());
+        }
+
+        /// <summary>
+        /// Aggregates a collection of tries into a try of collection.
+        /// </summary>
+        public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, IEnumerable<E>>> tries)
+        {
+            var enumeratedTries = tries.ToList();
+            if (enumeratedTries.All(t => t.IsSuccess))
+            {
+                return Success<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.Select(t => t.Success).Flatten().ToList());
+            }
+
+            return Error<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.SelectMany(t => t.Error.Flatten()).ToList());
         }
 
         /// <summary>
