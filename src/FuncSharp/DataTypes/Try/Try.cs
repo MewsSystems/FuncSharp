@@ -89,13 +89,11 @@ namespace FuncSharp
         /// </summary>
         public static ITry<IEnumerable<A>> Aggregate<A>(IEnumerable<ITry<A>> tries)
         {
-            var enumeratedTries = tries.ToList();
-            if (enumeratedTries.All(t => t.IsSuccess))
-            {
-                return Success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
-            }
-
-            return Error<IEnumerable<A>>(enumeratedTries.SelectMany(t => t.Error.Flatten()).ToList());
+            return Aggregate(
+                tries,
+                t => Success(t),
+                e => Error<IEnumerable<A>>(e.SelectMany(error => error).ToList())
+            );
         }
 
         /// <summary>
@@ -103,13 +101,11 @@ namespace FuncSharp
         /// </summary>
         public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, E>> tries)
         {
-            var enumeratedTries = tries.ToList();
-            if (enumeratedTries.All(t => t.IsSuccess))
-            {
-                return Success<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.Select(t => t.Success).Flatten().ToList());
-            }
-
-            return Error<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.Select(t => t.Error).Flatten().ToList());
+            return Aggregate(
+                tries,
+                t => Success<IEnumerable<A>, IEnumerable<E>>(t),
+                e => Error<IEnumerable<A>, IEnumerable<E>>(e)
+            );
         }
 
         /// <summary>
@@ -117,14 +113,27 @@ namespace FuncSharp
         /// </summary>
         public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, IEnumerable<E>>> tries)
         {
+            return Aggregate(
+                tries,
+                t => Success<IEnumerable<A>, IEnumerable<E>>(t),
+                e => Error<IEnumerable<A>, IEnumerable<E>>(e.SelectMany(error => error).ToList())
+            );
+        }
+
+        /// <summary>
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
+        /// </summary>
+        public static R Aggregate<T, R, E>(IEnumerable<ITry<T, E>> tries, Func<IEnumerable<T>, R> success, Func<IEnumerable<E>, R> error)
+        {
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
             {
-                return Success<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.Select(t => t.Success).Flatten().ToList());
+                return success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
             }
 
-            return Error<IEnumerable<A>, IEnumerable<E>>(enumeratedTries.SelectMany(t => t.Error.Flatten()).ToList());
+            return error(enumeratedTries.Select(t => t.Error).Flatten());
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
