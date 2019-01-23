@@ -6,8 +6,8 @@ namespace FuncSharp.Tests
 {
     public class TryTests
     {
-        private static readonly ITry<int> Success = Try.Create<int>(_ => 42);
-        private static readonly ITry<int> Exception = Try.Create<int>(_ => throw new NotImplementedException());
+        private static readonly ITry<int> Success = Try.Create<int, Exception>(_ => 42);
+        private static readonly ITry<int> Exception = Try.Create<int, Exception>(_ => throw new NotImplementedException());
 
         [Fact]
         public void Create()
