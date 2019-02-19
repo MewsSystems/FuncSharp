@@ -12,7 +12,7 @@
     <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <PackageReleaseNotes>Fixed missing method again.</PackageReleaseNotes>
+    <PackageReleaseNotes>Introduced more variants of Try.Aggregate</PackageReleaseNotes>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
@@ -36,8 +36,8 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.5.2</Version>
-  	<AssemblyVersion>1.5.2.0</AssemblyVersion>
+  	<Version>1.5.3</Version>
+  	<AssemblyVersion>1.5.3.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

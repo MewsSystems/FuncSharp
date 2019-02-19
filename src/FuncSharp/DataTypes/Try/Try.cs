@@ -134,7 +134,6 @@ namespace FuncSharp
             return error(enumeratedTries.Select(t => t.Error).Flatten());
         }
 
-
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
