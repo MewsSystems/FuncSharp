@@ -7,10 +7,11 @@ namespace FuncSharp.Performance
         static void Main(string[] args)
         {
             var cube = new DataCube3<int, int, int, int>();
+            var iterations = 100;
 
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < iterations; i++)
             {
-                Console.WriteLine($"Iteration {i}/20");
+                Console.WriteLine($"Iteration {i}/{iterations}");
 
                 for (var j = 0; j < 100; j++)
                 {
