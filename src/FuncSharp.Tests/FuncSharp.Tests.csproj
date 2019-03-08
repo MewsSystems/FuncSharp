@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net471;</TargetFrameworks>
+	<RuntimeFrameworkVersion>2.0.9</RuntimeFrameworkVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -14,9 +15,5 @@
   <ItemGroup>
     <ProjectReference Include="..\FuncSharp\FuncSharp.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
-  </PropertyGroup>
   
 </Project>
