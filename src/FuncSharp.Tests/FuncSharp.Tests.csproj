@@ -15,4 +15,8 @@
     <ProjectReference Include="..\FuncSharp\FuncSharp.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+  </PropertyGroup>
+  
 </Project>
