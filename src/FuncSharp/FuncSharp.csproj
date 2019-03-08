@@ -9,7 +9,7 @@
     <Copyright>Copyright © 2018</Copyright>
 
     <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/siroky/FuncSharp/blob/develop/License.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
     <PackageReleaseNotes>Added Boolean.ToTry.</PackageReleaseNotes>
