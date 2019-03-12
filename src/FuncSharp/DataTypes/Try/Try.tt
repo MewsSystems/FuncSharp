@@ -34,10 +34,10 @@ namespace FuncSharp
         /// Create a new try with the result of the specified function while converting exceptions of the specified type
         /// into erroneous result.
         /// </summary>
-        public static ITry<A> Create<A, E>(Func<Unit, A> f)
+        public static Try<A> Create<A, E>(Func<Unit, A> f)
             where E : Exception
         {
-            return Catch<ITry<A>, E>(
+            return Catch<Try<A>, E>(
                 _ => Success(f(Unit.Value)),
                 e => Error<A>(e)
             );
@@ -46,7 +46,7 @@ namespace FuncSharp
         /// <summary>
         /// Create a new try with the result of the specified function while converting all exceptions into erroneous result.
         /// </summary>
-        public static ITry<A> Create<A>(Func<Unit, A> f)
+        public static Try<A> Create<A>(Func<Unit, A> f)
         {
             return Create<A, Exception>(f);
         }
@@ -54,7 +54,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static ITry<A, E> Success<A, E>(A success)
+        public static Try<A, E> Success<A, E>(A success)
         {
             return new Try<A, E>(success);
         }
@@ -62,7 +62,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static ITry<A> Success<A>(A success)
+        public static Try<A> Success<A>(A success)
         {
             return new Try<A>(success);
         }
@@ -70,7 +70,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with an error result.
         /// </summary>
-        public static ITry<A, E> Error<A, E>(E error)
+        public static Try<A, E> Error<A, E>(E error)
         {
             return new Try<A, E>(error);
         }
@@ -78,7 +78,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with an exception result.
         /// </summary>
-        public static ITry<A> Error<A>(Exception exception)
+        public static Try<A> Error<A>(Exception exception)
         {
             return new Try<A>(new[] { exception });
         }
@@ -86,7 +86,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with an exception result.
         /// </summary>
-        public static ITry<A> Error<A>(IEnumerable<Exception> exception)
+        public static Try<A> Error<A>(IEnumerable<Exception> exception)
         {
             return new Try<A>(exception);
         }
@@ -94,7 +94,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static ITry<IEnumerable<A>> Aggregate<A>(IEnumerable<ITry<A>> tries)
+        public static Try<IEnumerable<A>> Aggregate<A>(IEnumerable<Try<A>> tries)
         {
             return Aggregate(
                 tries,
@@ -106,7 +106,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, E>> tries)
+        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, E>> tries)
         {
             return Aggregate(
                 tries,
@@ -118,7 +118,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, IEnumerable<E>>> tries)
+        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, IEnumerable<E>>> tries)
         {
             return Aggregate(
                 tries,
@@ -130,7 +130,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static R Aggregate<T, R, E>(IEnumerable<ITry<T, E>> tries, Func<IEnumerable<T>, R> success, Func<IEnumerable<E>, R> error)
+        public static R Aggregate<T, R, E>(IEnumerable<Try<T, E>> tries, Func<IEnumerable<T>, R> success, Func<IEnumerable<E>, R> error)
         {
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
@@ -145,7 +145,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<<#= Types(i) #>, T, E>(<#= List(i, x => $"ITry<{Type(x)}, E> t{x}") #>, Func<E, E, E> errorAggregate, Func<<#= Types(i) #>, T> success, Func<E, T> error)
+        public static T Aggregate<<#= Types(i) #>, T, E>(<#= List(i, x => $"Try<{Type(x)}, E> t{x}") #>, Func<E, E, E> errorAggregate, Func<<#= Types(i) #>, T> success, Func<E, T> error)
         {
             if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
             {
@@ -159,7 +159,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i) #>, R, E>(<#= List(i, x => $"ITry<T{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i) #>, R> f)
+        public static Try<R, IEnumerable<E>> Aggregate<<#= Types(i) #>, R, E>(<#= List(i, x => $"Try<T{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i) #>, R> f)
         {
             return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(f(<#= List(i, x => $"s{x}") #>)), Error<R, IEnumerable<E>>);
         }
@@ -167,21 +167,21 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
         /// </summary>
-        public static ITry<R> Aggregate<<#= Types(i) #>, R>(<#= List(i, x => $"ITry<T{x}> t{x}") #>, Func<<#= Types(i) #>, R> f)
+        public static Try<R> Aggregate<<#= Types(i) #>, R>(<#= List(i, x => $"Try<T{x}> t{x}") #>, Func<<#= Types(i) #>, R> f)
         {
             return Aggregate(<#= List(i, x => $"t{x}") #>, (e1, e2) => e1.Concat(e2), (<#= List(i, x => $"s{x}") #>) => Success<R>(f(<#= List(i, x => $"s{x}") #>)), Error<R>);
         }
 <#  } #>  
     }
 
-    internal class Try<A, E> : Coproduct2<A, E>, ITry<A, E>
+    public class Try<A, E> : Coproduct2<A, E>
     {
-        public Try(A success)
+        internal Try(A success)
             : base(success)
         {
         }
 
-        public Try(E error)
+        internal Try(E error)
             : base(error)
         {
         }
@@ -206,7 +206,7 @@ namespace FuncSharp
             get { return Second; }
         }
 
-        public ITry<B, E> Map<B>(Func<A, B> f)
+        public Try<B, E> Map<B>(Func<A, B> f)
         {
             return Match(
                 s => Try.Success<B, E>(f(s)),
@@ -214,23 +214,33 @@ namespace FuncSharp
             );
         }
 
-        public ITry<A, F> MapError<F>(Func<E, F> f)
+        public Try<A, F> MapError<F>(Func<E, F> f)
         {
             return Match(
                 s => Try.Success<A, F>(s),
                 e => Try.Error<A, F>(f(e))
             );
         }
+
+        public static implicit operator Try<A, E>(Success<A> success)
+        {
+            return new Try<A, E>(success.Value);
+        }
+
+        public static implicit operator Try<A, E>(Error<E> error)
+        {
+            return new Try<A, E>(error.Value);
+        }
     }
 
-    internal class Try<A> : Try<A, IEnumerable<Exception>>, ITry<A>
+    public class Try<A> : Try<A, IEnumerable<Exception>>
     {
-        public Try(A success)
+        internal Try(A success)
             : base(success)
         {
         }
 
-        public Try(IEnumerable<Exception> exceptions)
+        internal Try(IEnumerable<Exception> exceptions)
             : base(exceptions)
         {
         }
@@ -243,7 +253,7 @@ namespace FuncSharp
             );
         }
         
-        public ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g)
+        public Try<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g)
         {
             return Match(
                 s => Try.Success<B>(f(s)),
@@ -251,27 +261,27 @@ namespace FuncSharp
             );
         }
 
-        public ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, Exception> g)
+        public Try<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, Exception> g)
         {
             return Map(f, e => new[] { g(e) });
         }
 
-        public new ITry<B> Map<B>(Func<A, B> f)
+        public new Try<B> Map<B>(Func<A, B> f)
         {
             return Map(f, e => e);
         }
 
-        public ITry<A> MapError(Func<IEnumerable<Exception>, IEnumerable<Exception>> f)
+        public Try<A> MapError(Func<IEnumerable<Exception>, IEnumerable<Exception>> f)
         {
             return Map(s => s, f);
         }
 
-        public ITry<A> MapError(Func<IEnumerable<Exception>, Exception> f)
+        public Try<A> MapError(Func<IEnumerable<Exception>, Exception> f)
         {
             return MapError(e => new[] { f(e) });
         }
 
-		public ITry<A> MapError(Func<Exception, Exception> f)
+		public Try<A> MapError(Func<Exception, Exception> f)
         {
             return MapError(exceptions => exceptions.Select(f).ToList());
         }
