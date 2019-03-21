@@ -619,12 +619,17 @@ namespace FuncSharp
 
         public A Get()
         {
+            return Get(e => e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception));
+        }
+
+        public A Get(Func<IEnumerable<Exception>, Exception> otherwise)
+        {
             return Match(
                 s => s,
-                e => throw e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception)
+                e => throw otherwise(e)
             );
         }
-        
+
         public ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g)
         {
             return Match(

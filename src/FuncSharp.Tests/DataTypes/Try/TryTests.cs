@@ -21,6 +21,15 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
+        public void Get()
+        {
+            Assert.Equal(42, Success.Get());
+            Assert.Equal(42, Success.Get(e => new InvalidOperationException("test")));
+            Assert.Throws<NotImplementedException>(() => Exception.Get());
+            Assert.Throws<InvalidOperationException>(() => Exception.Get(e => new InvalidOperationException("foo", e.First())));
+        }
+
+        [Fact]
         public void Map()
         {
             Assert.Equal(45, Success.Map(i => i + 3).Get());
@@ -56,7 +65,7 @@ namespace FuncSharp.Tests
 
             var a4 = Try.Aggregate(new[] { Success, Success, Success });
             Assert.True(a4.IsSuccess);
-            Assert.True(a4.Get().SequenceEqual(new[] { 42, 42, 42}));
+            Assert.True(a4.Get().SequenceEqual(new[] { 42, 42, 42 }));
 
             var a5 = Try.Aggregate(new[] { Success, Exception, Success, Exception });
             Assert.True(a5.IsError);

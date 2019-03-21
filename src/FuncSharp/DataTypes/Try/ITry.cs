@@ -50,6 +50,11 @@ namespace FuncSharp
         A Get();
 
         /// <summary>
+        /// If the result is success, returns it. Otherwise throws the result of the otherwise function.
+        /// </summary>
+        A Get(Func<IEnumerable<Exception>, Exception> otherwise);
+
+        /// <summary>
         /// Maps the successful result to a new successful result and erroneous result into new erroneous result.
         /// </summary>
         ITry<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g);
