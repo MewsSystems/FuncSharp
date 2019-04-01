@@ -1,6 +1,14 @@
-﻿using System;
+﻿
+
+
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
@@ -134,6 +142,7 @@ namespace FuncSharp
             return error(enumeratedTries.Select(t => t.Error).Flatten());
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -163,6 +172,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, (e1, e2) => e1.Concat(e2), (s1, s2) => Success<R>(f(s1, s2)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -194,6 +204,7 @@ namespace FuncSharp
             return Aggregate(t1, t2, t3, (e1, e2) => e1.Concat(e2), (s1, s2, s3) => Success<R>(f(s1, s2, s3)), Error<R>);
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -223,6 +234,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4) => Success<R>(f(s1, s2, s3, s4)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -254,6 +266,7 @@ namespace FuncSharp
             return Aggregate(t1, t2, t3, t4, t5, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5) => Success<R>(f(s1, s2, s3, s4, s5)), Error<R>);
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -283,6 +296,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, t5, t6, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6) => Success<R>(f(s1, s2, s3, s4, s5, s6)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -314,6 +328,7 @@ namespace FuncSharp
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7)), Error<R>);
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -343,6 +358,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -374,6 +390,7 @@ namespace FuncSharp
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9)), Error<R>);
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -403,6 +420,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -434,6 +452,7 @@ namespace FuncSharp
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)), Error<R>);
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -463,6 +482,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -494,6 +514,7 @@ namespace FuncSharp
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13)), Error<R>);
         }
 
+
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
@@ -523,6 +544,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14)), Error<R>);
         }
+
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
@@ -621,7 +643,16 @@ namespace FuncSharp
         {
             return Match(
                 s => s,
-                e => throw e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception)
+                e =>
+                {
+                    var exception = e.SingleOption();
+                    if (exception.NonEmpty)
+                    {
+                        ExceptionDispatchInfo.Capture(exception.Get()).Throw();
+                    }
+
+                    throw new AggregateException(e);
+                }
             );
         }
         
