@@ -140,6 +140,13 @@ namespace FuncSharp
         {
             return f(<#= Properties(i, name: "ProductValue") #>);
         }
+<#          if (i > 0) { #>
+
+        public void Match(Action<<#= Types(i) #>> f)
+        {
+            f(<#= Properties(i, name: "ProductValue") #>);
+        }
+<#          } #>
 <#      } #>
 
         protected override int ProductHashCode()

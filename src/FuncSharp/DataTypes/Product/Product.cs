@@ -153,6 +153,11 @@ namespace FuncSharp
             return f(ProductValue1);
         }
 
+        public void Match(Action<T1> f)
+        {
+            f(ProductValue1);
+        }
+
         protected override int ProductHashCode()
         {
             return ValueTuple.Create(ProductValue1).GetHashCode();
@@ -221,6 +226,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, R> f)
         {
             return f(ProductValue1, ProductValue2);
+        }
+
+        public void Match(Action<T1, T2> f)
+        {
+            f(ProductValue1, ProductValue2);
         }
 
         protected override int ProductHashCode()
@@ -296,6 +306,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3);
+        }
+
+        public void Match(Action<T1, T2, T3> f)
+        {
+            f(ProductValue1, ProductValue2, ProductValue3);
         }
 
         protected override int ProductHashCode()
@@ -376,6 +391,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4);
+        }
+
+        public void Match(Action<T1, T2, T3, T4> f)
+        {
+            f(ProductValue1, ProductValue2, ProductValue3, ProductValue4);
         }
 
         protected override int ProductHashCode()
@@ -461,6 +481,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, T5, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5);
+        }
+
+        public void Match(Action<T1, T2, T3, T4, T5> f)
+        {
+            f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5);
         }
 
         protected override int ProductHashCode()
@@ -551,6 +576,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, T5, T6, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6);
+        }
+
+        public void Match(Action<T1, T2, T3, T4, T5, T6> f)
+        {
+            f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6);
         }
 
         protected override int ProductHashCode()
@@ -646,6 +676,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
+        }
+
+        public void Match(Action<T1, T2, T3, T4, T5, T6, T7> f)
+        {
+            f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
         }
 
         protected override int ProductHashCode()
@@ -746,6 +781,11 @@ namespace FuncSharp
         public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8);
+        }
+
+        public void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8> f)
+        {
+            f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8);
         }
 
         protected override int ProductHashCode()
