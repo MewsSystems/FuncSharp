@@ -42,7 +42,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1> f);
@@ -68,7 +68,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2> f);
@@ -99,7 +99,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3> f);
@@ -135,7 +135,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4> f);
@@ -176,7 +176,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5> f);
@@ -222,7 +222,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6> f);
@@ -273,7 +273,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7> f);
@@ -329,7 +329,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8> f);
@@ -390,7 +390,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> f);
@@ -456,7 +456,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> f);
@@ -527,7 +527,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> f);
@@ -603,7 +603,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> f);
@@ -684,7 +684,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> f);
@@ -770,7 +770,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> f);
@@ -861,7 +861,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> f);
@@ -957,7 +957,7 @@ namespace FuncSharp
         /// </summary>
         R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, R> f);
 
-		/// <summary>
+        /// <summary>
         /// Invokes the specified function with the product values as its parameters.
         /// </summary>
         void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> f);
