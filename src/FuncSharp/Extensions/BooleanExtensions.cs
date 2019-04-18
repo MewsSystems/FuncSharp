@@ -21,12 +21,12 @@ namespace FuncSharp
             }
         }
 
-        public static Try<T> ToTry<T>(this bool b, Func<Unit, T> ifTrue, Func<Unit, Exception> ifFalse)
+        public static ITry<T> ToTry<T>(this bool b, Func<Unit, T> ifTrue, Func<Unit, Exception> ifFalse)
         {
             return b ? Try.Success<T>(ifTrue(Unit.Value)) : Try.Error<T>(ifFalse(Unit.Value));
         }
 
-        public static Try<T, E> ToTry<T, E>(this bool b, Func<Unit, T> ifTrue, Func<Unit, E> ifFalse)
+        public static ITry<T, E> ToTry<T, E>(this bool b, Func<Unit, T> ifTrue, Func<Unit, E> ifFalse)
         {
             return b ? Try.Success<T, E>(ifTrue(Unit.Value)) : Try.Error<T, E>(ifFalse(Unit.Value));
         }
