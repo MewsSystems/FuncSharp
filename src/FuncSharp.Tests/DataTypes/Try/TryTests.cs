@@ -6,8 +6,8 @@ namespace FuncSharp.Tests
 {
     public class TryTests
     {
-        private static readonly ITry<int> Success = Try.Create<int, Exception>(_ => 42);
-        private static readonly ITry<int> Exception = Try.Create<int, Exception>(_ => throw new NotImplementedException());
+        private static readonly Try<int> Success = Try.Create<int, Exception>(_ => 42);
+        private static readonly Try<int> Exception = Try.Create<int, Exception>(_ => throw new NotImplementedException());
 
         [Fact]
         public void Create()
@@ -56,7 +56,7 @@ namespace FuncSharp.Tests
 
             var a4 = Try.Aggregate(new[] { Success, Success, Success });
             Assert.True(a4.IsSuccess);
-            Assert.True(a4.Get().SequenceEqual(new[] { 42, 42, 42}));
+            Assert.True(a4.Get().SequenceEqual(new[] { 42, 42, 42 }));
 
             var a5 = Try.Aggregate(new[] { Success, Exception, Success, Exception });
             Assert.True(a5.IsError);
