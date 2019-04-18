@@ -37,11 +37,17 @@ namespace FuncSharp
 
 <#      } #>
 <#      if (i <= MaxFuncArity()) { #>
-
         /// <summary>
         /// Invokes the specified function with the product values as its parameters and returns its result.
         /// </summary>
         R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f);
+<#          if (i > 0) { #>
+
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
+        void Match(Action<<#= Types(i, appendSeparator: false) #>> f);
+<#          } #>
 <#      } #>
     }
 

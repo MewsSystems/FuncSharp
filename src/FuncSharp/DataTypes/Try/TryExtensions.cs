@@ -51,5 +51,16 @@ namespace FuncSharp
                 e => f(e)
             );
         }
+
+        /// <summary>
+        /// If the result is success, returns it. Otherwise throws the result of the otherwise function.
+        /// </summary>
+        public static A Get<A, E>(this ITry<A, E> t, Func<E, Exception> otherwise)
+        {
+            return t.Match(
+                s => s,
+                e => throw otherwise(e)
+            );
+        }
     }
 }

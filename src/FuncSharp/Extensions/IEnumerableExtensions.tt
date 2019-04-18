@@ -25,12 +25,12 @@ namespace FuncSharp
         /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
-        public static IOption<T> ToNonEmptyOption<T>(this T source)
+        public static IOption<IEnumerable<T>> ToNonEmptyOption<T>(this IEnumerable<T> source)
             where T : IEnumerable
         {
             if (source == null || !source.Any())
             {
-                return Option.Empty<T>();
+                return Option.Empty<IEnumerable<T>>();
             }
             return source.ToOption();
         }
@@ -68,7 +68,7 @@ namespace FuncSharp
             }
             return data.FirstOption();
         }
-        <#  for (var i = 1; i <= MaxStructureArity(); i++) { #>
+<#  for (var i = 1; i <= MaxStructureArity(); i++) { #>
 
         /// <summary>
         /// Coverts the source to a new <#= i #>-dimensional data cube.
@@ -79,6 +79,16 @@ namespace FuncSharp
             Func<T, TValue> value)
         {
             return DataCube.Create(source, <#= List(i, x => "p" + x) #>, value);
+        }
+
+        /// <summary>
+        /// Transposes a collection of coproducts to product of collections.
+        /// </summary>
+        public static IProduct<#= i #><<#= List(i, x => "IEnumerable<" + Type(x) + ">") #>> Transpose<#= TypeBracket(i) #>(this IEnumerable<<#= CoproductType(i) #>> source)
+        {
+            return Product<#= i #>.Create(
+<#= Lines(i, x => Indent(14) + "source.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList().AsEnumerable()", separator: ",") #>
+            );
         }
 <#  } #>
     }
