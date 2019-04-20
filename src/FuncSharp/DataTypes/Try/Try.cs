@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
@@ -553,7 +554,7 @@ namespace FuncSharp
         {
             return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)), Error<R>);
         }
-  
+
     }
 
     internal class Try<A, E> : Coproduct2<A, E>, ITry<A, E>
@@ -619,14 +620,18 @@ namespace FuncSharp
 
         public A Get()
         {
-            return Get(e => e.SingleOption().GetOrElse(_ => new AggregateException(e) as Exception));
-        }
-
-        public A Get(Func<IEnumerable<Exception>, Exception> otherwise)
-        {
             return Match(
                 s => s,
-                e => throw otherwise(e)
+                e =>
+                {
+                    var exception = e.SingleOption();
+                    if (exception.NonEmpty)
+                    {
+                        ExceptionDispatchInfo.Capture(exception.Get()).Throw();
+                    }
+
+                    throw new AggregateException(e);
+                }
             );
         }
 
