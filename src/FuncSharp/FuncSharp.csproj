@@ -12,7 +12,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 
-    <PackageReleaseNotes>Added another overload of Try.Get.</PackageReleaseNotes>
+    <PackageReleaseNotes>Introduced Transpose extension method for collection of coproducts.</PackageReleaseNotes>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
@@ -36,9 +36,9 @@
 
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.5.6</Version>
-  	<AssemblyVersion>1.5.6.0</AssemblyVersion>
-  	<FileVersion>1.5.6.0</FileVersion>
+  	<Version>1.6.0</Version>
+  	<AssemblyVersion>1.6.0.0</AssemblyVersion>
+  	<FileVersion>1.6.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
