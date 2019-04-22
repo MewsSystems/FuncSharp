@@ -22,8 +22,8 @@ namespace FuncSharp
         /// </summary>
         IEnumerable<object> ProductValues { get; }
     }
-
 <#  for (var i = 0; i < MaxArity(); i++) { #>
+
     /// <summary>
     /// A <#= i #>-dimensional strongly-typed product.
     /// </summary>
@@ -50,6 +50,5 @@ namespace FuncSharp
 <#          } #>
 <#      } #>
     }
-
 <#  } #>
 }

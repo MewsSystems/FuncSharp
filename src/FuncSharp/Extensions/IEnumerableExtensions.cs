@@ -18,12 +18,12 @@ namespace FuncSharp
         /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
-        public static IOption<IEnumerable<T>> ToNonEmptyOption<T>(this IEnumerable<T> source)
+        public static IOption<T> ToNonEmptyOption<T>(this T source)
             where T : IEnumerable
         {
-            if (source == null || !source.Any())
+            if (source == null || !source.OfType<object>().Any())
             {
-                return Option.Empty<IEnumerable<T>>();
+                return Option.Empty<T>();
             }
             return source.ToOption();
         }
@@ -74,13 +74,13 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct1<IEnumerable<T1>> Transpose<T1>(this IEnumerable<ICoproduct1<T1>> source)
+        public static void PartitionMatch<T1>(
+            this IEnumerable<ICoproduct1<T1>> source,
+            Action<IEnumerable<T1>> f1)
         {
-            return Product1.Create(
-              source.Select(c => c.First).Flatten().ToList().AsEnumerable()
-            );
+            f1(source.Select(c => c.First).Flatten().ToList());
         }
 
         /// <summary>
@@ -96,14 +96,15 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct2<IEnumerable<T1>, IEnumerable<T2>> Transpose<T1, T2>(this IEnumerable<ICoproduct2<T1, T2>> source)
+        public static void PartitionMatch<T1, T2>(
+            this IEnumerable<ICoproduct2<T1, T2>> source,
+            Action<IEnumerable<T1>> f1,
+            Action<IEnumerable<T2>> f2)
         {
-            return Product2.Create(
-              source.Select(c => c.First).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Second).Flatten().ToList().AsEnumerable()
-            );
+            f1(source.Select(c => c.First).Flatten().ToList());
+            f2(source.Select(c => c.Second).Flatten().ToList());
         }
 
         /// <summary>
@@ -120,15 +121,17 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct3<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> Transpose<T1, T2, T3>(this IEnumerable<ICoproduct3<T1, T2, T3>> source)
+        public static void PartitionMatch<T1, T2, T3>(
+            this IEnumerable<ICoproduct3<T1, T2, T3>> source,
+            Action<IEnumerable<T1>> f1,
+            Action<IEnumerable<T2>> f2,
+            Action<IEnumerable<T3>> f3)
         {
-            return Product3.Create(
-              source.Select(c => c.First).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Second).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Third).Flatten().ToList().AsEnumerable()
-            );
+            f1(source.Select(c => c.First).Flatten().ToList());
+            f2(source.Select(c => c.Second).Flatten().ToList());
+            f3(source.Select(c => c.Third).Flatten().ToList());
         }
 
         /// <summary>
@@ -146,16 +149,19 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct4<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> Transpose<T1, T2, T3, T4>(this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source)
+        public static void PartitionMatch<T1, T2, T3, T4>(
+            this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source,
+            Action<IEnumerable<T1>> f1,
+            Action<IEnumerable<T2>> f2,
+            Action<IEnumerable<T3>> f3,
+            Action<IEnumerable<T4>> f4)
         {
-            return Product4.Create(
-              source.Select(c => c.First).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Second).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Third).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Fourth).Flatten().ToList().AsEnumerable()
-            );
+            f1(source.Select(c => c.First).Flatten().ToList());
+            f2(source.Select(c => c.Second).Flatten().ToList());
+            f3(source.Select(c => c.Third).Flatten().ToList());
+            f4(source.Select(c => c.Fourth).Flatten().ToList());
         }
 
         /// <summary>
@@ -174,17 +180,21 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct5<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> Transpose<T1, T2, T3, T4, T5>(this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source)
+        public static void PartitionMatch<T1, T2, T3, T4, T5>(
+            this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source,
+            Action<IEnumerable<T1>> f1,
+            Action<IEnumerable<T2>> f2,
+            Action<IEnumerable<T3>> f3,
+            Action<IEnumerable<T4>> f4,
+            Action<IEnumerable<T5>> f5)
         {
-            return Product5.Create(
-              source.Select(c => c.First).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Second).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Third).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Fourth).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Fifth).Flatten().ToList().AsEnumerable()
-            );
+            f1(source.Select(c => c.First).Flatten().ToList());
+            f2(source.Select(c => c.Second).Flatten().ToList());
+            f3(source.Select(c => c.Third).Flatten().ToList());
+            f4(source.Select(c => c.Fourth).Flatten().ToList());
+            f5(source.Select(c => c.Fifth).Flatten().ToList());
         }
 
         /// <summary>
@@ -204,18 +214,23 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct6<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> Transpose<T1, T2, T3, T4, T5, T6>(this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source)
+        public static void PartitionMatch<T1, T2, T3, T4, T5, T6>(
+            this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source,
+            Action<IEnumerable<T1>> f1,
+            Action<IEnumerable<T2>> f2,
+            Action<IEnumerable<T3>> f3,
+            Action<IEnumerable<T4>> f4,
+            Action<IEnumerable<T5>> f5,
+            Action<IEnumerable<T6>> f6)
         {
-            return Product6.Create(
-              source.Select(c => c.First).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Second).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Third).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Fourth).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Fifth).Flatten().ToList().AsEnumerable(),
-              source.Select(c => c.Sixth).Flatten().ToList().AsEnumerable()
-            );
+            f1(source.Select(c => c.First).Flatten().ToList());
+            f2(source.Select(c => c.Second).Flatten().ToList());
+            f3(source.Select(c => c.Third).Flatten().ToList());
+            f4(source.Select(c => c.Fourth).Flatten().ToList());
+            f5(source.Select(c => c.Fifth).Flatten().ToList());
+            f6(source.Select(c => c.Sixth).Flatten().ToList());
         }
     }
 }

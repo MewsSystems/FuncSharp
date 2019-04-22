@@ -59,7 +59,6 @@ namespace FuncSharp
         /// </summary>
         void Match(
             Action<T1> ifFirst = null);
-
     }
 
     /// <summary>
@@ -104,7 +103,6 @@ namespace FuncSharp
         void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null);
-
     }
 
     /// <summary>
@@ -162,7 +160,6 @@ namespace FuncSharp
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null);
-
     }
 
     /// <summary>
@@ -233,7 +230,6 @@ namespace FuncSharp
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null);
-
     }
 
     /// <summary>
@@ -317,7 +313,6 @@ namespace FuncSharp
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null);
-
     }
 
     /// <summary>
@@ -414,7 +409,6 @@ namespace FuncSharp
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null);
-
     }
 
     /// <summary>
@@ -524,7 +518,6 @@ namespace FuncSharp
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null);
-
     }
 
     /// <summary>
@@ -647,7 +640,6 @@ namespace FuncSharp
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null,
             Action<T8> ifEighth = null);
-
     }
 
     /// <summary>
@@ -783,7 +775,6 @@ namespace FuncSharp
             Action<T7> ifSeventh = null,
             Action<T8> ifEighth = null,
             Action<T9> ifNinth = null);
-
     }
 
     /// <summary>
@@ -932,7 +923,6 @@ namespace FuncSharp
             Action<T8> ifEighth = null,
             Action<T9> ifNinth = null,
             Action<T10> ifTenth = null);
-
     }
 
     /// <summary>
@@ -1094,7 +1084,6 @@ namespace FuncSharp
             Action<T9> ifNinth = null,
             Action<T10> ifTenth = null,
             Action<T11> ifEleventh = null);
-
     }
 
     /// <summary>
@@ -1269,7 +1258,6 @@ namespace FuncSharp
             Action<T10> ifTenth = null,
             Action<T11> ifEleventh = null,
             Action<T12> ifTwelfth = null);
-
     }
 
     /// <summary>
@@ -1457,7 +1445,6 @@ namespace FuncSharp
             Action<T11> ifEleventh = null,
             Action<T12> ifTwelfth = null,
             Action<T13> ifThirteenth = null);
-
     }
 
     /// <summary>
@@ -1658,7 +1645,6 @@ namespace FuncSharp
             Action<T12> ifTwelfth = null,
             Action<T13> ifThirteenth = null,
             Action<T14> ifFourteenth = null);
-
     }
 
     /// <summary>
@@ -1872,7 +1858,6 @@ namespace FuncSharp
             Action<T13> ifThirteenth = null,
             Action<T14> ifFourteenth = null,
             Action<T15> ifFifteenth = null);
-
     }
 
     /// <summary>
@@ -2099,7 +2084,6 @@ namespace FuncSharp
             Action<T14> ifFourteenth = null,
             Action<T15> ifFifteenth = null,
             Action<T16> ifSixteenth = null);
-
     }
 
     /// <summary>
@@ -2339,7 +2323,6 @@ namespace FuncSharp
             Action<T15> ifFifteenth = null,
             Action<T16> ifSixteenth = null,
             Action<T17> ifSeventeenth = null);
-
     }
 
     /// <summary>
@@ -2592,7 +2575,6 @@ namespace FuncSharp
             Action<T16> ifSixteenth = null,
             Action<T17> ifSeventeenth = null,
             Action<T18> ifEighteenth = null);
-
     }
 
     /// <summary>
@@ -2858,7 +2840,6 @@ namespace FuncSharp
             Action<T17> ifSeventeenth = null,
             Action<T18> ifEighteenth = null,
             Action<T19> ifNineteenth = null);
-
     }
 
 }

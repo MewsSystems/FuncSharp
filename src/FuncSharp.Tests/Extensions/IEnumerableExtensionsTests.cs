@@ -26,10 +26,11 @@ namespace FuncSharp.Tests
                 Coproduct3.CreateSecond<string, int, bool>(21)
             };
 
-            var transposed = source.Transpose();
-            Assert.True(transposed.ProductValue1.SequenceEqual(new[] { "foo", "bar" }));
-            Assert.True(transposed.ProductValue2.SequenceEqual(new[] { 42, 21 }));
-            Assert.True(transposed.ProductValue3.SequenceEqual(new bool[0]));
+            source.PartitionMatch(
+                f => Assert.True(f.SequenceEqual(new[] { "foo", "bar" })),
+                s => Assert.True(s.SequenceEqual(new[] { 42, 21 })),
+                t => Assert.True(t.SequenceEqual(new bool[0]))
+            );
         }
     }
 }

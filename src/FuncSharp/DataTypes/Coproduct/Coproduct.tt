@@ -101,7 +101,6 @@ namespace FuncSharp
         }
 
 <#    } #>
-
         /// <summary>
         /// Creates a new <#= i #>-dimensional coproduct based on the specified source.
         /// </summary>
@@ -149,7 +148,7 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-<#= Lines(i, x => Indent(16) + "case " + x + ": if (" + IfIth(x) + " != null) { " + IfIth(x) + "(GetCoproductValue<T" + x + ">()); } break;") #>
+<#= Lines(i, x => Indent(16) + "case " + x + ": " + IfIth(x) + "?.Invoke(GetCoproductValue<T" + x + ">()); break;") #>
             }
         }
 <#    } else { #>

@@ -25,12 +25,12 @@ namespace FuncSharp
         /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
-        public static IOption<IEnumerable<T>> ToNonEmptyOption<T>(this IEnumerable<T> source)
+        public static IOption<T> ToNonEmptyOption<T>(this T source)
             where T : IEnumerable
         {
-            if (source == null || !source.Any())
+            if (source == null || !source.OfType<object>().Any())
             {
-                return Option.Empty<IEnumerable<T>>();
+                return Option.Empty<T>();
             }
             return source.ToOption();
         }
@@ -82,13 +82,13 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Transposes a collection of coproducts to product of collections.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
-        public static IProduct<#= i #><<#= List(i, x => "IEnumerable<" + Type(x) + ">") #>> Transpose<#= TypeBracket(i) #>(this IEnumerable<<#= CoproductType(i) #>> source)
+        public static void PartitionMatch<#= TypeBracket(i) #>(
+            this IEnumerable<<#= CoproductType(i) #>> source,
+<#= Lines(i, x => Indent(12) + "Action<IEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
-            return Product<#= i #>.Create(
-<#= Lines(i, x => Indent(14) + "source.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList().AsEnumerable()", separator: ",") #>
-            );
+<#= Lines(i, x => Indent(12) + "f" + x + "(source.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList());") #>
         }
 <#  } #>
     }

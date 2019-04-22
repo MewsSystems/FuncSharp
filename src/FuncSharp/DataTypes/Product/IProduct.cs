@@ -1253,5 +1253,4 @@ namespace FuncSharp
         T19 ProductValue19 { get; }
 
     }
-
 }

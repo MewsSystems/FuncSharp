@@ -29,13 +29,17 @@ namespace FuncSharp
 
         public object CoproductValue { get; }
 
-        public T GetCoproductValue<T>()
+        public T GetCoproductValue<T>(Func<Unit, Exception> otherwise = null)
         {
             if (CoproductValue is T value)
             {
                 return value;
             }
-            return default(T);
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new InvalidOperationException("The coproduct value does not match the specified type.");
         }
 
         public override int GetHashCode()
@@ -93,7 +97,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 1-dimensional coproduct based on the specified source.
         /// </summary>
@@ -137,7 +140,7 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
             }
         }
     }
@@ -185,7 +188,6 @@ namespace FuncSharp
             : this(2, secondValue)
         {
         }
-
 
         /// <summary>
         /// Creates a new 2-dimensional coproduct based on the specified source.
@@ -241,8 +243,8 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
             }
         }
     }
@@ -306,7 +308,6 @@ namespace FuncSharp
             : this(3, thirdValue)
         {
         }
-
 
         /// <summary>
         /// Creates a new 3-dimensional coproduct based on the specified source.
@@ -373,9 +374,9 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
             }
         }
     }
@@ -456,7 +457,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 4-dimensional coproduct based on the specified source.
         /// </summary>
@@ -533,10 +533,10 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
             }
         }
     }
@@ -633,7 +633,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 5-dimensional coproduct based on the specified source.
         /// </summary>
@@ -721,11 +720,11 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
             }
         }
     }
@@ -838,7 +837,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 6-dimensional coproduct based on the specified source.
         /// </summary>
@@ -937,12 +935,12 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
             }
         }
     }
@@ -1071,7 +1069,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 7-dimensional coproduct based on the specified source.
         /// </summary>
@@ -1181,13 +1178,13 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
             }
         }
     }
@@ -1332,7 +1329,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 8-dimensional coproduct based on the specified source.
         /// </summary>
@@ -1453,14 +1449,14 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
             }
         }
     }
@@ -1621,7 +1617,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 9-dimensional coproduct based on the specified source.
         /// </summary>
@@ -1753,15 +1748,15 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
             }
         }
     }
@@ -1938,7 +1933,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 10-dimensional coproduct based on the specified source.
         /// </summary>
@@ -2081,16 +2075,16 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
             }
         }
     }
@@ -2283,7 +2277,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 11-dimensional coproduct based on the specified source.
         /// </summary>
@@ -2437,17 +2430,17 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
             }
         }
     }
@@ -2656,7 +2649,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 12-dimensional coproduct based on the specified source.
         /// </summary>
@@ -2821,18 +2813,18 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
             }
         }
     }
@@ -3057,7 +3049,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 13-dimensional coproduct based on the specified source.
         /// </summary>
@@ -3233,19 +3224,19 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
             }
         }
     }
@@ -3486,7 +3477,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 14-dimensional coproduct based on the specified source.
         /// </summary>
@@ -3673,20 +3663,20 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
-                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
             }
         }
     }
@@ -3943,7 +3933,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 15-dimensional coproduct based on the specified source.
         /// </summary>
@@ -4141,21 +4130,21 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
-                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
-                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
+                case 15: ifFifteenth?.Invoke(GetCoproductValue<T15>()); break;
             }
         }
     }
@@ -4428,7 +4417,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 16-dimensional coproduct based on the specified source.
         /// </summary>
@@ -4637,22 +4625,22 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
-                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
-                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
-                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
+                case 15: ifFifteenth?.Invoke(GetCoproductValue<T15>()); break;
+                case 16: ifSixteenth?.Invoke(GetCoproductValue<T16>()); break;
             }
         }
     }
@@ -4941,7 +4929,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 17-dimensional coproduct based on the specified source.
         /// </summary>
@@ -5161,23 +5148,23 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
-                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
-                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
-                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
-                case 17: if (ifSeventeenth != null) { ifSeventeenth(GetCoproductValue<T17>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
+                case 15: ifFifteenth?.Invoke(GetCoproductValue<T15>()); break;
+                case 16: ifSixteenth?.Invoke(GetCoproductValue<T16>()); break;
+                case 17: ifSeventeenth?.Invoke(GetCoproductValue<T17>()); break;
             }
         }
     }
@@ -5482,7 +5469,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 18-dimensional coproduct based on the specified source.
         /// </summary>
@@ -5713,24 +5699,24 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
-                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
-                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
-                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
-                case 17: if (ifSeventeenth != null) { ifSeventeenth(GetCoproductValue<T17>()); } break;
-                case 18: if (ifEighteenth != null) { ifEighteenth(GetCoproductValue<T18>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
+                case 15: ifFifteenth?.Invoke(GetCoproductValue<T15>()); break;
+                case 16: ifSixteenth?.Invoke(GetCoproductValue<T16>()); break;
+                case 17: ifSeventeenth?.Invoke(GetCoproductValue<T17>()); break;
+                case 18: ifEighteenth?.Invoke(GetCoproductValue<T18>()); break;
             }
         }
     }
@@ -6051,7 +6037,6 @@ namespace FuncSharp
         {
         }
 
-
         /// <summary>
         /// Creates a new 19-dimensional coproduct based on the specified source.
         /// </summary>
@@ -6293,25 +6278,25 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-                case 1: if (ifFirst != null) { ifFirst(GetCoproductValue<T1>()); } break;
-                case 2: if (ifSecond != null) { ifSecond(GetCoproductValue<T2>()); } break;
-                case 3: if (ifThird != null) { ifThird(GetCoproductValue<T3>()); } break;
-                case 4: if (ifFourth != null) { ifFourth(GetCoproductValue<T4>()); } break;
-                case 5: if (ifFifth != null) { ifFifth(GetCoproductValue<T5>()); } break;
-                case 6: if (ifSixth != null) { ifSixth(GetCoproductValue<T6>()); } break;
-                case 7: if (ifSeventh != null) { ifSeventh(GetCoproductValue<T7>()); } break;
-                case 8: if (ifEighth != null) { ifEighth(GetCoproductValue<T8>()); } break;
-                case 9: if (ifNinth != null) { ifNinth(GetCoproductValue<T9>()); } break;
-                case 10: if (ifTenth != null) { ifTenth(GetCoproductValue<T10>()); } break;
-                case 11: if (ifEleventh != null) { ifEleventh(GetCoproductValue<T11>()); } break;
-                case 12: if (ifTwelfth != null) { ifTwelfth(GetCoproductValue<T12>()); } break;
-                case 13: if (ifThirteenth != null) { ifThirteenth(GetCoproductValue<T13>()); } break;
-                case 14: if (ifFourteenth != null) { ifFourteenth(GetCoproductValue<T14>()); } break;
-                case 15: if (ifFifteenth != null) { ifFifteenth(GetCoproductValue<T15>()); } break;
-                case 16: if (ifSixteenth != null) { ifSixteenth(GetCoproductValue<T16>()); } break;
-                case 17: if (ifSeventeenth != null) { ifSeventeenth(GetCoproductValue<T17>()); } break;
-                case 18: if (ifEighteenth != null) { ifEighteenth(GetCoproductValue<T18>()); } break;
-                case 19: if (ifNineteenth != null) { ifNineteenth(GetCoproductValue<T19>()); } break;
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
+                case 15: ifFifteenth?.Invoke(GetCoproductValue<T15>()); break;
+                case 16: ifSixteenth?.Invoke(GetCoproductValue<T16>()); break;
+                case 17: ifSeventeenth?.Invoke(GetCoproductValue<T17>()); break;
+                case 18: ifEighteenth?.Invoke(GetCoproductValue<T18>()); break;
+                case 19: ifNineteenth?.Invoke(GetCoproductValue<T19>()); break;
             }
         }
     }
