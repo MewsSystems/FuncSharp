@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace FuncSharp
 {
-<# for (var i = 0; i <= MaxStructureArity(); i++) { #>
+<# for (var i = 0; i <= MaxCubeArity(); i++) { #>
     /// <summary>
     /// A <#= i #>-dimensional data cube.
     /// </summary>

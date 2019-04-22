@@ -17,7 +17,7 @@ namespace FuncSharp
     /// </summary>
     public abstract class DataCube
     {
-<#  for (var i = 1; i <= MaxStructureArity(); i++) { #>
+<#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
         /// <summary>
         /// Creates a new <#= i #>-dimensional data cube.
         /// </summary>

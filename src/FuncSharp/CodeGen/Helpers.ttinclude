@@ -9,7 +9,7 @@
         return 8;
     }
 
-    public int MaxStructureArity()
+    public int MaxCubeArity()
     {
         return 6;
     }
