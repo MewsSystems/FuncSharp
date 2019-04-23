@@ -51,9 +51,11 @@ namespace FuncSharp.Tests
         {
             var u1 = Coproduct2.CreateFirst<string, int>("foo");
             var u2 = Coproduct2.CreateSecond<string, int>(42);
+            var u3 = 42.AsSafeCoproduct<string, double>();
 
             Assert.True(u1.Match(v => v == "foo", v => false));
             Assert.True(u2.Match(v => false, v => v == 42));
+            Assert.True(u3.Match(s => false, d => false, _ => true));
         }
     }
 }
