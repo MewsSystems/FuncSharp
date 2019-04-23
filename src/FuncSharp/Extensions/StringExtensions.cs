@@ -71,7 +71,8 @@ namespace FuncSharp
             {
                 return Option.Empty<TEnum>();
             }
-            return Tryer.Invoke<string, bool, TEnum>(Enum.TryParse<TEnum>, s, ignoreCase);
+            var enumValue = Tryer.Invoke<string, bool, TEnum>(Enum.TryParse<TEnum>, s, ignoreCase);
+            return enumValue.Where(v => v.ToString().Equals(s, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public static IOption<Guid> ToGuid(this string s)

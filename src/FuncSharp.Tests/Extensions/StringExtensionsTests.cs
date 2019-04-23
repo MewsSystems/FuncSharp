@@ -24,6 +24,8 @@ namespace FuncSharp.Tests
             Assert.Equal(new TimeSpan(1, 2, 3), "01:02:03".ToTimeSpan().Get());
             Assert.Equal(NumberStyles.Integer, "Integer".ToEnum<NumberStyles>().Get());
             Assert.Equal(Option.Empty<NumberStyles>(), "Integer,Number".ToEnum<NumberStyles>());
+            Assert.Equal((NumberStyles)2, "AllowTrailingWhite".ToEnum<NumberStyles>().Get());
+            Assert.Equal(Option.Empty<NumberStyles>(), "2".ToEnum<NumberStyles>());
         }
     }
 }
