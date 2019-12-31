@@ -1,26 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-  
+  	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  	<Version>1.6.5</Version>
+  	<AssemblyVersion>1.6.5.0</AssemblyVersion>
+  	<FileVersion>1.6.5.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.</Description>
     <VersionPrefix>0.10.0</VersionPrefix>
     <Authors>Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#</PackageTags>
     <Copyright>Copyright © 2018</Copyright>
-
     <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-
     <PackageReleaseNotes>Fixed ToEnum.</PackageReleaseNotes>
-
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
-
-    <NoWarn>$(NoWarn);CS1591</NoWarn>    
-
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>     
-
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateAssemblyTitleAttribute>true</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>true</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
@@ -31,16 +28,10 @@
     <GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-
   </PropertyGroup>
-
-  <PropertyGroup>
-  	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
-  	<Version>1.6.5</Version>
-  	<AssemblyVersion>1.6.5.0</AssemblyVersion>
-  	<FileVersion>1.6.5.0</FileVersion>
-  </PropertyGroup>
-
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
   <ItemGroup>
     <None Update="DataTypes\Coproduct\Coproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -99,11 +90,6 @@
       <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
   <ItemGroup>
     <Compile Update="DataTypes\Coproduct\Coproduct.cs">
       <DesignTime>True</DesignTime>
@@ -176,5 +162,4 @@
       <DependentUpon>ObjectExtensions.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

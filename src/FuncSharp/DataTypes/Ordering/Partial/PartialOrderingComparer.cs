@@ -4,13 +4,13 @@ namespace FuncSharp
 {
     internal class PartialOrderingComparer<A> : IComparer<A>
     {
-        public PartialOrderingComparer(IPartialOrdering<A> ordering, Order order)
+        public PartialOrderingComparer(PartialOrdering<A> ordering, Order order)
         {
             Ordering = ordering;
             Multiplier = order == Order.Ascending ? 1 : -1;
         }
 
-        public IPartialOrdering<A> Ordering { get; }
+        public PartialOrdering<A> Ordering { get; }
 
         private int Multiplier { get; }
 

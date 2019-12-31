@@ -2,12 +2,12 @@
 
 namespace FuncSharp.Tests
 {
-    public class ITotalOrderingIntervalSetTests
+    /*public class ITotalOrderingIntervalSetTests
     {
         private static readonly ITotalOrdering<int> to = Integers.Ordering;
 
         [Fact]
-        public void CreationTest()
+        public void Creation()
         {
             Assert.Equal("{}", to.EmptyIntervalSet().ToString());
             Assert.Equal("{}", to.IntervalSet(to.EmptyInterval(), to.EmptyInterval()).ToString());
@@ -24,7 +24,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void IntersectTest()
+        public void Intersect()
         {
             Assert.Equal("{(2, 3]}", to.Intersect(
                 to.IntervalSet(to.OpenClosedInterval(1, 3)),
@@ -56,7 +56,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void UnionTest()
+        public void Union()
         {
             Assert.Equal("{(1, 4]}", to.Union(
                 to.IntervalSet(to.OpenClosedInterval(1, 3)),
@@ -86,5 +86,5 @@ namespace FuncSharp.Tests
                 to.IntervalSet(to.UnboundedOpenInterval(2), to.OpenUnboundedInterval(3)),
                 to.IntervalSet(to.UnboundedClosedInterval(1), to.ClosedUnboundedInterval(4))).ToString());
         }
-    }
+    }*/
 }

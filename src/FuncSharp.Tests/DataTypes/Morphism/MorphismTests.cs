@@ -25,7 +25,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void DomainRangeTest()
+        public void DomainRange()
         {
             var m = Morphism.Create(
                 Product2.Create(1, true),
@@ -43,7 +43,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void ApplyTest()
+        public void Apply()
         {
             var m = Morphism.Create(
                 Product2.Create("foo", 123),
@@ -57,7 +57,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void IsoMorphismTest()
+        public void IsoMorphism()
         {
             var m = Morphism.CreateIso(
                 Product2.Create(0, false),
