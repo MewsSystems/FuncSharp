@@ -8,19 +8,12 @@ A C# library with main purpose to reduce boilerplate code and avoid bugs thanks 
 
 ## Contents
 
-- [Data Types](#data-types)
-    - [Product](#product)
-    - [Coproduct](#coproduct)
-    - [Option](#option)
-    - [Morphism](#morphism)
-    - [DataCube](#datacube)
-- [Type Classes](#type-classes)
-    - [Equality](#equality)
-    - [Enumeration](#enumeration)
-    - [Ordering](#ordering)
-- [Traits](#traits)
-
-## Data Types
+- [Product](#product)
+- [Coproduct](#coproduct)
+- [Option](#option)
+- [Morphism](#morphism)
+- [DataCube](#datacube)
+- [Ordering](#ordering)
 
 ### Product
 
@@ -91,24 +84,8 @@ foreach (var commit in commits)
 var dailyTotals = punchCard.RollUpDimension2((a, b) => a + b); // DataCube1<Day, int>
 ```
 
-## Type Classes
+### Order
 
-Type classes allow a programmer to define functionality for a type outside of that type. It comes handy mainly when the type comes from an external library and therefore it's not possible to make the type implement your interface. Or to have multiple different implementations of the same functionality. You can learn more about the concept (and other interesting stuff) in [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/making-our-own-types-and-typeclasses#typeclasses-102).
+Defines partial or total order for a type. By implementing the `Less` operation that compares two instances of the type, you get many many useful functions based on that. Starting from finding minimum or maximum in a collection of the instances, it allows you to work with **intervals** bounded by the type instances. And moreover working with **interval sets** which essentially represent a disjoint set of intervals. You can e.g. get an interval set as a result of union of two disjoint intervals.
 
-### Equality
-
-Defines equality for a type. Many other type classes are based on this one.
-
-### Enumeration
-
-Defines enumeration operation for a type. The only operation is the `Successor` which, given an instance of the type, returns the next instance, whatever it means.
-
-### Ordering
-
-Defines partial or total ordering for a type. By implementing the `Less` operation that compares two instances of the type, you get many many useful functions based on that. Starting from finding minimum or maximum in a collection of the instances, it allows you to work **intervals** bounded by the type instances. And moreover working with **interval sets** which essentially represent a disjoint set of intervals. You can e.g. get an interval set as a result of union of two disjoint intervals.
-
-Generic representation of an interval and interval set may seem simple on the first sight, but becomes really handy when you consider all the cases it supports (and you'd have to implement): empty or single-value interval, any combination a bounded/unbounded interval with open/closed lower/upper bound, and finally unbounded interval. And also interval sets consisting of any combination of the aforementioned intervals. In combination with all the operations on them (`Contains`, `Intersect`, `Union`, `Complement` etc.) it becomes obvious, it's not something anybody would like to implement more than once. Or not even once. However implementing the `Less` operation is trivial and you get the rest for free.
-
-## Traits
-
-A trait can be understood as a plain C# interface enhanced with data and some implementation. It is a well-known pattern how to enhance interfaces with implementation. Simply create extension methods that take the interface type as the first `this` parameter. However it is not possible to create extension properties not fields and that's where **FuncSharp** comes handy. By extending `ITrait<TData>`, your interface becomes capable of data storage and retrieval, so the extension methods do not have to compute everything from scratch.
+Generic representation of an interval and interval set may seem simple on the first sight, but becomes really handy when you consider all the cases it supports (and you'd have to implement): empty or single-value interval, any combination a bounded/unbounded interval with open/closed lower/upper bound, and finally unbounded interval. And also interval sets consisting of any combination of the aforementioned intervals. In combination with all the operations on them (`Contains`, `Intersect`, `Union` etc.) it becomes obvious, it's not something anybody would like to implement more than once. Or not even once. However implementing the `Less` operation is trivial and you get the rest for free.
