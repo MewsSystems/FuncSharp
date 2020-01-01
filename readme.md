@@ -4,11 +4,7 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 [![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 
-A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Download from [NuGet](https://www.nuget.org/packages/FuncSharp/):
-
-```
-Install-Package FuncSharp
-```
+A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.
 
 ## Contents
 
