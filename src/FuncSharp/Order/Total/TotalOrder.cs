@@ -5,16 +5,16 @@ using System.Linq;
 namespace FuncSharp
 {
     /// <summary>
-    /// A total ordering relation for the specified type.
+    /// A total order relation for the specified type.
     /// </summary>
     /// <typeparam name="A">Type for which the ordering relation is implemented.</typeparam>
-    public class TotalOrdering<A> : PartialOrdering<A>
+    public class TotalOrder<A> : PartialOrder<A>
     {
         private static readonly Interval<A> emptyInterval;
         private static readonly Interval<A> unbounedInterval;
         private static readonly IntervalSet<A> emptyIntervalSet;
 
-        static TotalOrdering()
+        static TotalOrder()
         {
             var defaultBound = IntervalBound.Open(default(A)).ToOption();
             var noBound = Option.Empty<IntervalBound<A>>();
@@ -24,8 +24,8 @@ namespace FuncSharp
             emptyIntervalSet = new IntervalSet<A>(Enumerable.Empty<Interval<A>>());
         }
 
-        public TotalOrdering(Func<A, A, bool> equal, Func<A, A, bool> less)
-            : base(equal, less)
+        public TotalOrder(Func<A, A, bool> less)
+            : base(less)
         {
         }
 
@@ -110,7 +110,7 @@ namespace FuncSharp
             {
                 return UnboundedInterval;
             }
-            if (lowerBound.FlatMap(l => upperBound.Map(u => Greater(l.Value, u.Value) || Equal(l.Value, u.Value) && (l.IsOpen || u.IsOpen))).GetOrFalse())
+            if (lowerBound.FlatMap(l => upperBound.Map(u => Greater(l.Value, u.Value) || Equals(l.Value, u.Value) && (l.IsOpen || u.IsOpen))).GetOrFalse())
             {
                 return EmptyInterval;
             }
@@ -192,6 +192,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Orders the specified intervals.
+        /// </summary>
+        public List<Interval<A>> Order(IEnumerable<Interval<A>> intervals, Ordering ordering = Ordering.Ascending)
+        {
+            return intervals.Order(Less, ordering);
+        }
+
+        /// <summary>
         /// Returns whether the interval contains the specified value.
         /// </summary>
         public bool Contains(Interval<A> interval, A value)
@@ -221,8 +229,8 @@ namespace FuncSharp
         public Interval<A> Intersect(Interval<A> a, Interval<A> b)
         {
             return Interval(
-                ExtremeBound(a.LowerBound, b.LowerBound, Greater),
-                ExtremeBound(a.UpperBound, b.UpperBound, Less)
+                LowerBoundLess(a.LowerBound, b.LowerBound) ? b.LowerBound : a.LowerBound,
+                UpperBoundLess(a.UpperBound, b.UpperBound) ? a.UpperBound : b.UpperBound
             );
         }
 
@@ -239,6 +247,10 @@ namespace FuncSharp
         /// </summary>
         public IntervalSet<A> IntervalSet(Interval<A> interval)
         {
+            if (interval.IsEmpty)
+            {
+                return EmptyIntervalSet;
+            }
             return new IntervalSet<A>(new[] { interval });
         }
 
@@ -247,7 +259,7 @@ namespace FuncSharp
         /// </summary>
         public IntervalSet<A> IntervalSet(IEnumerable<Interval<A>> intervals)
         {
-            return intervals.Aggregate(EmptyIntervalSet, Union);
+            return Union(intervals);
         }
 
         /// <summary>
@@ -320,7 +332,22 @@ namespace FuncSharp
         /// </summary>
         public IntervalSet<A> Union(IEnumerable<Interval<A>> intervals)
         {
-            return IntervalSet(intervals);
+            var orderedIntervals = Order(intervals.Where(i => i.NonEmpty));
+            var results = new List<Interval<A>>();
+
+            // Thanks to interval ordering, results of the union are formed of continuous sequences of intervals in the ordered interval collection.
+            foreach (var interval in orderedIntervals)
+            {
+                var result = results.LastOption().Where(r => Intersects(r, interval) || Complements(r.UpperBound, interval.LowerBound));
+
+                // If the interval should be part of the result, replace the result with a new extended result. Otherwise, initialize a new result.
+                result.Match(
+                    r => results[results.Count - 1] = Interval(r.LowerBound, interval.UpperBound),
+                    _ => results.Add(interval)
+                );
+            }
+
+            return new IntervalSet<A>(results);
         }
 
         /// <summary>
@@ -336,22 +363,7 @@ namespace FuncSharp
         /// </summary>
         public IntervalSet<A> Union(IntervalSet<A> a, IntervalSet<A> b)
         {
-            new IntervalSet<A>(a.Intervals.Aggregate(b.Intervals, Union));
-
-            // Check that all intervals belong to the underlying space and that they are disjoint.        
-            var orderedIntervals = ordering.GetIntervalOrdering().Order(intervals.Where(i => i.IsNonEmpty)).ToArray();
-            for (var i = 0; i < orderedIntervals.Length; i++)
-            {
-                Ordering.Check(orderedIntervals[i], _ => new ArgumentException($"The {i}-th interval uses different ordering."));
-
-                if (i + 1 < orderedIntervals.Length)
-                {
-                    if (Ordering.Intersects(orderedIntervals[i], orderedIntervals[i + 1]))
-                    {
-                        throw new ArgumentException("The intervals have to be disjoint.");
-                    }
-                }
-            }
+            return Union(new[] { a, b });
         }
 
         /// <summary>
@@ -359,53 +371,52 @@ namespace FuncSharp
         /// </summary>
         public IntervalSet<A> Union(IEnumerable<IntervalSet<A>> sets)
         {
-            return sets.Aggregate(EmptyIntervalSet, Union);
+            return Union(sets.SelectMany(s => s.Intervals));
         }
 
         /// <summary>
-        /// Returns extreme of the specified two bounds of same type.
+        /// Returns whether the first interval is less than the second one.
         /// </summary>
-        private IOption<IntervalBound<A>> ExtremeBound(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b, Func<A, A, bool> metric)
+        private bool Less(Interval<A> a, Interval<A> b)
         {
-            return a.FlatMap(x => b.Map(y => ExtremeBound(x, y, metric))).OrElse(_ => a).OrElse(_ => b);
+            if (a.IsEmpty)
+            {
+                return b.NonEmpty;
+            }
+            if (b.IsEmpty)
+            {
+                return false;
+            }
+
+            return
+                LowerBoundLess(a.LowerBound, b.LowerBound) ||
+                Equals(a.LowerBound, b.LowerBound) && UpperBoundLess(a.UpperBound, b.UpperBound);
         }
 
         /// <summary>
-        /// Returns extreme of the specified two bounds of same type.
+        /// Returns whether the first lower bound is less than the second.
         /// </summary>
-        private IntervalBound<A> ExtremeBound(IntervalBound<A> a, IntervalBound<A> b, Func<A, A, bool> metric)
+        private bool LowerBoundLess(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b)
         {
-            if (metric(a.Value, b.Value) || Equal(a.Value, b.Value) && a.IsOpen)
-            {
-                return a;
-            }
-            return b;
+            var result = a.FlatMap(x => b.Map(y => Less(x.Value, y.Value) || Equals(x.Value, y.Value) && x.IsClosed && y.IsOpen));
+            return result.GetOrElse(_ => a.IsEmpty && b.NonEmpty);
         }
 
-        private IEnumerable<Interval<A>> Union(IEnumerable<Interval<A>> intervals, Interval<A> interval)
+        /// <summary>
+        /// Returns whether the first upper bound is less than the second.
+        /// </summary>
+        private bool UpperBoundLess(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b)
         {
-            // An interval should be merged together with another interval if either closure of the interval intersects the second
-            // interval or if closure of the second interval intersects the first interval.
-            var unionIntervals = intervals.Where(i =>
-                ordering.Intersects(ordering.Closure(i), interval) ||
-                ordering.Intersects(i, ordering.Closure(interval))
-            ).ToList();
-            var otherIntervals = intervals.Except(unionIntervals);
+            var result = a.FlatMap(x => b.Map(y => Less(x.Value, y.Value) || Equals(x.Value, y.Value) && x.IsOpen && y.IsClosed));
+            return result.GetOrElse(_ => a.NonEmpty && b.IsEmpty);
+        }
 
-            // Create a union interval from the intersectced intervals and the target interval. The union interval will replace
-            // the intersected intervals.
-            var data = ordering.GetTraitData();
-            var unionInterval = interval;
-            if (unionIntervals.Any())
-            {
-                // Union with the intervals is the first 
-                unionInterval = ordering.Interval(
-                    data.LimitOrderings.LowerRestrictiveness.Min(interval.LowerBound, unionIntervals.First().LowerBound),
-                    data.LimitOrderings.UpperRestrictiveness.Min(interval.UpperBound, unionIntervals.Last().UpperBound)
-                );
-            }
-
-            return data.IntervalOrdering.Order(otherIntervals.Concat(new[] { unionInterval }));
+        /// <summary>
+        /// Returns whther one interval bound complements another (i.e. have same value, but differ in type).
+        /// </summary>
+        private bool Complements(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b)
+        {
+            return a.FlatMap(x => b.Map(y => Equals(x.Value, y.Value) && !Equals(x.Type, y.Type))).GetOrFalse();
         }
     }
 }

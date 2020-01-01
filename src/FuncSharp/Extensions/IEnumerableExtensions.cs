@@ -63,6 +63,17 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Orders the values using the specified less function in the specified order.
+        /// </summary>
+        public static List<T> Order<T>(this IEnumerable<T> values, Func<T, T, bool> less, Ordering ordering = Ordering.Ascending)
+        {
+            var result = values.ToList();
+            var comparer = new Comparer<T>(less, ordering);
+            result.Sort(comparer);
+            return result;
+        }
+
+        /// <summary>
         /// Coverts the source to a new 1-dimensional data cube.
         /// </summary>
         public static DataCube1<P1, TValue> ToDataCube<T, P1, TValue>(

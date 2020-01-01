@@ -33,43 +33,43 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="DataTypes\Coproduct\Coproduct.tt">
+    <None Update="Coproduct\Coproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Coproduct\ICoproduct.tt">
+    <None Update="Coproduct\ICoproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ICoproduct.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Coproduct\ICoproductExtensions.tt">
+    <None Update="Coproduct\ICoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\DataCube\DataCube.tt">
+    <None Update="DataCube\DataCube.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataCube.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\DataCube\DataCubes.tt">
+    <None Update="DataCube\DataCubes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataCubes.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\DataCube\Position.tt">
+    <None Update="DataCube\Position.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Position.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Product\IProduct.tt">
+    <None Update="Product\IProduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IProduct.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Product\Product.tt">
+    <None Update="Product\Product.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Product.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Relation\Relations.tt">
+    <None Update="Relation\Relations.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Relations.cs</LastGenOutput>
     </None>
-    <None Update="DataTypes\Try\Try.tt">
+    <None Update="Try\Try.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Try.cs</LastGenOutput>
     </None>
@@ -91,52 +91,52 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="DataTypes\Coproduct\Coproduct.cs">
+    <Compile Update="Coproduct\Coproduct.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Coproduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Coproduct\ICoproduct.cs">
+    <Compile Update="Coproduct\ICoproduct.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ICoproduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Coproduct\ICoproductExtensions.cs">
+    <Compile Update="Coproduct\ICoproductExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ICoproductExtensions.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\DataCube\DataCube.cs">
+    <Compile Update="DataCube\DataCube.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataCube.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\DataCube\DataCubes.cs">
+    <Compile Update="DataCube\DataCubes.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataCubes.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\DataCube\Position.cs">
+    <Compile Update="DataCube\Position.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Position.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Product\IProduct.cs">
+    <Compile Update="Product\IProduct.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>IProduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Product\Product.cs">
+    <Compile Update="Product\Product.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Product.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Relation\Relations.cs">
+    <Compile Update="Relation\Relations.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Relations.tt</DependentUpon>
     </Compile>
-    <Compile Update="DataTypes\Try\Try.cs">
+    <Compile Update="Try\Try.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Try.tt</DependentUpon>

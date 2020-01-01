@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="../../CodeGen/Helpers.ttinclude" #>
+<#@ include file="../Helpers.ttinclude" #>
 namespace FuncSharp
 {
 <#  for (var i = 0; i <= MaxProductArity(); i++) { #>

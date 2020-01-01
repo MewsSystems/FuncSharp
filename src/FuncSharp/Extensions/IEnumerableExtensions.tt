@@ -68,6 +68,17 @@ namespace FuncSharp
             }
             return data.FirstOption();
         }
+
+        /// <summary>
+        /// Orders the values using the specified less function in the specified order.
+        /// </summary>
+        public static List<T> Order<T>(this IEnumerable<T> values, Func<T, T, bool> less, Ordering ordering = Ordering.Ascending)
+        {
+            var result = values.ToList();
+            var comparer = new Comparer<T>(less, ordering);
+            result.Sort(comparer);
+            return result;
+        }
 <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
 
         /// <summary>

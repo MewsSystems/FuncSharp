@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FuncSharp
 {
     /// <summary>
-    /// A partial ordering for the specified type.
+    /// A partial order for the specified type.
     /// </summary>
     /// <typeparam name="A">Type for which the ordering relation is implemented.</typeparam>
-    public class PartialOrdering<A> : Equality<A>
+    public class PartialOrder<A>
     {
-        public PartialOrdering(Func<A, A, bool> equal, Func<A, A, bool> less)
-            : base(equal)
+        public PartialOrder(Func<A, A, bool> less)
         {
             LessImpl = less;
         }
@@ -31,7 +29,7 @@ namespace FuncSharp
         /// </summary>
         public bool LessOrEqual(A a, A b)
         {
-            return Less(a, b) || Equal(a, b);
+            return Less(a, b) || Equals(a, b);
         }
 
         /// <summary>
@@ -47,18 +45,15 @@ namespace FuncSharp
         /// </summary>
         public bool GreaterOrEqual(A a, A b)
         {
-            return Greater(a, b) || Equal(a, b);
+            return Greater(a, b) || Equals(a, b);
         }
 
         /// <summary>
         /// Returns the values ordered according to the specified order.
         /// </summary>
-        public IEnumerable<A> Order(IEnumerable<A> values, Order order = FuncSharp.Order.Ascending)
+        public IEnumerable<A> Order(IEnumerable<A> values, Ordering ordering = Ordering.Ascending)
         {
-            var result = values.ToList();
-            var comparer = new PartialOrderingComparer<A>(this, order);
-            result.Sort(comparer);
-            return result;
+            return values.Order(Less, ordering);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FuncSharp
 {
-    public enum Order
+    public enum Ordering
     {
         Ascending,
         Descending
