@@ -13,7 +13,7 @@ A C# library with main purpose to reduce boilerplate code and avoid bugs thanks 
 - [Option](#option)
 - [Morphism](#morphism)
 - [DataCube](#datacube)
-- [Ordering](#ordering)
+- [Order](#order)
 
 ### Product
 
