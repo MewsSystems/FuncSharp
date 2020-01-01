@@ -147,7 +147,7 @@ namespace FuncSharp
     public static class Coproduct2
     {
         /// <summary>
-        /// Creates a new 2-dimensional coproduct with the second value.
+        /// Creates a new 2-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct2<T1, T2> CreateFirst<T1, T2>(T1 value)
         {
