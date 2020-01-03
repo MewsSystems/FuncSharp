@@ -10,11 +10,11 @@ using System;
 namespace FuncSharp
 {
     /// <summary>
-    /// Base class and factory of canonical coproduct types.
+    /// A type that represents a disjunction of types, choice from multiple different types e.g. T1 or T2 or T3.
     /// </summary>
-    public abstract class CoproductBase : ICoproduct
+    public abstract class Coproduct
     {
-        public CoproductBase(int arity, int discriminator, object value)
+        public Coproduct(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -30,10 +30,19 @@ namespace FuncSharp
             CoproductValue = value;
         }
 
+        /// <summary>
+        /// Arity of the coproduct type. Should be non-negative.
+        /// </summary>
         public int CoproductArity { get; }
 
+        /// <summary>
+        /// Discriminator of the coproduct type value. Should be in interval [1, CoproductArity].
+        /// </summary>
         public int CoproductDiscriminator { get; }
 
+        /// <summary>
+        /// Value of the coproduct type no matter which one of the possible values it is.
+        /// </summary>
         public object CoproductValue { get; }
 
         public override int GetHashCode()
@@ -74,7 +83,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= CoproductType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Type(j) #> value)
         {
-            return new <#= CoproductImplType(i) #>(value);
+            return new <#= CoproductType(i) #>(value);
         }
 
 <#        } #>
@@ -82,9 +91,9 @@ namespace FuncSharp
 
 <#     } #>
     /// <summary>
-    /// A <#= i #>-dimensional immutable coproduct.
+    /// A <#= i #>-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class <#= CoproductImplType(i) #> : CoproductBase, <#= CoproductType(i) #>
+    public class <#= CoproductType(i) #> : Coproduct
     {
 <#    if (i > 0) { #>
 <#    for (var j = 1; j <= i; j++) { #>
@@ -116,6 +125,9 @@ namespace FuncSharp
         }
 
 <#    for (var j = 1; j <= i; j++) { #>
+        /// <summary>
+        /// Returns whether the coproduct contains the <#= GetLowerOrdinal(j) #> value.
+        /// </summary>
         public bool Is<#= GetOrdinal(j) #>
         {
             get { return CoproductDiscriminator == <#= j #>; }
@@ -123,12 +135,20 @@ namespace FuncSharp
 <#    } #>
 
 <#    for (var j = 1; j <= i; j++) { #>
-        public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
+        /// <summary>
+        /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #> 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
             get { return Is<#= GetOrdinal(j) #> ? Option.Valued(GetCoproductValue<<#= Type(j) #>>()) : Option.Empty<<#= Type(j) #>>(); }
         }
 <#    } #>
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
 <#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>)
         {
@@ -139,6 +159,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
 <#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>)
         {

@@ -13,10 +13,15 @@ using System.Text;
 namespace FuncSharp
 {
     /// <summary>
-    /// Base class and factory of canonical product types.
+    /// A type that is a compound of other types. Can be understood as a cartesian product of types, e.g. T1 × T2 × T3.
+    /// Therefore instances of a product type consist of values of the compound types, e.g. T1 value1, T2 value2 and T3 value3.
+    /// This interface represents the most abstract definition of a product type with unknown compound types and unknown arity.
     /// </summary>
-    public abstract class ProductBase : IProduct
+    public abstract class Product
     {
+        /// <summary>
+        /// Values of the product.
+        /// </summary>
         public abstract IEnumerable<object> ProductValues { get; }
 
         private int? HashCode { get; set; }
@@ -72,7 +77,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
         {
-            if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
+            if (Equals(p.GetType(), typeof(<#= ProductType(i) #>)))
             {
                 return p;
             }
@@ -85,7 +90,7 @@ namespace FuncSharp
     /// <summary>
     /// A <#= i #>-dimensional strongly-typed immutable product.
     /// </summary>
-    public class <#= ProductImplType(i) #> : ProductBase, <#= ProductType(i) #>
+    public class <#= ProductType(i) #> : Product
     {
         public Product<#= i #>(<#= Parameters(i) #>)
         {
@@ -95,6 +100,9 @@ namespace FuncSharp
         }
 <#      for (var j = 1; j <= i; j++) { #>
 
+        /// <summary>
+        /// Value of the product in the dimension <#= j #>.
+        /// </summary>
         public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
 <#      } #>
 
@@ -126,7 +134,7 @@ namespace FuncSharp
         /// </summary>
         public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
         {
-            if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
+            if (Equals(p.GetType(), typeof(<#= ProductType(i) #>)))
             {
                 return p;
             }
@@ -136,12 +144,18 @@ namespace FuncSharp
 <#      } #>
 <#      if (i <= MaxFuncArity()) { #>
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f)
         {
             return f(<#= Properties(i, name: "ProductValue") #>);
         }
 <#          if (i > 0) { #>
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<<#= Types(i) #>> f)
         {
             f(<#= Properties(i, name: "ProductValue") #>);

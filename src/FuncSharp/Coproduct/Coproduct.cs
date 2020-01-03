@@ -3,11 +3,11 @@
 namespace FuncSharp
 {
     /// <summary>
-    /// Base class and factory of canonical coproduct types.
+    /// A type that represents a disjunction of types, choice from multiple different types e.g. T1 or T2 or T3.
     /// </summary>
-    public abstract class CoproductBase : ICoproduct
+    public abstract class Coproduct
     {
-        public CoproductBase(int arity, int discriminator, object value)
+        public Coproduct(int arity, int discriminator, object value)
         {
             if (arity <= 0)
             {
@@ -23,10 +23,19 @@ namespace FuncSharp
             CoproductValue = value;
         }
 
+        /// <summary>
+        /// Arity of the coproduct type. Should be non-negative.
+        /// </summary>
         public int CoproductArity { get; }
 
+        /// <summary>
+        /// Discriminator of the coproduct type value. Should be in interval [1, CoproductArity].
+        /// </summary>
         public int CoproductDiscriminator { get; }
 
+        /// <summary>
+        /// Value of the coproduct type no matter which one of the possible values it is.
+        /// </summary>
         public object CoproductValue { get; }
 
         public override int GetHashCode()
@@ -55,9 +64,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 0-dimensional immutable coproduct.
+    /// A 0-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct0 : CoproductBase, ICoproduct0
+    public class Coproduct0 : Coproduct
     {
         protected Coproduct0()
             : base(0, 0, null)
@@ -73,7 +82,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 1-dimensional coproduct with the first value.
         /// </summary>
-        public static ICoproduct1<T1> CreateFirst<T1>(T1 value)
+        public static Coproduct1<T1> CreateFirst<T1>(T1 value)
         {
             return new Coproduct1<T1>(value);
         }
@@ -81,9 +90,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 1-dimensional immutable coproduct.
+    /// A 1-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct1<T1> : CoproductBase, ICoproduct1<T1>
+    public class Coproduct1<T1> : Coproduct
     {
         /// <summary>
         /// Creates a new 1-dimensional coproduct with the specified value on the first position.
@@ -96,7 +105,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 1-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct1(ICoproduct1<T1> source)
+        public Coproduct1(Coproduct1<T1> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -111,16 +120,27 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst)
         {
@@ -131,6 +151,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null)
         {
@@ -147,9 +171,9 @@ namespace FuncSharp
     public static class Coproduct2
     {
         /// <summary>
-        /// Creates a new 2-dimensional coproduct with the first value.
+        /// Creates a new 2-dimensional coproduct with the second value.
         /// </summary>
-        public static ICoproduct2<T1, T2> CreateFirst<T1, T2>(T1 value)
+        public static Coproduct2<T1, T2> CreateFirst<T1, T2>(T1 value)
         {
             return new Coproduct2<T1, T2>(value);
         }
@@ -157,7 +181,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 2-dimensional coproduct with the second value.
         /// </summary>
-        public static ICoproduct2<T1, T2> CreateSecond<T1, T2>(T2 value)
+        public static Coproduct2<T1, T2> CreateSecond<T1, T2>(T2 value)
         {
             return new Coproduct2<T1, T2>(value);
         }
@@ -165,9 +189,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 2-dimensional immutable coproduct.
+    /// A 2-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct2<T1, T2> : CoproductBase, ICoproduct2<T1, T2>
+    public class Coproduct2<T1, T2> : Coproduct
     {
         /// <summary>
         /// Creates a new 2-dimensional coproduct with the specified value on the first position.
@@ -188,7 +212,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 2-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct2(ICoproduct2<T1, T2> source)
+        public Coproduct2(Coproduct2<T1, T2> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -203,24 +227,42 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond)
@@ -233,6 +275,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null)
@@ -253,7 +299,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the third value.
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 value)
+        public static Coproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 value)
         {
             return new Coproduct3<T1, T2, T3>(value);
         }
@@ -261,7 +307,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the third value.
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 value)
+        public static Coproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 value)
         {
             return new Coproduct3<T1, T2, T3>(value);
         }
@@ -269,7 +315,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the third value.
         /// </summary>
-        public static ICoproduct3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 value)
+        public static Coproduct3<T1, T2, T3> CreateThird<T1, T2, T3>(T3 value)
         {
             return new Coproduct3<T1, T2, T3>(value);
         }
@@ -277,9 +323,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 3-dimensional immutable coproduct.
+    /// A 3-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct3<T1, T2, T3> : CoproductBase, ICoproduct3<T1, T2, T3>
+    public class Coproduct3<T1, T2, T3> : Coproduct
     {
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the specified value on the first position.
@@ -308,7 +354,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct3(ICoproduct3<T1, T2, T3> source)
+        public Coproduct3(Coproduct3<T1, T2, T3> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -323,32 +369,57 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -363,6 +434,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -385,7 +460,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 value)
+        public static Coproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 value)
         {
             return new Coproduct4<T1, T2, T3, T4>(value);
         }
@@ -393,7 +468,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 value)
+        public static Coproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 value)
         {
             return new Coproduct4<T1, T2, T3, T4>(value);
         }
@@ -401,7 +476,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 value)
+        public static Coproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 value)
         {
             return new Coproduct4<T1, T2, T3, T4>(value);
         }
@@ -409,7 +484,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the fourth value.
         /// </summary>
-        public static ICoproduct4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 value)
+        public static Coproduct4<T1, T2, T3, T4> CreateFourth<T1, T2, T3, T4>(T4 value)
         {
             return new Coproduct4<T1, T2, T3, T4>(value);
         }
@@ -417,9 +492,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 4-dimensional immutable coproduct.
+    /// A 4-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct4<T1, T2, T3, T4> : CoproductBase, ICoproduct4<T1, T2, T3, T4>
+    public class Coproduct4<T1, T2, T3, T4> : Coproduct
     {
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the specified value on the first position.
@@ -456,7 +531,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct4(ICoproduct4<T1, T2, T3, T4> source)
+        public Coproduct4(Coproduct4<T1, T2, T3, T4> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -471,40 +546,72 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -521,6 +628,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -545,7 +656,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 value)
+        public static Coproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 value)
         {
             return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
@@ -553,7 +664,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 value)
+        public static Coproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 value)
         {
             return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
@@ -561,7 +672,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 value)
+        public static Coproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 value)
         {
             return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
@@ -569,7 +680,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 value)
+        public static Coproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 value)
         {
             return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
@@ -577,7 +688,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the fifth value.
         /// </summary>
-        public static ICoproduct5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 value)
+        public static Coproduct5<T1, T2, T3, T4, T5> CreateFifth<T1, T2, T3, T4, T5>(T5 value)
         {
             return new Coproduct5<T1, T2, T3, T4, T5>(value);
         }
@@ -585,9 +696,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 5-dimensional immutable coproduct.
+    /// A 5-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct5<T1, T2, T3, T4, T5> : CoproductBase, ICoproduct5<T1, T2, T3, T4, T5>
+    public class Coproduct5<T1, T2, T3, T4, T5> : Coproduct
     {
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the specified value on the first position.
@@ -632,7 +743,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct5(ICoproduct5<T1, T2, T3, T4, T5> source)
+        public Coproduct5(Coproduct5<T1, T2, T3, T4, T5> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -647,48 +758,87 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -707,6 +857,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -733,7 +887,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 value)
+        public static Coproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 value)
         {
             return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
@@ -741,7 +895,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 value)
+        public static Coproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 value)
         {
             return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
@@ -749,7 +903,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 value)
+        public static Coproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 value)
         {
             return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
@@ -757,7 +911,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 value)
+        public static Coproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 value)
         {
             return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
@@ -765,7 +919,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 value)
+        public static Coproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 value)
         {
             return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
@@ -773,7 +927,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the sixth value.
         /// </summary>
-        public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 value)
+        public static Coproduct6<T1, T2, T3, T4, T5, T6> CreateSixth<T1, T2, T3, T4, T5, T6>(T6 value)
         {
             return new Coproduct6<T1, T2, T3, T4, T5, T6>(value);
         }
@@ -781,9 +935,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 6-dimensional immutable coproduct.
+    /// A 6-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct6<T1, T2, T3, T4, T5, T6> : CoproductBase, ICoproduct6<T1, T2, T3, T4, T5, T6>
+    public class Coproduct6<T1, T2, T3, T4, T5, T6> : Coproduct
     {
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the specified value on the first position.
@@ -836,7 +990,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct6(ICoproduct6<T1, T2, T3, T4, T5, T6> source)
+        public Coproduct6(Coproduct6<T1, T2, T3, T4, T5, T6> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -851,56 +1005,102 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -921,6 +1121,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -949,7 +1153,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -957,7 +1161,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -965,7 +1169,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -973,7 +1177,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -981,7 +1185,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -989,7 +1193,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -997,7 +1201,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the seventh value.
         /// </summary>
-        public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 value)
+        public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSeventh<T1, T2, T3, T4, T5, T6, T7>(T7 value)
         {
             return new Coproduct7<T1, T2, T3, T4, T5, T6, T7>(value);
         }
@@ -1005,9 +1209,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 7-dimensional immutable coproduct.
+    /// A 7-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : CoproductBase, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>
+    public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : Coproduct
     {
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the specified value on the first position.
@@ -1068,7 +1272,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct7(ICoproduct7<T1, T2, T3, T4, T5, T6, T7> source)
+        public Coproduct7(Coproduct7<T1, T2, T3, T4, T5, T6, T7> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1083,64 +1287,117 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -1163,6 +1420,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -1193,7 +1454,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1201,7 +1462,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1209,7 +1470,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1217,7 +1478,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1225,7 +1486,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1233,7 +1494,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1241,7 +1502,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1249,7 +1510,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the eighth value.
         /// </summary>
-        public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
+        public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8>(T8 value)
         {
             return new Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>(value);
         }
@@ -1257,9 +1518,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 8-dimensional immutable coproduct.
+    /// A 8-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : CoproductBase, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>
+    public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : Coproduct
     {
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the specified value on the first position.
@@ -1328,7 +1589,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct8(ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> source)
+        public Coproduct8(Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1343,72 +1604,132 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -1433,6 +1754,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -1465,7 +1790,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1473,7 +1798,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1481,7 +1806,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1489,7 +1814,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1497,7 +1822,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1505,7 +1830,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1513,7 +1838,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1521,7 +1846,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1529,7 +1854,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the ninth value.
         /// </summary>
-        public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
+        public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T9 value)
         {
             return new Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(value);
         }
@@ -1537,9 +1862,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 9-dimensional immutable coproduct.
+    /// A 9-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : CoproductBase, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
+    public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : Coproduct
     {
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the specified value on the first position.
@@ -1616,7 +1941,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct9(ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> source)
+        public Coproduct9(Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1631,80 +1956,147 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -1731,6 +2123,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -1765,7 +2161,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1773,7 +2169,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1781,7 +2177,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1789,7 +2185,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1797,7 +2193,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1805,7 +2201,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1813,7 +2209,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1821,7 +2217,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1829,7 +2225,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1837,7 +2233,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the tenth value.
         /// </summary>
-        public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
+        public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T10 value)
         {
             return new Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(value);
         }
@@ -1845,9 +2241,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 10-dimensional immutable coproduct.
+    /// A 10-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : CoproductBase, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
+    public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : Coproduct
     {
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the specified value on the first position.
@@ -1932,7 +2328,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct10(ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> source)
+        public Coproduct10(Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1947,88 +2343,162 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -2057,6 +2527,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -2093,7 +2567,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2101,7 +2575,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2109,7 +2583,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2117,7 +2591,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2125,7 +2599,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2133,7 +2607,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2141,7 +2615,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2149,7 +2623,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2157,7 +2631,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2165,7 +2639,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2173,7 +2647,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the eleventh value.
         /// </summary>
-        public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
+        public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T11 value)
         {
             return new Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(value);
         }
@@ -2181,9 +2655,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 11-dimensional immutable coproduct.
+    /// A 11-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : CoproductBase, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
+    public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : Coproduct
     {
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the specified value on the first position.
@@ -2276,7 +2750,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct11(ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> source)
+        public Coproduct11(Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -2291,96 +2765,177 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -2411,6 +2966,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -2449,7 +3008,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2457,7 +3016,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2465,7 +3024,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2473,7 +3032,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2481,7 +3040,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2489,7 +3048,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2497,7 +3056,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2505,7 +3064,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2513,7 +3072,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2521,7 +3080,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2529,7 +3088,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2537,7 +3096,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the twelfth value.
         /// </summary>
-        public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
+        public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T12 value)
         {
             return new Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(value);
         }
@@ -2545,9 +3104,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 12-dimensional immutable coproduct.
+    /// A 12-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : CoproductBase, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
+    public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : Coproduct
     {
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the specified value on the first position.
@@ -2648,7 +3207,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct12(ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> source)
+        public Coproduct12(Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -2663,104 +3222,192 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -2793,6 +3440,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -2833,7 +3484,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2841,7 +3492,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2849,7 +3500,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2857,7 +3508,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2865,7 +3516,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2873,7 +3524,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2881,7 +3532,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2889,7 +3540,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2897,7 +3548,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2905,7 +3556,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2913,7 +3564,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2921,7 +3572,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2929,7 +3580,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the thirteenth value.
         /// </summary>
-        public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
+        public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T13 value)
         {
             return new Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(value);
         }
@@ -2937,9 +3588,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 13-dimensional immutable coproduct.
+    /// A 13-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : CoproductBase, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
+    public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : Coproduct
     {
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the specified value on the first position.
@@ -3048,7 +3699,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct13(ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> source)
+        public Coproduct13(Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -3063,112 +3714,207 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -3203,6 +3949,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -3245,7 +3995,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3253,7 +4003,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3261,7 +4011,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3269,7 +4019,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3277,7 +4027,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3285,7 +4035,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3293,7 +4043,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3301,7 +4051,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3309,7 +4059,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3317,7 +4067,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3325,7 +4075,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3333,7 +4083,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3341,7 +4091,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3349,7 +4099,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the fourteenth value.
         /// </summary>
-        public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
+        public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T14 value)
         {
             return new Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(value);
         }
@@ -3357,9 +4107,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 14-dimensional immutable coproduct.
+    /// A 14-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : CoproductBase, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
+    public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : Coproduct
     {
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the specified value on the first position.
@@ -3476,7 +4226,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct14(ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> source)
+        public Coproduct14(Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -3491,120 +4241,222 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
         public bool IsFourteenth
         {
             get { return CoproductDiscriminator == 14; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -3641,6 +4493,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -3685,7 +4541,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3693,7 +4549,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3701,7 +4557,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3709,7 +4565,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3717,7 +4573,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3725,7 +4581,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3733,7 +4589,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3741,7 +4597,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3749,7 +4605,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3757,7 +4613,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3765,7 +4621,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3773,7 +4629,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3781,7 +4637,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3789,7 +4645,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3797,7 +4653,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the fifteenth value.
         /// </summary>
-        public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
+        public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T15 value)
         {
             return new Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(value);
         }
@@ -3805,9 +4661,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 15-dimensional immutable coproduct.
+    /// A 15-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : CoproductBase, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
+    public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : Coproduct
     {
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the specified value on the first position.
@@ -3932,7 +4788,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct15(ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> source)
+        public Coproduct15(Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -3947,128 +4803,237 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
         public bool IsFourteenth
         {
             get { return CoproductDiscriminator == 14; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifteenth value.
+        /// </summary>
         public bool IsFifteenth
         {
             get { return CoproductDiscriminator == 15; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        /// <summary>
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -4107,6 +5072,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -4153,7 +5122,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4161,7 +5130,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4169,7 +5138,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4177,7 +5146,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4185,7 +5154,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4193,7 +5162,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4201,7 +5170,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4209,7 +5178,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4217,7 +5186,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4225,7 +5194,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4233,7 +5202,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4241,7 +5210,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4249,7 +5218,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4257,7 +5226,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4265,7 +5234,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4273,7 +5242,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the sixteenth value.
         /// </summary>
-        public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value)
+        public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T16 value)
         {
             return new Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(value);
         }
@@ -4281,9 +5250,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 16-dimensional immutable coproduct.
+    /// A 16-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : CoproductBase, ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
+    public class Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : Coproduct
     {
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the specified value on the first position.
@@ -4416,7 +5385,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct16(ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> source)
+        public Coproduct16(Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -4431,136 +5400,252 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
         public bool IsFourteenth
         {
             get { return CoproductDiscriminator == 14; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifteenth value.
+        /// </summary>
         public bool IsFifteenth
         {
             get { return CoproductDiscriminator == 15; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixteenth value.
+        /// </summary>
         public bool IsSixteenth
         {
             get { return CoproductDiscriminator == 16; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        /// <summary>
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        /// <summary>
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -4601,6 +5686,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -4649,7 +5738,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T1 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T1 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4657,7 +5746,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T2 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T2 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4665,7 +5754,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T3 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T3 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4673,7 +5762,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T4 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T4 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4681,7 +5770,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T5 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T5 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4689,7 +5778,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T6 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T6 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4697,7 +5786,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T7 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T7 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4705,7 +5794,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T8 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T8 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4713,7 +5802,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T9 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T9 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4721,7 +5810,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T10 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T10 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4729,7 +5818,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T11 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T11 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4737,7 +5826,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T12 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T12 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4745,7 +5834,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T13 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T13 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4753,7 +5842,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T14 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T14 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4761,7 +5850,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T15 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T15 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4769,7 +5858,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T16 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T16 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4777,7 +5866,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the seventeenth value.
         /// </summary>
-        public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T17 value)
+        public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T17 value)
         {
             return new Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(value);
         }
@@ -4785,9 +5874,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 17-dimensional immutable coproduct.
+    /// A 17-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : CoproductBase, ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
+    public class Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : Coproduct
     {
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the specified value on the first position.
@@ -4928,7 +6017,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct17(ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> source)
+        public Coproduct17(Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -4943,144 +6032,267 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
         public bool IsFourteenth
         {
             get { return CoproductDiscriminator == 14; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifteenth value.
+        /// </summary>
         public bool IsFifteenth
         {
             get { return CoproductDiscriminator == 15; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixteenth value.
+        /// </summary>
         public bool IsSixteenth
         {
             get { return CoproductDiscriminator == 16; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventeenth value.
+        /// </summary>
         public bool IsSeventeenth
         {
             get { return CoproductDiscriminator == 17; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        /// <summary>
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        /// <summary>
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        /// <summary>
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -5123,6 +6335,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -5173,7 +6389,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T1 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T1 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5181,7 +6397,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T2 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T2 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5189,7 +6405,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T3 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T3 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5197,7 +6413,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T4 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T4 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5205,7 +6421,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T5 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T5 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5213,7 +6429,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T6 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T6 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5221,7 +6437,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T7 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T7 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5229,7 +6445,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T8 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T8 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5237,7 +6453,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T9 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T9 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5245,7 +6461,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T10 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T10 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5253,7 +6469,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T11 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T11 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5261,7 +6477,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T12 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T12 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5269,7 +6485,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T13 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T13 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5277,7 +6493,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T14 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T14 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5285,7 +6501,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T15 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T15 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5293,7 +6509,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T16 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T16 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5301,7 +6517,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T17 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T17 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5309,7 +6525,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the eighteenth value.
         /// </summary>
-        public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T18 value)
+        public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T18 value)
         {
             return new Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(value);
         }
@@ -5317,9 +6533,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 18-dimensional immutable coproduct.
+    /// A 18-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : CoproductBase, ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
+    public class Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : Coproduct
     {
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the specified value on the first position.
@@ -5468,7 +6684,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct18(ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> source)
+        public Coproduct18(Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -5483,152 +6699,282 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
         public bool IsFourteenth
         {
             get { return CoproductDiscriminator == 14; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifteenth value.
+        /// </summary>
         public bool IsFifteenth
         {
             get { return CoproductDiscriminator == 15; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixteenth value.
+        /// </summary>
         public bool IsSixteenth
         {
             get { return CoproductDiscriminator == 16; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventeenth value.
+        /// </summary>
         public bool IsSeventeenth
         {
             get { return CoproductDiscriminator == 17; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighteenth value.
+        /// </summary>
         public bool IsEighteenth
         {
             get { return CoproductDiscriminator == 18; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        /// <summary>
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        /// <summary>
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        /// <summary>
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
         }
-        public IOption<T18> Eighteenth
+        /// <summary>
+        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T18> Eighteenth
         {
             get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -5673,6 +7019,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -5725,7 +7075,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T1 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T1 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5733,7 +7083,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T2 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T2 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5741,7 +7091,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T3 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T3 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5749,7 +7099,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T4 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T4 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5757,7 +7107,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T5 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T5 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5765,7 +7115,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T6 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T6 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5773,7 +7123,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T7 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T7 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5781,7 +7131,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T8 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T8 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5789,7 +7139,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T9 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T9 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5797,7 +7147,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T10 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T10 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5805,7 +7155,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T11 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T11 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5813,7 +7163,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T12 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T12 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5821,7 +7171,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T13 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T13 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5829,7 +7179,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T14 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T14 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5837,7 +7187,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T15 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T15 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5845,7 +7195,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T16 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T16 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5853,7 +7203,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T17 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T17 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5861,7 +7211,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T18 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T18 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5869,7 +7219,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the nineteenth value.
         /// </summary>
-        public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T19 value)
+        public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T19 value)
         {
             return new Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(value);
         }
@@ -5877,9 +7227,9 @@ namespace FuncSharp
     }
 
     /// <summary>
-    /// A 19-dimensional immutable coproduct.
+    /// A 19-dimensional strongly-typed immutable coproduct.
     /// </summary> 
-    public class Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : CoproductBase, ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
+    public class Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : Coproduct
     {
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the specified value on the first position.
@@ -6036,7 +7386,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct19(ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> source)
+        public Coproduct19(Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -6051,160 +7401,297 @@ namespace FuncSharp
         {
         }
 
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
         public bool IsFirst
         {
             get { return CoproductDiscriminator == 1; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
         public bool IsSecond
         {
             get { return CoproductDiscriminator == 2; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
         public bool IsThird
         {
             get { return CoproductDiscriminator == 3; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
         public bool IsFourth
         {
             get { return CoproductDiscriminator == 4; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
         public bool IsFifth
         {
             get { return CoproductDiscriminator == 5; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
         public bool IsSixth
         {
             get { return CoproductDiscriminator == 6; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
         public bool IsSeventh
         {
             get { return CoproductDiscriminator == 7; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
         public bool IsEighth
         {
             get { return CoproductDiscriminator == 8; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
         public bool IsNinth
         {
             get { return CoproductDiscriminator == 9; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
         public bool IsTenth
         {
             get { return CoproductDiscriminator == 10; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
         public bool IsEleventh
         {
             get { return CoproductDiscriminator == 11; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
         public bool IsTwelfth
         {
             get { return CoproductDiscriminator == 12; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
         public bool IsThirteenth
         {
             get { return CoproductDiscriminator == 13; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
         public bool IsFourteenth
         {
             get { return CoproductDiscriminator == 14; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the fifteenth value.
+        /// </summary>
         public bool IsFifteenth
         {
             get { return CoproductDiscriminator == 15; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the sixteenth value.
+        /// </summary>
         public bool IsSixteenth
         {
             get { return CoproductDiscriminator == 16; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the seventeenth value.
+        /// </summary>
         public bool IsSeventeenth
         {
             get { return CoproductDiscriminator == 17; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the eighteenth value.
+        /// </summary>
         public bool IsEighteenth
         {
             get { return CoproductDiscriminator == 18; }
         }
+        /// <summary>
+        /// Returns whether the coproduct contains the nineteenth value.
+        /// </summary>
         public bool IsNineteenth
         {
             get { return CoproductDiscriminator == 19; }
         }
 
-        public IOption<T1> First
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        /// <summary>
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        /// <summary>
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        /// <summary>
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
         }
-        public IOption<T18> Eighteenth
+        /// <summary>
+        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T18> Eighteenth
         {
             get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
         }
-        public IOption<T19> Nineteenth
+        /// <summary>
+        /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        public Option<T19> Nineteenth
         {
             get { return IsNineteenth ? Option.Valued(GetCoproductValue<T19>()) : Option.Empty<T19>(); }
         }
 
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         public R Match<R>(
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond,
@@ -6251,6 +7738,10 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,

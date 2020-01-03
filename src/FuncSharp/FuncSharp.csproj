@@ -28,13 +28,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
-    <None Update="Coproduct\ICoproduct.tt">
+    <None Update="Coproduct\CoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproduct.cs</LastGenOutput>
-    </None>
-    <None Update="Coproduct\ICoproductExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
+      <LastGenOutput>CoproductExtensions.cs</LastGenOutput>
     </None>
     <None Update="DataCube\DataCube.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -47,10 +43,6 @@
     <None Update="DataCube\Position.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Position.cs</LastGenOutput>
-    </None>
-    <None Update="Product\IProduct.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IProduct.cs</LastGenOutput>
     </None>
     <None Update="Product\Product.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -87,15 +79,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Coproduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="Coproduct\ICoproduct.cs">
+    <Compile Update="Coproduct\CoproductExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ICoproduct.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Coproduct\ICoproductExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
+      <DependentUpon>CoproductExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="DataCube\DataCube.cs">
       <DesignTime>True</DesignTime>
@@ -111,11 +98,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Position.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Product\IProduct.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IProduct.tt</DependentUpon>
     </Compile>
     <Compile Update="Product\Product.cs">
       <DesignTime>True</DesignTime>

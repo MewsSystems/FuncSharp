@@ -15,17 +15,17 @@ namespace FuncSharp
         /// <summary>
         /// True value as an option.
         /// </summary>
-        public static IOption<bool> True { get; }
+        public static Option<bool> True { get; }
 
         /// <summary>
         /// False value as an option.
         /// </summary>
-        public static IOption<bool> False { get; }
+        public static Option<bool> False { get; }
 
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
-        public static IOption<A> Create<A>(A value)
+        public static Option<A> Create<A>(A value)
         {
             if (value != null)
             {
@@ -37,7 +37,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
-        public static IOption<A> Create<A>(A? value)
+        public static Option<A> Create<A>(A? value)
             where A : struct
         {
             if (value.HasValue)
@@ -50,7 +50,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an option with the specified value.
         /// </summary>
-        public static IOption<A> Valued<A>(A value)
+        public static Option<A> Valued<A>(A value)
         {
             return new Option<A>(value);
         }
@@ -58,20 +58,20 @@ namespace FuncSharp
         /// <summary>
         /// Returns an empty option.
         /// </summary>
-        public static IOption<A> Empty<A>()
+        public static Option<A> Empty<A>()
         {
             return Option<A>.Empty;
         }
     }
 
-    internal class Option<A> : Coproduct2<A, Unit>, IOption<A>
+    public class Option<A> : Coproduct2<A, Unit>
     {
         static Option()
         {
             Empty = new Option<A>();
         }
 
-        public Option(A value)
+        internal Option(A value)
             : base(value)
         {
         }
@@ -81,18 +81,27 @@ namespace FuncSharp
         {
         }
 
-        public static IOption<A> Empty { get; }
+        public static Option<A> Empty { get; }
 
+        /// <summary>
+        /// Returns whether the option is empty (doesn't contain any value).
+        /// </summary>
         public bool IsEmpty
         {
             get { return IsSecond; }
         }
 
+        /// <summary>
+        /// Returns whether the option is not empty (contain a value).
+        /// </summary>
         public bool NonEmpty
         {
             get { return IsFirst; }
         }
 
+        /// <summary>
+        /// Returns value of the option if not empty.
+        /// </summary>
         public A Get(Func<Unit, Exception> otherwise = null)
         {
             return this.GetOrElse<A, A>(_ =>
@@ -108,23 +117,30 @@ namespace FuncSharp
             });
         }
 
-        public A GetOrDefault()
-        {
-            return this.GetOrElse(default(A));
-        }
-
-        public IOption<B> Map<B>(Func<A, B> f)
+        /// <summary>
+        /// Maps value of the current option (if present) into a new value using the specified function and 
+        /// returns a new option with that new value.
+        /// </summary>
+        public Option<B> Map<B>(Func<A, B> f)
         {
             return FlatMap(a => Option.Valued(f(a)));
         }
 
-        public IOption<B> Map<B>(Func<A, B?> f)
+        /// <summary>
+        /// Maps value of the current option (if present) into a new value using the specified function and 
+        /// returns a new option with that new value.
+        /// </summary>
+        public Option<B> Map<B>(Func<A, B?> f)
             where B : struct
         {
             return FlatMap(a => f(a).ToOption());
         }
 
-        public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)
+        /// <summary>
+        /// Maps value of the current option (if present) into a new option using the specified function and 
+        /// returns that new option.
+        /// </summary>
+        public Option<B> FlatMap<B>(Func<A, Option<B>> f)
         {
             return Match(
                 a => f(a),
@@ -132,6 +148,9 @@ namespace FuncSharp
             );
         }
 
+        /// <summary>
+        /// Returns an enumerable with the option value. If the option is empty, returns empty enumerable.
+        /// </summary>
         public IEnumerable<A> ToEnumerable()
         {
             return Match(

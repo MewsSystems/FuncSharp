@@ -36,7 +36,7 @@
         /// <summary>
         /// Creates a new 1-dimensional canonical product.
         /// </summary>
-        public static Position1<P1> Create<P1>(IProduct1<P1> p)
+        public static Position1<P1> Create<P1>(Product1<P1> p)
         {
             return Create(p.ProductValue1);
         }
@@ -75,7 +75,7 @@
         /// <summary>
         /// Creates a new 2-dimensional canonical product.
         /// </summary>
-        public static Position2<P1, P2> Create<P1, P2>(IProduct2<P1, P2> p)
+        public static Position2<P1, P2> Create<P1, P2>(Product2<P1, P2> p)
         {
             return Create(p.ProductValue1, p.ProductValue2);
         }
@@ -119,7 +119,7 @@
         /// <summary>
         /// Creates a new 3-dimensional canonical product.
         /// </summary>
-        public static Position3<P1, P2, P3> Create<P1, P2, P3>(IProduct3<P1, P2, P3> p)
+        public static Position3<P1, P2, P3> Create<P1, P2, P3>(Product3<P1, P2, P3> p)
         {
             return Create(p.ProductValue1, p.ProductValue2, p.ProductValue3);
         }
@@ -168,7 +168,7 @@
         /// <summary>
         /// Creates a new 4-dimensional canonical product.
         /// </summary>
-        public static Position4<P1, P2, P3, P4> Create<P1, P2, P3, P4>(IProduct4<P1, P2, P3, P4> p)
+        public static Position4<P1, P2, P3, P4> Create<P1, P2, P3, P4>(Product4<P1, P2, P3, P4> p)
         {
             return Create(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4);
         }
@@ -222,7 +222,7 @@
         /// <summary>
         /// Creates a new 5-dimensional canonical product.
         /// </summary>
-        public static Position5<P1, P2, P3, P4, P5> Create<P1, P2, P3, P4, P5>(IProduct5<P1, P2, P3, P4, P5> p)
+        public static Position5<P1, P2, P3, P4, P5> Create<P1, P2, P3, P4, P5>(Product5<P1, P2, P3, P4, P5> p)
         {
             return Create(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5);
         }
@@ -281,7 +281,7 @@
         /// <summary>
         /// Creates a new 6-dimensional canonical product.
         /// </summary>
-        public static Position6<P1, P2, P3, P4, P5, P6> Create<P1, P2, P3, P4, P5, P6>(IProduct6<P1, P2, P3, P4, P5, P6> p)
+        public static Position6<P1, P2, P3, P4, P5, P6> Create<P1, P2, P3, P4, P5, P6>(Product6<P1, P2, P3, P4, P5, P6> p)
         {
             return Create(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6);
         }
@@ -345,7 +345,7 @@
         /// <summary>
         /// Creates a new 7-dimensional canonical product.
         /// </summary>
-        public static Position7<P1, P2, P3, P4, P5, P6, P7> Create<P1, P2, P3, P4, P5, P6, P7>(IProduct7<P1, P2, P3, P4, P5, P6, P7> p)
+        public static Position7<P1, P2, P3, P4, P5, P6, P7> Create<P1, P2, P3, P4, P5, P6, P7>(Product7<P1, P2, P3, P4, P5, P6, P7> p)
         {
             return Create(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, p.ProductValue7);
         }
@@ -414,7 +414,7 @@
         /// <summary>
         /// Creates a new 8-dimensional canonical product.
         /// </summary>
-        public static Position8<P1, P2, P3, P4, P5, P6, P7, P8> Create<P1, P2, P3, P4, P5, P6, P7, P8>(IProduct8<P1, P2, P3, P4, P5, P6, P7, P8> p)
+        public static Position8<P1, P2, P3, P4, P5, P6, P7, P8> Create<P1, P2, P3, P4, P5, P6, P7, P8>(Product8<P1, P2, P3, P4, P5, P6, P7, P8> p)
         {
             return Create(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, p.ProductValue7, p.ProductValue8);
         }

@@ -104,7 +104,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new interval with the specified bounds.
         /// </summary>
-        public Interval<A> Interval(IOption<IntervalBound<A>> lowerBound, IOption<IntervalBound<A>> upperBound)
+        public Interval<A> Interval(Option<IntervalBound<A>> lowerBound, Option<IntervalBound<A>> upperBound)
         {
             if (lowerBound.IsEmpty && upperBound.IsEmpty)
             {
@@ -396,7 +396,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns whether the first lower bound is less than the second.
         /// </summary>
-        private bool LowerBoundLess(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b)
+        private bool LowerBoundLess(Option<IntervalBound<A>> a, Option<IntervalBound<A>> b)
         {
             var result = a.FlatMap(x => b.Map(y => Less(x.Value, y.Value) || Equals(x.Value, y.Value) && x.IsClosed && y.IsOpen));
             return result.GetOrElse(_ => a.IsEmpty && b.NonEmpty);
@@ -405,7 +405,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns whether the first upper bound is less than the second.
         /// </summary>
-        private bool UpperBoundLess(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b)
+        private bool UpperBoundLess(Option<IntervalBound<A>> a, Option<IntervalBound<A>> b)
         {
             var result = a.FlatMap(x => b.Map(y => Less(x.Value, y.Value) || Equals(x.Value, y.Value) && x.IsOpen && y.IsClosed));
             return result.GetOrElse(_ => a.NonEmpty && b.IsEmpty);
@@ -414,7 +414,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns whther one interval bound complements another (i.e. have same value, but differ in type).
         /// </summary>
-        private bool Complements(IOption<IntervalBound<A>> a, IOption<IntervalBound<A>> b)
+        private bool Complements(Option<IntervalBound<A>> a, Option<IntervalBound<A>> b)
         {
             return a.FlatMap(x => b.Map(y => Equals(x.Value, y.Value) && !Equals(x.Type, y.Type))).GetOrFalse();
         }

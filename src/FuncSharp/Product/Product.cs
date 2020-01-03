@@ -6,10 +6,15 @@ using System.Text;
 namespace FuncSharp
 {
     /// <summary>
-    /// Base class and factory of canonical product types.
+    /// A type that is a compound of other types. Can be understood as a cartesian product of types, e.g. T1 × T2 × T3.
+    /// Therefore instances of a product type consist of values of the compound types, e.g. T1 value1, T2 value2 and T3 value3.
+    /// This interface represents the most abstract definition of a product type with unknown compound types and unknown arity.
     /// </summary>
-    public abstract class ProductBase : IProduct
+    public abstract class Product
     {
+        /// <summary>
+        /// Values of the product.
+        /// </summary>
         public abstract IEnumerable<object> ProductValues { get; }
 
         private int? HashCode { get; set; }
@@ -48,7 +53,7 @@ namespace FuncSharp
     /// <summary>
     /// A 0-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product0 : ProductBase, IProduct0
+    public class Product0 : Product
     {
         public Product0()
         {
@@ -65,7 +70,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 0-dimensional canonical product.
         /// </summary>
-        public static IProduct0 Create()
+        public static Product0 Create()
         {
             return new Product0();
         }
@@ -73,7 +78,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 0-dimensional canonical product.
         /// </summary>
-        public static IProduct0 Create(IProduct0 p)
+        public static Product0 Create(Product0 p)
         {
             if (Equals(p.GetType(), typeof(Product0)))
             {
@@ -83,6 +88,9 @@ namespace FuncSharp
             return Create();
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<R> f)
         {
             return f();
@@ -96,7 +104,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct0 p &&
+                obj is Product0 p &&
                 Equals(GetType(), p.GetType());
         }
     }
@@ -109,7 +117,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 1-dimensional canonical product.
         /// </summary>
-        public static IProduct1<T1> Create<T1>(T1 t1)
+        public static Product1<T1> Create<T1>(T1 t1)
         {
             return new Product1<T1>(t1);
         }
@@ -117,7 +125,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 1-dimensional canonical product.
         /// </summary>
-        public static IProduct1<T1> Create<T1>(IProduct1<T1> p)
+        public static Product1<T1> Create<T1>(Product1<T1> p)
         {
             if (Equals(p.GetType(), typeof(Product1<T1>)))
             {
@@ -131,13 +139,16 @@ namespace FuncSharp
     /// <summary>
     /// A 1-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product1<T1> : ProductBase, IProduct1<T1>
+    public class Product1<T1> : Product
     {
         public Product1(T1 t1)
         {
             ProductValue1 = t1;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -148,11 +159,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, R> f)
         {
             return f(ProductValue1);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1> f)
         {
             f(ProductValue1);
@@ -166,7 +183,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct1<T1> p &&
+                obj is Product1<T1> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(GetType(), p.GetType());
         }
@@ -180,7 +197,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 2-dimensional canonical product.
         /// </summary>
-        public static IProduct2<T1, T2> Create<T1, T2>(T1 t1, T2 t2)
+        public static Product2<T1, T2> Create<T1, T2>(T1 t1, T2 t2)
         {
             return new Product2<T1, T2>(t1, t2);
         }
@@ -188,7 +205,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 2-dimensional canonical product.
         /// </summary>
-        public static IProduct2<T1, T2> Create<T1, T2>(IProduct2<T1, T2> p)
+        public static Product2<T1, T2> Create<T1, T2>(Product2<T1, T2> p)
         {
             if (Equals(p.GetType(), typeof(Product2<T1, T2>)))
             {
@@ -202,7 +219,7 @@ namespace FuncSharp
     /// <summary>
     /// A 2-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product2<T1, T2> : ProductBase, IProduct2<T1, T2>
+    public class Product2<T1, T2> : Product
     {
         public Product2(T1 t1, T2 t2)
         {
@@ -210,8 +227,14 @@ namespace FuncSharp
             ProductValue2 = t2;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -223,11 +246,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, R> f)
         {
             return f(ProductValue1, ProductValue2);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2> f)
         {
             f(ProductValue1, ProductValue2);
@@ -241,7 +270,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct2<T1, T2> p &&
+                obj is Product2<T1, T2> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(GetType(), p.GetType());
@@ -256,7 +285,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional canonical product.
         /// </summary>
-        public static IProduct3<T1, T2, T3> Create<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
+        public static Product3<T1, T2, T3> Create<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
         {
             return new Product3<T1, T2, T3>(t1, t2, t3);
         }
@@ -264,7 +293,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional canonical product.
         /// </summary>
-        public static IProduct3<T1, T2, T3> Create<T1, T2, T3>(IProduct3<T1, T2, T3> p)
+        public static Product3<T1, T2, T3> Create<T1, T2, T3>(Product3<T1, T2, T3> p)
         {
             if (Equals(p.GetType(), typeof(Product3<T1, T2, T3>)))
             {
@@ -278,7 +307,7 @@ namespace FuncSharp
     /// <summary>
     /// A 3-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product3<T1, T2, T3> : ProductBase, IProduct3<T1, T2, T3>
+    public class Product3<T1, T2, T3> : Product
     {
         public Product3(T1 t1, T2 t2, T3 t3)
         {
@@ -287,10 +316,19 @@ namespace FuncSharp
             ProductValue3 = t3;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
         public T3 ProductValue3 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -303,11 +341,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, T3, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2, T3> f)
         {
             f(ProductValue1, ProductValue2, ProductValue3);
@@ -321,7 +365,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct3<T1, T2, T3> p &&
+                obj is Product3<T1, T2, T3> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(ProductValue3, p.ProductValue3) &&
@@ -337,7 +381,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional canonical product.
         /// </summary>
-        public static IProduct4<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T1 t1, T2 t2, T3 t3, T4 t4)
+        public static Product4<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T1 t1, T2 t2, T3 t3, T4 t4)
         {
             return new Product4<T1, T2, T3, T4>(t1, t2, t3, t4);
         }
@@ -345,7 +389,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional canonical product.
         /// </summary>
-        public static IProduct4<T1, T2, T3, T4> Create<T1, T2, T3, T4>(IProduct4<T1, T2, T3, T4> p)
+        public static Product4<T1, T2, T3, T4> Create<T1, T2, T3, T4>(Product4<T1, T2, T3, T4> p)
         {
             if (Equals(p.GetType(), typeof(Product4<T1, T2, T3, T4>)))
             {
@@ -359,7 +403,7 @@ namespace FuncSharp
     /// <summary>
     /// A 4-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product4<T1, T2, T3, T4> : ProductBase, IProduct4<T1, T2, T3, T4>
+    public class Product4<T1, T2, T3, T4> : Product
     {
         public Product4(T1 t1, T2 t2, T3 t3, T4 t4)
         {
@@ -369,12 +413,24 @@ namespace FuncSharp
             ProductValue4 = t4;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
         public T3 ProductValue3 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
         public T4 ProductValue4 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -388,11 +444,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, T3, T4, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2, T3, T4> f)
         {
             f(ProductValue1, ProductValue2, ProductValue3, ProductValue4);
@@ -406,7 +468,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct4<T1, T2, T3, T4> p &&
+                obj is Product4<T1, T2, T3, T4> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(ProductValue3, p.ProductValue3) &&
@@ -423,7 +485,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional canonical product.
         /// </summary>
-        public static IProduct5<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+        public static Product5<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
         {
             return new Product5<T1, T2, T3, T4, T5>(t1, t2, t3, t4, t5);
         }
@@ -431,7 +493,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional canonical product.
         /// </summary>
-        public static IProduct5<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(IProduct5<T1, T2, T3, T4, T5> p)
+        public static Product5<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(Product5<T1, T2, T3, T4, T5> p)
         {
             if (Equals(p.GetType(), typeof(Product5<T1, T2, T3, T4, T5>)))
             {
@@ -445,7 +507,7 @@ namespace FuncSharp
     /// <summary>
     /// A 5-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product5<T1, T2, T3, T4, T5> : ProductBase, IProduct5<T1, T2, T3, T4, T5>
+    public class Product5<T1, T2, T3, T4, T5> : Product
     {
         public Product5(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
         {
@@ -456,14 +518,29 @@ namespace FuncSharp
             ProductValue5 = t5;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
         public T3 ProductValue3 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
         public T4 ProductValue4 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
         public T5 ProductValue5 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -478,11 +555,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, T3, T4, T5, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2, T3, T4, T5> f)
         {
             f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5);
@@ -496,7 +579,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct5<T1, T2, T3, T4, T5> p &&
+                obj is Product5<T1, T2, T3, T4, T5> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(ProductValue3, p.ProductValue3) &&
@@ -514,7 +597,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional canonical product.
         /// </summary>
-        public static IProduct6<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+        public static Product6<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
             return new Product6<T1, T2, T3, T4, T5, T6>(t1, t2, t3, t4, t5, t6);
         }
@@ -522,7 +605,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional canonical product.
         /// </summary>
-        public static IProduct6<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(IProduct6<T1, T2, T3, T4, T5, T6> p)
+        public static Product6<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(Product6<T1, T2, T3, T4, T5, T6> p)
         {
             if (Equals(p.GetType(), typeof(Product6<T1, T2, T3, T4, T5, T6>)))
             {
@@ -536,7 +619,7 @@ namespace FuncSharp
     /// <summary>
     /// A 6-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product6<T1, T2, T3, T4, T5, T6> : ProductBase, IProduct6<T1, T2, T3, T4, T5, T6>
+    public class Product6<T1, T2, T3, T4, T5, T6> : Product
     {
         public Product6(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
@@ -548,16 +631,34 @@ namespace FuncSharp
             ProductValue6 = t6;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
         public T3 ProductValue3 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
         public T4 ProductValue4 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
         public T5 ProductValue5 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
         public T6 ProductValue6 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -573,11 +674,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, T3, T4, T5, T6, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2, T3, T4, T5, T6> f)
         {
             f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6);
@@ -591,7 +698,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct6<T1, T2, T3, T4, T5, T6> p &&
+                obj is Product6<T1, T2, T3, T4, T5, T6> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(ProductValue3, p.ProductValue3) &&
@@ -610,7 +717,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional canonical product.
         /// </summary>
-        public static IProduct7<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
+        public static Product7<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
         {
             return new Product7<T1, T2, T3, T4, T5, T6, T7>(t1, t2, t3, t4, t5, t6, t7);
         }
@@ -618,7 +725,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional canonical product.
         /// </summary>
-        public static IProduct7<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(IProduct7<T1, T2, T3, T4, T5, T6, T7> p)
+        public static Product7<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(Product7<T1, T2, T3, T4, T5, T6, T7> p)
         {
             if (Equals(p.GetType(), typeof(Product7<T1, T2, T3, T4, T5, T6, T7>)))
             {
@@ -632,7 +739,7 @@ namespace FuncSharp
     /// <summary>
     /// A 7-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product7<T1, T2, T3, T4, T5, T6, T7> : ProductBase, IProduct7<T1, T2, T3, T4, T5, T6, T7>
+    public class Product7<T1, T2, T3, T4, T5, T6, T7> : Product
     {
         public Product7(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
         {
@@ -645,18 +752,39 @@ namespace FuncSharp
             ProductValue7 = t7;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
         public T3 ProductValue3 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
         public T4 ProductValue4 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
         public T5 ProductValue5 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
         public T6 ProductValue6 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
         public T7 ProductValue7 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -673,11 +801,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2, T3, T4, T5, T6, T7> f)
         {
             f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7);
@@ -691,7 +825,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct7<T1, T2, T3, T4, T5, T6, T7> p &&
+                obj is Product7<T1, T2, T3, T4, T5, T6, T7> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(ProductValue3, p.ProductValue3) &&
@@ -711,7 +845,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional canonical product.
         /// </summary>
-        public static IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
+        public static Product8<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
         {
             return new Product8<T1, T2, T3, T4, T5, T6, T7, T8>(t1, t2, t3, t4, t5, t6, t7, t8);
         }
@@ -719,7 +853,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional canonical product.
         /// </summary>
-        public static IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> p)
+        public static Product8<T1, T2, T3, T4, T5, T6, T7, T8> Create<T1, T2, T3, T4, T5, T6, T7, T8>(Product8<T1, T2, T3, T4, T5, T6, T7, T8> p)
         {
             if (Equals(p.GetType(), typeof(Product8<T1, T2, T3, T4, T5, T6, T7, T8>)))
             {
@@ -733,7 +867,7 @@ namespace FuncSharp
     /// <summary>
     /// A 8-dimensional strongly-typed immutable product.
     /// </summary>
-    public class Product8<T1, T2, T3, T4, T5, T6, T7, T8> : ProductBase, IProduct8<T1, T2, T3, T4, T5, T6, T7, T8>
+    public class Product8<T1, T2, T3, T4, T5, T6, T7, T8> : Product
     {
         public Product8(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
         {
@@ -747,20 +881,44 @@ namespace FuncSharp
             ProductValue8 = t8;
         }
 
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
         public T1 ProductValue1 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
         public T2 ProductValue2 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
         public T3 ProductValue3 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
         public T4 ProductValue4 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
         public T5 ProductValue5 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
         public T6 ProductValue6 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
         public T7 ProductValue7 { get; }
 
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
         public T8 ProductValue8 { get; }
 
         public override IEnumerable<object> ProductValues
@@ -778,11 +936,17 @@ namespace FuncSharp
             }
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters and returns its result.
+        /// </summary>
         public R Match<R>(Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f)
         {
             return f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8);
         }
 
+        /// <summary>
+        /// Invokes the specified function with the product values as its parameters.
+        /// </summary>
         public void Match(Action<T1, T2, T3, T4, T5, T6, T7, T8> f)
         {
             f(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7, ProductValue8);
@@ -796,7 +960,7 @@ namespace FuncSharp
         protected override bool ProductEquals(object obj)
         {
             return
-                obj is IProduct8<T1, T2, T3, T4, T5, T6, T7, T8> p &&
+                obj is Product8<T1, T2, T3, T4, T5, T6, T7, T8> p &&
                 Equals(ProductValue1, p.ProductValue1) &&
                 Equals(ProductValue2, p.ProductValue2) &&
                 Equals(ProductValue3, p.ProductValue3) &&
