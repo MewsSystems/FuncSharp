@@ -31,7 +31,7 @@ namespace FuncSharp
         /// <summary>
         /// The only value in the cube.
         /// </summary>
-        public IOption<TValue> Value 
+        public Option<TValue> Value 
         { 
             get { return Get(); }
         }
@@ -62,7 +62,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(<#= Parameters(i, name: "P") #>)
+        public Option<TValue> Get(<#= Parameters(i, name: "P") #>)
         {
             return Get(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
         }

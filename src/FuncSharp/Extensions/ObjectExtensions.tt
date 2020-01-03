@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="../CodeGen/Helpers.ttinclude" #>
+<#@ include file="../Helpers.ttinclude" #>
 using System;
 
 namespace FuncSharp
@@ -14,7 +14,7 @@ namespace FuncSharp
         /// <summary>
         /// Casts the specified object to the given type.
         /// </summary>
-        public static IOption<A> As<A>(this object o)
+        public static Option<A> As<A>(this object o)
             where A : class
         {
             return (o as A).ToOption();
@@ -35,7 +35,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
-        public static IOption<A> ToOption<A>(this A value)
+        public static Option<A> ToOption<A>(this A value)
         {
             return Option.Create(value);
         }
@@ -43,7 +43,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into a successful try.
         /// </summary>
-        public static ITry<A> ToTry<A>(this A value)
+        public static Try<A> ToTry<A>(this A value)
         {
             return Try.Success(value);
         }
@@ -51,7 +51,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified exception into a try.
         /// </summary>
-        public static ITry<A> ToTry<A>(this Exception e)
+        public static Try<A> ToTry<A>(this Exception e)
         {
             return Try.Error<A>(e);
         }
@@ -113,7 +113,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
-        public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
+        public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
         {
             return value.AsCoproduct(v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }
@@ -123,7 +123,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
-        public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
+        public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
         {
             return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }

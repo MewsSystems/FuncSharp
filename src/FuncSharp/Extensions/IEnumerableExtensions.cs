@@ -10,7 +10,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns values of the nonempty options.
         /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<Option<T>> source)
         {
             return source.SelectMany(o => o.ToEnumerable());
         }
@@ -18,7 +18,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
-        public static IOption<T> ToNonEmptyOption<T>(this T source)
+        public static Option<T> ToNonEmptyOption<T>(this T source)
             where T : IEnumerable
         {
             if (source == null || !source.OfType<object>().Any())
@@ -31,7 +31,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns first value or an empty option. 
         /// </summary>
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
             if (data.Count == 0)
@@ -44,7 +44,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns last value or an empty option. 
         /// </summary>
-        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             return source.Reverse().FirstOption(predicate);
         }
@@ -52,7 +52,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the only value if the source contains just one value, otherwise an empty option.
         /// </summary>
-        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static Option<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             var data = source.Where(predicate ?? (t => true)).Take(2).ToList();
             if (data.Count == 2)
@@ -158,7 +158,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1>(
-            this IEnumerable<ICoproduct1<T1>> source,
+            this IEnumerable<Coproduct1<T1>> source,
             Action<IEnumerable<T1>> f1)
         {
             f1(source.Select(c => c.First).Flatten().ToList());
@@ -168,7 +168,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2>(
-            this IEnumerable<ICoproduct2<T1, T2>> source,
+            this IEnumerable<Coproduct2<T1, T2>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2)
         {
@@ -180,7 +180,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3>(
-            this IEnumerable<ICoproduct3<T1, T2, T3>> source,
+            this IEnumerable<Coproduct3<T1, T2, T3>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3)
@@ -194,7 +194,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4>(
-            this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source,
+            this IEnumerable<Coproduct4<T1, T2, T3, T4>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -210,7 +210,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5>(
-            this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source,
+            this IEnumerable<Coproduct5<T1, T2, T3, T4, T5>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -228,7 +228,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6>(
-            this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source,
+            this IEnumerable<Coproduct6<T1, T2, T3, T4, T5, T6>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -248,7 +248,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7>(
-            this IEnumerable<ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> source,
+            this IEnumerable<Coproduct7<T1, T2, T3, T4, T5, T6, T7>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -270,7 +270,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8>(
-            this IEnumerable<ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source,
+            this IEnumerable<Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -294,7 +294,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-            this IEnumerable<ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source,
+            this IEnumerable<Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -320,7 +320,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
-            this IEnumerable<ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source,
+            this IEnumerable<Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -348,7 +348,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
-            this IEnumerable<ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source,
+            this IEnumerable<Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -378,7 +378,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
-            this IEnumerable<ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source,
+            this IEnumerable<Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -410,7 +410,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
-            this IEnumerable<ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source,
+            this IEnumerable<Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -444,7 +444,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
-            this IEnumerable<ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source,
+            this IEnumerable<Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -480,7 +480,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
-            this IEnumerable<ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source,
+            this IEnumerable<Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -518,7 +518,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
-            this IEnumerable<ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source,
+            this IEnumerable<Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -558,7 +558,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(
-            this IEnumerable<ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source,
+            this IEnumerable<Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -600,7 +600,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(
-            this IEnumerable<ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source,
+            this IEnumerable<Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,
@@ -644,7 +644,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(
-            this IEnumerable<ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source,
+            this IEnumerable<Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source,
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3,

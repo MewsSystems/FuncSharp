@@ -7,7 +7,7 @@ namespace FuncSharp
     /// General representation of a relation.
     /// </summary>
     public abstract class Relation<TProduct, TDataCube>
-        where TProduct : IProduct
+        where TProduct : Product
         where TDataCube : DataCube<TProduct, Unit>, new()
     {
         /// <summary>

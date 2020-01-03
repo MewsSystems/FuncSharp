@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace FuncSharp
 {
-    public static class ITryExtensions
+    public static class TryExtensions
     {
         /// <summary>
         /// Maps the successful result to a new try.
         /// </summary>
-        public static ITry<B> FlatMap<A, B>(this ITry<A> t, Func<A, ITry<B>> f)
+        public static Try<B> FlatMap<A, B>(this Try<A> t, Func<A, Try<B>> f)
         {
             return t.Match(
                 s => f(s),
@@ -19,7 +19,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the successful result to a new try.
         /// </summary>
-        public static ITry<B, E> FlatMap<A, E, B>(this ITry<A, E> t, Func<A, ITry<B, E>> f)
+        public static Try<B, E> FlatMap<A, E, B>(this Try<A, E> t, Func<A, Try<B, E>> f)
         {
             return t.Match(
                 s => f(s),
@@ -30,7 +30,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the exception result to a new try.
         /// </summary>
-        public static ITry<B> FlatMapError<A, B>(this ITry<A> t, Func<IEnumerable<Exception>, ITry<B>> f)
+        public static Try<B> FlatMapError<A, B>(this Try<A> t, Func<IEnumerable<Exception>, Try<B>> f)
             where A : B
         {
             return t.Match(
@@ -42,7 +42,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the error result to a new try.
         /// </summary>
-        public static ITry<B, F> FlatMapError<A, E, B, F>(this ITry<A, E> t, Func<E, ITry<B, F>> f)
+        public static Try<B, F> FlatMapError<A, E, B, F>(this Try<A, E> t, Func<E, Try<B, F>> f)
             where A : B
             where E : F
         {
@@ -55,7 +55,7 @@ namespace FuncSharp
         /// <summary>
         /// If the result is success, returns it. Otherwise throws the result of the otherwise function.
         /// </summary>
-        public static A Get<A, E>(this ITry<A, E> t, Func<E, Exception> otherwise)
+        public static A Get<A, E>(this Try<A, E> t, Func<E, Exception> otherwise)
         {
             return t.Match(
                 s => s,

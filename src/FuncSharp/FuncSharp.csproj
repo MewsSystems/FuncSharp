@@ -2,30 +2,21 @@
   <PropertyGroup>
   	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-  	<Version>1.6.5</Version>
-  	<AssemblyVersion>1.6.5.0</AssemblyVersion>
-  	<FileVersion>1.6.5.0</FileVersion>
+  	<Version>1.7.0</Version>
+  	<AssemblyVersion>1.7.0.0</AssemblyVersion>
+  	<FileVersion>1.7.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.</Description>
-    <VersionPrefix>0.10.0</VersionPrefix>
     <Authors>Honza Široký</Authors>
-    <PackageTags>FuncSharp, Functional C#</PackageTags>
-    <Copyright>Copyright © 2018</Copyright>
+    <PackageTags>FuncSharp, Functional C#, Product, Coproduct, ADT, Algebraic, Types</PackageTags>
+    <Copyright>Copyright © 2020</Copyright>
     <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Fixed ToEnum.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed traits, improved intervals, performed general cleanup of the library, added some more tests.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateAssemblyTitleAttribute>true</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>true</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>true</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>true</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>true</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -37,13 +28,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
-    <None Update="Coproduct\ICoproduct.tt">
+    <None Update="Coproduct\CoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproduct.cs</LastGenOutput>
-    </None>
-    <None Update="Coproduct\ICoproductExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
+      <LastGenOutput>CoproductExtensions.cs</LastGenOutput>
     </None>
     <None Update="DataCube\DataCube.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -56,10 +43,6 @@
     <None Update="DataCube\Position.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Position.cs</LastGenOutput>
-    </None>
-    <None Update="Product\IProduct.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IProduct.cs</LastGenOutput>
     </None>
     <None Update="Product\Product.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -96,15 +79,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Coproduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="Coproduct\ICoproduct.cs">
+    <Compile Update="Coproduct\CoproductExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ICoproduct.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Coproduct\ICoproductExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
+      <DependentUpon>CoproductExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="DataCube\DataCube.cs">
       <DesignTime>True</DesignTime>
@@ -120,11 +98,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Position.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Product\IProduct.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IProduct.tt</DependentUpon>
     </Compile>
     <Compile Update="Product\Product.cs">
       <DesignTime>True</DesignTime>

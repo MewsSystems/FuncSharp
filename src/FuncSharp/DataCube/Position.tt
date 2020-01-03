@@ -35,7 +35,7 @@ namespace FuncSharp
     /// <summary>
     /// A <#= i #>-dimensional data cube position.
     /// </summary>
-    public sealed class <#= PositionType(i) #> : <#= ProductImplType(i, name: "P") #>
+    public sealed class <#= PositionType(i) #> : <#= ProductType(i, name: "P") #>
     {
         public Position<#= i #>(<#= Parameters(i, name: "P") #>)
             : base(<#= Values(i, name: "p") #>)

@@ -17,7 +17,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a morphism defined by the specified mappings.
         /// </summary>
-        public static IMorphism<A, B> Create<A, B>(params IProduct2<A, B>[] mappings)
+        public static IMorphism<A, B> Create<A, B>(params Product2<A, B>[] mappings)
         {
             return Create(mappings.AsEnumerable());
         }
@@ -25,7 +25,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns a morphism defined by the specified mappings.
         /// </summary>
-        public static IMorphism<A, B> Create<A, B>(IEnumerable<IProduct2<A, B>> mappings)
+        public static IMorphism<A, B> Create<A, B>(IEnumerable<Product2<A, B>> mappings)
         {
             return new Morphism<A, B>(mappings);
         }
@@ -33,7 +33,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an isomorphism defined by the specified pairings.
         /// </summary>
-        public static IIsoMorphism<A, B> CreateIso<A, B>(params IProduct2<A, B>[] pairings)
+        public static IIsoMorphism<A, B> CreateIso<A, B>(params Product2<A, B>[] pairings)
         {
             return new IsoMorphism<A, B>(pairings.AsEnumerable());
         }
@@ -55,7 +55,7 @@ namespace FuncSharp
 
     internal class Morphism<A, B> : IMorphism<A, B>
     {
-        public Morphism(IEnumerable<IProduct2<A, B>> mappings)
+        public Morphism(IEnumerable<Product2<A, B>> mappings)
         {
             Mappings = new DataCube1<A, B>();
             foreach (var mapping in mappings)
@@ -79,7 +79,7 @@ namespace FuncSharp
 
         private DataCube1<A, B> Mappings { get; }
 
-        public IOption<B> Apply(A source)
+        public Option<B> Apply(A source)
         {
             return Mappings.Get(source);
         }
