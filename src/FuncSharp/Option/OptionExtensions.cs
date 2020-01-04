@@ -158,24 +158,13 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Turns the option into a try using the exception in case of empty option.
+        /// Turns the option into a try using the error in case of empty option.
         /// </summary>
-        public static Try<A> ToTry<A>(this Option<A> option, Func<Unit, Exception> e)
+        public static Try<A, E> ToTry<A, E>(this Option<A> option, Func<Unit, E> error)
         {
-            return option.Match<Try<A>>(
+            return option.Match<Try<A, E>>(
                 val => Try.Success(val),
-                _ => Try.Exception(e(Unit.Value))
-            );
-        }
-
-        /// <summary>
-        /// Turns the option into a try using the exception in case of empty option.
-        /// </summary>
-        public static Try<A, E> ToTry<A, E>(this Option<A> option, Func<Unit, E> e)
-        {
-            return option.Match(
-                val => Try.Success<A, E>(val),
-                _ => Try.Error<A, E>(e(Unit.Value))
+                _ => Try.Error(error(Unit.Value))
             );
         }
     }
