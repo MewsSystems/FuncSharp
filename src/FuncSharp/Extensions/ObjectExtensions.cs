@@ -34,22 +34,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Turns the specified value into a successful try.
-        /// </summary>
-        public static Try<A> ToTry<A>(this A value)
-        {
-            return Try.Success(value);
-        }
-
-        /// <summary>
-        /// Turns the specified exception into a try.
-        /// </summary>
-        public static Try<A> ToTry<A>(this Exception e)
-        {
-            return Try.Error<A>(e);
-        }
-
-        /// <summary>
         /// Creates a new 1-dimensional coproduct as a result of type match. The specified value will be on the first place 
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).

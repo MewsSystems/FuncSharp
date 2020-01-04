@@ -15,7 +15,7 @@
             {
                 return Option.Valued(result);
             }
-            return Option.Empty<TResult>();
+            return Option.Empty;
         }
 
         public static Option<TResult> Invoke<A, B, TResult>(Tryer<A, B, TResult> tryer, A a, B b)
@@ -25,7 +25,7 @@
             {
                 return Option.Valued(result);
             }
-            return Option.Empty<TResult>();
+            return Option.Empty;
         }
 
         public static Option<TResult> Invoke<A, B, C, TResult>(Tryer<A, B, C, TResult> tryer, A a, B b, C c)
@@ -35,7 +35,7 @@
             {
                 return Option.Valued(result);
             }
-            return Option.Empty<TResult>();
+            return Option.Empty;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FuncSharp
         {
             if (Equals(key, null))
             {
-                return Option.Empty<V>();
+                return Option.Empty;
             }
             return Tryer.Invoke<K, V>(dictionary.TryGetValue, key);
         }

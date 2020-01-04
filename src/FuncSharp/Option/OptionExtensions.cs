@@ -130,7 +130,7 @@ namespace FuncSharp
         {
             return option.FlatMap(a => predicate(a).Match(
                 t => option,
-                f => Option.Empty<A>()
+                f => Option.Empty
             ));
         }
 
@@ -162,9 +162,9 @@ namespace FuncSharp
         /// </summary>
         public static Try<A> ToTry<A>(this Option<A> option, Func<Unit, Exception> e)
         {
-            return option.Match(
+            return option.Match<Try<A>>(
                 val => Try.Success(val),
-                _ => Try.Error<A>(e(Unit.Value))
+                _ => Try.Exception(e(Unit.Value))
             );
         }
 

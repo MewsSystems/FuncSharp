@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
-    
     public static class Try
     {
         /// <summary>
@@ -34,7 +32,7 @@ namespace FuncSharp
         {
             return Catch<Try<A>, E>(
                 _ => Success(f(Unit.Value)),
-                e => Error<A>(e)
+                e => Exception(e)
             );
         }
 
@@ -49,17 +47,25 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static Try<A, E> Success<A, E>(A success)
+        public static TrySuccess<A> Success<A>(A value)
         {
-            return new Try<A, E>(success);
+            return new TrySuccess<A>(value);
         }
 
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static Try<A> Success<A>(A success)
+        public static Try<A, E> Success<A, E>(A value)
         {
-            return new Try<A>(success);
+            return new Try<A, E>(value);
+        }
+
+        /// <summary>
+        /// Creates a new try with an error result.
+        /// </summary>
+        public static TryError<E> Error<E>(E error)
+        {
+            return new TryError<E>(error);
         }
 
         /// <summary>
@@ -73,15 +79,15 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with an exception result.
         /// </summary>
-        public static Try<A> Error<A>(Exception exception)
+        public static TryException Exception(Exception exception)
         {
-            return new Try<A>(new[] { exception });
+            return new TryException(exception);
         }
 
         /// <summary>
-        /// Creates a new try with an exception result.
+        /// Creates a new try with an error result.
         /// </summary>
-        public static Try<A> Error<A>(IEnumerable<Exception> exception)
+        public static Try<A> Exception<A>(Exception exception)
         {
             return new Try<A>(exception);
         }
@@ -91,41 +97,17 @@ namespace FuncSharp
         /// </summary>
         public static Try<IEnumerable<A>> Aggregate<A>(IEnumerable<Try<A>> tries)
         {
-            return Aggregate(
+            return Aggregate<A, Exception, Try<IEnumerable<A>>>(
                 tries,
                 t => Success(t),
-                e => Error<IEnumerable<A>>(e.SelectMany(error => error).ToList())
-            );
-        }
-
-        /// <summary>
-        /// Aggregates a collection of tries into a try of collection.
-        /// </summary>
-        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, E>> tries)
-        {
-            return Aggregate(
-                tries,
-                t => Success<IEnumerable<A>, IEnumerable<E>>(t),
-                e => Error<IEnumerable<A>, IEnumerable<E>>(e)
-            );
-        }
-
-        /// <summary>
-        /// Aggregates a collection of tries into a try of collection.
-        /// </summary>
-        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, IEnumerable<E>>> tries)
-        {
-            return Aggregate(
-                tries,
-                t => Success<IEnumerable<A>, IEnumerable<E>>(t),
-                e => Error<IEnumerable<A>, IEnumerable<E>>(e.SelectMany(error => error).ToList())
+                e => Exception(e.Aggregate())
             );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static R Aggregate<T, R, E>(IEnumerable<Try<T, E>> tries, Func<IEnumerable<T>, R> success, Func<IEnumerable<E>, R> error)
+        public static R Aggregate<A, E, R>(IEnumerable<Try<A, E>> tries, Func<IEnumerable<A>, R> success, Func<IEnumerable<E>, R> error)
         {
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
@@ -139,7 +121,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T, E>(Try<T1, E> t1, Try<T2, E> t2, Func<E, E, E> errorAggregate, Func<T1, T2, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, E, R>(Try<A1, E> t1, Try<A2, E> t2, Func<A1, A2, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess)
             {
@@ -147,29 +129,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Func<T1, T2, R> f)
+        public static Try<B> Aggregate<A1, A2, B>(Try<A1> t1, Try<A2> t2, Func<A1, A2, B> f)
         {
-            return Aggregate(t1, t2, (e1, e2) => e1.Concat(e2), (s1, s2) => Success<R, IEnumerable<E>>(f(s1, s2)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, R>(Try<T1> t1, Try<T2> t2, Func<T1, T2, R> f)
-        {
-            return Aggregate(t1, t2, (e1, e2) => e1.Concat(e2), (s1, s2) => Success<R>(f(s1, s2)), Error<R>);
+            return Aggregate<A1, A2, Exception, Try<B>>(
+                t1, t2,
+                (s1, s2) => Success(f(s1, s2)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Func<A1, A2, A3, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess)
             {
@@ -177,29 +155,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Func<T1, T2, T3, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Func<A1, A2, A3, B> f)
         {
-            return Aggregate(t1, t2, t3, (e1, e2) => e1.Concat(e2), (s1, s2, s3) => Success<R, IEnumerable<E>>(f(s1, s2, s3)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Func<T1, T2, T3, R> f)
-        {
-            return Aggregate(t1, t2, t3, (e1, e2) => e1.Concat(e2), (s1, s2, s3) => Success<R>(f(s1, s2, s3)), Error<R>);
+            return Aggregate<A1, A2, A3, Exception, Try<B>>(
+                t1, t2, t3,
+                (s1, s2, s3) => Success(f(s1, s2, s3)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Func<A1, A2, A3, A4, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess)
             {
@@ -207,29 +181,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Func<T1, T2, T3, T4, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Func<A1, A2, A3, A4, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Func<T1, T2, T3, T4, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4) => Success<R>(f(s1, s2, s3, s4)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, Exception, Try<B>>(
+                t1, t2, t3, t4,
+                (s1, s2, s3, s4) => Success(f(s1, s2, s3, s4)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Func<A1, A2, A3, A4, A5, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess)
             {
@@ -237,29 +207,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Func<T1, T2, T3, T4, T5, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Func<A1, A2, A3, A4, A5, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Func<T1, T2, T3, T4, T5, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5) => Success<R>(f(s1, s2, s3, s4, s5)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, Exception, Try<B>>(
+                t1, t2, t3, t4, t5,
+                (s1, s2, s3, s4, s5) => Success(f(s1, s2, s3, s4, s5)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Func<A1, A2, A3, A4, A5, A6, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess)
             {
@@ -267,29 +233,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Func<T1, T2, T3, T4, T5, T6, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Func<A1, A2, A3, A4, A5, A6, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Func<T1, T2, T3, T4, T5, T6, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6) => Success<R>(f(s1, s2, s3, s4, s5, s6)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6,
+                (s1, s2, s3, s4, s5, s6) => Success(f(s1, s2, s3, s4, s5, s6)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Func<A1, A2, A3, A4, A5, A6, A7, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess)
             {
@@ -297,29 +259,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Func<T1, T2, T3, T4, T5, T6, T7, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Func<A1, A2, A3, A4, A5, A6, A7, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Func<T1, T2, T3, T4, T5, T6, T7, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7,
+                (s1, s2, s3, s4, s5, s6, s7) => Success(f(s1, s2, s3, s4, s5, s6, s7)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Func<A1, A2, A3, A4, A5, A6, A7, A8, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess)
             {
@@ -327,29 +285,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Func<A1, A2, A3, A4, A5, A6, A7, A8, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Func<T1, T2, T3, T4, T5, T6, T7, T8, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8,
+                (s1, s2, s3, s4, s5, s6, s7, s8) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess)
             {
@@ -357,29 +311,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Try<T10, E> t10, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Try<A10, E> t10, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess && t10.IsSuccess)
             {
@@ -387,29 +337,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Try<T10, IEnumerable<E>> t10, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Try<A10> t10, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Try<T10> t10, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Try<T10, E> t10, Try<T11, E> t11, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Try<A10, E> t10, Try<A11, E> t11, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess && t10.IsSuccess && t11.IsSuccess)
             {
@@ -417,29 +363,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Try<T10, IEnumerable<E>> t10, Try<T11, IEnumerable<E>> t11, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Try<A10> t10, Try<A11> t11, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Try<T10> t10, Try<T11> t11, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Try<T10, E> t10, Try<T11, E> t11, Try<T12, E> t12, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Try<A10, E> t10, Try<A11, E> t11, Try<A12, E> t12, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess && t10.IsSuccess && t11.IsSuccess && t12.IsSuccess)
             {
@@ -447,29 +389,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Try<T10, IEnumerable<E>> t10, Try<T11, IEnumerable<E>> t11, Try<T12, IEnumerable<E>> t12, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Try<A10> t10, Try<A11> t11, Try<A12> t12, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Try<T10> t10, Try<T11> t11, Try<T12> t12, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Try<T10, E> t10, Try<T11, E> t11, Try<T12, E> t12, Try<T13, E> t13, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Try<A10, E> t10, Try<A11, E> t11, Try<A12, E> t12, Try<A13, E> t13, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess && t10.IsSuccess && t11.IsSuccess && t12.IsSuccess && t13.IsSuccess)
             {
@@ -477,29 +415,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Try<T10, IEnumerable<E>> t10, Try<T11, IEnumerable<E>> t11, Try<T12, IEnumerable<E>> t12, Try<T13, IEnumerable<E>> t13, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Try<A10> t10, Try<A11> t11, Try<A12> t12, Try<A13> t13, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Try<T10> t10, Try<T11> t11, Try<T12> t12, Try<T13> t13, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Try<T10, E> t10, Try<T11, E> t11, Try<T12, E> t12, Try<T13, E> t13, Try<T14, E> t14, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Try<A10, E> t10, Try<A11, E> t11, Try<A12, E> t12, Try<A13, E> t13, Try<A14, E> t14, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess && t10.IsSuccess && t11.IsSuccess && t12.IsSuccess && t13.IsSuccess && t14.IsSuccess)
             {
@@ -507,29 +441,25 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error, t14.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Try<T10, IEnumerable<E>> t10, Try<T11, IEnumerable<E>> t11, Try<T12, IEnumerable<E>> t12, Try<T13, IEnumerable<E>> t13, Try<T14, IEnumerable<E>> t14, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Try<A10> t10, Try<A11> t11, Try<A12> t12, Try<A13> t13, Try<A14> t14, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Try<T10> t10, Try<T11> t11, Try<T12> t12, Try<T13> t13, Try<T14> t14, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14)),
+                e => Exception(e.Aggregate())
+            );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by given aggregate and calls error function.
         /// </summary>
-        public static T Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T, E>(Try<T1, E> t1, Try<T2, E> t2, Try<T3, E> t3, Try<T4, E> t4, Try<T5, E> t5, Try<T6, E> t6, Try<T7, E> t7, Try<T8, E> t8, Try<T9, E> t9, Try<T10, E> t10, Try<T11, E> t11, Try<T12, E> t12, Try<T13, E> t13, Try<T14, E> t14, Try<T15, E> t15, Func<E, E, E> errorAggregate, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T> success, Func<E, T> error)
+        public static R Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, E, R>(Try<A1, E> t1, Try<A2, E> t2, Try<A3, E> t3, Try<A4, E> t4, Try<A5, E> t5, Try<A6, E> t6, Try<A7, E> t7, Try<A8, E> t8, Try<A9, E> t9, Try<A10, E> t10, Try<A11, E> t11, Try<A12, E> t12, Try<A13, E> t13, Try<A14, E> t14, Try<A15, E> t15, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, R> success, Func<IEnumerable<E>, R> error)
         {
             if (t1.IsSuccess && t2.IsSuccess && t3.IsSuccess && t4.IsSuccess && t5.IsSuccess && t6.IsSuccess && t7.IsSuccess && t8.IsSuccess && t9.IsSuccess && t10.IsSuccess && t11.IsSuccess && t12.IsSuccess && t13.IsSuccess && t14.IsSuccess && t15.IsSuccess)
             {
@@ -537,23 +467,19 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error, t14.Error, t15.Error };
-            return error(errors.Flatten().Aggregate(errorAggregate));
+            return error(errors.Flatten());
         }
 
         /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into an AggregateException.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R, E>(Try<T1, IEnumerable<E>> t1, Try<T2, IEnumerable<E>> t2, Try<T3, IEnumerable<E>> t3, Try<T4, IEnumerable<E>> t4, Try<T5, IEnumerable<E>> t5, Try<T6, IEnumerable<E>> t6, Try<T7, IEnumerable<E>> t7, Try<T8, IEnumerable<E>> t8, Try<T9, IEnumerable<E>> t9, Try<T10, IEnumerable<E>> t10, Try<T11, IEnumerable<E>> t11, Try<T12, IEnumerable<E>> t12, Try<T13, IEnumerable<E>> t13, Try<T14, IEnumerable<E>> t14, Try<T15, IEnumerable<E>> t15, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R> f)
+        public static Try<B> Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, B>(Try<A1> t1, Try<A2> t2, Try<A3> t3, Try<A4> t4, Try<A5> t5, Try<A6> t6, Try<A7> t7, Try<A8> t8, Try<A9> t9, Try<A10> t10, Try<A11> t11, Try<A12> t12, Try<A13> t13, Try<A14> t14, Try<A15> t15, Func<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, B> f)
         {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)), Error<R, IEnumerable<E>>);
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
-        /// </summary>
-        public static Try<R> Aggregate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R>(Try<T1> t1, Try<T2> t2, Try<T3> t3, Try<T4> t4, Try<T5> t5, Try<T6> t6, Try<T7> t7, Try<T8> t8, Try<T9> t9, Try<T10> t10, Try<T11> t11, Try<T12> t12, Try<T13> t13, Try<T14> t14, Try<T15> t15, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, R> f)
-        {
-            return Aggregate(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, (e1, e2) => e1.Concat(e2), (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success<R>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)), Error<R>);
+            return Aggregate<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, Exception, Try<B>>(
+                t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15,
+                (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)),
+                e => Exception(e.Aggregate())
+            );
         }
     }
 
@@ -609,9 +535,9 @@ namespace FuncSharp
         /// </summary>
         public Try<B, E> Map<B>(Func<A, B> f)
         {
-            return Match(
-                s => Try.Success<B, E>(f(s)),
-                e => Try.Error<B, E>(e)
+            return Match<Try<B, E>>(
+                s => Try.Success(f(s)),
+                e => Try.Error(e)
             );
         }
 
@@ -620,25 +546,35 @@ namespace FuncSharp
         /// </summary>
         public Try<A, F> MapError<F>(Func<E, F> f)
         {
-            return Match(
-                s => Try.Success<A, F>(s),
-                e => Try.Error<A, F>(f(e))
+            return Match<Try<A, F>>(
+                s => Try.Success(s),
+                e => Try.Error(f(e))
             );
+        }
+
+        public static implicit operator Try<A, E>(TrySuccess<A> success)
+        {
+            return new Try<A, E>(success.Value);
+        }
+
+        public static implicit operator Try<A, E>(TryError<E> error)
+        {
+            return new Try<A, E>(error.Value);
         }
     }
 
     /// <summary>
     /// Result of an operation that may either succeed or fail with exception.
     /// </summary>
-    public class Try<A> : Try<A, IEnumerable<Exception>>
+    public class Try<A> : Try<A, Exception>
     {
         internal Try(A success)
             : base(success)
         {
         }
 
-        internal Try(IEnumerable<Exception> exceptions)
-            : base(exceptions)
+        internal Try(Exception exception)
+            : base(exception)
         {
         }
 
@@ -649,36 +585,19 @@ namespace FuncSharp
         {
             return Match(
                 s => s,
-                e =>
-                {
-                    var exception = e.SingleOption();
-                    if (exception.NonEmpty)
-                    {
-                        ExceptionDispatchInfo.Capture(exception.Get()).Throw();
-                    }
-
-                    throw new AggregateException(e);
-                }
+                e => throw e
             );
         }
 
         /// <summary>
         /// Maps the successful result to a new successful result and erroneous result into new erroneous result.
         /// </summary>
-        public Try<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, IEnumerable<Exception>> g)
+        public Try<B> Map<B>(Func<A, B> f, Func<Exception, Exception> g)
         {
-            return Match(
-                s => Try.Success<B>(f(s)),
-                e => Try.Error<B>(g(e))
+            return Match<Try<B>>(
+                s => Try.Success(f(s)),
+                e => Try.Exception(g(e))
             );
-        }
-
-        /// <summary>
-        /// Maps the successful result to a new successful result and erroneous result into new erroneous result.
-        /// </summary>
-        public Try<B> Map<B>(Func<A, B> f, Func<IEnumerable<Exception>, Exception> g)
-        {
-            return Map(f, e => new[] { g(e) });
         }
 
         /// <summary>
@@ -692,25 +611,19 @@ namespace FuncSharp
         /// <summary>
         /// Maps the exception result to a new exception result.
         /// </summary>
-        public Try<A> MapError(Func<IEnumerable<Exception>, IEnumerable<Exception>> f)
+        public Try<A> MapError(Func<Exception, Exception> f)
         {
             return Map(s => s, f);
         }
 
-        /// <summary>
-        /// Maps the exception result to a new exception result.
-        /// </summary>
-        public Try<A> MapError(Func<IEnumerable<Exception>, Exception> f)
+        public static implicit operator Try<A>(TrySuccess<A> success)
         {
-            return MapError(e => new[] { f(e) });
+            return new Try<A>(success.Value);
         }
 
-        /// <summary>
-        /// Maps all the exceptions to new exceptions.
-        /// </summary>
-		public Try<A> MapError(Func<Exception, Exception> f)
+        public static implicit operator Try<A>(TryException exception)
         {
-            return MapError(exceptions => exceptions.Select(f).ToList());
+            return new Try<A>(exception.Value);
         }
     }
 }

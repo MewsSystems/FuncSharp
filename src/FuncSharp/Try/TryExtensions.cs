@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace FuncSharp
 {
@@ -12,7 +11,7 @@ namespace FuncSharp
         {
             return t.Match(
                 s => f(s),
-                e => Try.Error<B>(e)
+                e => Try.Exception(e)
             );
         }
 
@@ -30,7 +29,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the exception result to a new try.
         /// </summary>
-        public static Try<B> FlatMapError<A, B>(this Try<A> t, Func<IEnumerable<Exception>, Try<B>> f)
+        public static Try<B> FlatMapError<A, B>(this Try<A> t, Func<Exception, Try<B>> f)
             where A : B
         {
             return t.Match(

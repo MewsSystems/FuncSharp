@@ -5,6 +5,8 @@ namespace FuncSharp.Tests
 {
     public class OptionTests
     {
+        private static readonly Option<int> Empty = Option.Empty;
+
         [Fact]
         public void IsEmpty()
         {
@@ -24,28 +26,28 @@ namespace FuncSharp.Tests
         {
             Assert.Equal(42, 42.ToOption().Get());
             Assert.Equal(42, (42 as int?).ToOption().Get());
-            Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get());
+            Assert.Throws<InvalidOperationException>(() => Empty.Get());
         }
 
         [Fact]
         public void OrElse()
         {
             Assert.Equal(Option.Valued(42), 42.ToOption().OrElse(_ => 53.ToOption()));
-            Assert.Equal(Option.Valued(42), Option.Empty<int>().OrElse(_ => 42.ToOption()));
+            Assert.Equal(Option.Valued(42), Empty.OrElse(_ => 42.ToOption()));
         }
 
         [Fact]
         public void GetOrElse()
         {
             Assert.Equal(42, 42.ToOption().GetOrElse(_ => 123));
-            Assert.Equal(123, Option.Empty<int>().GetOrElse(_ => 123));
+            Assert.Equal(123, Empty.GetOrElse(_ => 123));
         }
 
         [Fact]
         public void GetOrDefault()
         {
             Assert.Equal(42, 42.ToOption().GetOrZero());
-            Assert.Equal(0, Option.Empty<int>().GetOrZero());
+            Assert.Equal(0, Empty.GetOrZero());
         }
 
         [Fact]
@@ -53,7 +55,7 @@ namespace FuncSharp.Tests
         {
             Assert.Equal(84, 42.ToOption().Map(v => v * 2).Get());
             Assert.Equal("xxxxx", 5.ToOption().Map(v => new String('x', v)).Get());
-            Assert.True(Option.Empty<int>().Map(v => v * 2).IsEmpty);
+            Assert.True(Empty.Map(v => v * 2).IsEmpty);
         }
 
         [Fact]
@@ -67,10 +69,10 @@ namespace FuncSharp.Tests
         public void FlatMap()
         {
             Assert.Equal(84, 42.ToOption().FlatMap(v => (v * 2).ToOption()).Get());
-            Assert.True(42.ToOption().FlatMap(v => Option.Empty<int>()).IsEmpty);
+            Assert.True(42.ToOption().FlatMap(v => Empty).IsEmpty);
 
-            Assert.True(Option.Empty<int>().FlatMap(v => (v * 2).ToOption()).IsEmpty);
-            Assert.True(Option.Empty<int>().FlatMap(v => Option.Empty<int>()).IsEmpty);
+            Assert.True(Empty.FlatMap(v => (v * 2).ToOption()).IsEmpty);
+            Assert.True(Empty.FlatMap(v => Empty).IsEmpty);
         }
 
         [Fact]
@@ -86,10 +88,10 @@ namespace FuncSharp.Tests
 
             var emptySum =
                 from x in 1.ToOption()
-                from y in Option.Empty<int>()
+                from y in Empty
                 select x + y;
 
-            Assert.Equal(Option.Empty<int>(), emptySum);
+            Assert.Equal(Empty, emptySum);
 
             var filteredSum =
                 from x in 1.ToOption()
@@ -97,7 +99,7 @@ namespace FuncSharp.Tests
                 where x > 100
                 select x + y;
 
-            Assert.Equal(Option.Empty<int>(), filteredSum);
+            Assert.Equal(Empty, filteredSum);
         }
     }
 }
