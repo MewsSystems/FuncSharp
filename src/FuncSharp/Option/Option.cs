@@ -25,7 +25,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an empty option.
         /// </summary>
-        public static OptionEmpty Empty { get; }
+        public static EmptyOption Empty { get; }
 
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
@@ -164,7 +164,7 @@ namespace FuncSharp
             );
         }
 
-        public static implicit operator Option<A>(OptionEmpty empty)
+        public static implicit operator Option<A>(EmptyOption empty)
         {
             return Empty;
         }

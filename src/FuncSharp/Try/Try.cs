@@ -47,9 +47,9 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static TrySuccess<A> Success<A>(A value)
+        public static SuccessTry<A> Success<A>(A value)
         {
-            return new TrySuccess<A>(value);
+            return new SuccessTry<A>(value);
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with an error result.
         /// </summary>
-        public static TryError<E> Error<E>(E error)
+        public static ErrorTry<E> Error<E>(E error)
         {
-            return new TryError<E>(error);
+            return new ErrorTry<E>(error);
         }
 
         /// <summary>
@@ -551,12 +551,12 @@ namespace FuncSharp
             );
         }
 
-        public static implicit operator Try<A, E>(TrySuccess<A> success)
+        public static implicit operator Try<A, E>(SuccessTry<A> success)
         {
             return new Try<A, E>(success.Value);
         }
 
-        public static implicit operator Try<A, E>(TryError<E> error)
+        public static implicit operator Try<A, E>(ErrorTry<E> error)
         {
             return new Try<A, E>(error.Value);
         }

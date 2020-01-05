@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
@@ -12,7 +13,11 @@ namespace FuncSharp
         {
             return t.Match(
                 s => s,
-                e => throw e
+                e =>
+                {
+                    ExceptionDispatchInfo.Capture(e).Throw();
+                    return default;
+                }
             );
         }
 

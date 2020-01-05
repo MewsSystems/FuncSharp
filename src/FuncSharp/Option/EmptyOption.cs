@@ -1,6 +1,6 @@
 ﻿namespace FuncSharp
 {
-    public struct OptionEmpty
+    public struct EmptyOption
     {
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace FuncSharp
 {
-    public struct TrySuccess<A>
+    public struct SuccessTry<A>
     {
-        internal TrySuccess(A value)
+        internal SuccessTry(A value)
         {
             Value = value;
         }

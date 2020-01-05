@@ -1,8 +1,8 @@
 ﻿namespace FuncSharp
 {
-    public struct TryError<E>
+    public struct ErrorTry<E>
     {
-        internal TryError(E value)
+        internal ErrorTry(E value)
         {
             Value = value;
         }
