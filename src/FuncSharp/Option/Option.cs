@@ -23,6 +23,11 @@ namespace FuncSharp
         public static Option<bool> False { get; }
 
         /// <summary>
+        /// Returns an empty option.
+        /// </summary>
+        public static EmptyOption Empty { get; }
+
+        /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
         public static Option<A> Create<A>(A value)
@@ -31,7 +36,7 @@ namespace FuncSharp
             {
                 return Valued(value);
             }
-            return Empty<A>();
+            return Empty;
         }
 
         /// <summary>
@@ -42,9 +47,9 @@ namespace FuncSharp
         {
             if (value.HasValue)
             {
-                return Valued<A>(value.Value);
+                return Valued(value.Value);
             }
-            return Empty<A>();
+            return Empty;
         }
 
         /// <summary>
@@ -53,14 +58,6 @@ namespace FuncSharp
         public static Option<A> Valued<A>(A value)
         {
             return new Option<A>(value);
-        }
-
-        /// <summary>
-        /// Returns an empty option.
-        /// </summary>
-        public static Option<A> Empty<A>()
-        {
-            return Option<A>.Empty;
         }
     }
 
@@ -144,7 +141,7 @@ namespace FuncSharp
         {
             return Match(
                 a => f(a),
-                _ => Option.Empty<B>()
+                _ => Option.Empty
             );
         }
 
@@ -165,6 +162,11 @@ namespace FuncSharp
                 v => "Value(" + v.SafeToString() + ")",
                 _ => "Empty"
             );
+        }
+
+        public static implicit operator Option<A>(EmptyOption empty)
+        {
+            return Empty;
         }
     }
 }

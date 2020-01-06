@@ -23,7 +23,7 @@ namespace FuncSharp
         {
             if (source == null || !source.OfType<object>().Any())
             {
-                return Option.Empty<T>();
+                return Option.Empty;
             }
             return source.ToOption();
         }
@@ -36,7 +36,7 @@ namespace FuncSharp
             var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
             if (data.Count == 0)
             {
-                return Option.Empty<T>();
+                return Option.Empty;
             }
             return Option.Valued(data.First());
         }
@@ -57,9 +57,17 @@ namespace FuncSharp
             var data = source.Where(predicate ?? (t => true)).Take(2).ToList();
             if (data.Count == 2)
             {
-                return Option.Empty<T>();
+                return Option.Empty;
             }
             return data.FirstOption();
+        }
+
+        /// <summary>
+        /// Aggregates the specified exceptions into a single AggregateException if necessary. Otherwise returns the single exception in the collection.
+        /// </summary>
+        public static Exception Aggregate(this IEnumerable<Exception> exceptions)
+        {
+            return exceptions.SingleOption().GetOrElse(_ => new AggregateException(exceptions) as Exception);
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace FuncSharp
         {
             if (String.IsNullOrEmpty(s))
             {
-                return Option.Empty<string>();
+                return Option.Empty;
             }
             return s.ToOption();
         }
@@ -69,9 +69,9 @@ namespace FuncSharp
         {
             if (s == null || s.Contains(","))
             {
-                return Option.Empty<TEnum>();
+                return Option.Empty;
             }
-            var enumValue = Tryer.Invoke<string, bool, TEnum>(Enum.TryParse<TEnum>, s, ignoreCase);
+            var enumValue = Tryer.Invoke<string, bool, TEnum>(Enum.TryParse, s, ignoreCase);
             return enumValue.Where(v => Enum.IsDefined(typeof(TEnum), v) && v.ToString().Equals(s, StringComparison.InvariantCultureIgnoreCase));
         }
 

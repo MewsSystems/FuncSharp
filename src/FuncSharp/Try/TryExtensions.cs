@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
     public static class TryExtensions
     {
         /// <summary>
-        /// Maps the successful result to a new try.
+        /// If the result is success, returns it. Otherwise throws the exception result.
         /// </summary>
-        public static Try<B> FlatMap<A, B>(this Try<A> t, Func<A, Try<B>> f)
+        public static A Get<A, E>(this Try<A, E> t)
+            where E : Exception
         {
             return t.Match(
-                s => f(s),
-                e => Try.Error<B>(e)
+                s => s,
+                e =>
+                {
+                    ExceptionDispatchInfo.Capture(e).Throw();
+                    return default;
+                }
             );
         }
 
@@ -24,18 +29,6 @@ namespace FuncSharp
             return t.Match(
                 s => f(s),
                 e => Try.Error<B, E>(e)
-            );
-        }
-
-        /// <summary>
-        /// Maps the exception result to a new try.
-        /// </summary>
-        public static Try<B> FlatMapError<A, B>(this Try<A> t, Func<IEnumerable<Exception>, Try<B>> f)
-            where A : B
-        {
-            return t.Match(
-                s => Try.Success<B>(s),
-                e => f(e)
             );
         }
 

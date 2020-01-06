@@ -59,7 +59,7 @@ namespace FuncSharp
             {
                 return (T)CoproductValue;
             }
-            return default(T);
+            return default;
         }
     }
 
@@ -134,7 +134,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace FuncSharp
             switch (CoproductDiscriminator)
             {
                 case 1: return ifFirst(GetCoproductValue<T1>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -248,7 +248,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -256,7 +256,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace FuncSharp
             {
                 case 1: return ifFirst(GetCoproductValue<T1>());
                 case 2: return ifSecond(GetCoproductValue<T2>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -397,7 +397,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -405,7 +405,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -413,7 +413,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace FuncSharp
                 case 1: return ifFirst(GetCoproductValue<T1>());
                 case 2: return ifSecond(GetCoproductValue<T2>());
                 case 3: return ifThird(GetCoproductValue<T3>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -581,7 +581,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -589,7 +589,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -597,7 +597,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -605,7 +605,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -624,7 +624,7 @@ namespace FuncSharp
                 case 2: return ifSecond(GetCoproductValue<T2>());
                 case 3: return ifThird(GetCoproductValue<T3>());
                 case 4: return ifFourth(GetCoproductValue<T4>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -800,7 +800,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -808,7 +808,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -816,7 +816,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -824,7 +824,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -832,7 +832,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -853,7 +853,7 @@ namespace FuncSharp
                 case 3: return ifThird(GetCoproductValue<T3>());
                 case 4: return ifFourth(GetCoproductValue<T4>());
                 case 5: return ifFifth(GetCoproductValue<T5>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -1054,7 +1054,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -1062,7 +1062,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -1070,7 +1070,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -1078,7 +1078,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -1086,7 +1086,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -1094,7 +1094,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -1117,7 +1117,7 @@ namespace FuncSharp
                 case 4: return ifFourth(GetCoproductValue<T4>());
                 case 5: return ifFifth(GetCoproductValue<T5>());
                 case 6: return ifSixth(GetCoproductValue<T6>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -1343,7 +1343,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -1351,7 +1351,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -1359,7 +1359,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -1367,7 +1367,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -1375,7 +1375,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -1383,7 +1383,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -1391,7 +1391,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -1416,7 +1416,7 @@ namespace FuncSharp
                 case 5: return ifFifth(GetCoproductValue<T5>());
                 case 6: return ifSixth(GetCoproductValue<T6>());
                 case 7: return ifSeventh(GetCoproductValue<T7>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -1667,7 +1667,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -1675,7 +1675,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -1683,7 +1683,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -1691,7 +1691,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -1699,7 +1699,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -1707,7 +1707,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -1715,7 +1715,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -1723,7 +1723,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -1750,7 +1750,7 @@ namespace FuncSharp
                 case 6: return ifSixth(GetCoproductValue<T6>());
                 case 7: return ifSeventh(GetCoproductValue<T7>());
                 case 8: return ifEighth(GetCoproductValue<T8>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -2026,7 +2026,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -2034,7 +2034,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -2042,7 +2042,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -2050,7 +2050,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -2058,7 +2058,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -2066,7 +2066,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -2074,7 +2074,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -2082,7 +2082,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -2090,7 +2090,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -2119,7 +2119,7 @@ namespace FuncSharp
                 case 7: return ifSeventh(GetCoproductValue<T7>());
                 case 8: return ifEighth(GetCoproductValue<T8>());
                 case 9: return ifNinth(GetCoproductValue<T9>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -2420,7 +2420,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -2428,7 +2428,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -2436,7 +2436,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -2444,7 +2444,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -2452,7 +2452,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -2460,7 +2460,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -2468,7 +2468,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -2476,7 +2476,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -2484,7 +2484,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -2492,7 +2492,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -2523,7 +2523,7 @@ namespace FuncSharp
                 case 8: return ifEighth(GetCoproductValue<T8>());
                 case 9: return ifNinth(GetCoproductValue<T9>());
                 case 10: return ifTenth(GetCoproductValue<T10>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -2849,7 +2849,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -2857,7 +2857,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -2865,7 +2865,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -2873,7 +2873,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -2881,7 +2881,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -2889,7 +2889,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -2897,7 +2897,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -2905,7 +2905,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -2913,7 +2913,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -2921,7 +2921,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -2929,7 +2929,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -2962,7 +2962,7 @@ namespace FuncSharp
                 case 9: return ifNinth(GetCoproductValue<T9>());
                 case 10: return ifTenth(GetCoproductValue<T10>());
                 case 11: return ifEleventh(GetCoproductValue<T11>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -3313,7 +3313,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -3321,7 +3321,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -3329,7 +3329,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -3337,7 +3337,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -3345,7 +3345,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -3353,7 +3353,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -3361,7 +3361,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -3369,7 +3369,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -3377,7 +3377,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -3385,7 +3385,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -3393,7 +3393,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -3401,7 +3401,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -3436,7 +3436,7 @@ namespace FuncSharp
                 case 10: return ifTenth(GetCoproductValue<T10>());
                 case 11: return ifEleventh(GetCoproductValue<T11>());
                 case 12: return ifTwelfth(GetCoproductValue<T12>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -3812,7 +3812,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -3820,7 +3820,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -3828,7 +3828,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -3836,7 +3836,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -3844,7 +3844,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -3852,7 +3852,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -3860,7 +3860,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -3868,7 +3868,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -3876,7 +3876,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -3884,7 +3884,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -3892,7 +3892,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -3900,7 +3900,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -3908,7 +3908,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -3945,7 +3945,7 @@ namespace FuncSharp
                 case 11: return ifEleventh(GetCoproductValue<T11>());
                 case 12: return ifTwelfth(GetCoproductValue<T12>());
                 case 13: return ifThirteenth(GetCoproductValue<T13>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -4346,7 +4346,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -4354,7 +4354,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -4362,7 +4362,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -4370,7 +4370,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -4378,7 +4378,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -4386,7 +4386,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -4394,7 +4394,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -4402,7 +4402,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -4410,7 +4410,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -4418,7 +4418,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -4426,7 +4426,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -4434,7 +4434,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -4442,7 +4442,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
@@ -4450,7 +4450,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T14> Fourteenth
         {
-            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -4489,7 +4489,7 @@ namespace FuncSharp
                 case 12: return ifTwelfth(GetCoproductValue<T12>());
                 case 13: return ifThirteenth(GetCoproductValue<T13>());
                 case 14: return ifFourteenth(GetCoproductValue<T14>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -4915,7 +4915,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -4923,7 +4923,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -4931,7 +4931,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -4939,7 +4939,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -4947,7 +4947,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -4955,7 +4955,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -4963,7 +4963,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -4971,7 +4971,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -4979,7 +4979,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -4987,7 +4987,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -4995,7 +4995,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -5003,7 +5003,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -5011,7 +5011,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
@@ -5019,7 +5019,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T14> Fourteenth
         {
-            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
@@ -5027,7 +5027,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T15> Fifteenth
         {
-            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -5068,7 +5068,7 @@ namespace FuncSharp
                 case 13: return ifThirteenth(GetCoproductValue<T13>());
                 case 14: return ifFourteenth(GetCoproductValue<T14>());
                 case 15: return ifFifteenth(GetCoproductValue<T15>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -5519,7 +5519,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -5527,7 +5527,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -5535,7 +5535,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -5543,7 +5543,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -5551,7 +5551,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -5559,7 +5559,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -5567,7 +5567,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -5575,7 +5575,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -5583,7 +5583,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -5591,7 +5591,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -5599,7 +5599,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -5607,7 +5607,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -5615,7 +5615,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
@@ -5623,7 +5623,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T14> Fourteenth
         {
-            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
@@ -5631,7 +5631,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T15> Fifteenth
         {
-            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
@@ -5639,7 +5639,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T16> Sixteenth
         {
-            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -5682,7 +5682,7 @@ namespace FuncSharp
                 case 14: return ifFourteenth(GetCoproductValue<T14>());
                 case 15: return ifFifteenth(GetCoproductValue<T15>());
                 case 16: return ifSixteenth(GetCoproductValue<T16>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -6158,7 +6158,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -6166,7 +6166,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -6174,7 +6174,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -6182,7 +6182,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -6190,7 +6190,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -6198,7 +6198,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -6206,7 +6206,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -6214,7 +6214,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -6222,7 +6222,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -6230,7 +6230,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -6238,7 +6238,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -6246,7 +6246,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -6254,7 +6254,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
@@ -6262,7 +6262,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T14> Fourteenth
         {
-            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
@@ -6270,7 +6270,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T15> Fifteenth
         {
-            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
@@ -6278,7 +6278,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T16> Sixteenth
         {
-            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
@@ -6286,7 +6286,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T17> Seventeenth
         {
-            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -6331,7 +6331,7 @@ namespace FuncSharp
                 case 15: return ifFifteenth(GetCoproductValue<T15>());
                 case 16: return ifSixteenth(GetCoproductValue<T16>());
                 case 17: return ifSeventeenth(GetCoproductValue<T17>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -6832,7 +6832,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -6840,7 +6840,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -6848,7 +6848,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -6856,7 +6856,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -6864,7 +6864,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -6872,7 +6872,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -6880,7 +6880,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -6888,7 +6888,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -6896,7 +6896,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -6904,7 +6904,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -6912,7 +6912,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -6920,7 +6920,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -6928,7 +6928,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
@@ -6936,7 +6936,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T14> Fourteenth
         {
-            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
@@ -6944,7 +6944,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T15> Fifteenth
         {
-            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
@@ -6952,7 +6952,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T16> Sixteenth
         {
-            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
@@ -6960,7 +6960,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T17> Seventeenth
         {
-            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
@@ -6968,7 +6968,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T18> Eighteenth
         {
-            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
+            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -7015,7 +7015,7 @@ namespace FuncSharp
                 case 16: return ifSixteenth(GetCoproductValue<T16>());
                 case 17: return ifSeventeenth(GetCoproductValue<T17>());
                 case 18: return ifEighteenth(GetCoproductValue<T18>());
-                default: return default(R);
+                default: return default;
             }
         }
 
@@ -7541,7 +7541,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T1> First
         {
-            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns second value of the coproduct as an option. The option contains the second 
@@ -7549,7 +7549,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T2> Second
         {
-            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns third value of the coproduct as an option. The option contains the third 
@@ -7557,7 +7557,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T3> Third
         {
-            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourth value of the coproduct as an option. The option contains the fourth 
@@ -7565,7 +7565,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T4> Fourth
         {
-            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifth value of the coproduct as an option. The option contains the fifth 
@@ -7573,7 +7573,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T5> Fifth
         {
-            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixth value of the coproduct as an option. The option contains the sixth 
@@ -7581,7 +7581,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T6> Sixth
         {
-            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventh value of the coproduct as an option. The option contains the seventh 
@@ -7589,7 +7589,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T7> Seventh
         {
-            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighth value of the coproduct as an option. The option contains the eighth 
@@ -7597,7 +7597,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T8> Eighth
         {
-            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns ninth value of the coproduct as an option. The option contains the ninth 
@@ -7605,7 +7605,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T9> Ninth
         {
-            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns tenth value of the coproduct as an option. The option contains the tenth 
@@ -7613,7 +7613,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T10> Tenth
         {
-            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
@@ -7621,7 +7621,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T11> Eleventh
         {
-            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
@@ -7629,7 +7629,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T12> Twelfth
         {
-            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
@@ -7637,7 +7637,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T13> Thirteenth
         {
-            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
@@ -7645,7 +7645,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T14> Fourteenth
         {
-            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
@@ -7653,7 +7653,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T15> Fifteenth
         {
-            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
@@ -7661,7 +7661,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T16> Sixteenth
         {
-            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
@@ -7669,7 +7669,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T17> Seventeenth
         {
-            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
@@ -7677,7 +7677,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T18> Eighteenth
         {
-            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
+            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty; }
         }
         /// <summary>
         /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth 
@@ -7685,7 +7685,7 @@ namespace FuncSharp
         /// </summary>
         public Option<T19> Nineteenth
         {
-            get { return IsNineteenth ? Option.Valued(GetCoproductValue<T19>()) : Option.Empty<T19>(); }
+            get { return IsNineteenth ? Option.Valued(GetCoproductValue<T19>()) : Option.Empty; }
         }
 
         /// <summary>
@@ -7734,7 +7734,7 @@ namespace FuncSharp
                 case 17: return ifSeventeenth(GetCoproductValue<T17>());
                 case 18: return ifEighteenth(GetCoproductValue<T18>());
                 case 19: return ifNineteenth(GetCoproductValue<T19>());
-                default: return default(R);
+                default: return default;
             }
         }
 

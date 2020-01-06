@@ -6,13 +6,12 @@ namespace FuncSharp.Tests
 {
     public class TryTests
     {
-        private static readonly Try<int> Success = Try.Create<int, Exception>(_ => 42);
-        private static readonly Try<int> Exception = Try.Create<int, Exception>(_ => throw new NotImplementedException());
+        private static readonly Try<int, Exception> Success = Try.Create<int, Exception>(_ => 42);
+        private static readonly Try<int, Exception> Exception = Try.Create<int, Exception>(_ => throw new NotImplementedException());
 
         [Fact]
         public void Create()
         {
-
             Assert.True(Success.IsSuccess);
             Assert.Equal(42, Success.Get());
 
@@ -26,7 +25,7 @@ namespace FuncSharp.Tests
             Assert.Equal(42, Success.Get());
             Assert.Equal(42, Success.Get(e => new InvalidOperationException("test")));
             Assert.Throws<NotImplementedException>(() => Exception.Get());
-            Assert.Throws<InvalidOperationException>(() => Exception.Get(e => new InvalidOperationException("foo", e.First())));
+            Assert.Throws<InvalidOperationException>(() => Exception.Get(e => new InvalidOperationException("foo", e)));
         }
 
         [Fact]
@@ -39,8 +38,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void MapError()
         {
-            Assert.Equal(42, Success.MapError(e => new InvalidOperationException("foo", e.First())).Get());
-            Assert.Throws<InvalidOperationException>(() => Exception.MapError(e => new InvalidOperationException("foo", e.First())).Get());
+            Assert.Equal(42, Success.MapError(e => new InvalidOperationException("foo", e)).Get());
+            Assert.Throws<InvalidOperationException>(() => Exception.MapError(e => new InvalidOperationException("foo", e)).Get());
         }
 
         [Fact]
@@ -53,14 +52,13 @@ namespace FuncSharp.Tests
 
             var a2 = Try.Aggregate(Success, Exception, Product2.Create);
             Assert.True(a2.IsError);
-            Assert.Single(a2.Error.Get());
-            Assert.True(a2.Error.Get().First() is NotImplementedException);
+            Assert.NotNull(a2.Error.Get());
+            Assert.True(a2.Error.Get() is NotImplementedException);
             Assert.Throws<NotImplementedException>(() => a2.Get());
 
             var a3 = Try.Aggregate(Exception, Exception, Product2.Create);
             Assert.True(a3.IsError);
-            Assert.Equal(2, a3.Error.Get().Count());
-            Assert.True(a3.Error.Get().All(e => e is NotImplementedException));
+            Assert.True(a3.Error.Get() is AggregateException e1 && e1.InnerExceptions.Count == 2 && e1.InnerExceptions.All(i => i is NotImplementedException));
             Assert.Throws<AggregateException>(() => a3.Get());
 
             var a4 = Try.Aggregate(new[] { Success, Success, Success });
@@ -69,8 +67,7 @@ namespace FuncSharp.Tests
 
             var a5 = Try.Aggregate(new[] { Success, Exception, Success, Exception });
             Assert.True(a5.IsError);
-            Assert.Equal(2, a5.Error.Get().Count());
-            Assert.True(a5.Error.Get().All(e => e is NotImplementedException));
+            Assert.True(a5.Error.Get() is AggregateException e2 && e2.InnerExceptions.Count == 2 && e2.InnerExceptions.All(i => i is NotImplementedException));
         }
     }
 }

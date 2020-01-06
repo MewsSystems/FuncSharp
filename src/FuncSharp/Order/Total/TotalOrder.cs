@@ -17,10 +17,9 @@ namespace FuncSharp
         static TotalOrder()
         {
             var defaultBound = IntervalBound.Open(default(A)).ToOption();
-            var noBound = Option.Empty<IntervalBound<A>>();
 
             emptyInterval = new Interval<A>(defaultBound, defaultBound, isEmpty: true);
-            unbounedInterval = new Interval<A>(noBound, noBound, isEmpty: false);
+            unbounedInterval = new Interval<A>(Option.Empty, Option.Empty, isEmpty: false);
             emptyIntervalSet = new IntervalSet<A>(Enumerable.Empty<Interval<A>>());
         }
 

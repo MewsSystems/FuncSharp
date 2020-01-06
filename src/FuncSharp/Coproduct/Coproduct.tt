@@ -66,7 +66,7 @@ namespace FuncSharp
             {
                 return (T)CoproductValue;
             }
-            return default(T);
+            return default;
         }
     }
 
@@ -141,7 +141,7 @@ namespace FuncSharp
         /// </summary>
         public Option<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
-            get { return Is<#= GetOrdinal(j) #> ? Option.Valued(GetCoproductValue<<#= Type(j) #>>()) : Option.Empty<<#= Type(j) #>>(); }
+            get { return Is<#= GetOrdinal(j) #> ? Option.Valued(GetCoproductValue<<#= Type(j) #>>()) : Option.Empty; }
         }
 <#    } #>
 
@@ -155,7 +155,7 @@ namespace FuncSharp
             switch (CoproductDiscriminator)
             {
 <#= Lines(i, x => Indent(16) + "case " + x + ": return " + IfIth(x) + "(GetCoproductValue<T" + x + ">());") #>
-                default: return default(R);
+                default: return default;
             }
         }
 

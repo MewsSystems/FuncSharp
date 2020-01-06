@@ -40,9 +40,9 @@ namespace FuncSharp.Tests
             var u2 = Coproduct2.CreateSecond<string, int>(42);
 
             Assert.Equal(Option.Valued("foo"), u1.First);
-            Assert.Equal(Option.Empty<int>(), u1.Second);
+            Assert.Equal(Option.Empty, u1.Second);
 
-            Assert.Equal(Option.Empty<string>(), u2.First);
+            Assert.Equal(Option.Empty, u2.First);
             Assert.Equal(Option.Valued(42), u2.Second);
         }
 
