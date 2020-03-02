@@ -65,7 +65,7 @@ A coproduct of zero types (a choice from no types) is also a well known type, in
 
 ### Option
 
-An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy.
+An `Option<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy.
 
 ### Morphism
 
