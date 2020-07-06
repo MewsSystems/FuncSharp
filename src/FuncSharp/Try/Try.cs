@@ -38,14 +38,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Create a new try with the result of the specified function while converting all exceptions into erroneous result.
-        /// </summary>
-        public static ITry<A> Create<A>(Func<Unit, A> f)
-        {
-            return Create<A, Exception>(f);
-        }
-
-        /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
         public static ITry<A, E> Success<A, E>(A success)

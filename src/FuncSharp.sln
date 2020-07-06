@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp", "FuncSharp\FuncSharp.csproj", "{15BF2557-15C2-49D5-AAD2-359D10E647B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Tests", "FuncSharp.Tests\FuncSharp.Tests.csproj", "{AF10BBEC-20C9-474E-864A-4597B6C9278A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp.Performance", "FuncSharp.Performance\FuncSharp.Performance.csproj", "{C9050FAA-602F-47CE-81F4-899D83CB5E12}"
-EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -26,15 +21,14 @@ Global
 		{AF10BBEC-20C9-474E-864A-4597B6C9278A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF10BBEC-20C9-474E-864A-4597B6C9278A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF10BBEC-20C9-474E-864A-4597B6C9278A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9050FAA-602F-47CE-81F4-899D83CB5E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9050FAA-602F-47CE-81F4-899D83CB5E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9050FAA-602F-47CE-81F4-899D83CB5E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9050FAA-602F-47CE-81F4-899D83CB5E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77674F60-8200-4068-9253-F0C13FBB07B8}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

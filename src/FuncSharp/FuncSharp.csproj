@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-  	<TargetFrameworks>netstandard2.0;net471;</TargetFrameworks>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-  	<Version>1.7.0</Version>
-  	<AssemblyVersion>1.7.0.0</AssemblyVersion>
-  	<FileVersion>1.7.0.0</FileVersion>
+  	<Version>1.7.1</Version>
+  	<AssemblyVersion>1.7.1.0</AssemblyVersion>
+  	<FileVersion>1.7.1.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.</Description>
     <Authors>Honza Široký</Authors>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Removed traits, improved intervals, performed general cleanup of the library, added some more tests.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed Try.Create that catches all exceptions implicitly.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
