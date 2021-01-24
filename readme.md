@@ -1,6 +1,6 @@
 # FuncSharp - Functional C&#35;
 
-[![Azure DevOps](https://img.shields.io/azure-devops/build/siroky/FuncSharp/1)](https://dev.azure.com/siroky/FuncSharp/_build/latest?definitionId=1)
+[![Build Status](https://dev.azure.com/siroky/FuncSharp/_apis/build/status/siroky.FuncSharp?branchName=master)](https://dev.azure.com/siroky/FuncSharp/_build/latest?definitionId=2&branchName=master)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 [![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 
