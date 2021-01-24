@@ -218,7 +218,7 @@ namespace FuncSharp
                 <#= List(i, x => $"t{x}") #>,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(f(<#= List(i, x => $"s{x}") #>)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -231,7 +231,7 @@ namespace FuncSharp
                 <#= List(i, x => $"t{x}") #>,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (<#= List(i, x => $"s{x}") #>) => Success(f(<#= List(i, x => $"s{x}") #>)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 <#  } #>

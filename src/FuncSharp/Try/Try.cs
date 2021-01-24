@@ -210,7 +210,7 @@ namespace FuncSharp
                 t1, t2,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2) => Success<R, IEnumerable<E>>(f(s1, s2)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -223,7 +223,7 @@ namespace FuncSharp
                 t1, t2,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2) => Success(f(s1, s2)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -274,7 +274,7 @@ namespace FuncSharp
                 t1, t2, t3,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3) => Success<R, IEnumerable<E>>(f(s1, s2, s3)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -287,7 +287,7 @@ namespace FuncSharp
                 t1, t2, t3,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3) => Success(f(s1, s2, s3)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -338,7 +338,7 @@ namespace FuncSharp
                 t1, t2, t3, t4,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -351,7 +351,7 @@ namespace FuncSharp
                 t1, t2, t3, t4,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4) => Success(f(s1, s2, s3, s4)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -402,7 +402,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -415,7 +415,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5) => Success(f(s1, s2, s3, s4, s5)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -466,7 +466,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -479,7 +479,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6) => Success(f(s1, s2, s3, s4, s5, s6)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -530,7 +530,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -543,7 +543,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7) => Success(f(s1, s2, s3, s4, s5, s6, s7)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -594,7 +594,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -607,7 +607,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -658,7 +658,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -671,7 +671,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -722,7 +722,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -735,7 +735,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -786,7 +786,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -799,7 +799,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -850,7 +850,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -863,7 +863,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -914,7 +914,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -927,7 +927,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -978,7 +978,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -991,7 +991,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
 
@@ -1042,7 +1042,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success<R, IEnumerable<E>>(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)),
-                error: Error<R, IEnumerable<E>>
+                error: errors => Error<R, IEnumerable<E>>(errors)
             );
         }
 
@@ -1055,7 +1055,7 @@ namespace FuncSharp
                 t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15,
                 errorAggregate: (e1, e2) => e1.Concat(e2),
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success(f(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)),
-                error: Error<R>
+                error: errors => Error<R>(errors)
             );
         }
     }
