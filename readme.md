@@ -1,10 +1,10 @@
 # FuncSharp - Functional C&#35;
 
+A C# library with main purpose to introduce more advanced functional programming concepts unavailable in C#, reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
+
 [![Build Status](https://dev.azure.com/siroky/FuncSharp/_apis/build/status/siroky.FuncSharp?branchName=master)](https://dev.azure.com/siroky/FuncSharp/_build/latest?definitionId=2&branchName=master)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 [![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
-
-A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.
 
 ## Contents
 
