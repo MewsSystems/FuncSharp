@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="../CodeGen/Helpers.ttinclude" #>
+<#@ include file="../Helpers.ttinclude" #>
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -78,6 +78,14 @@ namespace FuncSharp
             var comparer = new Comparer<T>(less, ordering);
             result.Sort(comparer);
             return result;
+        }
+
+        /// <summary>
+        /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
+        /// </summary>
+        public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
+        {
+            return source.SingleOption().OrElse(_ => source.FirstOption().Map<Exception>(e => new AggregateException(source)));
         }
 <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
 

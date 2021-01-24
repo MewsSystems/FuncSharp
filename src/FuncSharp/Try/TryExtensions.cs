@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
@@ -60,6 +61,22 @@ namespace FuncSharp
             return t.Match(
                 s => s,
                 e => throw otherwise(e)
+            );
+        }
+
+        /// <summary>
+        /// If the result is success, returns it. Otherwise throws the exception.
+        /// </summary>
+        public static A Get<A, E>(this ITry<A, E> t)
+            where E : Exception
+        {
+            return t.Match(
+                s => s,
+                e =>
+                {
+                    ExceptionDispatchInfo.Capture(e).Throw();
+                    return default;
+                }
             );
         }
     }
