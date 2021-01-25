@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -16,7 +17,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void Transpose()
+        public void PartitionMatch()
         {
             var source = new[]
             {
@@ -31,6 +32,16 @@ namespace FuncSharp.Tests
                 s => Assert.True(s.SequenceEqual(new[] { 42, 21 })),
                 t => Assert.True(t.SequenceEqual(new bool[0]))
             );
+        }
+
+        [Fact]
+        public void Aggregate()
+        {
+            var e = new Exception();
+
+            Assert.Equal(Option.Empty<Exception>(), new List<Exception>().Aggregate());
+            Assert.Equal(e.ToOption(), new[] { e }.Aggregate());
+            Assert.True(new[] { e, e, e }.Aggregate().Get() is AggregateException);
         }
     }
 }

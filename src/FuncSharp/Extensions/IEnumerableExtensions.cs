@@ -74,6 +74,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
+        /// </summary>
+        public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
+        {
+            return source.SingleOption().OrElse(_ => source.FirstOption().Map<Exception>(e => new AggregateException(source)));
+        }
+
+        /// <summary>
         /// Coverts the source to a new 1-dimensional data cube.
         /// </summary>
         public static DataCube1<P1, TValue> ToDataCube<T, P1, TValue>(
