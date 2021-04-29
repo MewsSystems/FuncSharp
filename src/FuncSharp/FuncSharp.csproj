@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <Version>1.7.1</Version>
-    <AssemblyVersion>1.7.1.0</AssemblyVersion>
-    <FileVersion>1.7.1.0</FileVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>CS1591</NoWarn>
+    <Version>3.0.0</Version>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.</Description>
     <Authors>Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#, Product, Coproduct, ADT, Algebraic, Types</PackageTags>
-    <Copyright>Copyright © 2020</Copyright>
+    <Copyright>Copyright © 2021</Copyright>
     <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Removed Try.Create that catches all exceptions implicitly.</PackageReleaseNotes>
+    <PackageReleaseNotes>Targeting .NET Standard 2.0, better support of Try with Exception as an error.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
