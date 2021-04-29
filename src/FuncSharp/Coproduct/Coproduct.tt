@@ -89,10 +89,10 @@ namespace FuncSharp
 <#    if (i > 0) { #>
 <#    for (var j = 1; j <= i; j++) { #>
         /// <summary>
-        /// Creates a new <#= i #>-dimensional coproduct with the specified value on the <#= GetOrdinal(j).ToLowerInvariant() #> position.
+        /// Creates a new <#= i #>-dimensional coproduct with the specified value on the <#= GetLowerOrdinal(j) #> position.
         /// </summary>
-        public Coproduct<#= i #>(<#= Type(j) #> <#= GetOrdinal(j).ToLowerInvariant() #>Value)
-            : this(<#= j #>, <#= GetOrdinal(j).ToLowerInvariant() #>Value)
+        public Coproduct<#= i #>(<#= Type(j) #> <#= GetLowerOrdinal(j) #>Value)
+            : this(<#= j #>, <#= GetLowerOrdinal(j) #>Value)
         {
         }
 
