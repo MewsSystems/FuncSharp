@@ -1253,4 +1253,111 @@ namespace FuncSharp
         T19 ProductValue19 { get; }
 
     }
+
+    /// <summary>
+    /// A 20-dimensional strongly-typed product.
+    /// </summary>
+    public interface IProduct20<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16, out T17, out T18, out T19, out T20> : IProduct
+    {
+        /// <summary>
+        /// Value of the product in the dimension 1.
+        /// </summary>
+        T1 ProductValue1 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 2.
+        /// </summary>
+        T2 ProductValue2 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 3.
+        /// </summary>
+        T3 ProductValue3 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 4.
+        /// </summary>
+        T4 ProductValue4 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 5.
+        /// </summary>
+        T5 ProductValue5 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 6.
+        /// </summary>
+        T6 ProductValue6 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 7.
+        /// </summary>
+        T7 ProductValue7 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 8.
+        /// </summary>
+        T8 ProductValue8 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 9.
+        /// </summary>
+        T9 ProductValue9 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 10.
+        /// </summary>
+        T10 ProductValue10 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 11.
+        /// </summary>
+        T11 ProductValue11 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 12.
+        /// </summary>
+        T12 ProductValue12 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 13.
+        /// </summary>
+        T13 ProductValue13 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 14.
+        /// </summary>
+        T14 ProductValue14 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 15.
+        /// </summary>
+        T15 ProductValue15 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 16.
+        /// </summary>
+        T16 ProductValue16 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 17.
+        /// </summary>
+        T17 ProductValue17 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 18.
+        /// </summary>
+        T18 ProductValue18 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 19.
+        /// </summary>
+        T19 ProductValue19 { get; }
+
+        /// <summary>
+        /// Value of the product in the dimension 20.
+        /// </summary>
+        T20 ProductValue20 { get; }
+
+    }
 }

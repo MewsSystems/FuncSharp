@@ -251,7 +251,7 @@ namespace FuncSharp
     public static class Coproduct3
     {
         /// <summary>
-        /// Creates a new 3-dimensional coproduct with the third value.
+        /// Creates a new 3-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct3<T1, T2, T3> CreateFirst<T1, T2, T3>(T1 value)
         {
@@ -259,7 +259,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 3-dimensional coproduct with the third value.
+        /// Creates a new 3-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct3<T1, T2, T3> CreateSecond<T1, T2, T3>(T2 value)
         {
@@ -383,7 +383,7 @@ namespace FuncSharp
     public static class Coproduct4
     {
         /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// Creates a new 4-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct4<T1, T2, T3, T4> CreateFirst<T1, T2, T3, T4>(T1 value)
         {
@@ -391,7 +391,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// Creates a new 4-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct4<T1, T2, T3, T4> CreateSecond<T1, T2, T3, T4>(T2 value)
         {
@@ -399,7 +399,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 4-dimensional coproduct with the fourth value.
+        /// Creates a new 4-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct4<T1, T2, T3, T4> CreateThird<T1, T2, T3, T4>(T3 value)
         {
@@ -543,7 +543,7 @@ namespace FuncSharp
     public static class Coproduct5
     {
         /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// Creates a new 5-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct5<T1, T2, T3, T4, T5> CreateFirst<T1, T2, T3, T4, T5>(T1 value)
         {
@@ -551,7 +551,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// Creates a new 5-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct5<T1, T2, T3, T4, T5> CreateSecond<T1, T2, T3, T4, T5>(T2 value)
         {
@@ -559,7 +559,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// Creates a new 5-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct5<T1, T2, T3, T4, T5> CreateThird<T1, T2, T3, T4, T5>(T3 value)
         {
@@ -567,7 +567,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 5-dimensional coproduct with the fifth value.
+        /// Creates a new 5-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct5<T1, T2, T3, T4, T5> CreateFourth<T1, T2, T3, T4, T5>(T4 value)
         {
@@ -731,7 +731,7 @@ namespace FuncSharp
     public static class Coproduct6
     {
         /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// Creates a new 6-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFirst<T1, T2, T3, T4, T5, T6>(T1 value)
         {
@@ -739,7 +739,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// Creates a new 6-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateSecond<T1, T2, T3, T4, T5, T6>(T2 value)
         {
@@ -747,7 +747,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// Creates a new 6-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateThird<T1, T2, T3, T4, T5, T6>(T3 value)
         {
@@ -755,7 +755,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// Creates a new 6-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFourth<T1, T2, T3, T4, T5, T6>(T4 value)
         {
@@ -763,7 +763,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 6-dimensional coproduct with the sixth value.
+        /// Creates a new 6-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct6<T1, T2, T3, T4, T5, T6> CreateFifth<T1, T2, T3, T4, T5, T6>(T5 value)
         {
@@ -947,7 +947,7 @@ namespace FuncSharp
     public static class Coproduct7
     {
         /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// Creates a new 7-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFirst<T1, T2, T3, T4, T5, T6, T7>(T1 value)
         {
@@ -955,7 +955,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// Creates a new 7-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSecond<T1, T2, T3, T4, T5, T6, T7>(T2 value)
         {
@@ -963,7 +963,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// Creates a new 7-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateThird<T1, T2, T3, T4, T5, T6, T7>(T3 value)
         {
@@ -971,7 +971,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// Creates a new 7-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFourth<T1, T2, T3, T4, T5, T6, T7>(T4 value)
         {
@@ -979,7 +979,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// Creates a new 7-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateFifth<T1, T2, T3, T4, T5, T6, T7>(T5 value)
         {
@@ -987,7 +987,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 7-dimensional coproduct with the seventh value.
+        /// Creates a new 7-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct7<T1, T2, T3, T4, T5, T6, T7> CreateSixth<T1, T2, T3, T4, T5, T6, T7>(T6 value)
         {
@@ -1191,7 +1191,7 @@ namespace FuncSharp
     public static class Coproduct8
     {
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value)
         {
@@ -1199,7 +1199,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8>(T2 value)
         {
@@ -1207,7 +1207,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8>(T3 value)
         {
@@ -1215,7 +1215,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8>(T4 value)
         {
@@ -1223,7 +1223,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8>(T5 value)
         {
@@ -1231,7 +1231,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8>(T6 value)
         {
@@ -1239,7 +1239,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 8-dimensional coproduct with the eighth value.
+        /// Creates a new 8-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8>(T7 value)
         {
@@ -1463,7 +1463,7 @@ namespace FuncSharp
     public static class Coproduct9
     {
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 value)
         {
@@ -1471,7 +1471,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T2 value)
         {
@@ -1479,7 +1479,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T3 value)
         {
@@ -1487,7 +1487,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T4 value)
         {
@@ -1495,7 +1495,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T5 value)
         {
@@ -1503,7 +1503,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T6 value)
         {
@@ -1511,7 +1511,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T7 value)
         {
@@ -1519,7 +1519,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 9-dimensional coproduct with the ninth value.
+        /// Creates a new 9-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T8 value)
         {
@@ -1763,7 +1763,7 @@ namespace FuncSharp
     public static class Coproduct10
     {
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 value)
         {
@@ -1771,7 +1771,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T2 value)
         {
@@ -1779,7 +1779,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T3 value)
         {
@@ -1787,7 +1787,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T4 value)
         {
@@ -1795,7 +1795,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T5 value)
         {
@@ -1803,7 +1803,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T6 value)
         {
@@ -1811,7 +1811,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T7 value)
         {
@@ -1819,7 +1819,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T8 value)
         {
@@ -1827,7 +1827,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 10-dimensional coproduct with the tenth value.
+        /// Creates a new 10-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T9 value)
         {
@@ -2091,7 +2091,7 @@ namespace FuncSharp
     public static class Coproduct11
     {
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 value)
         {
@@ -2099,7 +2099,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T2 value)
         {
@@ -2107,7 +2107,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T3 value)
         {
@@ -2115,7 +2115,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T4 value)
         {
@@ -2123,7 +2123,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T5 value)
         {
@@ -2131,7 +2131,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T6 value)
         {
@@ -2139,7 +2139,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T7 value)
         {
@@ -2147,7 +2147,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T8 value)
         {
@@ -2155,7 +2155,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T9 value)
         {
@@ -2163,7 +2163,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 11-dimensional coproduct with the eleventh value.
+        /// Creates a new 11-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T10 value)
         {
@@ -2447,7 +2447,7 @@ namespace FuncSharp
     public static class Coproduct12
     {
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 value)
         {
@@ -2455,7 +2455,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T2 value)
         {
@@ -2463,7 +2463,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T3 value)
         {
@@ -2471,7 +2471,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T4 value)
         {
@@ -2479,7 +2479,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T5 value)
         {
@@ -2487,7 +2487,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T6 value)
         {
@@ -2495,7 +2495,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T7 value)
         {
@@ -2503,7 +2503,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T8 value)
         {
@@ -2511,7 +2511,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T9 value)
         {
@@ -2519,7 +2519,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T10 value)
         {
@@ -2527,7 +2527,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 12-dimensional coproduct with the twelfth value.
+        /// Creates a new 12-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T11 value)
         {
@@ -2831,7 +2831,7 @@ namespace FuncSharp
     public static class Coproduct13
     {
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 value)
         {
@@ -2839,7 +2839,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T2 value)
         {
@@ -2847,7 +2847,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T3 value)
         {
@@ -2855,7 +2855,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T4 value)
         {
@@ -2863,7 +2863,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T5 value)
         {
@@ -2871,7 +2871,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T6 value)
         {
@@ -2879,7 +2879,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T7 value)
         {
@@ -2887,7 +2887,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T8 value)
         {
@@ -2895,7 +2895,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T9 value)
         {
@@ -2903,7 +2903,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T10 value)
         {
@@ -2911,7 +2911,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T11 value)
         {
@@ -2919,7 +2919,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 13-dimensional coproduct with the thirteenth value.
+        /// Creates a new 13-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T12 value)
         {
@@ -3243,7 +3243,7 @@ namespace FuncSharp
     public static class Coproduct14
     {
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 value)
         {
@@ -3251,7 +3251,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T2 value)
         {
@@ -3259,7 +3259,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T3 value)
         {
@@ -3267,7 +3267,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T4 value)
         {
@@ -3275,7 +3275,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T5 value)
         {
@@ -3283,7 +3283,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T6 value)
         {
@@ -3291,7 +3291,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T7 value)
         {
@@ -3299,7 +3299,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T8 value)
         {
@@ -3307,7 +3307,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T9 value)
         {
@@ -3315,7 +3315,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T10 value)
         {
@@ -3323,7 +3323,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T11 value)
         {
@@ -3331,7 +3331,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T12 value)
         {
@@ -3339,7 +3339,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 14-dimensional coproduct with the fourteenth value.
+        /// Creates a new 14-dimensional coproduct with the thirteenth value.
         /// </summary>
         public static ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T13 value)
         {
@@ -3683,7 +3683,7 @@ namespace FuncSharp
     public static class Coproduct15
     {
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 value)
         {
@@ -3691,7 +3691,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T2 value)
         {
@@ -3699,7 +3699,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T3 value)
         {
@@ -3707,7 +3707,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T4 value)
         {
@@ -3715,7 +3715,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T5 value)
         {
@@ -3723,7 +3723,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T6 value)
         {
@@ -3731,7 +3731,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T7 value)
         {
@@ -3739,7 +3739,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T8 value)
         {
@@ -3747,7 +3747,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T9 value)
         {
@@ -3755,7 +3755,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T10 value)
         {
@@ -3763,7 +3763,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T11 value)
         {
@@ -3771,7 +3771,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T12 value)
         {
@@ -3779,7 +3779,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the thirteenth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T13 value)
         {
@@ -3787,7 +3787,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 15-dimensional coproduct with the fifteenth value.
+        /// Creates a new 15-dimensional coproduct with the fourteenth value.
         /// </summary>
         public static ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T14 value)
         {
@@ -4151,7 +4151,7 @@ namespace FuncSharp
     public static class Coproduct16
     {
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 value)
         {
@@ -4159,7 +4159,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T2 value)
         {
@@ -4167,7 +4167,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T3 value)
         {
@@ -4175,7 +4175,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T4 value)
         {
@@ -4183,7 +4183,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T5 value)
         {
@@ -4191,7 +4191,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T6 value)
         {
@@ -4199,7 +4199,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T7 value)
         {
@@ -4207,7 +4207,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T8 value)
         {
@@ -4215,7 +4215,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T9 value)
         {
@@ -4223,7 +4223,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T10 value)
         {
@@ -4231,7 +4231,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T11 value)
         {
@@ -4239,7 +4239,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T12 value)
         {
@@ -4247,7 +4247,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the thirteenth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T13 value)
         {
@@ -4255,7 +4255,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the fourteenth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T14 value)
         {
@@ -4263,7 +4263,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 16-dimensional coproduct with the sixteenth value.
+        /// Creates a new 16-dimensional coproduct with the fifteenth value.
         /// </summary>
         public static ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T15 value)
         {
@@ -4647,7 +4647,7 @@ namespace FuncSharp
     public static class Coproduct17
     {
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T1 value)
         {
@@ -4655,7 +4655,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T2 value)
         {
@@ -4663,7 +4663,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T3 value)
         {
@@ -4671,7 +4671,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T4 value)
         {
@@ -4679,7 +4679,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T5 value)
         {
@@ -4687,7 +4687,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T6 value)
         {
@@ -4695,7 +4695,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T7 value)
         {
@@ -4703,7 +4703,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T8 value)
         {
@@ -4711,7 +4711,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T9 value)
         {
@@ -4719,7 +4719,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T10 value)
         {
@@ -4727,7 +4727,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T11 value)
         {
@@ -4735,7 +4735,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T12 value)
         {
@@ -4743,7 +4743,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the thirteenth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T13 value)
         {
@@ -4751,7 +4751,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the fourteenth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T14 value)
         {
@@ -4759,7 +4759,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the fifteenth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T15 value)
         {
@@ -4767,7 +4767,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 17-dimensional coproduct with the seventeenth value.
+        /// Creates a new 17-dimensional coproduct with the sixteenth value.
         /// </summary>
         public static ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(T16 value)
         {
@@ -5171,7 +5171,7 @@ namespace FuncSharp
     public static class Coproduct18
     {
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T1 value)
         {
@@ -5179,7 +5179,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T2 value)
         {
@@ -5187,7 +5187,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T3 value)
         {
@@ -5195,7 +5195,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T4 value)
         {
@@ -5203,7 +5203,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T5 value)
         {
@@ -5211,7 +5211,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T6 value)
         {
@@ -5219,7 +5219,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T7 value)
         {
@@ -5227,7 +5227,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T8 value)
         {
@@ -5235,7 +5235,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T9 value)
         {
@@ -5243,7 +5243,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T10 value)
         {
@@ -5251,7 +5251,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T11 value)
         {
@@ -5259,7 +5259,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T12 value)
         {
@@ -5267,7 +5267,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the thirteenth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T13 value)
         {
@@ -5275,7 +5275,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the fourteenth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T14 value)
         {
@@ -5283,7 +5283,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the fifteenth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T15 value)
         {
@@ -5291,7 +5291,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the sixteenth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T16 value)
         {
@@ -5299,7 +5299,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 18-dimensional coproduct with the eighteenth value.
+        /// Creates a new 18-dimensional coproduct with the seventeenth value.
         /// </summary>
         public static ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(T17 value)
         {
@@ -5723,7 +5723,7 @@ namespace FuncSharp
     public static class Coproduct19
     {
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the first value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T1 value)
         {
@@ -5731,7 +5731,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the second value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T2 value)
         {
@@ -5739,7 +5739,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the third value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T3 value)
         {
@@ -5747,7 +5747,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the fourth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T4 value)
         {
@@ -5755,7 +5755,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the fifth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T5 value)
         {
@@ -5763,7 +5763,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the sixth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T6 value)
         {
@@ -5771,7 +5771,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the seventh value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T7 value)
         {
@@ -5779,7 +5779,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the eighth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T8 value)
         {
@@ -5787,7 +5787,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the ninth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T9 value)
         {
@@ -5795,7 +5795,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the tenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T10 value)
         {
@@ -5803,7 +5803,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the eleventh value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T11 value)
         {
@@ -5811,7 +5811,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the twelfth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T12 value)
         {
@@ -5819,7 +5819,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the thirteenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T13 value)
         {
@@ -5827,7 +5827,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the fourteenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T14 value)
         {
@@ -5835,7 +5835,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the fifteenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T15 value)
         {
@@ -5843,7 +5843,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the sixteenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T16 value)
         {
@@ -5851,7 +5851,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the seventeenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T17 value)
         {
@@ -5859,7 +5859,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Creates a new 19-dimensional coproduct with the nineteenth value.
+        /// Creates a new 19-dimensional coproduct with the eighteenth value.
         /// </summary>
         public static ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(T18 value)
         {
@@ -6293,6 +6293,614 @@ namespace FuncSharp
                 case 17: ifSeventeenth?.Invoke(GetCoproductValue<T17>()); break;
                 case 18: ifEighteenth?.Invoke(GetCoproductValue<T18>()); break;
                 case 19: ifNineteenth?.Invoke(GetCoproductValue<T19>()); break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Factory for 20-dimensional immutable coproducts.
+    /// </summary>
+    public static class Coproduct20
+    {
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the first value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T1 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the second value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T2 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the third value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T3 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the fourth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T4 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the fifth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T5 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the sixth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T6 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the seventh value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T7 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the eighth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T8 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the ninth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T9 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the tenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T10 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the eleventh value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T11 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the twelfth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T12 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the thirteenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T13 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the fourteenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T14 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the fifteenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T15 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the sixteenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T16 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the seventeenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T17 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the eighteenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T18 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the nineteenth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T19 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the twentieth value.
+        /// </summary>
+        public static ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> CreateTwentieth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(T20 value)
+        {
+            return new Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(value);
+        }
+
+    }
+
+    /// <summary>
+    /// A 20-dimensional immutable coproduct.
+    /// </summary> 
+    public class Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> : CoproductBase, ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>
+    {
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the first position.
+        /// </summary>
+        public Coproduct20(T1 firstValue)
+            : this(1, firstValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the second position.
+        /// </summary>
+        public Coproduct20(T2 secondValue)
+            : this(2, secondValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the third position.
+        /// </summary>
+        public Coproduct20(T3 thirdValue)
+            : this(3, thirdValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the fourth position.
+        /// </summary>
+        public Coproduct20(T4 fourthValue)
+            : this(4, fourthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the fifth position.
+        /// </summary>
+        public Coproduct20(T5 fifthValue)
+            : this(5, fifthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the sixth position.
+        /// </summary>
+        public Coproduct20(T6 sixthValue)
+            : this(6, sixthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the seventh position.
+        /// </summary>
+        public Coproduct20(T7 seventhValue)
+            : this(7, seventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the eighth position.
+        /// </summary>
+        public Coproduct20(T8 eighthValue)
+            : this(8, eighthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the ninth position.
+        /// </summary>
+        public Coproduct20(T9 ninthValue)
+            : this(9, ninthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the tenth position.
+        /// </summary>
+        public Coproduct20(T10 tenthValue)
+            : this(10, tenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the eleventh position.
+        /// </summary>
+        public Coproduct20(T11 eleventhValue)
+            : this(11, eleventhValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the twelfth position.
+        /// </summary>
+        public Coproduct20(T12 twelfthValue)
+            : this(12, twelfthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the thirteenth position.
+        /// </summary>
+        public Coproduct20(T13 thirteenthValue)
+            : this(13, thirteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the fourteenth position.
+        /// </summary>
+        public Coproduct20(T14 fourteenthValue)
+            : this(14, fourteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the fifteenth position.
+        /// </summary>
+        public Coproduct20(T15 fifteenthValue)
+            : this(15, fifteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the sixteenth position.
+        /// </summary>
+        public Coproduct20(T16 sixteenthValue)
+            : this(16, sixteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the seventeenth position.
+        /// </summary>
+        public Coproduct20(T17 seventeenthValue)
+            : this(17, seventeenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the eighteenth position.
+        /// </summary>
+        public Coproduct20(T18 eighteenthValue)
+            : this(18, eighteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the nineteenth position.
+        /// </summary>
+        public Coproduct20(T19 nineteenthValue)
+            : this(19, nineteenthValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct with the specified value on the twentieth position.
+        /// </summary>
+        public Coproduct20(T20 twentiethValue)
+            : this(20, twentiethValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct based on the specified source.
+        /// </summary>
+        public Coproduct20(ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> source)
+            : this(source.CoproductDiscriminator, source.CoproductValue)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new 20-dimensional coproduct.
+        /// </summary>
+        /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+        /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
+        protected Coproduct20(int discriminator, object value)
+            : base(20, discriminator, value)
+        {
+        }
+
+        public bool IsFirst
+        {
+            get { return CoproductDiscriminator == 1; }
+        }
+        public bool IsSecond
+        {
+            get { return CoproductDiscriminator == 2; }
+        }
+        public bool IsThird
+        {
+            get { return CoproductDiscriminator == 3; }
+        }
+        public bool IsFourth
+        {
+            get { return CoproductDiscriminator == 4; }
+        }
+        public bool IsFifth
+        {
+            get { return CoproductDiscriminator == 5; }
+        }
+        public bool IsSixth
+        {
+            get { return CoproductDiscriminator == 6; }
+        }
+        public bool IsSeventh
+        {
+            get { return CoproductDiscriminator == 7; }
+        }
+        public bool IsEighth
+        {
+            get { return CoproductDiscriminator == 8; }
+        }
+        public bool IsNinth
+        {
+            get { return CoproductDiscriminator == 9; }
+        }
+        public bool IsTenth
+        {
+            get { return CoproductDiscriminator == 10; }
+        }
+        public bool IsEleventh
+        {
+            get { return CoproductDiscriminator == 11; }
+        }
+        public bool IsTwelfth
+        {
+            get { return CoproductDiscriminator == 12; }
+        }
+        public bool IsThirteenth
+        {
+            get { return CoproductDiscriminator == 13; }
+        }
+        public bool IsFourteenth
+        {
+            get { return CoproductDiscriminator == 14; }
+        }
+        public bool IsFifteenth
+        {
+            get { return CoproductDiscriminator == 15; }
+        }
+        public bool IsSixteenth
+        {
+            get { return CoproductDiscriminator == 16; }
+        }
+        public bool IsSeventeenth
+        {
+            get { return CoproductDiscriminator == 17; }
+        }
+        public bool IsEighteenth
+        {
+            get { return CoproductDiscriminator == 18; }
+        }
+        public bool IsNineteenth
+        {
+            get { return CoproductDiscriminator == 19; }
+        }
+        public bool IsTwentieth
+        {
+            get { return CoproductDiscriminator == 20; }
+        }
+
+        public IOption<T1> First
+        {
+            get { return IsFirst ? Option.Valued(GetCoproductValue<T1>()) : Option.Empty<T1>(); }
+        }
+        public IOption<T2> Second
+        {
+            get { return IsSecond ? Option.Valued(GetCoproductValue<T2>()) : Option.Empty<T2>(); }
+        }
+        public IOption<T3> Third
+        {
+            get { return IsThird ? Option.Valued(GetCoproductValue<T3>()) : Option.Empty<T3>(); }
+        }
+        public IOption<T4> Fourth
+        {
+            get { return IsFourth ? Option.Valued(GetCoproductValue<T4>()) : Option.Empty<T4>(); }
+        }
+        public IOption<T5> Fifth
+        {
+            get { return IsFifth ? Option.Valued(GetCoproductValue<T5>()) : Option.Empty<T5>(); }
+        }
+        public IOption<T6> Sixth
+        {
+            get { return IsSixth ? Option.Valued(GetCoproductValue<T6>()) : Option.Empty<T6>(); }
+        }
+        public IOption<T7> Seventh
+        {
+            get { return IsSeventh ? Option.Valued(GetCoproductValue<T7>()) : Option.Empty<T7>(); }
+        }
+        public IOption<T8> Eighth
+        {
+            get { return IsEighth ? Option.Valued(GetCoproductValue<T8>()) : Option.Empty<T8>(); }
+        }
+        public IOption<T9> Ninth
+        {
+            get { return IsNinth ? Option.Valued(GetCoproductValue<T9>()) : Option.Empty<T9>(); }
+        }
+        public IOption<T10> Tenth
+        {
+            get { return IsTenth ? Option.Valued(GetCoproductValue<T10>()) : Option.Empty<T10>(); }
+        }
+        public IOption<T11> Eleventh
+        {
+            get { return IsEleventh ? Option.Valued(GetCoproductValue<T11>()) : Option.Empty<T11>(); }
+        }
+        public IOption<T12> Twelfth
+        {
+            get { return IsTwelfth ? Option.Valued(GetCoproductValue<T12>()) : Option.Empty<T12>(); }
+        }
+        public IOption<T13> Thirteenth
+        {
+            get { return IsThirteenth ? Option.Valued(GetCoproductValue<T13>()) : Option.Empty<T13>(); }
+        }
+        public IOption<T14> Fourteenth
+        {
+            get { return IsFourteenth ? Option.Valued(GetCoproductValue<T14>()) : Option.Empty<T14>(); }
+        }
+        public IOption<T15> Fifteenth
+        {
+            get { return IsFifteenth ? Option.Valued(GetCoproductValue<T15>()) : Option.Empty<T15>(); }
+        }
+        public IOption<T16> Sixteenth
+        {
+            get { return IsSixteenth ? Option.Valued(GetCoproductValue<T16>()) : Option.Empty<T16>(); }
+        }
+        public IOption<T17> Seventeenth
+        {
+            get { return IsSeventeenth ? Option.Valued(GetCoproductValue<T17>()) : Option.Empty<T17>(); }
+        }
+        public IOption<T18> Eighteenth
+        {
+            get { return IsEighteenth ? Option.Valued(GetCoproductValue<T18>()) : Option.Empty<T18>(); }
+        }
+        public IOption<T19> Nineteenth
+        {
+            get { return IsNineteenth ? Option.Valued(GetCoproductValue<T19>()) : Option.Empty<T19>(); }
+        }
+        public IOption<T20> Twentieth
+        {
+            get { return IsTwentieth ? Option.Valued(GetCoproductValue<T20>()) : Option.Empty<T20>(); }
+        }
+
+        public R Match<R>(
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth,
+            Func<T10, R> ifTenth,
+            Func<T11, R> ifEleventh,
+            Func<T12, R> ifTwelfth,
+            Func<T13, R> ifThirteenth,
+            Func<T14, R> ifFourteenth,
+            Func<T15, R> ifFifteenth,
+            Func<T16, R> ifSixteenth,
+            Func<T17, R> ifSeventeenth,
+            Func<T18, R> ifEighteenth,
+            Func<T19, R> ifNineteenth,
+            Func<T20, R> ifTwentieth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return ifFirst(GetCoproductValue<T1>());
+                case 2: return ifSecond(GetCoproductValue<T2>());
+                case 3: return ifThird(GetCoproductValue<T3>());
+                case 4: return ifFourth(GetCoproductValue<T4>());
+                case 5: return ifFifth(GetCoproductValue<T5>());
+                case 6: return ifSixth(GetCoproductValue<T6>());
+                case 7: return ifSeventh(GetCoproductValue<T7>());
+                case 8: return ifEighth(GetCoproductValue<T8>());
+                case 9: return ifNinth(GetCoproductValue<T9>());
+                case 10: return ifTenth(GetCoproductValue<T10>());
+                case 11: return ifEleventh(GetCoproductValue<T11>());
+                case 12: return ifTwelfth(GetCoproductValue<T12>());
+                case 13: return ifThirteenth(GetCoproductValue<T13>());
+                case 14: return ifFourteenth(GetCoproductValue<T14>());
+                case 15: return ifFifteenth(GetCoproductValue<T15>());
+                case 16: return ifSixteenth(GetCoproductValue<T16>());
+                case 17: return ifSeventeenth(GetCoproductValue<T17>());
+                case 18: return ifEighteenth(GetCoproductValue<T18>());
+                case 19: return ifNineteenth(GetCoproductValue<T19>());
+                case 20: return ifTwentieth(GetCoproductValue<T20>());
+                default: return default(R);
+            }
+        }
+
+        public void Match(
+            Action<T1> ifFirst = null,
+            Action<T2> ifSecond = null,
+            Action<T3> ifThird = null,
+            Action<T4> ifFourth = null,
+            Action<T5> ifFifth = null,
+            Action<T6> ifSixth = null,
+            Action<T7> ifSeventh = null,
+            Action<T8> ifEighth = null,
+            Action<T9> ifNinth = null,
+            Action<T10> ifTenth = null,
+            Action<T11> ifEleventh = null,
+            Action<T12> ifTwelfth = null,
+            Action<T13> ifThirteenth = null,
+            Action<T14> ifFourteenth = null,
+            Action<T15> ifFifteenth = null,
+            Action<T16> ifSixteenth = null,
+            Action<T17> ifSeventeenth = null,
+            Action<T18> ifEighteenth = null,
+            Action<T19> ifNineteenth = null,
+            Action<T20> ifTwentieth = null)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: ifFirst?.Invoke(GetCoproductValue<T1>()); break;
+                case 2: ifSecond?.Invoke(GetCoproductValue<T2>()); break;
+                case 3: ifThird?.Invoke(GetCoproductValue<T3>()); break;
+                case 4: ifFourth?.Invoke(GetCoproductValue<T4>()); break;
+                case 5: ifFifth?.Invoke(GetCoproductValue<T5>()); break;
+                case 6: ifSixth?.Invoke(GetCoproductValue<T6>()); break;
+                case 7: ifSeventh?.Invoke(GetCoproductValue<T7>()); break;
+                case 8: ifEighth?.Invoke(GetCoproductValue<T8>()); break;
+                case 9: ifNinth?.Invoke(GetCoproductValue<T9>()); break;
+                case 10: ifTenth?.Invoke(GetCoproductValue<T10>()); break;
+                case 11: ifEleventh?.Invoke(GetCoproductValue<T11>()); break;
+                case 12: ifTwelfth?.Invoke(GetCoproductValue<T12>()); break;
+                case 13: ifThirteenth?.Invoke(GetCoproductValue<T13>()); break;
+                case 14: ifFourteenth?.Invoke(GetCoproductValue<T14>()); break;
+                case 15: ifFifteenth?.Invoke(GetCoproductValue<T15>()); break;
+                case 16: ifSixteenth?.Invoke(GetCoproductValue<T16>()); break;
+                case 17: ifSeventeenth?.Invoke(GetCoproductValue<T17>()); break;
+                case 18: ifEighteenth?.Invoke(GetCoproductValue<T18>()); break;
+                case 19: ifNineteenth?.Invoke(GetCoproductValue<T19>()); break;
+                case 20: ifTwentieth?.Invoke(GetCoproductValue<T20>()); break;
             }
         }
     }

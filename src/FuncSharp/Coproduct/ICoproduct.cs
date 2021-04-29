@@ -2842,4 +2842,282 @@ namespace FuncSharp
             Action<T19> ifNineteenth = null);
     }
 
+    /// <summary>
+    /// A 20-dimensional strongly-typed coproduct.
+    /// </summary>
+    public interface ICoproduct20<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16, out T17, out T18, out T19, out T20> : ICoproduct
+    {
+        /// <summary>
+        /// Returns whether the coproduct contains the first value.
+        /// </summary>
+        bool IsFirst { get; }
+
+        /// <summary>
+        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T1> First { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the second value.
+        /// </summary>
+        bool IsSecond { get; }
+
+        /// <summary>
+        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T2> Second { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the third value.
+        /// </summary>
+        bool IsThird { get; }
+
+        /// <summary>
+        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T3> Third { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the fourth value.
+        /// </summary>
+        bool IsFourth { get; }
+
+        /// <summary>
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T4> Fourth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the fifth value.
+        /// </summary>
+        bool IsFifth { get; }
+
+        /// <summary>
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T5> Fifth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the sixth value.
+        /// </summary>
+        bool IsSixth { get; }
+
+        /// <summary>
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T6> Sixth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the seventh value.
+        /// </summary>
+        bool IsSeventh { get; }
+
+        /// <summary>
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T7> Seventh { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the eighth value.
+        /// </summary>
+        bool IsEighth { get; }
+
+        /// <summary>
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T8> Eighth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the ninth value.
+        /// </summary>
+        bool IsNinth { get; }
+
+        /// <summary>
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T9> Ninth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the tenth value.
+        /// </summary>
+        bool IsTenth { get; }
+
+        /// <summary>
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T10> Tenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the eleventh value.
+        /// </summary>
+        bool IsEleventh { get; }
+
+        /// <summary>
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T11> Eleventh { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the twelfth value.
+        /// </summary>
+        bool IsTwelfth { get; }
+
+        /// <summary>
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T12> Twelfth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the thirteenth value.
+        /// </summary>
+        bool IsThirteenth { get; }
+
+        /// <summary>
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T13> Thirteenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the fourteenth value.
+        /// </summary>
+        bool IsFourteenth { get; }
+
+        /// <summary>
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T14> Fourteenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the fifteenth value.
+        /// </summary>
+        bool IsFifteenth { get; }
+
+        /// <summary>
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T15> Fifteenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the sixteenth value.
+        /// </summary>
+        bool IsSixteenth { get; }
+
+        /// <summary>
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T16> Sixteenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the seventeenth value.
+        /// </summary>
+        bool IsSeventeenth { get; }
+
+        /// <summary>
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T17> Seventeenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the eighteenth value.
+        /// </summary>
+        bool IsEighteenth { get; }
+
+        /// <summary>
+        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T18> Eighteenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the nineteenth value.
+        /// </summary>
+        bool IsNineteenth { get; }
+
+        /// <summary>
+        /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T19> Nineteenth { get; }
+
+        /// <summary>
+        /// Returns whether the coproduct contains the twentieth value.
+        /// </summary>
+        bool IsTwentieth { get; }
+
+        /// <summary>
+        /// Returns twentieth value of the coproduct as an option. The option contains the twentieth 
+        /// value or is empty if the coproduct contains different value.
+        /// </summary>
+        IOption<T20> Twentieth { get; }
+
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
+        R Match<R>(
+            Func<T1, R> ifFirst,
+            Func<T2, R> ifSecond,
+            Func<T3, R> ifThird,
+            Func<T4, R> ifFourth,
+            Func<T5, R> ifFifth,
+            Func<T6, R> ifSixth,
+            Func<T7, R> ifSeventh,
+            Func<T8, R> ifEighth,
+            Func<T9, R> ifNinth,
+            Func<T10, R> ifTenth,
+            Func<T11, R> ifEleventh,
+            Func<T12, R> ifTwelfth,
+            Func<T13, R> ifThirteenth,
+            Func<T14, R> ifFourteenth,
+            Func<T15, R> ifFifteenth,
+            Func<T16, R> ifSixteenth,
+            Func<T17, R> ifSeventeenth,
+            Func<T18, R> ifEighteenth,
+            Func<T19, R> ifNineteenth,
+            Func<T20, R> ifTwentieth);
+
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
+        void Match(
+            Action<T1> ifFirst = null,
+            Action<T2> ifSecond = null,
+            Action<T3> ifThird = null,
+            Action<T4> ifFourth = null,
+            Action<T5> ifFifth = null,
+            Action<T6> ifSixth = null,
+            Action<T7> ifSeventh = null,
+            Action<T8> ifEighth = null,
+            Action<T9> ifNinth = null,
+            Action<T10> ifTenth = null,
+            Action<T11> ifEleventh = null,
+            Action<T12> ifTwelfth = null,
+            Action<T13> ifThirteenth = null,
+            Action<T14> ifFourteenth = null,
+            Action<T15> ifFifteenth = null,
+            Action<T16> ifSixteenth = null,
+            Action<T17> ifSeventeenth = null,
+            Action<T18> ifEighteenth = null,
+            Action<T19> ifNineteenth = null,
+            Action<T20> ifTwentieth = null);
+    }
+
 }
