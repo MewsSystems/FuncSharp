@@ -70,7 +70,7 @@ namespace FuncSharp
     {
 <#         for (var j = 1; j <= i; j++) { #>
         /// <summary>
-        /// Creates a new <#= i #>-dimensional coproduct with the <#= GetLowerOrdinal(i) #> value.
+        /// Creates a new <#= i #>-dimensional coproduct with the <#= GetLowerOrdinal(j) #> value.
         /// </summary>
         public static <#= CoproductType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Type(j) #> value)
         {
