@@ -693,5 +693,53 @@ namespace FuncSharp
             f18(source.Select(c => c.Eighteenth).Flatten().ToList());
             f19(source.Select(c => c.Nineteenth).Flatten().ToList());
         }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// </summary>
+        public static void PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(
+            this IEnumerable<ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> source,
+            Action<IEnumerable<T1>> f1,
+            Action<IEnumerable<T2>> f2,
+            Action<IEnumerable<T3>> f3,
+            Action<IEnumerable<T4>> f4,
+            Action<IEnumerable<T5>> f5,
+            Action<IEnumerable<T6>> f6,
+            Action<IEnumerable<T7>> f7,
+            Action<IEnumerable<T8>> f8,
+            Action<IEnumerable<T9>> f9,
+            Action<IEnumerable<T10>> f10,
+            Action<IEnumerable<T11>> f11,
+            Action<IEnumerable<T12>> f12,
+            Action<IEnumerable<T13>> f13,
+            Action<IEnumerable<T14>> f14,
+            Action<IEnumerable<T15>> f15,
+            Action<IEnumerable<T16>> f16,
+            Action<IEnumerable<T17>> f17,
+            Action<IEnumerable<T18>> f18,
+            Action<IEnumerable<T19>> f19,
+            Action<IEnumerable<T20>> f20)
+        {
+            f1(source.Select(c => c.First).Flatten().ToList());
+            f2(source.Select(c => c.Second).Flatten().ToList());
+            f3(source.Select(c => c.Third).Flatten().ToList());
+            f4(source.Select(c => c.Fourth).Flatten().ToList());
+            f5(source.Select(c => c.Fifth).Flatten().ToList());
+            f6(source.Select(c => c.Sixth).Flatten().ToList());
+            f7(source.Select(c => c.Seventh).Flatten().ToList());
+            f8(source.Select(c => c.Eighth).Flatten().ToList());
+            f9(source.Select(c => c.Ninth).Flatten().ToList());
+            f10(source.Select(c => c.Tenth).Flatten().ToList());
+            f11(source.Select(c => c.Eleventh).Flatten().ToList());
+            f12(source.Select(c => c.Twelfth).Flatten().ToList());
+            f13(source.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(source.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(source.Select(c => c.Fifteenth).Flatten().ToList());
+            f16(source.Select(c => c.Sixteenth).Flatten().ToList());
+            f17(source.Select(c => c.Seventeenth).Flatten().ToList());
+            f18(source.Select(c => c.Eighteenth).Flatten().ToList());
+            f19(source.Select(c => c.Nineteenth).Flatten().ToList());
+            f20(source.Select(c => c.Twentieth).Flatten().ToList());
+        }
     }
 }
