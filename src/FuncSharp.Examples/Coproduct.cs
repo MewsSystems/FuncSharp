@@ -1,5 +1,11 @@
 ﻿namespace FuncSharp.Examples
 {
+    public class Tree<A> : Coproduct2<Node<A>, Leaf>
+    {
+        public Tree(Node<A> node) : base(node) { }
+        public Tree(Leaf leaf) : base(leaf) { }
+    }
+
     public class Leaf : Product0
     {
     }
@@ -14,12 +20,6 @@
         public A Value { get { return ProductValue1; } }
         public Tree<A> Left { get { return ProductValue2; } }
         public Tree<A> Right { get { return ProductValue3; } }
-    }
-
-    public class Tree<A> : Coproduct2<Node<A>, Leaf>
-    {
-        public Tree(Node<A> node) : base(node) { }
-        public Tree(Leaf leaf) : base(leaf) { }
     }
 
     public static class TreeUtilities
