@@ -4,9 +4,9 @@
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 [![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 
-FuncSharp is a C# library with main purpose to introduce more advanced functional programming concepts that are currently not availabile in C# natively. As on outcome, it helps reducing boilerplate code, making code more readable and avoiding bugs thanks to stronger typing. It utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
+FuncSharp is a C# library with main purpose to introduce more advanced functional programming concepts that are currently not availabile in C# natively. As on outcome, it helps **reducing boilerplate** code, making code **more readable** and **avoiding bugs** thanks to stronger typing. It utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
 
-Core of the library is formed by algebraic data types (ADTs), namely `Product` and `Coproduct`. Get familiar with them first and make sure you understand concepts of algebraic data modeling. Just those two types, on their own, can be pretty helpful when used in your applications. Everything else this library offers is built on top of the ADTs and is an application of ADT principles to solve some real life use-cases. You can find practical examples in the [FuncSharp.Examples](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples) project.
+Core of the library is formed by **algebraic data types** (ADTs), namely `Product` and `Coproduct`. Get familiar with them first and make sure you understand concepts of algebraic data modeling. Just those two types, on their own, can be pretty helpful when used in your applications. Everything else this library offers is built on top of the ADTs and is an application of ADT principles to solve some real life use-cases. You can find practical examples in the [FuncSharp.Examples](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples) project.
 
 ## Algebraic Data Types
 
