@@ -1,19 +1,14 @@
 # FuncSharp - Functional C&#35;
 
-A C# library with main purpose to introduce more advanced functional programming concepts unavailable in C#, reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
-
 [![Build Status](https://dev.azure.com/siroky/FuncSharp/_apis/build/status/siroky.FuncSharp?branchName=master)](https://dev.azure.com/siroky/FuncSharp/_build/latest?definitionId=2&branchName=master)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 [![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 
-## Contents
+FuncSharp is a C# library with main purpose to introduce more advanced functional programming concepts that are currently not availabile in C# natively. As on outcome, it helps reducing boilerplate code, making code more readable and avoiding bugs thanks to stronger typing. It utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
 
-- [Product](#product)
-- [Coproduct](#coproduct)
-- [Option](#option)
-- [Morphism](#morphism)
-- [DataCube](#datacube)
-- [Order](#order)
+Core of the library is formed by algebraic data types (ADTs), namely `Product` and `Coproduct`. Get familiar with them first and make sure you understand concepts of algebraic data modeling. Just those two types, on their own, can be pretty helpful when used in your applications. Everything else this library offers is built on top of the ADTs and is an application of ADT principles to solve some real life use-cases. You can find practical examples in the [FuncSharp.Examples](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples) project.
+
+## Algebraic Data Types
 
 ### Product
 
@@ -62,6 +57,8 @@ int LeafCount<A>(Tree<A> tree)
 ```
 
 A coproduct of zero types (a choice from no types) is also a well known type, in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
+
+## Additional Helpful Types
 
 ### Option
 
