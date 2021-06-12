@@ -1,16 +1,24 @@
-﻿using System;
-
-namespace FuncSharp.Examples
+﻿namespace FuncSharp.Examples
 {
-    public class User : Product3<string, string, DateTime>
+    public class Point2D : Product2<float, float>
     {
-        public User(string firstName, string lastName, DateTime birthDate)
-            : base(firstName, lastName, birthDate)
+        public Point2D(float x, float y)
+            : base(x, y)
         {
         }
 
-        public string FirstName { get { return ProductValue1; } }
-        public string LastName { get { return ProductValue2; } }
-        public DateTime BirthDate { get { return ProductValue3; } }
+        public float X { get { return ProductValue1; } }
+        public float Y { get { return ProductValue2; } }
+    }
+
+    public class Rectangle : Product2<Point2D, Point2D>
+    {
+        public Rectangle(Point2D a, Point2D b)
+            : base(a, b)
+        {
+        }
+
+        public Point2D A { get { return ProductValue1; } }
+        public Point2D B { get { return ProductValue2; } }
     }
 }
