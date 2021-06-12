@@ -49,22 +49,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Position.cs</LastGenOutput>
     </None>
-    <None Update="Product\IProduct.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IProduct.cs</LastGenOutput>
-    </None>
-    <None Update="Product\Product.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Product.cs</LastGenOutput>
-    </None>
-    <None Update="Relation\Relations.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Relations.cs</LastGenOutput>
-    </None>
-    <None Update="Try\Try.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Try.cs</LastGenOutput>
-    </None>
     <None Update="Extensions\ActionExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ActionExtensions.cs</LastGenOutput>
@@ -80,6 +64,22 @@
     <None Update="Extensions\ObjectExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Product\IProduct.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IProduct.cs</LastGenOutput>
+    </None>
+    <None Update="Product\Product.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Product.cs</LastGenOutput>
+    </None>
+    <None Update="Relation\Relations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Relations.cs</LastGenOutput>
+    </None>
+    <None Update="Try\Try.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Try.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -113,26 +113,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Position.tt</DependentUpon>
     </Compile>
-    <Compile Update="Product\IProduct.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IProduct.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Product\Product.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Product.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Relation\Relations.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Relations.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Try\Try.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Try.tt</DependentUpon>
-    </Compile>
     <Compile Update="Extensions\ActionExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -152,6 +132,26 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ObjectExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Product\IProduct.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IProduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Product\Product.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Product.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Relation\Relations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Relations.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Try\Try.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Try.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
