@@ -109,7 +109,24 @@ namespace FuncSharp
             this IEnumerable<<#= CoproductType(i) #>> source,
 <#= Lines(i, x => Indent(12) + "Action<IEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
-<#= Lines(i, x => Indent(12) + "f" + x + "(source.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList());") #>
+            var evaluatedSource = source.ToList();
+<#= Lines(i, x => Indent(12) + "f" + x + "(evaluatedSource.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList());") #>
+        }
+<#  } #>
+<#  for (var i = 1; i < MaxArity(); i++) { #>
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// </summary>
+        public static IEnumerable<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
+            this IEnumerable<<#= CoproductType(i) #>> source,
+<#= Lines(i, x => Indent(12) + "Func<" + Type(x) + ", TResult> f" + x, separator: ",") #>)
+        {
+            var result = new List<TResult>();
+            source.PartitionMatch(
+<#= Lines(i, x => Indent(16) + "c" + x + " => result.AddRange(c" + x + ".Select(c => f" + x + "(c)))", separator: ",") #>
+            );
+            return result;
         }
 <#  } #>
     }
