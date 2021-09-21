@@ -55,7 +55,7 @@ namespace FuncSharp.Examples
             decimal valueOrFallback2 = divisionResult.GetOrElse(114m);
             decimal valueOrFallback3 = divisionResult.GetOrElse(_ => 114m); // Lazy. Will only run the lambda if it needs to.
 
-            // These two are identical:
+            // These two are identical. Just Map creates one extra instance of Option for no reason.
             decimal roundedDivisionResult1 = divisionResult.Map(r => Math.Round(r)).GetOrZero();
             decimal roundedDivisionResult2 = divisionResult.Match(
                 r => Math.Round(r),
