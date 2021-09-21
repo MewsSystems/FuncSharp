@@ -116,7 +116,7 @@ namespace FuncSharp
 <#  for (var i = 1; i < MaxArity(); i++) { #>
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
             this IEnumerable<<#= CoproductType(i) #>> source,
