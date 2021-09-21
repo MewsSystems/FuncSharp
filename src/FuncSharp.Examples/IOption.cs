@@ -31,36 +31,28 @@ namespace FuncSharp.Examples
         private void HandlingNestedOptionsWithFlatMap(decimal number, decimal divisor)
         {
             IOption<decimal> divisionResult = Divide(number, divisor);
-
             IOption<IOption<decimal>> resultOfDoubleDivision = divisionResult.Map(r => Divide(r, divisor));
-            IOption<decimal> flattenedResultOfDoubleDivision = resultOfDoubleDivision.Flatten(); // this option has value if both the inner and the outer option have value.
-
-            IOption<decimal> resultOfDoubleDivisionFlattenedDirectly = divisionResult.FlatMap(r => Divide(r, divisor)); // Flatmap on option is the same as SelectMany on collections. It directly unwraps.
+            IOption<decimal> flattenedResultOfDoubleDivision1 = resultOfDoubleDivision.Flatten(); // This option has value if both the inner and the outer option have value.
+            // Same can be done with 1 call.
+            IOption<decimal> flattenedResultOfDoubleDivision2 = divisionResult.FlatMap(r => Divide(r, divisor));
         }
 
         private void UsingOptionValueWithMatch(decimal number, decimal divisor)
         {
             var divisionResult = Divide(number, divisor);
             // This overload takes 2 Func parameters. Each of those have to return a value and result is stored in the `roundedResult` variable.
-            decimal roundedResultOrZero = divisionResult.Match(
+            decimal roundedResultOrFourteen = divisionResult.Match(
                 result => Math.Round(result),
-                _ => 0
+                _ => 14
             );
 
-            // This overload accepts 2 optional lambdas. If lambda isn't provided, nothing happens.
+            // This overload accepts 2 optional void lambdas. If lambda isn't provided, nothing happens for that case.
             divisionResult.Match(
                 result => Console.Write($"Division successful, result is: {result}."),
                 _ => Console.Write("Division failed, must have divided by zero.")
             );
-            divisionResult.Match(result =>
-            {
-                // Here you could send result over network only in case the operation succeeds and ignore errors.
-            });
-
-            divisionResult.Match(ifSecond: _ =>
-            {
-                // Here you could only handle error and not do anything if division succeeds.
-            });
+            divisionResult.Match(result => { }); // Or only handle the result if it succeeds.
+            divisionResult.Match(ifSecond: _ => { }); // Or only handle errors.
         }
 
         private void GettingOptionValue(decimal number, decimal divisor)
