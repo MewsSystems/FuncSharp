@@ -764,7 +764,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, TResult>(
             this IEnumerable<ICoproduct1<T1>> source,
@@ -778,7 +778,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, TResult>(
             this IEnumerable<ICoproduct2<T1, T2>> source,
@@ -794,7 +794,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, TResult>(
             this IEnumerable<ICoproduct3<T1, T2, T3>> source,
@@ -812,7 +812,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, TResult>(
             this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source,
@@ -832,7 +832,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, TResult>(
             this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source,
@@ -854,7 +854,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, TResult>(
             this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source,
@@ -878,7 +878,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, TResult>(
             this IEnumerable<ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> source,
@@ -904,7 +904,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
             this IEnumerable<ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source,
@@ -932,7 +932,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
             this IEnumerable<ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source,
@@ -962,7 +962,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
             this IEnumerable<ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source,
@@ -994,7 +994,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
             this IEnumerable<ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source,
@@ -1028,7 +1028,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
             this IEnumerable<ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source,
@@ -1064,7 +1064,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
             this IEnumerable<ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source,
@@ -1102,7 +1102,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
             this IEnumerable<ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source,
@@ -1142,7 +1142,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
             this IEnumerable<ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source,
@@ -1184,7 +1184,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
             this IEnumerable<ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source,
@@ -1228,7 +1228,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, TResult>(
             this IEnumerable<ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source,
@@ -1274,7 +1274,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, TResult>(
             this IEnumerable<ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source,
@@ -1322,7 +1322,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, TResult>(
             this IEnumerable<ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source,
@@ -1372,7 +1372,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function.
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, TResult>(
             this IEnumerable<ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> source,
