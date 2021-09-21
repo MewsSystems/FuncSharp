@@ -18,16 +18,6 @@ namespace FuncSharp.Examples
             IOption<string> stringifiedDivisionResult = divisionResult.Map(r => r.ToString());
         }
 
-        private void HandlingCollectionsOfOptions()
-        {
-            var numbers = new List<int> { 1, 2, 3 };
-            var divisors = new List<int> { 1, 2, 3 };
-            IEnumerable<IOption<decimal>> divisionResults = numbers.SelectMany(n => divisors.Select(d => Divide(n, d))).ToList();
-            IEnumerable<decimal> successfulResults1 = divisionResults.Flatten();
-            IEnumerable<decimal> successfulResults2 = divisionResults.Where(r => r.NonEmpty).Select(r => r.Get()); // get throws exception when called on empty option
-            int errorResultCount = divisionResults.Count(r => r.IsEmpty);
-        }
-
         private void HandlingNestedOptionsWithFlatMap(decimal number, decimal divisor)
         {
             IOption<decimal> divisionResult = Divide(number, divisor);
@@ -71,6 +61,16 @@ namespace FuncSharp.Examples
                 r => Math.Round(r),
                 _ => 0
             );
+        }
+
+        private void HandlingCollectionsOfOptions()
+        {
+            var numbers = new List<int> { 1, 2, 3 };
+            var divisors = new List<int> { 1, 2, 3 };
+            IEnumerable<IOption<decimal>> divisionResults = numbers.SelectMany(n => divisors.Select(d => Divide(n, d))).ToList();
+            IEnumerable<decimal> successfulResults1 = divisionResults.Flatten();
+            IEnumerable<decimal> successfulResults2 = divisionResults.Where(r => r.NonEmpty).Select(r => r.Get()); // get throws exception when called on empty option
+            int errorResultCount = divisionResults.Count(r => r.IsEmpty);
         }
 
         private void OptionCreatingExamples()
