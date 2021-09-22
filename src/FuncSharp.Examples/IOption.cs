@@ -41,15 +41,17 @@ namespace FuncSharp.Examples
                 result => Console.Write($"Division successful, result is: {result}."),
                 _ => Console.Write("Division failed, must have divided by zero.")
             );
-            divisionResult.Match(result => { }); // Only handle the result if it succeeds.
-            divisionResult.Match(ifSecond: _ => { }); // Only handle errors.
+            divisionResult.Match(result => Console.Write($"Division successful, result is: {result}."));
+            divisionResult.Match(ifSecond: _ => Console.Write("Division failed, must have divided by zero."));
         }
 
         private void GettingOptionValue(decimal number, decimal divisor)
         {
             var divisionResult = Divide(number, divisor);
 
-            decimal valueOrExceptionThrown = divisionResult.Get(); // This will throw exception in case of empty option.
+            // `Get` will throw an exception in case of empty option. Therefore you should not really use it at all.
+            // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
+            decimal valueOrExceptionThrown = divisionResult.Get();
 
             decimal valueOrFallback1 = divisionResult.GetOrZero();
             decimal valueOrFallback2 = divisionResult.GetOrElse(114m);
@@ -65,11 +67,13 @@ namespace FuncSharp.Examples
 
         private void HandlingCollectionsOfOptions()
         {
-            var numbers = new List<int> { 1, 2, 3 };
-            var divisors = new List<int> { 1, 2, 3 };
+            var numbers = new List<int> { 0, 1, 2, 3 };
+            var divisors = new List<int> { 0, 1, 2, 3 };
             IEnumerable<IOption<decimal>> divisionResults = numbers.SelectMany(n => divisors.Select(d => Divide(n, d))).ToList();
+            // These two lines produce equal results. But flatten is more readable and generally using `Get` is an anti-pattern as it is not safe.
             IEnumerable<decimal> successfulResults1 = divisionResults.Flatten();
             IEnumerable<decimal> successfulResults2 = divisionResults.Where(r => r.NonEmpty).Select(r => r.Get()); // get throws exception when called on empty option
+
             int errorResultCount = divisionResults.Count(r => r.IsEmpty);
         }
 
