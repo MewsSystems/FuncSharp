@@ -110,7 +110,7 @@ namespace FuncSharp
 <#= Lines(i, x => Indent(12) + "Action<IEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
             var evaluatedSource = source.ToList();
-<#= Lines(i, x => Indent(12) + "f" + x + "(evaluatedSource.Select(c => c." + GetOrdinal(x) + ").Flatten());") #>
+<#= Lines(i, x => Indent(12) + "f" + x + "(evaluatedSource.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList());") #>
         }
 <#  } #>
 <#  for (var i = 1; i < MaxArity(); i++) { #>

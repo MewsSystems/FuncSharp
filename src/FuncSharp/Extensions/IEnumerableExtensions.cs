@@ -171,7 +171,7 @@ namespace FuncSharp
             Action<IEnumerable<T1>> f1)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
         }
 
         /// <summary>
@@ -183,8 +183,8 @@ namespace FuncSharp
             Action<IEnumerable<T2>> f2)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
         }
 
         /// <summary>
@@ -197,9 +197,9 @@ namespace FuncSharp
             Action<IEnumerable<T3>> f3)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
         }
 
         /// <summary>
@@ -213,10 +213,10 @@ namespace FuncSharp
             Action<IEnumerable<T4>> f4)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
         }
 
         /// <summary>
@@ -231,11 +231,11 @@ namespace FuncSharp
             Action<IEnumerable<T5>> f5)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
         }
 
         /// <summary>
@@ -251,12 +251,12 @@ namespace FuncSharp
             Action<IEnumerable<T6>> f6)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
         }
 
         /// <summary>
@@ -273,13 +273,13 @@ namespace FuncSharp
             Action<IEnumerable<T7>> f7)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
         }
 
         /// <summary>
@@ -297,14 +297,14 @@ namespace FuncSharp
             Action<IEnumerable<T8>> f8)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
         }
 
         /// <summary>
@@ -323,15 +323,15 @@ namespace FuncSharp
             Action<IEnumerable<T9>> f9)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
         }
 
         /// <summary>
@@ -351,16 +351,16 @@ namespace FuncSharp
             Action<IEnumerable<T10>> f10)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -381,17 +381,17 @@ namespace FuncSharp
             Action<IEnumerable<T11>> f11)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
         }
 
         /// <summary>
@@ -413,18 +413,18 @@ namespace FuncSharp
             Action<IEnumerable<T12>> f12)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
         }
 
         /// <summary>
@@ -447,19 +447,19 @@ namespace FuncSharp
             Action<IEnumerable<T13>> f13)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -483,20 +483,20 @@ namespace FuncSharp
             Action<IEnumerable<T14>> f14)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -521,21 +521,21 @@ namespace FuncSharp
             Action<IEnumerable<T15>> f15)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -561,22 +561,22 @@ namespace FuncSharp
             Action<IEnumerable<T16>> f16)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
+            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -603,23 +603,23 @@ namespace FuncSharp
             Action<IEnumerable<T17>> f17)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
+            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
+            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -647,24 +647,24 @@ namespace FuncSharp
             Action<IEnumerable<T18>> f18)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten());
-            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
+            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
+            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
+            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -693,25 +693,25 @@ namespace FuncSharp
             Action<IEnumerable<T19>> f19)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten());
-            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten());
-            f19(evaluatedSource.Select(c => c.Nineteenth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
+            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
+            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
+            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten().ToList());
+            f19(evaluatedSource.Select(c => c.Nineteenth).Flatten().ToList());
         }
 
         /// <summary>
@@ -741,26 +741,26 @@ namespace FuncSharp
             Action<IEnumerable<T20>> f20)
         {
             var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten());
-            f2(evaluatedSource.Select(c => c.Second).Flatten());
-            f3(evaluatedSource.Select(c => c.Third).Flatten());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten());
-            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten());
-            f19(evaluatedSource.Select(c => c.Nineteenth).Flatten());
-            f20(evaluatedSource.Select(c => c.Twentieth).Flatten());
+            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
+            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
+            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
+            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten().ToList());
+            f19(evaluatedSource.Select(c => c.Nineteenth).Flatten().ToList());
+            f20(evaluatedSource.Select(c => c.Twentieth).Flatten().ToList());
         }
 
         /// <summary>
