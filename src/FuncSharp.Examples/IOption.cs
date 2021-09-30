@@ -14,7 +14,7 @@ namespace FuncSharp.Examples
         private void TransformingOptionValuesWithMap(decimal number, decimal divisor)
         {
             IOption<decimal> divisionResult = Divide(number, divisor);
-            IOption<decimal> roundedDivisionResult = divisionResult.Map(r => Math.Round(r));
+            IOption<int> flooredDivisionResult = divisionResult.Map(r => (int)r);
             IOption<string> stringifiedDivisionResult = divisionResult.Map(r => r.ToString());
         }
 
@@ -32,6 +32,7 @@ namespace FuncSharp.Examples
 
         private void UsingOptionValueWithMatch(decimal number, decimal divisor)
         {
+            // IOption is a specific case of Coproduct. Match methods are applicable for all coproduct types. Just like ITry and IOption.
             var divisionResult = Divide(number, divisor);
 
             // This overload takes 2 Func parameters. Each of those have to return a value and result is stored in the roundedResult variable.
