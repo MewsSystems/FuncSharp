@@ -95,9 +95,9 @@ namespace FuncSharp.Examples
             IOption<bool> valuedOption3 = Option.Create(nullableBool);
 
             // Option.Valued can construct options with null value inside. Therefore it can cause confusion and is an anti-pattern.
+            IOption<object> valuedOptionWithNullInside2 = Option.Valued<object>(null);
             IOption<bool?> valuedOptionWithNullInside1 = Option.Valued(emptyNullableBool);
             IOption<bool?> valuedOptionWithFalse = Option.Valued(nullableBool);
-            IOption<object> valuedOptionWithNullInside2 = Option.Valued<object>(null);
 
             // Instead, you can use option of an option. For example when updating a value of a nullable property.
             // Outer option defines whether we're changing value, inner option holds the value to assign.
