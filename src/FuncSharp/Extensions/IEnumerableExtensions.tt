@@ -109,8 +109,16 @@ namespace FuncSharp
             this IEnumerable<<#= CoproductType(i) #>> source,
 <#= Lines(i, x => Indent(12) + "Action<IEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
-            var evaluatedSource = source.ToList();
-<#= Lines(i, x => Indent(12) + "f" + x + "(evaluatedSource.Select(c => c." + GetOrdinal(x) + ").Flatten().ToList());") #>
+<#= Lines(i, x => Indent(12) + "var list" + x + " = new List<T" + x + ">();") #>
+
+            foreach (var c in source)
+            {
+                c.Match(
+<#= Lines(i, x => Indent(20) + "c" + x + " => list" + x + ".Add(c" + x + ")", separator: ",") #>
+                );
+            }
+
+<#= Lines(i, x => Indent(12) + "f" + x + "(list" + x + ");") #>
         }
 <#  } #>
 <#  for (var i = 1; i < MaxArity(); i++) { #>
@@ -123,9 +131,14 @@ namespace FuncSharp
 <#= Lines(i, x => Indent(12) + "Func<" + Type(x) + ", TResult> f" + x, separator: ",") #>)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-<#= Lines(i, x => Indent(16) + "c" + x + " => result.AddRange(c" + x + ".Select(c => f" + x + "(c)))", separator: ",") #>
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+<#= Lines(i, x => Indent(20) + "c" + x + " => result.Add(f" + x + "(c" + x + "))", separator: ",") #>
+                );
+            }
+
             return result;
         }
 <#  } #>

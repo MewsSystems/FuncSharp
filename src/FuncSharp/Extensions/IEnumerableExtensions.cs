@@ -170,8 +170,16 @@ namespace FuncSharp
             this IEnumerable<ICoproduct1<T1>> source,
             Action<IEnumerable<T1>> f1)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
+            var list1 = new List<T1>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1)
+                );
+            }
+
+            f1(list1);
         }
 
         /// <summary>
@@ -182,9 +190,19 @@ namespace FuncSharp
             Action<IEnumerable<T1>> f1,
             Action<IEnumerable<T2>> f2)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
         }
 
         /// <summary>
@@ -196,10 +214,22 @@ namespace FuncSharp
             Action<IEnumerable<T2>> f2,
             Action<IEnumerable<T3>> f3)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
         }
 
         /// <summary>
@@ -212,11 +242,25 @@ namespace FuncSharp
             Action<IEnumerable<T3>> f3,
             Action<IEnumerable<T4>> f4)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
         }
 
         /// <summary>
@@ -230,12 +274,28 @@ namespace FuncSharp
             Action<IEnumerable<T4>> f4,
             Action<IEnumerable<T5>> f5)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
         }
 
         /// <summary>
@@ -250,13 +310,31 @@ namespace FuncSharp
             Action<IEnumerable<T5>> f5,
             Action<IEnumerable<T6>> f6)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
         }
 
         /// <summary>
@@ -272,14 +350,34 @@ namespace FuncSharp
             Action<IEnumerable<T6>> f6,
             Action<IEnumerable<T7>> f7)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
         }
 
         /// <summary>
@@ -296,15 +394,37 @@ namespace FuncSharp
             Action<IEnumerable<T7>> f7,
             Action<IEnumerable<T8>> f8)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
         }
 
         /// <summary>
@@ -322,16 +442,40 @@ namespace FuncSharp
             Action<IEnumerable<T8>> f8,
             Action<IEnumerable<T9>> f9)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
         }
 
         /// <summary>
@@ -350,17 +494,43 @@ namespace FuncSharp
             Action<IEnumerable<T9>> f9,
             Action<IEnumerable<T10>> f10)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
         }
 
         /// <summary>
@@ -380,18 +550,46 @@ namespace FuncSharp
             Action<IEnumerable<T10>> f10,
             Action<IEnumerable<T11>> f11)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
         }
 
         /// <summary>
@@ -412,19 +610,49 @@ namespace FuncSharp
             Action<IEnumerable<T11>> f11,
             Action<IEnumerable<T12>> f12)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
         }
 
         /// <summary>
@@ -446,20 +674,52 @@ namespace FuncSharp
             Action<IEnumerable<T12>> f12,
             Action<IEnumerable<T13>> f13)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
         }
 
         /// <summary>
@@ -482,21 +742,55 @@ namespace FuncSharp
             Action<IEnumerable<T13>> f13,
             Action<IEnumerable<T14>> f14)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
         }
 
         /// <summary>
@@ -520,22 +814,58 @@ namespace FuncSharp
             Action<IEnumerable<T14>> f14,
             Action<IEnumerable<T15>> f15)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+            var list15 = new List<T15>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14),
+                    c15 => list15.Add(c15)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
+            f15(list15);
         }
 
         /// <summary>
@@ -560,23 +890,61 @@ namespace FuncSharp
             Action<IEnumerable<T15>> f15,
             Action<IEnumerable<T16>> f16)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+            var list15 = new List<T15>();
+            var list16 = new List<T16>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14),
+                    c15 => list15.Add(c15),
+                    c16 => list16.Add(c16)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
+            f15(list15);
+            f16(list16);
         }
 
         /// <summary>
@@ -602,24 +970,64 @@ namespace FuncSharp
             Action<IEnumerable<T16>> f16,
             Action<IEnumerable<T17>> f17)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+            var list15 = new List<T15>();
+            var list16 = new List<T16>();
+            var list17 = new List<T17>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14),
+                    c15 => list15.Add(c15),
+                    c16 => list16.Add(c16),
+                    c17 => list17.Add(c17)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
+            f15(list15);
+            f16(list16);
+            f17(list17);
         }
 
         /// <summary>
@@ -646,25 +1054,67 @@ namespace FuncSharp
             Action<IEnumerable<T17>> f17,
             Action<IEnumerable<T18>> f18)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
-            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+            var list15 = new List<T15>();
+            var list16 = new List<T16>();
+            var list17 = new List<T17>();
+            var list18 = new List<T18>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14),
+                    c15 => list15.Add(c15),
+                    c16 => list16.Add(c16),
+                    c17 => list17.Add(c17),
+                    c18 => list18.Add(c18)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
+            f15(list15);
+            f16(list16);
+            f17(list17);
+            f18(list18);
         }
 
         /// <summary>
@@ -692,26 +1142,70 @@ namespace FuncSharp
             Action<IEnumerable<T18>> f18,
             Action<IEnumerable<T19>> f19)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
-            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten().ToList());
-            f19(evaluatedSource.Select(c => c.Nineteenth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+            var list15 = new List<T15>();
+            var list16 = new List<T16>();
+            var list17 = new List<T17>();
+            var list18 = new List<T18>();
+            var list19 = new List<T19>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14),
+                    c15 => list15.Add(c15),
+                    c16 => list16.Add(c16),
+                    c17 => list17.Add(c17),
+                    c18 => list18.Add(c18),
+                    c19 => list19.Add(c19)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
+            f15(list15);
+            f16(list16);
+            f17(list17);
+            f18(list18);
+            f19(list19);
         }
 
         /// <summary>
@@ -740,27 +1234,73 @@ namespace FuncSharp
             Action<IEnumerable<T19>> f19,
             Action<IEnumerable<T20>> f20)
         {
-            var evaluatedSource = source.ToList();
-            f1(evaluatedSource.Select(c => c.First).Flatten().ToList());
-            f2(evaluatedSource.Select(c => c.Second).Flatten().ToList());
-            f3(evaluatedSource.Select(c => c.Third).Flatten().ToList());
-            f4(evaluatedSource.Select(c => c.Fourth).Flatten().ToList());
-            f5(evaluatedSource.Select(c => c.Fifth).Flatten().ToList());
-            f6(evaluatedSource.Select(c => c.Sixth).Flatten().ToList());
-            f7(evaluatedSource.Select(c => c.Seventh).Flatten().ToList());
-            f8(evaluatedSource.Select(c => c.Eighth).Flatten().ToList());
-            f9(evaluatedSource.Select(c => c.Ninth).Flatten().ToList());
-            f10(evaluatedSource.Select(c => c.Tenth).Flatten().ToList());
-            f11(evaluatedSource.Select(c => c.Eleventh).Flatten().ToList());
-            f12(evaluatedSource.Select(c => c.Twelfth).Flatten().ToList());
-            f13(evaluatedSource.Select(c => c.Thirteenth).Flatten().ToList());
-            f14(evaluatedSource.Select(c => c.Fourteenth).Flatten().ToList());
-            f15(evaluatedSource.Select(c => c.Fifteenth).Flatten().ToList());
-            f16(evaluatedSource.Select(c => c.Sixteenth).Flatten().ToList());
-            f17(evaluatedSource.Select(c => c.Seventeenth).Flatten().ToList());
-            f18(evaluatedSource.Select(c => c.Eighteenth).Flatten().ToList());
-            f19(evaluatedSource.Select(c => c.Nineteenth).Flatten().ToList());
-            f20(evaluatedSource.Select(c => c.Twentieth).Flatten().ToList());
+            var list1 = new List<T1>();
+            var list2 = new List<T2>();
+            var list3 = new List<T3>();
+            var list4 = new List<T4>();
+            var list5 = new List<T5>();
+            var list6 = new List<T6>();
+            var list7 = new List<T7>();
+            var list8 = new List<T8>();
+            var list9 = new List<T9>();
+            var list10 = new List<T10>();
+            var list11 = new List<T11>();
+            var list12 = new List<T12>();
+            var list13 = new List<T13>();
+            var list14 = new List<T14>();
+            var list15 = new List<T15>();
+            var list16 = new List<T16>();
+            var list17 = new List<T17>();
+            var list18 = new List<T18>();
+            var list19 = new List<T19>();
+            var list20 = new List<T20>();
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => list1.Add(c1),
+                    c2 => list2.Add(c2),
+                    c3 => list3.Add(c3),
+                    c4 => list4.Add(c4),
+                    c5 => list5.Add(c5),
+                    c6 => list6.Add(c6),
+                    c7 => list7.Add(c7),
+                    c8 => list8.Add(c8),
+                    c9 => list9.Add(c9),
+                    c10 => list10.Add(c10),
+                    c11 => list11.Add(c11),
+                    c12 => list12.Add(c12),
+                    c13 => list13.Add(c13),
+                    c14 => list14.Add(c14),
+                    c15 => list15.Add(c15),
+                    c16 => list16.Add(c16),
+                    c17 => list17.Add(c17),
+                    c18 => list18.Add(c18),
+                    c19 => list19.Add(c19),
+                    c20 => list20.Add(c20)
+                );
+            }
+
+            f1(list1);
+            f2(list2);
+            f3(list3);
+            f4(list4);
+            f5(list5);
+            f6(list6);
+            f7(list7);
+            f8(list8);
+            f9(list9);
+            f10(list10);
+            f11(list11);
+            f12(list12);
+            f13(list13);
+            f14(list14);
+            f15(list15);
+            f16(list16);
+            f17(list17);
+            f18(list18);
+            f19(list19);
+            f20(list20);
         }
 
         /// <summary>
@@ -771,9 +1311,14 @@ namespace FuncSharp
             Func<T1, TResult> f1)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1))
+                );
+            }
+
             return result;
         }
 
@@ -786,10 +1331,15 @@ namespace FuncSharp
             Func<T2, TResult> f2)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2))
+                );
+            }
+
             return result;
         }
 
@@ -803,11 +1353,16 @@ namespace FuncSharp
             Func<T3, TResult> f3)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3))
+                );
+            }
+
             return result;
         }
 
@@ -822,12 +1377,17 @@ namespace FuncSharp
             Func<T4, TResult> f4)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4))
+                );
+            }
+
             return result;
         }
 
@@ -843,13 +1403,18 @@ namespace FuncSharp
             Func<T5, TResult> f5)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5))
+                );
+            }
+
             return result;
         }
 
@@ -866,14 +1431,19 @@ namespace FuncSharp
             Func<T6, TResult> f6)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6))
+                );
+            }
+
             return result;
         }
 
@@ -891,15 +1461,20 @@ namespace FuncSharp
             Func<T7, TResult> f7)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7))
+                );
+            }
+
             return result;
         }
 
@@ -918,16 +1493,21 @@ namespace FuncSharp
             Func<T8, TResult> f8)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8))
+                );
+            }
+
             return result;
         }
 
@@ -947,17 +1527,22 @@ namespace FuncSharp
             Func<T9, TResult> f9)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9))
+                );
+            }
+
             return result;
         }
 
@@ -978,18 +1563,23 @@ namespace FuncSharp
             Func<T10, TResult> f10)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10))
+                );
+            }
+
             return result;
         }
 
@@ -1011,19 +1601,24 @@ namespace FuncSharp
             Func<T11, TResult> f11)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11))
+                );
+            }
+
             return result;
         }
 
@@ -1046,20 +1641,25 @@ namespace FuncSharp
             Func<T12, TResult> f12)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12))
+                );
+            }
+
             return result;
         }
 
@@ -1083,21 +1683,26 @@ namespace FuncSharp
             Func<T13, TResult> f13)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13))
+                );
+            }
+
             return result;
         }
 
@@ -1122,22 +1727,27 @@ namespace FuncSharp
             Func<T14, TResult> f14)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14))
+                );
+            }
+
             return result;
         }
 
@@ -1163,23 +1773,28 @@ namespace FuncSharp
             Func<T15, TResult> f15)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c))),
-                c15 => result.AddRange(c15.Select(c => f15(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14)),
+                    c15 => result.Add(f15(c15))
+                );
+            }
+
             return result;
         }
 
@@ -1206,24 +1821,29 @@ namespace FuncSharp
             Func<T16, TResult> f16)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c))),
-                c15 => result.AddRange(c15.Select(c => f15(c))),
-                c16 => result.AddRange(c16.Select(c => f16(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14)),
+                    c15 => result.Add(f15(c15)),
+                    c16 => result.Add(f16(c16))
+                );
+            }
+
             return result;
         }
 
@@ -1251,25 +1871,30 @@ namespace FuncSharp
             Func<T17, TResult> f17)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c))),
-                c15 => result.AddRange(c15.Select(c => f15(c))),
-                c16 => result.AddRange(c16.Select(c => f16(c))),
-                c17 => result.AddRange(c17.Select(c => f17(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14)),
+                    c15 => result.Add(f15(c15)),
+                    c16 => result.Add(f16(c16)),
+                    c17 => result.Add(f17(c17))
+                );
+            }
+
             return result;
         }
 
@@ -1298,26 +1923,31 @@ namespace FuncSharp
             Func<T18, TResult> f18)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c))),
-                c15 => result.AddRange(c15.Select(c => f15(c))),
-                c16 => result.AddRange(c16.Select(c => f16(c))),
-                c17 => result.AddRange(c17.Select(c => f17(c))),
-                c18 => result.AddRange(c18.Select(c => f18(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14)),
+                    c15 => result.Add(f15(c15)),
+                    c16 => result.Add(f16(c16)),
+                    c17 => result.Add(f17(c17)),
+                    c18 => result.Add(f18(c18))
+                );
+            }
+
             return result;
         }
 
@@ -1347,27 +1977,32 @@ namespace FuncSharp
             Func<T19, TResult> f19)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c))),
-                c15 => result.AddRange(c15.Select(c => f15(c))),
-                c16 => result.AddRange(c16.Select(c => f16(c))),
-                c17 => result.AddRange(c17.Select(c => f17(c))),
-                c18 => result.AddRange(c18.Select(c => f18(c))),
-                c19 => result.AddRange(c19.Select(c => f19(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14)),
+                    c15 => result.Add(f15(c15)),
+                    c16 => result.Add(f16(c16)),
+                    c17 => result.Add(f17(c17)),
+                    c18 => result.Add(f18(c18)),
+                    c19 => result.Add(f19(c19))
+                );
+            }
+
             return result;
         }
 
@@ -1398,28 +2033,33 @@ namespace FuncSharp
             Func<T20, TResult> f20)
         {
             var result = new List<TResult>();
-            source.PartitionMatch(
-                c1 => result.AddRange(c1.Select(c => f1(c))),
-                c2 => result.AddRange(c2.Select(c => f2(c))),
-                c3 => result.AddRange(c3.Select(c => f3(c))),
-                c4 => result.AddRange(c4.Select(c => f4(c))),
-                c5 => result.AddRange(c5.Select(c => f5(c))),
-                c6 => result.AddRange(c6.Select(c => f6(c))),
-                c7 => result.AddRange(c7.Select(c => f7(c))),
-                c8 => result.AddRange(c8.Select(c => f8(c))),
-                c9 => result.AddRange(c9.Select(c => f9(c))),
-                c10 => result.AddRange(c10.Select(c => f10(c))),
-                c11 => result.AddRange(c11.Select(c => f11(c))),
-                c12 => result.AddRange(c12.Select(c => f12(c))),
-                c13 => result.AddRange(c13.Select(c => f13(c))),
-                c14 => result.AddRange(c14.Select(c => f14(c))),
-                c15 => result.AddRange(c15.Select(c => f15(c))),
-                c16 => result.AddRange(c16.Select(c => f16(c))),
-                c17 => result.AddRange(c17.Select(c => f17(c))),
-                c18 => result.AddRange(c18.Select(c => f18(c))),
-                c19 => result.AddRange(c19.Select(c => f19(c))),
-                c20 => result.AddRange(c20.Select(c => f20(c)))
-            );
+
+            foreach (var c in source)
+            {
+                c.Match(
+                    c1 => result.Add(f1(c1)),
+                    c2 => result.Add(f2(c2)),
+                    c3 => result.Add(f3(c3)),
+                    c4 => result.Add(f4(c4)),
+                    c5 => result.Add(f5(c5)),
+                    c6 => result.Add(f6(c6)),
+                    c7 => result.Add(f7(c7)),
+                    c8 => result.Add(f8(c8)),
+                    c9 => result.Add(f9(c9)),
+                    c10 => result.Add(f10(c10)),
+                    c11 => result.Add(f11(c11)),
+                    c12 => result.Add(f12(c12)),
+                    c13 => result.Add(f13(c13)),
+                    c14 => result.Add(f14(c14)),
+                    c15 => result.Add(f15(c15)),
+                    c16 => result.Add(f16(c16)),
+                    c17 => result.Add(f17(c17)),
+                    c18 => result.Add(f18(c18)),
+                    c19 => result.Add(f19(c19)),
+                    c20 => result.Add(f20(c20))
+                );
+            }
+
             return result;
         }
     }
