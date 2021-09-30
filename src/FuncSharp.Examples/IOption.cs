@@ -102,11 +102,11 @@ namespace FuncSharp.Examples
             // Instead, you can use option of an option. For example when updating a value of a nullable property.
             // Outer option defines whether we're changing value, inner option holds the value to assign.
             IOption<IOption<bool>> notUpdating = Option.Empty<IOption<bool>>();
-            IOption<IOption<bool>> settingToTrue1 = true.ToOption().ToOption();
+            IOption<IOption<bool>> settingToTrue1 = Option.Create(Option.Create(true));
             IOption<IOption<bool>> settingToTrue2 = Option.Create(true.ToOption());
-            IOption<IOption<bool>> settingToTrue3 = Option.Create(Option.Create(true));
-            IOption<IOption<bool>> settingToNull1 = Option.Empty<bool>().ToOption();
-            IOption<IOption<bool>> settingToNull2 = Option.Create(Option.Empty<bool>());
+            IOption<IOption<bool>> settingToTrue3 = true.ToOption().ToOption();
+            IOption<IOption<bool>> settingToNull1 = Option.Create(Option.Empty<bool>());
+            IOption<IOption<bool>> settingToNull2 = Option.Empty<bool>().ToOption();
         }
     }
 }
