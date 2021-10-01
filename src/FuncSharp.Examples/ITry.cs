@@ -8,9 +8,9 @@ namespace FuncSharp.Examples
 {
     public class ITryUsages
     {
-        public class ClassWithMultiplePropertiesToValidate
+        public class ClassWithMultipleProperties
         {
-            public ClassWithMultiplePropertiesToValidate(decimal multiplicationResult, decimal additionResult, decimal subtractionResult)
+            public ClassWithMultipleProperties(decimal multiplicationResult, decimal additionResult, decimal subtractionResult)
             {
                 MultiplicationResult = multiplicationResult;
                 AdditionResult = additionResult;
@@ -80,7 +80,7 @@ namespace FuncSharp.Examples
             ITry<ITry<decimal, NetworkOperationError>, NetworkOperationError> resultOfDoubleMultiplication = multiplicationResult.Map(r => PerformNetworkOperation(_ => r * secondMultiplier));
 
             // This try succeeds only if both tries succeed. However the second lambda is only executed in case the first try is successful.
-            ITry<decimal, NetworkOperationError> flattenedResultOfDoubleDivision = multiplicationResult.FlatMap(r => PerformNetworkOperation(_ => r * secondMultiplier));
+            ITry<decimal, NetworkOperationError> flattenedResultOfDoubleMultiplication = multiplicationResult.FlatMap(r => PerformNetworkOperation(_ => r * secondMultiplier));
         }
 
         private void AggregatingMultipleTriesIntoSingleResult(decimal number, decimal multiplier, decimal numberToAdd, decimal numberToSubtract)
@@ -89,11 +89,11 @@ namespace FuncSharp.Examples
             // For validations, you would write your validation method, so it already returns IEnumerable as the error type.
             // Try.Aggregate method always executes all tries and then aggregates the success results or the errors. It doesn't stop on first error.
             // You can transform the result into any class you want. This makes it nice and effective way of parsing values and combining the results.
-            ITry<ClassWithMultiplePropertiesToValidate, IEnumerable<string>> combinedResult = Try.Aggregate(
+            ITry<ClassWithMultipleProperties, IEnumerable<string>> combinedResult = Try.Aggregate(
                 t1: PerformNetworkOperation(_ => number * multiplier).MapError(e => new List<string>{ e.ToString() }),
                 t2: PerformNetworkOperation(_ => number + numberToAdd).MapError(e => new List<string>{ e.ToString() }),
                 t3: PerformNetworkOperation(_ => number - numberToSubtract).MapError(e => new List<string>{ e.ToString() }),
-                f: (multiplicationResult, additionResult, subtractionResult) => new ClassWithMultiplePropertiesToValidate(multiplicationResult, additionResult, subtractionResult)
+                f: (multiplicationResult, additionResult, subtractionResult) => new ClassWithMultipleProperties(multiplicationResult, additionResult, subtractionResult)
             );
         }
 
@@ -130,7 +130,7 @@ namespace FuncSharp.Examples
             ITry<decimal, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => number * multiplier);
             ITry<decimal, Exception> iTryWithExceptionAsError = multiplicationResult.MapError(e => new Exception(e.ToString()));
 
-            // Get method will throw an exception in case of empty option. Using it is an anti-pattern.
+            // Get method will throw an exception for unsuccessful tries. Using it is an anti-pattern.
             // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
             decimal valueOrExceptionThrown1 = iTryWithExceptionAsError.Get();
 
@@ -146,9 +146,23 @@ namespace FuncSharp.Examples
             IOption<NetworkOperationError> errorResult2 = multiplicationResult.Second;
         }
 
+        public void HandlingExceptionsWithCreate(decimal number, decimal divisor)
+        {
+            // Catches any exception.
+            ITry<decimal> divisionHandlingAllExceptions1 = Try.Create<decimal, Exception>(_ => number / divisor);
+
+            // Only catches a specific exception.
+            ITry<decimal> divisionHandlingDividingByZero = Try.Create<decimal, DivideByZeroException>(_ => number / divisor);
+
+            // ITry that doesn't specify the error type has a collection of exceptions by default.
+            // It is a collection because then you can aggregate multiple tries and still have the same type.
+            ITry<decimal, IEnumerable<Exception>> fullTypeOfVariable = divisionHandlingDividingByZero;
+        }
+
         public void HandlingExceptionsWithCatch(decimal number, decimal divisor)
         {
-            // Catches any exception
+            // Catches any exception and stores the single exception into the try.
+            // This is useful for handling individual errors, but cannot be aggregated.
             ITry<decimal, Exception> divisionHandlingAllExceptions1 = Try.Catch<decimal, Exception>(_ => number / divisor);
 
             // Only catches a specific exception.
@@ -159,19 +173,6 @@ namespace FuncSharp.Examples
                 _ => number / divisor,
                 exception => 0
             );
-        }
-
-        public void HandlingExceptionsWithCreate(decimal number, decimal divisor)
-        {
-            // Catches any exception
-            ITry<decimal> divisionHandlingAllExceptions1 = Try.Create<decimal, Exception>(_ => number / divisor);
-
-            // Only catches a specific exception.
-            ITry<decimal> divisionHandlingDividingByZero = Try.Create<decimal, DivideByZeroException>(_ => number / divisor);
-
-            // ITry that doesn't specify the error type has a collection of exceptions by default.
-            // It is a collection because otherwise aggregating multiple tries together would create a different type.
-            ITry<decimal, IEnumerable<Exception>> fullTypeOfVariable = divisionHandlingDividingByZero;
         }
 
         private void ITryCreatingExamples(decimal number, decimal divisor)
