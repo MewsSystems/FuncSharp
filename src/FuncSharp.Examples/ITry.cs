@@ -59,28 +59,28 @@ namespace FuncSharp.Examples
             // The purpose of ITry is not covering every exception. But that methods should show what are the expected outputs and make the call site handle all of them.
         }
 
-        private void TransformingResultValuesWithMap(decimal number, decimal multiplier)
+        private void TransformingResultValuesWithMap()
         {
-            ITry<decimal, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => number * multiplier);
-            ITry<int, NetworkOperationError> flooredMultiplicationResult = multiplicationResult.Map(r => (int)r);
-            ITry<string, NetworkOperationError> stringifiedDivisionResult = multiplicationResult.Map(r => r.ToString());
+            ITry<int, NetworkOperationError> downloadedNumber = PerformNetworkOperation(_ => DownloadNumberOverNetwork());
+            ITry<decimal, NetworkOperationError> castedNumber = downloadedNumber.Map(r => (decimal)r);
+            ITry<string, NetworkOperationError> stringifiedNumber = downloadedNumber.Map(r => r.ToString());
         }
 
-        private void TransformingErrorValuesWithMapError(decimal number, decimal multiplier)
+        private void TransformingErrorValuesWithMapError()
         {
-            ITry<decimal, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => number * multiplier);
+            ITry<int, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => DownloadNumberOverNetwork());
 
             // You can use MapError to map for example from exception to another type you use to represent errors. Or map to logging messages.
-            ITry<decimal, string> flooredMultiplicationResult = multiplicationResult.MapError(e => e.ToString());
+            ITry<int, string> flooredMultiplicationResult = multiplicationResult.MapError(e => e.ToString());
         }
 
-        private void HandlingNestedTriesWithFlatMap(decimal number, decimal firstMultiplier, decimal secondMultiplier)
+        private void HandlingNestedTriesWithFlatMap()
         {
-            ITry<decimal, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => number * firstMultiplier);
-            ITry<ITry<decimal, NetworkOperationError>, NetworkOperationError> resultOfDoubleMultiplication = multiplicationResult.Map(r => PerformNetworkOperation(_ => r * secondMultiplier));
+            ITry<int, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => DownloadNumberOverNetwork());
+            ITry<ITry<int, NetworkOperationError>, NetworkOperationError> resultOfDoubleMultiplication = multiplicationResult.Map(r => PerformNetworkOperation(_ => TransformNumberOverNetwork(r)));
 
             // This try succeeds only if both tries succeed. However the second lambda is only executed in case the first try is successful.
-            ITry<decimal, NetworkOperationError> flattenedResultOfDoubleMultiplication = multiplicationResult.FlatMap(r => PerformNetworkOperation(_ => r * secondMultiplier));
+            ITry<int, NetworkOperationError> flattenedResultOfDoubleMultiplication = multiplicationResult.FlatMap(r => PerformNetworkOperation(_ => TransformNumberOverNetwork(r)));
         }
 
         private void AggregatingMultipleTriesIntoSingleResult(decimal number, decimal multiplier, decimal numberToAdd, decimal numberToSubtract)
@@ -97,51 +97,51 @@ namespace FuncSharp.Examples
             );
         }
 
-        private void HandlingCollectionsOfTries(List<decimal> numbers, List<decimal> multipliers)
+        private void HandlingCollectionsOfTries(int numberCount)
         {
-            IEnumerable<ITry<decimal, NetworkOperationError>> multiplicationResults = numbers.SelectMany(n => multipliers.Select(m => PerformNetworkOperation(_ => n * m))).ToList();
+            IEnumerable<ITry<int, NetworkOperationError>> multiplicationResults = Enumerable.Repeat(Unit.Value, numberCount).Select(_ => PerformNetworkOperation(u => DownloadNumberOverNetwork()));
 
             // Contains all the multiplication results if all succeeded. Or all the errors from the ones that failed. (success results are lost in such case)
-            ITry<IEnumerable<decimal>, IEnumerable<NetworkOperationError>> combinedResult = Try.Aggregate(multiplicationResults);
+            ITry<IEnumerable<int>, IEnumerable<NetworkOperationError>> combinedResult = Try.Aggregate(multiplicationResults);
         }
 
-        private void UsingITryValueWithMatch(decimal number, decimal multiplier)
+        private void UsingITryValueWithMatch()
         {
             // ITry is a specific case of Coproduct. Match methods are applicable for all coproduct types. Just like ITry and IOption.
-            ITry<decimal, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => number * multiplier);
+            ITry<int, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => DownloadNumberOverNetwork());
 
             // This overload takes 2 Func parameters. Each of those have to return a value and result is stored in the roundedResult variable.
-            decimal roundedResultOrFourteen = multiplicationResult.Match(
-                result => Math.Round(result),
-                _ => 14
+            string stringifiedValue = multiplicationResult.Match(
+                result => result.ToString(),
+                _ => "Unfortunately, we failed to obtain a number from the server."
             );
 
             // This overload accepts 2 optional void lambdas. If lambda isn't provided, nothing happens for that case.
             multiplicationResult.Match(
-                result => Console.Write($"Division successful, result is: {result}."),
-                _ => Console.Write("Division failed, must have divided by zero.")
+                result => Console.Write($"Operation successful, result is: {result}."),
+                _ => Console.Write("Operation failed, try again.")
             );
-            multiplicationResult.Match(result => Console.Write($"Division successful, result is: {result}."));
-            multiplicationResult.Match(ifSecond: _ => Console.Write("Division failed, must have divided by zero."));
+            multiplicationResult.Match(result => Console.Write($"Operation successful, result is: {result}."));
+            multiplicationResult.Match(ifSecond: _ => Console.Write("Operation failed, try again."));
         }
 
-        private void GettingTryValue(decimal number, decimal multiplier)
+        private void GettingTryValue()
         {
-            ITry<decimal, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => number * multiplier);
-            ITry<decimal, Exception> iTryWithExceptionAsError = multiplicationResult.MapError(e => new Exception(e.ToString()));
+            ITry<int, NetworkOperationError> multiplicationResult = PerformNetworkOperation(_ => DownloadNumberOverNetwork());
+            ITry<int, Exception> iTryWithExceptionAsError = multiplicationResult.MapError(e => new Exception(e.ToString()));
 
             // Get method will throw an exception for unsuccessful tries. Using it is an anti-pattern.
             // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
-            decimal valueOrExceptionThrown1 = iTryWithExceptionAsError.Get();
+            int valueOrExceptionThrown1 = iTryWithExceptionAsError.Get();
 
             // You can also configure the exception that is thrown by mapping the error inside Get directly.
-            decimal valueOrExceptionThrown2 = multiplicationResult.Get(e => new Exception(e.ToString()));
-            decimal valueOrExceptionThrown3 = iTryWithExceptionAsError.Get(ex => new Exception("Error when multiplying", innerException: ex));
+            int valueOrExceptionThrown2 = multiplicationResult.Get(e => new Exception(e.ToString()));
+            int valueOrExceptionThrown3 = iTryWithExceptionAsError.Get(ex => new Exception("Error when multiplying", innerException: ex));
 
             // Because ITry is a coproduct, you can check the value directly. On ITry, there are named properties for this.
             // See IOption usages for more information about them.
-            IOption<decimal> successResult = multiplicationResult.Success;
-            IOption<decimal> successResult2 = multiplicationResult.First;
+            IOption<int> successResult = multiplicationResult.Success;
+            IOption<int> successResult2 = multiplicationResult.First;
             IOption<NetworkOperationError> errorResult = multiplicationResult.Error;
             IOption<NetworkOperationError> errorResult2 = multiplicationResult.Second;
         }
@@ -149,52 +149,61 @@ namespace FuncSharp.Examples
         public void HandlingExceptionsWithCreate(decimal number, decimal divisor)
         {
             // Catches any exception.
-            ITry<decimal> divisionHandlingAllExceptions1 = Try.Create<decimal, Exception>(_ => number / divisor);
+            ITry<int> divisionHandlingAllExceptions1 = Try.Create<int, Exception>(_ => DownloadNumberOverNetwork());
 
             // Only catches a specific exception.
-            ITry<decimal> divisionHandlingDividingByZero = Try.Create<decimal, DivideByZeroException>(_ => number / divisor);
+            ITry<int> divisionHandlingDividingByZero = Try.Create<int, TaskCanceledException>(_ => DownloadNumberOverNetwork());
 
             // ITry that doesn't specify the error type has a collection of exceptions by default.
             // It is a collection because then you can aggregate multiple tries and still have the same type.
-            ITry<decimal, IEnumerable<Exception>> fullTypeOfVariable = divisionHandlingDividingByZero;
+            ITry<int, IEnumerable<Exception>> fullTypeOfVariable = divisionHandlingDividingByZero;
         }
 
-        public void HandlingExceptionsWithCatch(decimal number, decimal divisor)
+        public void HandlingExceptionsWithCatch()
         {
             // Catches any exception and stores the single exception into the try.
             // This is useful for handling individual errors, but cannot be aggregated.
-            ITry<decimal, Exception> divisionHandlingAllExceptions1 = Try.Catch<decimal, Exception>(_ => number / divisor);
+            ITry<int, Exception> divisionHandlingAllExceptions1 = Try.Catch<int, Exception>(_ => DownloadNumberOverNetwork());
 
-            // Only catches a specific exception.
-            ITry<decimal, DivideByZeroException> divisionHandlingDividingByZero = Try.Catch<decimal, DivideByZeroException>(_ => number / divisor);
+            // Only catches a specific exception. Notice that the error type is the specific type of exception.
+            ITry<int, TaskCanceledException> divisionHandlingDividingByZero = Try.Catch<int, TaskCanceledException>(_ => DownloadNumberOverNetwork());
 
             // Catch also has an overload which allows recovering in case of exception.
-            decimal divisionResult = Try.Catch<decimal, DivideByZeroException>(
-                _ => number / divisor,
-                exception => 0
+            int divisionResult = Try.Catch<int, DivideByZeroException>(
+                _ => DownloadNumberOverNetwork(),
+                exception => 42
             );
         }
 
-        private void ITryCreatingExamples(decimal number, decimal divisor)
+        private void ITryCreatingExamples()
         {
-            ITry<decimal, NetworkOperationError> success = Try.Success<decimal, NetworkOperationError>(number);
-            ITry<decimal, NetworkOperationError> error = Try.Error<decimal, NetworkOperationError>(NetworkOperationError.NetworkIssues);
+            ITry<int, NetworkOperationError> success = Try.Success<int, NetworkOperationError>(42);
+            ITry<int, NetworkOperationError> error = Try.Error<int, NetworkOperationError>(NetworkOperationError.NetworkIssues);
 
-            ITry<decimal> divisionHandlingDividingByZero1 = Try.Create<decimal, DivideByZeroException>(_ => number / divisor);
-            ITry<decimal, IEnumerable<Exception>> fullTypeOfTryCreate = divisionHandlingDividingByZero1;
-            ITry<decimal, DivideByZeroException> divisionHandlingDividingByZero2 = Try.Catch<decimal, DivideByZeroException>(_ => number / divisor);
+            ITry<int> divisionHandlingDividingByZero1 = Try.Create<int, DivideByZeroException>(_ => DownloadNumberOverNetwork());
+            ITry<int, IEnumerable<Exception>> fullTypeOfTryCreate = divisionHandlingDividingByZero1;
+            ITry<int, DivideByZeroException> divisionHandlingDividingByZero2 = Try.Catch<int, DivideByZeroException>(_ => DownloadNumberOverNetwork());
 
             Exception exception = new Exception();
-            var option = Option.Empty<decimal>();
+            var option = Option.Empty<int>();
 
-            ITry<decimal> successTry = number.ToTry();
-            ITry<decimal> errorTry = exception.ToTry<decimal>();
-            ITry<decimal> tryFromOption = option.ToTry(_ => new Exception("No value was provided in the option."));
-            ITry<decimal, string> tryFromOptionWithErrorType = option.ToTry(_ => "No value was provided in the option.");
+            ITry<int> successTry = 42.ToTry();
+            ITry<int> errorTry = exception.ToTry<int>();
+            ITry<int> tryFromOption = option.ToTry(_ => new Exception("No value was provided in the option."));
+            ITry<int, string> tryFromOptionWithErrorType = option.ToTry(_ => "No value was provided in the option.");
 
             // Generally collections are recommended for validations.
             // It is easy to aggregate validations of multiple values into one ITry of the whole object. And then you either successfully parsed the object or you have the list of errors.
-            ITry<decimal, IEnumerable<string>> validationRepresentation = option.ToTry(_ => new [] { "No valid value was provided in the option." });
+            ITry<int, IEnumerable<string>> validationRepresentation = option.ToTry(_ => new [] { "No valid value was provided in the option." });
+        }
+
+        private int DownloadNumberOverNetwork()
+        {
+            return new Random().Next();
+        }
+        private int TransformNumberOverNetwork(int value)
+        {
+            return new Random().Next();
         }
     }
 }
