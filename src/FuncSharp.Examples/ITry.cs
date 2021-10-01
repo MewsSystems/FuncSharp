@@ -8,18 +8,24 @@ namespace FuncSharp.Examples
 {
     public class ITryUsages
     {
-        public class ClassWithMultipleProperties
+        public class Person
         {
-            public ClassWithMultipleProperties(decimal multiplicationResult, decimal additionResult, decimal subtractionResult)
+            public Person(string name, int age)
             {
-                MultiplicationResult = multiplicationResult;
-                AdditionResult = additionResult;
-                SubtractionResult = subtractionResult;
+                Name = name;
+                Age = age;
             }
 
-            public decimal MultiplicationResult { get; }
-            public decimal AdditionResult { get; }
-            public decimal SubtractionResult { get; }
+            public string Name { get; }
+            public int Age { get; }
+        }
+
+        public enum PersonParsingError
+        {
+            NameNotProvided,
+            AgeNotANumber,
+            AgeNegative,
+            AgeTooHigh
         }
 
         public enum NetworkOperationError
@@ -83,17 +89,37 @@ namespace FuncSharp.Examples
             ITry<int, NetworkOperationError> flattenedResultOfDoubleMultiplication = multiplicationResult.FlatMap(r => PerformNetworkOperation(_ => TransformNumberOverNetwork(r)));
         }
 
-        private void AggregatingMultipleTriesIntoSingleResult(decimal number, decimal multiplier, decimal numberToAdd, decimal numberToSubtract)
+        private void AggregatingMultipleTriesIntoSingleResult(string name, string age, string heightInCentimeters)
         {
             // You need to start with tries that have a collection as the type of error. So we MapError to a collection of strings here. But it can be a collection of any type.
-            // For validations, you would write your validation method, so it already returns IEnumerable as the error type.
+            // For validations, you would write your validation method, so it already returns IEnumerable as the error type and use MapError inside the method.
             // Try.Aggregate method always executes all tries and then aggregates the success results or the errors. It doesn't stop on first error.
             // You can transform the result into any class you want. This makes it nice and effective way of parsing values and combining the results.
-            ITry<ClassWithMultipleProperties, IEnumerable<string>> combinedResult = Try.Aggregate(
-                t1: PerformNetworkOperation(_ => number * multiplier).MapError(e => new List<string>{ e.ToString() }),
-                t2: PerformNetworkOperation(_ => number + numberToAdd).MapError(e => new List<string>{ e.ToString() }),
-                t3: PerformNetworkOperation(_ => number - numberToSubtract).MapError(e => new List<string>{ e.ToString() }),
-                f: (multiplicationResult, additionResult, subtractionResult) => new ClassWithMultipleProperties(multiplicationResult, additionResult, subtractionResult)
+            ITry<string, IEnumerable<PersonParsingError>> parsedName = name.ToNonEmptyOption().ToTry(_ => new [] { PersonParsingError.NameNotProvided });
+
+            // Notice that you can chain validations using FlatMap and then pass it into Aggregate.
+            var ageAsValidNumber = Try.Catch<int, Exception>(_ => Convert.ToInt32(age)).MapError(_ => PersonParsingError.AgeNotANumber);
+            var notNegativeAge = ageAsValidNumber.FlatMap(
+                a => a.ToOption().Where(aa => aa >= 0).ToTry(_ => PersonParsingError.AgeNegative)
+            );
+            var validAge = notNegativeAge.FlatMap(
+                a => a.ToOption().Where(aa => aa < 140).ToTry(_ => PersonParsingError.AgeTooHigh)
+            );
+            ITry<int, IEnumerable<PersonParsingError>> parsedAge = validAge.MapError(e => new [] { e });
+
+            // You can aggregate more than 2 tries, just saving space here.
+            ITry<Person, IEnumerable<PersonParsingError>> parsedPerson = Try.Aggregate(
+                parsedName,
+                parsedAge,
+                f: (n, a) => new Person(n, a)
+            );
+
+            // You could also combine multiple network requests into a successfully initialized object for example.
+            ITry<int, IEnumerable<string>> sumOfThreeNumbers = Try.Aggregate(
+                t1: PerformNetworkOperation(_ => DownloadNumberOverNetwork()).MapError(e => new List<string>{ e.ToString() }),
+                t2: PerformNetworkOperation(_ => DownloadNumberOverNetwork()).MapError(e => new List<string>{ e.ToString() }),
+                t3: PerformNetworkOperation(_ => DownloadNumberOverNetwork()).MapError(e => new List<string>{ e.ToString() }),
+                f: (number1, number2, number3) => number1 + number2 + number3
             );
         }
 
