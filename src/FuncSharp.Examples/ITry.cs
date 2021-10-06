@@ -98,14 +98,13 @@ namespace FuncSharp.Examples
             ITry<string, IEnumerable<PersonParsingError>> parsedName = name.ToNonEmptyOption().ToTry(_ => new [] { PersonParsingError.NameNotProvided });
 
             // Notice that you can chain validations using FlatMap and then pass it into Aggregate.
-            var ageAsValidNumber = Try.Catch<int, Exception>(_ => Convert.ToInt32(age)).MapError(_ => PersonParsingError.AgeNotANumber);
+            var ageAsValidNumber = Try.Catch<int, Exception>(_ => Convert.ToInt32(age)).MapError(_ => new [] { PersonParsingError.AgeNotANumber });
             var notNegativeAge = ageAsValidNumber.FlatMap(
-                a => a.ToOption().Where(aa => aa >= 0).ToTry(_ => PersonParsingError.AgeNegative)
+                a => a.ToOption().Where(aa => aa >= 0).ToTry(_ => new [] { PersonParsingError.AgeNegative })
             );
-            var validAge = notNegativeAge.FlatMap(
-                a => a.ToOption().Where(aa => aa < 140).ToTry(_ => PersonParsingError.AgeTooHigh)
+            var parsedAge = notNegativeAge.FlatMap(
+                a => a.ToOption().Where(aa => aa < 140).ToTry(_ => new [] { PersonParsingError.AgeTooHigh })
             );
-            ITry<int, IEnumerable<PersonParsingError>> parsedAge = validAge.MapError(e => new [] { e });
 
             // You can aggregate more than 2 tries, just saving space here.
             ITry<Person, IEnumerable<PersonParsingError>> parsedPerson = Try.Aggregate(
@@ -206,9 +205,9 @@ namespace FuncSharp.Examples
             ITry<int, NetworkOperationError> success = Try.Success<int, NetworkOperationError>(42);
             ITry<int, NetworkOperationError> error = Try.Error<int, NetworkOperationError>(NetworkOperationError.NetworkIssues);
 
-            ITry<int> divisionHandlingDividingByZero1 = Try.Create<int, DivideByZeroException>(_ => DownloadNumberOverNetwork());
-            ITry<int, IEnumerable<Exception>> fullTypeOfTryCreate = divisionHandlingDividingByZero1;
-            ITry<int, DivideByZeroException> divisionHandlingDividingByZero2 = Try.Catch<int, DivideByZeroException>(_ => DownloadNumberOverNetwork());
+            ITry<int, DivideByZeroException> divisionHandlingDividingByZero1 = Try.Catch<int, DivideByZeroException>(_ => DownloadNumberOverNetwork());
+            ITry<int> divisionHandlingDividingByZero2 = Try.Create<int, DivideByZeroException>(_ => DownloadNumberOverNetwork());
+            ITry<int, IEnumerable<Exception>> fullTypeOfTryCreate = divisionHandlingDividingByZero2;
 
             Exception exception = new Exception();
             var option = Option.Empty<int>();
