@@ -94,7 +94,8 @@ namespace FuncSharp.Examples
             // You need to start with tries that have a collection as the type of error. So we MapError to a collection of strings here. But it can be a collection of any type.
             // For validations, you would write your validation method, so it already returns IEnumerable as the error type and use MapError inside the method.
             // Try.Aggregate method always executes all tries and then aggregates the success results or the errors. It doesn't stop on first error.
-            // You can transform the result into any class you want. This makes it nice and effective way of parsing values and combining the results.
+            // You can transform the result into any type you want. This makes it nice and effective way of parsing values and combining the results.
+            
             ITry<string, IEnumerable<PersonParsingError>> parsedName = name.ToNonEmptyOption().ToTry(_ => new [] { PersonParsingError.NameNotProvided });
 
             // Notice that you can chain validations using FlatMap and then pass it into Aggregate.
@@ -190,7 +191,7 @@ namespace FuncSharp.Examples
             // This is useful for handling individual errors, but cannot be aggregated.
             ITry<int, Exception> divisionHandlingAllExceptions1 = Try.Catch<int, Exception>(_ => DownloadNumberOverNetwork());
 
-            // Only catches a specific exception. Notice that the error type is the specific type of exception.
+            // Only catches a specific exception. Notice that the error type is the specific type of exception, not a collection of exceptions.
             ITry<int, TaskCanceledException> divisionHandlingDividingByZero = Try.Catch<int, TaskCanceledException>(_ => DownloadNumberOverNetwork());
 
             // Catch also has an overload which allows recovering in case of exception.
