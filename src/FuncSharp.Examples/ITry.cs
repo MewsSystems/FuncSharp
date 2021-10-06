@@ -192,7 +192,7 @@ namespace FuncSharp.Examples
             // This is useful for handling individual errors, but cannot be aggregated.
             ITry<int, Exception> divisionHandlingAllExceptions1 = Try.Catch<int, Exception>(_ => DownloadNumberOverNetwork());
 
-            // Only catches a specific exception. Notice that the error type is the specific type of exception.
+            // Only catches a specific exception. Notice that the error type is the specific type of exception, not a collection of exceptions.
             ITry<int, TaskCanceledException> divisionHandlingDividingByZero = Try.Catch<int, TaskCanceledException>(_ => DownloadNumberOverNetwork());
 
             // Catch also has an overload which allows recovering in case of exception.
