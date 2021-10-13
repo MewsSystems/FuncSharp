@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FuncSharp.Examples
 {
-    public class ITryNetworkExceptionHandling
+    public class Api
     {
         public enum NetworkOperationError
         {
@@ -49,6 +49,7 @@ namespace FuncSharp.Examples
             // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
             return PerformNetworkOperation(_ => new Random().Next());
         }
+
         private ITry<int, NetworkOperationError> TransformNumberOverNetwork(int value)
         {
             // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
