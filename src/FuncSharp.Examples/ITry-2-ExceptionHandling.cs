@@ -14,19 +14,19 @@ namespace FuncSharp.Examples
 
     public class Api
     {
-        public ITry<int, NetworkOperationError> DownloadNumberOverNetwork()
+        public static ITry<int, NetworkOperationError> DownloadNumberOverNetwork()
         {
             // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
             return PerformNetworkOperation(_ => new Random().Next());
         }
 
-        public ITry<int, NetworkOperationError> TransformNumberOverNetwork(int value)
+        public static ITry<int, NetworkOperationError> TransformNumberOverNetwork(int value)
         {
             // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
             return PerformNetworkOperation(_ => new Random().Next());
         }
 
-        private ITry<T, NetworkOperationError> PerformNetworkOperation<T>(Func<Unit, T> operation)
+        private static ITry<T, NetworkOperationError> PerformNetworkOperation<T>(Func<Unit, T> operation)
         {
             var connectionErrorStatuses = new List<WebExceptionStatus>
             {
