@@ -128,16 +128,13 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
             this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Func<" + Type(x) + ", TResult> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(12) + "Func<IEnumerable<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-<#= Lines(i, x => Indent(20) + "c" + x + " => result.Add(f" + x + "(c" + x + "))", separator: ",") #>
-                );
-            }
+            source.PartitionMatch(
+<#= Lines(i, x => Indent(16) + "c" + x + " => result.AddRange(f" + x + "(c" + x + "))", separator: ",") #>
+            );
 
             return result;
         }
