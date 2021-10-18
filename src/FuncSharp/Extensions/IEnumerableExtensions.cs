@@ -1308,16 +1308,13 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, TResult>(
             this IEnumerable<ICoproduct1<T1>> source,
-            Func<T1, TResult> f1)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1))
+            );
 
             return result;
         }
@@ -1327,18 +1324,15 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, TResult>(
             this IEnumerable<ICoproduct2<T1, T2>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2))
+            );
 
             return result;
         }
@@ -1348,20 +1342,17 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, TResult>(
             this IEnumerable<ICoproduct3<T1, T2, T3>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3))
+            );
 
             return result;
         }
@@ -1371,22 +1362,19 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, TResult>(
             this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4))
+            );
 
             return result;
         }
@@ -1396,24 +1384,21 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, TResult>(
             this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5))
+            );
 
             return result;
         }
@@ -1423,26 +1408,23 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, TResult>(
             this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6))
+            );
 
             return result;
         }
@@ -1452,28 +1434,25 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, TResult>(
             this IEnumerable<ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7))
+            );
 
             return result;
         }
@@ -1483,30 +1462,27 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
             this IEnumerable<ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8))
+            );
 
             return result;
         }
@@ -1516,32 +1492,29 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
             this IEnumerable<ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9))
+            );
 
             return result;
         }
@@ -1551,34 +1524,31 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
             this IEnumerable<ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10))
+            );
 
             return result;
         }
@@ -1588,36 +1558,33 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
             this IEnumerable<ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11))
+            );
 
             return result;
         }
@@ -1627,38 +1594,35 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
             this IEnumerable<ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12))
+            );
 
             return result;
         }
@@ -1668,40 +1632,37 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
             this IEnumerable<ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13))
+            );
 
             return result;
         }
@@ -1711,42 +1672,39 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
             this IEnumerable<ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14))
+            );
 
             return result;
         }
@@ -1756,44 +1714,41 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
             this IEnumerable<ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14,
-            Func<T15, TResult> f15)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14,
+            Func<IEnumerable<T15>, IEnumerable<TResult>> f15)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14)),
-                    c15 => result.Add(f15(c15))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15))
+            );
 
             return result;
         }
@@ -1803,46 +1758,43 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
             this IEnumerable<ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14,
-            Func<T15, TResult> f15,
-            Func<T16, TResult> f16)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14,
+            Func<IEnumerable<T15>, IEnumerable<TResult>> f15,
+            Func<IEnumerable<T16>, IEnumerable<TResult>> f16)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14)),
-                    c15 => result.Add(f15(c15)),
-                    c16 => result.Add(f16(c16))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16))
+            );
 
             return result;
         }
@@ -1852,48 +1804,45 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, TResult>(
             this IEnumerable<ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14,
-            Func<T15, TResult> f15,
-            Func<T16, TResult> f16,
-            Func<T17, TResult> f17)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14,
+            Func<IEnumerable<T15>, IEnumerable<TResult>> f15,
+            Func<IEnumerable<T16>, IEnumerable<TResult>> f16,
+            Func<IEnumerable<T17>, IEnumerable<TResult>> f17)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14)),
-                    c15 => result.Add(f15(c15)),
-                    c16 => result.Add(f16(c16)),
-                    c17 => result.Add(f17(c17))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17))
+            );
 
             return result;
         }
@@ -1903,50 +1852,47 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, TResult>(
             this IEnumerable<ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14,
-            Func<T15, TResult> f15,
-            Func<T16, TResult> f16,
-            Func<T17, TResult> f17,
-            Func<T18, TResult> f18)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14,
+            Func<IEnumerable<T15>, IEnumerable<TResult>> f15,
+            Func<IEnumerable<T16>, IEnumerable<TResult>> f16,
+            Func<IEnumerable<T17>, IEnumerable<TResult>> f17,
+            Func<IEnumerable<T18>, IEnumerable<TResult>> f18)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14)),
-                    c15 => result.Add(f15(c15)),
-                    c16 => result.Add(f16(c16)),
-                    c17 => result.Add(f17(c17)),
-                    c18 => result.Add(f18(c18))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17)),
+                c18 => result.AddRange(f18(c18))
+            );
 
             return result;
         }
@@ -1956,52 +1902,49 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, TResult>(
             this IEnumerable<ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14,
-            Func<T15, TResult> f15,
-            Func<T16, TResult> f16,
-            Func<T17, TResult> f17,
-            Func<T18, TResult> f18,
-            Func<T19, TResult> f19)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14,
+            Func<IEnumerable<T15>, IEnumerable<TResult>> f15,
+            Func<IEnumerable<T16>, IEnumerable<TResult>> f16,
+            Func<IEnumerable<T17>, IEnumerable<TResult>> f17,
+            Func<IEnumerable<T18>, IEnumerable<TResult>> f18,
+            Func<IEnumerable<T19>, IEnumerable<TResult>> f19)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14)),
-                    c15 => result.Add(f15(c15)),
-                    c16 => result.Add(f16(c16)),
-                    c17 => result.Add(f17(c17)),
-                    c18 => result.Add(f18(c18)),
-                    c19 => result.Add(f19(c19))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17)),
+                c18 => result.AddRange(f18(c18)),
+                c19 => result.AddRange(f19(c19))
+            );
 
             return result;
         }
@@ -2011,54 +1954,51 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, TResult>(
             this IEnumerable<ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> source,
-            Func<T1, TResult> f1,
-            Func<T2, TResult> f2,
-            Func<T3, TResult> f3,
-            Func<T4, TResult> f4,
-            Func<T5, TResult> f5,
-            Func<T6, TResult> f6,
-            Func<T7, TResult> f7,
-            Func<T8, TResult> f8,
-            Func<T9, TResult> f9,
-            Func<T10, TResult> f10,
-            Func<T11, TResult> f11,
-            Func<T12, TResult> f12,
-            Func<T13, TResult> f13,
-            Func<T14, TResult> f14,
-            Func<T15, TResult> f15,
-            Func<T16, TResult> f16,
-            Func<T17, TResult> f17,
-            Func<T18, TResult> f18,
-            Func<T19, TResult> f19,
-            Func<T20, TResult> f20)
+            Func<IEnumerable<T1>, IEnumerable<TResult>> f1,
+            Func<IEnumerable<T2>, IEnumerable<TResult>> f2,
+            Func<IEnumerable<T3>, IEnumerable<TResult>> f3,
+            Func<IEnumerable<T4>, IEnumerable<TResult>> f4,
+            Func<IEnumerable<T5>, IEnumerable<TResult>> f5,
+            Func<IEnumerable<T6>, IEnumerable<TResult>> f6,
+            Func<IEnumerable<T7>, IEnumerable<TResult>> f7,
+            Func<IEnumerable<T8>, IEnumerable<TResult>> f8,
+            Func<IEnumerable<T9>, IEnumerable<TResult>> f9,
+            Func<IEnumerable<T10>, IEnumerable<TResult>> f10,
+            Func<IEnumerable<T11>, IEnumerable<TResult>> f11,
+            Func<IEnumerable<T12>, IEnumerable<TResult>> f12,
+            Func<IEnumerable<T13>, IEnumerable<TResult>> f13,
+            Func<IEnumerable<T14>, IEnumerable<TResult>> f14,
+            Func<IEnumerable<T15>, IEnumerable<TResult>> f15,
+            Func<IEnumerable<T16>, IEnumerable<TResult>> f16,
+            Func<IEnumerable<T17>, IEnumerable<TResult>> f17,
+            Func<IEnumerable<T18>, IEnumerable<TResult>> f18,
+            Func<IEnumerable<T19>, IEnumerable<TResult>> f19,
+            Func<IEnumerable<T20>, IEnumerable<TResult>> f20)
         {
             var result = new List<TResult>();
 
-            foreach (var c in source)
-            {
-                c.Match(
-                    c1 => result.Add(f1(c1)),
-                    c2 => result.Add(f2(c2)),
-                    c3 => result.Add(f3(c3)),
-                    c4 => result.Add(f4(c4)),
-                    c5 => result.Add(f5(c5)),
-                    c6 => result.Add(f6(c6)),
-                    c7 => result.Add(f7(c7)),
-                    c8 => result.Add(f8(c8)),
-                    c9 => result.Add(f9(c9)),
-                    c10 => result.Add(f10(c10)),
-                    c11 => result.Add(f11(c11)),
-                    c12 => result.Add(f12(c12)),
-                    c13 => result.Add(f13(c13)),
-                    c14 => result.Add(f14(c14)),
-                    c15 => result.Add(f15(c15)),
-                    c16 => result.Add(f16(c16)),
-                    c17 => result.Add(f17(c17)),
-                    c18 => result.Add(f18(c18)),
-                    c19 => result.Add(f19(c19)),
-                    c20 => result.Add(f20(c20))
-                );
-            }
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17)),
+                c18 => result.AddRange(f18(c18)),
+                c19 => result.AddRange(f19(c19)),
+                c20 => result.AddRange(f20(c20))
+            );
 
             return result;
         }

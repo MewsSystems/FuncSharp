@@ -34,12 +34,12 @@ namespace FuncSharp.Tests
             );
 
             var lengths = source.PartitionMatch(
-                t => t.Length,
-                i => i,
-                b => b ? 1 : 0
+                texts => texts.Select(t => t.Length),
+                ints => ints,
+                bools => bools.Select(b => b ? 1 : 0)
             );
 
-            Assert.True(lengths.SequenceEqual(new[] { 3, 42, 3, 21 }));
+            Assert.True(lengths.SequenceEqual(new[] { 3, 3, 42, 21 }));
         }
 
         [Fact]
