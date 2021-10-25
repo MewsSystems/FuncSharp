@@ -22,7 +22,7 @@ namespace FuncSharp.Examples
 
         public static ITry<int, NetworkOperationError> TransformNumberOverNetwork(int value)
         {
-            // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
+            // This method serves as an example use-case for handling value of ITries, instead of multiplication, there should be some network call.
             return PerformNetworkOperation(_ => value * 2);
         }
 
