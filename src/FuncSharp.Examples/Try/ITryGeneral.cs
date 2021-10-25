@@ -6,6 +6,12 @@ namespace FuncSharp.Examples
 {
     public class ITryUsages
     {
+        public enum NumberParsingError
+        {
+            NotANumber,
+            NumberTooLow
+        }
+
         private void TransformingResultValuesWithMap()
         {
             ITry<int, NetworkOperationError> downloadedNumber = Api.DownloadNumberOverNetwork();
@@ -30,7 +36,7 @@ namespace FuncSharp.Examples
             ITry<int, NetworkOperationError> flattenedResultOfDoubleMultiplication = multiplicationResult.FlatMap(r => Api.TransformNumberOverNetwork(r));
         }
 
-        private void AggregatingMultipleTriesIntoSingleResult(string name, string age, string heightInCentimeters)
+        private void AggregatingMultipleTriesIntoSingleResult()
         {
             // You can combine independent itries into a successfully result or a list of errors in case any of the itries fails.
             // All the ITries are evaluated all the time.
@@ -41,9 +47,24 @@ namespace FuncSharp.Examples
                 success: (number1, number2, number3) => number1 + number2 + number3
             );
 
-            // Great examples of aggregating Itries can be found when parsing. See what the method does.
+            // Great examples of aggregating Itries can be found when parsing. See what the Parse method does.
             ITry<Person, IEnumerable<PersonParsingError>> parsedPerson = Person.Parse("John Doe", "21", "185");
         }
+
+        private void ChainingConditionsWithWhere(string value)
+        {
+            ITry<int, NumberParsingError> number1 = Try.Catch<int, Exception>(_ => Convert.ToInt32(value)).MapError(_ => NumberParsingError.NotANumber);
+            ITry<int, NumberParsingError> numberAboveZero1 = number1.Where(n => n > 0, _ => NumberParsingError.NumberTooLow);
+
+            // You can also call where on the result of aggregation.
+            ITry<int, IEnumerable<NumberParsingError>> number2 = Try.Aggregate(number1, number1, (n1, n2) => n1 + n2);
+            ITry<int, IEnumerable<NumberParsingError>> numberAboveZero2 = number2.Where(n => n > 0, _ => NumberParsingError.NumberTooLow);
+
+            // ITry<T> implements ITry<T, IEnumerable<Exception>>, so it works just like the second example.
+            ITry<int> number3 = Try.Create<int, Exception>(_ => Convert.ToInt32(value));
+            ITry<int> numberAboveZero3 = number3.Where(n => n > 0, _ => new Exception("Number too low."));
+        }
+
 
         private void HandlingCollectionsOfTries(int numberCount)
         {
