@@ -35,10 +35,10 @@ namespace FuncSharp.Examples
             // You can combine independent itries into a successfully result or a list of errors in case any of the itries fails.
             // All the ITries are evaluated all the time.
             ITry<int, IEnumerable<string>> sumOfThreeNumbers = Try.Aggregate(
-                t1: Api.DownloadNumberOverNetwork().MapError(e => new List<string>{ e.ToString() }),
-                t2: Api.DownloadNumberOverNetwork().MapError(e => new List<string>{ e.ToString() }),
-                t3: Api.DownloadNumberOverNetwork().MapError(e => new List<string>{ e.ToString() }),
-                f: (number1, number2, number3) => number1 + number2 + number3
+                t1: Api.DownloadNumberOverNetwork().MapError(e => e.ToString()),
+                t2: Api.DownloadNumberOverNetwork().MapError(e => e.ToString()),
+                t3: Api.DownloadNumberOverNetwork().MapError(e => e.ToString()),
+                success: (number1, number2, number3) => number1 + number2 + number3
             );
 
             // Great examples of aggregating Itries can be found when parsing. See what the method does.

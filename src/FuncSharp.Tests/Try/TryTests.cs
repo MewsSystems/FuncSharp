@@ -12,6 +12,8 @@ namespace FuncSharp.Tests
         private static readonly ITry<int, NotImplementedException> E1 = Try.Catch<int, NotImplementedException>(_ => throw Exception);
         private static readonly ITry<int> S2 = Try.Create<int, Exception>(_ => 42);
         private static readonly ITry<int> E2 = Try.Create<int, Exception>(_ => throw Exception);
+        private static readonly ITry<int, IEnumerable<Exception>> S3 = Try.Create<int, NotImplementedException>(_ => 42);
+        private static readonly ITry<int, IEnumerable<Exception>> E3 = Try.Create<int, NotImplementedException>(_ => throw Exception);
 
         [Fact]
         public void Catch()
@@ -68,9 +70,28 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
+        public void Where()
+        {
+            Assert.Equal(42, S1.Where(i => i > 40, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => S1.Where(i => i > 50, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => E1.Where(i => i > 40, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => E2.Where(i => i > 50, _ => Exception).Get());
+
+            Assert.Equal(42, ((ITry<int>)S2.Where(i => i > 40, _ => Exception)).Get());
+            Assert.Throws<NotImplementedException>(() => ((ITry<int>)S2.Where(i => i > 50, _ => Exception)).Get());
+            Assert.Throws<NotImplementedException>(() => ((ITry<int>)E2.Where(i => i > 40, _ => Exception)).Get());
+            Assert.Throws<NotImplementedException>(() => ((ITry<int>)E2.Where(i => i > 50, _ => Exception)).Get());
+
+            Assert.Equal(42, S3.Where(i => i > 40, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => S3.Where(i => i > 50, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => E3.Where(i => i > 40, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => E3.Where(i => i > 50, _ => Exception).Get(e => e.First()));
+        }
+
+        [Fact]
         public void Aggregate()
         {
-            var as1 = Try.Aggregate(S1, S1, Product2.Create);
+            var as1 = Try.Aggregate<int, int, IProduct2<int, int>>(S1, S1, success: Product2.Create);
             Assert.Equal(42, as1.Get().ProductValue1);
             Assert.Equal(42, as1.Get().ProductValue2);
 
@@ -78,7 +99,7 @@ namespace FuncSharp.Tests
             Assert.Equal(42, as2.Get().ProductValue1);
             Assert.Equal(42, as2.Get().ProductValue2);
 
-            var am1 = Try.Aggregate(S1, E1, Product2.Create);
+            var am1 = Try.Aggregate<int, int, IProduct2<int, int>>(S1, E1, Product2.Create);
             Assert.Equal(Exception, am1.Error.Get());
             Assert.Throws<NotImplementedException>(() => am1.Get());
 
@@ -86,7 +107,7 @@ namespace FuncSharp.Tests
             Assert.Equal(Exception, am2.Error.FlatMap(e => e.SingleOption()).Get());
             Assert.Throws<NotImplementedException>(() => am2.Get());
 
-            var ae1 = Try.Aggregate(E1, E1, Product2.Create);
+            var ae1 = Try.Aggregate<int, int, IProduct2<int, int>>(E1, E1, Product2.Create);
             Assert.True(ae1.Error.Get() is AggregateException a && a.InnerExceptions.SequenceEqual(new[] { Exception, Exception }));
             Assert.Throws<AggregateException>(() => ae1.Get());
 

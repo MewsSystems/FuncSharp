@@ -7,6 +7,39 @@ namespace FuncSharp
     public static class ITryExtensions
     {
         /// <summary>
+        /// If the successful result passes the predicate, returns the original try. Otherwise returns erroneous try with the specified result.
+        /// </summary>
+        public static ITry<A> Where<A>(this ITry<A> t, Func<A, bool> predicate, Func<Unit, Exception> otherwise)
+        {
+            return t.FlatMap(a => predicate(a).Match(
+                _ => t,
+                _ => Try.Error<A>(otherwise(Unit.Value))
+            ));
+        }
+
+        /// <summary>
+        /// If the successful result passes the predicate, returns the original try. Otherwise returns erroneous try with the specified result.
+        /// </summary>
+        public static ITry<A, E> Where<A, E>(this ITry<A, E> t, Func<A, bool> predicate, Func<Unit, E> otherwise)
+        {
+            return t.FlatMap(a => predicate(a).Match(
+                _ => t,
+                _ => Try.Error<A, E>(otherwise(Unit.Value))
+            ));
+        }
+
+        /// <summary>
+        /// If the successful result passes the predicate, returns the original try. Otherwise returns erroneous try with the specified result.
+        /// </summary>
+        public static ITry<A, IEnumerable<E>> Where<A, E>(this ITry<A, IEnumerable<E>> t, Func<A, bool> predicate, Func<Unit, E> otherwise)
+        {
+            return t.FlatMap(a => predicate(a).Match(
+                _ => t,
+                _ => Try.Error<A, IEnumerable<E>>(new List<E> { otherwise(Unit.Value) })
+            ));
+        }
+
+        /// <summary>
         /// Maps the successful result to a new try.
         /// </summary>
         public static ITry<B> FlatMap<A, B>(this ITry<A> t, Func<A, ITry<B>> f)

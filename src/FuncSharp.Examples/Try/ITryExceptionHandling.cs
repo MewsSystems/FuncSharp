@@ -12,7 +12,7 @@ namespace FuncSharp.Examples
         NetworkIssues
     }
 
-    public class Api
+    public sealed class Api
     {
         public static ITry<int, NetworkOperationError> DownloadNumberOverNetwork()
         {
@@ -23,7 +23,7 @@ namespace FuncSharp.Examples
         public static ITry<int, NetworkOperationError> TransformNumberOverNetwork(int value)
         {
             // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
-            return PerformNetworkOperation(_ => new Random().Next());
+            return PerformNetworkOperation(_ => value * 2);
         }
 
         private static ITry<T, NetworkOperationError> PerformNetworkOperation<T>(Func<Unit, T> operation)
