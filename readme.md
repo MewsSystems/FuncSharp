@@ -34,7 +34,7 @@ public class Point2D : Product2<float, float>
 }
 ```
 
-You can check more extensive example, together with usage, in the [`Product.cs`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples/Product.cs) example. A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particularly useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
+You can check more extensive example, together with usage, in the [`Product.cs`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples/Product/Product.cs) example. A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particularly useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
 
 ### Coproduct
 
@@ -48,13 +48,13 @@ public class Tree<A> : Coproduct2<Node<A>, Leaf>
 }
 ```
 
-More extensive example can be found in the [`Coproduct.cs`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples/Coproduct.cs) file. A coproduct of zero types (a choice from no types) is also a well known type, in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
+More extensive example can be found in the [`Coproduct.cs`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples/Coproduct/Coproduct.cs) file. A coproduct of zero types (a choice from no types) is also a well known type, in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
 
 ## Additional Helpful Types
 
 ### Option
 
-An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/IOption.cs) file.
+An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Option/IOption.cs) file.
 
 ### Morphism
 
