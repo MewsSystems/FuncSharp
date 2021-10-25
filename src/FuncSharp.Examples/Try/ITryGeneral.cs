@@ -40,15 +40,26 @@ namespace FuncSharp.Examples
         {
             // You can combine independent itries into a successfully result or a list of errors in case any of the itries fails.
             // All the ITries are evaluated all the time.
+            ITry<int, string> number1 = Api.DownloadNumberOverNetwork().MapError(e => e.ToString());
+            ITry<int, string> number2 = Api.DownloadNumberOverNetwork().MapError(e => e.ToString());
+            ITry<int, string> number3 = Api.DownloadNumberOverNetwork().MapError(e => e.ToString());
             ITry<int, IEnumerable<string>> sumOfThreeNumbers = Try.Aggregate(
-                t1: Api.DownloadNumberOverNetwork().MapError(e => e.ToString()),
-                t2: Api.DownloadNumberOverNetwork().MapError(e => e.ToString()),
-                t3: Api.DownloadNumberOverNetwork().MapError(e => e.ToString()),
-                success: (number1, number2, number3) => number1 + number2 + number3
+                t1: number1,
+                t2: number2,
+                t3: number3,
+                success: (n1, n2, n3) => n1 + n2 + n3
             );
 
-            // Great examples of aggregating Itries can be found when parsing. See what the Parse method does.
-            ITry<Person, IEnumerable<PersonParsingError>> parsedPerson = Person.Parse("John Doe", "21", "185");
+            // Great examples of aggregating ITries can also be found when parsing. See what the Person.Parse method does.
+            ITry<Person, IEnumerable<PersonParsingError>> mom = Person.Parse("Jane Doe", "24", "185");
+            ITry<Person, IEnumerable<PersonParsingError>> dad = Person.Parse("John Doe", "29", "185");
+            ITry<Person, IEnumerable<PersonParsingError>> son = Person.Parse("Jimmy Doe", "1", "75");
+            ITry<(Person Dad, Person Mom, Person Son), IEnumerable<PersonParsingError>> family = Try.Aggregate(
+                t1: mom,
+                t2: dad,
+                t3: son,
+                success: (m, d, s) => (Dad: d, Mom: m, Son: s)
+            );
         }
 
         private void ChainingConditionsWithWhere(string value)
