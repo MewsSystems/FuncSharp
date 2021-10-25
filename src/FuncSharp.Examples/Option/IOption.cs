@@ -8,6 +8,7 @@ namespace FuncSharp.Examples
     {
         private static void CreatingOptionDirectly()
         {
+            // Note that we explicitly specify types of variables in the following examples. However, in practice, we use var.
             IOption<bool> emptyOption1 = Option.Empty<bool>();
             bool? emptyNullableBool = null;
             IOption<bool> emptyOption2 = emptyNullableBool.ToOption();

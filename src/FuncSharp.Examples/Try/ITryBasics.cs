@@ -7,6 +7,7 @@ namespace FuncSharp.Examples
     {
         private static void CreatingTryDirectly()
         {
+            // Note that we explicitly specify types of variables in the following examples. However, in practice, we use var.
             // Creates an ITry with successful result while specifying type of an error.
             ITry<int, NetworkOperationError> success = Try.Success<int, NetworkOperationError>(42);
 

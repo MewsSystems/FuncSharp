@@ -212,26 +212,38 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"ITry<A{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> f)
+        public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"ITry<A{x}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
-                errorAggregate: (e1, e2) => e1.Concat(e2),
-                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(f(<#= List(i, x => $"s{x}") #>)),
+                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(success(<#= List(i, x => $"s{x}") #>)),
                 error: errors => Error<R, IEnumerable<E>>(errors)
+            );
+        }
+
+        /// <summary>
+        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+        /// </summary>
+        public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"ITry<A{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        {
+            return Aggregate(
+                <#= List(i, x => $"t{x}") #>,
+                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(success(<#= List(i, x => $"s{x}") #>)),
+                error: errors => Error<R, IEnumerable<E>>(errors),
+                errorAggregate: (e1, e2) => e1.Concat(e2)
             );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all exceptions into error result by concatenation.
         /// </summary>
-        public static ITry<R> Aggregate<<#= Types(i, name: "A") #>, R>(<#= List(i, x => $"ITry<A{x}> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> f)
+        public static ITry<R> Aggregate<<#= Types(i, name: "A") #>, R>(<#= List(i, x => $"ITry<A{x}> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
-                errorAggregate: (e1, e2) => e1.Concat(e2),
-                success: (<#= List(i, x => $"s{x}") #>) => Success(f(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<R>(errors)
+                success: (<#= List(i, x => $"s{x}") #>) => Success(success(<#= List(i, x => $"s{x}") #>)),
+                error: errors => Error<R>(errors),
+                errorAggregate: (e1, e2) => e1.Concat(e2)
             );
         }
 <#  } #>
