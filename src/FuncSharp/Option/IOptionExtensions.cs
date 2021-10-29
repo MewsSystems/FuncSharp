@@ -54,10 +54,11 @@ namespace FuncSharp
         public static B GetOrElse<A, B>(this IOption<A> option, Func<Unit, B> otherwise)
             where A : B
         {
-            return option.Match(
-                a => a,
-                _ => otherwise(Unit.Value)
-            );
+            if (option.NonEmpty)
+            {
+                return (B)option.CoproductValue;
+            }
+            return otherwise(Unit.Value);
         }
 
         /// <summary>
@@ -66,10 +67,11 @@ namespace FuncSharp
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<Unit, IOption<B>> alternative)
             where A : B
         {
-            return option.Match(
-                _ => option as IOption<B>,
-                _ => alternative(Unit.Value)
-            );
+            if (option.NonEmpty)
+            {
+                return (IOption<B>)option;
+            }
+            return alternative(Unit.Value);
         }
 
         /// <summary>

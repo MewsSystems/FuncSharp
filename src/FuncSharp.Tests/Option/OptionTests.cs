@@ -54,6 +54,7 @@ namespace FuncSharp.Tests
             Assert.Equal(84, 42.ToOption().Map(v => v * 2).Get());
             Assert.Equal("xxxxx", 5.ToOption().Map(v => new String('x', v)).Get());
             Assert.True(Option.Empty<int>().Map(v => v * 2).IsEmpty);
+            Assert.True(Option.Empty<string>().Map(v => (int?)null).IsEmpty);
         }
 
         [Fact]
