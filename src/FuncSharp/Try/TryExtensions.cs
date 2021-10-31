@@ -18,6 +18,17 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// If the successful result passes the predicate, returns the original try. Otherwise returns erroneous try with the specified result.
+        /// </summary>
+        public static ITry<A, IEnumerable<E>> Where<A, E>(this ITry<A, IEnumerable<E>> t, Func<A, bool> predicate, Func<Unit, E> otherwise)
+        {
+            return t.FlatMap(a => predicate(a).Match(
+                _ => t,
+                _ => Try.Error<A, IEnumerable<E>>(new[] { otherwise(Unit.Value) })
+            ));
+        }
+
+        /// <summary>
         /// Maps the successful result to a new try.
         /// </summary>
         public static ITry<B, E> FlatMap<A, E, B>(this ITry<A, E> t, Func<A, ITry<B, E>> f)

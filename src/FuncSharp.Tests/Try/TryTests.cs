@@ -55,6 +55,14 @@ namespace FuncSharp.Tests
             Assert.Equal(42, Success.Where(i => i > 40, _ => Exception).Get());
             Assert.Throws<NotImplementedException>(() => Success.Where(i => i > 50, _ => Exception).Get());
             Assert.Throws<NotImplementedException>(() => Error.Where(i => i > 40, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => Error.Where(i => i > 50, _ => Exception).Get());
+          
+            var s = Try.Success<int, IEnumerable<NotImplementedException>>(42);
+            var e = Try.Error<int, IEnumerable<NotImplementedException>>(Exception);
+            Assert.Equal(42, s.Where(i => i > 40, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => s.Where(i => i > 50, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => e.Where(i => i > 40, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => e.Where(i => i > 50, _ => Exception).Get(e => e.First()));
         }
 
         [Fact]
