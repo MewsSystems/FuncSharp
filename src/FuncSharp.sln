@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Examples", "FuncS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Benchmarks", "FuncSharp.Benchmarks\FuncSharp.Benchmarks.csproj", "{5F3E2D07-7A4B-43C4-965F-68319D6388E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp.Benchmarks", "FuncSharp.Benchmarks\FuncSharp.Benchmarks.csproj", "{5F3E2D07-7A4B-43C4-965F-68319D6388E4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
