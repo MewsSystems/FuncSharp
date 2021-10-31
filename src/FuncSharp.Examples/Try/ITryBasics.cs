@@ -15,14 +15,14 @@ namespace FuncSharp.Examples
             ITry<int, NetworkOperationError> error = Try.Error<int, NetworkOperationError>(NetworkOperationError.NetworkIssues);
 
             // Creating a successful ITry while specifying type of an error.
-            ITry<int> successTry = 42.ToTry();
+            ITry<int, Exception> successTry = 42.ToTry<int, Exception>();
 
             // Creating an erronous ITry directly from exception while specifying type of a success.
-            ITry<int> errorTry = new Exception().ToTry<int>();
+            ITry<int, Exception> errorTry = new Exception().ToTry<int, Exception>();
 
             // Converting an option to try.
             var option = Option.Empty<int>();
-            ITry<int> tryFromOption = option.ToTry(_ => new Exception("No value was provided in the option."));
+            ITry<int, Exception> tryFromOption = option.ToTry(_ => new Exception("No value was provided in the option."));
             ITry<int, string> tryFromOptionWithErrorType = option.ToTry(_ => "No value was provided in the option.");
 
             // Generally collections are recommended for validations.
@@ -45,19 +45,6 @@ namespace FuncSharp.Examples
                 _ => number / divisor,
                 exception => 0
             );
-        }
-
-        public static void HandlingExceptionsWithCreate(decimal number, decimal divisor)
-        {
-            // Catches any exception.
-            ITry<decimal> divisionHandlingAllExceptions = Try.Create<decimal, Exception>(_ => number / divisor);
-
-            // Only catches a specific exception.
-            ITry<decimal> divisionHandlingDividingByZero = Try.Create<decimal, DivideByZeroException>(_ => number / divisor);
-
-            // ITry that doesn't specify the error type has a collection of exceptions by default.
-            // It is a collection because then you can aggregate multiple tries and still have the same type.
-            ITry<decimal, IEnumerable<Exception>> fullTypeOfVariable = divisionHandlingDividingByZero;
         }
     }
 }

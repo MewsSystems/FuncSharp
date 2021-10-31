@@ -36,17 +36,17 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into a successful try.
         /// </summary>
-        public static ITry<A> ToTry<A>(this A value)
+        public static ITry<A, E> ToTry<A, E>(this A value)
         {
-            return Try.Success(value);
+            return Try.Success<A, E>(value);
         }
 
         /// <summary>
-        /// Turns the specified exception into a try.
+        /// Turns the specified error into a try.
         /// </summary>
-        public static ITry<A> ToTry<A>(this Exception e)
+        public static ITry<A, E> ToTry<A, E>(this E e)
         {
-            return Try.Error<A>(e);
+            return Try.Error<A, E>(e);
         }
 
         /// <summary>
