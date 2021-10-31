@@ -16,15 +16,6 @@ namespace FuncSharp
     {
         public CoproductBase(int arity, int discriminator, object value)
         {
-            if (arity <= 0)
-            {
-                throw new ArgumentException("The arity must be a positive number.");
-            }
-            if (discriminator < 1 || arity < discriminator)
-            {
-                throw new ArgumentException("The discriminator must be from interval [1, arity].");
-            }
-
             CoproductArity = arity;
             CoproductDiscriminator = discriminator;
             CoproductValue = value;
@@ -125,18 +116,26 @@ namespace FuncSharp
 <#    for (var j = 1; j <= i; j++) { #>
         public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
-            get { return Is<#= GetOrdinal(j) #> ? Option.Valued(GetCoproductValue<<#= Type(j) #>>()) : Option.Empty<<#= Type(j) #>>(); }
+            get { return Is<#= GetOrdinal(j) #> ? Option.Valued((<#= Type(j) #>)CoproductValue) : Option.Empty<<#= Type(j) #>>(); }
         }
 <#    } #>
 
         public R Match<R>(
 <#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>)
         {
+<#     if (i == 2) { #>
+            if (CoproductDiscriminator == 1)
+            {
+                return ifFirst((T1)CoproductValue);
+            }
+            return ifSecond((T2)CoproductValue);
+<#     } else { #>
             switch (CoproductDiscriminator)
             {
-<#= Lines(i, x => Indent(16) + "case " + x + ": return " + IfIth(x) + "(GetCoproductValue<T" + x + ">());") #>
+<#= Lines(i, x => Indent(16) + "case " + x + ": return " + IfIth(x) + "((" + Type(x) + ")CoproductValue);") #>
                 default: return default(R);
             }
+<#     } #>
         }
 
         public void Match(
@@ -144,7 +143,7 @@ namespace FuncSharp
         {
             switch (CoproductDiscriminator)
             {
-<#= Lines(i, x => Indent(16) + "case " + x + ": " + IfIth(x) + "?.Invoke(GetCoproductValue<T" + x + ">()); break;") #>
+<#= Lines(i, x => Indent(16) + "case " + x + ": " + IfIth(x) + "?.Invoke((" + Type(x) + ")CoproductValue); break;") #>
             }
         }
 <#    } else { #>

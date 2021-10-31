@@ -5,7 +5,6 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
-using System;
 using System.Collections.Generic;
 
 namespace FuncSharp

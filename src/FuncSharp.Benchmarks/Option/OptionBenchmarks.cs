@@ -17,7 +17,7 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public IOption<string> MapEmptyToConstant()
         {
-            return EmptyOption.Map(o => "non-empty-mapped");
+            return EmptyOption.Map(o => "empty-mapped");
         }
 
         [Benchmark]
