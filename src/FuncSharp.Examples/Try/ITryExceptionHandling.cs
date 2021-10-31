@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,15 +12,15 @@ namespace FuncSharp.Examples
         NetworkIssues
     }
 
-    public sealed class Api
+    public static class Api
     {
-        public static ITry<int, NetworkOperationError> DownloadNumberOverNetwork()
+        public static ITry<int, NetworkOperationError> GetNumber()
         {
             // This method serves as an example use-case for handling value of ITries, instead of random next, there should be some network call.
             return PerformNetworkOperation(_ => new Random().Next());
         }
 
-        public static ITry<int, NetworkOperationError> TransformNumberOverNetwork(int value)
+        public static ITry<int, NetworkOperationError> DoubleNumber(int value)
         {
             // This method serves as an example use-case for handling value of ITries, instead of multiplication, there should be some network call.
             return PerformNetworkOperation(_ => value * 2);
@@ -28,7 +28,7 @@ namespace FuncSharp.Examples
 
         private static ITry<T, NetworkOperationError> PerformNetworkOperation<T>(Func<Unit, T> operation)
         {
-            var connectionErrorStatuses = new List<WebExceptionStatus>
+            var connectionErrorStatuses = new[]
             {
                 WebExceptionStatus.ConnectFailure,
                 WebExceptionStatus.ConnectionClosed,

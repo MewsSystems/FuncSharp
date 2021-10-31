@@ -4,53 +4,83 @@ using System.Linq;
 
 namespace FuncSharp.Examples
 {
-    public class ITryUsages
+    public class ITryGeneral
     {
-        public enum NumberParsingError
+        private void TransformingSuccessWithMap()
         {
-            NotANumber,
-            NumberTooLow
+            ITry<int, NetworkOperationError> number = Api.GetNumber();
+            ITry<decimal, NetworkOperationError> castedNumber = number.Map(r => (decimal)r);
+            ITry<string, NetworkOperationError> stringifiedNumber = number.Map(r => r.ToString());
         }
 
-        private void TransformingResultValuesWithMap()
+        private void TransformingErrorWithMapError()
         {
-            ITry<int, NetworkOperationError> downloadedNumber = Api.DownloadNumberOverNetwork();
-            ITry<decimal, NetworkOperationError> castedNumber = downloadedNumber.Map(r => (decimal)r);
-            ITry<string, NetworkOperationError> stringifiedNumber = downloadedNumber.Map(r => r.ToString());
-        }
-
-        private void TransformingErrorValuesWithMapError()
-        {
-            ITry<int, NetworkOperationError> multiplicationResult = Api.DownloadNumberOverNetwork();
+            ITry<int, NetworkOperationError> number = Api.GetNumber();
 
             // You can use MapError to map for example from exception to another type you use to represent errors. Or map to logging messages.
-            ITry<int, string> flooredMultiplicationResult = multiplicationResult.MapError(e => e.ToString());
+            ITry<int, string> flooredMultiplicationResult = number.MapError(e => e.ToString());
         }
 
         private void HandlingNestedTriesWithFlatMap()
         {
-            ITry<int, NetworkOperationError> multiplicationResult = Api.DownloadNumberOverNetwork();
-            ITry<ITry<int, NetworkOperationError>, NetworkOperationError> resultOfDoubleMultiplication = multiplicationResult.Map(r => Api.TransformNumberOverNetwork(r));
+            ITry<int, NetworkOperationError> number = Api.GetNumber();
+            ITry<ITry<int, NetworkOperationError>, NetworkOperationError> doubleNumber = number.Map(r => Api.DoubleNumber(r));
 
             // This try succeeds only if both tries succeed. However the second lambda is only executed in case the first try is successful.
-            ITry<int, NetworkOperationError> flattenedResultOfDoubleMultiplication = multiplicationResult.FlatMap(r => Api.TransformNumberOverNetwork(r));
+            ITry<int, NetworkOperationError> doubleNumberFlattened = number.FlatMap(r => Api.DoubleNumber(r));
+        }
+
+        private void RetrievingValues()
+        {
+            // A try is a specific case of coproduct. Match methods are applicable for all coproduct types.
+            ITry<int, NetworkOperationError> number = Api.GetNumber();
+
+            // Match is the preferred way how to retrieve values of tries (and coproducts in general). It is typesafe and future proof.
+            // This overload takes two functions. Each of those have to return a value and result is stored in the stringifiedNumber variable.
+            string stringifiedNumber = number.Match(
+                result => result.ToString(),
+                _ => "Unfortunately, we failed to obtain a number from the server."
+            );
+
+            // This overload accepts two optional functions. If either of them isn't provided, nothing happens for that case.
+            number.Match(
+                n => Console.Write($"Operation successful, result is: {n}."),
+                _ => Console.Write("Operation failed, try again.")
+            );
+            number.Match(n => Console.Write($"Operation successful, result is: {n}."));
+            number.Match(ifSecond: _ => Console.Write("Operation failed, try again."));
+
+            // Get method will throw an exception for unsuccessful tries that have exception as the error. Using it is an anti-pattern.
+            // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
+            // This might be needed on the boundary with some other framework where you have to work with exceptions.
+            ITry<int, Exception> numberWithException = number.MapError(e => new InvalidOperationException());
+            int numberValue1 = numberWithException.Get();
+
+            // You can also configure the exception that is thrown by mapping the error inside Get directly.
+            int numberValue2 = number.Get(e => new InvalidOperationException());
+            int numberValue3 = numberWithException.Get(ex => new Exception("Error when retrieving number", innerException: ex));
+
+            // Because try is a coproduct, you can check the value directly. On try, there are named properties for this.
+            IOption<int> successResult1 = number.Success;
+            IOption<int> successResult2 = number.First;
+            IOption<NetworkOperationError> errorResult = number.Error;
+            IOption<NetworkOperationError> errorResult2 = number.Second;
         }
 
         private void AggregatingMultipleTriesIntoSingleResult()
         {
-            // You can combine independent itries into a successfully result or a list of errors in case any of the itries fails.
-            // All the ITries are evaluated all the time.
-            ITry<int, string> number1 = Api.DownloadNumberOverNetwork().MapError(e => e.ToString());
-            ITry<int, string> number2 = Api.DownloadNumberOverNetwork().MapError(e => e.ToString());
-            ITry<int, string> number3 = Api.DownloadNumberOverNetwork().MapError(e => e.ToString());
-            ITry<int, IEnumerable<string>> sumOfThreeNumbers = Try.Aggregate(
+            // You can combine independent tries into a single value or a list of errors in case any of the tries is erroneous.
+            ITry<int, NetworkOperationError> number1 = Api.GetNumber();
+            ITry<int, NetworkOperationError> number2 = Api.GetNumber();
+            ITry<int, NetworkOperationError> number3 = Api.GetNumber();
+            ITry<int, IEnumerable<NetworkOperationError>> sumOfThreeNumbers = Try.Aggregate(
                 t1: number1,
                 t2: number2,
                 t3: number3,
                 success: (n1, n2, n3) => n1 + n2 + n3
             );
 
-            // Great examples of aggregating ITries can also be found when parsing. See what the Person.Parse method does.
+            // Great examples of aggregating tries can also be found when parsing. See what the Person.Parse method does.
             ITry<Person, IEnumerable<PersonParsingError>> mom = Person.Parse("Jane Doe", "24", "185");
             ITry<Person, IEnumerable<PersonParsingError>> dad = Person.Parse("John Doe", "29", "185");
             ITry<Person, IEnumerable<PersonParsingError>> son = Person.Parse("Jimmy Doe", "1", "75");
@@ -62,68 +92,12 @@ namespace FuncSharp.Examples
             );
         }
 
-        private void ChainingConditionsWithWhere(string value)
+        private void AggregatingCollectionOfTries(int numberCount)
         {
-            ITry<int, NumberParsingError> number1 = Try.Catch<int, Exception>(_ => Convert.ToInt32(value)).MapError(_ => NumberParsingError.NotANumber);
-            ITry<int, NumberParsingError> numberAboveZero1 = number1.Where(n => n > 0, _ => NumberParsingError.NumberTooLow);
+            IEnumerable<ITry<int, NetworkOperationError>> numbers = Enumerable.Range(0, numberCount).Select(_ => Api.GetNumber());
 
-            // You can also call where on the result of aggregation.
-            ITry<int, IEnumerable<NumberParsingError>> number2 = Try.Aggregate(number1, number1, (n1, n2) => n1 + n2);
-            ITry<int, IEnumerable<NumberParsingError>> numberAboveZero2 = number2.Where(n => n > 0, _ => NumberParsingError.NumberTooLow);
-
-            // ITry<T> implements ITry<T, IEnumerable<Exception>>, so it works just like the second example.
-            ITry<int> number3 = Try.Create<int, Exception>(_ => Convert.ToInt32(value));
-            ITry<int> numberAboveZero3 = number3.Where(n => n > 0, _ => new Exception("Number too low."));
-        }
-
-
-        private void HandlingCollectionsOfTries(int numberCount)
-        {
-            IEnumerable<ITry<int, NetworkOperationError>> multiplicationResults = Enumerable.Repeat(Unit.Value, numberCount).Select(_ => Api.DownloadNumberOverNetwork());
-
-            // Contains all the multiplication results if all succeeded. Or all the errors from the ones that failed. (success results are lost in such case)
-            ITry<IEnumerable<int>, IEnumerable<NetworkOperationError>> combinedResult = Try.Aggregate(multiplicationResults);
-        }
-
-        private void UsingITryValueWithMatch()
-        {
-            // ITry is a specific case of Coproduct. Match methods are applicable for all coproduct types. Just like ITry and IOption.
-            ITry<int, NetworkOperationError> multiplicationResult = Api.DownloadNumberOverNetwork();
-
-            // This overload takes 2 Func parameters. Each of those have to return a value and result is stored in the roundedResult variable.
-            string stringifiedValue = multiplicationResult.Match(
-                result => result.ToString(),
-                _ => "Unfortunately, we failed to obtain a number from the server."
-            );
-
-            // This overload accepts 2 optional void lambdas. If lambda isn't provided, nothing happens for that case.
-            multiplicationResult.Match(
-                result => Console.Write($"Operation successful, result is: {result}."),
-                _ => Console.Write("Operation failed, try again.")
-            );
-            multiplicationResult.Match(result => Console.Write($"Operation successful, result is: {result}."));
-            multiplicationResult.Match(ifSecond: _ => Console.Write("Operation failed, try again."));
-        }
-
-        private void GettingTryValue()
-        {
-            ITry<int, NetworkOperationError> multiplicationResult = Api.DownloadNumberOverNetwork();
-            ITry<int, Exception> iTryWithExceptionAsError = multiplicationResult.MapError(e => new Exception(e.ToString()));
-
-            // Get method will throw an exception for unsuccessful tries. Using it is an anti-pattern.
-            // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
-            int valueOrExceptionThrown1 = iTryWithExceptionAsError.Get();
-
-            // You can also configure the exception that is thrown by mapping the error inside Get directly.
-            int valueOrExceptionThrown2 = multiplicationResult.Get(e => new Exception(e.ToString()));
-            int valueOrExceptionThrown3 = iTryWithExceptionAsError.Get(ex => new Exception("Error when multiplying", innerException: ex));
-
-            // Because ITry is a coproduct, you can check the value directly. On ITry, there are named properties for this.
-            // See IOption usages for more information about them.
-            IOption<int> successResult = multiplicationResult.Success;
-            IOption<int> successResult2 = multiplicationResult.First;
-            IOption<NetworkOperationError> errorResult = multiplicationResult.Error;
-            IOption<NetworkOperationError> errorResult2 = multiplicationResult.Second;
+            // Contains all the numbers if their retrieval succeeded. Or all the errors from the ones that failed. Success results are lost in such case.
+            ITry<IEnumerable<int>, IEnumerable<NetworkOperationError>> combinedResult = Try.Aggregate(numbers);
         }
     }
 }

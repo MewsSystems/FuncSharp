@@ -11,6 +11,7 @@ namespace FuncSharp.Tests
         private static readonly ITry<int, NotImplementedException> Success = Try.Success<int, NotImplementedException>(42);
         private static readonly ITry<int, NotImplementedException> Error = Try.Error<int, NotImplementedException>(Exception);
 
+
         [Fact]
         public void Catch()
         {
@@ -56,13 +57,13 @@ namespace FuncSharp.Tests
             Assert.Throws<NotImplementedException>(() => Success.Where(i => i > 50, _ => Exception).Get());
             Assert.Throws<NotImplementedException>(() => Error.Where(i => i > 40, _ => Exception).Get());
             Assert.Throws<NotImplementedException>(() => Error.Where(i => i > 50, _ => Exception).Get());
-          
-            var s = Try.Success<int, IEnumerable<NotImplementedException>>(42);
-            var e = Try.Error<int, IEnumerable<NotImplementedException>>(Exception);
-            Assert.Equal(42, s.Where(i => i > 40, _ => Exception).Get(e => e.First()));
-            Assert.Throws<NotImplementedException>(() => s.Where(i => i > 50, _ => Exception).Get(e => e.First()));
-            Assert.Throws<NotImplementedException>(() => e.Where(i => i > 40, _ => Exception).Get(e => e.First()));
-            Assert.Throws<NotImplementedException>(() => e.Where(i => i > 50, _ => Exception).Get(e => e.First()));
+
+            var success = Try.Success<int, IEnumerable<NotImplementedException>>(42);
+            var error = Try.Error<int, IEnumerable<NotImplementedException>>(new[] { Exception });
+            Assert.Equal(42, success.Where(i => i > 40, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => success.Where(i => i > 50, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => error.Where(i => i > 40, _ => Exception).Get(e => e.First()));
+            Assert.Throws<NotImplementedException>(() => error.Where(i => i > 50, _ => Exception).Get(e => e.First()));
         }
 
         [Fact]
