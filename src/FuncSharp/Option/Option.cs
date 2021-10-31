@@ -17,16 +17,20 @@ namespace FuncSharp
         public static IOption<bool> False { get; } = false.ToOption();
 
         /// <summary>
+        /// Unit value as an option.
+        /// </summary>
+        public static IOption<Unit> Unit { get; } = FuncSharp.Unit.Value.ToOption();
+
+        /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
         public static IOption<A> Create<A>(A value)
         {
             if (value != null)
             {
-                return Valued(value);
+                return new Option<A>(value);
             }
-
-            return Empty<A>();
+            return Option<A>.Empty;
         }
 
         /// <summary>
@@ -37,9 +41,9 @@ namespace FuncSharp
         {
             if (value.HasValue)
             {
-                return Valued(value.Value);
+                return new Option<A>(value.Value);
             }
-            return Empty<A>();
+            return Option<A>.Empty;
         }
 
         /// <summary>
@@ -73,8 +77,6 @@ namespace FuncSharp
             NonEmpty = false;
         }
 
-        private A Value { get; }
-
         public static IOption<A> Empty { get; } = new Option<A>();
 
         public int CoproductArity => 2;
@@ -85,15 +87,17 @@ namespace FuncSharp
 
         public bool IsFirst => NonEmpty;
 
-        public IOption<A> First => this;
-
         public bool IsSecond => !NonEmpty;
 
-        public IOption<Unit> Second => Option<Unit>.Empty;
+        public IOption<A> First => this;
+
+        public IOption<Unit> Second => IsEmpty ? Option.Unit : Option<Unit>.Empty;
+
+        public bool NonEmpty { get; }
 
         public bool IsEmpty => !NonEmpty;
-        
-        public bool NonEmpty { get; }
+
+        private A Value { get; }
 
         public R Match<R>(Func<A, R> ifFirst, Func<Unit, R> ifSecond)
         {
@@ -159,7 +163,7 @@ namespace FuncSharp
             {
                 return f(Value).ToOption();
             }
-            return Option.Empty<B>();
+            return Option<B>.Empty;
         }
 
         public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)

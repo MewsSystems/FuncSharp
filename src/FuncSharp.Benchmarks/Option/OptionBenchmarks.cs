@@ -13,7 +13,7 @@ namespace FuncSharp.Benchmarks
         {
             return NonEmptyOption.Map(o => "non-empty-mapped");
         }
-
+        /*
         [Benchmark]
         public IOption<string> MapEmptyToConstant()
         {
@@ -35,7 +35,7 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public IOption<string> FlatMapNonEmptyToNonEmpty()
         {
-            return NonEmptyOption.FlatMap(o => "non-empty".ToOption());
+            return NonEmptyOption.FlatMap(o => NonEmptyOption);
         }
 
         [Benchmark]
@@ -89,13 +89,13 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public IOption<string> OrElseNonEmpty()
         {
-            return NonEmptyOption.OrElse(_ => Option.Valued("else"));
+            return NonEmptyOption.OrElse(_ => NonEmptyOption);
         }
 
         [Benchmark]
         public IOption<string> OrElseEmpty()
         {
-            return EmptyOption.OrElse(_ => Option.Valued("else"));
-        }
+            return EmptyOption.OrElse(_ => NonEmptyOption);
+        }*/
     }
 }
