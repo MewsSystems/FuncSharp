@@ -6,11 +6,6 @@ namespace FuncSharp
     /// </summary>
     public sealed class Unit : Product0
     {
-        static Unit()
-        {
-            Value = new Unit();
-        }
-
         private Unit()
         {
         }
@@ -18,7 +13,7 @@ namespace FuncSharp
         /// <summary>
         /// The only instance of the Unit type.
         /// </summary>
-        public static Unit Value { get; }
+        public static Unit Value { get; } = new Unit();
 
         public override int GetHashCode()
         {

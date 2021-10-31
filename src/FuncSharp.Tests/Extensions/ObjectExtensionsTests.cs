@@ -6,7 +6,7 @@ namespace FuncSharp.Tests
     public class ObjectExtensionsTests
     {
         [Fact]
-        public void MatchWorks()
+        public void Match()
         {
             Assert.Equal("foo", 0.Match(
                 0, _ => "foo",
@@ -29,7 +29,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void AsCoproductWorks()
+        public void AsCoproduct()
         {
             Assert.Equal("foo", "foo".AsCoproduct<string, int>().First.Get());
             Assert.Equal(42, 42.AsCoproduct<string, int>().Second.Get());
@@ -42,7 +42,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void AsSafeCoproductWorks()
+        public void AsSafeCoproduct()
         {
             Assert.Equal("foo", "foo".AsSafeCoproduct<string, int>().First.Get());
             Assert.Equal(42, 42.AsSafeCoproduct<string, int>().Second.Get());

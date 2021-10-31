@@ -12,7 +12,7 @@ namespace FuncSharp
         public static A GetOrNull<A>(this IOption<A> option)
             where A : class
         {
-            return option.GetOrElse<A, A>(_ => null);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace FuncSharp
         /// </summary>
         public static int GetOrZero(this IOption<int> option)
         {
-            return option.GetOrElse(0);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace FuncSharp
         /// </summary>
         public static decimal GetOrZero(this IOption<decimal> option)
         {
-            return option.GetOrElse(0m);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace FuncSharp
         /// </summary>
         public static bool GetOrFalse(this IOption<bool> option)
         {
-            return option.GetOrElse(false);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -45,7 +45,11 @@ namespace FuncSharp
         public static B GetOrElse<A, B>(this IOption<A> option, B otherwise)
             where A : B
         {
-            return option.GetOrElse(_ => otherwise);
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            return otherwise;
         }
 
         /// <summary>
@@ -54,10 +58,11 @@ namespace FuncSharp
         public static B GetOrElse<A, B>(this IOption<A> option, Func<Unit, B> otherwise)
             where A : B
         {
-            return option.Match(
-                a => a,
-                _ => otherwise(Unit.Value)
-            );
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            return otherwise(Unit.Value);
         }
 
         /// <summary>
@@ -66,10 +71,11 @@ namespace FuncSharp
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<Unit, IOption<B>> alternative)
             where A : B
         {
-            return option.Match(
-                _ => option as IOption<B>,
-                _ => alternative(Unit.Value)
-            );
+            if (option.NonEmpty)
+            {
+                return (IOption<B>)option;
+            }
+            return alternative(Unit.Value);
         }
 
         /// <summary>
@@ -154,17 +160,6 @@ namespace FuncSharp
             return option.Match<A?>(
                 a => a,
                 _ => null
-            );
-        }
-
-        /// <summary>
-        /// Turns the option into a try using the exception in case of empty option.
-        /// </summary>
-        public static ITry<A> ToTry<A>(this IOption<A> option, Func<Unit, Exception> e)
-        {
-            return option.Match(
-                val => Try.Success(val),
-                _ => Try.Error<A>(e(Unit.Value))
             );
         }
 
