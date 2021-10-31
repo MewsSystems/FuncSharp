@@ -225,12 +225,11 @@ namespace FuncSharp
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond)
         {
-            switch (CoproductDiscriminator)
+            if (CoproductDiscriminator == 1)
             {
-                case 1: return ifFirst((T1)CoproductValue);
-                case 2: return ifSecond((T2)CoproductValue);
-                default: return default(R);
+                return ifFirst((T1)CoproductValue);
             }
+            return ifSecond((T2)CoproductValue);
         }
 
         public void Match(

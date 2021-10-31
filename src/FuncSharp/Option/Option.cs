@@ -6,21 +6,15 @@ namespace FuncSharp
 {
     public static class Option
     {
-        static Option()
-        {
-            True = true.ToOption();
-            False = false.ToOption();
-        }
-
         /// <summary>
         /// True value as an option.
         /// </summary>
-        public static IOption<bool> True { get; }
+        public static IOption<bool> True { get; } = true.ToOption();
 
         /// <summary>
         /// False value as an option.
         /// </summary>
-        public static IOption<bool> False { get; }
+        public static IOption<bool> False { get; } = false.ToOption();
 
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
@@ -64,13 +58,8 @@ namespace FuncSharp
         }
     }
 
-    internal class Option<A> : Coproduct2<A, Unit>, IOption<A>
+    internal sealed class Option<A> : Coproduct2<A, Unit>, IOption<A>
     {
-        static Option()
-        {
-            Empty = new Option<A>();
-        }
-
         public Option(A value)
             : base(value)
         {
@@ -81,7 +70,7 @@ namespace FuncSharp
         {
         }
 
-        public static IOption<A> Empty { get; }
+        public static IOption<A> Empty { get; } = new Option<A>();
 
         public bool IsEmpty
         {

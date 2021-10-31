@@ -132,11 +132,19 @@ namespace FuncSharp
         public R Match<R>(
 <#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>)
         {
+<#     if (i == 2) { #>
+            if (CoproductDiscriminator == 1)
+            {
+                return ifFirst((T1)CoproductValue);
+            }
+            return ifSecond((T2)CoproductValue);
+<#     } else { #>
             switch (CoproductDiscriminator)
             {
 <#= Lines(i, x => Indent(16) + "case " + x + ": return " + IfIth(x) + "((" + Type(x) + ")CoproductValue);") #>
                 default: return default(R);
             }
+<#     } #>
         }
 
         public void Match(
