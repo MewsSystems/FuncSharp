@@ -23,7 +23,6 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.
         /// </summary>
-        [Obsolete("Use GetOrZero, GetOrNull or GetOrElse instead.")]
         A GetOrDefault();
 
         /// <summary>

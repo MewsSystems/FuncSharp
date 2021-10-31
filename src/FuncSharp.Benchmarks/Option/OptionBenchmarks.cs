@@ -5,97 +5,62 @@ namespace FuncSharp.Benchmarks
     [MemoryDiagnoser]
     public class OptionBenchmarks
     {
-        public IOption<string> NonEmptyOption { get; } = "non-empty".ToOption();
-        public IOption<string> EmptyOption { get; } = Option.Empty<string>();
+        private object Object { get; } = new object();
+        private IOption<string> NonEmptyOption { get; } = "non-empty".ToOption();
+        private IOption<string> EmptyOption { get; } = Option.Empty<string>();
 
         [Benchmark]
-        public IOption<string> MapNonEmptyToConstant()
+        public void Creation()
         {
-            return NonEmptyOption.Map(o => "non-empty-mapped");
+            Option.Create(42);
+            Option.Create(42 as int?);
+            Option.Create(null as int?);
+
+            Option.Create(Object);
+            Option.Create(null as object);
         }
 
         [Benchmark]
-        public IOption<string> MapEmptyToConstant()
+        public void Retrieval()
         {
-            return EmptyOption.Map(o => "empty-mapped");
+            var a = NonEmptyOption.NonEmpty;
+            var b = EmptyOption.NonEmpty;
+            var c = NonEmptyOption.IsEmpty;
+            var d = EmptyOption.IsEmpty;
+
+            NonEmptyOption.Get();
+
+            NonEmptyOption.GetOrElse("else");
+            EmptyOption.GetOrElse("else");
+
+            NonEmptyOption.OrElse(_ => NonEmptyOption);
+            EmptyOption.OrElse(_ => NonEmptyOption);
         }
 
         [Benchmark]
-        public string GetNonEmpty()
+        public void Mapping()
         {
-            return NonEmptyOption.Get();
+            NonEmptyOption.Map(o => "non-empty-mapped");
+            EmptyOption.Map(o => "empty-mapped");
+
+            NonEmptyOption.FlatMap(o => EmptyOption);
+            NonEmptyOption.FlatMap(o => NonEmptyOption);
+            EmptyOption.FlatMap(o => EmptyOption);
+            EmptyOption.FlatMap(o => NonEmptyOption);
         }
 
         [Benchmark]
-        public IOption<string> FlatMapNonEmptyToEmpty()
+        public void Matching()
         {
-            return NonEmptyOption.FlatMap(o => EmptyOption);
+            NonEmptyOption.Match(_ => true, _ => false);
+            EmptyOption.Match(_ => true, _ => false);
         }
 
         [Benchmark]
-        public IOption<string> FlatMapNonEmptyToNonEmpty()
-        {
-            return NonEmptyOption.FlatMap(o => NonEmptyOption);
-        }
-
-        [Benchmark]
-        public void ToEnumerableFromNonEmpty()
+        public void ToEnumerable()
         {
             NonEmptyOption.ToEnumerable();
-        }
-
-        [Benchmark]
-        public void ToEnumerableFromEmpty()
-        {
             EmptyOption.ToEnumerable();
-        }
-
-        [Benchmark]
-        public bool MatchNonEmpty()
-        {
-            return NonEmptyOption.Match(_ => true, _ => false);
-        }
-
-        [Benchmark]
-        public bool MatchEmpty()
-        {
-            return EmptyOption.Match(_ => true, _ => false);
-        }
-
-        [Benchmark]
-        public IOption<string> Empty()
-        {
-            return Option.Empty<string>();
-        }
-
-        [Benchmark]
-        public IOption<string> Valued()
-        {
-            return Option.Valued("value");
-        }
-
-        [Benchmark]
-        public string GetOrElseNonEmpty()
-        {
-            return NonEmptyOption.GetOrElse("else");
-        }
-
-        [Benchmark]
-        public string GetOrElseEmpty()
-        {
-            return EmptyOption.GetOrElse("else");
-        }
-
-        [Benchmark]
-        public IOption<string> OrElseNonEmpty()
-        {
-            return NonEmptyOption.OrElse(_ => NonEmptyOption);
-        }
-
-        [Benchmark]
-        public IOption<string> OrElseEmpty()
-        {
-            return EmptyOption.OrElse(_ => NonEmptyOption);
         }
     }
 }

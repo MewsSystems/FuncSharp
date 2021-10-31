@@ -79,11 +79,17 @@ namespace FuncSharp
 
         public static IOption<A> Empty { get; } = new Option<A>();
 
+        private A Value { get; }
+
+        public bool NonEmpty { get; }
+
+        public bool IsEmpty => !NonEmpty;
+
         public int CoproductArity => 2;
 
         public int CoproductDiscriminator => NonEmpty ? 1 : 2;
 
-        public object CoproductValue => Value;
+        public object CoproductValue => NonEmpty ? (object)Value : Unit.Value;
 
         public bool IsFirst => NonEmpty;
 
@@ -92,12 +98,6 @@ namespace FuncSharp
         public IOption<A> First => this;
 
         public IOption<Unit> Second => IsEmpty ? Option.Unit : Option<Unit>.Empty;
-
-        public bool NonEmpty { get; }
-
-        public bool IsEmpty => !NonEmpty;
-
-        private A Value { get; }
 
         public R Match<R>(Func<A, R> ifFirst, Func<Unit, R> ifSecond)
         {
@@ -141,11 +141,7 @@ namespace FuncSharp
 
         public A GetOrDefault()
         {
-            if (NonEmpty)
-            {
-                return Value;
-            }
-            return default;
+            return Value;
         }
 
         public IOption<B> Map<B>(Func<A, B> f)

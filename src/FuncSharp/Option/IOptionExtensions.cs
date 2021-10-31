@@ -12,7 +12,7 @@ namespace FuncSharp
         public static A GetOrNull<A>(this IOption<A> option)
             where A : class
         {
-            return option.GetOrElse<A, A>(_ => null);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace FuncSharp
         /// </summary>
         public static int GetOrZero(this IOption<int> option)
         {
-            return option.GetOrElse(0);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace FuncSharp
         /// </summary>
         public static decimal GetOrZero(this IOption<decimal> option)
         {
-            return option.GetOrElse(0m);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace FuncSharp
         /// </summary>
         public static bool GetOrFalse(this IOption<bool> option)
         {
-            return option.GetOrElse(false);
+            return option.GetOrDefault();
         }
 
         /// <summary>
@@ -45,7 +45,11 @@ namespace FuncSharp
         public static B GetOrElse<A, B>(this IOption<A> option, B otherwise)
             where A : B
         {
-            return option.GetOrElse(_ => otherwise);
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            return otherwise;
         }
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace FuncSharp
         {
             if (option.NonEmpty)
             {
-                return (B)option.CoproductValue;
+                return option.GetOrDefault();
             }
             return otherwise(Unit.Value);
         }
