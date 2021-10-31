@@ -5,7 +5,7 @@ namespace FuncSharp.Tests
     public class CoproductTests
     {
         [Fact]
-        public void ConstructionPreservesValues()
+        public void Create()
         {
             var c1 = Coproduct2.CreateFirst<string, int>("foo");
             var c2 = Coproduct2.CreateSecond<string, int>(42);
@@ -34,7 +34,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void OptionProjectionIsCorrect()
+        public void Projections()
         {
             var u1 = Coproduct2.CreateFirst<string, int>("foo");
             var u2 = Coproduct2.CreateSecond<string, int>(42);
@@ -47,7 +47,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void MatchWorks()
+        public void Match()
         {
             var u1 = Coproduct2.CreateFirst<string, int>("foo");
             var u2 = Coproduct2.CreateSecond<string, int>(42);

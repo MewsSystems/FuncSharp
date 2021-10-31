@@ -64,12 +64,10 @@ namespace FuncSharp
         /// </summary>
         public static <#= CoproductType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
-<#     for (var j = 1; j <= i; j++) { #>
-            if (value is <#= Type(j) #>)
-            {
-                return Coproduct<#= i #>.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
+            switch (value) {
+<#= Lines(i, j => Indent(16) + "case " + Type(j) + " " + Value(j) + ": return Coproduct" + i + ".Create" + GetOrdinal(j) + TypeBracket(i) + "(" + Value(j) + ");") #>
             }
-<#     } #>
+
             if (fallback != null)
             {
                 return fallback(value);

@@ -6,15 +6,25 @@ namespace FuncSharp.Tests
     public class DataCubeTests
     {
         [Fact]
-        public void NewCubeIsClear()
+        public void Create()
         {
-            var c = new DataCube2<int, string, int>();
+            var c1 = new DataCube2<int, string, int>();
+            Assert.True(c1.IsEmpty);
 
-            Assert.True(c.IsEmpty);
+            var c2 = DataCube.Create(Enumerable.Range(1, 3),
+                i => i,
+                i => -i,
+                i => i.ToString()
+            );
+
+            Assert.Equal(3, c2.Values.Count());
+            Assert.Equal("1", c2.Get(1, -1).Get());
+            Assert.Equal("2", c2.Get(2, -2).Get());
+            Assert.Equal("3", c2.Get(3, -3).Get());
         }
 
         [Fact]
-        public void AddedValuesArePreserved()
+        public void Set()
         {
             var c1 = new DataCube2<int, string, int>();
 
@@ -38,7 +48,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void PositionsContainAddedPositions()
+        public void Positions()
         {
             var c = new DataCube2<int, string, int>();
             Assert.Empty(c.Positions);
@@ -58,7 +68,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void ValuesContainAddedValues()
+        public void Values()
         {
             var c = new DataCube2<int, string, int>();
             Assert.Empty(c.Values);
@@ -78,7 +88,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void DomainsContainAddedProductValues()
+        public void Domains()
         {
             var c = new DataCube2<int, string, int>();
             Assert.Empty(c.Domain1);
@@ -108,7 +118,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void CubeContainsAddedPositions()
+        public void Contains()
         {
             var c = new DataCube2<int, string, int>();
 
@@ -125,22 +135,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void CreateWorks()
-        {
-            var c = DataCube.Create(Enumerable.Range(1, 3),
-                i => i,
-                i => -i,
-                i => i.ToString()
-            );
-
-            Assert.Equal(3, c.Values.Count());
-            Assert.Equal("1", c.Get(1, -1).Get());
-            Assert.Equal("2", c.Get(2, -2).Get());
-            Assert.Equal("3", c.Get(3, -3).Get());
-        }
-
-        [Fact]
-        public void GetOrElseSetWorks()
+        public void GetOrElseSet()
         {
             var c = new DataCube2<int, string, int>();
             c.Set(1, "foo", 42);
@@ -157,7 +152,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void SetOrElseUpdateWorks()
+        public void SetOrElseUpdate()
         {
             var c = new DataCube2<int, string, int>();
 
@@ -180,7 +175,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void TransformWorks()
+        public void Transform()
         {
             var c = new DataCube3<int, int, int, int>();
             c.Set(0, 0, 0, 1);
@@ -205,7 +200,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void MultiTransformWorks()
+        public void MultiTransform()
         {
             var c = new DataCube2<int, int, int>();
             c.Set(0, 0, 1);
@@ -231,7 +226,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void RollUpDimensionWorks()
+        public void RollUpDimension()
         {
             var c = new DataCube3<int, int, int, int>();
             c.Set(0, 0, 0, 1);
@@ -257,7 +252,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void SliceDimensionWorks()
+        public void SliceDimension()
         {
             var c = new DataCube3<int, int, int, int>();
             c.Set(0, 0, 0, 1);
