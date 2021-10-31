@@ -59,7 +59,7 @@ namespace FuncSharp
         }
     }
 
-    internal sealed class Option<A> : Coproduct2<A, Unit>, IOption<A>
+    internal sealed class Option<A> : IOption<A>
     {
         public Option(A value)
         {
