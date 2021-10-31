@@ -24,7 +24,7 @@ namespace FuncSharp
         {
             return t.FlatMap(a => predicate(a).Match(
                 _ => t,
-                _ => Try.Error<A, IEnumerable<E>>(new List<E> { otherwise(Unit.Value) })
+                _ => Try.Error<A, IEnumerable<E>>(new[] { otherwise(Unit.Value) })
             ));
         }
 
