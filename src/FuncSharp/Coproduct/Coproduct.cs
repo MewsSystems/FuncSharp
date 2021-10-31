@@ -9,15 +9,6 @@ namespace FuncSharp
     {
         public CoproductBase(int arity, int discriminator, object value)
         {
-            if (arity <= 0)
-            {
-                throw new ArgumentException("The arity must be a positive number.");
-            }
-            if (discriminator < 1 || arity < discriminator)
-            {
-                throw new ArgumentException("The discriminator must be from interval [1, arity].");
-            }
-
             CoproductArity = arity;
             CoproductDiscriminator = discriminator;
             CoproductValue = value;
