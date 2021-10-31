@@ -68,9 +68,18 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
+        public void Where()
+        {
+            Assert.Equal(42, S1.Where(i => i > 40, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => S1.Where(i => i > 50, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => E1.Where(i => i > 40, _ => Exception).Get());
+            Assert.Throws<NotImplementedException>(() => E2.Where(i => i > 50, _ => Exception).Get());
+        }
+
+        [Fact]
         public void Aggregate()
         {
-            var as1 = Try.Aggregate(S1, S1, Product2.Create);
+            var as1 = Try.Aggregate<int, int, IProduct2<int, int>>(S1, S1, success: Product2.Create);
             Assert.Equal(42, as1.Get().ProductValue1);
             Assert.Equal(42, as1.Get().ProductValue2);
 
@@ -78,7 +87,7 @@ namespace FuncSharp.Tests
             Assert.Equal(42, as2.Get().ProductValue1);
             Assert.Equal(42, as2.Get().ProductValue2);
 
-            var am1 = Try.Aggregate(S1, E1, Product2.Create);
+            var am1 = Try.Aggregate<int, int, IProduct2<int, int>>(S1, E1, Product2.Create);
             Assert.Equal(Exception, am1.Error.Get());
             Assert.Throws<NotImplementedException>(() => am1.Get());
 
@@ -86,7 +95,7 @@ namespace FuncSharp.Tests
             Assert.Equal(Exception, am2.Error.FlatMap(e => e.SingleOption()).Get());
             Assert.Throws<NotImplementedException>(() => am2.Get());
 
-            var ae1 = Try.Aggregate(E1, E1, Product2.Create);
+            var ae1 = Try.Aggregate<int, int, IProduct2<int, int>>(E1, E1, Product2.Create);
             Assert.True(ae1.Error.Get() is AggregateException a && a.InnerExceptions.SequenceEqual(new[] { Exception, Exception }));
             Assert.Throws<AggregateException>(() => ae1.Get());
 

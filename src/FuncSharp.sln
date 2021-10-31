@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp", "FuncSharp\Func
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Tests", "FuncSharp.Tests\FuncSharp.Tests.csproj", "{AF10BBEC-20C9-474E-864A-4597B6C9278A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp.Examples", "FuncSharp.Examples\FuncSharp.Examples.csproj", "{0D515251-0E05-4F53-BB3E-3809AD1EB189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Examples", "FuncSharp.Examples\FuncSharp.Examples.csproj", "{0D515251-0E05-4F53-BB3E-3809AD1EB189}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Benchmarks", "FuncSharp.Benchmarks\FuncSharp.Benchmarks.csproj", "{5F3E2D07-7A4B-43C4-965F-68319D6388E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuncSharp.Benchmarks", "FuncSharp.Benchmarks\FuncSharp.Benchmarks.csproj", "{5F3E2D07-7A4B-43C4-965F-68319D6388E4}"
 EndProject
