@@ -56,6 +56,15 @@ More extensive example can be found in the [`Coproduct.cs`](https://github.com/s
 
 An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Option/IOption.cs) file.
 
+### Try
+
+In order to handle errors or exceptions, FuncSharp features `ITry<A, E>` that represents a result of an operation that can end with either success or error. It explicitly communicates all the possible outcomes on type level, unlike exceptions where you have to read a documentation to understand how a method can end. An extensive set of examples can be found in the following files:
+
+- [Basics](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryBasics.cs) - Basic concepts.
+- [Exception Handling](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
+- [Parsing](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryParsing.cs) - How to safely parse unsafe incoming data.
+- [General Usage](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryGeneral.cs) - Putting it all together, a few advanced concepts.
+
 ### Morphism
 
 Simplistic implementation of finite morphisms between two types. Isomorphisms can be used as a concise representation of a bidirectional mapping that is in .NET traditionally represented as a pair of dictionaries.
