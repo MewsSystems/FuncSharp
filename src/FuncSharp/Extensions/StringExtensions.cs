@@ -79,5 +79,10 @@ namespace FuncSharp
         {
             return Tryer.Invoke<string, Guid>(Guid.TryParse, s);
         }
+
+        public static IOption<Guid> ToGuidExact(this string s, string format = "D")
+        {
+            return Tryer.Invoke<string, string, Guid>(Guid.TryParseExact, s, format);
+        }
     }
 }

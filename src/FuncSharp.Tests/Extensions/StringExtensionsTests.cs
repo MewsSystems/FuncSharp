@@ -27,6 +27,7 @@ namespace FuncSharp.Tests
             Assert.Equal((NumberStyles)2, "AllowTrailingWhite".ToEnum<NumberStyles>().Get());
             Assert.Equal(Option.Empty<NumberStyles>(), "2".ToEnum<NumberStyles>());
             Assert.Equal(Option.Empty<NumberStyles>(), "999999999".ToEnum<NumberStyles>());
+            Assert.Equal(Option.Empty<Guid>(), "c0fb150f6bf344df984a3a0611ae5e4a".ToGuidExact());
         }
     }
 }
