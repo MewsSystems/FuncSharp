@@ -59,7 +59,11 @@ namespace FuncSharp
         {
             return t.Match(
                 s => s,
-                e => throw otherwise(e)
+                e =>
+                {
+                    ExceptionDispatchInfo.Capture(otherwise(e)).Throw();
+                    return default;
+                }
             );
         }
 
