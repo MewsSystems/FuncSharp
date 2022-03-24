@@ -85,6 +85,7 @@ namespace FuncSharp.Examples
             // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
             decimal valueOrExceptionThrown = divisionResult.Get();
 
+            decimal? valueOrNull = divisionResult.ToNullable();
             decimal valueOrFallback1 = divisionResult.GetOrZero();
             decimal valueOrFallback2 = divisionResult.GetOrElse(114m);
             decimal valueOrFallback3 = divisionResult.GetOrElse(_ => 114m); // Lazy. Will only run the lambda if it needs to.
