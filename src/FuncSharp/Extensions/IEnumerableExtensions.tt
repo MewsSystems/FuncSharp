@@ -87,19 +87,55 @@ namespace FuncSharp
         {
             return source.SingleOption().OrElse(_ => source.FirstOption().Map<Exception>(e => new AggregateException(source)));
         }
+        <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
+
+        /// <summary>
+        /// Converts the source to a new <#= i #>-dimensional data cube and aggregates values.
+        /// </summary>
+        public static <#= DataCubeType(i, valueType: "TResult") #> ToDataCube<T, <#= Types(i, name: "P") #>, TValue, TResult>(
+            this IEnumerable<T> source,
+<#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
+            Func<T, TValue> value,
+            Func<TValue, TResult> initialization,
+            Func<TResult, TResult, TResult> aggregation)
+        {
+            var dataCube = new <#= DataCubeType(i,valueType: "TResult") #>();
+            foreach (var v in source)
+            {
+                dataCube.SetOrElseUpdate(<#= List(i, x => "p" + x + "(v)") #>, initialization(value(v)), aggregation);
+            }
+            return dataCube;
+        }
+<#  } #>
+
 <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
 
         /// <summary>
-        /// Coverts the source to a new <#= i #>-dimensional data cube.
+        /// Converts the source to a new <#= i #>-dimensional data cube.
         /// </summary>
         public static <#= DataCubeType(i) #> ToDataCube<T, <#= Types(i, name: "P") #>, TValue>(
             this IEnumerable<T> source,
 <#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
             Func<T, TValue> value)
         {
-            return DataCube.Create(source, <#= List(i, x => "p" + x) #>, value);
+            return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, TValue>(source, <#= List(i, x => "p" + x) #>, value, a => a, (a, b) => b);
         }
 <#  } #>
+
+<#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
+
+        /// <summary>
+        /// Converts the source to a new <#= i #>-dimensional data cube.
+        /// </summary>
+        public static <#= DataCubeType(i, valueType: "IEnumerable<TValue>") #> ToCollectionDataCube<T, <#= Types(i, name: "P") #>, TValue>(
+            this IEnumerable<T> source,
+<#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
+            Func<T, TValue> value)
+        {
+            return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, IEnumerable<TValue>>(source, <#= List(i, x => "p" + x) #>, value, a => Enumerable.Repeat(a, 1), (a, b) => a.Concat(b));
+        }
+<#  } #>
+
 <#  for (var i = 1; i < MaxArity(); i++) { #>
 
         /// <summary>
