@@ -166,7 +166,7 @@ namespace FuncSharp
         /// <summary>
         /// Coverts the source to a new 1-dimensional data cube and aggregate values.
         /// </summary>
-        public static DataCube1<P1, IEnumerable<TValue>> ToCollectionDataCube<T, P1, TValue>(
+        public static DataCube1<P1, IEnumerable<TValue>> ToDataCube<T, P1, TValue>(
             this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, TValue> value,
@@ -183,7 +183,7 @@ namespace FuncSharp
         /// <summary>
         /// Coverts the source to a new 2-dimensional data cube and aggregate values.
         /// </summary>
-        public static DataCube2<P1, P2, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, TValue>(
+        public static DataCube2<P1, P2, IEnumerable<TValue>> ToDataCube<T, P1, P2, TValue>(
             this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
@@ -201,7 +201,7 @@ namespace FuncSharp
         /// <summary>
         /// Coverts the source to a new 3-dimensional data cube and aggregate values.
         /// </summary>
-        public static DataCube3<P1, P2, P3, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, TValue>(
+        public static DataCube3<P1, P2, P3, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, TValue>(
             this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
@@ -220,7 +220,7 @@ namespace FuncSharp
         /// <summary>
         /// Coverts the source to a new 4-dimensional data cube and aggregate values.
         /// </summary>
-        public static DataCube4<P1, P2, P3, P4, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, TValue>(
+        public static DataCube4<P1, P2, P3, P4, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, P4, TValue>(
             this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
@@ -240,7 +240,7 @@ namespace FuncSharp
         /// <summary>
         /// Coverts the source to a new 5-dimensional data cube and aggregate values.
         /// </summary>
-        public static DataCube5<P1, P2, P3, P4, P5, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, P5, TValue>(
+        public static DataCube5<P1, P2, P3, P4, P5, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, P4, P5, TValue>(
             this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
@@ -261,7 +261,7 @@ namespace FuncSharp
         /// <summary>
         /// Coverts the source to a new 6-dimensional data cube and aggregate values.
         /// </summary>
-        public static DataCube6<P1, P2, P3, P4, P5, P6, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
+        public static DataCube6<P1, P2, P3, P4, P5, P6, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
             this IEnumerable<T> source,
             Func<T, P1> p1,
             Func<T, P2> p2,
@@ -278,6 +278,93 @@ namespace FuncSharp
                 dataCube.SetOrElseUpdate(p1(v), p2(v), p3(v), p4(v), p5(v), p6(v), Enumerable.Repeat(value(v), 1), aggregation);
             }
             return dataCube;
+        }
+
+        /// <summary>
+        /// Coverts the source to a new 1-dimensional data cube and aggregate values.
+        /// </summary>
+        public static DataCube1<P1, IEnumerable<TValue>> ToCollectionDataCube<T, P1, TValue>(
+            this IEnumerable<T> source,
+            Func<T, P1> p1,
+            Func<T, TValue> value,
+            Func<IEnumerable<TValue>, IEnumerable<TValue>, IEnumerable<TValue>> aggregation)
+        {
+            return ToDataCube(source, p1, value, (a, b) => a.Concat(b));
+        }
+
+        /// <summary>
+        /// Coverts the source to a new 2-dimensional data cube and aggregate values.
+        /// </summary>
+        public static DataCube2<P1, P2, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, TValue>(
+            this IEnumerable<T> source,
+            Func<T, P1> p1,
+            Func<T, P2> p2,
+            Func<T, TValue> value,
+            Func<IEnumerable<TValue>, IEnumerable<TValue>, IEnumerable<TValue>> aggregation)
+        {
+            return ToDataCube(source, p1, p2, value, (a, b) => a.Concat(b));
+        }
+
+        /// <summary>
+        /// Coverts the source to a new 3-dimensional data cube and aggregate values.
+        /// </summary>
+        public static DataCube3<P1, P2, P3, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, TValue>(
+            this IEnumerable<T> source,
+            Func<T, P1> p1,
+            Func<T, P2> p2,
+            Func<T, P3> p3,
+            Func<T, TValue> value,
+            Func<IEnumerable<TValue>, IEnumerable<TValue>, IEnumerable<TValue>> aggregation)
+        {
+            return ToDataCube(source, p1, p2, p3, value, (a, b) => a.Concat(b));
+        }
+
+        /// <summary>
+        /// Coverts the source to a new 4-dimensional data cube and aggregate values.
+        /// </summary>
+        public static DataCube4<P1, P2, P3, P4, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, TValue>(
+            this IEnumerable<T> source,
+            Func<T, P1> p1,
+            Func<T, P2> p2,
+            Func<T, P3> p3,
+            Func<T, P4> p4,
+            Func<T, TValue> value,
+            Func<IEnumerable<TValue>, IEnumerable<TValue>, IEnumerable<TValue>> aggregation)
+        {
+            return ToDataCube(source, p1, p2, p3, p4, value, (a, b) => a.Concat(b));
+        }
+
+        /// <summary>
+        /// Coverts the source to a new 5-dimensional data cube and aggregate values.
+        /// </summary>
+        public static DataCube5<P1, P2, P3, P4, P5, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, P5, TValue>(
+            this IEnumerable<T> source,
+            Func<T, P1> p1,
+            Func<T, P2> p2,
+            Func<T, P3> p3,
+            Func<T, P4> p4,
+            Func<T, P5> p5,
+            Func<T, TValue> value,
+            Func<IEnumerable<TValue>, IEnumerable<TValue>, IEnumerable<TValue>> aggregation)
+        {
+            return ToDataCube(source, p1, p2, p3, p4, p5, value, (a, b) => a.Concat(b));
+        }
+
+        /// <summary>
+        /// Coverts the source to a new 6-dimensional data cube and aggregate values.
+        /// </summary>
+        public static DataCube6<P1, P2, P3, P4, P5, P6, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
+            this IEnumerable<T> source,
+            Func<T, P1> p1,
+            Func<T, P2> p2,
+            Func<T, P3> p3,
+            Func<T, P4> p4,
+            Func<T, P5> p5,
+            Func<T, P6> p6,
+            Func<T, TValue> value,
+            Func<IEnumerable<TValue>, IEnumerable<TValue>, IEnumerable<TValue>> aggregation)
+        {
+            return ToDataCube(source, p1, p2, p3, p4, p5, p6, value, (a, b) => a.Concat(b));
         }
 
         /// <summary>

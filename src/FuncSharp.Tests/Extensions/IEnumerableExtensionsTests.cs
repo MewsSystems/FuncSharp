@@ -17,7 +17,7 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void ToDataCollectionDataCube()
+        public void ToCollectionDataCube()
         {
             var source = new List<IProduct3<string, string, string>>
             {
