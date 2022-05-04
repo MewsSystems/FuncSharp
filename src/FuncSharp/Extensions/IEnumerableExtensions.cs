@@ -83,7 +83,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 1-dimensional data cube.
+        /// Converts the source to a new 1-dimensional data cube.
         /// </summary>
         public static DataCube1<P1, TValue> ToDataCube<T, P1, TValue>(
             this IEnumerable<T> source,
@@ -94,7 +94,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 2-dimensional data cube.
+        /// Converts the source to a new 2-dimensional data cube.
         /// </summary>
         public static DataCube2<P1, P2, TValue> ToDataCube<T, P1, P2, TValue>(
             this IEnumerable<T> source,
@@ -106,7 +106,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 3-dimensional data cube.
+        /// Converts the source to a new 3-dimensional data cube.
         /// </summary>
         public static DataCube3<P1, P2, P3, TValue> ToDataCube<T, P1, P2, P3, TValue>(
             this IEnumerable<T> source,
@@ -119,7 +119,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 4-dimensional data cube.
+        /// Converts the source to a new 4-dimensional data cube.
         /// </summary>
         public static DataCube4<P1, P2, P3, P4, TValue> ToDataCube<T, P1, P2, P3, P4, TValue>(
             this IEnumerable<T> source,
@@ -133,7 +133,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 5-dimensional data cube.
+        /// Converts the source to a new 5-dimensional data cube.
         /// </summary>
         public static DataCube5<P1, P2, P3, P4, P5, TValue> ToDataCube<T, P1, P2, P3, P4, P5, TValue>(
             this IEnumerable<T> source,
@@ -148,7 +148,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 6-dimensional data cube.
+        /// Converts the source to a new 6-dimensional data cube.
         /// </summary>
         public static DataCube6<P1, P2, P3, P4, P5, P6, TValue> ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
             this IEnumerable<T> source,
@@ -164,7 +164,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 1-dimensional data cube and aggregate values.
+        /// Converts the source to a new 1-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube1<P1, IEnumerable<TValue>> ToDataCube<T, P1, TValue>(
             this IEnumerable<T> source,
@@ -181,7 +181,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 2-dimensional data cube and aggregate values.
+        /// Converts the source to a new 2-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube2<P1, P2, IEnumerable<TValue>> ToDataCube<T, P1, P2, TValue>(
             this IEnumerable<T> source,
@@ -199,7 +199,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 3-dimensional data cube and aggregate values.
+        /// Converts the source to a new 3-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube3<P1, P2, P3, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, TValue>(
             this IEnumerable<T> source,
@@ -218,7 +218,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 4-dimensional data cube and aggregate values.
+        /// Converts the source to a new 4-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube4<P1, P2, P3, P4, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, P4, TValue>(
             this IEnumerable<T> source,
@@ -238,7 +238,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 5-dimensional data cube and aggregate values.
+        /// Converts the source to a new 5-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube5<P1, P2, P3, P4, P5, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, P4, P5, TValue>(
             this IEnumerable<T> source,
@@ -259,7 +259,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 6-dimensional data cube and aggregate values.
+        /// Converts the source to a new 6-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube6<P1, P2, P3, P4, P5, P6, IEnumerable<TValue>> ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
             this IEnumerable<T> source,
@@ -281,7 +281,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 1-dimensional data cube and aggregate values.
+        /// Converts the source to a new 1-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube1<P1, IEnumerable<TValue>> ToCollectionDataCube<T, P1, TValue>(
             this IEnumerable<T> source,
@@ -293,7 +293,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 2-dimensional data cube and aggregate values.
+        /// Converts the source to a new 2-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube2<P1, P2, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, TValue>(
             this IEnumerable<T> source,
@@ -306,7 +306,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 3-dimensional data cube and aggregate values.
+        /// Converts the source to a new 3-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube3<P1, P2, P3, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, TValue>(
             this IEnumerable<T> source,
@@ -320,7 +320,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 4-dimensional data cube and aggregate values.
+        /// Converts the source to a new 4-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube4<P1, P2, P3, P4, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, TValue>(
             this IEnumerable<T> source,
@@ -335,7 +335,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 5-dimensional data cube and aggregate values.
+        /// Converts the source to a new 5-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube5<P1, P2, P3, P4, P5, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, P5, TValue>(
             this IEnumerable<T> source,
@@ -351,7 +351,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Coverts the source to a new 6-dimensional data cube and aggregate values.
+        /// Converts the source to a new 6-dimensional data cube and aggregate values.
         /// </summary>
         public static DataCube6<P1, P2, P3, P4, P5, P6, IEnumerable<TValue>> ToCollectionDataCube<T, P1, P2, P3, P4, P5, P6, TValue>(
             this IEnumerable<T> source,
