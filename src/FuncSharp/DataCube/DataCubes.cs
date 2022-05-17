@@ -84,6 +84,15 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position0.Create(), value, valueInitialization, updater);
+        }
+
+        /// <summary>
         /// For each value in the cube, invokes the specified function passing in the position and the stored value.
         /// </summary>
         public void ForEach(Action<TValue> a)
@@ -221,6 +230,15 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Position1.Create(p1), value, updater);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(P1 p1, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position1.Create(p1), value, valueInitialization, updater);
         }
 
         /// <summary>
@@ -424,6 +442,15 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Position2.Create(p1, p2), value, updater);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(P1 p1, P2 p2, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position2.Create(p1, p2), value, valueInitialization, updater);
         }
 
         /// <summary>
@@ -690,6 +717,15 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Position3.Create(p1, p2, p3), value, updater);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(P1 p1, P2 p2, P3 p3, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position3.Create(p1, p2, p3), value, valueInitialization, updater);
         }
 
         /// <summary>
@@ -1019,6 +1055,15 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Position4.Create(p1, p2, p3, p4), value, updater);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(P1 p1, P2 p2, P3 p3, P4 p4, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position4.Create(p1, p2, p3, p4), value, valueInitialization, updater);
         }
 
         /// <summary>
@@ -1411,6 +1456,15 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Position5.Create(p1, p2, p3, p4, p5), value, updater);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position5.Create(p1, p2, p3, p4, p5), value, valueInitialization, updater);
         }
 
         /// <summary>
@@ -1866,6 +1920,15 @@ namespace FuncSharp
         public TValue SetOrElseUpdate(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TValue value, Func<TValue, TValue, TValue> updater)
         {
             return SetOrElseUpdate(Position6.Create(p1, p2, p3, p4, p5, p6), value, updater);
+        }
+
+        /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position6.Create(p1, p2, p3, p4, p5, p6), value, valueInitialization, updater);
         }
 
         /// <summary>

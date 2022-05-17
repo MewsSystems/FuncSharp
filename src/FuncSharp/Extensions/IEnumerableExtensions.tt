@@ -90,19 +90,19 @@ namespace FuncSharp
         <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
 
         /// <summary>
-        /// Converts the source to a new <#= i #>-dimensional data cube and aggregates values.
+        /// Converts the source to a new <#= i #>-dimensional data cube and aggregates the values in case of conflicting positions.
         /// </summary>
         public static <#= DataCubeType(i, valueType: "TResult") #> ToDataCube<T, <#= Types(i, name: "P") #>, TValue, TResult>(
             this IEnumerable<T> source,
 <#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
             Func<T, TValue> value,
             Func<TValue, TResult> initialization,
-            Func<TResult, TResult, TResult> aggregation)
+            Func<TResult, TValue, TResult> aggregation)
         {
-            var dataCube = new <#= DataCubeType(i,valueType: "TResult") #>();
+            var dataCube = new <#= DataCubeType(i, valueType: "TResult") #>();
             foreach (var v in source)
             {
-                dataCube.SetOrElseUpdate(<#= List(i, x => "p" + x + "(v)") #>, initialization(value(v)), aggregation);
+                dataCube.SetOrElseUpdate<TValue>(<#= List(i, x => "p" + x + "(v)") #>, value(v), initialization, aggregation);
             }
             return dataCube;
         }
@@ -121,18 +121,17 @@ namespace FuncSharp
             return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, TValue>(source, <#= List(i, x => "p" + x) #>, value, a => a, (a, b) => b);
         }
 <#  } #>
-
 <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
 
         /// <summary>
-        /// Converts the source to a new <#= i #>-dimensional data cube.
+        /// Converts the source to a new <#= i #>-dimensional data cube, in case of collisions, it aggregates the values to a collection.
         /// </summary>
         public static <#= DataCubeType(i, valueType: "IEnumerable<TValue>") #> ToCollectionDataCube<T, <#= Types(i, name: "P") #>, TValue>(
             this IEnumerable<T> source,
 <#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, IEnumerable<TValue>>(source, <#= List(i, x => "p" + x) #>, value, a => Enumerable.Repeat(a, 1), (a, b) => a.Concat(b));
+            return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, IEnumerable<TValue>>(source, <#= List(i, x => "p" + x) #>, value, a => Enumerable.Repeat(a, 1), (a, b) => a.Concat(new [] { b }));
         }
 <#  } #>
 
