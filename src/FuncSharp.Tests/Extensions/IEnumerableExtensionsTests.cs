@@ -17,6 +17,19 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
+        public void ToCollectionDataCube()
+        {
+            var source = new List<IProduct3<string, string, string>>
+            {
+                Product3.Create("A", "B", "C"),
+                Product3.Create("A", "B", "D")
+            };
+
+            var collectionDataCube = source.ToCollectionDataCube(s => s.ProductValue1, s => s.ProductValue2, s => s.ProductValue3);
+            Assert.Equal(new List<string> { "C", "D" }, collectionDataCube.Get("A", "B").GetOrNull());
+        }
+
+        [Fact]
         public void PartitionMatch()
         {
             var source = new[]

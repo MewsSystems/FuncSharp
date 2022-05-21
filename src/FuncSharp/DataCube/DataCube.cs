@@ -262,6 +262,15 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public virtual TValue SetOrElseUpdate<TNewValue>(TPosition position, TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElse(position, valueInitialization(value), v => Set(position, updater(v, value)));
+        }
+
+        /// <summary>
         /// For each value in the cube, invokes the specified function passing in the position and the stored value.
         /// </summary>
         public void ForEach(Action<TPosition, TValue> a)

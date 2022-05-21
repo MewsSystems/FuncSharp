@@ -114,6 +114,15 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Sets value at the specified position. If there is value already present at that position, updates it with the
+        /// result of the <paramref name="updater"/> function which is given the present value and the new value.
+        /// </summary>
+        public TValue SetOrElseUpdate<TNewValue>(<#= Parameters(i, name: "P", appendSeparator: true) #>TNewValue value, Func<TNewValue, TValue> valueInitialization, Func<TValue, TNewValue, TValue> updater)
+        {
+            return SetOrElseUpdate<TNewValue>(Position<#= i #>.Create(<#= Values(i, name: "P") #>), value, valueInitialization, updater);
+        }
+
+        /// <summary>
         /// For each value in the cube, invokes the specified function passing in the position and the stored value.
         /// </summary>
         public void ForEach(Action<<#= Types(i, name: "P", appendSeparator: true) #>TValue> a)
