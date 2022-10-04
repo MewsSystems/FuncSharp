@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -213,7 +213,7 @@ namespace FuncSharp
             Func<T, P1> p1,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, P1, TValue, TValue>(source, p1, value, a => a, (a, b) => b);
+            return ToDataCube<T, P1, TValue, TValue>(source, p1, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace FuncSharp
             Func<T, P2> p2,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, P1, P2, TValue, TValue>(source, p1, p2, value, a => a, (a, b) => b);
+            return ToDataCube<T, P1, P2, TValue, TValue>(source, p1, p2, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace FuncSharp
             Func<T, P3> p3,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, P1, P2, P3, TValue, TValue>(source, p1, p2, p3, value, a => a, (a, b) => b);
+            return ToDataCube<T, P1, P2, P3, TValue, TValue>(source, p1, p2, p3, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace FuncSharp
             Func<T, P4> p4,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, P1, P2, P3, P4, TValue, TValue>(source, p1, p2, p3, p4, value, a => a, (a, b) => b);
+            return ToDataCube<T, P1, P2, P3, P4, TValue, TValue>(source, p1, p2, p3, p4, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace FuncSharp
             Func<T, P5> p5,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, P1, P2, P3, P4, P5, TValue, TValue>(source, p1, p2, p3, p4, p5, value, a => a, (a, b) => b);
+            return ToDataCube<T, P1, P2, P3, P4, P5, TValue, TValue>(source, p1, p2, p3, p4, p5, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace FuncSharp
             Func<T, P6> p6,
             Func<T, TValue> value)
         {
-            return ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue, TValue>(source, p1, p2, p3, p4, p5, p6, value, a => a, (a, b) => b);
+            return ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue, TValue>(source, p1, p2, p3, p4, p5, p6, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
         }
 
         /// <summary>
