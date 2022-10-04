@@ -30,6 +30,23 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
+        public void ToDataCube()
+        {
+            var source = new List<IProduct3<string, string, string>>
+            {
+                Product3.Create("A", "B", "D"),
+                Product3.Create("A", "C", "E")
+            };
+
+            var dataCube = source.ToDataCube(s => s.ProductValue2, s => s.ProductValue3);
+            Assert.Equal(new List<string> { "B", "C" }, dataCube.Domain1);
+            Assert.Equal(new List<string> { "D", "E" }, dataCube.Values);
+
+            // A duplicit key throws exception.
+            Assert.Throws<ArgumentException>(() => source.ToDataCube(s => s.ProductValue1, s => s.ProductValue3));
+        }
+
+        [Fact]
         public void PartitionMatch()
         {
             var source = new[]
