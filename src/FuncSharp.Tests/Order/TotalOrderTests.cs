@@ -239,6 +239,10 @@ namespace FuncSharp.Tests
                 T.IntervalSet(T.UnboundedOpenInterval(2), T.OpenUnboundedInterval(3)),
                 T.IntervalSet(T.UnboundedClosedInterval(1), T.ClosedUnboundedInterval(4))
             ));
+            AssertEqual("{[2, 14]}", T.Union(
+                T.IntervalSet(T.ClosedInterval(12, 12)),
+                T.IntervalSet(T.ClosedInterval(2, 14))
+            ));
         }
 
         private void AssertEqual(string expected, IntervalSet<int> intervalSet)

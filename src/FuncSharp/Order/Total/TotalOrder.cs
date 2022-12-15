@@ -342,7 +342,10 @@ namespace FuncSharp
 
                 // If the interval should be part of the result, replace the result with a new extended result. Otherwise, initialize a new result.
                 result.Match(
-                    r => results[results.Count - 1] = Interval(r.LowerBound, interval.UpperBound),
+                    r => results[results.Count - 1] = Interval(
+                        lowerBound: r.LowerBound,
+                        upperBound: UpperBoundLess(r.UpperBound, interval.UpperBound) ? interval.UpperBound : r.UpperBound
+                    ),
                     _ => results.Add(interval)
                 );
             }

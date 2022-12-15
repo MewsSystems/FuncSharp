@@ -3,9 +3,9 @@
     <TargetFrameworks>net4.5;netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>4.3.0</Version>
-    <AssemblyVersion>4.3.0.0</AssemblyVersion>
-    <FileVersion>4.3.0.0</FileVersion>
+    <Version>4.3.1</Version>
+    <AssemblyVersion>4.3.1.0</AssemblyVersion>
+    <FileVersion>4.3.1.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#.</Description>
     <Authors>Honza Široký</Authors>
@@ -14,7 +14,7 @@
     <PackageProjectUrl>https://github.com/siroky/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Made ToDataCube safer by not accepting duplicate keys.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed a bug in Union of intervals.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/siroky/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
