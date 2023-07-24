@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      config: 'Release'
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
+
       
     defaults:
       run:
@@ -30,16 +32,16 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Clean
-      run: dotnet clean ./FuncSharp.sln --configuration Release && dotnet nuget locals all --clear
+      run: dotnet clean ./FuncSharp.sln --configuration $config && dotnet nuget locals all --clear
 
     - name: Install dependencies
       run: dotnet restore
     
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration $config --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --logger "trx;LogFileName=test-results.trx" || true
+      run: dotnet test --no-restore --no-build --configuration $config --logger "trx;LogFileName=test-results.trx" || true
 
     - name: Test Report
       uses: dorny/test-reporter@v1
