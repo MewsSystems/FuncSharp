@@ -16,7 +16,6 @@ jobs:
       config: 'Release'
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
-
       
     defaults:
       run:

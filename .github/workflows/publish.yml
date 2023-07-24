@@ -20,8 +20,8 @@ jobs:
 
     defaults:
       run:
-        working-directory: src
-        
+        working-directory: src/FuncSharp
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
