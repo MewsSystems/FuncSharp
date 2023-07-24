@@ -18,7 +18,7 @@ namespace FuncSharp
 
         /// <summary>
         /// Unit value as an option.
-        /// </summary>git pu
+        /// </summary>
         public static IOption<Unit> Unit { get; } = FuncSharp.Unit.Value.ToOption();
 
         /// <summary>
