@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>4.4.0</Version>
+    <Version>4.4.1</Version>
     <AssemblyVersion>4.4.0</AssemblyVersion>
     <FileVersion>4.4.0</FileVersion>
     <PackageId>Mews.FuncSharp</PackageId>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Created a Mews package, Bumped .net and C# versions</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed unused usings.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -30,7 +30,7 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\readme.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Coproduct\Coproduct.tt">
