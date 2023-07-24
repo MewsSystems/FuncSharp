@@ -1,0 +1,43 @@
+name: publish
+
+on:
+  workflow_run:
+    workflows: [build-and-test]
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    defaults:
+      run:
+        working-directory: src
+        
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Pack
+      run: dotnet pack -c Release -o out
+
+    - name: Publish packages
+      run: dotnet nuget push ./out/*.nupkg --skip-duplicate --source nuget.org --api-key ${{secrets.NUGET_TOKEN}}

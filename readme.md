@@ -1,12 +1,20 @@
 # FuncSharp - Functional C&#35;
 
-[![Build Status](https://dev.azure.com/siroky/FuncSharp/_apis/build/status/siroky.FuncSharp?branchName=master)](https://dev.azure.com/siroky/FuncSharp/_build/latest?definitionId=2&branchName=master)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
-[![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
+<p align="center">
+    <a href="https://mews.com">
+        <img alt="Mews" height="100px" src="https://user-images.githubusercontent.com/435787/129971779-2c64348e-05a3-49d0-b026-91913ffd68dc.png">
+    </a>
+</p>
+
+[![Build](https://img.shields.io/github/actions/workflow/status/MewsSystems/FuncSharp/build-and-test.yml?branch=master&label=build%20and%20tests)](https://github.com/MewsSystems/FuncSharp/actions/workflows/build-and-test.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/MewsSystems/FuncSharp/publish.yml?branch=master&label=publish)](https://github.com/MewsSystems/FuncSharp/actions/workflows/publish.yml)
+[![License](https://img.shields.io/github/license/MewsSystems/FuncSharp)](https://github.com/MewsSystems/FuncSharp/blob/master/license.txt)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/Mews.FuncSharp/)
+[![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/Mews.FuncSharp/)
 
 FuncSharp is a C# library with main purpose to introduce more advanced functional programming concepts that are currently not availabile in C# natively. As on outcome, it helps **reducing boilerplate** code, making code **more readable** and **avoiding bugs** thanks to stronger typing. It utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
 
-Core of the library is formed by **algebraic data types** (ADTs), namely `Product` and `Coproduct`. Get familiar with them first and make sure you understand concepts of algebraic data modeling. Just those two types, on their own, can be pretty helpful when used in your applications. Everything else this library offers is built on top of the ADTs and is an application of ADT principles to solve some real life use-cases. You can find practical examples in the [`FuncSharp.Examples`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples) project.
+Core of the library is formed by **algebraic data types** (ADTs), namely `Product` and `Coproduct`. Get familiar with them first and make sure you understand concepts of algebraic data modeling. Just those two types, on their own, can be pretty helpful when used in your applications. Everything else this library offers is built on top of the ADTs and is an application of ADT principles to solve some real life use-cases. You can find practical examples in the [`FuncSharp.Examples`](https://github.com/MewsSystems/FuncSharp/tree/master/src/FuncSharp.Examples) project.
 
 ## Algebraic Data Types
 
@@ -34,7 +42,7 @@ public class Point2D : Product2<float, float>
 }
 ```
 
-You can check more extensive example, together with usage, in the [`Product.cs`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples/Product/Product.cs) example. A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particularly useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
+You can check more extensive example, together with usage, in the [`Product.cs`](https://github.com/MewsSystems/FuncSharp/tree/master/src/FuncSharp.Examples/Product/Product.cs) example. A direct consequence of product types is the `Unit` type that can be understood as a product of zero types. In the world of .NET it becomes particularly useful when abstracting over `Func`tions and `Action`s which aren't compatible. Therefore there are also conversions between `Action`s and `Func`tions returning the `Unit` value.
 
 ### Coproduct
 
@@ -48,22 +56,22 @@ public class Tree<A> : Coproduct2<Node<A>, Leaf>
 }
 ```
 
-More extensive example can be found in the [`Coproduct.cs`](https://github.com/siroky/FuncSharp/tree/master/src/FuncSharp.Examples/Coproduct/Coproduct.cs) file. A coproduct of zero types (a choice from no types) is also a well known type, in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
+More extensive example can be found in the [`Coproduct.cs`](https://github.com/MewsSystems/FuncSharp/tree/master/src/FuncSharp.Examples/Coproduct/Coproduct.cs) file. A coproduct of zero types (a choice from no types) is also a well known type, in **FuncSharp** named `Nothing`. This type has no instance and can be used e.g. as a return type of function that always throws an exception. So behavior of the function is encoded in its type signature.
 
 ## Additional Helpful Types
 
 ### Option
 
-An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Option/IOption.cs) file.
+An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Option/IOption.cs) file.
 
 ### Try
 
 In order to handle errors or exceptions, FuncSharp features `ITry<A, E>` that represents a result of an operation that can end with either success or error. It explicitly communicates all the possible outcomes on type level, unlike exceptions where you have to read a documentation to understand how a method can end. An extensive set of examples can be found in the following files:
 
-- [Basics](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryBasics.cs) - Basic concepts.
-- [Exception Handling](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
-- [Parsing](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryParsing.cs) - How to safely parse unsafe incoming data.
-- [General Usage](https://github.com/siroky/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryGeneral.cs) - Putting it all together, a few advanced concepts.
+- [Basics](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryBasics.cs) - Basic concepts.
+- [Exception Handling](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
+- [Parsing](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryParsing.cs) - How to safely parse unsafe incoming data.
+- [General Usage](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryGeneral.cs) - Putting it all together, a few advanced concepts.
 
 ### Morphism
 
