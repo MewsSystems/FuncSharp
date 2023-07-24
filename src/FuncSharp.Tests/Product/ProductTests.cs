@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Xunit;
 
 namespace FuncSharp.Tests
@@ -29,8 +28,7 @@ namespace FuncSharp.Tests
             var h2 = p2.GetHashCode();
             var h3 = p3.GetHashCode();
 
-            // Not all of them are equal. Testing three which should minimaze probability of collision no matter
-            // how it's actually implemented.
+            // Not all of them are equal. Testing three which should minimize the probability of a collision no matter how it's actually implemented.
             Assert.True(h1 != h2 || h1 != h3 || h2 != h3);
         }
 
