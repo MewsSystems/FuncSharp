@@ -31,11 +31,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-        
-    - name: Setup .NET Core 3
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 3.1.x
 
     - name: Clean
       run: dotnet clean ./FuncSharp.sln --configuration Release && dotnet nuget locals all --clear
