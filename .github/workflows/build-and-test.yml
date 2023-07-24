@@ -34,6 +34,9 @@ jobs:
 
     - name: Clean
       run: dotnet clean ./FuncSharp.sln --configuration Release && dotnet nuget locals all --clear
+
+    - name: Install dependencies
+      run: dotnet restore
     
     - name: Build
       run: dotnet build --configuration Release --no-restore
