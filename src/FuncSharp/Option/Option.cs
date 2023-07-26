@@ -63,7 +63,7 @@ namespace FuncSharp
         }
     }
 
-    internal sealed class Option<A> : IOption<A>
+    internal sealed class Option<A> : IOption<A>, IOption
     {
         public Option(A value)
         {
@@ -78,6 +78,10 @@ namespace FuncSharp
         }
 
         public static IOption<A> Empty { get; } = new Option<A>();
+
+        object IOption.Value => Value;
+        bool IOption.IsEmpty => IsEmpty;
+        bool IOption.NonEmpty => NonEmpty;
 
         private A Value { get; }
 
