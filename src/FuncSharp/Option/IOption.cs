@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FuncSharp
 {
-    public interface IOption<out A> : ICoproduct2<A, Unit>
+    public interface IOption<out A>
     {
         /// <summary>
         /// Returns whether the option is empty (doesn't contain any value).
@@ -16,6 +16,11 @@ namespace FuncSharp
         bool NonEmpty { get; }
 
         /// <summary>
+        /// Returns an option of Unit if this option is empty. Or returns an empty option if this option contains value.
+        /// </summary>
+        IOption<Unit> Second { get; }
+
+        /// <summary>
         /// Returns value of the option if not empty.
         /// </summary>
         A Get(Func<Unit, Exception> otherwise = null);
@@ -24,6 +29,22 @@ namespace FuncSharp
         /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.
         /// </summary>
         A GetOrDefault();
+
+        /// <summary>
+        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
+        R Match<R>(
+            Func<A, R> ifFirst,
+            Func<Unit, R> ifSecond);
+
+        /// <summary>
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
+        void Match(
+            Action<A> ifFirst = null,
+            Action<Unit> ifSecond = null);
 
         /// <summary>
         /// Maps value of the current option (if present) into a new value using the specified function and 

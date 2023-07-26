@@ -85,18 +85,6 @@ namespace FuncSharp
 
         public bool IsEmpty => !NonEmpty;
 
-        public int CoproductArity => 2;
-
-        public int CoproductDiscriminator => NonEmpty ? 1 : 2;
-
-        public object CoproductValue => NonEmpty ? (object)Value : Unit.Value;
-
-        public bool IsFirst => NonEmpty;
-
-        public bool IsSecond => !NonEmpty;
-
-        public IOption<A> First => this;
-
         public IOption<Unit> Second => IsEmpty ? Option.Unit : Option<Unit>.Empty;
 
         public R Match<R>(Func<A, R> ifFirst, Func<Unit, R> ifSecond)
@@ -191,12 +179,16 @@ namespace FuncSharp
 
         public override int GetHashCode()
         {
-            return this.CoproductHashCode();
+            return Structural.HashCode(NonEmpty, Value);
         }
 
         public override bool Equals(object obj)
         {
-            return this.CoproductEquals(obj);
+            if (obj is IOption<A> other)
+            {
+                return NonEmpty == other.NonEmpty && Equals(Value, other.GetOrDefault());
+            }
+            return false;
         }
     }
 }
