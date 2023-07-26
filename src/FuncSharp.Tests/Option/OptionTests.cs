@@ -61,7 +61,7 @@ namespace FuncSharp.Tests
         public void NullableMap()
         {
             Assert.Equal(84, 42.ToOption().Map(v => v * 2 as int?).Get());
-            Assert.True(5.ToOption().Map(v => null as int?).IsEmpty);
+            Assert.True(5.ToOption().Map(v => null as int?).NonEmpty);
         }
 
         [Fact]

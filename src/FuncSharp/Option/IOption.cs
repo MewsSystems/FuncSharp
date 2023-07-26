@@ -16,11 +16,6 @@ namespace FuncSharp
         bool NonEmpty { get; }
 
         /// <summary>
-        /// Returns an option of Unit if this option is empty. Or returns an empty option if this option contains value.
-        /// </summary>
-        IOption<Unit> Second { get; }
-
-        /// <summary>
         /// Returns value of the option if not empty.
         /// </summary>
         A Get(Func<Unit, Exception> otherwise = null);
@@ -31,20 +26,18 @@ namespace FuncSharp
         A GetOrDefault();
 
         /// <summary>
-        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
-        /// of the <paramref name="ifFirst" /> function.
+        /// Returns result of the first function when the option has value or the second function when option is empty.
         /// </summary>
         R Match<R>(
-            Func<A, R> ifFirst,
-            Func<Unit, R> ifSecond);
+            Func<A, R> ifNonEmpty,
+            Func<Unit, R> ifEmpty);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
-        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// Executes the first function when the option has value or the second function when option is empty.
         /// </summary>
         void Match(
-            Action<A> ifFirst = null,
-            Action<Unit> ifSecond = null);
+            Action<A> ifNonEmpty = null,
+            Action<Unit> ifEmpty = null);
 
         /// <summary>
         /// Maps value of the current option (if present) into a new value using the specified function and 
@@ -53,15 +46,13 @@ namespace FuncSharp
         IOption<B> Map<B>(Func<A, B> f);
 
         /// <summary>
-        /// Maps value of the current option (if present) into a new value using the specified function and 
-        /// returns a new option with that new value.
+        /// Maps a unit in case the option is empty.
         /// </summary>
-        IOption<B> Map<B>(Func<A, B?> f)
-            where B : struct;
+        IOption<B> MapEmpty<B>(Func<Unit, B> f);
 
         /// <summary>
         /// Maps value of the current option (if present) into a new option using the specified function and 
-        /// returns that new option.
+        /// returns a flattened option. So result only has a value if both options have a value.
         /// </summary>
         IOption<B> FlatMap<B>(Func<A, IOption<B>> f);
 

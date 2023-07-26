@@ -85,31 +85,29 @@ namespace FuncSharp
 
         public bool IsEmpty => !NonEmpty;
 
-        public IOption<Unit> Second => IsEmpty ? Option.Unit : Option<Unit>.Empty;
-
-        public R Match<R>(Func<A, R> ifFirst, Func<Unit, R> ifSecond)
+        public R Match<R>(Func<A, R> ifNonEmpty, Func<Unit, R> ifEmpty)
         {
             if (NonEmpty)
             {
-                return ifFirst(Value);
+                return ifNonEmpty(Value);
             }
-            return ifSecond(Unit.Value);
+            return ifEmpty(Unit.Value);
         }
 
-        public void Match(Action<A> ifFirst = null, Action<Unit> ifSecond = null)
+        public void Match(Action<A> ifNonEmpty = null, Action<Unit> ifEmpty = null)
         {
             if (NonEmpty)
             {
-                if (ifFirst != null)
+                if (ifNonEmpty != null)
                 {
-                    ifFirst(Value);
+                    ifNonEmpty(Value);
                 }
             }
             else
             {
-                if (ifSecond != null)
+                if (ifEmpty != null)
                 {
-                    ifSecond(Unit.Value);
+                    ifEmpty(Unit.Value);
                 }
             }
         }
@@ -141,13 +139,13 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IOption<B> Map<B>(Func<A, B?> f) where B : struct
+        public IOption<B> MapEmpty<B>(Func<Unit, B> f)
         {
             if (NonEmpty)
             {
-                return f(Value).ToOption();
+                return Option<B>.Empty;
             }
-            return Option<B>.Empty;
+            return new Option<B>(f(Unit.Value));
         }
 
         public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)

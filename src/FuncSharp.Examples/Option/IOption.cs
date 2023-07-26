@@ -74,7 +74,7 @@ namespace FuncSharp.Examples
                 _ => Console.Write("Division failed, must have divided by zero.")
             );
             divisionResult.Match(result => Console.Write($"Division successful, result is: {result}."));
-            divisionResult.Match(ifSecond: _ => Console.Write("Division failed, must have divided by zero."));
+            divisionResult.Match(ifEmpty: _ => Console.Write("Division failed, must have divided by zero."));
         }
 
         private static void GettingOptionValue(decimal number, decimal divisor)
