@@ -58,6 +58,25 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
+        public void ToNullable()
+        {
+            Assert.Equal(84, 42.ToOption().ToNullable(v => (int?)v * 2));
+            Assert.Equal(84, 42.ToOption().ToNullable(v => v * 2));
+            Assert.Null(42.ToOption().ToNullable(v => (int?)null));
+
+            Assert.Equal(14, "".ToOption().ToNullable(v => (int?)14));
+            Assert.Equal(14, "".ToOption().ToNullable(v => 14));
+            Assert.Null("".ToOption().ToNullable(v => (int?)null));
+
+
+            Assert.Null(Option.Empty<int>().ToNullable(v => (int?)14));
+            Assert.Null(Option.Empty<int>().ToNullable(v => 14));
+            Assert.Null(Option.Empty<int>().ToNullable(v => (int?)null));
+            Assert.Null(Option.Empty<string>().ToNullable(v => 14));
+            Assert.Null(Option.Empty<string>().ToNullable(v => (int?)null));
+        }
+
+        [Fact]
         public void NullableMap()
         {
             Assert.Equal(84, 42.ToOption().Map(v => v * 2 as int?).Get());

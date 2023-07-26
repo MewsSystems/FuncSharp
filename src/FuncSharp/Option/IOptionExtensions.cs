@@ -171,7 +171,19 @@ namespace FuncSharp
         {
             return option.Match(
                 a => func(a),
-                _ => null
+                _ => (B?)null
+            );
+        }
+
+        /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B> func)
+            where B : struct
+        {
+            return option.Match(
+                a => func(a),
+                _ => (B?)null
             );
         }
 
