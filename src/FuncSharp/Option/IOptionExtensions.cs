@@ -164,6 +164,18 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B?> func)
+            where B : struct
+        {
+            return option.Match(
+                a => func(a),
+                _ => null
+            );
+        }
+
+        /// <summary>
         /// Turns the option into a try using the exception in case of empty option.
         /// </summary>
         public static ITry<A, E> ToTry<A, E>(this IOption<A> option, Func<Unit, E> e)
