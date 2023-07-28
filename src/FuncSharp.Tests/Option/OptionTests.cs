@@ -44,8 +44,60 @@ namespace FuncSharp.Tests
         [Fact]
         public void GetOrDefault()
         {
+            Assert.Equal("asd", Option.Create("asd").GetOrDefault());
+            Assert.Equal(42, 42.ToOption().GetOrDefault());
+
+            Assert.Equal(0, Option.Empty<int>().GetOrDefault());
+            Assert.Null(Option.Empty<int?>().GetOrDefault());
+            Assert.Null(Option.Empty<string>().GetOrDefault());
+
+            var emptyOption = Option.Empty<object>();
+            var valuedOption = Option.Create(Unit.Value);
+            Assert.Equal(42, valuedOption.GetOrDefault(_ => 42));
+            Assert.Equal("asd", valuedOption.GetOrDefault(_ => "asd"));
+            Assert.Equal(0, emptyOption.GetOrDefault(_ => 14));
+            Assert.Null(emptyOption.GetOrDefault<int?>(_ => 14));
+            Assert.Null(emptyOption.GetOrDefault(_ => "asd"));
+        }
+
+        [Fact]
+        public void GetOrZero()
+        {
             Assert.Equal(42, 42.ToOption().GetOrZero());
             Assert.Equal(0, Option.Empty<int>().GetOrZero());
+
+            Assert.Equal(14, Unit.Value.ToOption().GetOrZero(_ => 14));
+            Assert.Equal(0, Option.Empty<Unit>().GetOrZero(_ => 14));
+        }
+
+        [Fact]
+        public void GetOrZero_Decimal()
+        {
+            Assert.Equal(42m, 42m.ToOption().GetOrZero());
+            Assert.Equal(0m, Option.Empty<decimal>().GetOrZero());
+
+            Assert.Equal(14, Unit.Value.ToOption().GetOrZero(_ => 14m));
+            Assert.Equal(0, Option.Empty<Unit>().GetOrZero(_ => 14m));
+        }
+
+        [Fact]
+        public void GetOrFalse()
+        {
+            Assert.True(true.ToOption().GetOrFalse());
+            Assert.False(Option.Empty<bool>().GetOrFalse());
+
+            Assert.True(Unit.Value.ToOption().GetOrFalse(_ => true));
+            Assert.False(Option.Empty<Unit>().GetOrFalse(_ => true));
+        }
+
+        [Fact]
+        public void GetOrNull()
+        {
+            Assert.NotNull(Unit.Value.ToOption().GetOrNull());
+            Assert.Null(Option.Empty<Unit>().GetOrNull());
+
+            Assert.Equal("asd", Unit.Value.ToOption().GetOrNull(_ => "asd"));
+            Assert.Null(Option.Empty<Unit>().GetOrNull(_ => "asd"));
         }
 
         [Fact]

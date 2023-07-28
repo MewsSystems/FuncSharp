@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace FuncSharp
 {
     /// <summary>
-    /// This interface serves for generic funcionality such as comparing objects, sorting etc. However it bypasses the whole point of an Option - map and Match functions for accessing value.
+    /// This interface serves for generic functionality such as comparing objects, sorting etc. However it bypasses the whole point of an Option - map and Match functions for accessing value.
     /// </summary>
     public interface IOption
     {
@@ -47,6 +47,11 @@ namespace FuncSharp
         A GetOrDefault();
 
         /// <summary>
+        /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="R"/> type.
+        /// </summary>
+        R GetOrDefault<R>(Func<A, R> func);
+
+        /// <summary>
         /// Returns result of the first function when the option has value or the second function when option is empty.
         /// </summary>
         R Match<R>(
@@ -76,6 +81,13 @@ namespace FuncSharp
         /// returns a flattened option. So result only has a value if both options have a value.
         /// </summary>
         IOption<B> FlatMap<B>(Func<A, IOption<B>> f);
+
+        /// <summary>
+        /// Maps value of the current option (if present) into a nullable value using the specified function and
+        /// returns a value in case it's not null. So result only has a value if both the option and the function result have a value.
+        /// </summary>
+        IOption<B> FlatMap<B>(Func<A, B?> f)
+            where B: struct;
 
         /// <summary>
         /// Returns an enumerable with the option value. If the option is empty, returns empty enumerable.

@@ -134,6 +134,13 @@ namespace FuncSharp
             return Value;
         }
 
+        public R GetOrDefault<R>(Func<A, R> func)
+        {
+            if (NonEmpty)
+                return func(Value);
+            return default(R);
+        }
+
         public IOption<B> Map<B>(Func<A, B> f)
         {
             if (NonEmpty)
@@ -157,6 +164,20 @@ namespace FuncSharp
             if (NonEmpty)
             {
                 return f(Value);
+            }
+            return Option<B>.Empty;
+        }
+
+        public IOption<B> FlatMap<B>(Func<A, B?> f) where B : struct
+        {
+            if (NonEmpty)
+            {
+                var result = f(Value);
+                if (result is not null)
+                {
+                    return Option.Valued(result.Value);
+                }
+                return Option<B>.Empty;
             }
             return Option<B>.Empty;
         }

@@ -9,10 +9,19 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns null.
         /// </summary>
-        public static A GetOrNull<A>(this IOption<A> option)
-            where A : class
+        public static T GetOrNull<T>(this IOption<T> option)
+            where T : class
         {
             return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns null.
+        /// </summary>
+        public static R GetOrNull<T, R>(this IOption<T> option, Func<T, R> func)
+            where R : class
+        {
+            return option.GetOrDefault(func);
         }
 
         /// <summary>
@@ -26,9 +35,25 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns zero.
         /// </summary>
+        public static int GetOrZero<T>(this IOption<T> option, Func<T, int> func)
+        {
+            return option.GetOrDefault(func);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
         public static decimal GetOrZero(this IOption<decimal> option)
         {
             return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static decimal GetOrZero<T>(this IOption<T> option, Func<T, decimal> func)
+        {
+            return option.GetOrDefault(func);
         }
 
         /// <summary>
@@ -37,6 +62,14 @@ namespace FuncSharp
         public static bool GetOrFalse(this IOption<bool> option)
         {
             return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns false.
+        /// </summary>
+        public static bool GetOrFalse<T>(this IOption<T> option, Func<T, bool> func)
+        {
+            return option.GetOrDefault(func);
         }
 
         /// <summary>
@@ -134,10 +167,11 @@ namespace FuncSharp
         /// </summary>
         public static IOption<A> Where<A>(this IOption<A> option, Func<A, bool> predicate)
         {
-            return option.FlatMap(a => predicate(a).Match(
-                t => option,
-                f => Option.Empty<A>()
-            ));
+            if (option.IsEmpty || !predicate(option.GetOrDefault()))
+            {
+                return Option.Empty<A>();
+            }
+            return option;
         }
 
         /// <summary>
@@ -145,10 +179,9 @@ namespace FuncSharp
         /// </summary>
         public static bool Is<A>(this IOption<A> option, Func<A, bool> predicate)
         {
-            return option.Match(
-                a => predicate(a),
-                _ => false
-            );
+            if (option.NonEmpty)
+                return predicate(option.GetOrDefault());
+            return false;
         }
 
         /// <summary>
@@ -157,10 +190,9 @@ namespace FuncSharp
         public static A? ToNullable<A>(this IOption<A> option)
             where A : struct
         {
-            return option.Match<A?>(
-                a => a,
-                _ => null
-            );
+            if (option.NonEmpty)
+                return option.GetOrDefault();
+            return null;
         }
 
         /// <summary>
@@ -169,10 +201,9 @@ namespace FuncSharp
         public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B?> func)
             where B : struct
         {
-            return option.Match(
-                a => func(a),
-                _ => (B?)null
-            );
+            if (option.NonEmpty)
+                return func(option.GetOrDefault());
+            return null;
         }
 
         /// <summary>
@@ -181,10 +212,9 @@ namespace FuncSharp
         public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B> func)
             where B : struct
         {
-            return option.Match(
-                a => func(a),
-                _ => (B?)null
-            );
+            if (option.NonEmpty)
+                return func(option.GetOrDefault());
+            return null;
         }
 
         /// <summary>
@@ -192,10 +222,10 @@ namespace FuncSharp
         /// </summary>
         public static ITry<A, E> ToTry<A, E>(this IOption<A> option, Func<Unit, E> e)
         {
-            return option.Match(
-                val => Try.Success<A, E>(val),
-                _ => Try.Error<A, E>(e(Unit.Value))
-            );
+            if (option.NonEmpty)
+                return Try.Success<A, E>(option.GetOrDefault());
+
+            return Try.Error<A, E>(e(Unit.Value));
         }
     }
 }
