@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Targetting .net 6, various performance optimizations, a couple of new extensions added for easier usage.</PackageReleaseNotes>
+    <PackageReleaseNotes>Targetting .net 6. Various performance optimizations. IOption is no longer an ICoproduct. GetOrElse, GetOrDefault, GetOrNull, ToNullable etc.. now accept a func to get the value without having to map first.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
