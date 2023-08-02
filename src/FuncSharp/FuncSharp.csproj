@@ -2,18 +2,18 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>5.1.0</Version>
-    <AssemblyVersion>5.1.0</AssemblyVersion>
-    <FileVersion>5.1.0</FileVersion>
-    <PackageId>Mews.FuncSharp</PackageId>
-    <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. A fork of Funcsharp package by Honza Široký.</Description>
+    <Version>6.0.0</Version>
+    <AssemblyVersion>6.0.0</AssemblyVersion>
+    <FileVersion>6.0.0</FileVersion>
+    <PackageId>FuncSharp</PackageId>
+    <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Originally written by Honza Široký.</Description>
     <Authors>Mews, Honza Široký</Authors>
     <PackageTags>FuncSharp, Functional C#, Product, Coproduct, ADT, Algebraic, Types</PackageTags>
     <Copyright>Copyright © 2022</Copyright>
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>GetOrDefault now accepts a func + overloads for value types. Also some performance improvements.</PackageReleaseNotes>
+    <PackageReleaseNotes>Targetting .net 6, various performance optimizations, a couple of new extensions added for easier usage.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10</LangVersion>
-    <Product>Mews.FuncSharp</Product>
+    <Product>FuncSharp</Product>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
