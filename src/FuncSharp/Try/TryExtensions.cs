@@ -4,7 +4,7 @@ using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
-    public static class ITryExtensions
+    public static class TryExtensions
     {
         /// <summary>
         /// If the successful result passes the predicate, returns the original try. Otherwise returns erroneous try with the specified result.

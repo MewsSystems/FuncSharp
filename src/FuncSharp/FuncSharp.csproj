@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Targetting .net 6. Various performance optimizations. IOption is no longer an ICoproduct. GetOrElse, GetOrDefault, GetOrNull, ToNullable etc.. now accept a func to get the value without having to map first.</PackageReleaseNotes>
+    <PackageReleaseNotes>Completely removed ITry and ICoproduct interfaces so that we could remove IOption interface and make Option a struct.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

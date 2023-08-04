@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace FuncSharp.Examples
 {
-    public static class ITryBasics
+    public static class TryBasics
     {
         private static void CreatingTryDirectly()
         {
             // Note that we explicitly specify types of variables in the following examples. However, in practice, we use var.
-            // Creates an ITry with successful result while specifying type of an error.
+            // Creates an Try with successful result while specifying type of an error.
             Try<int, NetworkOperationError> success = Try.Success<int, NetworkOperationError>(42);
 
-            // Creates an ITry with erroneous result while specifying type of a success.
+            // Creates a Try with erroneous result while specifying type of a success.
             Try<int, NetworkOperationError> error = Try.Error<int, NetworkOperationError>(NetworkOperationError.NetworkIssues);
 
-            // Creating a successful ITry while specifying type of an error.
+            // Creating a successful Try while specifying type of an error.
             Try<int, Exception> successTry = 42.ToTry<int, Exception>();
 
-            // Creating an erronous ITry directly from exception while specifying type of a success.
+            // Creating an erroneous Try directly from exception while specifying type of a success.
             Try<int, Exception> errorTry = new Exception().ToTry<int, Exception>();
 
             // Converting an option to try.
@@ -26,7 +26,7 @@ namespace FuncSharp.Examples
             Try<int, string> tryFromOptionWithErrorType = option.ToTry(_ => "No value was provided in the option.");
 
             // Generally collections are recommended for validations.
-            // It is easy to aggregate validations of multiple values into one ITry of the whole object.
+            // It is easy to aggregate validations of multiple values into one Try of the whole object.
             // And then you either get the successfully parsed object or you have the list of errors.
             Try<int, string[]> validationRepresentation = option.ToTry(_ => new[] { "No valid value was provided in the option." });
         }

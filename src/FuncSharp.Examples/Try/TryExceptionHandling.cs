@@ -53,7 +53,7 @@ namespace FuncSharp.Examples
                 return Try.Error<T, NetworkOperationError>(NetworkOperationError.NetworkIssues);
             }
             // Notice that general Exception is not handled. We're handling the exceptions we expect, so the signature makes sense.
-            // The purpose of ITry is not covering every exception. But that methods should show what are the expected outputs and make the call site handle all of them.
+            // The purpose of Try is not covering every exception. But that methods should show what are the expected outputs and make the call site handle all of them.
         }
     }
 }

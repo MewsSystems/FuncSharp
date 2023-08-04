@@ -68,10 +68,10 @@ An `IOption<A>` is widely used functional data type known from other languages. 
 
 In order to handle errors or exceptions, FuncSharp features `Try<A, E>` that represents a result of an operation that can end with either success or error. It explicitly communicates all the possible outcomes on type level, unlike exceptions where you have to read a documentation to understand how a method can end. An extensive set of examples can be found in the following files:
 
-- [Basics](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryBasics.cs) - Basic concepts.
-- [Exception Handling](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
-- [Parsing](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryParsing.cs) - How to safely parse unsafe incoming data.
-- [General Usage](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryGeneral.cs) - Putting it all together, a few advanced concepts.
+- [Basics](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryBasics.cs) - Basic concepts.
+- [Exception Handling](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
+- [Parsing](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryParsing.cs) - How to safely parse unsafe incoming data.
+- [General Usage](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryGeneral.cs) - Putting it all together, a few advanced concepts.
 
 ### Morphism
 

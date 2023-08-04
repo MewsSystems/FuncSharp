@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FuncSharp.Examples
 {
-    public class ITryGeneral
+    public class TryGeneral
     {
         private void TransformingSuccessWithMap()
         {
