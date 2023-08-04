@@ -62,9 +62,9 @@ More extensive example can be found in the [`Coproduct.cs`](https://github.com/M
 
 ### Option
 
-An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Option/IOption.cs) file.
+An `Option<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`Option.cs`](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Option/Option.cs) file.
 
-Currently, we're replacing `IOption<A>` with `ValueOption<A>`, so that the option itself is a struct and cannot be null. That prevents bugs when people check the option for being null instead of the value. [Examples](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Option/ValueOption.cs) have been updated.
+There is also an interface `IOption<A>` for when you need covariance. Let's say a collection of types that have inheritance between them.
 
 ### Try
 
