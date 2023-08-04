@@ -6,6 +6,15 @@ namespace FuncSharp
 {
     public static class IOptionExtensions
     {
+        //TODO - boxing here
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns null.
+        /// </summary>
+        public static Option<A> ToStructOption<A>(this IOption<A> option)
+        {
+            return option.Map(a => a);
+        }
+
         /// <summary>
         /// Returns value of the option if it has value. If not, returns null.
         /// </summary>
@@ -97,7 +106,7 @@ namespace FuncSharp
             return alternative(Unit.Value);
         }
 
-        // Unfortunately, C# cannot have 2 methods with the same signature with constraints being the only difference.
+        // TODO - Unfortunately, C# cannot have 2 methods with the same signature with constraints being the only difference. I chose flattening of Enumerables.
         // /// <summary>
         // /// Returns the value of the outer option or an empty opion.
         // /// </summary>
@@ -141,7 +150,8 @@ namespace FuncSharp
         /// Maps value of the current option (if present) into a new value using the specified function and
         /// returns a new option with that new value.
         /// </summary>
-        public static Option<B> Select<A, B>(this IOption<A> option, Func<A, B> f)
+        public static Option<B> Select<T, A, B>(this T option, Func<A, B> f)
+            where T: IOption<A>
         {
             return option.Map(f);
         }
@@ -150,7 +160,8 @@ namespace FuncSharp
         /// Maps value of the current option (if present) into a new option using the specified function and
         /// returns that new option.
         /// </summary>
-        public static Option<B> SelectMany<A, B>(this IOption<A> option, Func<A, Option<B>> f)
+        public static Option<B> SelectMany<T, A, B>(this T option, Func<A, Option<B>> f)
+            where T: IOption<A>
         {
             return option.FlatMap(f);
         }
@@ -158,7 +169,8 @@ namespace FuncSharp
         /// <summary>
         /// Maps the current value to a new option using the specified function and combines values of both of the options.
         /// </summary>
-        public static Option<B> SelectMany<A, X, B>(this IOption<A> option, Func<A, Option<X>> f, Func<A, X, B> compose)
+        public static Option<B> SelectMany<T, A, X, B>(this T option, Func<A, Option<X>> f, Func<A, X, B> compose)
+            where T: IOption<A>
         {
             return option.FlatMap(a => f(a).Map(x => compose(a, x)));
         }

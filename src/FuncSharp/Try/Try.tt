@@ -67,10 +67,10 @@ namespace FuncSharp
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
             {
-                return success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
+                return success(enumeratedTries.Select(t => t.Success.ToStructOption()).Flatten().ToList());
             }
 
-            return error(enumeratedTries.Select(t => t.Error).Flatten().ToList());
+            return error(enumeratedTries.Select(t => t.Error.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { <#= List(i, x => $"t{x}.Error") #> };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>

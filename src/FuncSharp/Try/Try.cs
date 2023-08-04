@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
@@ -61,10 +62,10 @@ namespace FuncSharp
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
             {
-                return success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
+                return success(enumeratedTries.Select(t => t.Success.ToStructOption()).Flatten().ToList());
             }
 
-            return error(enumeratedTries.Select(t => t.Error).Flatten().ToList());
+            return error(enumeratedTries.Select(t => t.Error.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -178,7 +179,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -216,7 +217,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -254,7 +255,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -292,7 +293,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -330,7 +331,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -368,7 +369,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -406,7 +407,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -444,7 +445,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -482,7 +483,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -520,7 +521,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -558,7 +559,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error, t14.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>
@@ -596,7 +597,7 @@ namespace FuncSharp
             }
 
             var errors = new[] { t1.Error, t2.Error, t3.Error, t4.Error, t5.Error, t6.Error, t7.Error, t8.Error, t9.Error, t10.Error, t11.Error, t12.Error, t13.Error, t14.Error, t15.Error };
-            return error(errors.Flatten().ToList());
+            return error(errors.Select(e => e.ToStructOption()).Flatten().ToList());
         }
 
         /// <summary>

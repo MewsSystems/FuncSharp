@@ -16,9 +16,19 @@ namespace FuncSharp
         /// <summary>
         /// Returns values of the nonempty options.
         /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
+        public static IEnumerable<A> Flatten<T, A>(this IEnumerable<T> source)
+            where T : IOption<A>
         {
             return source.SelectMany(o => o.ToEnumerable());
+        }
+
+        /// <summary>
+        /// Returns values of the nonempty options.
+        /// </summary>
+        public static IEnumerable<A> Flatten<T, TOption, A>(this IEnumerable<T> source, Func<T, TOption> func)
+            where TOption : IOption<A>
+        {
+            return source.Select(func).Where(o => o.NonEmpty).Select(o => o.GetOrDefault());
         }
 
         /// <summary>
