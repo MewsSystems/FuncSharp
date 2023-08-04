@@ -8,8 +8,8 @@ namespace FuncSharp.Tests
     public class TryTests
     {
         private static readonly NotImplementedException Exception = new NotImplementedException();
-        private static readonly ITry<int, NotImplementedException> Success = Try.Success<int, NotImplementedException>(42);
-        private static readonly ITry<int, NotImplementedException> Error = Try.Error<int, NotImplementedException>(Exception);
+        private static readonly Try<int, NotImplementedException> Success = Try.Success<int, NotImplementedException>(42);
+        private static readonly Try<int, NotImplementedException> Error = Try.Error<int, NotImplementedException>(Exception);
 
 
         [Fact]

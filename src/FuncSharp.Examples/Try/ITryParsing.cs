@@ -27,7 +27,7 @@ namespace FuncSharp.Examples
         public int Age { get; }
         public decimal HeightInCentimeters { get; }
 
-        public static ITry<Person, IEnumerable<PersonParsingError>> Parse(string name, string age, string height)
+        public static Try<Person, IEnumerable<PersonParsingError>> Parse(string name, string age, string height)
         {
             // Try.Aggregate method always executes all tries and then aggregates the success results or the errors. It doesn't stop on first error.
             // You can transform the result into any type you want. This makes it nice and effective way of parsing values and combining the results.
@@ -39,12 +39,12 @@ namespace FuncSharp.Examples
             );
         }
 
-        private static ITry<string, PersonParsingError> ParseName(string name)
+        private static Try<string, PersonParsingError> ParseName(string name)
         {
             return name.ToNonEmptyOption().ToTry(_ => PersonParsingError.NameNotProvided);
         }
 
-        private static ITry<int, PersonParsingError> ParseAge(string age)
+        private static Try<int, PersonParsingError> ParseAge(string age)
         {
             var numericAge = Try.Catch<int, Exception>(_ => Convert.ToInt32(age));
             var validAge = numericAge.MapError(_ => PersonParsingError.AgeNotANumber);
@@ -54,7 +54,7 @@ namespace FuncSharp.Examples
             return reasonableAge;
         }
 
-        private static ITry<decimal, PersonParsingError> ParseHeight(string height)
+        private static Try<decimal, PersonParsingError> ParseHeight(string height)
         {
             var numericHeight = Try.Catch<decimal, Exception>(_ => Convert.ToDecimal(height));
             var validHeight = numericHeight.MapError(_ => PersonParsingError.HeightNotANumber);

@@ -140,7 +140,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
         /// </summary>
         public static void PartitionMatch<#= TypeBracket(i) #>(
-            this IEnumerable<<#= CoproductType(i) #>> source,
+            this IEnumerable<<#= CoproductImplType(i) #>> source,
 <#= Lines(i, x => Indent(12) + "Action<IEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
 <#= Lines(i, x => Indent(12) + "var list" + x + " = new List<T" + x + ">();") #>
@@ -161,7 +161,7 @@ namespace FuncSharp
         /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
         public static IEnumerable<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
-            this IEnumerable<<#= CoproductType(i) #>> source,
+            this IEnumerable<<#= CoproductImplType(i) #>> source,
 <#= Lines(i, x => Indent(12) + "Func<IEnumerable<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
         {
             var result = new List<TResult>();

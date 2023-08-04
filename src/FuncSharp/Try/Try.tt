@@ -34,10 +34,10 @@ namespace FuncSharp
         /// Tries the specified action and returns a successful try if it succeeds. Otherwise in case of the specified exception,
         /// returns an erroneous try.
         /// </summary>
-        public static ITry<A, E> Catch<A, E>(Func<Unit, A> f)
+        public static Try<A, E> Catch<A, E>(Func<Unit, A> f)
             where E : Exception
         {
-            return Catch<ITry<A, E>, E>(
+            return Catch<Try<A, E>, E>(
                 _ => Success<A, E>(f(Unit.Value)),
                 e => Error<A, E>(e)
             );
@@ -46,7 +46,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static ITry<A, E> Success<A, E>(A success)
+        public static Try<A, E> Success<A, E>(A success)
         {
             return new Try<A, E>(success);
         }
@@ -54,7 +54,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with an error result.
         /// </summary>
-        public static ITry<A, E> Error<A, E>(E error)
+        public static Try<A, E> Error<A, E>(E error)
         {
             return new Try<A, E>(error);
         }
@@ -62,7 +62,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using the specified function.
         /// </summary>
-        public static R Aggregate<A, E, R>(IEnumerable<ITry<A, E>> tries, Func<IEnumerable<A>, R> success, Func<IEnumerable<E>, R> error)
+        public static R Aggregate<A, E, R>(IEnumerable<Try<A, E>> tries, Func<IEnumerable<A>, R> success, Func<IEnumerable<E>, R> error)
         {
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
@@ -76,7 +76,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, E>> tries)
+        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, E>> tries)
         {
             return Aggregate(
                 tries,
@@ -88,7 +88,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static ITry<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<ITry<A, IEnumerable<E>>> tries)
+        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, IEnumerable<E>>> tries)
         {
             return Aggregate(
                 tries,
@@ -101,7 +101,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by the specified function.
         /// </summary>
-        public static R Aggregate<<#= Types(i, name: "A") #>, E, R>(<#= List(i, x => $"ITry<{Type(x, name: "A")}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success, Func<IEnumerable<E>, R> error)
+        public static R Aggregate<<#= Types(i, name: "A") #>, E, R>(<#= List(i, x => $"Try<{Type(x, name: "A")}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success, Func<IEnumerable<E>, R> error)
         {
             if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
             {
@@ -115,7 +115,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"ITry<A{x}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        public static Try<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
@@ -127,7 +127,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static ITry<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"ITry<A{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        public static Try<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
@@ -138,7 +138,7 @@ namespace FuncSharp
 <#  } #>
     }
 
-    internal class Try<A, E> : Coproduct2<A, E>, ITry<A, E>
+    public class Try<A, E> : Coproduct2<A, E>
     {
         public Try(A success)
             : base(success)
@@ -170,7 +170,7 @@ namespace FuncSharp
             get { return Second; }
         }
 
-        public ITry<B, E> Map<B>(Func<A, B> f)
+        public Try<B, E> Map<B>(Func<A, B> f)
         {
             return Match(
                 s => Try.Success<B, E>(f(s)),
@@ -178,7 +178,7 @@ namespace FuncSharp
             );
         }
 
-        public ITry<A, F> MapError<F>(Func<E, F> f)
+        public Try<A, F> MapError<F>(Func<E, F> f)
         {
             return Match(
                 s => Try.Success<A, F>(s),
