@@ -11,6 +11,13 @@ namespace FuncSharp
         /// <summary>
         /// Returns values of the nonempty options.
         /// </summary>
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<Option<T>> source)
+        {
+            return source.SelectMany(o => o.ToEnumerable());
+        }
+        /// <summary>
+        /// Returns values of the nonempty options.
+        /// </summary>
         public static IEnumerable<A> Flatten<T, A>(this IEnumerable<T> source)
             where T : IOption<A>
         {
@@ -26,13 +33,7 @@ namespace FuncSharp
             return source.Select(func).Where(o => o.NonEmpty).Select(o => o.GetOrDefault());
         }
 
-        /// <summary>
-        /// Returns values of the nonempty options.
-        /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<Option<T>> source)
-        {
-            return source.SelectMany(o => o.ToEnumerable());
-        }
+
 
         /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.

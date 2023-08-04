@@ -141,7 +141,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty enumerable.
         /// </summary>
-        public static IEnumerable<A> Flatten2<T, A>(this Option<T> option)
+        public static IEnumerable<A> Flatten<T, A>(this Option<T> option)
             where T : IEnumerable<A>
         {
             if (option.NonEmpty)
@@ -149,54 +149,6 @@ namespace FuncSharp
                 return option.GetOrDefault();
             }
             return Enumerable.Empty<A>();
-        }
-
-        /// <summary>
-        /// Maps value of the current option (if present) into a new value using the specified function and
-        /// returns a new option with that new value.
-        /// </summary>
-        public static Option<B> Select<A, B>(this Option<A> option, Func<A, B> f)
-        {
-            return option.Map(f);
-        }
-
-        /// <summary>
-        /// Maps value of the current option (if present) into a new option using the specified function and
-        /// returns that new option.
-        /// </summary>
-        public static Option<B> SelectMany<A, B>(this Option<A> option, Func<A, Option<B>> f)
-        {
-            return option.FlatMap(f);
-        }
-
-        /// <summary>
-        /// Maps the current value to a new option using the specified function and combines values of both of the options.
-        /// </summary>
-        public static Option<B> SelectMany<A, X, B>(this Option<A> option, Func<A, Option<X>> f, Func<A, X, B> compose)
-        {
-            return option.FlatMap(a => f(a).Map(x => compose(a, x)));
-        }
-
-        /// <summary>
-        /// Retuns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
-        /// </summary>
-        public static Option<A> Where<A>(this Option<A> option, Func<A, bool> predicate)
-        {
-            if (option.IsEmpty || !predicate(option.GetOrDefault()))
-                return Option.Empty<A>();
-
-            return option;
-        }
-
-        /// <summary>
-        /// Retuns true if value of the option matches the specified predicate. Otherwise returns false.
-        /// </summary>
-        public static bool Is<A>(this Option<A> option, Func<A, bool> predicate)
-        {
-            if (option.IsEmpty)
-                return false;
-
-            return predicate(option.GetOrDefault());
         }
 
         /// <summary>
@@ -209,41 +161,6 @@ namespace FuncSharp
                 return option.GetOrDefault();
 
             return null;
-        }
-
-        /// <summary>
-        /// Turns the option into a nullable value.
-        /// </summary>
-        public static B? ToNullable<A, B>(this Option<A> option, Func<A, B> func)
-            where B : struct
-        {
-            if (option.NonEmpty)
-                return func(option.GetOrDefault());
-
-            return null;
-        }
-
-        /// <summary>
-        /// Turns the option into a nullable value.
-        /// </summary>
-        public static B? ToNullable<A, B>(this Option<A> option, Func<A, B?> func)
-            where B : struct
-        {
-            if (option.NonEmpty)
-                return func(option.GetOrDefault());
-
-            return null;
-        }
-
-        /// <summary>
-        /// Turns the option into a try using the exception in case of empty option.
-        /// </summary>
-        public static ITry<A, E> ToTry<A, E>(this Option<A> option, Func<Unit, E> e)
-        {
-            if (option.NonEmpty)
-                return Try.Success<A, E>(option.GetOrDefault());
-
-            return Try.Error<A, E>(e(Unit.Value));
         }
     }
 }

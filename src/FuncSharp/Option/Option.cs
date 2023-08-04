@@ -107,6 +107,52 @@ namespace FuncSharp
             throw new InvalidOperationException("An empty option does not have a value.");
         }
 
+        /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public B? ToNullable<B>(Func<A, B> func)
+            where B : struct
+        {
+            if (NonEmpty)
+                return func(GetOrDefault());
+
+            return null;
+        }
+
+        /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public B? ToNullable<B>(Func<A, B?> func)
+            where B : struct
+        {
+            if (NonEmpty)
+                return func(GetOrDefault());
+
+            return null;
+        }
+
+        /// <summary>
+        /// Retuns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
+        /// </summary>
+        public Option<A> Where(Func<A, bool> predicate)
+        {
+            if (IsEmpty || !predicate(GetOrDefault()))
+                return Option.Empty<A>();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Retuns true if value of the option matches the specified predicate. Otherwise returns false.
+        /// </summary>
+        public bool Is(Func<A, bool> predicate)
+        {
+            if (IsEmpty)
+                return false;
+
+            return predicate(GetOrDefault());
+        }
+
         public R Match<R>(Func<A, R> ifNonEmpty, Func<Unit, R> ifEmpty)
         {
             if (NonEmpty)
@@ -175,6 +221,16 @@ namespace FuncSharp
         }
 
         [Pure]
+        public IEnumerable<B> Flatten<B>(Func<A, IEnumerable<B>> f)
+        {
+            if (NonEmpty)
+            {
+                return f(Value);
+            }
+            return Enumerable.Empty<B>();
+        }
+
+        [Pure]
         public IEnumerable<A> ToEnumerable()
         {
             if (NonEmpty)
@@ -182,6 +238,43 @@ namespace FuncSharp
                 return new[] { Value };
             }
             return Enumerable.Empty<A>();
+        }
+
+        /// <summary>
+        /// Maps value of the current option (if present) into a new value using the specified function and
+        /// returns a new option with that new value.
+        /// </summary>
+        public Option<B> Select<B>(Func<A, B> f)
+        {
+            return Map(f);
+        }
+
+        /// <summary>
+        /// Maps value of the current option (if present) into a new option using the specified function and
+        /// returns that new option.
+        /// </summary>
+        public Option<B> SelectMany<B>(Func<A, Option<B>> f)
+        {
+            return FlatMap(f);
+        }
+
+        /// <summary>
+        /// Maps the current value to a new option using the specified function and combines values of both of the options.
+        /// </summary>
+        public Option<B> SelectMany<X, B>(Func<A, Option<X>> f, Func<A, X, B> compose)
+        {
+            return FlatMap(a => f(a).Map(x => compose(a, x)));
+        }
+
+        /// <summary>
+        /// Turns the option into a try using the exception in case of empty option.
+        /// </summary>
+        public ITry<A, E> ToTry<E>(Func<Unit, E> e)
+        {
+            if (NonEmpty)
+                return Try.Success<A, E>(GetOrDefault());
+
+            return Try.Error<A, E>(e(Unit.Value));
         }
 
         [Pure]
