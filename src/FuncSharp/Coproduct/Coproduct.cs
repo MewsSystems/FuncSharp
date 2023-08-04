@@ -6,7 +6,7 @@ namespace FuncSharp
     /// <summary>
     /// Base class and factory of canonical coproduct types.
     /// </summary>
-    public abstract class CoproductBase : ICoproduct
+    public abstract class CoproductBase
     {
         public CoproductBase(int arity, int discriminator, object value)
         {

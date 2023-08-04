@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>6.0.0</Version>
-    <AssemblyVersion>6.0.0</AssemblyVersion>
-    <FileVersion>6.0.0</FileVersion>
+    <Version>7.0.0</Version>
+    <AssemblyVersion>7.0.0</AssemblyVersion>
+    <FileVersion>7.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Originally written by Honza Široký.</Description>
     <Authors>Mews, Honza Široký</Authors>
@@ -37,13 +37,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
-    <None Update="Coproduct\ICoproduct.tt">
+    <None Update="Coproduct\CoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproduct.cs</LastGenOutput>
-    </None>
-    <None Update="Coproduct\ICoproductExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
+      <LastGenOutput>CoproductExtensions.cs</LastGenOutput>
     </None>
     <None Update="DataCube\DataCube.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -96,15 +92,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Coproduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="Coproduct\ICoproduct.cs">
+    <Compile Update="Coproduct\CoproductExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ICoproduct.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Coproduct\ICoproductExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
+      <DependentUpon>CoproductExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="DataCube\DataCube.cs">
       <DesignTime>True</DesignTime>
