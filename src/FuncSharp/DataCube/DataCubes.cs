@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +20,7 @@ namespace FuncSharp
         /// <summary>
         /// The only value in the cube.
         /// </summary>
-        public IOption<TValue> Value 
+        public Option<TValue> Value
         { 
             get { return Get(); }
         }
@@ -35,7 +36,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get()
+        public Option<TValue> Get()
         {
             return Get(Position0.Create());
         }
@@ -183,7 +184,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(P1 p1)
+        public Option<TValue> Get(P1 p1)
         {
             return Get(Position1.Create(p1));
         }
@@ -394,7 +395,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(P1 p1, P2 p2)
+        public Option<TValue> Get(P1 p1, P2 p2)
         {
             return Get(Position2.Create(p1, p2));
         }
@@ -668,7 +669,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(P1 p1, P2 p2, P3 p3)
+        public Option<TValue> Get(P1 p1, P2 p2, P3 p3)
         {
             return Get(Position3.Create(p1, p2, p3));
         }
@@ -1005,7 +1006,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4)
+        public Option<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4)
         {
             return Get(Position4.Create(p1, p2, p3, p4));
         }
@@ -1405,7 +1406,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
+        public Option<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
             return Get(Position5.Create(p1, p2, p3, p4, p5));
         }
@@ -1868,7 +1869,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
+        public Option<TValue> Get(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6)
         {
             return Get(Position6.Create(p1, p2, p3, p4, p5, p6));
         }

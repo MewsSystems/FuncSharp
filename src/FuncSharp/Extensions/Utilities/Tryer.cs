@@ -1,4 +1,6 @@
-﻿namespace FuncSharp
+﻿using System;
+
+namespace FuncSharp
 {
     public delegate bool Tryer<A, TResult>(A a, out TResult result);
 
@@ -8,7 +10,7 @@
 
     public static class Tryer
     {
-        public static IOption<TResult> Invoke<A, TResult>(Tryer<A, TResult> tryer, A a)
+        public static Option<TResult> Invoke<A, TResult>(Tryer<A, TResult> tryer, A a)
         {
             TResult result;
             if (tryer(a, out result))
@@ -18,7 +20,7 @@
             return Option.Empty<TResult>();
         }
 
-        public static IOption<TResult> Invoke<A, B, TResult>(Tryer<A, B, TResult> tryer, A a, B b)
+        public static Option<TResult> Invoke<A, B, TResult>(Tryer<A, B, TResult> tryer, A a, B b)
         {
             TResult result;
             if (tryer(a, b, out result))
@@ -28,7 +30,7 @@
             return Option.Empty<TResult>();
         }
 
-        public static IOption<TResult> Invoke<A, B, C, TResult>(Tryer<A, B, C, TResult> tryer, A a, B b, C c)
+        public static Option<TResult> Invoke<A, B, C, TResult>(Tryer<A, B, C, TResult> tryer, A a, B b, C c)
         {
             TResult result;
             if (tryer(a, b, c, out result))

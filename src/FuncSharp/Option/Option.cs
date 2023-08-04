@@ -1,30 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FuncSharp
 {
     public static class Option
     {
-        /// <summary>
-        /// True value as an option.
-        /// </summary>
-        public static IOption<bool> True { get; } = true.ToOption();
-
-        /// <summary>
-        /// False value as an option.
-        /// </summary>
-        public static IOption<bool> False { get; } = false.ToOption();
 
         /// <summary>
         /// Unit value as an option.
         /// </summary>
-        public static IOption<Unit> Unit { get; } = FuncSharp.Unit.Value.ToOption();
+        public static Option<Unit> Unit { get; } = Valued(FuncSharp.Unit.Value);
 
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
-        public static IOption<A> Create<A>(A value)
+        public static Option<A> Create<A>(A value)
         {
             if (value != null)
             {
@@ -36,7 +28,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
-        public static IOption<A> Create<A>(A? value)
+        public static Option<A> Create<A>(A? value)
             where A : struct
         {
             if (value.HasValue)
@@ -49,7 +41,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an option with the specified value.
         /// </summary>
-        public static IOption<A> Valued<A>(A value)
+        public static Option<A> Valued<A>(A value)
         {
             return new Option<A>(value);
         }
@@ -57,13 +49,13 @@ namespace FuncSharp
         /// <summary>
         /// Returns an empty option.
         /// </summary>
-        public static IOption<A> Empty<A>()
+        public static Option<A> Empty<A>()
         {
             return Option<A>.Empty;
         }
     }
 
-    internal sealed class Option<A> : IOption<A>, IOption
+    public struct Option<A> : IOption<A>, IOption
     {
         public Option(A value)
         {
@@ -71,23 +63,49 @@ namespace FuncSharp
             NonEmpty = true;
         }
 
-        private Option()
+        public Option()
         {
             Value = default;
             NonEmpty = false;
         }
 
-        public static IOption<A> Empty { get; } = new Option<A>();
-
         object IOption.Value => Value;
-        bool IOption.IsEmpty => IsEmpty;
-        bool IOption.NonEmpty => NonEmpty;
 
         private A Value { get; }
+
+        public static Option<A> Empty { get; } = new Option<A>();
 
         public bool NonEmpty { get; }
 
         public bool IsEmpty => !NonEmpty;
+
+        [Pure]
+        public A GetOrDefault()
+        {
+            return Value;
+        }
+
+        [Pure]
+        public R GetOrDefault<R>(Func<A, R> func)
+        {
+            if (NonEmpty)
+                return func(Value);
+            return default(R);
+        }
+
+        [Pure]
+        public A Get(Func<Unit, Exception> otherwise = null)
+        {
+            if (NonEmpty)
+            {
+                return Value;
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new InvalidOperationException("An empty option does not have a value.");
+        }
 
         public R Match<R>(Func<A, R> ifNonEmpty, Func<Unit, R> ifEmpty)
         {
@@ -116,32 +134,8 @@ namespace FuncSharp
             }
         }
 
-        public A Get(Func<Unit, Exception> otherwise = null)
-        {
-            if (NonEmpty)
-            {
-                return Value;
-            }
-            if (otherwise != null)
-            {
-                throw otherwise(Unit.Value);
-            }
-            throw new InvalidOperationException("An empty option does not have a value.");
-        }
-
-        public A GetOrDefault()
-        {
-            return Value;
-        }
-
-        public R GetOrDefault<R>(Func<A, R> func)
-        {
-            if (NonEmpty)
-                return func(Value);
-            return default(R);
-        }
-
-        public IOption<B> Map<B>(Func<A, B> f)
+        [Pure]
+        public Option<B> Map<B>(Func<A, B> f)
         {
             if (NonEmpty)
             {
@@ -150,16 +144,18 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IOption<B> MapEmpty<B>(Func<Unit, B> f)
+        [Pure]
+        public Option<B> MapEmpty<B>(Func<Unit, B> f)
         {
-            if (NonEmpty)
+            if (IsEmpty)
             {
-                return Option<B>.Empty;
+                return new Option<B>(f(Unit.Value));
             }
-            return new Option<B>(f(Unit.Value));
+            return Option<B>.Empty;
         }
 
-        public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)
+        [Pure]
+        public Option<B> FlatMap<B>(Func<A, Option<B>> f)
         {
             if (NonEmpty)
             {
@@ -168,20 +164,17 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IOption<B> FlatMap<B>(Func<A, B?> f) where B : struct
+        [Pure]
+        public Option<B> FlatMap<B>(Func<A, B?> f) where B : struct
         {
             if (NonEmpty)
             {
-                var result = f(Value);
-                if (result is not null)
-                {
-                    return Option.Valued(result.Value);
-                }
-                return Option<B>.Empty;
+                return f(Value).ToOption();
             }
             return Option<B>.Empty;
         }
 
+        [Pure]
         public IEnumerable<A> ToEnumerable()
         {
             if (NonEmpty)
@@ -191,6 +184,7 @@ namespace FuncSharp
             return Enumerable.Empty<A>();
         }
 
+        [Pure]
         public override string ToString()
         {
             if (NonEmpty)
@@ -200,16 +194,18 @@ namespace FuncSharp
             return "Empty";
         }
 
+        [Pure]
         public override int GetHashCode()
         {
             return Structural.HashCode(NonEmpty, Value);
         }
 
+        [Pure]
         public override bool Equals(object obj)
         {
-            if (obj is IOption<A> other)
+            if (obj is Option<A> other)
             {
-                return NonEmpty == other.NonEmpty && Equals(Value, other.GetOrDefault());
+                return NonEmpty == other.NonEmpty && Equals(Value, other.Value);
             }
             return false;
         }

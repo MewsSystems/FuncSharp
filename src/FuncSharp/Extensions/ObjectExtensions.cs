@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace FuncSharp
 {
@@ -7,7 +8,7 @@ namespace FuncSharp
         /// <summary>
         /// Casts the specified object to the given type.
         /// </summary>
-        public static IOption<A> As<A>(this object o)
+        public static Option<A> As<A>(this object o)
             where A : class
         {
             return (o as A).ToOption();
@@ -28,7 +29,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
-        public static IOption<A> ToOption<A>(this A value)
+        public static Option<A> ToOption<A>(this A value)
         {
             return Option.Create(value);
         }

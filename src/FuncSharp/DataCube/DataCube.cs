@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -217,7 +218,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value at the specified position.
         /// </summary>
-        public IOption<TValue> Get(TPosition position)
+        public Option<TValue> Get(TPosition position)
         {
             return Index.Get(position);
         }

@@ -64,6 +64,8 @@ More extensive example can be found in the [`Coproduct.cs`](https://github.com/M
 
 An `IOption<A>` is widely used functional data type known from other languages. It represents a value that may or may not be available. Great for avoiding `NullReferenceException`s and handling the two null/non-null cases. Also in C#, nullable types are somewhat different from references (in case of nullables, you have to use the `Value` getter). The option type nicely unifies this discrepancy. Lot of examples how to use options is in [`IOption.cs`](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Option/IOption.cs) file.
 
+Currently, we're replacing `IOption<A>` with `ValueOption<A>`, so that the option itself is a struct and cannot be null. That prevents bugs when people check the option for being null instead of the value. [Examples](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Option/ValueOption.cs) have been updated.
+
 ### Try
 
 In order to handle errors or exceptions, FuncSharp features `ITry<A, E>` that represents a result of an operation that can end with either success or error. It explicitly communicates all the possible outcomes on type level, unlike exceptions where you have to read a documentation to understand how a method can end. An extensive set of examples can be found in the following files:

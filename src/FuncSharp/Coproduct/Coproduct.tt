@@ -113,7 +113,13 @@ namespace FuncSharp
 <#    } #>
 
 <#    for (var j = 1; j <= i; j++) { #>
+        [Obsolete("Use the new version using Option.")]
         public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
+        {
+            get { return Is<#= GetOrdinal(j) #> ? Option.Valued((<#= Type(j) #>)CoproductValue) : Option.Empty<<#= Type(j) #>>(); }
+        }
+
+        public Option<<#= Type(j) #>> <#= GetOrdinal(j) #>New
         {
             get { return Is<#= GetOrdinal(j) #> ? Option.Valued((<#= Type(j) #>)CoproductValue) : Option.Empty<<#= Type(j) #>>(); }
         }

@@ -4,13 +4,12 @@ using System.Linq;
 
 namespace FuncSharp
 {
-    public static class IOptionExtensions
+    public static class OptionExtensions
     {
         /// <summary>
         /// Returns value of the option if it has value. If not, returns null.
         /// </summary>
-        public static A GetOrNull<T, A>(this T option)
-            where T : IOption<A>
+        public static A GetOrNull<A>(this Option<A> option)
             where A : class
         {
             return option.GetOrDefault();
@@ -19,18 +18,26 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns null.
         /// </summary>
-        public static R GetOrNull<T, A, R>(this T option, Func<A, R> func)
-            where T : IOption<A>
+        public static R GetOrNull<A, R>(this Option<A> option, Func<A, R> func)
             where R : class
         {
             return option.GetOrDefault(func);
         }
 
+
         /// <summary>
         /// Returns value of the option if it has value. If not, returns zero.
         /// </summary>
-        public static int GetOrZero<T, A>(this T option, Func<A, int> func)
-            where T : IOption<A>
+        public static int GetOrZero(this Option<int> option)
+        {
+            return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static int GetOrZero<A>(this Option<A> option, Func<A, int> func)
+
         {
             return option.GetOrDefault(func);
         }
@@ -38,8 +45,15 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns zero.
         /// </summary>
-        public static decimal GetOrZero<T, A>(this T option, Func<A, decimal> func)
-            where T : IOption<A>
+        public static decimal GetOrZero(this Option<decimal> option)
+        {
+            return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static decimal GetOrZero<A>(this Option<A> option, Func<A, decimal> func)
 
         {
             return option.GetOrDefault(func);
@@ -48,8 +62,15 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns false.
         /// </summary>
-        public static bool GetOrFalse<T, A>(this T option, Func<A, bool> func)
-            where T : IOption<A>
+        public static bool GetOrFalse(this Option<bool> option)
+        {
+            return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns false.
+        /// </summary>
+        public static bool GetOrFalse<A>(this Option<A> option, Func<A, bool> func)
 
         {
             return option.GetOrDefault(func);
@@ -58,8 +79,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns the <paramref name="otherwise"/>.
         /// </summary>
-        public static B GetOrElse<T, A, B>(this T option, B otherwise)
-            where T : IOption<A>
+        public static B GetOrElse<A, B>(this Option<A> option, B otherwise)
             where A : B
         {
             if (option.NonEmpty)
@@ -72,8 +92,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns value created by the otherwise function.
         /// </summary>
-        public static B GetOrElse<T, A, B>(this T option, Func<Unit, B> otherwise)
-            where T : IOption<A>
+        public static B GetOrElse<A, B>(this Option<A> option, Func<Unit, B> otherwise)
             where A : B
         {
             if (option.NonEmpty)
@@ -86,36 +105,43 @@ namespace FuncSharp
         /// <summary>
         /// Returns the option if it has value. Otherwise returns the alternative option.
         /// </summary>
-        public static Option<B> OrElse<T, A, B>(this T option, Func<Unit, Option<B>> alternative)
-            where T : IOption<A>
+        public static Option<B> OrElse<A, B>(this Option<A> option, Func<Unit, Option<B>> alternative)
             where A : B
         {
             if (option.NonEmpty)
             {
-                return new Option<B>(option.GetOrDefault());
+                return Option.Valued((B)option.GetOrDefault());
             }
             return alternative(Unit.Value);
         }
 
-        // Unfortunately, C# cannot have 2 methods with the same signature with constraints being the only difference.
-        // /// <summary>
-        // /// Returns the value of the outer option or an empty opion.
-        // /// </summary>
-        // public static Option<A> Flatten<T, A>(this T option)
-        //     where T : IOption<Option<A>>
-        // {
-        //     if (option.NonEmpty)
-        //     {
-        //         return option.GetOrDefault();
-        //     }
-        //     return Option<A>.Empty;
-        // }
+        /// <summary>
+        /// Turns the option of nullable into an option.
+        /// </summary>
+        public static Option<A> Flatten<A>(this Option<A?> option)
+            where A : struct
+        {
+            if (option.IsEmpty)
+                return new Option<A>();
+
+            return option.GetOrDefault().ToOption();
+        }
+
+        /// <summary>
+        /// Returns the value of the outer option or an empty opion.
+        /// </summary>
+        public static Option<A> Flatten<A>(this Option<Option<A>> option)
+        {
+            if (option.IsEmpty)
+                return new Option<A>();
+
+            return option.GetOrDefault();
+        }
 
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty enumerable.
         /// </summary>
-        public static IEnumerable<A> Flatten<T, A>(this T option)
-            where T : IOption<IEnumerable<A>>
+        public static IEnumerable<A> Flatten<A>(this Option<IEnumerable<A>> option)
         {
             if (option.NonEmpty)
             {
@@ -125,23 +151,10 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Turns the option of nullable into an option.
-        /// </summary>
-        public static Option<A> Flatten<A>(this Option<A?> option)
-            where A : struct
-        {
-            if (option.NonEmpty)
-            {
-                return option.GetOrDefault().ToOption();
-            }
-            return Option<A>.Empty;
-        }
-
-        /// <summary>
         /// Maps value of the current option (if present) into a new value using the specified function and
         /// returns a new option with that new value.
         /// </summary>
-        public static Option<B> Select<A, B>(this IOption<A> option, Func<A, B> f)
+        public static Option<B> Select<A, B>(this Option<A> option, Func<A, B> f)
         {
             return option.Map(f);
         }
@@ -150,7 +163,7 @@ namespace FuncSharp
         /// Maps value of the current option (if present) into a new option using the specified function and
         /// returns that new option.
         /// </summary>
-        public static Option<B> SelectMany<A, B>(this IOption<A> option, Func<A, Option<B>> f)
+        public static Option<B> SelectMany<A, B>(this Option<A> option, Func<A, Option<B>> f)
         {
             return option.FlatMap(f);
         }
@@ -158,90 +171,73 @@ namespace FuncSharp
         /// <summary>
         /// Maps the current value to a new option using the specified function and combines values of both of the options.
         /// </summary>
-        public static Option<B> SelectMany<A, X, B>(this IOption<A> option, Func<A, Option<X>> f, Func<A, X, B> compose)
+        public static Option<B> SelectMany<A, X, B>(this Option<A> option, Func<A, Option<X>> f, Func<A, X, B> compose)
         {
             return option.FlatMap(a => f(a).Map(x => compose(a, x)));
         }
 
         /// <summary>
-        /// Returns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
+        /// Retuns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
         /// </summary>
-        public static Option<A> Where<T, A>(this T option, Func<A, bool> predicate)
-            where T : IOption<A>
+        public static Option<A> Where<A>(this Option<A> option, Func<A, bool> predicate)
         {
             if (option.IsEmpty || !predicate(option.GetOrDefault()))
-            {
                 return Option.Empty<A>();
-            }
-            return option.Map(a => a);
-        }
 
-        // TODO - Where with Casting
-        // /// <summary>
-        // /// Returns the current option only if its value matches the specified predicate. Otherwise returns an empty option.
-        // /// </summary>
-        // public static T Where<T, A>(this T option, Func<A, bool> predicate)
-        //     where T : IOption<A>
-        // {
-        //     if (option.IsEmpty || !predicate(option.GetOrDefault()))
-        //     {
-        //         return (T)(IOption<A>)Option.Empty<A>();
-        //     }
-        //     return option;
-        // }
+            return option;
+        }
 
         /// <summary>
         /// Retuns true if value of the option matches the specified predicate. Otherwise returns false.
         /// </summary>
-        public static bool Is<T, A>(this T option, Func<A, bool> predicate)
-            where T : IOption<A>
+        public static bool Is<A>(this Option<A> option, Func<A, bool> predicate)
         {
-            if (option.NonEmpty)
-                return predicate(option.GetOrDefault());
-            return false;
+            if (option.IsEmpty)
+                return false;
+
+            return predicate(option.GetOrDefault());
         }
 
         /// <summary>
         /// Turns the option into a nullable value.
         /// </summary>
-        public static A? ToNullable<T, A>(this T option)
-            where T : IOption<A>
+        public static A? ToNullable<A>(this Option<A> option)
             where A : struct
         {
             if (option.NonEmpty)
                 return option.GetOrDefault();
+
             return null;
         }
 
         /// <summary>
         /// Turns the option into a nullable value.
         /// </summary>
-        public static B? ToNullable<T, A, B>(this T option, Func<A, B> func)
-            where T : IOption<A>
+        public static B? ToNullable<A, B>(this Option<A> option, Func<A, B> func)
             where B : struct
         {
             if (option.NonEmpty)
                 return func(option.GetOrDefault());
+
             return null;
         }
 
         /// <summary>
         /// Turns the option into a nullable value.
         /// </summary>
-        public static B? ToNullable<T, A, B>(this T option, Func<A, B?> func)
-            where T : IOption<A>
+        public static B? ToNullable<A, B>(this Option<A> option, Func<A, B?> func)
             where B : struct
         {
             if (option.NonEmpty)
                 return func(option.GetOrDefault());
+
             return null;
         }
 
         /// <summary>
         /// Turns the option into a try using the exception in case of empty option.
         /// </summary>
-        public static ITry<A, E> ToTry<T, A, E>(this T option, Func<Unit, E> e)
-            where T : IOption<A>
+        public static ITry<A, E> ToTry<A, E>(this Option<A> option, Func<Unit, E> e)
         {
             if (option.NonEmpty)
                 return Try.Success<A, E>(option.GetOrDefault());

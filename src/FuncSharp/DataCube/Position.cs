@@ -1,4 +1,5 @@
-﻿namespace FuncSharp
+﻿
+namespace FuncSharp
 {
     /// <summary>
     /// A 0-dimensional data cube position.

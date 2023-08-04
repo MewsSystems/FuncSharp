@@ -69,24 +69,24 @@ namespace FuncSharp
         /// Maps value of the current option (if present) into a new value using the specified function and 
         /// returns a new option with that new value.
         /// </summary>
-        IOption<B> Map<B>(Func<A, B> f);
+        Option<B> Map<B>(Func<A, B> f);
 
         /// <summary>
         /// Maps a unit in case the option is empty.
         /// </summary>
-        IOption<B> MapEmpty<B>(Func<Unit, B> f);
+        Option<B> MapEmpty<B>(Func<Unit, B> f);
 
         /// <summary>
         /// Maps value of the current option (if present) into a new option using the specified function and 
         /// returns a flattened option. So result only has a value if both options have a value.
         /// </summary>
-        IOption<B> FlatMap<B>(Func<A, IOption<B>> f);
+        Option<B> FlatMap<B>(Func<A, Option<B>> f);
 
         /// <summary>
         /// Maps value of the current option (if present) into a nullable value using the specified function and
         /// returns a value in case it's not null. So result only has a value if both the option and the function result have a value.
         /// </summary>
-        IOption<B> FlatMap<B>(Func<A, B?> f)
+        Option<B> FlatMap<B>(Func<A, B?> f)
             where B: struct;
 
         /// <summary>

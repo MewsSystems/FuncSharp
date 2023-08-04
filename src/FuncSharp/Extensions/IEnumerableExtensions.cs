@@ -1,3 +1,4 @@
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,9 +17,17 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns values of the nonempty options.
+        /// </summary>
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<Option<T>> source)
+        {
+            return source.SelectMany(o => o.ToEnumerable());
+        }
+
+        /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
-        public static IOption<T> ToNonEmptyOption<T>(this T source)
+        public static Option<T> ToNonEmptyOption<T>(this T source)
             where T : IEnumerable
         {
             if (source == null || !source.OfType<object>().Any())
@@ -31,7 +40,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns first value or an empty option. 
         /// </summary>
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
             if (data.Count == 0)
@@ -44,7 +53,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns last value or an empty option. 
         /// </summary>
-        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             return source.Reverse().FirstOption(predicate);
         }
@@ -52,7 +61,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the only value if the source contains just one value, otherwise an empty option.
         /// </summary>
-        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static Option<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             var data = source.Where(predicate ?? (t => true)).Take(2).ToList();
             if (data.Count == 2)
@@ -73,10 +82,11 @@ namespace FuncSharp
             return result;
         }
 
+
         /// <summary>
         /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
         /// </summary>
-        public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
+        public static Option<Exception> Aggregate(this IEnumerable<Exception> source)
         {
             return source.SingleOption().OrElse(_ => source.FirstOption().Map<Exception>(e => new AggregateException(source)));
         }

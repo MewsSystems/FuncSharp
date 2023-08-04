@@ -6,8 +6,8 @@ namespace FuncSharp.Benchmarks
     public class OptionBenchmarks
     {
         private static readonly object Object;
-        private static readonly IOption<string> NonEmptyOption;
-        private static readonly IOption<string> EmptyOption;
+        private static readonly Option<string> NonEmptyOption;
+        private static readonly Option<string> EmptyOption;
 
         static OptionBenchmarks()
         {

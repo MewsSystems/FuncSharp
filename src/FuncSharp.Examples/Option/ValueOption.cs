@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FuncSharp.Examples
 {
-    public static class IOptionUsages
+    public static class ValueOptionUsages
     {
         private static void CreatingOptionDirectly()
         {
@@ -19,14 +19,13 @@ namespace FuncSharp.Examples
             Option<bool> valuedOption2 = nullableBool.ToOption();
             Option<bool> valuedOption3 = Option.Create(nullableBool);
 
-            // Option.Valued can construct options with null value inside. Therefore it can cause confusion and is an anti-pattern.
+            // ValueOption.Valued can construct options with null value inside. Therefore it can cause confusion and is an anti-pattern.
             Option<object> valuedOptionWithNullInside2 = Option.Valued<object>(null);
             Option<bool?> valuedOptionWithNullInside1 = Option.Valued(emptyNullableBool);
             Option<bool?> valuedOptionWithFalse = Option.Valued(nullableBool);
 
-            // Instead, you can use option of an option. For example when updating a value of a nullable property.
+            // Instead, you can use option of an ValueOption. For example when updating a value of a nullable property.
             // Outer option defines whether we're changing value, inner option holds the value to assign.
-            // Although it's better to create a class for it and name it `UpdateValue` and make it have an Option property inside.
             Option<Option<bool>> notUpdating = Option.Empty<Option<bool>>();
             Option<Option<bool>> settingToTrue1 = Option.Create(true.ToOption());
             Option<Option<bool>> settingToTrue2 = Option.Create(Option.Create(true));
@@ -82,7 +81,7 @@ namespace FuncSharp.Examples
         {
             var divisionResult = Divide(number, divisor);
 
-            // Get method will throw an exception in case of empty option. Using it is an anti-pattern.
+            // Get method will throw an exception in case of empty ValueOption. Using it is an anti-pattern.
             // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
             decimal valueOrExceptionThrown = divisionResult.Get();
 
