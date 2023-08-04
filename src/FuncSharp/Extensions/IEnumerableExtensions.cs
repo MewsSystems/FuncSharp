@@ -82,7 +82,6 @@ namespace FuncSharp
             return result;
         }
 
-
         /// <summary>
         /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
         /// </summary>
