@@ -113,10 +113,13 @@ namespace FuncSharp
 <#    } #>
 
 <#    for (var j = 1; j <= i; j++) { #>
-        public IOption<<#= Type(j) #>> <#= GetOrdinal(j) #>
+        public Option<<#= Type(j) #>> <#= GetOrdinal(j) #>
         {
             get { return Is<#= GetOrdinal(j) #> ? Option.Valued((<#= Type(j) #>)CoproductValue) : Option.Empty<<#= Type(j) #>>(); }
         }
+
+        IOption<<#= Type(j) #>> <#= CoproductType(i) #>.<#= GetOrdinal(j) #> => <#= GetOrdinal(j) #>;
+
 <#    } #>
 
         public R Match<R>(
