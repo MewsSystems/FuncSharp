@@ -141,7 +141,8 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty enumerable.
         /// </summary>
-        public static IEnumerable<A> Flatten<A>(this Option<IEnumerable<A>> option)
+        public static IEnumerable<A> Flatten2<T, A>(this Option<T> option)
+            where T : IEnumerable<A>
         {
             if (option.NonEmpty)
             {
