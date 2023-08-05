@@ -40,7 +40,7 @@ namespace FuncSharp
         /// <summary>
         /// Canonical representation of the coproduct.
         /// </summary>
-        public static IProduct3<int, int, object> CoproductRepresentation(this CoproductBase c)
+        public static IProduct3<int, int, object> CoproductRepresentation(this ICoproduct c)
         {
             return Product3.Create(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
         }
@@ -48,7 +48,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns hash code of the specified coproduct.
         /// </summary>
-        public static int CoproductHashCode(this CoproductBase c)
+        public static int CoproductHashCode(this ICoproduct c)
         {
             return Structural.HashCode(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
         }
@@ -57,9 +57,9 @@ namespace FuncSharp
         /// Returns whether the two specified coproducts are structurally equal. Note that two nulls are 
         /// considered structurally equal coproducts.
         /// </summary>
-        public static bool CoproductEquals(this CoproductBase c1, object that)
+        public static bool CoproductEquals(this ICoproduct c1, object that)
         {
-            if (that is CoproductBase c2 && c1 is not null && c1.GetType() == c2.GetType())
+            if (that is ICoproduct c2 && c1 is not null && c1.GetType() == c2.GetType())
             {
                 return c1.CoproductRepresentation().Equals(c2.CoproductRepresentation());
             }
@@ -69,7 +69,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns string representation of the specified coproduct type.
         /// </summary>
-        public static string CoproductToString(this CoproductBase c)
+        public static string CoproductToString(this ICoproduct c)
         {
             return
                 c.GetType().SimpleName() + "(" +

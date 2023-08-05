@@ -41,9 +41,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ICoproduct.cs</LastGenOutput>
     </None>
-    <None Update="Coproduct\CoproductExtensions.tt">
+    <None Update="Coproduct\ICoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CoproductExtensions.cs</LastGenOutput>
+      <LastGenOutput>ICoproductExtensions.cs</LastGenOutput>
     </None>
     <None Update="DataCube\DataCube.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -101,10 +101,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ICoproduct.tt</DependentUpon>
     </Compile>
-    <Compile Update="Coproduct\CoproductExtensions.cs">
+    <Compile Update="Coproduct\ICoproductExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CoproductExtensions.tt</DependentUpon>
+      <DependentUpon>ICoproductExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="DataCube\DataCube.cs">
       <DesignTime>True</DesignTime>
