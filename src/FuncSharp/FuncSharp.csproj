@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Completely removed ITry and ICoproduct interfaces so that we could remove IOption interface and make Option a struct.</PackageReleaseNotes>
+    <PackageReleaseNotes>Completely removed ITry interface and made ICoproduct interface non covariant so that we could remove the IOption interface and make Option a struct.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
