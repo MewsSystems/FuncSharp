@@ -94,6 +94,11 @@
         return NaryType("Product", i, name, except);
     }
 
+    public string CoproductType(int i, string name = "T")
+    {
+        return NaryType("ICoproduct", i, name);
+    }
+
     public string CoproductImplType(int i, string name = "T")
     {
         return NaryType("Coproduct", i, name);

@@ -37,6 +37,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Coproduct.cs</LastGenOutput>
     </None>
+    <None Update="Coproduct\ICoproduct.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ICoproduct.cs</LastGenOutput>
+    </None>
     <None Update="Coproduct\CoproductExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CoproductExtensions.cs</LastGenOutput>
@@ -91,6 +95,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Coproduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Coproduct\ICoproduct.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ICoproduct.tt</DependentUpon>
     </Compile>
     <Compile Update="Coproduct\CoproductExtensions.cs">
       <DesignTime>True</DesignTime>
