@@ -6,7 +6,7 @@ namespace FuncSharp
     /// <summary>
     /// Base class and factory of canonical coproduct types.
     /// </summary>
-    public abstract class CoproductBase
+    public abstract class CoproductBase : ICoproduct
     {
         public CoproductBase(int arity, int discriminator, object value)
         {
@@ -49,7 +49,7 @@ namespace FuncSharp
     /// <summary>
     /// A 0-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct0 : CoproductBase
+    public class Coproduct0 : CoproductBase, ICoproduct0
     {
         protected Coproduct0()
             : base(0, 0, null)
@@ -75,7 +75,7 @@ namespace FuncSharp
     /// <summary>
     /// A 1-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct1<T1> : CoproductBase
+    public class Coproduct1<T1> : CoproductBase, ICoproduct1<T1>
     {
         /// <summary>
         /// Creates a new 1-dimensional coproduct with the specified value on the first position.
@@ -88,7 +88,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 1-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct1(Coproduct1<T1> source)
+        public Coproduct1(ICoproduct1<T1> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -159,7 +159,7 @@ namespace FuncSharp
     /// <summary>
     /// A 2-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct2<T1, T2> : CoproductBase
+    public class Coproduct2<T1, T2> : CoproductBase, ICoproduct2<T1, T2>
     {
         /// <summary>
         /// Creates a new 2-dimensional coproduct with the specified value on the first position.
@@ -180,7 +180,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 2-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct2(Coproduct2<T1, T2> source)
+        public Coproduct2(ICoproduct2<T1, T2> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -271,7 +271,7 @@ namespace FuncSharp
     /// <summary>
     /// A 3-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct3<T1, T2, T3> : CoproductBase
+    public class Coproduct3<T1, T2, T3> : CoproductBase, ICoproduct3<T1, T2, T3>
     {
         /// <summary>
         /// Creates a new 3-dimensional coproduct with the specified value on the first position.
@@ -300,7 +300,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 3-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct3(Coproduct3<T1, T2, T3> source)
+        public Coproduct3(ICoproduct3<T1, T2, T3> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -411,7 +411,7 @@ namespace FuncSharp
     /// <summary>
     /// A 4-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct4<T1, T2, T3, T4> : CoproductBase
+    public class Coproduct4<T1, T2, T3, T4> : CoproductBase, ICoproduct4<T1, T2, T3, T4>
     {
         /// <summary>
         /// Creates a new 4-dimensional coproduct with the specified value on the first position.
@@ -448,7 +448,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 4-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct4(Coproduct4<T1, T2, T3, T4> source)
+        public Coproduct4(ICoproduct4<T1, T2, T3, T4> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -579,7 +579,7 @@ namespace FuncSharp
     /// <summary>
     /// A 5-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct5<T1, T2, T3, T4, T5> : CoproductBase
+    public class Coproduct5<T1, T2, T3, T4, T5> : CoproductBase, ICoproduct5<T1, T2, T3, T4, T5>
     {
         /// <summary>
         /// Creates a new 5-dimensional coproduct with the specified value on the first position.
@@ -624,7 +624,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 5-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct5(Coproduct5<T1, T2, T3, T4, T5> source)
+        public Coproduct5(ICoproduct5<T1, T2, T3, T4, T5> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -775,7 +775,7 @@ namespace FuncSharp
     /// <summary>
     /// A 6-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct6<T1, T2, T3, T4, T5, T6> : CoproductBase
+    public class Coproduct6<T1, T2, T3, T4, T5, T6> : CoproductBase, ICoproduct6<T1, T2, T3, T4, T5, T6>
     {
         /// <summary>
         /// Creates a new 6-dimensional coproduct with the specified value on the first position.
@@ -828,7 +828,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 6-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct6(Coproduct6<T1, T2, T3, T4, T5, T6> source)
+        public Coproduct6(ICoproduct6<T1, T2, T3, T4, T5, T6> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -999,7 +999,7 @@ namespace FuncSharp
     /// <summary>
     /// A 7-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : CoproductBase
+    public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : CoproductBase, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>
     {
         /// <summary>
         /// Creates a new 7-dimensional coproduct with the specified value on the first position.
@@ -1060,7 +1060,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 7-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct7(Coproduct7<T1, T2, T3, T4, T5, T6, T7> source)
+        public Coproduct7(ICoproduct7<T1, T2, T3, T4, T5, T6, T7> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1251,7 +1251,7 @@ namespace FuncSharp
     /// <summary>
     /// A 8-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : CoproductBase
+    public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : CoproductBase, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         /// <summary>
         /// Creates a new 8-dimensional coproduct with the specified value on the first position.
@@ -1320,7 +1320,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 8-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct8(Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> source)
+        public Coproduct8(ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1531,7 +1531,7 @@ namespace FuncSharp
     /// <summary>
     /// A 9-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : CoproductBase
+    public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : CoproductBase, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
         /// <summary>
         /// Creates a new 9-dimensional coproduct with the specified value on the first position.
@@ -1608,7 +1608,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 9-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct9(Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> source)
+        public Coproduct9(ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -1839,7 +1839,7 @@ namespace FuncSharp
     /// <summary>
     /// A 10-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : CoproductBase
+    public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : CoproductBase, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     {
         /// <summary>
         /// Creates a new 10-dimensional coproduct with the specified value on the first position.
@@ -1924,7 +1924,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 10-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct10(Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> source)
+        public Coproduct10(ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -2175,7 +2175,7 @@ namespace FuncSharp
     /// <summary>
     /// A 11-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : CoproductBase
+    public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : CoproductBase, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     {
         /// <summary>
         /// Creates a new 11-dimensional coproduct with the specified value on the first position.
@@ -2268,7 +2268,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 11-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct11(Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> source)
+        public Coproduct11(ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -2539,7 +2539,7 @@ namespace FuncSharp
     /// <summary>
     /// A 12-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : CoproductBase
+    public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : CoproductBase, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     {
         /// <summary>
         /// Creates a new 12-dimensional coproduct with the specified value on the first position.
@@ -2640,7 +2640,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 12-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct12(Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> source)
+        public Coproduct12(ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -2931,7 +2931,7 @@ namespace FuncSharp
     /// <summary>
     /// A 13-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : CoproductBase
+    public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : CoproductBase, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     {
         /// <summary>
         /// Creates a new 13-dimensional coproduct with the specified value on the first position.
@@ -3040,7 +3040,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 13-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct13(Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> source)
+        public Coproduct13(ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -3351,7 +3351,7 @@ namespace FuncSharp
     /// <summary>
     /// A 14-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : CoproductBase
+    public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : CoproductBase, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     {
         /// <summary>
         /// Creates a new 14-dimensional coproduct with the specified value on the first position.
@@ -3468,7 +3468,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 14-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct14(Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> source)
+        public Coproduct14(ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -3799,7 +3799,7 @@ namespace FuncSharp
     /// <summary>
     /// A 15-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : CoproductBase
+    public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : CoproductBase, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     {
         /// <summary>
         /// Creates a new 15-dimensional coproduct with the specified value on the first position.
@@ -3924,7 +3924,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 15-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct15(Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> source)
+        public Coproduct15(ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -4275,7 +4275,7 @@ namespace FuncSharp
     /// <summary>
     /// A 16-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : CoproductBase
+    public class Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : CoproductBase, ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
     {
         /// <summary>
         /// Creates a new 16-dimensional coproduct with the specified value on the first position.
@@ -4408,7 +4408,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 16-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct16(Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> source)
+        public Coproduct16(ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -4779,7 +4779,7 @@ namespace FuncSharp
     /// <summary>
     /// A 17-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : CoproductBase
+    public class Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : CoproductBase, ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
     {
         /// <summary>
         /// Creates a new 17-dimensional coproduct with the specified value on the first position.
@@ -4920,7 +4920,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 17-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct17(Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> source)
+        public Coproduct17(ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -5311,7 +5311,7 @@ namespace FuncSharp
     /// <summary>
     /// A 18-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : CoproductBase
+    public class Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : CoproductBase, ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
     {
         /// <summary>
         /// Creates a new 18-dimensional coproduct with the specified value on the first position.
@@ -5460,7 +5460,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 18-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct18(Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> source)
+        public Coproduct18(ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -5871,7 +5871,7 @@ namespace FuncSharp
     /// <summary>
     /// A 19-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : CoproductBase
+    public class Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : CoproductBase, ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
     {
         /// <summary>
         /// Creates a new 19-dimensional coproduct with the specified value on the first position.
@@ -6028,7 +6028,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 19-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct19(Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> source)
+        public Coproduct19(ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
@@ -6459,7 +6459,7 @@ namespace FuncSharp
     /// <summary>
     /// A 20-dimensional immutable coproduct.
     /// </summary> 
-    public class Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> : CoproductBase
+    public class Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> : CoproductBase, ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>
     {
         /// <summary>
         /// Creates a new 20-dimensional coproduct with the specified value on the first position.
@@ -6624,7 +6624,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new 20-dimensional coproduct based on the specified source.
         /// </summary>
-        public Coproduct20(Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> source)
+        public Coproduct20(ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> source)
             : this(source.CoproductDiscriminator, source.CoproductValue)
         {
         }
