@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 
 namespace FuncSharp
 {
-    public static class ICoproductExtensions
+    public static class CoproductExtensions
     {
         private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
         {
@@ -49,7 +50,7 @@ namespace FuncSharp
         /// </summary>
         public static int CoproductHashCode(this ICoproduct c)
         {
-            return Structural.HashCode(new[] { c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue });
+            return Structural.HashCode(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace FuncSharp
         /// </summary>
         public static bool CoproductEquals(this ICoproduct c1, object that)
         {
-            if (that is ICoproduct c2 && c1 != null && c2 != null && c1.GetType() == c2.GetType())
+            if (that is ICoproduct c2 && c1 is not null && c1.GetType() == c2.GetType())
             {
                 return c1.CoproductRepresentation().Equals(c2.CoproductRepresentation());
             }

@@ -220,7 +220,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the option into a try using the exception in case of empty option.
         /// </summary>
-        public static ITry<A, E> ToTry<A, E>(this IOption<A> option, Func<Unit, E> e)
+        public static Try<A, E> ToTry<A, E>(this IOption<A> option, Func<Unit, E> e)
         {
             if (option.NonEmpty)
                 return Try.Success<A, E>(option.GetOrDefault());

@@ -21,7 +21,7 @@ Core of the library is formed by **algebraic data types** (ADTs), namely `Produc
 There are basic types in C# like `string`, `int`, `bool`, `DateTime` or others. But how to create more types? The standard approach is to define a new class and "wrap" some of the already available types into it. That's the idiomatic way how to do that in C#, however it has some limitations when it comes to abstraction. Without reflection, you cannot easily iterate over all the properties of a class. Or create a method that accepts classes with 3 properties and whose first property is a string. That's where algebraic data types come into picture by offering alternative ways how to form types. To be specific, 2 ways:
 
 - Product (also known as "and type" or "tuple") represents **multiple values of other types** in a single type. For example financial amount can be understood as a product of decimal value **and** string currency code. Written algebraically `decimal AND string`, using FuncSharp code `IProduct2<decimal, string>`. That's nothing surprising and it does not differ from standard tuples in C#.
-- Coproduct (also known as "or type", "sum type" or "disjoint union") represents **exactly one of multiple other types**. For example an API call result can be understood as a coproduct of either successful string response **or** integer error code. In algebraic language `string OR int`, in FuncSharp `ICoproduct2<string, int>`. An equivalent in C# would be an abstract class (Animal) with two subclasses (Cat, Dog), however it wouldn't be type-safe and it has other drawbacks.
+- Coproduct (also known as "or type", "sum type" or "disjoint union") represents **exactly one of multiple other types**. For example an API call result can be understood as a coproduct of either successful string response **or** integer error code. In algebraic language `string OR int`, in FuncSharp `Coproduct2<string, int>`. An equivalent in C# would be an abstract class (Animal) with two subclasses (Cat, Dog), however it wouldn't be type-safe and it has other drawbacks.
 
 The nice part about ADTs is that you can combine the types recursively, however deep you want. And build up very complex types using these two basic operations. There are many good posts about ADTs, you can check out the [Haskell primer on algebraic data types](http://learnyouahaskell.com/making-our-own-types-and-typeclasses#algebraic-data-types), how ADTs are implemented in [other programming languages](https://blog.softwaremill.com/algebraic-data-types-in-four-languages-858788043d4e) or great [explanation of coproducts and their advantages](http://chadaustin.me/2015/07/sum-types/).
 
@@ -66,12 +66,12 @@ An `IOption<A>` is widely used functional data type known from other languages. 
 
 ### Try
 
-In order to handle errors or exceptions, FuncSharp features `ITry<A, E>` that represents a result of an operation that can end with either success or error. It explicitly communicates all the possible outcomes on type level, unlike exceptions where you have to read a documentation to understand how a method can end. An extensive set of examples can be found in the following files:
+In order to handle errors or exceptions, FuncSharp features `Try<A, E>` that represents a result of an operation that can end with either success or error. It explicitly communicates all the possible outcomes on type level, unlike exceptions where you have to read a documentation to understand how a method can end. An extensive set of examples can be found in the following files:
 
-- [Basics](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryBasics.cs) - Basic concepts.
-- [Exception Handling](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
-- [Parsing](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryParsing.cs) - How to safely parse unsafe incoming data.
-- [General Usage](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/ITryGeneral.cs) - Putting it all together, a few advanced concepts.
+- [Basics](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryBasics.cs) - Basic concepts.
+- [Exception Handling](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryExceptionHandling.cs) - How to turn a standard API that uses exceptions to strongly typed one, using the try type.
+- [Parsing](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryParsing.cs) - How to safely parse unsafe incoming data.
+- [General Usage](https://github.com/MewsSystems/FuncSharp/blob/master/src/FuncSharp.Examples/Try/TryGeneral.cs) - Putting it all together, a few advanced concepts.
 
 ### Morphism
 

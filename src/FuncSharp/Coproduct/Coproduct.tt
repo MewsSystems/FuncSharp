@@ -62,7 +62,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new <#= i #>-dimensional coproduct with the <#= GetLowerOrdinal(j) #> value.
         /// </summary>
-        public static <#= CoproductType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Type(j) #> value)
+        public static <#= CoproductImplType(i) #> Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>(<#= Type(j) #> value)
         {
             return new <#= CoproductImplType(i) #>(value);
         }

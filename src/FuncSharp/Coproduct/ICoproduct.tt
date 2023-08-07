@@ -33,7 +33,7 @@ namespace FuncSharp
     /// <summary>
     /// A <#= i #>-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface <#= CoproductType(i, name: "out T") #> : ICoproduct
+    public interface <#= CoproductType(i, name: "T") #> : ICoproduct
     {
 <#      for (var j = 1; j <= i; j++) { #>
         /// <summary>
@@ -42,7 +42,7 @@ namespace FuncSharp
         bool Is<#= GetOrdinal(j) #> { get; }
 
         /// <summary>
-        /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #> 
+        /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #>
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
@@ -57,7 +57,7 @@ namespace FuncSharp
 <#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(

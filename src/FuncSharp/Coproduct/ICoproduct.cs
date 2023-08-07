@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 
 namespace FuncSharp
 {
@@ -33,7 +34,7 @@ namespace FuncSharp
     /// <summary>
     /// A 1-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct1<out T1> : ICoproduct
+    public interface ICoproduct1<T1> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -41,7 +42,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -54,7 +55,7 @@ namespace FuncSharp
             Func<T1, R> ifFirst);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -64,7 +65,7 @@ namespace FuncSharp
     /// <summary>
     /// A 2-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct2<out T1, out T2> : ICoproduct
+    public interface ICoproduct2<T1, T2> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -72,7 +73,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -83,7 +84,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -97,7 +98,7 @@ namespace FuncSharp
             Func<T2, R> ifSecond);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -108,7 +109,7 @@ namespace FuncSharp
     /// <summary>
     /// A 3-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct3<out T1, out T2, out T3> : ICoproduct
+    public interface ICoproduct3<T1, T2, T3> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -116,7 +117,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -127,7 +128,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -138,7 +139,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -153,7 +154,7 @@ namespace FuncSharp
             Func<T3, R> ifThird);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -165,7 +166,7 @@ namespace FuncSharp
     /// <summary>
     /// A 4-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct4<out T1, out T2, out T3, out T4> : ICoproduct
+    public interface ICoproduct4<T1, T2, T3, T4> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -173,7 +174,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -184,7 +185,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -195,7 +196,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -206,7 +207,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -222,7 +223,7 @@ namespace FuncSharp
             Func<T4, R> ifFourth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -235,7 +236,7 @@ namespace FuncSharp
     /// <summary>
     /// A 5-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct5<out T1, out T2, out T3, out T4, out T5> : ICoproduct
+    public interface ICoproduct5<T1, T2, T3, T4, T5> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -243,7 +244,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -254,7 +255,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -265,7 +266,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -276,7 +277,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -287,7 +288,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -304,7 +305,7 @@ namespace FuncSharp
             Func<T5, R> ifFifth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -318,7 +319,7 @@ namespace FuncSharp
     /// <summary>
     /// A 6-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct6<out T1, out T2, out T3, out T4, out T5, out T6> : ICoproduct
+    public interface ICoproduct6<T1, T2, T3, T4, T5, T6> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -326,7 +327,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -337,7 +338,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -348,7 +349,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -359,7 +360,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -370,7 +371,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -381,7 +382,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -399,7 +400,7 @@ namespace FuncSharp
             Func<T6, R> ifSixth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -414,7 +415,7 @@ namespace FuncSharp
     /// <summary>
     /// A 7-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct7<out T1, out T2, out T3, out T4, out T5, out T6, out T7> : ICoproduct
+    public interface ICoproduct7<T1, T2, T3, T4, T5, T6, T7> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -422,7 +423,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -433,7 +434,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -444,7 +445,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -455,7 +456,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -466,7 +467,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -477,7 +478,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -488,7 +489,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -507,7 +508,7 @@ namespace FuncSharp
             Func<T7, R> ifSeventh);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -523,7 +524,7 @@ namespace FuncSharp
     /// <summary>
     /// A 8-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct8<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8> : ICoproduct
+    public interface ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -531,7 +532,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -542,7 +543,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -553,7 +554,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -564,7 +565,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -575,7 +576,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -586,7 +587,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -597,7 +598,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -608,7 +609,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -628,7 +629,7 @@ namespace FuncSharp
             Func<T8, R> ifEighth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -645,7 +646,7 @@ namespace FuncSharp
     /// <summary>
     /// A 9-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct9<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9> : ICoproduct
+    public interface ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -653,7 +654,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -664,7 +665,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -675,7 +676,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -686,7 +687,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -697,7 +698,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -708,7 +709,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -719,7 +720,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -730,7 +731,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -741,7 +742,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -762,7 +763,7 @@ namespace FuncSharp
             Func<T9, R> ifNinth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -780,7 +781,7 @@ namespace FuncSharp
     /// <summary>
     /// A 10-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct10<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10> : ICoproduct
+    public interface ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -788,7 +789,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -799,7 +800,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -810,7 +811,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -821,7 +822,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -832,7 +833,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -843,7 +844,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -854,7 +855,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -865,7 +866,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -876,7 +877,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -887,7 +888,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -909,7 +910,7 @@ namespace FuncSharp
             Func<T10, R> ifTenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -928,7 +929,7 @@ namespace FuncSharp
     /// <summary>
     /// A 11-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct11<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11> : ICoproduct
+    public interface ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -936,7 +937,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -947,7 +948,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -958,7 +959,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -969,7 +970,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -980,7 +981,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -991,7 +992,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -1002,7 +1003,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -1013,7 +1014,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -1024,7 +1025,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -1035,7 +1036,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -1046,7 +1047,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -1069,7 +1070,7 @@ namespace FuncSharp
             Func<T11, R> ifEleventh);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -1089,7 +1090,7 @@ namespace FuncSharp
     /// <summary>
     /// A 12-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct12<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12> : ICoproduct
+    public interface ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -1097,7 +1098,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -1108,7 +1109,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -1119,7 +1120,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -1130,7 +1131,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -1141,7 +1142,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -1152,7 +1153,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -1163,7 +1164,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -1174,7 +1175,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -1185,7 +1186,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -1196,7 +1197,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -1207,7 +1208,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -1218,7 +1219,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -1242,7 +1243,7 @@ namespace FuncSharp
             Func<T12, R> ifTwelfth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -1263,7 +1264,7 @@ namespace FuncSharp
     /// <summary>
     /// A 13-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct13<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13> : ICoproduct
+    public interface ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -1271,7 +1272,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -1282,7 +1283,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -1293,7 +1294,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -1304,7 +1305,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -1315,7 +1316,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -1326,7 +1327,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -1337,7 +1338,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -1348,7 +1349,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -1359,7 +1360,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -1370,7 +1371,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -1381,7 +1382,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -1392,7 +1393,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -1403,7 +1404,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -1428,7 +1429,7 @@ namespace FuncSharp
             Func<T13, R> ifThirteenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -1450,7 +1451,7 @@ namespace FuncSharp
     /// <summary>
     /// A 14-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct14<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14> : ICoproduct
+    public interface ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -1458,7 +1459,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -1469,7 +1470,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -1480,7 +1481,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -1491,7 +1492,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -1502,7 +1503,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -1513,7 +1514,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -1524,7 +1525,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -1535,7 +1536,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -1546,7 +1547,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -1557,7 +1558,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -1568,7 +1569,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -1579,7 +1580,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -1590,7 +1591,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -1601,7 +1602,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -1627,7 +1628,7 @@ namespace FuncSharp
             Func<T14, R> ifFourteenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -1650,7 +1651,7 @@ namespace FuncSharp
     /// <summary>
     /// A 15-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct15<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15> : ICoproduct
+    public interface ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -1658,7 +1659,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -1669,7 +1670,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -1680,7 +1681,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -1691,7 +1692,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -1702,7 +1703,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -1713,7 +1714,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -1724,7 +1725,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -1735,7 +1736,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -1746,7 +1747,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -1757,7 +1758,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -1768,7 +1769,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -1779,7 +1780,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -1790,7 +1791,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -1801,7 +1802,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -1812,7 +1813,7 @@ namespace FuncSharp
         bool IsFifteenth { get; }
 
         /// <summary>
-        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T15> Fifteenth { get; }
@@ -1839,7 +1840,7 @@ namespace FuncSharp
             Func<T15, R> ifFifteenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -1863,7 +1864,7 @@ namespace FuncSharp
     /// <summary>
     /// A 16-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct16<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16> : ICoproduct
+    public interface ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -1871,7 +1872,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -1882,7 +1883,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -1893,7 +1894,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -1904,7 +1905,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -1915,7 +1916,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -1926,7 +1927,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -1937,7 +1938,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -1948,7 +1949,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -1959,7 +1960,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -1970,7 +1971,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -1981,7 +1982,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -1992,7 +1993,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -2003,7 +2004,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -2014,7 +2015,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -2025,7 +2026,7 @@ namespace FuncSharp
         bool IsFifteenth { get; }
 
         /// <summary>
-        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T15> Fifteenth { get; }
@@ -2036,7 +2037,7 @@ namespace FuncSharp
         bool IsSixteenth { get; }
 
         /// <summary>
-        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T16> Sixteenth { get; }
@@ -2064,7 +2065,7 @@ namespace FuncSharp
             Func<T16, R> ifSixteenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -2089,7 +2090,7 @@ namespace FuncSharp
     /// <summary>
     /// A 17-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct17<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16, out T17> : ICoproduct
+    public interface ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -2097,7 +2098,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -2108,7 +2109,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -2119,7 +2120,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -2130,7 +2131,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -2141,7 +2142,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -2152,7 +2153,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -2163,7 +2164,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -2174,7 +2175,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -2185,7 +2186,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -2196,7 +2197,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -2207,7 +2208,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -2218,7 +2219,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -2229,7 +2230,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -2240,7 +2241,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -2251,7 +2252,7 @@ namespace FuncSharp
         bool IsFifteenth { get; }
 
         /// <summary>
-        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T15> Fifteenth { get; }
@@ -2262,7 +2263,7 @@ namespace FuncSharp
         bool IsSixteenth { get; }
 
         /// <summary>
-        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T16> Sixteenth { get; }
@@ -2273,7 +2274,7 @@ namespace FuncSharp
         bool IsSeventeenth { get; }
 
         /// <summary>
-        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T17> Seventeenth { get; }
@@ -2302,7 +2303,7 @@ namespace FuncSharp
             Func<T17, R> ifSeventeenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -2328,7 +2329,7 @@ namespace FuncSharp
     /// <summary>
     /// A 18-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct18<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16, out T17, out T18> : ICoproduct
+    public interface ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -2336,7 +2337,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -2347,7 +2348,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -2358,7 +2359,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -2369,7 +2370,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -2380,7 +2381,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -2391,7 +2392,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -2402,7 +2403,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -2413,7 +2414,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -2424,7 +2425,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -2435,7 +2436,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -2446,7 +2447,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -2457,7 +2458,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -2468,7 +2469,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -2479,7 +2480,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -2490,7 +2491,7 @@ namespace FuncSharp
         bool IsFifteenth { get; }
 
         /// <summary>
-        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T15> Fifteenth { get; }
@@ -2501,7 +2502,7 @@ namespace FuncSharp
         bool IsSixteenth { get; }
 
         /// <summary>
-        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T16> Sixteenth { get; }
@@ -2512,7 +2513,7 @@ namespace FuncSharp
         bool IsSeventeenth { get; }
 
         /// <summary>
-        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T17> Seventeenth { get; }
@@ -2523,7 +2524,7 @@ namespace FuncSharp
         bool IsEighteenth { get; }
 
         /// <summary>
-        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
+        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T18> Eighteenth { get; }
@@ -2553,7 +2554,7 @@ namespace FuncSharp
             Func<T18, R> ifEighteenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -2580,7 +2581,7 @@ namespace FuncSharp
     /// <summary>
     /// A 19-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct19<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16, out T17, out T18, out T19> : ICoproduct
+    public interface ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -2588,7 +2589,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -2599,7 +2600,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -2610,7 +2611,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -2621,7 +2622,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -2632,7 +2633,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -2643,7 +2644,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -2654,7 +2655,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -2665,7 +2666,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -2676,7 +2677,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -2687,7 +2688,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -2698,7 +2699,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -2709,7 +2710,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -2720,7 +2721,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -2731,7 +2732,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -2742,7 +2743,7 @@ namespace FuncSharp
         bool IsFifteenth { get; }
 
         /// <summary>
-        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T15> Fifteenth { get; }
@@ -2753,7 +2754,7 @@ namespace FuncSharp
         bool IsSixteenth { get; }
 
         /// <summary>
-        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T16> Sixteenth { get; }
@@ -2764,7 +2765,7 @@ namespace FuncSharp
         bool IsSeventeenth { get; }
 
         /// <summary>
-        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T17> Seventeenth { get; }
@@ -2775,7 +2776,7 @@ namespace FuncSharp
         bool IsEighteenth { get; }
 
         /// <summary>
-        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
+        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T18> Eighteenth { get; }
@@ -2786,7 +2787,7 @@ namespace FuncSharp
         bool IsNineteenth { get; }
 
         /// <summary>
-        /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth 
+        /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T19> Nineteenth { get; }
@@ -2817,7 +2818,7 @@ namespace FuncSharp
             Func<T19, R> ifNineteenth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
@@ -2845,7 +2846,7 @@ namespace FuncSharp
     /// <summary>
     /// A 20-dimensional strongly-typed coproduct.
     /// </summary>
-    public interface ICoproduct20<out T1, out T2, out T3, out T4, out T5, out T6, out T7, out T8, out T9, out T10, out T11, out T12, out T13, out T14, out T15, out T16, out T17, out T18, out T19, out T20> : ICoproduct
+    public interface ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> : ICoproduct
     {
         /// <summary>
         /// Returns whether the coproduct contains the first value.
@@ -2853,7 +2854,7 @@ namespace FuncSharp
         bool IsFirst { get; }
 
         /// <summary>
-        /// Returns first value of the coproduct as an option. The option contains the first 
+        /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T1> First { get; }
@@ -2864,7 +2865,7 @@ namespace FuncSharp
         bool IsSecond { get; }
 
         /// <summary>
-        /// Returns second value of the coproduct as an option. The option contains the second 
+        /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T2> Second { get; }
@@ -2875,7 +2876,7 @@ namespace FuncSharp
         bool IsThird { get; }
 
         /// <summary>
-        /// Returns third value of the coproduct as an option. The option contains the third 
+        /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T3> Third { get; }
@@ -2886,7 +2887,7 @@ namespace FuncSharp
         bool IsFourth { get; }
 
         /// <summary>
-        /// Returns fourth value of the coproduct as an option. The option contains the fourth 
+        /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T4> Fourth { get; }
@@ -2897,7 +2898,7 @@ namespace FuncSharp
         bool IsFifth { get; }
 
         /// <summary>
-        /// Returns fifth value of the coproduct as an option. The option contains the fifth 
+        /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T5> Fifth { get; }
@@ -2908,7 +2909,7 @@ namespace FuncSharp
         bool IsSixth { get; }
 
         /// <summary>
-        /// Returns sixth value of the coproduct as an option. The option contains the sixth 
+        /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T6> Sixth { get; }
@@ -2919,7 +2920,7 @@ namespace FuncSharp
         bool IsSeventh { get; }
 
         /// <summary>
-        /// Returns seventh value of the coproduct as an option. The option contains the seventh 
+        /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T7> Seventh { get; }
@@ -2930,7 +2931,7 @@ namespace FuncSharp
         bool IsEighth { get; }
 
         /// <summary>
-        /// Returns eighth value of the coproduct as an option. The option contains the eighth 
+        /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T8> Eighth { get; }
@@ -2941,7 +2942,7 @@ namespace FuncSharp
         bool IsNinth { get; }
 
         /// <summary>
-        /// Returns ninth value of the coproduct as an option. The option contains the ninth 
+        /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T9> Ninth { get; }
@@ -2952,7 +2953,7 @@ namespace FuncSharp
         bool IsTenth { get; }
 
         /// <summary>
-        /// Returns tenth value of the coproduct as an option. The option contains the tenth 
+        /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T10> Tenth { get; }
@@ -2963,7 +2964,7 @@ namespace FuncSharp
         bool IsEleventh { get; }
 
         /// <summary>
-        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh 
+        /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T11> Eleventh { get; }
@@ -2974,7 +2975,7 @@ namespace FuncSharp
         bool IsTwelfth { get; }
 
         /// <summary>
-        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth 
+        /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T12> Twelfth { get; }
@@ -2985,7 +2986,7 @@ namespace FuncSharp
         bool IsThirteenth { get; }
 
         /// <summary>
-        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth 
+        /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T13> Thirteenth { get; }
@@ -2996,7 +2997,7 @@ namespace FuncSharp
         bool IsFourteenth { get; }
 
         /// <summary>
-        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth 
+        /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T14> Fourteenth { get; }
@@ -3007,7 +3008,7 @@ namespace FuncSharp
         bool IsFifteenth { get; }
 
         /// <summary>
-        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth 
+        /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T15> Fifteenth { get; }
@@ -3018,7 +3019,7 @@ namespace FuncSharp
         bool IsSixteenth { get; }
 
         /// <summary>
-        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth 
+        /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T16> Sixteenth { get; }
@@ -3029,7 +3030,7 @@ namespace FuncSharp
         bool IsSeventeenth { get; }
 
         /// <summary>
-        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth 
+        /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T17> Seventeenth { get; }
@@ -3040,7 +3041,7 @@ namespace FuncSharp
         bool IsEighteenth { get; }
 
         /// <summary>
-        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth 
+        /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T18> Eighteenth { get; }
@@ -3051,7 +3052,7 @@ namespace FuncSharp
         bool IsNineteenth { get; }
 
         /// <summary>
-        /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth 
+        /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T19> Nineteenth { get; }
@@ -3062,7 +3063,7 @@ namespace FuncSharp
         bool IsTwentieth { get; }
 
         /// <summary>
-        /// Returns twentieth value of the coproduct as an option. The option contains the twentieth 
+        /// Returns twentieth value of the coproduct as an option. The option contains the twentieth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
         IOption<T20> Twentieth { get; }
@@ -3094,7 +3095,7 @@ namespace FuncSharp
             Func<T20, R> ifTwentieth);
 
         /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes 
+        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(

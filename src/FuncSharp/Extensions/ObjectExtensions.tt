@@ -42,7 +42,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into a successful try.
         /// </summary>
-        public static ITry<A, E> ToTry<A, E>(this A value)
+        public static Try<A, E> ToTry<A, E>(this A value)
         {
             return Try.Success<A, E>(value);
         }
@@ -50,7 +50,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified error into a try.
         /// </summary>
-        public static ITry<A, E> ToTry<A, E>(this E e)
+        public static Try<A, E> ToTry<A, E>(this E e)
         {
             return Try.Error<A, E>(e);
         }
@@ -61,7 +61,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
-        public static <#= CoproductType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
+        public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
 <#= Lines(i, j => Indent(16) + "case " + Type(j) + " " + Value(j) + ": return Coproduct" + i + ".Create" + GetOrdinal(j) + TypeBracket(i) + "(" + Value(j) + ");") #>
@@ -84,7 +84,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
-        public static <#= CoproductType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>, Func<object, <#= CoproductType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
+        public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
@@ -110,7 +110,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
-        public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
+        public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
         {
             return value.AsCoproduct(v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }
@@ -120,7 +120,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
-        public static <#= "ICoproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
+        public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
         {
             return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
         }
