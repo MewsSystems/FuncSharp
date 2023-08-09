@@ -116,6 +116,19 @@ namespace FuncSharp
             }
         }
 
+        public R Get<R>(Func<A, R> func, Func<Unit, Exception> otherwise = null)
+        {
+            if (NonEmpty)
+            {
+                return func(Value);
+            }
+            if (otherwise != null)
+            {
+                throw otherwise(Unit.Value);
+            }
+            throw new InvalidOperationException("An empty option does not have a value.");
+        }
+
         public A Get(Func<Unit, Exception> otherwise = null)
         {
             if (NonEmpty)

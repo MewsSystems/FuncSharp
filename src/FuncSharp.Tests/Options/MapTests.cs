@@ -8,7 +8,7 @@ namespace FuncSharp.Tests.Options
 {
     public class MapTests
     {
-        static MapTests()
+        public MapTests()
         {
             Arb.Register<Generators>();
         }

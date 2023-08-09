@@ -37,9 +37,14 @@ namespace FuncSharp
         bool NonEmpty { get; }
 
         /// <summary>
-        /// Returns value of the option if not empty.
+        /// Returns value of the option if not empty. Otherwise throws exception.
         /// </summary>
         A Get(Func<Unit, Exception> otherwise = null);
+
+        /// <summary>
+        /// Returns result of the function if the option is not empty. Otherwise throws exception.
+        /// </summary>
+        T Get<T>(Func<A, T> map, Func<Unit, Exception> otherwise = null);
 
         /// <summary>
         /// Returns value of the option if it's present. If not, returns default value of the <typeparamref name="A"/> type.

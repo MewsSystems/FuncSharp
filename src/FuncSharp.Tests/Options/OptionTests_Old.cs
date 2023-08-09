@@ -23,14 +23,6 @@ namespace FuncSharp.Tests.Options
         }
 
         [Fact]
-        public void Get()
-        {
-            Assert.Equal(42, 42.ToOption().Get());
-            Assert.Equal(42, (42 as int?).ToOption().Get());
-            Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get());
-        }
-
-        [Fact]
         public void OrElse()
         {
             Assert.Equal(Option.Valued(42), 42.ToOption().OrElse(_ => 53.ToOption()));
