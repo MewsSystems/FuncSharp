@@ -1,6 +1,7 @@
 ﻿using System;
 using FsCheck;
 using FsCheck.Xunit;
+using FuncSharp.Tests.Generative;
 using Xunit;
 
 namespace FuncSharp.Tests.Options
@@ -37,6 +38,12 @@ namespace FuncSharp.Tests.Options
 
         [Property]
         internal void Map_decimal(IOption<decimal> option)
+        {
+            AssertMapResult(option, d => d * 2);
+        }
+
+        [Property]
+        internal void Map_double(IOption<double> option)
         {
             AssertMapResult(option, d => d * 2);
         }
