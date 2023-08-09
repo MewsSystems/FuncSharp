@@ -7,8 +7,13 @@ namespace FuncSharp.Tests.Options
 {
     public class MapTests
     {
+        static MapTests()
+        {
+            Arb.Register<Generators>();
+        }
+
         [Fact]
-        public void Map()
+        internal void Map()
         {
             // Empty option mapped is always empty
             OptionAssert.IsEmpty(Option.Empty<int>().Map(v => v * 2));
@@ -25,48 +30,37 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        public void Map_int(int x)
+        internal void Map_int(IOption<int> option)
         {
-            Assert.Equal(4 / x, 4 / x);
+            AssertMapResult(option, i => i * 2);
         }
 
-        [Fact]
-        public void Map_Generative()
+        [Property]
+        internal void Map_decimal(IOption<decimal> option)
         {
-            Generators.AssertInvariant(Generators.DecimalOptions, option =>
-            {
-                var result = option.Map(d => d * 2);
-                Assert.Equal(option.IsEmpty, result.IsEmpty);
-                Assert.Equal(option.GetOrDefault() * 2, result.GetOrDefault());
-            });
-            Generators.AssertInvariant(Generators.IntOptions, option =>
-            {
-                var result = option.Map(d => d * 2);
-                Assert.Equal(option.IsEmpty, result.IsEmpty);
-                Assert.Equal(option.GetOrDefault() * 2, result.GetOrDefault());
-            });
-            Generators.AssertInvariant(Generators.BoolOptions, option =>
-            {
-                var result = option.Map(d => !d);
-                Assert.Equal(option.IsEmpty, result.IsEmpty);
-                Assert.Equal(!option.GetOrDefault(), result.GetOrDefault());
-            });
-            var referenceTypeGenerator = Arb.From<IOption<ReferenceType>>();
-            Generators.AssertInvariant(referenceTypeGenerator, option =>
-            {
-                var result = option.Map(d =>
-                {
-                    if (d is not null)
-                    {
-                        return new ReferenceType(d.Value * 2);
-                    }
-                    return null;
-                });
-                Assert.Equal(option.IsEmpty, result.IsEmpty);
-                Assert.Equal(option.GetOrDefault()?.Value * 2, result.GetOrDefault()?.Value);
-            });
+            AssertMapResult(option, d => d * 2);
         }
 
-        private record class ReferenceType (int Value);
+        [Property]
+        internal void Map_bool(IOption<bool> option)
+        {
+            AssertMapResult(option, b => !b);
+        }
+
+        [Property]
+        internal void Map_ReferenceType(IOption<ReferenceType> option)
+        {
+            AssertMapResult(option, d => new ReferenceType(d.Value * 2));
+        }
+
+        private void AssertMapResult<T>(IOption<T> option, Func<T, T> map)
+        {
+            var result = option.Map(map);
+            Assert.Equal(option.IsEmpty, result.IsEmpty);
+            if (option.NonEmpty)
+            {
+                Assert.Equal(map(option.GetOrDefault()), result.GetOrDefault());
+            }
+        }
     }
 }
