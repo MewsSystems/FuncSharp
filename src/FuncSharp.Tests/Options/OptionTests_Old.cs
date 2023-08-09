@@ -1,9 +1,12 @@
 ﻿using System;
 using Xunit;
 
-namespace FuncSharp.Tests
+namespace FuncSharp.Tests.Options
 {
-    public class OptionTests
+    /// <summary>
+    /// Will be replaced by individual class per method. Each method should be tested with both manual unit tests and generative tests.
+    /// </summary>
+    public class OptionTests_Old
     {
         [Fact]
         public void IsEmpty()
@@ -101,15 +104,6 @@ namespace FuncSharp.Tests
         }
 
         [Fact]
-        public void Map()
-        {
-            Assert.Equal(84, 42.ToOption().Map(v => v * 2).Get());
-            Assert.Equal("xxxxx", 5.ToOption().Map(v => new String('x', v)).Get());
-            Assert.True(Option.Empty<int>().Map(v => v * 2).IsEmpty);
-            Assert.True(Option.Empty<string>().Map(v => (int?)null).IsEmpty);
-        }
-
-        [Fact]
         public void ToNullable()
         {
             Assert.Equal(84, 42.ToOption().ToNullable(v => (int?)v * 2));
@@ -126,13 +120,6 @@ namespace FuncSharp.Tests
             Assert.Null(Option.Empty<int>().ToNullable(v => (int?)null));
             Assert.Null(Option.Empty<string>().ToNullable(v => 14));
             Assert.Null(Option.Empty<string>().ToNullable(v => (int?)null));
-        }
-
-        [Fact]
-        public void NullableMap()
-        {
-            Assert.Equal(84, 42.ToOption().Map(v => v * 2 as int?).Get());
-            Assert.True(5.ToOption().Map(v => null as int?).NonEmpty);
         }
 
         [Fact]
