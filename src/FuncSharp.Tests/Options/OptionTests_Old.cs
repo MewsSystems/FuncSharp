@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace FuncSharp.Tests.Options
 {
@@ -8,20 +7,6 @@ namespace FuncSharp.Tests.Options
     /// </summary>
     public class OptionTests_Old
     {
-        [Fact]
-        public void IsEmpty()
-        {
-            Assert.False(42.ToOption().IsEmpty);
-            Assert.False((42 as int?).ToOption().IsEmpty);
-            Assert.True((null as int?).ToOption().IsEmpty);
-
-            Assert.False(new object().ToOption().IsEmpty);
-            Assert.True((null as object).ToOption().IsEmpty);
-
-            Assert.False("foo".ToOption().IsEmpty);
-            Assert.True((null as string).ToOption().IsEmpty);
-        }
-
         [Fact]
         public void OrElse()
         {
@@ -34,25 +19,6 @@ namespace FuncSharp.Tests.Options
         {
             Assert.Equal(42, 42.ToOption().GetOrElse(_ => 123));
             Assert.Equal(123, Option.Empty<int>().GetOrElse(_ => 123));
-        }
-
-        [Fact]
-        public void GetOrDefault()
-        {
-            Assert.Equal("asd", Option.Create("asd").GetOrDefault());
-            Assert.Equal(42, 42.ToOption().GetOrDefault());
-
-            Assert.Equal(0, Option.Empty<int>().GetOrDefault());
-            Assert.Null(Option.Empty<int?>().GetOrDefault());
-            Assert.Null(Option.Empty<string>().GetOrDefault());
-
-            var emptyOption = Option.Empty<object>();
-            var valuedOption = Option.Create(Unit.Value);
-            Assert.Equal(42, valuedOption.GetOrDefault(_ => 42));
-            Assert.Equal("asd", valuedOption.GetOrDefault(_ => "asd"));
-            Assert.Equal(0, emptyOption.GetOrDefault(_ => 14));
-            Assert.Null(emptyOption.GetOrDefault<int?>(_ => 14));
-            Assert.Null(emptyOption.GetOrDefault(_ => "asd"));
         }
 
         [Fact]
@@ -112,16 +78,6 @@ namespace FuncSharp.Tests.Options
             Assert.Null(Option.Empty<int>().ToNullable(v => (int?)null));
             Assert.Null(Option.Empty<string>().ToNullable(v => 14));
             Assert.Null(Option.Empty<string>().ToNullable(v => (int?)null));
-        }
-
-        [Fact]
-        public void FlatMap()
-        {
-            Assert.Equal(84, 42.ToOption().FlatMap(v => (v * 2).ToOption()).Get());
-            Assert.True(42.ToOption().FlatMap(v => Option.Empty<int>()).IsEmpty);
-
-            Assert.True(Option.Empty<int>().FlatMap(v => (v * 2).ToOption()).IsEmpty);
-            Assert.True(Option.Empty<int>().FlatMap(v => Option.Empty<int>()).IsEmpty);
         }
 
         [Fact]

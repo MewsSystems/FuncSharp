@@ -34,6 +34,9 @@ namespace FuncSharp.Tests.Options
         internal void Map_int(IOption<int> option)
         {
             AssertMapResult(option, i => i * 2);
+
+            // Also mapping to a reference type.
+            AssertMapResult(option, i => new ReferenceType(i * 2));
         }
 
         [Property]
@@ -58,9 +61,12 @@ namespace FuncSharp.Tests.Options
         internal void Map_ReferenceType(IOption<ReferenceType> option)
         {
             AssertMapResult(option, d => new ReferenceType(d.Value * 2));
+
+            // Also mapping to a struct
+            AssertMapResult(option, d => d.Value * 2);
         }
 
-        private void AssertMapResult<T>(IOption<T> option, Func<T, T> map)
+        private void AssertMapResult<T, TResult>(IOption<T> option, Func<T, TResult> map)
         {
             var result = option.Map(map);
             Assert.Equal(option.IsEmpty, result.IsEmpty);
