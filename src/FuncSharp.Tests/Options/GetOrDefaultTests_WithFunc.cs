@@ -6,9 +6,9 @@ using Xunit;
 
 namespace FuncSharp.Tests.Options
 {
-    public class GetOrDefault_WithFunc_Tests
+    public class GetOrDefaultTests_WithFunc
     {
-        public GetOrDefault_WithFunc_Tests()
+        public GetOrDefaultTests_WithFunc()
         {
             Arb.Register<Generators>();
         }
