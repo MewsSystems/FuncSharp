@@ -7,10 +7,52 @@ namespace FuncSharp.Tests.Generative;
 /// </summary>
 internal static class Shrinkers
 {
+    internal static IEnumerable<IOption<short>> ShortOption(IOption<short> option)
+    {
+        if(option.NonEmpty)
+            yield return Option.Valued((short)(option.GetOrDefault() - 1));
+    }
+
+    internal static IEnumerable<IOption<short?>> NullableShortOption(IOption<short?> option)
+    {
+        if(option.NonEmpty)
+        {
+            yield return Option.Valued((short?)(option.GetOrDefault() - 1));
+            yield return Option.Valued((short?)null);
+            yield return Option.Empty<short?>();
+        }
+    }
+
     internal static IEnumerable<IOption<int>> IntOption(IOption<int> option)
     {
         if(option.NonEmpty)
             yield return Option.Valued(option.GetOrDefault() - 1);
+    }
+
+    internal static IEnumerable<IOption<int?>> NullableIntOption(IOption<int?> option)
+    {
+        if(option.NonEmpty)
+        {
+            yield return Option.Valued(option.GetOrDefault() - 1);
+            yield return Option.Valued((int?)null);
+            yield return Option.Empty<int?>();
+        }
+    }
+
+    internal static IEnumerable<IOption<long>> LongOption(IOption<long> option)
+    {
+        if(option.NonEmpty)
+            yield return Option.Valued(option.GetOrDefault() - 1);
+    }
+
+    internal static IEnumerable<IOption<long?>> NullableLongOption(IOption<long?> option)
+    {
+        if(option.NonEmpty)
+        {
+            yield return Option.Valued(option.GetOrDefault() - 1);
+            yield return Option.Valued((long?)null);
+            yield return Option.Empty<long?>();
+        }
     }
 
     internal static IEnumerable<IOption<decimal>> DecimalOption(IOption<decimal> option)
@@ -19,15 +61,41 @@ internal static class Shrinkers
             yield return Option.Valued(option.GetOrDefault() - 0.1m);
     }
 
+    internal static IEnumerable<IOption<decimal?>> NullableDecimalOption(IOption<decimal?> option)
+    {
+        if(option.NonEmpty)
+        {
+            yield return Option.Valued(option.GetOrDefault() - 0.1m);
+            yield return Option.Valued((decimal?)null);
+            yield return Option.Empty<decimal?>();
+        }
+    }
+
     internal static IEnumerable<IOption<double>> DoubleOption(IOption<double> option)
     {
         if(option.NonEmpty)
             yield return Option.Valued(option.GetOrDefault() - 0.1d);
     }
 
+    internal static IEnumerable<IOption<double?>> NullableDoubleOption(IOption<double?> option)
+    {
+        if(option.NonEmpty)
+        {
+            yield return Option.Valued(option.GetOrDefault() - 0.1d);
+            yield return Option.Valued((double?)null);
+            yield return Option.Empty<double?>();
+        }
+    }
+
     internal static IEnumerable<IOption<ReferenceType>> ReferenceTypeOption(IOption<ReferenceType> option)
     {
         if(option.NonEmpty)
             yield return Option.Valued(new ReferenceType(option.GetOrDefault().Value - 1));
+    }
+
+    internal static IEnumerable<IOption<ReferenceTypeBase>> ReferenceTypeBaseOption(IOption<ReferenceTypeBase> option)
+    {
+        if(option.NonEmpty)
+            yield return Option.Valued(new ReferenceTypeBase(option.GetOrDefault().BaseValue - 1));
     }
 }

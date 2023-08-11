@@ -1,0 +1,103 @@
+﻿using FsCheck;
+using FsCheck.Xunit;
+using FuncSharp.Tests.Generative;
+using Xunit;
+
+namespace FuncSharp.Tests.Options
+{
+    public class ToNullableTests
+    {
+        public ToNullableTests()
+        {
+            Arb.Register<Generators>();
+        }
+
+        [Fact]
+        public void ToNullable()
+        {
+            Assert.Equal(1, 1.ToOption().ToNullable());
+            Assert.Equal(2, ((int?)2).ToOption<int?>().ToNullable());
+            Assert.Null(Option.Valued<int?>(null).ToNullable());
+
+            Assert.Null(Option.Empty<int>().ToNullable());
+            Assert.Null(Option.Empty<int?>().ToNullable());
+        }
+
+        [Property]
+        internal void ToNullable_int(IOption<int> option)
+        {
+            AssertToNullable(option);
+        }
+
+        [Property]
+        internal void ToNullable_decimal(IOption<decimal> option)
+        {
+            AssertToNullable(option);
+        }
+
+        [Property]
+        internal void ToNullable_double(IOption<double> option)
+        {
+            AssertToNullable(option);
+        }
+
+        [Property]
+        internal void ToNullable_bool(IOption<bool> option)
+        {
+            AssertToNullable(option);
+        }
+
+        [Property]
+        internal void ToNullable_nullableInt(IOption<int?> option)
+        {
+            AssertToNullableOnNullableOption(option);
+        }
+
+        [Property]
+        internal void ToNullable_nullabledecimal(IOption<decimal?> option)
+        {
+            AssertToNullableOnNullableOption(option);
+        }
+
+        [Property]
+        internal void ToNullable_nullabledouble(IOption<double?> option)
+        {
+            AssertToNullableOnNullableOption(option);
+        }
+
+        [Property]
+        internal void ToNullable_nullablebool(IOption<bool?> option)
+        {
+            AssertToNullableOnNullableOption(option);
+        }
+
+        private void AssertToNullable<T>(IOption<T> option)
+            where T: struct
+        {
+            var result = option.ToNullable();
+            if (option.NonEmpty)
+            {
+                Assert.NotNull(result);
+                Assert.Equal(option.GetOrDefault(), result);
+            }
+            else
+            {
+                Assert.Null(result);
+            }
+        }
+
+        private void AssertToNullableOnNullableOption<T>(IOption<T?> option)
+            where T: struct
+        {
+            var result = option.ToNullable();
+            if (option.NonEmpty)
+            {
+                Assert.Equal(option.GetOrDefault(), result);
+            }
+            else
+            {
+                Assert.Null(result);
+            }
+        }
+    }
+}
