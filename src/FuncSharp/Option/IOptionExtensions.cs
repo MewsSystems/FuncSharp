@@ -7,6 +7,50 @@ namespace FuncSharp
     public static class IOptionExtensions
     {
         /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public static A? ToNullable<A>(this IOption<A> option)
+            where A : struct
+        {
+            if (option.NonEmpty)
+                return option.GetOrDefault();
+            return null;
+        }
+
+        /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public static A? ToNullable<A>(this IOption<A?> option)
+            where A : struct
+        {
+            if (option.NonEmpty)
+                return option.GetOrDefault();
+            return null;
+        }
+
+        /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B?> func)
+            where B : struct
+        {
+            if (option.NonEmpty)
+                return func(option.GetOrDefault());
+            return null;
+        }
+
+        /// <summary>
+        /// Turns the option into a nullable value.
+        /// </summary>
+        public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B> func)
+            where B : struct
+        {
+            if (option.NonEmpty)
+                return func(option.GetOrDefault());
+            return null;
+        }
+
+        /// <summary>
         /// Returns value of the option if it has value. If not, returns null.
         /// </summary>
         public static T GetOrNull<T>(this IOption<T> option)
@@ -20,6 +64,22 @@ namespace FuncSharp
         /// </summary>
         public static R GetOrNull<T, R>(this IOption<T> option, Func<T, R> func)
             where R : class
+        {
+            return option.GetOrDefault(func);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static short GetOrZero(this IOption<short> option)
+        {
+            return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static short GetOrZero<T>(this IOption<T> option, Func<T, short> func)
         {
             return option.GetOrDefault(func);
         }
@@ -43,6 +103,22 @@ namespace FuncSharp
         /// <summary>
         /// Returns value of the option if it has value. If not, returns zero.
         /// </summary>
+        public static long GetOrZero(this IOption<long> option)
+        {
+            return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static long GetOrZero<T>(this IOption<T> option, Func<T, long> func)
+        {
+            return option.GetOrDefault(func);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
         public static decimal GetOrZero(this IOption<decimal> option)
         {
             return option.GetOrDefault();
@@ -52,6 +128,22 @@ namespace FuncSharp
         /// Returns value of the option if it has value. If not, returns zero.
         /// </summary>
         public static decimal GetOrZero<T>(this IOption<T> option, Func<T, decimal> func)
+        {
+            return option.GetOrDefault(func);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static double GetOrZero(this IOption<double> option)
+        {
+            return option.GetOrDefault();
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns zero.
+        /// </summary>
+        public static double GetOrZero<T>(this IOption<T> option, Func<T, double> func)
         {
             return option.GetOrDefault(func);
         }
@@ -182,39 +274,6 @@ namespace FuncSharp
             if (option.NonEmpty)
                 return predicate(option.GetOrDefault());
             return false;
-        }
-
-        /// <summary>
-        /// Turns the option into a nullable value.
-        /// </summary>
-        public static A? ToNullable<A>(this IOption<A> option)
-            where A : struct
-        {
-            if (option.NonEmpty)
-                return option.GetOrDefault();
-            return null;
-        }
-
-        /// <summary>
-        /// Turns the option into a nullable value.
-        /// </summary>
-        public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B?> func)
-            where B : struct
-        {
-            if (option.NonEmpty)
-                return func(option.GetOrDefault());
-            return null;
-        }
-
-        /// <summary>
-        /// Turns the option into a nullable value.
-        /// </summary>
-        public static B? ToNullable<A, B>(this IOption<A> option, Func<A, B> func)
-            where B : struct
-        {
-            if (option.NonEmpty)
-                return func(option.GetOrDefault());
-            return null;
         }
 
         /// <summary>
