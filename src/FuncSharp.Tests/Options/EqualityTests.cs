@@ -95,13 +95,6 @@ namespace FuncSharp.Tests.Options
 
             var shouldBeEqual = first.NonEmpty == second.NonEmpty && Equals(first.GetOrDefault(), second.GetOrDefault());
             Assert.Equal(shouldBeEqual, first.Equals(second));
-
-            if (first.Equals(second))
-            {
-            }
-            else
-            {
-            }
         }
     }
 }
