@@ -32,10 +32,11 @@ public class OptionAssert
     /// <summary>
     /// Checks that an option has a specific value. If it is empty or has a different value, the assert fails.
     /// </summary>
+    /// <param name="expected">The value that's excected to be inside the option..</param>
     /// <param name="option">The option to check for having a specific value.</param>
     /// <param name="message">Message to display if the assert fails. If null, a generic message is used.</param>
     /// <typeparam name="T">Type of the option</typeparam>
-    public static void HasValue<T>(T expected, IOption<T> option, string message = null)
+    public static void NonEmptyWithValue<T>(T expected, IOption<T> option, string message = null)
     {
         Assert.True(option.NonEmpty, message ?? "Option was expected to have a value, but was empty.");
         Assert.Equal(expected, option.Get());

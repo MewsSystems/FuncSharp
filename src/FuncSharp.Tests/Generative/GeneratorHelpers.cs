@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FsCheck;
 
 namespace FuncSharp.Tests.Generative;
@@ -22,5 +24,14 @@ internal static class GeneratorExtensions
             else
                 return Option.Empty<T>();
         }));
+    }
+    
+    /// <summary>
+    /// Generates a collection of values from a given generator.
+    /// </summary>
+    internal static Gen<List<T>> ToList<T>(this Gen<T> generator)
+    {
+        return Gen.ArrayOf(generator).Select(array => array.ToList());
+
     }
 }

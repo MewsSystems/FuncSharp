@@ -10,7 +10,7 @@ namespace FuncSharp.Tests.Options
     {
         public GetTests()
         {
-            Arb.Register<Generators>();
+            Arb.Register<OptionGenerators>();
         }
 
         [Fact]

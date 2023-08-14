@@ -10,14 +10,14 @@ namespace FuncSharp.Tests.Options
     {
         public FlatMapTests_Nullable()
         {
-            Arb.Register<Generators>();
+            Arb.Register<OptionGenerators>();
         }
 
         [Fact]
         public void FlatMap()
         {
             // Flatmap to a not-null nullable should have the value.
-            OptionAssert.HasValue(84, 42.ToOption().FlatMap(v => (int?)(v * 2)));
+            OptionAssert.NonEmptyWithValue(84, 42.ToOption().FlatMap(v => (int?)(v * 2)));
 
             // Flatmap to null nullable should be empty.
             OptionAssert.IsEmpty(42.ToOption().FlatMap(v => (int?)null));
