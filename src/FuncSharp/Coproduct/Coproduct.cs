@@ -1,6 +1,6 @@
 ﻿
 using System;
-
+using System.Threading.Tasks;
 namespace FuncSharp
 {
     /// <summary>
@@ -123,6 +123,16 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null)
         {
@@ -131,6 +141,17 @@ namespace FuncSharp
                 case 1: ifFirst?.Invoke((T1)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -225,6 +246,18 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null)
@@ -235,6 +268,19 @@ namespace FuncSharp
                 case 2: ifSecond?.Invoke((T2)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -355,6 +401,20 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -367,6 +427,21 @@ namespace FuncSharp
                 case 3: ifThird?.Invoke((T3)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -513,6 +588,22 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -527,6 +618,23 @@ namespace FuncSharp
                 case 4: ifFourth?.Invoke((T4)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -699,6 +807,24 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -715,6 +841,25 @@ namespace FuncSharp
                 case 5: ifFifth?.Invoke((T5)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -913,6 +1058,26 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -931,6 +1096,27 @@ namespace FuncSharp
                 case 6: ifSixth?.Invoke((T6)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -1155,6 +1341,28 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -1175,6 +1383,29 @@ namespace FuncSharp
                 case 7: ifSeventh?.Invoke((T7)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -1425,6 +1656,30 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -1447,6 +1702,31 @@ namespace FuncSharp
                 case 8: ifEighth?.Invoke((T8)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -1723,6 +2003,32 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -1747,6 +2053,33 @@ namespace FuncSharp
                 case 9: ifNinth?.Invoke((T9)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -2049,6 +2382,34 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -2075,6 +2436,35 @@ namespace FuncSharp
                 case 10: ifTenth?.Invoke((T10)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -2403,6 +2793,36 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -2431,6 +2851,37 @@ namespace FuncSharp
                 case 11: ifEleventh?.Invoke((T11)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -2785,6 +3236,38 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -2815,6 +3298,39 @@ namespace FuncSharp
                 case 12: ifTwelfth?.Invoke((T12)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -3195,6 +3711,40 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -3227,6 +3777,41 @@ namespace FuncSharp
                 case 13: ifThirteenth?.Invoke((T13)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -3633,6 +4218,42 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -3667,6 +4288,43 @@ namespace FuncSharp
                 case 14: ifFourteenth?.Invoke((T14)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -4099,6 +4757,44 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth,
+            Func<T15, Task<R>> ifFifteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                case 15: return await ifFifteenth((T15)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -4135,6 +4831,45 @@ namespace FuncSharp
                 case 15: ifFifteenth?.Invoke((T15)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth,
+            Func<T15, Task> ifFifteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+                case 15: await (ifFifteenth?.Invoke((T15)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -4593,6 +5328,46 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth,
+            Func<T15, Task<R>> ifFifteenth,
+            Func<T16, Task<R>> ifSixteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                case 15: return await ifFifteenth((T15)CoproductValue);
+                case 16: return await ifSixteenth((T16)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -4631,6 +5406,47 @@ namespace FuncSharp
                 case 16: ifSixteenth?.Invoke((T16)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth,
+            Func<T15, Task> ifFifteenth,
+            Func<T16, Task> ifSixteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+                case 15: await (ifFifteenth?.Invoke((T15)CoproductValue) ?? Task.CompletedTask); break;
+                case 16: await (ifSixteenth?.Invoke((T16)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -5115,6 +5931,48 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth,
+            Func<T15, Task<R>> ifFifteenth,
+            Func<T16, Task<R>> ifSixteenth,
+            Func<T17, Task<R>> ifSeventeenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                case 15: return await ifFifteenth((T15)CoproductValue);
+                case 16: return await ifSixteenth((T16)CoproductValue);
+                case 17: return await ifSeventeenth((T17)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -5155,6 +6013,49 @@ namespace FuncSharp
                 case 17: ifSeventeenth?.Invoke((T17)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth,
+            Func<T15, Task> ifFifteenth,
+            Func<T16, Task> ifSixteenth,
+            Func<T17, Task> ifSeventeenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+                case 15: await (ifFifteenth?.Invoke((T15)CoproductValue) ?? Task.CompletedTask); break;
+                case 16: await (ifSixteenth?.Invoke((T16)CoproductValue) ?? Task.CompletedTask); break;
+                case 17: await (ifSeventeenth?.Invoke((T17)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -5665,6 +6566,50 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth,
+            Func<T15, Task<R>> ifFifteenth,
+            Func<T16, Task<R>> ifSixteenth,
+            Func<T17, Task<R>> ifSeventeenth,
+            Func<T18, Task<R>> ifEighteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                case 15: return await ifFifteenth((T15)CoproductValue);
+                case 16: return await ifSixteenth((T16)CoproductValue);
+                case 17: return await ifSeventeenth((T17)CoproductValue);
+                case 18: return await ifEighteenth((T18)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -5707,6 +6652,51 @@ namespace FuncSharp
                 case 18: ifEighteenth?.Invoke((T18)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth,
+            Func<T15, Task> ifFifteenth,
+            Func<T16, Task> ifSixteenth,
+            Func<T17, Task> ifSeventeenth,
+            Func<T18, Task> ifEighteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+                case 15: await (ifFifteenth?.Invoke((T15)CoproductValue) ?? Task.CompletedTask); break;
+                case 16: await (ifSixteenth?.Invoke((T16)CoproductValue) ?? Task.CompletedTask); break;
+                case 17: await (ifSeventeenth?.Invoke((T17)CoproductValue) ?? Task.CompletedTask); break;
+                case 18: await (ifEighteenth?.Invoke((T18)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -6243,6 +7233,52 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth,
+            Func<T15, Task<R>> ifFifteenth,
+            Func<T16, Task<R>> ifSixteenth,
+            Func<T17, Task<R>> ifSeventeenth,
+            Func<T18, Task<R>> ifEighteenth,
+            Func<T19, Task<R>> ifNineteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                case 15: return await ifFifteenth((T15)CoproductValue);
+                case 16: return await ifSixteenth((T16)CoproductValue);
+                case 17: return await ifSeventeenth((T17)CoproductValue);
+                case 18: return await ifEighteenth((T18)CoproductValue);
+                case 19: return await ifNineteenth((T19)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -6287,6 +7323,53 @@ namespace FuncSharp
                 case 19: ifNineteenth?.Invoke((T19)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth,
+            Func<T15, Task> ifFifteenth,
+            Func<T16, Task> ifSixteenth,
+            Func<T17, Task> ifSeventeenth,
+            Func<T18, Task> ifEighteenth,
+            Func<T19, Task> ifNineteenth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+                case 15: await (ifFifteenth?.Invoke((T15)CoproductValue) ?? Task.CompletedTask); break;
+                case 16: await (ifSixteenth?.Invoke((T16)CoproductValue) ?? Task.CompletedTask); break;
+                case 17: await (ifSeventeenth?.Invoke((T17)CoproductValue) ?? Task.CompletedTask); break;
+                case 18: await (ifEighteenth?.Invoke((T18)CoproductValue) ?? Task.CompletedTask); break;
+                case 19: await (ifNineteenth?.Invoke((T19)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
     /// <summary>
@@ -6849,6 +7932,54 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+            Func<T1, Task<R>> ifFirst,
+            Func<T2, Task<R>> ifSecond,
+            Func<T3, Task<R>> ifThird,
+            Func<T4, Task<R>> ifFourth,
+            Func<T5, Task<R>> ifFifth,
+            Func<T6, Task<R>> ifSixth,
+            Func<T7, Task<R>> ifSeventh,
+            Func<T8, Task<R>> ifEighth,
+            Func<T9, Task<R>> ifNinth,
+            Func<T10, Task<R>> ifTenth,
+            Func<T11, Task<R>> ifEleventh,
+            Func<T12, Task<R>> ifTwelfth,
+            Func<T13, Task<R>> ifThirteenth,
+            Func<T14, Task<R>> ifFourteenth,
+            Func<T15, Task<R>> ifFifteenth,
+            Func<T16, Task<R>> ifSixteenth,
+            Func<T17, Task<R>> ifSeventeenth,
+            Func<T18, Task<R>> ifEighteenth,
+            Func<T19, Task<R>> ifNineteenth,
+            Func<T20, Task<R>> ifTwentieth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: return await ifFirst((T1)CoproductValue);
+                case 2: return await ifSecond((T2)CoproductValue);
+                case 3: return await ifThird((T3)CoproductValue);
+                case 4: return await ifFourth((T4)CoproductValue);
+                case 5: return await ifFifth((T5)CoproductValue);
+                case 6: return await ifSixth((T6)CoproductValue);
+                case 7: return await ifSeventh((T7)CoproductValue);
+                case 8: return await ifEighth((T8)CoproductValue);
+                case 9: return await ifNinth((T9)CoproductValue);
+                case 10: return await ifTenth((T10)CoproductValue);
+                case 11: return await ifEleventh((T11)CoproductValue);
+                case 12: return await ifTwelfth((T12)CoproductValue);
+                case 13: return await ifThirteenth((T13)CoproductValue);
+                case 14: return await ifFourteenth((T14)CoproductValue);
+                case 15: return await ifFifteenth((T15)CoproductValue);
+                case 16: return await ifSixteenth((T16)CoproductValue);
+                case 17: return await ifSeventeenth((T17)CoproductValue);
+                case 18: return await ifEighteenth((T18)CoproductValue);
+                case 19: return await ifNineteenth((T19)CoproductValue);
+                case 20: return await ifTwentieth((T20)CoproductValue);
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null,
@@ -6895,6 +8026,55 @@ namespace FuncSharp
                 case 20: ifTwentieth?.Invoke((T20)CoproductValue); break;
             }
         }
+
+        public async Task MatchAsync(
+            Func<T1, Task> ifFirst,
+            Func<T2, Task> ifSecond,
+            Func<T3, Task> ifThird,
+            Func<T4, Task> ifFourth,
+            Func<T5, Task> ifFifth,
+            Func<T6, Task> ifSixth,
+            Func<T7, Task> ifSeventh,
+            Func<T8, Task> ifEighth,
+            Func<T9, Task> ifNinth,
+            Func<T10, Task> ifTenth,
+            Func<T11, Task> ifEleventh,
+            Func<T12, Task> ifTwelfth,
+            Func<T13, Task> ifThirteenth,
+            Func<T14, Task> ifFourteenth,
+            Func<T15, Task> ifFifteenth,
+            Func<T16, Task> ifSixteenth,
+            Func<T17, Task> ifSeventeenth,
+            Func<T18, Task> ifEighteenth,
+            Func<T19, Task> ifNineteenth,
+            Func<T20, Task> ifTwentieth)
+        {
+            switch (CoproductDiscriminator)
+            {
+                case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+                case 2: await (ifSecond?.Invoke((T2)CoproductValue) ?? Task.CompletedTask); break;
+                case 3: await (ifThird?.Invoke((T3)CoproductValue) ?? Task.CompletedTask); break;
+                case 4: await (ifFourth?.Invoke((T4)CoproductValue) ?? Task.CompletedTask); break;
+                case 5: await (ifFifth?.Invoke((T5)CoproductValue) ?? Task.CompletedTask); break;
+                case 6: await (ifSixth?.Invoke((T6)CoproductValue) ?? Task.CompletedTask); break;
+                case 7: await (ifSeventh?.Invoke((T7)CoproductValue) ?? Task.CompletedTask); break;
+                case 8: await (ifEighth?.Invoke((T8)CoproductValue) ?? Task.CompletedTask); break;
+                case 9: await (ifNinth?.Invoke((T9)CoproductValue) ?? Task.CompletedTask); break;
+                case 10: await (ifTenth?.Invoke((T10)CoproductValue) ?? Task.CompletedTask); break;
+                case 11: await (ifEleventh?.Invoke((T11)CoproductValue) ?? Task.CompletedTask); break;
+                case 12: await (ifTwelfth?.Invoke((T12)CoproductValue) ?? Task.CompletedTask); break;
+                case 13: await (ifThirteenth?.Invoke((T13)CoproductValue) ?? Task.CompletedTask); break;
+                case 14: await (ifFourteenth?.Invoke((T14)CoproductValue) ?? Task.CompletedTask); break;
+                case 15: await (ifFifteenth?.Invoke((T15)CoproductValue) ?? Task.CompletedTask); break;
+                case 16: await (ifSixteenth?.Invoke((T16)CoproductValue) ?? Task.CompletedTask); break;
+                case 17: await (ifSeventeenth?.Invoke((T17)CoproductValue) ?? Task.CompletedTask); break;
+                case 18: await (ifEighteenth?.Invoke((T18)CoproductValue) ?? Task.CompletedTask); break;
+                case 19: await (ifNineteenth?.Invoke((T19)CoproductValue) ?? Task.CompletedTask); break;
+                case 20: await (ifTwentieth?.Invoke((T20)CoproductValue) ?? Task.CompletedTask); break;
+            }
+            await Task.CompletedTask;
+        }
+
     }
 
 }

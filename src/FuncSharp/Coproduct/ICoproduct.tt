@@ -5,7 +5,7 @@
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
 using System;
-
+using System.Threading.Tasks;
 namespace FuncSharp
 {
     /// <summary>
@@ -56,12 +56,17 @@ namespace FuncSharp
         R Match<R>(
 <#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>);
 
+        Task<R> MatchAsync<R>(
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", Task<R>> " + IfIth(x), separator: ",") #>);
         /// <summary>
         /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
 <#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>);
+
+        Task MatchAsync(
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", Task> " + IfIth(x), separator: ",") #>);
 <#      } #>
     }
 
