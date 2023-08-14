@@ -10,7 +10,7 @@ namespace FuncSharp.Tests.Options
     {
         public FlatMapTests()
         {
-            Arb.Register<Generators>();
+            Arb.Register<OptionGenerators>();
         }
 
         [Fact]
@@ -25,6 +25,18 @@ namespace FuncSharp.Tests.Options
             // Flatmap on empty option is always empty.
             OptionAssert.IsEmpty(Option.Empty<int>().FlatMap(v => (v * 2).ToOption()));
             OptionAssert.IsEmpty(Option.Empty<int>().FlatMap(v => Option.Empty<int>()));
+        }
+
+        [Property]
+        internal void FlatMapOrder_int(IOption<int> first, IOption<int> second, IOption<int> third)
+        {
+            Assert.Equal(first.FlatMap(f => second.FlatMap(s => third)), second.FlatMap(s => first.FlatMap(f => third)));
+        }
+
+        [Property]
+        internal void FlatMapOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second, IOption<ReferenceType> third)
+        {
+            Assert.Equal(first.FlatMap(f => second.FlatMap(s => third)), second.FlatMap(s => first.FlatMap(f => third)));
         }
 
         [Property]

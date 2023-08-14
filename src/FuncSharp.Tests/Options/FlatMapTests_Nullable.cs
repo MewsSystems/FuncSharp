@@ -10,7 +10,7 @@ namespace FuncSharp.Tests.Options
     {
         public FlatMapTests_Nullable()
         {
-            Arb.Register<Generators>();
+            Arb.Register<OptionGenerators>();
         }
 
         [Fact]

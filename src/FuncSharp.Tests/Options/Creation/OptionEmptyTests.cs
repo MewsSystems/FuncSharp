@@ -9,7 +9,7 @@ namespace FuncSharp.Tests.Options
     {
         public OptionEmptyTests()
         {
-            Arb.Register<Generators>();
+            Arb.Register<OptionGenerators>();
         }
 
         [Fact]
