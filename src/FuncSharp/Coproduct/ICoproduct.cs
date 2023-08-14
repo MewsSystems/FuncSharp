@@ -54,6 +54,10 @@ namespace FuncSharp
         R Match<R>(
             Func<T1, R> ifFirst);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst);
         /// <summary>
@@ -63,6 +67,10 @@ namespace FuncSharp
         void Match(
             Action<T1> ifFirst = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst);
     }
@@ -102,6 +110,10 @@ namespace FuncSharp
             Func<T1, R> ifFirst,
             Func<T2, R> ifSecond);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond);
@@ -113,6 +125,10 @@ namespace FuncSharp
             Action<T1> ifFirst = null,
             Action<T2> ifSecond = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond);
@@ -165,6 +181,10 @@ namespace FuncSharp
             Func<T2, R> ifSecond,
             Func<T3, R> ifThird);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -178,6 +198,10 @@ namespace FuncSharp
             Action<T2> ifSecond = null,
             Action<T3> ifThird = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -243,6 +267,10 @@ namespace FuncSharp
             Func<T3, R> ifThird,
             Func<T4, R> ifFourth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -258,6 +286,10 @@ namespace FuncSharp
             Action<T3> ifThird = null,
             Action<T4> ifFourth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -336,6 +368,10 @@ namespace FuncSharp
             Func<T4, R> ifFourth,
             Func<T5, R> ifFifth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -353,6 +389,10 @@ namespace FuncSharp
             Action<T4> ifFourth = null,
             Action<T5> ifFifth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -444,6 +484,10 @@ namespace FuncSharp
             Func<T5, R> ifFifth,
             Func<T6, R> ifSixth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -463,6 +507,10 @@ namespace FuncSharp
             Action<T5> ifFifth = null,
             Action<T6> ifSixth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -567,6 +615,10 @@ namespace FuncSharp
             Func<T6, R> ifSixth,
             Func<T7, R> ifSeventh);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -588,6 +640,10 @@ namespace FuncSharp
             Action<T6> ifSixth = null,
             Action<T7> ifSeventh = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -705,6 +761,10 @@ namespace FuncSharp
             Func<T7, R> ifSeventh,
             Func<T8, R> ifEighth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -728,6 +788,10 @@ namespace FuncSharp
             Action<T7> ifSeventh = null,
             Action<T8> ifEighth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -858,6 +922,10 @@ namespace FuncSharp
             Func<T8, R> ifEighth,
             Func<T9, R> ifNinth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -883,6 +951,10 @@ namespace FuncSharp
             Action<T8> ifEighth = null,
             Action<T9> ifNinth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -1026,6 +1098,10 @@ namespace FuncSharp
             Func<T9, R> ifNinth,
             Func<T10, R> ifTenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -1053,6 +1129,10 @@ namespace FuncSharp
             Action<T9> ifNinth = null,
             Action<T10> ifTenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -1209,6 +1289,10 @@ namespace FuncSharp
             Func<T10, R> ifTenth,
             Func<T11, R> ifEleventh);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -1238,6 +1322,10 @@ namespace FuncSharp
             Action<T10> ifTenth = null,
             Action<T11> ifEleventh = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -1407,6 +1495,10 @@ namespace FuncSharp
             Func<T11, R> ifEleventh,
             Func<T12, R> ifTwelfth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -1438,6 +1530,10 @@ namespace FuncSharp
             Action<T11> ifEleventh = null,
             Action<T12> ifTwelfth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -1620,6 +1716,10 @@ namespace FuncSharp
             Func<T12, R> ifTwelfth,
             Func<T13, R> ifThirteenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -1653,6 +1753,10 @@ namespace FuncSharp
             Action<T12> ifTwelfth = null,
             Action<T13> ifThirteenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -1848,6 +1952,10 @@ namespace FuncSharp
             Func<T13, R> ifThirteenth,
             Func<T14, R> ifFourteenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -1883,6 +1991,10 @@ namespace FuncSharp
             Action<T13> ifThirteenth = null,
             Action<T14> ifFourteenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -2091,6 +2203,10 @@ namespace FuncSharp
             Func<T14, R> ifFourteenth,
             Func<T15, R> ifFifteenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -2128,6 +2244,10 @@ namespace FuncSharp
             Action<T14> ifFourteenth = null,
             Action<T15> ifFifteenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -2349,6 +2469,10 @@ namespace FuncSharp
             Func<T15, R> ifFifteenth,
             Func<T16, R> ifSixteenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -2388,6 +2512,10 @@ namespace FuncSharp
             Action<T15> ifFifteenth = null,
             Action<T16> ifSixteenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -2622,6 +2750,10 @@ namespace FuncSharp
             Func<T16, R> ifSixteenth,
             Func<T17, R> ifSeventeenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -2663,6 +2795,10 @@ namespace FuncSharp
             Action<T16> ifSixteenth = null,
             Action<T17> ifSeventeenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -2910,6 +3046,10 @@ namespace FuncSharp
             Func<T17, R> ifSeventeenth,
             Func<T18, R> ifEighteenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -2953,6 +3093,10 @@ namespace FuncSharp
             Action<T17> ifSeventeenth = null,
             Action<T18> ifEighteenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -3213,6 +3357,10 @@ namespace FuncSharp
             Func<T18, R> ifEighteenth,
             Func<T19, R> ifNineteenth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -3258,6 +3406,10 @@ namespace FuncSharp
             Action<T18> ifEighteenth = null,
             Action<T19> ifNineteenth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
@@ -3531,6 +3683,10 @@ namespace FuncSharp
             Func<T19, R> ifNineteenth,
             Func<T20, R> ifTwentieth);
 
+        /// <summary>
+        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+        /// of the <paramref name="ifFirst" /> function.
+        /// </summary>
         Task<R> MatchAsync<R>(
             Func<T1, Task<R>> ifFirst,
             Func<T2, Task<R>> ifSecond,
@@ -3578,6 +3734,10 @@ namespace FuncSharp
             Action<T19> ifNineteenth = null,
             Action<T20> ifTwentieth = null);
 
+        /// <summary>
+        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+        /// </summary>
         Task MatchAsync(
             Func<T1, Task> ifFirst,
             Func<T2, Task> ifSecond,
