@@ -5,6 +5,7 @@
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
 using System;
+using System.Threading.Tasks;
 
 namespace FuncSharp
 {
@@ -129,6 +130,16 @@ namespace FuncSharp
             }
         }
 
+        public async Task<R> MatchAsync<R>(
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", Task<R>> " + IfIth(x), separator: ",") #>)
+        {
+            switch (CoproductDiscriminator)
+            {
+<#= Lines(i, x => Indent(16) + "case " + x + ": return await " + IfIth(x) + "((" + Type(x) + ")CoproductValue);") #>
+                default: return await Task.FromResult(default(R));
+            }
+        }
+
         public void Match(
 <#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>)
         {
@@ -137,6 +148,17 @@ namespace FuncSharp
 <#= Lines(i, x => Indent(16) + "case " + x + ": " + IfIth(x) + "?.Invoke((" + Type(x) + ")CoproductValue); break;") #>
             }
         }
+
+        public async Task MatchAsync(
+<#= Lines(i, x => Indent(12) + "Func<T" + x + ", Task> " + IfIth(x), separator: ",") #>)
+        {
+            switch (CoproductDiscriminator)
+            {
+<#= Lines(i, x => Indent(16) + "case " + x + ": await (" + IfIth(x) + "?.Invoke((" + Type(x) + ")CoproductValue) ?? Task.CompletedTask); break;") #>
+            }
+            await Task.CompletedTask;
+        }
+
 <#    } else { #>
         protected Coproduct0()
             : base(0, 0, null)

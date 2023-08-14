@@ -5,6 +5,7 @@
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
 using System;
+using System.Threading.Tasks;
 
 namespace FuncSharp
 {
@@ -140,6 +141,19 @@ namespace FuncSharp
             return value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, Task<TResult>> f" + j, separator: ",") #>,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>);
+            }
+            return await value.AsSafeCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -155,6 +169,21 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T,Task> f" + j, separator: ",") #>,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>, _ => otherwise(value));
             }
         }
 

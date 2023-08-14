@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Threading.Tasks;
 
 namespace FuncSharp
 {
@@ -130,6 +131,19 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1).MatchAsync(f1);
+            }
+            return await value.AsSafeCoproduct(t1).MatchAsync(f1, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -145,6 +159,21 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1).MatchAsync(f1);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1).MatchAsync(f1, _ => otherwise(value));
             }
         }
 
@@ -234,6 +263,20 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2).MatchAsync(f1, f2);
+            }
+            return await value.AsSafeCoproduct(t1, t2).MatchAsync(f1, f2, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -250,6 +293,22 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2).MatchAsync(f1, f2);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2).MatchAsync(f1, f2, _ => otherwise(value));
             }
         }
 
@@ -345,6 +404,21 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -362,6 +436,23 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3, _ => otherwise(value));
             }
         }
 
@@ -463,6 +554,22 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -481,6 +588,24 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4, _ => otherwise(value));
             }
         }
 
@@ -588,6 +713,23 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -607,6 +749,25 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5, _ => otherwise(value));
             }
         }
 
@@ -720,6 +881,24 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -740,6 +919,26 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
             }
         }
 
@@ -859,6 +1058,25 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -880,6 +1098,27 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
             }
         }
 
@@ -1005,6 +1244,26 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -1027,6 +1286,28 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
             }
         }
 
@@ -1158,6 +1439,27 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -1181,6 +1483,29 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
             }
         }
 
@@ -1318,6 +1643,28 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -1342,6 +1689,30 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
             }
         }
 
@@ -1485,6 +1856,29 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -1510,6 +1904,31 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
             }
         }
 
@@ -1659,6 +2078,30 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -1685,6 +2128,32 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
             }
         }
 
@@ -1840,6 +2309,31 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -1867,6 +2361,33 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
             }
         }
 
@@ -2028,6 +2549,32 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            T t14, Func<T, Task<TResult>> f14,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -2056,6 +2603,34 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            T t14, Func<T,Task> f14,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
             }
         }
 
@@ -2223,6 +2798,33 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            T t14, Func<T, Task<TResult>> f14,
+            T t15, Func<T, Task<TResult>> f15,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -2252,6 +2854,35 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            T t14, Func<T,Task> f14,
+            T t15, Func<T,Task> f15,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
             }
         }
 
@@ -2425,6 +3056,34 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            T t14, Func<T, Task<TResult>> f14,
+            T t15, Func<T, Task<TResult>> f15,
+            T t16, Func<T, Task<TResult>> f16,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -2455,6 +3114,36 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            T t14, Func<T,Task> f14,
+            T t15, Func<T,Task> f15,
+            T t16, Func<T,Task> f16,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
             }
         }
 
@@ -2634,6 +3323,35 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            T t14, Func<T, Task<TResult>> f14,
+            T t15, Func<T, Task<TResult>> f15,
+            T t16, Func<T, Task<TResult>> f16,
+            T t17, Func<T, Task<TResult>> f17,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -2665,6 +3383,37 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            T t14, Func<T,Task> f14,
+            T t15, Func<T,Task> f15,
+            T t16, Func<T,Task> f16,
+            T t17, Func<T,Task> f17,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
             }
         }
 
@@ -2850,6 +3599,36 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            T t14, Func<T, Task<TResult>> f14,
+            T t15, Func<T, Task<TResult>> f15,
+            T t16, Func<T, Task<TResult>> f16,
+            T t17, Func<T, Task<TResult>> f17,
+            T t18, Func<T, Task<TResult>> f18,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -2882,6 +3661,38 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            T t14, Func<T,Task> f14,
+            T t15, Func<T,Task> f15,
+            T t16, Func<T,Task> f16,
+            T t17, Func<T,Task> f17,
+            T t18, Func<T,Task> f18,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
             }
         }
 
@@ -3073,6 +3884,37 @@ namespace FuncSharp
             return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
         }
 
+
+        public static async Task<TResult> MatchAsync<T, TResult>(
+            this T value,
+            T t1, Func<T, Task<TResult>> f1,
+            T t2, Func<T, Task<TResult>> f2,
+            T t3, Func<T, Task<TResult>> f3,
+            T t4, Func<T, Task<TResult>> f4,
+            T t5, Func<T, Task<TResult>> f5,
+            T t6, Func<T, Task<TResult>> f6,
+            T t7, Func<T, Task<TResult>> f7,
+            T t8, Func<T, Task<TResult>> f8,
+            T t9, Func<T, Task<TResult>> f9,
+            T t10, Func<T, Task<TResult>> f10,
+            T t11, Func<T, Task<TResult>> f11,
+            T t12, Func<T, Task<TResult>> f12,
+            T t13, Func<T, Task<TResult>> f13,
+            T t14, Func<T, Task<TResult>> f14,
+            T t15, Func<T, Task<TResult>> f15,
+            T t16, Func<T, Task<TResult>> f16,
+            T t17, Func<T, Task<TResult>> f17,
+            T t18, Func<T, Task<TResult>> f18,
+            T t19, Func<T, Task<TResult>> f19,
+            Func<T, Task<TResult>> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+            }
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+        }
+
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
@@ -3106,6 +3948,39 @@ namespace FuncSharp
             else
             {
                 value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+            }
+        }
+
+        public static async Task MatchAsync<T>(
+            this T value,
+            T t1, Func<T,Task> f1,
+            T t2, Func<T,Task> f2,
+            T t3, Func<T,Task> f3,
+            T t4, Func<T,Task> f4,
+            T t5, Func<T,Task> f5,
+            T t6, Func<T,Task> f6,
+            T t7, Func<T,Task> f7,
+            T t8, Func<T,Task> f8,
+            T t9, Func<T,Task> f9,
+            T t10, Func<T,Task> f10,
+            T t11, Func<T,Task> f11,
+            T t12, Func<T,Task> f12,
+            T t13, Func<T,Task> f13,
+            T t14, Func<T,Task> f14,
+            T t15, Func<T,Task> f15,
+            T t16, Func<T,Task> f16,
+            T t17, Func<T,Task> f17,
+            T t18, Func<T,Task> f18,
+            T t19, Func<T,Task> f19,
+            Func<T, Task> otherwise = null)
+        {
+            if (otherwise == null)
+            {
+                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+            }
+            else
+            {
+                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
             }
         }
 

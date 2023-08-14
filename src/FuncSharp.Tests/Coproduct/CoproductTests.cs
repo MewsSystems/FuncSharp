@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Xunit;
 
 namespace FuncSharp.Tests
 {
@@ -56,6 +57,18 @@ namespace FuncSharp.Tests
             Assert.True(u1.Match(v => v == "foo", v => false));
             Assert.True(u2.Match(v => false, v => v == 42));
             Assert.True(u3.Match(s => false, d => false, _ => true));
+        }
+        
+        [Fact]
+        public async Task MatchAsync()
+        {
+            var u1 = Coproduct2.CreateFirst<string, int>("foo");
+            var u2 = Coproduct2.CreateSecond<string, int>(42);
+            var u3 = 42.AsSafeCoproduct<string, double>();
+
+            Assert.True(await u1.MatchAsync(v => Task.FromResult(v == "foo"), v => Task.FromResult(false)));
+            Assert.True(await u2.MatchAsync(v => Task.FromResult(false), v => Task.FromResult(v == 42)));
+            Assert.True(await u3.MatchAsync(s => Task.FromResult(false), d => Task.FromResult(false), _ => Task.FromResult(true)));
         }
     }
 }
