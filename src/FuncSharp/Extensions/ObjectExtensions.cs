@@ -139,9 +139,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1).Match(f1);
+                return await value.AsCoproduct(t1).MatchAsync(f1);
             }
-            return await value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1).MatchAsync(f1, _ => otherwise(value));
         }
 
         /// <summary>
@@ -272,9 +272,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2).Match(f1, f2);
+                return await value.AsCoproduct(t1, t2).MatchAsync(f1, f2);
             }
-            return await value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2).MatchAsync(f1, f2, _ => otherwise(value));
         }
 
         /// <summary>
@@ -414,9 +414,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
+                return await value.AsCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3, _ => otherwise(value));
         }
 
         /// <summary>
@@ -565,9 +565,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
+                return await value.AsCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4, _ => otherwise(value));
         }
 
         /// <summary>
@@ -725,9 +725,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5, _ => otherwise(value));
         }
 
         /// <summary>
@@ -894,9 +894,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
         }
 
         /// <summary>
@@ -1072,9 +1072,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
         }
 
         /// <summary>
@@ -1259,9 +1259,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
         }
 
         /// <summary>
@@ -1455,9 +1455,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
         }
 
         /// <summary>
@@ -1660,9 +1660,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
         }
 
         /// <summary>
@@ -1874,9 +1874,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
         }
 
         /// <summary>
@@ -2097,9 +2097,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
         }
 
         /// <summary>
@@ -2329,9 +2329,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
         }
 
         /// <summary>
@@ -2570,9 +2570,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
         }
 
         /// <summary>
@@ -2820,9 +2820,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
         }
 
         /// <summary>
@@ -3079,9 +3079,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
         }
 
         /// <summary>
@@ -3347,9 +3347,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
         }
 
         /// <summary>
@@ -3624,9 +3624,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
         }
 
         /// <summary>
@@ -3910,9 +3910,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
         }
 
         /// <summary>

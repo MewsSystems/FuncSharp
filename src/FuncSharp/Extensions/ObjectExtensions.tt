@@ -149,9 +149,9 @@ namespace FuncSharp
         {
             if (otherwise == null)
             {
-                return await value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
+                return await value.AsCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>);
             }
-            return await value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
+            return await value.AsSafeCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>, _ => otherwise(value));
         }
 
         /// <summary>
