@@ -28,43 +28,58 @@ namespace FuncSharp.Tests.Options
         [Property]
         internal void GetOrFalse_WithFunc_short(IOption<short> option)
         {
-            Assert.Equal(option.GetOrDefault(i => i > 0), option.GetOrFalse(i => i > 0));
+            AssertGetOrFalse(option, i => i > 0);
         }
 
         [Property]
         internal void GetOrFalse_WithFunc_int(IOption<int> option)
         {
-            Assert.Equal(option.GetOrDefault(i => i > 1567), option.GetOrFalse(i => i > 1567));
+            AssertGetOrFalse(option, i => i > 1567);
         }
 
         [Property]
         internal void GetOrFalse_WithFunc_long(IOption<long> option)
         {
-            Assert.Equal(option.GetOrDefault(i => i < 1567), option.GetOrFalse(i => i < 1567));
+            AssertGetOrFalse(option, i => i < 1567);
         }
 
         [Property]
         internal void GetOrFalse_WithFunc_decimal(IOption<decimal> option)
         {
-            Assert.Equal(option.GetOrDefault(d => d < -1200), option.GetOrFalse(d => d < -1200));
+            AssertGetOrFalse(option, d => d < -1200);
         }
 
         [Property]
         internal void GetOrFalse_WithFunc_double(IOption<double> option)
         {
-            Assert.Equal(option.GetOrDefault(d => Math.Abs(d) > 14), option.GetOrFalse(d => Math.Abs(d) > 14));
+            AssertGetOrFalse(option, d => Math.Abs(d) > 14);
         }
 
         [Property]
         internal void GetOrFalse_WithFunc_bool(IOption<bool> option)
         {
-            Assert.Equal(option.GetOrDefault(b => !b), option.GetOrFalse(b => !b));
+            AssertGetOrFalse(option, b => !b);
         }
 
         [Property]
         internal void GetOrFalse_WithFunc_ReferenceType(IOption<ReferenceType> option)
         {
-            Assert.Equal(option.GetOrDefault(t => t.Value > 1567), option.GetOrFalse(t => t.Value > 1567));
+            AssertGetOrFalse(option, t => t.Value > 1567);
+        }
+
+        private void AssertGetOrFalse<T>(IOption<T> option, Func<T, bool> map)
+        {
+            var result = option.GetOrFalse(map);
+            Assert.Equal(option.GetOrDefault(map), result);
+
+            if (option.NonEmpty)
+            {
+                Assert.Equal(map(option.Get()), result);
+            }
+            else
+            {
+                Assert.False(result);
+            }
         }
     }
 }

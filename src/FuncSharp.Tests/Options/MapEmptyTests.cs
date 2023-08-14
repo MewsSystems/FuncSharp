@@ -22,10 +22,10 @@ namespace FuncSharp.Tests.Options
             OptionAssert.IsEmpty(Option.Valued("").MapEmpty(_ => "asd"));
 
             // Empty option will always have value when mapped with MapEmpty
-            OptionAssert.HasValue(14, Option.Empty<int>().MapEmpty(_ => 14));
-            OptionAssert.HasValue(28, Option.Empty<string>().MapEmpty(_ => (int?)28));
-            OptionAssert.HasValue(null, Option.Empty<int>().MapEmpty(_ => (string)null));
-            OptionAssert.HasValue("xxxxx", Option.Empty<string>().MapEmpty(v => "xxxxx"));
+            OptionAssert.NonEmptyWithValue(14, Option.Empty<int>().MapEmpty(_ => 14));
+            OptionAssert.NonEmptyWithValue(28, Option.Empty<string>().MapEmpty(_ => (int?)28));
+            OptionAssert.NonEmptyWithValue(null, Option.Empty<int>().MapEmpty(_ => (string)null));
+            OptionAssert.NonEmptyWithValue("xxxxx", Option.Empty<string>().MapEmpty(v => "xxxxx"));
         }
 
         [Property]
@@ -73,7 +73,7 @@ namespace FuncSharp.Tests.Options
             Assert.Equal(option.NonEmpty, result.IsEmpty);
             if (option.IsEmpty)
             {
-                OptionAssert.HasValue(map(Unit.Value), result);
+                OptionAssert.NonEmptyWithValue(map(Unit.Value), result);
             }
         }
     }

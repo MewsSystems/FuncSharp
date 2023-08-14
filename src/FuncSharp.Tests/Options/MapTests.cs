@@ -21,9 +21,9 @@ namespace FuncSharp.Tests.Options
             OptionAssert.IsEmpty(Option.Empty<string>().Map(v => (int?)null));
 
             // Valued option mapped will always have value
-            OptionAssert.HasValue(84, 42.ToOption().Map(v => v * 2));
-            OptionAssert.HasValue(84, 42.ToOption().Map(v => v * 2 as int?));
-            OptionAssert.HasValue("xxxxx", 5.ToOption().Map(v => new String('x', v)));
+            OptionAssert.NonEmptyWithValue(84, 42.ToOption().Map(v => v * 2));
+            OptionAssert.NonEmptyWithValue(84, 42.ToOption().Map(v => v * 2 as int?));
+            OptionAssert.NonEmptyWithValue("xxxxx", 5.ToOption().Map(v => new String('x', v)));
 
             // Even if you map to null, the option is still valued
             OptionAssert.NonEmpty(5.ToOption().Map(v => null as int?));

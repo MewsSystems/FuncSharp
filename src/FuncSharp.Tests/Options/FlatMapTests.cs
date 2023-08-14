@@ -17,7 +17,7 @@ namespace FuncSharp.Tests.Options
         public void FlatMap()
         {
             // Flatmap to a valued option should have the value.
-            OptionAssert.HasValue(84, 42.ToOption().FlatMap(v => (v * 2).ToOption()));
+            OptionAssert.NonEmptyWithValue(84, 42.ToOption().FlatMap(v => (v * 2).ToOption()));
 
             // Flatmap to Empty option should be empty.
             OptionAssert.IsEmpty(42.ToOption().FlatMap(v => Option.Empty<int>()));
