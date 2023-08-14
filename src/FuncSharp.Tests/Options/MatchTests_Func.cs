@@ -10,7 +10,7 @@ namespace FuncSharp.Tests.Options
     {
         public MatchTests_Func()
         {
-            Arb.Register<Generators>();
+            Arb.Register<OptionGenerators>();
         }
 
         [Fact]

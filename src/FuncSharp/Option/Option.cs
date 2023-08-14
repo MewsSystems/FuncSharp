@@ -26,7 +26,7 @@ namespace FuncSharp
         /// </summary>
         public static IOption<A> Create<A>(A value)
         {
-            if (value != null)
+            if (value is not null)
             {
                 return new Option<A>(value);
             }
