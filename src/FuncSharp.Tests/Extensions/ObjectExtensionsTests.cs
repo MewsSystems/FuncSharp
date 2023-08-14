@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace FuncSharp.Tests
@@ -27,6 +28,27 @@ namespace FuncSharp.Tests
                 1, _ => "bar"
             ));
         }
+        
+        [Fact]
+        public async Task MatchAsync()
+        {
+            Assert.Equal("foo", await 0.MatchAsync(
+                0, _ => Task.FromResult("foo"),
+                1, _ => Task.FromResult("bar")
+            ));
+            
+            Assert.Equal("baz", await 2.MatchAsync(
+                0, _ => Task.FromResult("foo"),
+                1, _ => Task.FromResult("bar"),
+                _ => Task.FromResult("baz")
+            ));
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await 2.MatchAsync(
+                0, _ => Task.FromResult("foo"),
+                1, _ => Task.FromResult("bar")
+            ));
+        }
+
 
         [Fact]
         public void AsCoproduct()
