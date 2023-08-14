@@ -49,7 +49,6 @@ namespace FuncSharp.Tests
             ));
         }
 
-
         [Fact]
         public void AsCoproduct()
         {

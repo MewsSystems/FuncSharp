@@ -6,6 +6,7 @@
 <#@ include file="../Helpers.ttinclude" #>
 using System;
 using System.Threading.Tasks;
+
 namespace FuncSharp
 {
     /// <summary>
@@ -67,7 +68,7 @@ namespace FuncSharp
         /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
         /// </summary>
         void Match(
-<#= Lines(i, x => Indent(12) + "Action<T" + x + "> "s + IfIth(x) + " = null", separator: ",") #>);
+<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>);
 
         /// <summary>
         /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
