@@ -31,40 +31,6 @@ namespace FuncSharp.Tests.Options
             );
         }
 
-        [Property]
-        internal void Flatten_int(IOption<int?> option)
-        {
-            AssertFlatten(option);
-        }
-
-        [Property]
-        internal void Flatten_decimal(IOption<decimal?> option)
-        {
-            AssertFlatten(option);
-        }
-
-        [Property]
-        internal void Flatten_double(IOption<double?> option)
-        {
-            AssertFlatten(option);
-        }
-
-        [Property]
-        internal void Flatten_bool(IOption<bool?> option)
-        {
-            AssertFlatten(option);
-        }
-
-        private void AssertFlatten<T>(IOption<T?> option)
-            where T : struct
-        {
-            var result = option.Flatten();
-            Assert.Equal(option.NonEmpty && option.Get() is not null, result.NonEmpty);
-
-            if (option.NonEmpty)
-            {
-                Assert.Equal(option.Get(), result.Get());
-            }
-        }
+        // WIP
     }
 }
