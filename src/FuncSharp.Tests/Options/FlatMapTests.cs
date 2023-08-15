@@ -28,15 +28,15 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void FlatMapOrder_int(IOption<int> first, IOption<int> second, IOption<int> third)
+        internal void FlatMapOrder_int(IOption<int> first, IOption<int> second)
         {
-            Assert.Equal(first.FlatMap(f => second.FlatMap(s => third)), second.FlatMap(s => first.FlatMap(f => third)));
+            Assert.Equal(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
         }
 
         [Property]
-        internal void FlatMapOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second, IOption<ReferenceType> third)
+        internal void FlatMapOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
         {
-            Assert.Equal(first.FlatMap(f => second.FlatMap(s => third)), second.FlatMap(s => first.FlatMap(f => third)));
+            Assert.Equal(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
         }
 
         [Property]
