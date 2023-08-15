@@ -77,7 +77,7 @@ namespace FuncSharp
             NonEmpty = false;
         }
 
-        public static IReadOnlyList<A> EmptyList { get; } = new List<A>().AsReadOnly();
+        public static readonly IReadOnlyList<A> EmptyList = new List<A>().AsReadOnly();
 
         public static IOption<A> Empty { get; } = new Option<A>();
 
