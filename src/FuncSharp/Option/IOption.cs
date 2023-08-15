@@ -98,6 +98,6 @@ namespace FuncSharp
         /// Returns an enumerable with the option value. If the option is empty, returns empty enumerable.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<A> ToEnumerable();
+        IReadOnlyList<A> ToList();
     }
 }

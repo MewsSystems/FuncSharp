@@ -5,7 +5,6 @@
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,20 +17,7 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
         {
-            return source.SelectMany(o => o.ToEnumerable());
-        }
-
-        /// <summary>
-        /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
-        /// </summary>
-        public static IOption<T> ToNonEmptyOption<T>(this T source)
-            where T : IEnumerable
-        {
-            if (source == null || !source.OfType<object>().Any())
-            {
-                return Option.Empty<T>();
-            }
-            return source.ToOption();
+            return source.SelectMany(o => o.ToList());
         }
 
         /// <summary>
@@ -141,7 +127,7 @@ namespace FuncSharp
         /// </summary>
         public static void PartitionMatch<#= TypeBracket(i) #>(
             this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Action<IEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(12) + "Action<IReadOnlyList<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
 <#= Lines(i, x => Indent(12) + "var list" + x + " = new List<T" + x + ">();") #>
 
@@ -160,9 +146,9 @@ namespace FuncSharp
         /// <summary>
         /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
-        public static IEnumerable<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
+        public static IReadOnlyList<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
             this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Func<IEnumerable<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(12) + "Func<IReadOnlyList<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
         {
             var result = new List<TResult>();
 

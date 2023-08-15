@@ -77,6 +77,8 @@ namespace FuncSharp
             NonEmpty = false;
         }
 
+        public static IReadOnlyList<A> EmptyList { get; } = new List<A>().AsReadOnly();
+
         public static IOption<A> Empty { get; } = new Option<A>();
 
         object IOption.Value => Value;
@@ -195,13 +197,13 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IEnumerable<A> ToEnumerable()
+        public IReadOnlyList<A> ToList()
         {
             if (NonEmpty)
             {
                 return new[] { Value };
             }
-            return Enumerable.Empty<A>();
+            return EmptyList;
         }
 
         public override string ToString()
