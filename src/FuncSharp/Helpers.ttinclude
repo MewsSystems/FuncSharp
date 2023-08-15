@@ -47,7 +47,7 @@
             "TwentyFirst"
         };
 
-        if (i < ordinals.Count)
+        if (i < ordinals.Length)
         {
             return ordinals[i];
         }

@@ -16,6 +16,19 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
+        /// </summary>
+        public static IOption<T> ToNonEmptyOption<T>(this T source)
+            where T : IEnumerable
+        {
+            if (source == null || !source.OfType<object>().Any())
+            {
+                return Option.Empty<T>();
+            }
+            return source.ToOption();
+        }
+
+        /// <summary>
         /// Returns first value or an empty option. 
         /// </summary>
         public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
