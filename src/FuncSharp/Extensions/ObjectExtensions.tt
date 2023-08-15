@@ -137,7 +137,7 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                return f(<#= j #>));
+                return f<#= j #>(value));
             }
 <#     } #>
             if (otherwise != null)
@@ -156,7 +156,7 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                return await f(<#= j #>));
+                return await f<#= j #>(value));
             }
 <#     } #>
             if (otherwise != null)
@@ -177,7 +177,7 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                f(<#= j #>));
+                f<#= j #>(value);
                 return;
             }
 <#     } #>
@@ -197,7 +197,7 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                await f(<#= j #>));
+                await f<#= j #>(value));
                 return;
             }
 <#     } #>

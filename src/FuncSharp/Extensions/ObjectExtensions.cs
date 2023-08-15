@@ -126,7 +126,7 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (otherwise != null)
             {
@@ -143,7 +143,7 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (otherwise != null)
             {
@@ -162,7 +162,7 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (otherwise != null)
@@ -180,7 +180,7 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (otherwise != null)
@@ -272,11 +272,11 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (otherwise != null)
             {
@@ -294,11 +294,11 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (otherwise != null)
             {
@@ -318,12 +318,12 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (otherwise != null)
@@ -342,12 +342,12 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (otherwise != null)
@@ -445,15 +445,15 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (otherwise != null)
             {
@@ -472,15 +472,15 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (otherwise != null)
             {
@@ -501,17 +501,17 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (otherwise != null)
@@ -531,17 +531,17 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (otherwise != null)
@@ -645,19 +645,19 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (otherwise != null)
             {
@@ -677,19 +677,19 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (otherwise != null)
             {
@@ -711,22 +711,22 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (otherwise != null)
@@ -747,22 +747,22 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (otherwise != null)
@@ -872,23 +872,23 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (otherwise != null)
             {
@@ -909,23 +909,23 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (otherwise != null)
             {
@@ -948,27 +948,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (otherwise != null)
@@ -990,27 +990,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (otherwise != null)
@@ -1126,27 +1126,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (otherwise != null)
             {
@@ -1168,27 +1168,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (otherwise != null)
             {
@@ -1212,32 +1212,32 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (otherwise != null)
@@ -1260,32 +1260,32 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (otherwise != null)
@@ -1407,31 +1407,31 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (otherwise != null)
             {
@@ -1454,31 +1454,31 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (otherwise != null)
             {
@@ -1503,37 +1503,37 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (otherwise != null)
@@ -1557,37 +1557,37 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (otherwise != null)
@@ -1715,35 +1715,35 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (otherwise != null)
             {
@@ -1767,35 +1767,35 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (otherwise != null)
             {
@@ -1821,42 +1821,42 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (otherwise != null)
@@ -1881,42 +1881,42 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (otherwise != null)
@@ -2050,39 +2050,39 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (otherwise != null)
             {
@@ -2107,39 +2107,39 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (otherwise != null)
             {
@@ -2166,47 +2166,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (otherwise != null)
@@ -2232,47 +2232,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (otherwise != null)
@@ -2412,43 +2412,43 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (otherwise != null)
             {
@@ -2474,43 +2474,43 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (otherwise != null)
             {
@@ -2538,52 +2538,52 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (otherwise != null)
@@ -2610,52 +2610,52 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (otherwise != null)
@@ -2801,47 +2801,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (otherwise != null)
             {
@@ -2868,47 +2868,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (otherwise != null)
             {
@@ -2937,57 +2937,57 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (otherwise != null)
@@ -3015,57 +3015,57 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (otherwise != null)
@@ -3217,51 +3217,51 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (otherwise != null)
             {
@@ -3289,51 +3289,51 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (otherwise != null)
             {
@@ -3363,62 +3363,62 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (otherwise != null)
@@ -3447,62 +3447,62 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (otherwise != null)
@@ -3660,55 +3660,55 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (otherwise != null)
             {
@@ -3737,55 +3737,55 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (otherwise != null)
             {
@@ -3816,67 +3816,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (otherwise != null)
@@ -3906,67 +3906,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (otherwise != null)
@@ -4130,59 +4130,59 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (Equals(value, t14))
             {
-                return f(14));
+                return f14(value));
             }
             if (otherwise != null)
             {
@@ -4212,59 +4212,59 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (Equals(value, t14))
             {
-                return await f(14));
+                return await f14(value));
             }
             if (otherwise != null)
             {
@@ -4296,72 +4296,72 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                f(14));
+                f14(value);
                 return;
             }
             if (otherwise != null)
@@ -4392,72 +4392,72 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (Equals(value, t14))
             {
-                await f(14));
+                await f14(value));
                 return;
             }
             if (otherwise != null)
@@ -4627,63 +4627,63 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (Equals(value, t14))
             {
-                return f(14));
+                return f14(value));
             }
             if (Equals(value, t15))
             {
-                return f(15));
+                return f15(value));
             }
             if (otherwise != null)
             {
@@ -4714,63 +4714,63 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (Equals(value, t14))
             {
-                return await f(14));
+                return await f14(value));
             }
             if (Equals(value, t15))
             {
-                return await f(15));
+                return await f15(value));
             }
             if (otherwise != null)
             {
@@ -4803,77 +4803,77 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                f(14));
+                f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                f(15));
+                f15(value);
                 return;
             }
             if (otherwise != null)
@@ -4905,77 +4905,77 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (Equals(value, t14))
             {
-                await f(14));
+                await f14(value));
                 return;
             }
             if (Equals(value, t15))
             {
-                await f(15));
+                await f15(value));
                 return;
             }
             if (otherwise != null)
@@ -5151,67 +5151,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (Equals(value, t14))
             {
-                return f(14));
+                return f14(value));
             }
             if (Equals(value, t15))
             {
-                return f(15));
+                return f15(value));
             }
             if (Equals(value, t16))
             {
-                return f(16));
+                return f16(value));
             }
             if (otherwise != null)
             {
@@ -5243,67 +5243,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (Equals(value, t14))
             {
-                return await f(14));
+                return await f14(value));
             }
             if (Equals(value, t15))
             {
-                return await f(15));
+                return await f15(value));
             }
             if (Equals(value, t16))
             {
-                return await f(16));
+                return await f16(value));
             }
             if (otherwise != null)
             {
@@ -5337,82 +5337,82 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                f(14));
+                f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                f(15));
+                f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                f(16));
+                f16(value);
                 return;
             }
             if (otherwise != null)
@@ -5445,82 +5445,82 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (Equals(value, t14))
             {
-                await f(14));
+                await f14(value));
                 return;
             }
             if (Equals(value, t15))
             {
-                await f(15));
+                await f15(value));
                 return;
             }
             if (Equals(value, t16))
             {
-                await f(16));
+                await f16(value));
                 return;
             }
             if (otherwise != null)
@@ -5702,71 +5702,71 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (Equals(value, t14))
             {
-                return f(14));
+                return f14(value));
             }
             if (Equals(value, t15))
             {
-                return f(15));
+                return f15(value));
             }
             if (Equals(value, t16))
             {
-                return f(16));
+                return f16(value));
             }
             if (Equals(value, t17))
             {
-                return f(17));
+                return f17(value));
             }
             if (otherwise != null)
             {
@@ -5799,71 +5799,71 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (Equals(value, t14))
             {
-                return await f(14));
+                return await f14(value));
             }
             if (Equals(value, t15))
             {
-                return await f(15));
+                return await f15(value));
             }
             if (Equals(value, t16))
             {
-                return await f(16));
+                return await f16(value));
             }
             if (Equals(value, t17))
             {
-                return await f(17));
+                return await f17(value));
             }
             if (otherwise != null)
             {
@@ -5898,87 +5898,87 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                f(14));
+                f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                f(15));
+                f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                f(16));
+                f16(value);
                 return;
             }
             if (Equals(value, t17))
             {
-                f(17));
+                f17(value);
                 return;
             }
             if (otherwise != null)
@@ -6012,87 +6012,87 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (Equals(value, t14))
             {
-                await f(14));
+                await f14(value));
                 return;
             }
             if (Equals(value, t15))
             {
-                await f(15));
+                await f15(value));
                 return;
             }
             if (Equals(value, t16))
             {
-                await f(16));
+                await f16(value));
                 return;
             }
             if (Equals(value, t17))
             {
-                await f(17));
+                await f17(value));
                 return;
             }
             if (otherwise != null)
@@ -6280,75 +6280,75 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (Equals(value, t14))
             {
-                return f(14));
+                return f14(value));
             }
             if (Equals(value, t15))
             {
-                return f(15));
+                return f15(value));
             }
             if (Equals(value, t16))
             {
-                return f(16));
+                return f16(value));
             }
             if (Equals(value, t17))
             {
-                return f(17));
+                return f17(value));
             }
             if (Equals(value, t18))
             {
-                return f(18));
+                return f18(value));
             }
             if (otherwise != null)
             {
@@ -6382,75 +6382,75 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (Equals(value, t14))
             {
-                return await f(14));
+                return await f14(value));
             }
             if (Equals(value, t15))
             {
-                return await f(15));
+                return await f15(value));
             }
             if (Equals(value, t16))
             {
-                return await f(16));
+                return await f16(value));
             }
             if (Equals(value, t17))
             {
-                return await f(17));
+                return await f17(value));
             }
             if (Equals(value, t18))
             {
-                return await f(18));
+                return await f18(value));
             }
             if (otherwise != null)
             {
@@ -6486,92 +6486,92 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                f(14));
+                f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                f(15));
+                f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                f(16));
+                f16(value);
                 return;
             }
             if (Equals(value, t17))
             {
-                f(17));
+                f17(value);
                 return;
             }
             if (Equals(value, t18))
             {
-                f(18));
+                f18(value);
                 return;
             }
             if (otherwise != null)
@@ -6606,92 +6606,92 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (Equals(value, t14))
             {
-                await f(14));
+                await f14(value));
                 return;
             }
             if (Equals(value, t15))
             {
-                await f(15));
+                await f15(value));
                 return;
             }
             if (Equals(value, t16))
             {
-                await f(16));
+                await f16(value));
                 return;
             }
             if (Equals(value, t17))
             {
-                await f(17));
+                await f17(value));
                 return;
             }
             if (Equals(value, t18))
             {
-                await f(18));
+                await f18(value));
                 return;
             }
             if (otherwise != null)
@@ -6885,79 +6885,79 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f(1));
+                return f1(value));
             }
             if (Equals(value, t2))
             {
-                return f(2));
+                return f2(value));
             }
             if (Equals(value, t3))
             {
-                return f(3));
+                return f3(value));
             }
             if (Equals(value, t4))
             {
-                return f(4));
+                return f4(value));
             }
             if (Equals(value, t5))
             {
-                return f(5));
+                return f5(value));
             }
             if (Equals(value, t6))
             {
-                return f(6));
+                return f6(value));
             }
             if (Equals(value, t7))
             {
-                return f(7));
+                return f7(value));
             }
             if (Equals(value, t8))
             {
-                return f(8));
+                return f8(value));
             }
             if (Equals(value, t9))
             {
-                return f(9));
+                return f9(value));
             }
             if (Equals(value, t10))
             {
-                return f(10));
+                return f10(value));
             }
             if (Equals(value, t11))
             {
-                return f(11));
+                return f11(value));
             }
             if (Equals(value, t12))
             {
-                return f(12));
+                return f12(value));
             }
             if (Equals(value, t13))
             {
-                return f(13));
+                return f13(value));
             }
             if (Equals(value, t14))
             {
-                return f(14));
+                return f14(value));
             }
             if (Equals(value, t15))
             {
-                return f(15));
+                return f15(value));
             }
             if (Equals(value, t16))
             {
-                return f(16));
+                return f16(value));
             }
             if (Equals(value, t17))
             {
-                return f(17));
+                return f17(value));
             }
             if (Equals(value, t18))
             {
-                return f(18));
+                return f18(value));
             }
             if (Equals(value, t19))
             {
-                return f(19));
+                return f19(value));
             }
             if (otherwise != null)
             {
@@ -6992,79 +6992,79 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f(1));
+                return await f1(value));
             }
             if (Equals(value, t2))
             {
-                return await f(2));
+                return await f2(value));
             }
             if (Equals(value, t3))
             {
-                return await f(3));
+                return await f3(value));
             }
             if (Equals(value, t4))
             {
-                return await f(4));
+                return await f4(value));
             }
             if (Equals(value, t5))
             {
-                return await f(5));
+                return await f5(value));
             }
             if (Equals(value, t6))
             {
-                return await f(6));
+                return await f6(value));
             }
             if (Equals(value, t7))
             {
-                return await f(7));
+                return await f7(value));
             }
             if (Equals(value, t8))
             {
-                return await f(8));
+                return await f8(value));
             }
             if (Equals(value, t9))
             {
-                return await f(9));
+                return await f9(value));
             }
             if (Equals(value, t10))
             {
-                return await f(10));
+                return await f10(value));
             }
             if (Equals(value, t11))
             {
-                return await f(11));
+                return await f11(value));
             }
             if (Equals(value, t12))
             {
-                return await f(12));
+                return await f12(value));
             }
             if (Equals(value, t13))
             {
-                return await f(13));
+                return await f13(value));
             }
             if (Equals(value, t14))
             {
-                return await f(14));
+                return await f14(value));
             }
             if (Equals(value, t15))
             {
-                return await f(15));
+                return await f15(value));
             }
             if (Equals(value, t16))
             {
-                return await f(16));
+                return await f16(value));
             }
             if (Equals(value, t17))
             {
-                return await f(17));
+                return await f17(value));
             }
             if (Equals(value, t18))
             {
-                return await f(18));
+                return await f18(value));
             }
             if (Equals(value, t19))
             {
-                return await f(19));
+                return await f19(value));
             }
             if (otherwise != null)
             {
@@ -7101,97 +7101,97 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                f(1));
+                f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                f(2));
+                f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                f(3));
+                f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                f(4));
+                f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                f(5));
+                f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                f(6));
+                f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                f(7));
+                f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                f(8));
+                f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                f(9));
+                f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                f(10));
+                f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                f(11));
+                f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                f(12));
+                f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                f(13));
+                f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                f(14));
+                f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                f(15));
+                f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                f(16));
+                f16(value);
                 return;
             }
             if (Equals(value, t17))
             {
-                f(17));
+                f17(value);
                 return;
             }
             if (Equals(value, t18))
             {
-                f(18));
+                f18(value);
                 return;
             }
             if (Equals(value, t19))
             {
-                f(19));
+                f19(value);
                 return;
             }
             if (otherwise != null)
@@ -7227,97 +7227,97 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f(1));
+                await f1(value));
                 return;
             }
             if (Equals(value, t2))
             {
-                await f(2));
+                await f2(value));
                 return;
             }
             if (Equals(value, t3))
             {
-                await f(3));
+                await f3(value));
                 return;
             }
             if (Equals(value, t4))
             {
-                await f(4));
+                await f4(value));
                 return;
             }
             if (Equals(value, t5))
             {
-                await f(5));
+                await f5(value));
                 return;
             }
             if (Equals(value, t6))
             {
-                await f(6));
+                await f6(value));
                 return;
             }
             if (Equals(value, t7))
             {
-                await f(7));
+                await f7(value));
                 return;
             }
             if (Equals(value, t8))
             {
-                await f(8));
+                await f8(value));
                 return;
             }
             if (Equals(value, t9))
             {
-                await f(9));
+                await f9(value));
                 return;
             }
             if (Equals(value, t10))
             {
-                await f(10));
+                await f10(value));
                 return;
             }
             if (Equals(value, t11))
             {
-                await f(11));
+                await f11(value));
                 return;
             }
             if (Equals(value, t12))
             {
-                await f(12));
+                await f12(value));
                 return;
             }
             if (Equals(value, t13))
             {
-                await f(13));
+                await f13(value));
                 return;
             }
             if (Equals(value, t14))
             {
-                await f(14));
+                await f14(value));
                 return;
             }
             if (Equals(value, t15))
             {
-                await f(15));
+                await f15(value));
                 return;
             }
             if (Equals(value, t16))
             {
-                await f(16));
+                await f16(value));
                 return;
             }
             if (Equals(value, t17))
             {
-                await f(17));
+                await f17(value));
                 return;
             }
             if (Equals(value, t18))
             {
-                await f(18));
+                await f18(value));
                 return;
             }
             if (Equals(value, t19))
             {
-                await f(19));
+                await f19(value));
                 return;
             }
             if (otherwise != null)
