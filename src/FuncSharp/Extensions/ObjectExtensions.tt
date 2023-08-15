@@ -134,11 +134,17 @@ namespace FuncSharp
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, TResult> f" + j, separator: ",") #>,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+<#     for (var j = 1; j <= i; j++) { #>
+            if (Equals(value, <#= Value(j) #>))
             {
-                return value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
+                return f(<#= j #>));
             }
-            return value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
+<#     } #>
+            if (otherwise != null)
+            {
+                return otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
 
 
@@ -147,11 +153,17 @@ namespace FuncSharp
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, Task<TResult>> f" + j, separator: ",") #>,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+<#     for (var j = 1; j <= i; j++) { #>
+            if (Equals(value, <#= Value(j) #>))
             {
-                return await value.AsCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>);
+                return await f(<#= j #>));
             }
-            return await value.AsSafeCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>, _ => otherwise(value));
+<#     } #>
+            if (otherwise != null)
+            {
+                return await otherwise(Unit.Value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
 
         /// <summary>
@@ -162,14 +174,19 @@ namespace FuncSharp
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Action<T> f" + j, separator: ",") #>,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+<#     for (var j = 1; j <= i; j++) { #>
+            if (Equals(value, <#= Value(j) #>))
             {
-                value.AsCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>);
+                f(<#= j #>));
+                return;
             }
-            else
+<#     } #>
+            if (otherwise != null)
             {
-                value.AsSafeCoproduct(<#= Values(i) #>).Match(<#= Values(i, name: "f") #>, _ => otherwise(value));
+                otherwise(Unit.Value);
+                return;
             }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -177,14 +194,19 @@ namespace FuncSharp
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T,Task> f" + j, separator: ",") #>,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+<#     for (var j = 1; j <= i; j++) { #>
+            if (Equals(value, <#= Value(j) #>))
             {
-                await value.AsCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>);
+                await f(<#= j #>));
+                return;
             }
-            else
+<#     } #>
+            if (otherwise != null)
             {
-                await value.AsSafeCoproduct(<#= Values(i) #>).MatchAsync(<#= Values(i, name: "f") #>, _ => otherwise(value));
+                await otherwise(Unit.Value);
+                return;
             }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
 
 <#     } #>
