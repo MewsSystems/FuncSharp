@@ -137,12 +137,12 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                return f<#= j #>(value));
+                return f<#= j #>(value);
             }
 <#     } #>
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
@@ -156,12 +156,12 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                return await f<#= j #>(value));
+                return await f<#= j #>(value);
             }
 <#     } #>
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
@@ -183,7 +183,7 @@ namespace FuncSharp
 <#     } #>
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
@@ -197,13 +197,13 @@ namespace FuncSharp
 <#     for (var j = 1; j <= i; j++) { #>
             if (Equals(value, <#= Value(j) #>))
             {
-                await f<#= j #>(value));
+                await f<#= j #>(value);
                 return;
             }
 <#     } #>
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");

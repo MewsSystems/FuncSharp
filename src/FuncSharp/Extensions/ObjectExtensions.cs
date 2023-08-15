@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace FuncSharp
@@ -126,11 +125,11 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
@@ -143,11 +142,11 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
@@ -167,7 +166,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
@@ -180,12 +179,12 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
@@ -272,15 +271,15 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
@@ -294,15 +293,15 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
@@ -328,7 +327,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
@@ -342,17 +341,17 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
@@ -445,19 +444,19 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
@@ -472,19 +471,19 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
@@ -516,7 +515,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
@@ -531,22 +530,22 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
@@ -645,23 +644,23 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
@@ -677,23 +676,23 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
@@ -731,7 +730,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
@@ -747,27 +746,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
@@ -872,27 +871,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
@@ -909,27 +908,27 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
@@ -973,7 +972,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
@@ -990,32 +989,32 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
@@ -1126,31 +1125,31 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
@@ -1168,31 +1167,31 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
@@ -1242,7 +1241,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
@@ -1260,37 +1259,37 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
@@ -1407,35 +1406,35 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
@@ -1454,35 +1453,35 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
@@ -1538,7 +1537,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
@@ -1557,42 +1556,42 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
@@ -1715,39 +1714,39 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
@@ -1767,39 +1766,39 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
@@ -1861,7 +1860,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
@@ -1881,47 +1880,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
@@ -2050,43 +2049,43 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
@@ -2107,43 +2106,43 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
@@ -2211,7 +2210,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
@@ -2232,52 +2231,52 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
@@ -2412,47 +2411,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
@@ -2474,47 +2473,47 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
@@ -2588,7 +2587,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
@@ -2610,57 +2609,57 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
@@ -2801,51 +2800,51 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
@@ -2868,51 +2867,51 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
@@ -2992,7 +2991,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
@@ -3015,62 +3014,62 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
@@ -3217,55 +3216,55 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
@@ -3289,55 +3288,55 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
@@ -3423,7 +3422,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
@@ -3447,67 +3446,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
@@ -3660,59 +3659,59 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
@@ -3737,59 +3736,59 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
@@ -3881,7 +3880,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
@@ -3906,72 +3905,72 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
@@ -4130,63 +4129,63 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (Equals(value, t14))
             {
-                return f14(value));
+                return f14(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
@@ -4212,63 +4211,63 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (Equals(value, t14))
             {
-                return await f14(value));
+                return await f14(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
@@ -4366,7 +4365,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
@@ -4392,77 +4391,77 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                await f14(value));
+                await f14(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
@@ -4627,67 +4626,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (Equals(value, t14))
             {
-                return f14(value));
+                return f14(value);
             }
             if (Equals(value, t15))
             {
-                return f15(value));
+                return f15(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
@@ -4714,67 +4713,67 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (Equals(value, t14))
             {
-                return await f14(value));
+                return await f14(value);
             }
             if (Equals(value, t15))
             {
-                return await f15(value));
+                return await f15(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
@@ -4878,7 +4877,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
@@ -4905,82 +4904,82 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                await f14(value));
+                await f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                await f15(value));
+                await f15(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
@@ -5151,71 +5150,71 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (Equals(value, t14))
             {
-                return f14(value));
+                return f14(value);
             }
             if (Equals(value, t15))
             {
-                return f15(value));
+                return f15(value);
             }
             if (Equals(value, t16))
             {
-                return f16(value));
+                return f16(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
@@ -5243,71 +5242,71 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (Equals(value, t14))
             {
-                return await f14(value));
+                return await f14(value);
             }
             if (Equals(value, t15))
             {
-                return await f15(value));
+                return await f15(value);
             }
             if (Equals(value, t16))
             {
-                return await f16(value));
+                return await f16(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
@@ -5417,7 +5416,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
@@ -5445,87 +5444,87 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                await f14(value));
+                await f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                await f15(value));
+                await f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                await f16(value));
+                await f16(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
@@ -5702,75 +5701,75 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (Equals(value, t14))
             {
-                return f14(value));
+                return f14(value);
             }
             if (Equals(value, t15))
             {
-                return f15(value));
+                return f15(value);
             }
             if (Equals(value, t16))
             {
-                return f16(value));
+                return f16(value);
             }
             if (Equals(value, t17))
             {
-                return f17(value));
+                return f17(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
@@ -5799,75 +5798,75 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (Equals(value, t14))
             {
-                return await f14(value));
+                return await f14(value);
             }
             if (Equals(value, t15))
             {
-                return await f15(value));
+                return await f15(value);
             }
             if (Equals(value, t16))
             {
-                return await f16(value));
+                return await f16(value);
             }
             if (Equals(value, t17))
             {
-                return await f17(value));
+                return await f17(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
@@ -5983,7 +5982,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
@@ -6012,92 +6011,92 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                await f14(value));
+                await f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                await f15(value));
+                await f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                await f16(value));
+                await f16(value);
                 return;
             }
             if (Equals(value, t17))
             {
-                await f17(value));
+                await f17(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
@@ -6280,79 +6279,79 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (Equals(value, t14))
             {
-                return f14(value));
+                return f14(value);
             }
             if (Equals(value, t15))
             {
-                return f15(value));
+                return f15(value);
             }
             if (Equals(value, t16))
             {
-                return f16(value));
+                return f16(value);
             }
             if (Equals(value, t17))
             {
-                return f17(value));
+                return f17(value);
             }
             if (Equals(value, t18))
             {
-                return f18(value));
+                return f18(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
@@ -6382,79 +6381,79 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (Equals(value, t14))
             {
-                return await f14(value));
+                return await f14(value);
             }
             if (Equals(value, t15))
             {
-                return await f15(value));
+                return await f15(value);
             }
             if (Equals(value, t16))
             {
-                return await f16(value));
+                return await f16(value);
             }
             if (Equals(value, t17))
             {
-                return await f17(value));
+                return await f17(value);
             }
             if (Equals(value, t18))
             {
-                return await f18(value));
+                return await f18(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
@@ -6576,7 +6575,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
@@ -6606,97 +6605,97 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                await f14(value));
+                await f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                await f15(value));
+                await f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                await f16(value));
+                await f16(value);
                 return;
             }
             if (Equals(value, t17))
             {
-                await f17(value));
+                await f17(value);
                 return;
             }
             if (Equals(value, t18))
             {
-                await f18(value));
+                await f18(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
@@ -6885,83 +6884,83 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return f1(value));
+                return f1(value);
             }
             if (Equals(value, t2))
             {
-                return f2(value));
+                return f2(value);
             }
             if (Equals(value, t3))
             {
-                return f3(value));
+                return f3(value);
             }
             if (Equals(value, t4))
             {
-                return f4(value));
+                return f4(value);
             }
             if (Equals(value, t5))
             {
-                return f5(value));
+                return f5(value);
             }
             if (Equals(value, t6))
             {
-                return f6(value));
+                return f6(value);
             }
             if (Equals(value, t7))
             {
-                return f7(value));
+                return f7(value);
             }
             if (Equals(value, t8))
             {
-                return f8(value));
+                return f8(value);
             }
             if (Equals(value, t9))
             {
-                return f9(value));
+                return f9(value);
             }
             if (Equals(value, t10))
             {
-                return f10(value));
+                return f10(value);
             }
             if (Equals(value, t11))
             {
-                return f11(value));
+                return f11(value);
             }
             if (Equals(value, t12))
             {
-                return f12(value));
+                return f12(value);
             }
             if (Equals(value, t13))
             {
-                return f13(value));
+                return f13(value);
             }
             if (Equals(value, t14))
             {
-                return f14(value));
+                return f14(value);
             }
             if (Equals(value, t15))
             {
-                return f15(value));
+                return f15(value);
             }
             if (Equals(value, t16))
             {
-                return f16(value));
+                return f16(value);
             }
             if (Equals(value, t17))
             {
-                return f17(value));
+                return f17(value);
             }
             if (Equals(value, t18))
             {
-                return f18(value));
+                return f18(value);
             }
             if (Equals(value, t19))
             {
-                return f19(value));
+                return f19(value);
             }
             if (otherwise != null)
             {
-                return otherwise(Unit.Value);
+                return otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
@@ -6992,83 +6991,83 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                return await f1(value));
+                return await f1(value);
             }
             if (Equals(value, t2))
             {
-                return await f2(value));
+                return await f2(value);
             }
             if (Equals(value, t3))
             {
-                return await f3(value));
+                return await f3(value);
             }
             if (Equals(value, t4))
             {
-                return await f4(value));
+                return await f4(value);
             }
             if (Equals(value, t5))
             {
-                return await f5(value));
+                return await f5(value);
             }
             if (Equals(value, t6))
             {
-                return await f6(value));
+                return await f6(value);
             }
             if (Equals(value, t7))
             {
-                return await f7(value));
+                return await f7(value);
             }
             if (Equals(value, t8))
             {
-                return await f8(value));
+                return await f8(value);
             }
             if (Equals(value, t9))
             {
-                return await f9(value));
+                return await f9(value);
             }
             if (Equals(value, t10))
             {
-                return await f10(value));
+                return await f10(value);
             }
             if (Equals(value, t11))
             {
-                return await f11(value));
+                return await f11(value);
             }
             if (Equals(value, t12))
             {
-                return await f12(value));
+                return await f12(value);
             }
             if (Equals(value, t13))
             {
-                return await f13(value));
+                return await f13(value);
             }
             if (Equals(value, t14))
             {
-                return await f14(value));
+                return await f14(value);
             }
             if (Equals(value, t15))
             {
-                return await f15(value));
+                return await f15(value);
             }
             if (Equals(value, t16))
             {
-                return await f16(value));
+                return await f16(value);
             }
             if (Equals(value, t17))
             {
-                return await f17(value));
+                return await f17(value);
             }
             if (Equals(value, t18))
             {
-                return await f18(value));
+                return await f18(value);
             }
             if (Equals(value, t19))
             {
-                return await f19(value));
+                return await f19(value);
             }
             if (otherwise != null)
             {
-                return await otherwise(Unit.Value);
+                return await otherwise(value);
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
@@ -7196,7 +7195,7 @@ namespace FuncSharp
             }
             if (otherwise != null)
             {
-                otherwise(Unit.Value);
+                otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
@@ -7227,102 +7226,102 @@ namespace FuncSharp
         {
             if (Equals(value, t1))
             {
-                await f1(value));
+                await f1(value);
                 return;
             }
             if (Equals(value, t2))
             {
-                await f2(value));
+                await f2(value);
                 return;
             }
             if (Equals(value, t3))
             {
-                await f3(value));
+                await f3(value);
                 return;
             }
             if (Equals(value, t4))
             {
-                await f4(value));
+                await f4(value);
                 return;
             }
             if (Equals(value, t5))
             {
-                await f5(value));
+                await f5(value);
                 return;
             }
             if (Equals(value, t6))
             {
-                await f6(value));
+                await f6(value);
                 return;
             }
             if (Equals(value, t7))
             {
-                await f7(value));
+                await f7(value);
                 return;
             }
             if (Equals(value, t8))
             {
-                await f8(value));
+                await f8(value);
                 return;
             }
             if (Equals(value, t9))
             {
-                await f9(value));
+                await f9(value);
                 return;
             }
             if (Equals(value, t10))
             {
-                await f10(value));
+                await f10(value);
                 return;
             }
             if (Equals(value, t11))
             {
-                await f11(value));
+                await f11(value);
                 return;
             }
             if (Equals(value, t12))
             {
-                await f12(value));
+                await f12(value);
                 return;
             }
             if (Equals(value, t13))
             {
-                await f13(value));
+                await f13(value);
                 return;
             }
             if (Equals(value, t14))
             {
-                await f14(value));
+                await f14(value);
                 return;
             }
             if (Equals(value, t15))
             {
-                await f15(value));
+                await f15(value);
                 return;
             }
             if (Equals(value, t16))
             {
-                await f16(value));
+                await f16(value);
                 return;
             }
             if (Equals(value, t17))
             {
-                await f17(value));
+                await f17(value);
                 return;
             }
             if (Equals(value, t18))
             {
-                await f18(value));
+                await f18(value);
                 return;
             }
             if (Equals(value, t19))
             {
-                await f19(value));
+                await f19(value);
                 return;
             }
             if (otherwise != null)
             {
-                await otherwise(Unit.Value);
+                await otherwise(value);
                 return;
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
