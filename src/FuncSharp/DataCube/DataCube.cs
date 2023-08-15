@@ -284,7 +284,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<TPosition, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<TPosition, TValue, T> f)
         {
             var result = new List<T>();
             ForEach((p, v) => result.Add(f(p, v)));
@@ -294,7 +294,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<TPosition, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<TPosition, TValue, IEnumerable<T>> f)
         {
             var result = new List<T>();
             ForEach((p, v) => result.AddRange(f(p, v)));

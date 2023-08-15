@@ -73,7 +73,7 @@ namespace FuncSharp.Examples
             Try<int, NetworkOperationError> number1 = Api.GetNumber();
             Try<int, NetworkOperationError> number2 = Api.GetNumber();
             Try<int, NetworkOperationError> number3 = Api.GetNumber();
-            Try<int, IEnumerable<NetworkOperationError>> sumOfThreeNumbers = Try.Aggregate(
+            Try<int, IReadOnlyList<NetworkOperationError>> sumOfThreeNumbers = Try.Aggregate(
                 t1: number1,
                 t2: number2,
                 t3: number3,
@@ -81,10 +81,10 @@ namespace FuncSharp.Examples
             );
 
             // Great examples of aggregating tries can also be found when parsing. See what the Person.Parse method does.
-            Try<Person, IEnumerable<PersonParsingError>> mom = Person.Parse("Jane Doe", "24", "185");
-            Try<Person, IEnumerable<PersonParsingError>> dad = Person.Parse("John Doe", "29", "185");
-            Try<Person, IEnumerable<PersonParsingError>> son = Person.Parse("Jimmy Doe", "1", "75");
-            Try<(Person Dad, Person Mom, Person Son), IEnumerable<PersonParsingError>> family = Try.Aggregate(
+            Try<Person, IReadOnlyList<PersonParsingError>> mom = Person.Parse("Jane Doe", "24", "185");
+            Try<Person, IReadOnlyList<PersonParsingError>> dad = Person.Parse("John Doe", "29", "185");
+            Try<Person, IReadOnlyList<PersonParsingError>> son = Person.Parse("Jimmy Doe", "1", "75");
+            Try<(Person Dad, Person Mom, Person Son), IReadOnlyList<PersonParsingError>> family = Try.Aggregate(
                 t1: mom,
                 t2: dad,
                 t3: son,
@@ -97,7 +97,7 @@ namespace FuncSharp.Examples
             IEnumerable<Try<int, NetworkOperationError>> numbers = Enumerable.Range(0, numberCount).Select(_ => Api.GetNumber());
 
             // Contains all the numbers if their retrieval succeeded. Or all the errors from the ones that failed. Success results are lost in such case.
-            Try<IEnumerable<int>, IEnumerable<NetworkOperationError>> combinedResult = Try.Aggregate(numbers);
+            Try<IReadOnlyList<int>, IReadOnlyList<NetworkOperationError>> combinedResult = Try.Aggregate(numbers);
         }
     }
 }

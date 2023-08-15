@@ -58,11 +58,12 @@ namespace FuncSharp
         /// </summary>
         public A Min(IEnumerable<A> values)
         {
-            if (!values.Any())
+            var enumerated = values.ToList();
+            if (enumerated.Count == 0)
             {
                 throw new InvalidOperationException("Empty collection doesn't have a minimum value.");
             }
-            return values.Aggregate((a, b) => Less(a, b) ? a : b);
+            return enumerated.Aggregate((a, b) => Less(a, b) ? a : b);
         }
 
         /// <summary>
@@ -78,11 +79,12 @@ namespace FuncSharp
         /// </summary>
         public A Max(IEnumerable<A> values)
         {
-            if (!values.Any())
+            var enumerated = values.ToList();
+            if (enumerated.Count == 0)
             {
                 throw new InvalidOperationException("Empty collection doesn't have a maximum value.");
             }
-            return values.Aggregate((a, b) => Less(a, b) ? b : a);
+            return enumerated.Aggregate((a, b) => Less(a, b) ? b : a);
         }
 
         /// <summary>
@@ -194,7 +196,7 @@ namespace FuncSharp
         /// <summary>
         /// Orders the specified intervals.
         /// </summary>
-        public List<Interval<A>> Order(IEnumerable<Interval<A>> intervals, Ordering ordering = Ordering.Ascending)
+        public IEnumerable<Interval<A>> Order(IEnumerable<Interval<A>> intervals, Ordering ordering = Ordering.Ascending)
         {
             return intervals.Order(Less, ordering);
         }

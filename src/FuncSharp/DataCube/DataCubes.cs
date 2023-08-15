@@ -103,7 +103,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<TValue, T> f)
         {
             return Select((p, v) => f(v));
         }
@@ -111,7 +111,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(v));
         }
@@ -252,7 +252,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<P1, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<P1, TValue, T> f)
         {
             return Select((p, v) => f(p.ProductValue1, v));
         }
@@ -260,7 +260,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<P1, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<P1, TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(p.ProductValue1, v));
         }
@@ -464,7 +464,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<P1, P2, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<P1, P2, TValue, T> f)
         {
             return Select((p, v) => f(p.ProductValue1, p.ProductValue2, v));
         }
@@ -472,7 +472,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<P1, P2, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<P1, P2, TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, v));
         }
@@ -739,7 +739,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<P1, P2, P3, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<P1, P2, P3, TValue, T> f)
         {
             return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, v));
         }
@@ -747,7 +747,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<P1, P2, P3, TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, v));
         }
@@ -1077,7 +1077,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<P1, P2, P3, P4, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<P1, P2, P3, P4, TValue, T> f)
         {
             return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, v));
         }
@@ -1085,7 +1085,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, P4, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<P1, P2, P3, P4, TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, v));
         }
@@ -1478,7 +1478,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<P1, P2, P3, P4, P5, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<P1, P2, P3, P4, P5, TValue, T> f)
         {
             return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, v));
         }
@@ -1486,7 +1486,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, P4, P5, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<P1, P2, P3, P4, P5, TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, v));
         }
@@ -1942,7 +1942,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<P1, P2, P3, P4, P5, P6, TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<P1, P2, P3, P4, P5, P6, TValue, T> f)
         {
             return Select((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, v));
         }
@@ -1950,7 +1950,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<P1, P2, P3, P4, P5, P6, TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<P1, P2, P3, P4, P5, P6, TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6, v));
         }

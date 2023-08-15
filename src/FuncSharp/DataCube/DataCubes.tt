@@ -132,7 +132,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> Select<T>(Func<<#= Types(i, name: "P", appendSeparator: true) #>TValue, T> f)
+        public IReadOnlyList<T> Select<T>(Func<<#= Types(i, name: "P", appendSeparator: true) #>TValue, T> f)
         {
             return Select((p, v) => f(<#= Properties(i, name: "ProductValue", accessor: "p.", appendSeparator: true) #>v));
         }
@@ -140,7 +140,7 @@ namespace FuncSharp
         /// <summary>
         /// Transforms each value in the cube using the specified function and returns a concatenated collection of the transformed values.
         /// </summary>
-        public IEnumerable<T> SelectMany<T>(Func<<#= Types(i, name: "P", appendSeparator: true) #>TValue, IEnumerable<T>> f)
+        public IReadOnlyList<T> SelectMany<T>(Func<<#= Types(i, name: "P", appendSeparator: true) #>TValue, IEnumerable<T>> f)
         {
             return SelectMany((p, v) => f(<#= Properties(i, name: "ProductValue", accessor: "p.", appendSeparator: true) #>v));
         }

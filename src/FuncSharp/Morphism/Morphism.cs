@@ -35,7 +35,7 @@ namespace FuncSharp
         /// </summary>
         public static IIsoMorphism<A, B> CreateIso<A, B>(params IProduct2<A, B>[] pairings)
         {
-            return new IsoMorphism<A, B>(pairings.AsEnumerable());
+            return new IsoMorphism<A, B>(pairings);
         }
 
         /// <summary>

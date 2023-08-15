@@ -15,15 +15,15 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void ToEnumerable()
         {
-            Assert.NotEmpty(42.ToOption().ToEnumerable());
-            Assert.NotEmpty((42 as int?).ToOption().ToEnumerable());
-            Assert.Empty((null as int?).ToOption().ToEnumerable());
+            Assert.NotEmpty(42.ToOption().ToList());
+            Assert.NotEmpty((42 as int?).ToOption().ToList());
+            Assert.Empty((null as int?).ToOption().ToList());
 
-            Assert.NotEmpty(new object().ToOption().ToEnumerable());
-            Assert.Empty((null as object).ToOption().ToEnumerable());
+            Assert.NotEmpty(new object().ToOption().ToList());
+            Assert.Empty((null as object).ToOption().ToList());
 
-            Assert.NotEmpty("foo".ToOption().ToEnumerable());
-            Assert.Empty((null as string).ToOption().ToEnumerable());
+            Assert.NotEmpty("foo".ToOption().ToList());
+            Assert.Empty((null as string).ToOption().ToList());
         }
 
         [Property]
@@ -58,8 +58,8 @@ namespace FuncSharp.Tests.Options
 
         private void AssertToEnumerable<T>(T value)
         {
-            Assert.NotEmpty(Option.Valued(value).ToEnumerable());
-            Assert.Empty(Option.Empty<T>().ToEnumerable());
+            Assert.NotEmpty(Option.Valued(value).ToList());
+            Assert.Empty(Option.Empty<T>().ToList());
         }
     }
 }

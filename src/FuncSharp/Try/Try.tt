@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 
 namespace FuncSharp
 {
@@ -62,7 +61,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using the specified function.
         /// </summary>
-        public static R Aggregate<A, E, R>(IEnumerable<Try<A, E>> tries, Func<IEnumerable<A>, R> success, Func<IEnumerable<E>, R> error)
+        public static R Aggregate<A, E, R>(IEnumerable<Try<A, E>> tries, Func<IReadOnlyList<A>, R> success, Func<IReadOnlyList<E>, R> error)
         {
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
@@ -76,24 +75,24 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, E>> tries)
+        public static Try<IReadOnlyList<A>, IReadOnlyList<E>> Aggregate<A, E>(IEnumerable<Try<A, E>> tries)
         {
             return Aggregate(
                 tries,
-                success: results => Success<IEnumerable<A>, IEnumerable<E>>(results),
-                error: errors => Error<IEnumerable<A>, IEnumerable<E>>(errors)
+                success: results => Success<IReadOnlyList<A>, IReadOnlyList<E>>(results),
+                error: errors => Error<IReadOnlyList<A>, IReadOnlyList<E>>(errors)
             );
         }
 
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static Try<IEnumerable<A>, IEnumerable<E>> Aggregate<A, E>(IEnumerable<Try<A, IEnumerable<E>>> tries)
+        public static Try<IReadOnlyList<A>, IReadOnlyList<E>> Aggregate<A, E>(IEnumerable<Try<A, IReadOnlyList<E>>> tries)
         {
             return Aggregate(
                 tries,
-                success: results => Success<IEnumerable<A>, IEnumerable<E>>(results),
-                error: errors => Error<IEnumerable<A>, IEnumerable<E>>(errors.SelectMany(e => e).ToList())
+                success: results => Success<IReadOnlyList<A>, IReadOnlyList<E>>(results),
+                error: errors => Error<IReadOnlyList<A>, IReadOnlyList<E>>(errors.SelectMany(e => e).ToList())
             );
         }
 <#  for (var i = 2; i < MaxFuncArity(); i++) { #>
@@ -101,7 +100,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by the specified function.
         /// </summary>
-        public static R Aggregate<<#= Types(i, name: "A") #>, E, R>(<#= List(i, x => $"Try<{Type(x, name: "A")}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success, Func<IEnumerable<E>, R> error)
+        public static R Aggregate<<#= Types(i, name: "A") #>, E, R>(<#= List(i, x => $"Try<{Type(x, name: "A")}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success, Func<IReadOnlyList<E>, R> error)
         {
             if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
             {
@@ -115,24 +114,24 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        public static Try<R, IReadOnlyList<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
-                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(success(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<R, IEnumerable<E>>(errors)
+                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IReadOnlyList<E>>(success(<#= List(i, x => $"s{x}") #>)),
+                error: errors => Error<R, IReadOnlyList<E>>(errors)
             );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static Try<R, IEnumerable<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, IEnumerable<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        public static Try<R, IReadOnlyList<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, IReadOnlyList<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
-                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IEnumerable<E>>(success(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<R, IEnumerable<E>>(errors.SelectMany(e => e).ToList())
+                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IReadOnlyList<E>>(success(<#= List(i, x => $"s{x}") #>)),
+                error: errors => Error<R, IReadOnlyList<E>>(errors.SelectMany(e => e).ToList())
             );
         }
 <#  } #>

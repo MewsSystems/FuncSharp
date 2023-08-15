@@ -139,15 +139,15 @@ namespace FuncSharp.Benchmarks
         }
 
         [Benchmark]
-        public void ToEnumerable_NonEmpty()
+        public void ToList_NonEmpty()
         {
-            NonEmptyOption.ToEnumerable();
+            NonEmptyOption.ToList();
         }
 
         [Benchmark]
-        public void ToEnumerable_Empty()
+        public void ToList_Empty()
         {
-            EmptyOption.ToEnumerable();
+            EmptyOption.ToList();
         }
     }
 }
