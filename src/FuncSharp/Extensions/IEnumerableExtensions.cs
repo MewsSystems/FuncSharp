@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,12 +52,10 @@ namespace FuncSharp
         /// <summary>
         /// Orders the values using the specified less function in the specified order.
         /// </summary>
-        public static List<T> Order<T>(this IEnumerable<T> values, Func<T, T, bool> less, Ordering ordering = Ordering.Ascending)
+        public static IEnumerable<T> Order<T>(this IEnumerable<T> values, Func<T, T, bool> less, Ordering ordering = Ordering.Ascending)
         {
-            var result = values.ToList();
             var comparer = new Comparer<T>(less, ordering);
-            result.Sort(comparer);
-            return result;
+            return values.OrderBy(v => v, comparer);
         }
 
         /// <summary>
@@ -64,7 +63,13 @@ namespace FuncSharp
         /// </summary>
         public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
         {
-            return source.SingleOption().OrElse(_ => source.FirstOption().Map<Exception>(e => new AggregateException(source)));
+            var exceptions = source.ToList();
+            switch (exceptions.Count)
+            {
+                case 0: return Option<Exception>.Empty;
+                case 1: return Option.Valued(exceptions[0]);
+                default: return Option.Valued(new AggregateException(exceptions));
+            }
         }
         
         /// <summary>

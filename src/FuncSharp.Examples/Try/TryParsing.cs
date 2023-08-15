@@ -27,7 +27,7 @@ namespace FuncSharp.Examples
         public int Age { get; }
         public decimal HeightInCentimeters { get; }
 
-        public static Try<Person, IEnumerable<PersonParsingError>> Parse(string name, string age, string height)
+        public static Try<Person, IReadOnlyList<PersonParsingError>> Parse(string name, string age, string height)
         {
             // Try.Aggregate method always executes all tries and then aggregates the success results or the errors. It doesn't stop on first error.
             // You can transform the result into any type you want. This makes it nice and effective way of parsing values and combining the results.

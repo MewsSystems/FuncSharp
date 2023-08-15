@@ -82,10 +82,10 @@ namespace FuncSharp.Tests
             var r4 = Try.Aggregate(new[] { Success, Success, Success });
             Assert.True(r4.Success.Get().SequenceEqual(new[] { 42, 42, 42 }));
 
-            var r5 = Try.Aggregate(new[] { Success, Success, Success }, i => i.Sum(), e => e.Count());
+            var r5 = Try.Aggregate(new[] { Success, Success, Success }, i => i.Sum(), e => e.Count);
             Assert.Equal(126, r5);
 
-            var r6 = Try.Aggregate(new[] { Success, Error, Error }, i => i.Sum(), e => e.Count());
+            var r6 = Try.Aggregate(new[] { Success, Error, Error }, i => i.Sum(), e => e.Count);
             Assert.Equal(2, r6);
 
             var r7 = Try.Aggregate(new[] { Success, Error, Success, Error });
