@@ -74,6 +74,11 @@ namespace FuncSharp.Tests.Options
             {
                 Assert.Equal(map(option.GetOrDefault()), result.GetOrDefault());
             }
+
+            var linqResult =
+                from x in option
+                select map(x);
+            Assert.Equal(result, linqResult);
         }
     }
 }

@@ -27,6 +27,33 @@ namespace FuncSharp.Tests.Options
             OptionAssert.IsEmpty(Option.Empty<int>().SelectMany(v => Option.Empty<int>()));
         }
 
+        [Fact]
+        public void Linq()
+        {
+            var sum =
+                from x in 1.ToOption()
+                from y in 2.ToOption()
+                from z in 3.ToOption()
+                select x + y + z;
+
+            Assert.Equal(6.ToOption(), sum);
+
+            var emptySum =
+                from x in 1.ToOption()
+                from y in Option.Empty<int>()
+                select x + y;
+
+            Assert.Equal(Option.Empty<int>(), emptySum);
+
+            var filteredSum =
+                from x in 1.ToOption()
+                from y in 2.ToOption()
+                where x > 100
+                select x + y;
+
+            Assert.Equal(Option.Empty<int>(), filteredSum);
+        }
+
         [Property]
         internal void SelectManyOrder_int(IOption<int> first, IOption<int> second)
         {
@@ -90,6 +117,18 @@ namespace FuncSharp.Tests.Options
             {
                 Assert.Equal(map(option.GetOrDefault()), selectManyResult.GetOrDefault());
             }
+
+            var linqResult =
+                from x in option
+                from y in Option.Valued(map(x))
+                select y;
+            Assert.Equal(selectManyResult, linqResult);
+
+            var emptyLinqResult =
+                from x in option
+                from y in Option.Empty<T>()
+                select y;
+            Assert.Equal(selectManyToEmptyResult, emptyLinqResult);
         }
     }
 }
