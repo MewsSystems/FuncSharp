@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace FuncSharp
@@ -124,11 +123,15 @@ namespace FuncSharp
             T t1, Func<T, TResult> f1,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1).Match(f1);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
 
 
@@ -137,11 +140,15 @@ namespace FuncSharp
             T t1, Func<T, Task<TResult>> f1,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1).MatchAsync(f1);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1).MatchAsync(f1, _ => otherwise(value));
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
 
         /// <summary>
@@ -152,14 +159,17 @@ namespace FuncSharp
             T t1, Action<T> f1,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1).Match(f1);
+                f1(value);
+                return;
             }
-            else
+            if (otherwise != null)
             {
-                value.AsSafeCoproduct(t1).Match(f1, _ => otherwise(value));
+                otherwise(value);
+                return;
             }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -167,14 +177,17 @@ namespace FuncSharp
             T t1, Func<T,Task> f1,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1).MatchAsync(f1);
+                await f1(value);
+                return;
             }
-            else
+            if (otherwise != null)
             {
-                await value.AsSafeCoproduct(t1).MatchAsync(f1, _ => otherwise(value));
+                await otherwise(value);
+                return;
             }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
 
         /// <summary>
@@ -256,11 +269,19 @@ namespace FuncSharp
             T t2, Func<T, TResult> f2,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2).Match(f1, f2);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
 
 
@@ -270,11 +291,19 @@ namespace FuncSharp
             T t2, Func<T, Task<TResult>> f2,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2).MatchAsync(f1, f2);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2).MatchAsync(f1, f2, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
 
         /// <summary>
@@ -286,14 +315,22 @@ namespace FuncSharp
             T t2, Action<T> f2,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2).Match(f1, f2);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2).Match(f1, f2, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -302,14 +339,22 @@ namespace FuncSharp
             T t2, Func<T,Task> f2,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2).MatchAsync(f1, f2);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2).MatchAsync(f1, f2, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
 
         /// <summary>
@@ -397,11 +442,23 @@ namespace FuncSharp
             T t3, Func<T, TResult> f3,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
 
 
@@ -412,11 +469,23 @@ namespace FuncSharp
             T t3, Func<T, Task<TResult>> f3,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
 
         /// <summary>
@@ -429,14 +498,27 @@ namespace FuncSharp
             T t3, Action<T> f3,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3).Match(f1, f2, f3);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3).Match(f1, f2, f3, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -446,14 +528,27 @@ namespace FuncSharp
             T t3, Func<T,Task> f3,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3).MatchAsync(f1, f2, f3, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
 
         /// <summary>
@@ -547,11 +642,27 @@ namespace FuncSharp
             T t4, Func<T, TResult> f4,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
 
 
@@ -563,11 +674,27 @@ namespace FuncSharp
             T t4, Func<T, Task<TResult>> f4,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
 
         /// <summary>
@@ -581,14 +708,32 @@ namespace FuncSharp
             T t4, Action<T> f4,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4).Match(f1, f2, f3, f4, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -599,14 +744,32 @@ namespace FuncSharp
             T t4, Func<T,Task> f4,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4).MatchAsync(f1, f2, f3, f4, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
 
         /// <summary>
@@ -706,11 +869,31 @@ namespace FuncSharp
             T t5, Func<T, TResult> f5,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
 
 
@@ -723,11 +906,31 @@ namespace FuncSharp
             T t5, Func<T, Task<TResult>> f5,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
 
         /// <summary>
@@ -742,14 +945,37 @@ namespace FuncSharp
             T t5, Action<T> f5,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5).Match(f1, f2, f3, f4, f5, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -761,14 +987,37 @@ namespace FuncSharp
             T t5, Func<T,Task> f5,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5).MatchAsync(f1, f2, f3, f4, f5, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
 
         /// <summary>
@@ -874,11 +1123,35 @@ namespace FuncSharp
             T t6, Func<T, TResult> f6,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
 
 
@@ -892,11 +1165,35 @@ namespace FuncSharp
             T t6, Func<T, Task<TResult>> f6,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
 
         /// <summary>
@@ -912,14 +1209,42 @@ namespace FuncSharp
             T t6, Action<T> f6,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).Match(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -932,14 +1257,42 @@ namespace FuncSharp
             T t6, Func<T,Task> f6,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6).MatchAsync(f1, f2, f3, f4, f5, f6, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
 
         /// <summary>
@@ -1051,11 +1404,39 @@ namespace FuncSharp
             T t7, Func<T, TResult> f7,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
 
 
@@ -1070,11 +1451,39 @@ namespace FuncSharp
             T t7, Func<T, Task<TResult>> f7,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
 
         /// <summary>
@@ -1091,14 +1500,47 @@ namespace FuncSharp
             T t7, Action<T> f7,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).Match(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -1112,14 +1554,47 @@ namespace FuncSharp
             T t7, Func<T,Task> f7,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7).MatchAsync(f1, f2, f3, f4, f5, f6, f7, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
 
         /// <summary>
@@ -1237,11 +1712,43 @@ namespace FuncSharp
             T t8, Func<T, TResult> f8,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
 
 
@@ -1257,11 +1764,43 @@ namespace FuncSharp
             T t8, Func<T, Task<TResult>> f8,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
 
         /// <summary>
@@ -1279,14 +1818,52 @@ namespace FuncSharp
             T t8, Action<T> f8,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).Match(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -1301,14 +1878,52 @@ namespace FuncSharp
             T t8, Func<T,Task> f8,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
 
         /// <summary>
@@ -1432,11 +2047,47 @@ namespace FuncSharp
             T t9, Func<T, TResult> f9,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
 
 
@@ -1453,11 +2104,47 @@ namespace FuncSharp
             T t9, Func<T, Task<TResult>> f9,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
 
         /// <summary>
@@ -1476,14 +2163,57 @@ namespace FuncSharp
             T t9, Action<T> f9,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -1499,14 +2229,57 @@ namespace FuncSharp
             T t9, Func<T,Task> f9,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
 
         /// <summary>
@@ -1636,11 +2409,51 @@ namespace FuncSharp
             T t10, Func<T, TResult> f10,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
 
 
@@ -1658,11 +2471,51 @@ namespace FuncSharp
             T t10, Func<T, Task<TResult>> f10,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
 
         /// <summary>
@@ -1682,14 +2535,62 @@ namespace FuncSharp
             T t10, Action<T> f10,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -1706,14 +2607,62 @@ namespace FuncSharp
             T t10, Func<T,Task> f10,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
 
         /// <summary>
@@ -1849,11 +2798,55 @@ namespace FuncSharp
             T t11, Func<T, TResult> f11,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
 
 
@@ -1872,11 +2865,55 @@ namespace FuncSharp
             T t11, Func<T, Task<TResult>> f11,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
 
         /// <summary>
@@ -1897,14 +2934,67 @@ namespace FuncSharp
             T t11, Action<T> f11,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -1922,14 +3012,67 @@ namespace FuncSharp
             T t11, Func<T,Task> f11,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
 
         /// <summary>
@@ -2071,11 +3214,59 @@ namespace FuncSharp
             T t12, Func<T, TResult> f12,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
 
 
@@ -2095,11 +3286,59 @@ namespace FuncSharp
             T t12, Func<T, Task<TResult>> f12,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
 
         /// <summary>
@@ -2121,14 +3360,72 @@ namespace FuncSharp
             T t12, Action<T> f12,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -2147,14 +3444,72 @@ namespace FuncSharp
             T t12, Func<T,Task> f12,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
 
         /// <summary>
@@ -2302,11 +3657,63 @@ namespace FuncSharp
             T t13, Func<T, TResult> f13,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
 
 
@@ -2327,11 +3734,63 @@ namespace FuncSharp
             T t13, Func<T, Task<TResult>> f13,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
 
         /// <summary>
@@ -2354,14 +3813,77 @@ namespace FuncSharp
             T t13, Action<T> f13,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -2381,14 +3903,77 @@ namespace FuncSharp
             T t13, Func<T,Task> f13,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
 
         /// <summary>
@@ -2542,11 +4127,67 @@ namespace FuncSharp
             T t14, Func<T, TResult> f14,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return f14(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
 
 
@@ -2568,11 +4209,67 @@ namespace FuncSharp
             T t14, Func<T, Task<TResult>> f14,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return await f14(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
 
         /// <summary>
@@ -2596,14 +4293,82 @@ namespace FuncSharp
             T t14, Action<T> f14,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                f14(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -2624,14 +4389,82 @@ namespace FuncSharp
             T t14, Func<T,Task> f14,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                await f14(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
 
         /// <summary>
@@ -2791,11 +4624,71 @@ namespace FuncSharp
             T t15, Func<T, TResult> f15,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return f15(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
 
@@ -2818,11 +4711,71 @@ namespace FuncSharp
             T t15, Func<T, Task<TResult>> f15,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return await f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return await f15(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
         /// <summary>
@@ -2847,14 +4800,87 @@ namespace FuncSharp
             T t15, Action<T> f15,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                f15(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -2876,14 +4902,87 @@ namespace FuncSharp
             T t15, Func<T,Task> f15,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                await f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                await f15(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
         /// <summary>
@@ -3049,11 +5148,75 @@ namespace FuncSharp
             T t16, Func<T, TResult> f16,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return f16(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
 
 
@@ -3077,11 +5240,75 @@ namespace FuncSharp
             T t16, Func<T, Task<TResult>> f16,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return await f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return await f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return await f16(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
 
         /// <summary>
@@ -3107,14 +5334,92 @@ namespace FuncSharp
             T t16, Action<T> f16,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                f16(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -3137,14 +5442,92 @@ namespace FuncSharp
             T t16, Func<T,Task> f16,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                await f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                await f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                await f16(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
 
         /// <summary>
@@ -3316,11 +5699,79 @@ namespace FuncSharp
             T t17, Func<T, TResult> f17,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return f16(value);
+            }
+            if (Equals(value, t17))
+            {
+                return f17(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
 
 
@@ -3345,11 +5796,79 @@ namespace FuncSharp
             T t17, Func<T, Task<TResult>> f17,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return await f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return await f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return await f16(value);
+            }
+            if (Equals(value, t17))
+            {
+                return await f17(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
 
         /// <summary>
@@ -3376,14 +5895,97 @@ namespace FuncSharp
             T t17, Action<T> f17,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                f16(value);
+                return;
+            }
+            if (Equals(value, t17))
+            {
+                f17(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -3407,14 +6009,97 @@ namespace FuncSharp
             T t17, Func<T,Task> f17,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                await f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                await f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                await f16(value);
+                return;
+            }
+            if (Equals(value, t17))
+            {
+                await f17(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
 
         /// <summary>
@@ -3592,11 +6277,83 @@ namespace FuncSharp
             T t18, Func<T, TResult> f18,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return f16(value);
+            }
+            if (Equals(value, t17))
+            {
+                return f17(value);
+            }
+            if (Equals(value, t18))
+            {
+                return f18(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
 
 
@@ -3622,11 +6379,83 @@ namespace FuncSharp
             T t18, Func<T, Task<TResult>> f18,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return await f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return await f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return await f16(value);
+            }
+            if (Equals(value, t17))
+            {
+                return await f17(value);
+            }
+            if (Equals(value, t18))
+            {
+                return await f18(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
 
         /// <summary>
@@ -3654,14 +6483,102 @@ namespace FuncSharp
             T t18, Action<T> f18,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                f16(value);
+                return;
+            }
+            if (Equals(value, t17))
+            {
+                f17(value);
+                return;
+            }
+            if (Equals(value, t18))
+            {
+                f18(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -3686,14 +6603,102 @@ namespace FuncSharp
             T t18, Func<T,Task> f18,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                await f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                await f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                await f16(value);
+                return;
+            }
+            if (Equals(value, t17))
+            {
+                await f17(value);
+                return;
+            }
+            if (Equals(value, t18))
+            {
+                await f18(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
 
         /// <summary>
@@ -3877,11 +6882,87 @@ namespace FuncSharp
             T t19, Func<T, TResult> f19,
             Func<T, TResult> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+                return f1(value);
             }
-            return value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return f16(value);
+            }
+            if (Equals(value, t17))
+            {
+                return f17(value);
+            }
+            if (Equals(value, t18))
+            {
+                return f18(value);
+            }
+            if (Equals(value, t19))
+            {
+                return f19(value);
+            }
+            if (otherwise != null)
+            {
+                return otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
 
 
@@ -3908,11 +6989,87 @@ namespace FuncSharp
             T t19, Func<T, Task<TResult>> f19,
             Func<T, Task<TResult>> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                return await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+                return await f1(value);
             }
-            return await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+            if (Equals(value, t2))
+            {
+                return await f2(value);
+            }
+            if (Equals(value, t3))
+            {
+                return await f3(value);
+            }
+            if (Equals(value, t4))
+            {
+                return await f4(value);
+            }
+            if (Equals(value, t5))
+            {
+                return await f5(value);
+            }
+            if (Equals(value, t6))
+            {
+                return await f6(value);
+            }
+            if (Equals(value, t7))
+            {
+                return await f7(value);
+            }
+            if (Equals(value, t8))
+            {
+                return await f8(value);
+            }
+            if (Equals(value, t9))
+            {
+                return await f9(value);
+            }
+            if (Equals(value, t10))
+            {
+                return await f10(value);
+            }
+            if (Equals(value, t11))
+            {
+                return await f11(value);
+            }
+            if (Equals(value, t12))
+            {
+                return await f12(value);
+            }
+            if (Equals(value, t13))
+            {
+                return await f13(value);
+            }
+            if (Equals(value, t14))
+            {
+                return await f14(value);
+            }
+            if (Equals(value, t15))
+            {
+                return await f15(value);
+            }
+            if (Equals(value, t16))
+            {
+                return await f16(value);
+            }
+            if (Equals(value, t17))
+            {
+                return await f17(value);
+            }
+            if (Equals(value, t18))
+            {
+                return await f18(value);
+            }
+            if (Equals(value, t19))
+            {
+                return await f19(value);
+            }
+            if (otherwise != null)
+            {
+                return await otherwise(value);
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
 
         /// <summary>
@@ -3941,14 +7098,107 @@ namespace FuncSharp
             T t19, Action<T> f19,
             Action<T> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+                f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).Match(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+                f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                f16(value);
+                return;
+            }
+            if (Equals(value, t17))
+            {
+                f17(value);
+                return;
+            }
+            if (Equals(value, t18))
+            {
+                f18(value);
+                return;
+            }
+            if (Equals(value, t19))
+            {
+                f19(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
 
         public static async Task MatchAsync<T>(
@@ -3974,14 +7224,107 @@ namespace FuncSharp
             T t19, Func<T,Task> f19,
             Func<T, Task> otherwise = null)
         {
-            if (otherwise == null)
+            if (Equals(value, t1))
             {
-                await value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19);
+                await f1(value);
+                return;
             }
-            else
+            if (Equals(value, t2))
             {
-                await value.AsSafeCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19).MatchAsync(f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, _ => otherwise(value));
+                await f2(value);
+                return;
             }
+            if (Equals(value, t3))
+            {
+                await f3(value);
+                return;
+            }
+            if (Equals(value, t4))
+            {
+                await f4(value);
+                return;
+            }
+            if (Equals(value, t5))
+            {
+                await f5(value);
+                return;
+            }
+            if (Equals(value, t6))
+            {
+                await f6(value);
+                return;
+            }
+            if (Equals(value, t7))
+            {
+                await f7(value);
+                return;
+            }
+            if (Equals(value, t8))
+            {
+                await f8(value);
+                return;
+            }
+            if (Equals(value, t9))
+            {
+                await f9(value);
+                return;
+            }
+            if (Equals(value, t10))
+            {
+                await f10(value);
+                return;
+            }
+            if (Equals(value, t11))
+            {
+                await f11(value);
+                return;
+            }
+            if (Equals(value, t12))
+            {
+                await f12(value);
+                return;
+            }
+            if (Equals(value, t13))
+            {
+                await f13(value);
+                return;
+            }
+            if (Equals(value, t14))
+            {
+                await f14(value);
+                return;
+            }
+            if (Equals(value, t15))
+            {
+                await f15(value);
+                return;
+            }
+            if (Equals(value, t16))
+            {
+                await f16(value);
+                return;
+            }
+            if (Equals(value, t17))
+            {
+                await f17(value);
+                return;
+            }
+            if (Equals(value, t18))
+            {
+                await f18(value);
+                return;
+            }
+            if (Equals(value, t19))
+            {
+                await f19(value);
+                return;
+            }
+            if (otherwise != null)
+            {
+                await otherwise(value);
+                return;
+            }
+            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
 
         /// <summary>
