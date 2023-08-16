@@ -22,14 +22,6 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns all the items inside all the collections combined into 1 IEnumerable.
-        /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)
-        {
-            return e.SelectMany(i => i);
-        }
-
-        /// <summary>
         /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
         /// </summary>
         public static IOption<T> ToNonEmptyOption<T>(this T source)
@@ -97,28 +89,6 @@ namespace FuncSharp
                 case 1: return Option.Valued(exceptions[0]);
                 default: return Option.Valued(new AggregateException(exceptions));
             }
-        }
-
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params T[] excludedItems)
-        {
-            return e.Except(excludedItems.AsEnumerable());
-        }
-
-        public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params IEnumerable<T>[] others)
-        {
-            return Enumerable.Except(e, others.Flatten());
-        }
-
-        public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T?> e)
-            where T : struct
-        {
-            return e.Where(v => v.HasValue).Select(v => v.Value);
-        }
-
-        public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T> e)
-            where T : class
-        {
-            return e.Where(v => v is not null);
         }
         <#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
 
