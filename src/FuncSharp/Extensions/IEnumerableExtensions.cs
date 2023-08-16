@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,14 @@ namespace FuncSharp
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
         {
             return source.SelectMany(o => o.ToList());
+        }
+
+        /// <summary>
+        /// Returns all the items inside all the collections combined into 1 IEnumerable.
+        /// </summary>
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)
+        {
+            return e.SelectMany(i => i);
         }
 
         /// <summary>
@@ -84,6 +91,28 @@ namespace FuncSharp
                 case 1: return Option.Valued(exceptions[0]);
                 default: return Option.Valued(new AggregateException(exceptions));
             }
+        }
+
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params T[] excludedItems)
+        {
+            return e.Except(excludedItems.AsEnumerable());
+        }
+
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params IEnumerable<T>[] others)
+        {
+            return Enumerable.Except(e, others.Flatten());
+        }
+
+        public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T?> e)
+            where T : struct
+        {
+            return e.Where(v => v.HasValue).Select(v => v.Value);
+        }
+
+        public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T> e)
+            where T : class
+        {
+            return e.Where(v => v is not null);
         }
         
         /// <summary>
