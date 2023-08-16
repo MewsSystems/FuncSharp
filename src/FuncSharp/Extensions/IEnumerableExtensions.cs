@@ -80,16 +80,6 @@ namespace FuncSharp
             return e.ElementAt(4);
         }
 
-        [DebuggerStepThrough]
-        public static IReadOnlyList<T> Defined<T>(this IEnumerable<T> e)
-        {
-            if (e is null)
-            {
-                return ReadOnlyList.Empty<T>();
-            }
-            return e.ToList();
-        }
-
         public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params T[] items)
         {
             return Enumerable.Concat(first, items);

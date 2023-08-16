@@ -86,16 +86,6 @@ namespace FuncSharp
             return e.ElementAt(4);
         }
 
-        [DebuggerStepThrough]
-        public static IReadOnlyList<T> Defined<T>(this IEnumerable<T> e)
-        {
-            if (e is null)
-            {
-                return ReadOnlyList.Empty<T>();
-            }
-            return e.ToList();
-        }
-
         public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params T[] items)
         {
             return Enumerable.Concat(first, items);
@@ -108,40 +98,12 @@ namespace FuncSharp
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
         {
-            return Enumerable.Concat(first.Defined(), items);
+            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), items);
         }
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
         {
-            return Enumerable.Concat(first.Defined(), others.SelectMany(o => o.Defined()));
-        }
-
-        [DebuggerStepThrough]
-        public static void ForEach<T>(this IEnumerable<T> e, Action<T> action)
-        {
-            e.ForEach((item, i) => action(item));
-        }
-
-        [DebuggerStepThrough]
-        public static void ForEach<T>(this IEnumerable<T> e, Action<T, int> action)
-        {
-            var i = 0;
-            foreach (var x in e.Defined())
-            {
-                action(x, i++);
-            }
-        }
-
-        [DebuggerStepThrough]
-        public static void ForEachPair<TFirst, TSecond>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Action<TFirst, TSecond> action)
-        {
-            using var enumFirst = first.GetEnumerator();
-            using var enumSecond = second.GetEnumerator();
-
-            while (enumFirst.MoveNext() && enumSecond.MoveNext())
-            {
-                action(enumFirst.Current, enumSecond.Current);
-            }
+            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), others.SelectMany(o => o ?? Enumerable.Empty<T>()));
         }
 
         /// <summary>
