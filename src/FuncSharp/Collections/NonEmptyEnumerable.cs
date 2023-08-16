@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using FuncSharp;
 
 namespace FuncSharp;
 
@@ -43,7 +42,13 @@ public static class NonEmptyEnumerable
 
     public static IOption<INonEmptyEnumerable<T>> Create<T>(IEnumerable<T> values)
     {
-        return Create(values.ToList());
+        var list = values.ToList();
+        if (list.Count == 0)
+        {
+            return Option.Empty<INonEmptyEnumerable<T>>();
+        }
+
+        return Option.Valued(Create(list[0], list.Skip(1)));
     }
 
     public static IOption<INonEmptyEnumerable<T>> Create<T>(IReadOnlyList<T> values)
@@ -118,12 +123,12 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
 
     public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, TResult> func)
     {
-        return new NonEmptyEnumerable<TResult>(func(Head), Tail.SelectStrict(func));
+        return new NonEmptyEnumerable<TResult>(func(Head), Tail.Select(func).ToList());
     }
 
     public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, int, TResult> func)
     {
-        return new NonEmptyEnumerable<TResult>(func(Head, 0), Tail.SelectStrict((v, i) => func(v, i + 1)));
+        return new NonEmptyEnumerable<TResult>(func(Head, 0), Tail.Select((v, i) => func(v, i + 1)).ToList());
     }
 
     public IReadOnlyList<T> AsReadonly()
