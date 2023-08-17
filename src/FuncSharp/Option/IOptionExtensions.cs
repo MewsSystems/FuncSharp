@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace FuncSharp
@@ -226,6 +227,32 @@ namespace FuncSharp
         public static IEnumerable<A> Flatten<A>(this IOption<IEnumerable<A>> option)
         {
             return option.GetOrElse(_ => Enumerable.Empty<A>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty ReadOnlyList.
+        /// </summary>
+        public static IReadOnlyList<A> Flatten<A>(this IOption<IReadOnlyList<A>> option)
+        {
+            return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty ReadOnlyList.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IReadOnlyList<T> GetOrEmpty<T>(this IOption<IReadOnlyList<T>> source)
+        {
+            return source.Match(s => s, _ => ReadOnlyList.Empty<T>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty enumerable.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IEnumerable<T> GetOrEmpty<T>(this IOption<IEnumerable<T>> source)
+        {
+            return source.Match(s => s, _ => Enumerable.Empty<T>());
         }
 
         /// <summary>

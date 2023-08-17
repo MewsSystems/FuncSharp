@@ -209,18 +209,6 @@ namespace FuncSharp
             return source.SelectMany(o => o.ToList());
         }
 
-        [DebuggerStepThrough]
-        public static IReadOnlyList<T> GetOrEmpty<T>(this IOption<IReadOnlyList<T>> source)
-        {
-            return source.Match(s => s, _ => ReadOnlyList.Empty<T>());
-        }
-
-        [DebuggerStepThrough]
-        public static IEnumerable<T> GetOrEmpty<T>(this IOption<IEnumerable<T>> source)
-        {
-            return source.Match(s => s, _ => Enumerable.Empty<T>());
-        }
-
         public static IOption<TValue> SafeMax<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
         {
             return source.AsNonEmpty().Map(s => s.Max(selector));
