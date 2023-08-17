@@ -9,8 +9,8 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/MewsSystems/FuncSharp/build-and-test.yml?branch=master&label=build%20and%20tests)](https://github.com/MewsSystems/FuncSharp/actions/workflows/build-and-test.yml)
 [![Build](https://img.shields.io/github/actions/workflow/status/MewsSystems/FuncSharp/publish.yml?branch=master&label=publish)](https://github.com/MewsSystems/FuncSharp/actions/workflows/publish.yml)
 [![License](https://img.shields.io/github/license/MewsSystems/FuncSharp)](https://github.com/MewsSystems/FuncSharp/blob/master/license.txt)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/Mews.FuncSharp)](https://www.nuget.org/packages/Mews.FuncSharp/)
-[![NuGet Version](https://img.shields.io/nuget/v/Mews.FuncSharp)](https://www.nuget.org/packages/Mews.FuncSharp/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
+[![NuGet Version](https://img.shields.io/nuget/v/FuncSharp)](https://www.nuget.org/packages/FuncSharp/)
 
 FuncSharp is a C# library with main purpose to introduce more advanced functional programming concepts that are currently not availabile in C# natively. As on outcome, it helps **reducing boilerplate** code, making code **more readable** and **avoiding bugs** thanks to stronger typing. It utilizes many concepts from other functional programming languages like Haskell or Scala, that are also applicable in C#.
 
