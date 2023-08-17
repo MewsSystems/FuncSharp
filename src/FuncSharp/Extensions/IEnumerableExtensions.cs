@@ -19,6 +19,24 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns the IEnumerable in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IReadOnlyList<T> AsReadOnlyList<T>(this IEnumerable<T> source)
+        {
+            return source as IReadOnlyList<T> ?? source.ToList();
+        }
+
+        /// <summary>
+        /// Returns the IEnumerable in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static List<T> AsList<T>(this IEnumerable<T> source)
+        {
+            return source as List<T> ?? source.ToList();
+        }
+
+        /// <summary>
         /// Returns all the items inside all the collections combined into 1 IEnumerable.
         /// </summary>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)

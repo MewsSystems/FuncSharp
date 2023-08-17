@@ -18,12 +18,12 @@ public static class IReadOnlyListExtensions
 
     public static bool IsMultiple<T>(this IReadOnlyList<T> source)
     {
-        return source.Count > 1;
+        return source is not null && source.Count > 1;
     }
 
     public static bool IsSingle<T>(this IReadOnlyList<T> source)
     {
-        return source.Count == 1;
+        return source is not null && source.Count == 1;
     }
 
     public static T Single<T>(this IReadOnlyList<T> source)
@@ -123,11 +123,13 @@ public static class ReadOnlyList
         return CreateFlat(values);
     }
 
+    [Obsolete("Use CreateFlat instead. This method will be gone once Mews replaces all the usages.", true)]
     public static IReadOnlyList<T> Create<T>(IEnumerable<T> values)
     {
         return values.ToList();
     }
 
+    [Obsolete("Use CreateFlat instead. This method will be gone once Mews replaces all the usages.", true)]
     public static IReadOnlyList<T> Create<T>(IReadOnlyList<T> values)
     {
         return values.ToList();
