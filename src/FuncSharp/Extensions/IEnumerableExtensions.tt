@@ -172,6 +172,15 @@ namespace FuncSharp
             return NonEmptyEnumerable.Create(source);
         }
 
+        /// <summary>
+        /// Returns the nonEmptyEnumerable typed as IReadOnlyList.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IReadOnlyList<T> AsReadOnly<T>(this INonEmptyEnumerable<T> source)
+        {
+            return source;
+        }
+
         public static INonEmptyEnumerable<V> SelectMany<T, V>(this INonEmptyEnumerable<T> source, Func<T, INonEmptyEnumerable<V>> selector)
         {
             return NonEmptyEnumerable.CreateFlat(source.Select(selector));
