@@ -1,66 +1,110 @@
-﻿
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace FuncSharp
 {
     public static class IEnumerableExtensions
     {
+        #region Generic
+
         /// <summary>
-        /// Returns values of the nonempty options.
+        /// Returns a ToList() juts of type IReadOnlyList.
         /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
+        public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
-            return source.SelectMany(o => o.ToList());
+            return e.ToList().AsReadOnly();
         }
 
         /// <summary>
-        /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
+        /// Returns all the items inside all the collections combined into 1 IEnumerable.
         /// </summary>
-        public static IOption<T> ToNonEmptyOption<T>(this T source)
-            where T : IEnumerable
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)
         {
-            if (source == null || !source.OfType<object>().Any())
-            {
-                return Option.Empty<T>();
-            }
-            return source.ToOption();
+            return e.SelectMany(i => i);
         }
 
-        /// <summary>
-        /// Returns first value or an empty option. 
-        /// </summary>
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params T[] excludedItems)
         {
-            var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
-            if (data.Count == 0)
-            {
-                return Option.Empty<T>();
-            }
-            return Option.Valued(data.First());
+            return e.Except(excludedItems.AsEnumerable());
         }
 
-        /// <summary>
-        /// Returns last value or an empty option. 
-        /// </summary>
-        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params IEnumerable<T>[] others)
         {
-            return source.Reverse().FirstOption(predicate);
+            return Enumerable.Except(e, others.Flatten());
         }
 
-        /// <summary>
-        /// Returns the only value if the source contains just one value, otherwise an empty option.
-        /// </summary>
-        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T?> e)
+            where T : struct
         {
-            var data = source.Where(predicate ?? (t => true)).Take(2).ToList();
-            if (data.Count == 2)
-            {
-                return Option.Empty<T>();
-            }
-            return data.FirstOption();
+            return e.Where(v => v.HasValue).Select(v => v.Value);
+        }
+
+        public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T> e)
+            where T : class
+        {
+            return e.Where(v => v is not null);
+        }
+
+        public static bool NonEmpty<T>(this IEnumerable<T> e)
+        {
+            return e is not null && e.Any();
+        }
+
+        public static bool IsEmpty<T>(this IEnumerable<T> e)
+        {
+            return !e.NonEmpty();
+        }
+
+        public static bool IsMultiple<T>(this IEnumerable<T> e)
+        {
+            return e is not null && e.Take(2).Count().SafeEquals(2);
+        }
+
+        public static bool IsSingle<T>(this IEnumerable<T> e)
+        {
+            return e is not null && e.Take(2).Count().SafeEquals(1);
+        }
+
+        public static T Second<T>(this IEnumerable<T> e)
+        {
+            return e.ElementAt(1);
+        }
+
+        public static T Third<T>(this IEnumerable<T> e)
+        {
+            return e.ElementAt(2);
+        }
+
+        public static T Fourth<T>(this IEnumerable<T> e)
+        {
+            return e.ElementAt(3);
+        }
+
+        public static T Fifth<T>(this IEnumerable<T> e)
+        {
+            return e.ElementAt(4);
+        }
+
+        public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params T[] items)
+        {
+            return Enumerable.Concat(first, items);
+        }
+
+        public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
+        {
+            return Enumerable.Concat(first, others.Flatten());
+        }
+
+        public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
+        {
+            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), items);
+        }
+
+        public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
+        {
+            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), others.SelectMany(o => o ?? Enumerable.Empty<T>()));
         }
 
         /// <summary>
@@ -85,7 +129,77 @@ namespace FuncSharp
                 default: return Option.Valued(new AggregateException(exceptions));
             }
         }
-        
+
+        #endregion Generic
+
+        #region Numeric
+
+        public static NonPositiveInt Sum(this IEnumerable<NonPositiveInt> values)
+        {
+            return values.Aggregate(0.AsUnsafeNonPositive(), (a, b) => a + b);
+        }
+
+        public static NonNegativeInt Sum(this IEnumerable<NonNegativeInt> values)
+        {
+            return values.Aggregate(NonNegativeInt.Zero, (a, b) => a + b);
+        }
+
+        #endregion Numeric
+
+        #region Options
+
+        /// <summary>
+        /// Returns values of the nonempty options.
+        /// </summary>
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
+        {
+            return source.SelectMany(o => o.ToList());
+        }
+
+        [DebuggerStepThrough]
+        public static IEnumerable<T> GetOrEmpty<T>(this IOption<IEnumerable<T>> source)
+        {
+            return source.Match(s => s, _ => Enumerable.Empty<T>());
+        }
+
+        /// <summary>
+        /// Returns first value or an empty option.
+        /// </summary>
+        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        {
+            var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
+            if (data.Count == 0)
+            {
+                return Option.Empty<T>();
+            }
+            return Option.Valued(data.First());
+        }
+
+        /// <summary>
+        /// Returns last value or an empty option.
+        /// </summary>
+        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        {
+            return source.Reverse().FirstOption(predicate);
+        }
+
+        /// <summary>
+        /// Returns the only value if the source contains just one value, otherwise an empty option.
+        /// </summary>
+        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        {
+            var data = source.Where(predicate ?? (t => true)).Take(2).ToList();
+            if (data.Count == 2)
+            {
+                return Option.Empty<T>();
+            }
+            return data.FirstOption();
+        }
+
+        #endregion Options
+
+        #region DataCubes
+
         /// <summary>
         /// Converts the source to a new 1-dimensional data cube and aggregates the values in case of conflicting positions.
         /// </summary>
@@ -372,6 +486,10 @@ namespace FuncSharp
             return ToDataCube<T, P1, P2, P3, P4, P5, P6, TValue, IEnumerable<TValue>>(source, p1, p2, p3, p4, p5, p6, value, a => Enumerable.Repeat(a, 1), (a, b) => a.Concat(new [] { b }));
         }
 
+        #endregion DataCubes
+
+        #region PartitionMatch
+
 
         /// <summary>
         /// For each partition (collection of n-th coproduct elements), invokes the specified function.
@@ -390,6 +508,22 @@ namespace FuncSharp
             }
 
             f1(list1);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, TResult>(
+            this IEnumerable<ICoproduct1<T1>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -413,6 +547,24 @@ namespace FuncSharp
 
             f1(list1);
             f2(list2);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, TResult>(
+            this IEnumerable<ICoproduct2<T1, T2>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -440,6 +592,26 @@ namespace FuncSharp
             f1(list1);
             f2(list2);
             f3(list3);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, TResult>(
+            this IEnumerable<ICoproduct3<T1, T2, T3>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -471,6 +643,28 @@ namespace FuncSharp
             f2(list2);
             f3(list3);
             f4(list4);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, TResult>(
+            this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -506,6 +700,30 @@ namespace FuncSharp
             f3(list3);
             f4(list4);
             f5(list5);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, TResult>(
+            this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -545,6 +763,32 @@ namespace FuncSharp
             f4(list4);
             f5(list5);
             f6(list6);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, TResult>(
+            this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -588,6 +832,34 @@ namespace FuncSharp
             f5(list5);
             f6(list6);
             f7(list7);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, TResult>(
+            this IEnumerable<ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -635,6 +907,36 @@ namespace FuncSharp
             f6(list6);
             f7(list7);
             f8(list8);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
+            this IEnumerable<ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -686,6 +988,38 @@ namespace FuncSharp
             f7(list7);
             f8(list8);
             f9(list9);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
+            this IEnumerable<ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -741,6 +1075,40 @@ namespace FuncSharp
             f8(list8);
             f9(list9);
             f10(list10);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
+            this IEnumerable<ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -800,6 +1168,42 @@ namespace FuncSharp
             f9(list9);
             f10(list10);
             f11(list11);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
+            this IEnumerable<ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -863,6 +1267,44 @@ namespace FuncSharp
             f10(list10);
             f11(list11);
             f12(list12);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
+            this IEnumerable<ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -930,6 +1372,46 @@ namespace FuncSharp
             f11(list11);
             f12(list12);
             f13(list13);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
+            this IEnumerable<ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1001,6 +1483,48 @@ namespace FuncSharp
             f12(list12);
             f13(list13);
             f14(list14);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
+            this IEnumerable<ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
+            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1076,6 +1600,50 @@ namespace FuncSharp
             f13(list13);
             f14(list14);
             f15(list15);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
+            this IEnumerable<ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
+            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
+            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1155,6 +1723,52 @@ namespace FuncSharp
             f14(list14);
             f15(list15);
             f16(list16);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
+            this IEnumerable<ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
+            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
+            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
+            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1238,6 +1852,54 @@ namespace FuncSharp
             f15(list15);
             f16(list16);
             f17(list17);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, TResult>(
+            this IEnumerable<ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
+            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
+            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
+            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16,
+            Func<IReadOnlyList<T17>, IEnumerable<TResult>> f17)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1325,6 +1987,56 @@ namespace FuncSharp
             f16(list16);
             f17(list17);
             f18(list18);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, TResult>(
+            this IEnumerable<ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
+            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
+            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
+            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16,
+            Func<IReadOnlyList<T17>, IEnumerable<TResult>> f17,
+            Func<IReadOnlyList<T18>, IEnumerable<TResult>> f18)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17)),
+                c18 => result.AddRange(f18(c18))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1416,6 +2128,58 @@ namespace FuncSharp
             f17(list17);
             f18(list18);
             f19(list19);
+        }
+
+        /// <summary>
+        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
+        /// </summary>
+        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, TResult>(
+            this IEnumerable<ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source,
+            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
+            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
+            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
+            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
+            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
+            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
+            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
+            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
+            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
+            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
+            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
+            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
+            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
+            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
+            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
+            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16,
+            Func<IReadOnlyList<T17>, IEnumerable<TResult>> f17,
+            Func<IReadOnlyList<T18>, IEnumerable<TResult>> f18,
+            Func<IReadOnlyList<T19>, IEnumerable<TResult>> f19)
+        {
+            var result = new List<TResult>();
+
+            source.PartitionMatch(
+                c1 => result.AddRange(f1(c1)),
+                c2 => result.AddRange(f2(c2)),
+                c3 => result.AddRange(f3(c3)),
+                c4 => result.AddRange(f4(c4)),
+                c5 => result.AddRange(f5(c5)),
+                c6 => result.AddRange(f6(c6)),
+                c7 => result.AddRange(f7(c7)),
+                c8 => result.AddRange(f8(c8)),
+                c9 => result.AddRange(f9(c9)),
+                c10 => result.AddRange(f10(c10)),
+                c11 => result.AddRange(f11(c11)),
+                c12 => result.AddRange(f12(c12)),
+                c13 => result.AddRange(f13(c13)),
+                c14 => result.AddRange(f14(c14)),
+                c15 => result.AddRange(f15(c15)),
+                c16 => result.AddRange(f16(c16)),
+                c17 => result.AddRange(f17(c17)),
+                c18 => result.AddRange(f18(c18)),
+                c19 => result.AddRange(f19(c19))
+            );
+
+            return result;
         }
 
         /// <summary>
@@ -1516,652 +2280,6 @@ namespace FuncSharp
         /// <summary>
         /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
         /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, TResult>(
-            this IEnumerable<ICoproduct1<T1>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, TResult>(
-            this IEnumerable<ICoproduct2<T1, T2>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, TResult>(
-            this IEnumerable<ICoproduct3<T1, T2, T3>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, TResult>(
-            this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, TResult>(
-            this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, TResult>(
-            this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, TResult>(
-            this IEnumerable<ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
-            this IEnumerable<ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
-            this IEnumerable<ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
-            this IEnumerable<ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
-            this IEnumerable<ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
-            this IEnumerable<ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
-            this IEnumerable<ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
-            this IEnumerable<ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
-            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13)),
-                c14 => result.AddRange(f14(c14))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
-            this IEnumerable<ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
-            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
-            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13)),
-                c14 => result.AddRange(f14(c14)),
-                c15 => result.AddRange(f15(c15))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
-            this IEnumerable<ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
-            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
-            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
-            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13)),
-                c14 => result.AddRange(f14(c14)),
-                c15 => result.AddRange(f15(c15)),
-                c16 => result.AddRange(f16(c16))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, TResult>(
-            this IEnumerable<ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
-            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
-            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
-            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16,
-            Func<IReadOnlyList<T17>, IEnumerable<TResult>> f17)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13)),
-                c14 => result.AddRange(f14(c14)),
-                c15 => result.AddRange(f15(c15)),
-                c16 => result.AddRange(f16(c16)),
-                c17 => result.AddRange(f17(c17))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, TResult>(
-            this IEnumerable<ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
-            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
-            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
-            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16,
-            Func<IReadOnlyList<T17>, IEnumerable<TResult>> f17,
-            Func<IReadOnlyList<T18>, IEnumerable<TResult>> f18)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13)),
-                c14 => result.AddRange(f14(c14)),
-                c15 => result.AddRange(f15(c15)),
-                c16 => result.AddRange(f16(c16)),
-                c17 => result.AddRange(f17(c17)),
-                c18 => result.AddRange(f18(c18))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
-        public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, TResult>(
-            this IEnumerable<ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source,
-            Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
-            Func<IReadOnlyList<T2>, IEnumerable<TResult>> f2,
-            Func<IReadOnlyList<T3>, IEnumerable<TResult>> f3,
-            Func<IReadOnlyList<T4>, IEnumerable<TResult>> f4,
-            Func<IReadOnlyList<T5>, IEnumerable<TResult>> f5,
-            Func<IReadOnlyList<T6>, IEnumerable<TResult>> f6,
-            Func<IReadOnlyList<T7>, IEnumerable<TResult>> f7,
-            Func<IReadOnlyList<T8>, IEnumerable<TResult>> f8,
-            Func<IReadOnlyList<T9>, IEnumerable<TResult>> f9,
-            Func<IReadOnlyList<T10>, IEnumerable<TResult>> f10,
-            Func<IReadOnlyList<T11>, IEnumerable<TResult>> f11,
-            Func<IReadOnlyList<T12>, IEnumerable<TResult>> f12,
-            Func<IReadOnlyList<T13>, IEnumerable<TResult>> f13,
-            Func<IReadOnlyList<T14>, IEnumerable<TResult>> f14,
-            Func<IReadOnlyList<T15>, IEnumerable<TResult>> f15,
-            Func<IReadOnlyList<T16>, IEnumerable<TResult>> f16,
-            Func<IReadOnlyList<T17>, IEnumerable<TResult>> f17,
-            Func<IReadOnlyList<T18>, IEnumerable<TResult>> f18,
-            Func<IReadOnlyList<T19>, IEnumerable<TResult>> f19)
-        {
-            var result = new List<TResult>();
-
-            source.PartitionMatch(
-                c1 => result.AddRange(f1(c1)),
-                c2 => result.AddRange(f2(c2)),
-                c3 => result.AddRange(f3(c3)),
-                c4 => result.AddRange(f4(c4)),
-                c5 => result.AddRange(f5(c5)),
-                c6 => result.AddRange(f6(c6)),
-                c7 => result.AddRange(f7(c7)),
-                c8 => result.AddRange(f8(c8)),
-                c9 => result.AddRange(f9(c9)),
-                c10 => result.AddRange(f10(c10)),
-                c11 => result.AddRange(f11(c11)),
-                c12 => result.AddRange(f12(c12)),
-                c13 => result.AddRange(f13(c13)),
-                c14 => result.AddRange(f14(c14)),
-                c15 => result.AddRange(f15(c15)),
-                c16 => result.AddRange(f16(c16)),
-                c17 => result.AddRange(f17(c17)),
-                c18 => result.AddRange(f18(c18)),
-                c19 => result.AddRange(f19(c19))
-            );
-
-            return result;
-        }
-
-        /// <summary>
-        /// For each partition (collection of n-th coproduct elements), invokes the specified function, aggregates results and returns them.
-        /// </summary>
         public static IReadOnlyList<TResult> PartitionMatch<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, TResult>(
             this IEnumerable<ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> source,
             Func<IReadOnlyList<T1>, IEnumerable<TResult>> f1,
@@ -2212,5 +2330,8 @@ namespace FuncSharp
 
             return result;
         }
+
+        #endregion PartitionMatch
+
     }
 }

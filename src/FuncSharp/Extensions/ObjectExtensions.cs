@@ -1,10 +1,228 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace FuncSharp
 {
     public static class ObjectExtensions
     {
+        public static bool SafeEquals<T>(this T t, T other)
+        {
+            return Equals(t, other);
+        }
+
+        public static bool SafeNotEquals<T>(this T t, T other)
+        {
+            return !t.SafeEquals(other);
+        }
+
+        public static bool SafeEquals<T>(this T t, T? other)
+            where T : struct
+        {
+            return ((T?)t).SafeEquals(other);
+        }
+
+        public static bool SafeEquals<T>(this T? t, T other)
+            where T : struct
+        {
+            return t.SafeEquals((T?)other);
+        }
+
+        [Obsolete("Use Match instead.", error: true)]
+        public static void MatchRef<A>(this IOption<A> a, Action<A> action = null, Action<Unit> otherwise = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        [DebuggerStepThrough]
+        public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)
+            where A : class
+        {
+            if (a is not null)
+            {
+                if (action is not null)
+                {
+                    action(a);
+                }
+            }
+            else if (otherwise is not null)
+            {
+                otherwise(Unit.Value);
+            }
+        }
+
+        [DebuggerStepThrough]
+        public static bool MatchRef<A>(this A a, Func<A, bool> func)
+            where A : class
+        {
+            if (a is not null)
+            {
+                return func(a);
+            }
+
+            return false;
+        }
+
+        [Obsolete("Use Match instead.", error: true)]
+        public static B MatchRef<A, B>(this IOption<A> a, Func<A, B> func, Func<Unit, B> otherwise)
+        {
+            throw new NotImplementedException();
+        }
+
+        [DebuggerStepThrough]
+        public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
+            where A : class
+        {
+            if (a is not null)
+            {
+                return func(a);
+            }
+            return otherwise(Unit.Value);
+        }
+
+        [DebuggerStepThrough]
+        public static async Task<B> MatchRefAsync<A, B>(this A a, Func<A, Task<B>> func, Func<Unit, Task<B>> otherwise)
+            where A : class
+        {
+            if (a is not null)
+            {
+                return await func(a);
+            }
+            return await otherwise(Unit.Value);
+        }
+
+        [Obsolete("Use Map instead.", error: true)]
+        public static B MapRef<A, B>(this IOption<A> a, Func<A, B> func)
+        {
+            throw new NotImplementedException();
+        }
+
+        [DebuggerStepThrough]
+        public static B MapRef<A, B>(this A a, Func<A, B> func)
+            where A : class
+            where B : class
+        {
+            if (a is not null)
+            {
+                return func(a);
+            }
+
+            return null;
+        }
+
+        [DebuggerStepThrough]
+        public static async Task<B> MapRefAsync<A, B>(this A a, Func<A, Task<B>> func)
+            where A : class
+            where B : class
+        {
+            if (a is not null)
+            {
+                return await func(a);
+            }
+            return default;
+        }
+
+        [DebuggerStepThrough]
+        public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
+            where A : class
+            where B : struct
+        {
+            return (a is not null).Match(
+                t => func(a),
+                f => default(B?)
+            );
+        }
+
+        [DebuggerStepThrough]
+        public static B? MapRefToVal<A, B>(this A a, Func<A, B?> func)
+            where A : class
+            where B : struct
+        {
+            return (a is not null).Match(
+                t => func(a),
+                f => null
+            );
+        }
+
+        [DebuggerStepThrough]
+        public static void MatchVal<A>(this A? a, Action<A> action = null, Action<Unit> otherwise = null)
+            where A : struct
+        {
+            if (a is not null)
+            {
+                if (action is not null)
+                {
+                    action(a.Value);
+                }
+            }
+            else if (otherwise is not null)
+            {
+                otherwise(Unit.Value);
+            }
+        }
+
+        [DebuggerStepThrough]
+        public static bool MatchVal<A>(this A? a, Func<A, bool> func)
+            where A : struct
+        {
+            return MatchVal(a, func, _ => false);
+        }
+
+        [DebuggerStepThrough]
+        public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
+            where A : struct
+        {
+            return (a is not null).Match(
+                t => func(a.Value),
+                f => otherwise(Unit.Value)
+            );
+        }
+
+        [DebuggerStepThrough]
+        public static B? MapVal<A, B>(this A? a, Func<A, B> func)
+            where A : struct
+            where B : struct
+        {
+            return (a is not null).Match(
+                t => func(a.Value),
+                f => default(B?)
+            );
+        }
+
+        [DebuggerStepThrough]
+        public static B? MapVal<A, B>(this A? a, Func<A, B?> func)
+            where A : struct
+            where B : struct
+        {
+            return (a is not null).Match(
+                t => func(a.Value),
+                f => null
+            );
+        }
+
+        [DebuggerStepThrough]
+        public static B MapValToRef<A, B>(this A? a, Func<A, B> func)
+            where A : struct
+            where B : class
+        {
+            return (a is not null).Match(
+                t => func(a.Value),
+                f => null
+            );
+        }
+
+        [DebuggerStepThrough]
+        public static async Task<B> MapValToRefAsync<A, B>(this A? a, Func<A, Task<B>> func)
+            where A : struct
+            where B : class
+        {
+            if (a is not null)
+            {
+                return await func(a.Value);
+            }
+            return default;
+        }
+
         /// <summary>
         /// Casts the specified object to the given type.
         /// </summary>
