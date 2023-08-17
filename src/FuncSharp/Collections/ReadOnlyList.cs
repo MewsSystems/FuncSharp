@@ -26,12 +26,32 @@ public static class IReadOnlyListExtensions
         return source.Count == 1;
     }
 
+    public static T Single<T>(this IReadOnlyList<T> source)
+    {
+        if (!source.IsSingle())
+        {
+            throw new ArgumentException("Source is not a single element.");
+        }
+
+        return source[0];
+    }
+
     public static IOption<T> SingleOption<T>(this IReadOnlyList<T> source)
     {
         return source.IsSingle().Match(
             t => Option.Valued(source[0]),
             f => Option.Empty<T>()
         );
+    }
+
+    public static T First<T>(this IReadOnlyList<T> source)
+    {
+        if (source.IsEmpty())
+        {
+            throw new ArgumentException("Source is empty.");
+        }
+
+        return source[0];
     }
 
     public static IOption<T> FirstOption<T>(this IReadOnlyList<T> source)
