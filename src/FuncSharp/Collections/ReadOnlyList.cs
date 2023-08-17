@@ -123,8 +123,14 @@ public static class ReadOnlyList
         return CreateFlat(values);
     }
 
-    [Obsolete("Use CreateFlat instead.", true)]
+    [Obsolete("Use CreateFlat instead. This method will be gone once Mews replaces all the usages.", true)]
     public static IReadOnlyList<T> Create<T>(IEnumerable<T> values)
+    {
+        return values.ToList();
+    }
+
+    [Obsolete("Use CreateFlat instead. This method will be gone once Mews replaces all the usages.", true)]
+    public static IReadOnlyList<T> Create<T>(IReadOnlyList<T> values)
     {
         return values.ToList();
     }
