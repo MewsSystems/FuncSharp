@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,6 +16,19 @@ namespace FuncSharp
         public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
             return e.ToList().AsReadOnly();
+        }
+
+        /// <summary>
+        /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
+        /// </summary>
+        public static IOption<T> ToNonEmptyOption<T>(this T source)
+            where T : IEnumerable
+        {
+            if (source == null || !source.OfType<object>().Any())
+            {
+                return Option.Empty<T>();
+            }
+            return source.ToOption();
         }
 
         /// <summary>
