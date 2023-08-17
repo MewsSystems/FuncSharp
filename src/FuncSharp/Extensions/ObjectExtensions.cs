@@ -6,6 +6,11 @@ namespace FuncSharp
 {
     public static class ObjectExtensions
     {
+        public static INonEmptyEnumerable<T> ToEnumerable<T>(this T value)
+        {
+            return NonEmptyEnumerable.Create(value);
+        }
+
         public static bool SafeEquals<T>(this T t, T other)
         {
             return Equals(t, other);

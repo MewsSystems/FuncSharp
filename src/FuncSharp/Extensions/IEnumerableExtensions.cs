@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -16,19 +16,6 @@ namespace FuncSharp
         public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
             return e.ToList().AsReadOnly();
-        }
-
-        /// <summary>
-        /// Returns the specified collection as an option in case it is nonempty. Otherwise returns empty option.
-        /// </summary>
-        public static IOption<T> ToNonEmptyOption<T>(this T source)
-            where T : IEnumerable
-        {
-            if (source == null || !source.OfType<object>().Any())
-            {
-                return Option.Empty<T>();
-            }
-            return source.ToOption();
         }
 
         /// <summary>
@@ -148,6 +135,11 @@ namespace FuncSharp
 
         #region Numeric
 
+        public static PositiveInt Sum(this INonEmptyEnumerable<PositiveInt> values)
+        {
+            return PositiveInt.CreateUnsafe(values.Sum(v => v.Value));
+        }
+
         public static NonPositiveInt Sum(this IEnumerable<NonPositiveInt> values)
         {
             return values.Aggregate(0.AsUnsafeNonPositive(), (a, b) => a + b);
@@ -160,6 +152,57 @@ namespace FuncSharp
 
         #endregion Numeric
 
+        #region NonEmpty
+
+        /// <summary>
+        /// Returns a nonEmptyEnumerable in case the collection is nonempty. Otherwise returns empty option.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this IEnumerable<T> source)
+        {
+            if (source is null)
+            {
+                return Option.Empty<INonEmptyEnumerable<T>>();
+            }
+            return NonEmptyEnumerable.Create(source);
+        }
+
+        /// <summary>
+        /// Returns the nonEmptyEnumerable typed as IReadOnlyList.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IReadOnlyList<T> AsReadOnly<T>(this INonEmptyEnumerable<T> source)
+        {
+            return source;
+        }
+
+        public static INonEmptyEnumerable<V> SelectMany<T, V>(this INonEmptyEnumerable<T> source, Func<T, INonEmptyEnumerable<V>> selector)
+        {
+            return NonEmptyEnumerable.CreateFlat(source.Select(selector));
+        }
+
+        public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
+        {
+            return NonEmptyEnumerable.CreateFlat(source);
+        }
+
+        public static INonEmptyEnumerable<T> Concat<T>(this T e, params IEnumerable<T>[] others)
+        {
+            return NonEmptyEnumerable.Create(e, others.Flatten());
+        }
+
+        public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params T[] items)
+        {
+            return source.Concat(items.AsEnumerable());
+        }
+
+        public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params IEnumerable<T>[] items)
+        {
+            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items));
+        }
+
+        #endregion NonEmpty
+
         #region Options
 
         /// <summary>
@@ -170,10 +213,14 @@ namespace FuncSharp
             return source.SelectMany(o => o.ToList());
         }
 
-        [DebuggerStepThrough]
-        public static IEnumerable<T> GetOrEmpty<T>(this IOption<IEnumerable<T>> source)
+        public static IOption<TValue> SafeMax<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
         {
-            return source.Match(s => s, _ => Enumerable.Empty<T>());
+            return source.AsNonEmpty().Map(s => s.Max(selector));
+        }
+
+        public static IOption<TValue> SafeMin<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
+        {
+            return source.AsNonEmpty().Map(s => s.Min(selector));
         }
 
         /// <summary>
