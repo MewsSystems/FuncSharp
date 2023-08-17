@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,6 +8,14 @@ namespace FuncSharp
     public static class IEnumerableExtensions
     {
         #region Generic
+
+        /// <summary>
+        /// Returns a ToList() juts of type IReadOnlyList.
+        /// </summary>
+        public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
+        {
+            return e.ToList();
+        }
 
         /// <summary>
         /// Returns all the items inside all the collections combined into 1 IEnumerable.
