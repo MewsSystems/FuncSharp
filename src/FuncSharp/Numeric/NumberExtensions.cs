@@ -61,4 +61,37 @@ public static class NumberExtensions
     {
         return NonPositiveDecimal.CreateUnsafe(value);
     }
+
+    public static decimal SafeDivide(this int a, decimal b, decimal otherwise = 0)
+    {
+        return Divide(a, b).GetOrElse(otherwise);
+    }
+
+    public static decimal SafeDivide(this decimal a, decimal b, decimal otherwise = 0)
+    {
+        return Divide(a, b).GetOrElse(otherwise);
+    }
+
+    public static IOption<decimal> Divide(this int a, decimal b)
+    {
+        return Divide((decimal)a, b);
+    }
+
+    public static IOption<decimal> Divide(this decimal a, decimal b)
+    {
+        return b.SafeNotEquals(0).MapTrue(_ => a / b);
+    }
+
+    public static decimal? DivideNullable(this int a, decimal b)
+    {
+        return DivideNullable((decimal)a, b);
+    }
+
+    public static decimal? DivideNullable(this decimal a, decimal b)
+    {
+        if (b.SafeEquals(0))
+            return null;
+
+        return a / b;
+    }
 }

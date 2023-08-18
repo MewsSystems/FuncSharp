@@ -39,9 +39,9 @@ namespace FuncSharp.Examples
             );
         }
 
-        private static Try<string, PersonParsingError> ParseName(string name)
+        private static Try<NonEmptyString, PersonParsingError> ParseName(string name)
         {
-            return name.ToNonEmptyOption().ToTry(_ => PersonParsingError.NameNotProvided);
+            return name.AsNonEmpty().ToTry(_ => PersonParsingError.NameNotProvided);
         }
 
         private static Try<int, PersonParsingError> ParseAge(string age)
