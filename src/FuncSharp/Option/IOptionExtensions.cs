@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FuncSharp
 {
@@ -312,6 +313,62 @@ namespace FuncSharp
                 return Try.Success<A, E>(option.GetOrDefault());
 
             return Try.Error<A, E>(e(Unit.Value));
+        }
+
+        /// <summary>
+        /// Maps value of the current <see cref="IOption{A}"/> (if present) into a new value using the specified function and
+        /// returns a new <see cref="IOption{A}"/> (with that new value) wrapped in a <see cref="System.Threading.Tasks.Task"/>.
+        /// </summary>
+        public static async Task<IOption<B>> MapAsync<A, B>(this IOption<A> option, Func<A, Task<B>> f)
+        {
+            if (option.NonEmpty)
+            {
+                return Option.Valued(await f(option.GetOrDefault()));
+            }
+            else
+            {
+                return Option.Empty<B>();
+            }
+        }
+
+        public static async Task MatchAsync<A>(this IOption<A> option, Func<A, Task> ifFirst, Func<Unit, Task> ifSecond)
+        {
+            if (option.NonEmpty)
+            {
+                await ifFirst(option.GetOrDefault());
+            }
+            else
+            {
+                await ifSecond(Unit.Value);
+            }
+        }
+
+        public static async Task<TResult> MatchAsync<A, TResult>(this IOption<A> option, Func<A, Task<TResult>> ifFirst, Func<Unit, Task<TResult>> ifSecond)
+        {
+            if (option.NonEmpty)
+            {
+                return await ifFirst(option.GetOrDefault());
+            }
+            else
+            {
+                return await ifSecond(Unit.Value);
+            }
+        }
+
+        /// <summary>
+        /// Maps value of the current <see cref="IOption{A}"/> (if present) into a new option using the specified function and
+        /// returns <see cref="IOption{B}"/> wrapped in a <see cref="System.Threading.Tasks.Task"/>.
+        /// </summary>
+        public static async Task<IOption<B>> FlatMapAsync<A, B>(this IOption<A> option, Func<A, Task<IOption<B>>> f)
+        {
+            if (option.NonEmpty)
+            {
+                return await f(option.GetOrDefault());
+            }
+            else
+            {
+                return Option.Empty<B>();
+            }
         }
     }
 }
