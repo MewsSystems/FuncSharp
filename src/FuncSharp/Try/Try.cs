@@ -2,41 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FuncSharp
 {
     public static class Try
     {
-        /// <summary>
-        /// Tries the specified action and returns its result if it succeeds. Otherwise in case of the specified exception,
-        /// returns result of the recovery function.
-        /// </summary>
-        public static A Catch<A, E>(Func<Unit, A> action, Func<E, A> recover)
-            where E : Exception
-        {
-            try
-            {
-                return action(Unit.Value);
-            }
-            catch (E e)
-            {
-                return recover(e);
-            }
-        }
-
-        /// <summary>
-        /// Tries the specified action and returns a successful try if it succeeds. Otherwise in case of the specified exception,
-        /// returns an erroneous try.
-        /// </summary>
-        public static Try<A, E> Catch<A, E>(Func<Unit, A> f)
-            where E : Exception
-        {
-            return Catch<Try<A, E>, E>(
-                _ => Success<A, E>(f(Unit.Value)),
-                e => Error<A, E>(e)
-            );
-        }
-
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
@@ -51,6 +22,82 @@ namespace FuncSharp
         public static Try<A, E> Error<A, E>(E error)
         {
             return new Try<A, E>(error);
+        }
+
+        /// <summary>
+        /// Tries the specified action and returns its result if it succeeds. Otherwise in case of the specified exception,
+        /// returns result of the recovery function.
+        /// </summary>
+        public static TResult Catch<TResult, TException>(Func<Unit, TResult> action, Func<TException, TResult> recover)
+            where TException : Exception
+        {
+            try
+            {
+                return action(Unit.Value);
+            }
+            catch (TException e)
+            {
+                return recover(e);
+            }
+        }
+
+        /// <summary>
+        /// Tries the specified action and returns a successful try if it succeeds. Otherwise in case of the specified exception,
+        /// returns an erroneous try.
+        /// </summary>
+        public static Try<A, TException> Catch<A, TException>(Func<Unit, A> f)
+            where TException : Exception
+        {
+            try
+            {
+                return Success<A, TException>(f(Unit.Value));
+            }
+            catch (TException e)
+            {
+                return Error<A, TException>(e);
+            }
+        }
+
+        /// <summary>
+        /// Tries to await the specified asynchronous action which returns a successful try wrapped in a <see cref="System.Threading.Tasks.Task"/>.
+        /// Otherwise, in case of an <see cref="System.Exception"/>, an erroneous try wrapped in a <see cref="System.Threading.Tasks.Task"/> is returned,
+        /// however this does not apply to <see cref="System.OperationCanceledException"/> and its inheritors.
+        /// </summary>
+        /// <exception cref="System.OperationCanceledException">
+        /// The <paramref name="action"/> delegate has been canceled.
+        /// </exception>
+        public static async Task<Try<TResult, TException>> CatchAsync<TResult, TException>(Func<Unit, Task<TResult>> action)
+            where TException : Exception
+        {
+            try
+            {
+                return Try.Success<TResult, TException>(await action(Unit.Value));
+            }
+            catch (TException e) when (!e.IsOrContainsOperationCanceledException())
+            {
+                return Try.Error<TResult, TException>(e);
+            }
+        }
+
+        /// <summary>
+        /// Tries to await the specified asynchronous action which returns a successful try wrapped in a <see cref="System.Threading.Tasks.Task"/>.
+        /// Otherwise, in case of an <see cref="System.Exception"/>, an erroneous try wrapped in a <see cref="System.Threading.Tasks.Task"/> is returned,
+        /// however this does not apply to <see cref="System.OperationCanceledException"/> and its inheritors.
+        /// </summary>
+        /// <exception cref="System.OperationCanceledException">
+        /// The <paramref name="action"/> delegate has been canceled.
+        /// </exception>
+        public static async Task<TResult> CatchAsync<TResult, TException>(Func<Unit, Task<TResult>> action, Func<TException, Task<TResult>> recover)
+            where TException : Exception
+        {
+            try
+            {
+                return await action(Unit.Value);
+            }
+            catch (TException e) when (!e.IsOrContainsOperationCanceledException())
+            {
+                return await recover(e);
+            }
         }
 
         /// <summary>
@@ -621,6 +668,21 @@ namespace FuncSharp
                 success: (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15) => Success<R, IReadOnlyList<E>>(success(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15)),
                 error: errors => Error<R, IReadOnlyList<E>>(errors.SelectMany(e => e).ToList())
             );
+        }
+
+        private static bool IsOrContainsOperationCanceledException(this Exception exception)
+        {
+            if (exception is OperationCanceledException)
+            {
+                return true;
+            }
+
+            if (exception.InnerException is not null)
+            {
+                return IsOrContainsOperationCanceledException(exception.InnerException);
+            }
+
+            return false;
         }
     }
 
