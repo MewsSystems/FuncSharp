@@ -7,37 +7,10 @@ namespace FuncSharp
     {
         /// <summary>
         /// Returns a type-safe option of NonEmptyString in case the string is not empty nor whitespace.
-        /// <para>There is also a version returning juts an option of string called ToNonEmptyOption.</para>
         /// </summary>
         public static IOption<NonEmptyString> AsNonEmpty(this string s)
         {
             return NonEmptyString.Create(s);
-        }
-
-        /// <summary>
-        /// <para>Returns an option of string in case the string is not null nor empty. Empty option otherwise.</para>
-        /// <para>There is also a Type-safe version called AsNonEmpty.</para>
-        /// </summary>
-        public static IOption<string> ToNonEmptyOption(this string s)
-        {
-            if (String.IsNullOrEmpty(s))
-            {
-                return Option.Empty<string>();
-            }
-            return s.ToOption();
-        }
-
-        /// <summary>
-        /// <para>Returns an option of string in case the string is not null nor empty nor whitespace. Empty option otherwise.</para>
-        /// <para>There is also a Type-safe version called AsNonEmpty.</para>
-        /// </summary>
-        public static IOption<string> ToNonEmptyNorWhiteSpaceOption(this string s)
-        {
-            if (String.IsNullOrWhiteSpace(s))
-            {
-                return Option.Empty<string>();
-            }
-            return s.ToOption();
         }
 
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
