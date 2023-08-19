@@ -11,6 +11,8 @@ public sealed class NonEmptyString : IEquatable<string>
 
     public string Value { get; }
 
+    public int Length => Value.Length;
+
     public static implicit operator string(NonEmptyString s)
     {
         return s.MapRef(v => v.Value);
@@ -34,6 +36,26 @@ public sealed class NonEmptyString : IEquatable<string>
         }
 
         return Option.Valued(new NonEmptyString(value));
+    }
+    
+    public bool Contains(string text)
+    {
+        return Value.Contains(text);
+    }
+
+    public bool Contains(string text, StringComparison comparisonType)
+    {
+        return Value.Contains(text, comparisonType);
+    }
+
+    public bool Contains(char c)
+    {
+        return Value.Contains(c);
+    }
+
+    public bool Contains(char c, StringComparison comparisonType)
+    {
+        return Value.Contains(c, comparisonType);
     }
 
     public override int GetHashCode()
