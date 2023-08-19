@@ -34,6 +34,30 @@ namespace FuncSharp
             }
         }
 
+        public static IOption<string> OrElse(this IOption<NonEmptyString> option, IOption<string> otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option.Map(v => v.Value);
+            }
+            else
+            {
+                return otherwise;
+            }
+        }
+
+        public static IOption<string> OrElse(this IOption<NonEmptyString> option, Func<Unit, IOption<string>> otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option.Map(v => v.Value);
+            }
+            else
+            {
+                return otherwise(Unit.Value);
+            }
+        }
+
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return Tryer.Invoke<string, NumberStyles, IFormatProvider, byte>(Byte.TryParse, s, style, format);
