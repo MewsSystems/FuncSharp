@@ -81,17 +81,4 @@ public static class NumberExtensions
     {
         return b.SafeNotEquals(0).MapTrue(_ => a / b);
     }
-
-    public static decimal? DivideNullable(this int a, decimal b)
-    {
-        return DivideNullable((decimal)a, b);
-    }
-
-    public static decimal? DivideNullable(this decimal a, decimal b)
-    {
-        if (b.SafeEquals(0))
-            return null;
-
-        return a / b;
-    }
 }

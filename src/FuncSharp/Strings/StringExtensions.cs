@@ -5,16 +5,6 @@ namespace FuncSharp
 {
     public static class StringExtensions
     {
-        public static bool IsEmptyOrWhiteSpace(this string s)
-        {
-            return string.IsNullOrWhiteSpace(s);
-        }
-
-        public static bool NonEmptyNorWhiteSpace(this string s)
-        {
-            return !IsEmptyOrWhiteSpace(s);
-        }
-
         public static IOption<NonEmptyString> AsNonEmpty(this string s)
         {
             return NonEmptyString.Create(s);

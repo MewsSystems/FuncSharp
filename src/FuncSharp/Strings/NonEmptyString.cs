@@ -18,25 +18,22 @@ public sealed class NonEmptyString : IEquatable<string>
 
     public static NonEmptyString CreateUnsafe(string value)
     {
-        var result = CreateNullable(value);
-        if (result is null)
+        if (string.IsNullOrWhiteSpace(value))
+        {
             throw new ArgumentException("You cannot create NonEmptyString from whitespace, empty string or null.");
-        return result;
+        }
+
+        return new NonEmptyString(value);
     }
 
     public static IOption<NonEmptyString> Create(string value)
     {
-        return CreateNullable(value).ToOption();
-    }
-
-    public static NonEmptyString CreateNullable(string value)
-    {
         if (string.IsNullOrWhiteSpace(value))
         {
-            return null;
+            return Option.Empty<NonEmptyString>();
         }
 
-        return new NonEmptyString(value);
+        return Option.Valued(new NonEmptyString(value));
     }
 
     public override int GetHashCode()
