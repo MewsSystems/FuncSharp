@@ -10,6 +10,30 @@ namespace FuncSharp
             return NonEmptyString.Create(s);
         }
 
+        public static string GetOrElse(this IOption<NonEmptyString> option, string otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            else
+            {
+                return otherwise;
+            }
+        }
+
+        public static string GetOrElse(this IOption<NonEmptyString> option, Func<Unit, string> otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            else
+            {
+                return otherwise(Unit.Value);
+            }
+        }
+
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return Tryer.Invoke<string, NumberStyles, IFormatProvider, byte>(Byte.TryParse, s, style, format);
