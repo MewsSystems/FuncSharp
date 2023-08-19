@@ -5,6 +5,30 @@ namespace FuncSharp
 {
     public static class NonEmptyStringExtensions
     {
+        public static bool SafeEquals(this NonEmptyString value, string other)
+        {
+            if (value is null)
+                return other is null;
+            return value.Value.SafeEquals(other);
+        }
+
+        public static bool SafeNotEquals(this NonEmptyString value, string other)
+        {
+            if (value is null)
+                return other is not null;
+            return value.Value.SafeNotEquals(other);
+        }
+
+        public static string SafeSubstring(this NonEmptyString s, int length)
+        {
+            return s?.Substring(length);
+        }
+
+        public static string SafeSubstring(this NonEmptyString s, int start, int length)
+        {
+            return s?.Substring(start, length);
+        }
+
         public static string GetOrElse(this IOption<NonEmptyString> option, string otherwise)
         {
             if (option.NonEmpty)
