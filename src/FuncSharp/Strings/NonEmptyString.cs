@@ -78,6 +78,16 @@ public sealed class NonEmptyString : IEquatable<string>
     public string Substring(int startIndex) => Value.Substring(startIndex);
     public string Substring(int startIndex, int length) => Value.Substring(startIndex, length);
 
+    public bool StartsWith(string s) => Value.StartsWith(s);
+    public bool StartsWith(string s, StringComparison comparisonType) => Value.StartsWith(s, comparisonType);
+    public bool StartsWith(string s, bool ignoreCase, CultureInfo culture) => Value.StartsWith(s, ignoreCase, culture);
+    public bool StartsWith(char c) => Value.StartsWith(c);
+
+    public bool EndsWith(string s) => Value.EndsWith(s);
+    public bool EndsWith(string s, StringComparison comparisonType) => Value.EndsWith(s, comparisonType);
+    public bool EndsWith(string s, bool ignoreCase, CultureInfo culture) => Value.EndsWith(s, ignoreCase, culture);
+    public bool EndsWith(char c) => Value.EndsWith(c);
+
     #endregion Proxy methods to string
 
     public override int GetHashCode()
