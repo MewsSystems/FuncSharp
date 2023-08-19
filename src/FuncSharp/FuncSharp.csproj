@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>7.0.0-preview.3.1</Version>
+    <Version>7.0.0-preview.4</Version>
     <AssemblyVersion>7.0.0</AssemblyVersion>
     <FileVersion>7.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Minor fixes to ReadonlyList.</PackageReleaseNotes>
+    <PackageReleaseNotes>Introduced NonEmptyString and another batch of Extensions.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -31,6 +31,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\readme.md" Pack="true" PackagePath="\" />
+    <None Update="Collections\IEnumerableExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnumerableExtensions.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Update="Coproduct\Coproduct.tt">
@@ -64,10 +68,6 @@
     <None Update="Extensions\FuncExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FuncExtensions.cs</LastGenOutput>
-    </None>
-    <None Update="Extensions\IEnumerableExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IEnumerableExtensions.cs</LastGenOutput>
     </None>
     <None Update="Extensions\ObjectExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -131,11 +131,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>FuncExtensions.tt</DependentUpon>
     </Compile>
-    <Compile Update="Extensions\IEnumerableExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>IEnumerableExtensions.tt</DependentUpon>
-    </Compile>
     <Compile Update="Extensions\ObjectExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -160,6 +155,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Try.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Collections\IEnumerableExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IEnumerableExtensions.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
