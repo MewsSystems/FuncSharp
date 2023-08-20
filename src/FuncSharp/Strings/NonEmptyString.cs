@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace FuncSharp;
 
-public sealed class NonEmptyString : IEquatable<string>
+public sealed class NonEmptyString : IEquatable<string>, IEquatable<NonEmptyString>
 {
     private NonEmptyString(string value)
     {
@@ -92,17 +92,24 @@ public sealed class NonEmptyString : IEquatable<string>
 
     public override int GetHashCode()
     {
-        return Value.GetHashCode();
+        return (Value != null ? Value.GetHashCode() : 0);
     }
 
     public override bool Equals(object obj)
     {
-        return (obj as NonEmptyString).MatchRef(e => Value.Equals(e.Value));
+        return ReferenceEquals(this, obj) ||
+               obj is NonEmptyString otherNonEmpty && Equals(otherNonEmpty) ||
+               obj is string otherString && Equals(otherString);
     }
 
     public bool Equals(string other)
     {
         return Value.Equals(other);
+    }
+
+    public bool Equals(NonEmptyString other)
+    {
+        return Value.Equals(other?.Value);
     }
 
     public override string ToString()
