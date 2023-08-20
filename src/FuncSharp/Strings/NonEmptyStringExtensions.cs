@@ -53,6 +53,30 @@ namespace FuncSharp
             }
         }
 
+        public static string GetOrElse(this IOption<string> option, NonEmptyString otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            else
+            {
+                return otherwise;
+            }
+        }
+
+        public static string GetOrElse(this IOption<string> option, Func<Unit, NonEmptyString> otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option.GetOrDefault();
+            }
+            else
+            {
+                return otherwise(Unit.Value);
+            }
+        }
+
         public static IOption<string> OrElse(this IOption<NonEmptyString> option, IOption<string> otherwise)
         {
             if (option.NonEmpty)
@@ -74,6 +98,30 @@ namespace FuncSharp
             else
             {
                 return otherwise(Unit.Value);
+            }
+        }
+
+        public static IOption<string> OrElse(this IOption<string> option, IOption<NonEmptyString> otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option;
+            }
+            else
+            {
+                return otherwise.Map(o => o.Value);
+            }
+        }
+
+        public static IOption<string> OrElse(this IOption<string> option, Func<Unit, IOption<NonEmptyString>> otherwise)
+        {
+            if (option.NonEmpty)
+            {
+                return option;
+            }
+            else
+            {
+                return otherwise(Unit.Value).Map(o => o.Value);
             }
         }
 
