@@ -92,7 +92,7 @@ public sealed class NonEmptyString : IEquatable<string>, IEquatable<NonEmptyStri
 
     public override int GetHashCode()
     {
-        return (Value != null ? Value.GetHashCode() : 0);
+        return Value.GetHashCode();
     }
 
     public override bool Equals(object obj)
