@@ -47,7 +47,7 @@ public class NonEmptyStringTests
         Assert.True(nonEmptyString.Equals(text));
         Assert.True(text.SafeEquals(nonEmptyString));
         Assert.True(nonEmptyString.SafeEquals(text));
-        // Assert.True(Equals(text, nonEmptyString)); - Unfortunately this doesn't work because default string comparer doesn't check IEquateable<String>
+        // Assert.True(Equals(text, nonEmptyString)); - Unfortunately this doesn't work because default string comparer doesn't check IEquateable<String> - https://stackoverflow.com/questions/76942352/iequatablestring-doesnt-work-with-static-equals-method.
         Assert.True(Equals(nonEmptyString, text));
 
         string differentString = "Text14";
