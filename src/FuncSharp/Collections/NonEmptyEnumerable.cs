@@ -41,19 +41,21 @@ public static class NonEmptyEnumerable
         return Create(values.Flatten());
     }
 
-    public static INonEmptyEnumerable<T> CreateFlat<T>(INonEmptyEnumerable<INonEmptyEnumerable<T>> values)
-    {
-        return CreateFlat(values.Head, values.Tail);
-    }
-
     public static INonEmptyEnumerable<T> CreateFlat<T>(INonEmptyEnumerable<T> head, params IEnumerable<T>[] tail)
     {
-        return CreateFlat(head, tail.AsEnumerable());
+        return Create(head: head.Head, tail: head.Tail.Concat(tail.Flatten()));
     }
 
-    public static INonEmptyEnumerable<T> CreateFlat<T>(INonEmptyEnumerable<T> head, IEnumerable<IEnumerable<T>> tail)
+    [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
+    public static bool NonEmpty<T>(this INonEmptyEnumerable<T> source)
     {
-        return Create(head: head.Head, tail: head.Tail.Concat(tail.Flatten()));
+        return true;
+    }
+
+    [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
+    public static bool IsEmpty<T>(this INonEmptyEnumerable<T> source)
+    {
+        return false;
     }
 }
 

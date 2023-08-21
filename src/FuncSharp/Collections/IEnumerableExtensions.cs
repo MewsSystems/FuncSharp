@@ -196,12 +196,12 @@ namespace FuncSharp
 
         public static INonEmptyEnumerable<V> SelectMany<T, V>(this INonEmptyEnumerable<T> source, Func<T, INonEmptyEnumerable<V>> selector)
         {
-            return NonEmptyEnumerable.CreateFlat(source.Select(selector));
+            return NonEmptyEnumerable.CreateFlat(head: selector(source.Head), tail: source.Tail.SelectMany(selector));
         }
 
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
         {
-            return NonEmptyEnumerable.CreateFlat(source);
+            return NonEmptyEnumerable.CreateFlat(source.Head, source.Tail.Flatten());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this T e, params IEnumerable<T>[] others)
