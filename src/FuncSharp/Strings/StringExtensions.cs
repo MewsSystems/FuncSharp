@@ -5,6 +5,9 @@ namespace FuncSharp
 {
     public static class StringExtensions
     {
+        /// <summary>
+        /// Returns a type-safe option of NonEmptyString in case the string is not empty nor whitespace.
+        /// </summary>
         public static IOption<NonEmptyString> AsNonEmpty(this string s)
         {
             return NonEmptyString.Create(s);

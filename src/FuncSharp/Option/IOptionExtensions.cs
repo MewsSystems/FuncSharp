@@ -195,6 +195,19 @@ namespace FuncSharp
         /// <summary>
         /// Returns the option if it has value. Otherwise returns the alternative option.
         /// </summary>
+        public static IOption<B> OrElse<A, B>(this IOption<A> option, IOption<B> alternative)
+            where A : B
+        {
+            if (option.NonEmpty)
+            {
+                return (IOption<B>)option;
+            }
+            return alternative;
+        }
+
+        /// <summary>
+        /// Returns the option if it has value. Otherwise returns the alternative option.
+        /// </summary>
         public static IOption<B> OrElse<A, B>(this IOption<A> option, Func<Unit, IOption<B>> alternative)
             where A : B
         {

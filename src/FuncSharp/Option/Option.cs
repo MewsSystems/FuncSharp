@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FuncSharp
 {
@@ -217,14 +216,36 @@ namespace FuncSharp
 
         public override int GetHashCode()
         {
-            return Structural.HashCode(NonEmpty, Value);
+            return HashCode.Combine(Value, NonEmpty);
+        }
+
+        public static bool operator ==(Option<A> obj1, object obj2)
+        {
+            return ReferenceEquals(obj1, null)
+                ? ReferenceEquals(obj2, null)
+                : obj1.Equals(obj2);
+        }
+
+        public static bool operator !=(Option<A> obj1, object obj2)
+        {
+            return ReferenceEquals(obj1, null)
+                ? !ReferenceEquals(obj2, null)
+                : !obj1.Equals(obj2);
         }
 
         public override bool Equals(object obj)
         {
             if (obj is IOption<A> other)
             {
-                return NonEmpty == other.NonEmpty && Equals(Value, other.GetOrDefault());
+                return NonEmpty == other.NonEmpty && Value.SafeEquals(other.GetOrDefault());
+            }
+            if (typeof(A) == typeof(NonEmptyString) && obj is IOption<string> otherString)
+            {
+                return NonEmpty == otherString.NonEmpty && string.Equals(Value as NonEmptyString, otherString.GetOrDefault());
+            }
+            if (typeof(A) == typeof(string) && obj is IOption<NonEmptyString> otherNonEmptyString)
+            {
+                return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.GetOrDefault(), Value);
             }
             return false;
         }
