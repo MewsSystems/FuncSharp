@@ -6,23 +6,6 @@ using System.Linq;
 
 namespace FuncSharp;
 
-public interface INonEmptyEnumerable<out T> : IReadOnlyList<T>
-{
-    T Head { get; }
-
-    IReadOnlyList<T> Tail { get; }
-
-    INonEmptyEnumerable<T> Distinct();
-
-    INonEmptyEnumerable<TResult> Distinct<TResult>(Func<T, TResult> selector);
-
-    INonEmptyEnumerable<TResult> Select<TResult>(Func<T, TResult> func);
-
-    INonEmptyEnumerable<TResult> Select<TResult>(Func<T, int, TResult> func);
-
-    IReadOnlyList<T> AsReadonly();
-}
-
 public static class NonEmptyEnumerable
 {
     public static INonEmptyEnumerable<T> Create<T>(T head, params T[] tail)
@@ -42,13 +25,10 @@ public static class NonEmptyEnumerable
 
     public static IOption<INonEmptyEnumerable<T>> Create<T>(IEnumerable<T> values)
     {
-        var list = values.ToList();
-        if (list.Count == 0)
-        {
-            return Option.Empty<INonEmptyEnumerable<T>>();
-        }
-
-        return Option.Valued(Create(list[0], list.Skip(1)));
+        var list = values.ToArray();
+        return list.Length == 0
+            ? Option.Empty<INonEmptyEnumerable<T>>()
+            : Option.Valued(Create(list[0], list.Skip(1)));
     }
 
     public static IOption<INonEmptyEnumerable<T>> Create<T>(IReadOnlyList<T> values)

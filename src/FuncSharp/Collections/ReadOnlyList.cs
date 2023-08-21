@@ -38,56 +38,44 @@ public static class IReadOnlyListExtensions
 
     public static IOption<T> SingleOption<T>(this IReadOnlyList<T> source)
     {
-        return source.IsSingle().Match(
-            t => Option.Valued(source[0]),
-            f => Option.Empty<T>()
-        );
+        return source.IsSingle()
+            ? Option.Valued(source[0])
+            : Option.Empty<T>();
     }
 
     public static T First<T>(this IReadOnlyList<T> source)
     {
-        if (source.IsEmpty())
-        {
-            throw new ArgumentException("Source is empty.");
-        }
-
-        return source[0];
+        return source.IsEmpty()
+            ? throw new ArgumentException("Source is empty.")
+            : source[0];
     }
 
     public static IOption<T> FirstOption<T>(this IReadOnlyList<T> source)
     {
-        return source.IsEmpty().Match(
-            t => Option.Empty<T>(),
-            f => Option.Valued(source[0])
-        );
+        return source.IsEmpty()
+            ? Option.Empty<T>()
+            : Option.Valued(source[0]);
     }
 
     public static T Second<T>(this IReadOnlyList<T> source)
     {
-        if (source.Count <= 1)
-        {
-            throw new ArgumentException("Source has less than 2 elements.");
-        }
-
-        return source[1];
+        return source.Count <= 1
+            ? throw new ArgumentException("Source has less than 2 elements.")
+            : source[1];
     }
 
     public static T Last<T>(this IReadOnlyList<T> source)
     {
-        if (source.Count == 0)
-        {
-            throw new ArgumentException("Source is empty.");
-        }
-
-        return source[source.Count - 1];
+        return source.Count == 0
+            ? throw new ArgumentException("Source is empty.")
+            : source[source.Count - 1];
     }
 
     public static IOption<T> LastOption<T>(this IReadOnlyList<T> source)
     {
-        return source.IsEmpty().Match(
-            t => Option.Empty<T>(),
-            f => Option.Valued(source[source.Count - 1])
-        );
+        return source.IsEmpty()
+            ? Option.Empty<T>()
+            : Option.Valued(source[source.Count - 1]);
     }
 
     public static T ElementAt<T>(this IReadOnlyList<T> source, int index)
@@ -97,10 +85,9 @@ public static class IReadOnlyListExtensions
 
     public static IOption<T> ElementAtOption<T>(this IReadOnlyList<T> source, NonNegativeInt index)
     {
-        return (source.Count > index).Match(
-            t => source[index].ToOption(),
-            f => Option.Empty<T>()
-        );
+        return source.Count > index
+            ? Option.Valued(source[index])
+            : Option.Empty<T>();
     }
 
     public static int IndexOf<T>(this IReadOnlyList<T> source, T item)
@@ -123,18 +110,6 @@ public static class ReadOnlyList
         return CreateFlat(values);
     }
 
-    [Obsolete("Use CreateFlat instead. This method will be gone once Mews replaces all the usages.", true)]
-    public static IReadOnlyList<T> Create<T>(IEnumerable<T> values)
-    {
-        return values.ToList();
-    }
-
-    [Obsolete("Use CreateFlat instead. This method will be gone once Mews replaces all the usages.", true)]
-    public static IReadOnlyList<T> Create<T>(IReadOnlyList<T> values)
-    {
-        return values.ToList();
-    }
-
     public static IReadOnlyList<T> CreateFlat<T>(params IEnumerable<T>[] values)
     {
         return values.Flatten().ToList();
@@ -152,7 +127,7 @@ public static class ReadOnlyList
 
     public static IReadOnlyList<T> CreateFlat<T>(params IOption<IEnumerable<T>>[] values)
     {
-        return values.SelectMany(v => v.Flatten()).ToList();
+        return values.Flatten().Flatten().ToList();
     }
 
     public static IReadOnlyList<T> Empty<T>()
@@ -163,5 +138,5 @@ public static class ReadOnlyList
 
 public class ReadOnlyList<T>
 {
-    public static readonly IReadOnlyList<T> Empty = new List<T>();
+    public static readonly IReadOnlyList<T> Empty = new List<T>().AsReadOnly();
 }

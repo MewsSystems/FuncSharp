@@ -15,11 +15,7 @@ internal class CollectionDebugView<T>
 
     public CollectionDebugView(IEnumerable<T> collection)
     {
-        if (collection is null)
-        {
-            throw new ArgumentNullException("collection");
-        }
-        this.collection = collection;
+        this.collection = collection ?? throw new ArgumentNullException("collection");
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
