@@ -19,7 +19,7 @@ namespace FuncSharp
             NonEmptyString value,
             JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.Value);
+            writer.WriteStringValue(value?.Value);
         }
     }
 }
