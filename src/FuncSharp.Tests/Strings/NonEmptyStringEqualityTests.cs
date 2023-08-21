@@ -43,6 +43,8 @@ public class NonEmptyStringTests
 
         string text = "ASDF123";
         NonEmptyString nonEmptyString = NonEmptyString.CreateUnsafe("ASDF123");
+        Assert.True(text == nonEmptyString);
+        Assert.True(nonEmptyString == text);
         Assert.True(text.Equals(nonEmptyString));
         Assert.True(nonEmptyString.Equals(text));
         Assert.True(text.SafeEquals(nonEmptyString));
@@ -54,6 +56,10 @@ public class NonEmptyStringTests
         NonEmptyString differentNonEmptyString = NonEmptyString.CreateUnsafe("Totally different text here.");
         Assert.False(differentNonEmptyString.Equals(differentString));
         Assert.False(differentString.Equals(differentNonEmptyString));
+        Assert.False(differentNonEmptyString == differentString);
+        Assert.False(differentString == differentNonEmptyString);
+        Assert.False(differentNonEmptyString.SafeEquals(differentString));
+        Assert.False(differentString.SafeEquals(differentNonEmptyString));
         Assert.False(Equals(differentNonEmptyString, differentString));
         Assert.False(Equals(differentString, differentNonEmptyString));
 
@@ -61,6 +67,8 @@ public class NonEmptyStringTests
         string null2 = null;
         Assert.True(null1.SafeEquals(null2));
         Assert.True(null2.SafeEquals(null1));
+        Assert.True(null1 == null2);
+        Assert.True(null2 == null1);
         Assert.True(Equals(null1, null2));
         Assert.True(Equals(null2, null1));
 

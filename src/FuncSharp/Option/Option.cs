@@ -220,6 +220,20 @@ namespace FuncSharp
             return Structural.HashCode(NonEmpty, Value);
         }
 
+        public static bool operator ==(Option<A> obj1, object obj2)
+        {
+            return ReferenceEquals(obj1, null)
+                ? ReferenceEquals(obj2, null)
+                : obj1.Equals(obj2);
+        }
+
+        public static bool operator !=(Option<A> obj1, object obj2)
+        {
+            return ReferenceEquals(obj1, null)
+                ? !ReferenceEquals(obj2, null)
+                : !obj1.Equals(obj2);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is IOption<A> other)
