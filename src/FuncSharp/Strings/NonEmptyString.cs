@@ -19,6 +19,11 @@ public sealed class NonEmptyString : IEquatable<string>, IEquatable<NonEmptyStri
         return s.MapRef(v => v.Value);
     }
 
+    public static explicit operator NonEmptyString(string s)
+    {
+        return CreateUnsafe(s);
+    }
+
     public static NonEmptyString CreateUnsafe(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
