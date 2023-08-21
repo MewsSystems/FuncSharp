@@ -226,6 +226,14 @@ namespace FuncSharp
             {
                 return NonEmpty == other.NonEmpty && Equals(Value, other.GetOrDefault());
             }
+            if (typeof(A) == typeof(NonEmptyString) && obj is IOption<string> otherString)
+            {
+                return NonEmpty == otherString.NonEmpty && Equals(Value, otherString.GetOrDefault());
+            }
+            if (typeof(A) == typeof(string) && obj is IOption<NonEmptyString> otherNonEmptyString)
+            {
+                return NonEmpty == otherNonEmptyString.NonEmpty && Equals(otherNonEmptyString.GetOrDefault(), Value);
+            }
             return false;
         }
     }
