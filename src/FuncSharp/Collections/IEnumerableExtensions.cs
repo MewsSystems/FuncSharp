@@ -187,20 +187,9 @@ namespace FuncSharp
         [DebuggerStepThrough]
         public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this IEnumerable<T> source)
         {
-            if (source is null)
-            {
-                return Option.Empty<INonEmptyEnumerable<T>>();
-            }
-            return NonEmptyEnumerable.Create(source);
-        }
-
-        /// <summary>
-        /// Returns the nonEmptyEnumerable typed as IReadOnlyList.
-        /// </summary>
-        [DebuggerStepThrough]
-        public static IReadOnlyList<T> AsReadOnly<T>(this INonEmptyEnumerable<T> source)
-        {
-            return source;
+            return source is null
+                ? Option.Empty<INonEmptyEnumerable<T>>()
+                : NonEmptyEnumerable.Create(source);
         }
 
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
