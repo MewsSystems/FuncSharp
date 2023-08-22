@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace FuncSharp;
 
@@ -10,40 +11,37 @@ public static class NonEmptyEnumerable
 {
     public static INonEmptyEnumerable<T> Create<T>(T head, params T[] tail)
     {
-        return Create(head, tail.ToList());
+        return NonEmptyEnumerable<T>.Create(head, tail);
     }
 
     public static INonEmptyEnumerable<T> Create<T>(T head, IEnumerable<T> tail)
     {
-        return Create(head, tail.ToList());
+        return NonEmptyEnumerable<T>.Create(head, tail);
     }
 
     public static INonEmptyEnumerable<T> Create<T>(T head, IReadOnlyList<T> tail)
     {
-        return new NonEmptyEnumerable<T>(head, tail);
+        return NonEmptyEnumerable<T>.Create(head, tail);
     }
 
     public static IOption<INonEmptyEnumerable<T>> Create<T>(IEnumerable<T> values)
     {
-        var list = values.ToArray();
-        return list.Length == 0
-            ? Option.Empty<INonEmptyEnumerable<T>>()
-            : Option.Valued(Create(list[0], list.Skip(1)));
+        return NonEmptyEnumerable<T>.Create(values);
     }
 
     public static IOption<INonEmptyEnumerable<T>> Create<T>(IReadOnlyList<T> values)
     {
-        return values.FirstOption().Map(h => Create(h, values.Skip(1).ToList()));
+        return NonEmptyEnumerable<T>.Create(values);
     }
 
     public static IOption<INonEmptyEnumerable<T>> CreateFlat<T>(params IOption<T>[] values)
     {
-        return Create(values.Flatten());
+        return NonEmptyEnumerable<T>.CreateFlat(values);
     }
 
     public static INonEmptyEnumerable<T> CreateFlat<T>(INonEmptyEnumerable<T> head, params IEnumerable<T>[] tail)
     {
-        return Create(head: head.Head, tail: head.Tail.Concat(tail.Flatten()));
+        return NonEmptyEnumerable<T>.CreateFlat(head, tail);
     }
 
     [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
@@ -63,58 +61,130 @@ public static class NonEmptyEnumerable
 [DebuggerDisplay("Count = {Count}")]
 public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
 {
-    private readonly IReadOnlyList<T> data;
-
     public NonEmptyEnumerable(T head, IReadOnlyList<T> tail)
     {
         Head = head;
         Tail = tail;
+    }
 
-        var list = new List<T> { head };
-        list.AddRange(Tail);
-        data = list;
+    private NonEmptyEnumerable(List<T> list)
+    {
+        Head = list[0];
+        Tail = CollectionsMarshal.AsSpan(list).Slice(1).ToArray();
+    }
+
+    private NonEmptyEnumerable(T[] array)
+    {
+        Head = array[0];
+        Tail = array.AsSpan().Slice(1).ToArray();
     }
 
     public T Head { get; }
 
     public IReadOnlyList<T> Tail { get; }
 
-    public int Count => data.Count;
+    public int Count => Tail.Count + 1;
 
-    public T this[int index] => data[index];
-
-    IEnumerator<T> IEnumerable<T>.GetEnumerator()
+    public T this[int index] => index switch
     {
-        return data.GetEnumerator();
+        0 => Head,
+        _ => Tail[index - 1]
+    };
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        yield return Head;
+        foreach (var item in Tail)
+        {
+            yield return item;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return data.GetEnumerator();
+        return GetEnumerator();
     }
 
     public INonEmptyEnumerable<T> Distinct()
     {
-        return NonEmptyEnumerable.Create(Head, Tail.Distinct().Except(Head));
+        return new NonEmptyEnumerable<T>(Enumerable.Distinct(this).ToArray());
     }
 
     public INonEmptyEnumerable<TResult> Distinct<TResult>(Func<T, TResult> selector)
     {
-        return Select(selector).Distinct();
+        return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, selector).Distinct().ToArray());
     }
 
     public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, TResult> func)
     {
-        return new NonEmptyEnumerable<TResult>(func(Head), Tail.Select(func).ToList());
+        return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, func).ToArray());
     }
 
     public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, int, TResult> func)
     {
-        return new NonEmptyEnumerable<TResult>(func(Head, 0), Tail.Select((v, i) => func(v, i + 1)).ToList());
+        return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, func).ToArray());
     }
 
     public IReadOnlyList<T> AsReadonly()
     {
         return this;
     }
+
+    #region static Create methods
+
+    public static INonEmptyEnumerable<T> Create(T head, params T[] tail)
+    {
+        return new NonEmptyEnumerable<T>(head, tail);
+    }
+
+    public static INonEmptyEnumerable<T> Create(T head, IEnumerable<T> tail)
+    {
+        if (tail is T[] array)
+            return new NonEmptyEnumerable<T>(head, array);
+
+        return new NonEmptyEnumerable<T>(head, tail.AsList());
+    }
+
+    public static INonEmptyEnumerable<T> Create(T head, IReadOnlyList<T> tail)
+    {
+        return new NonEmptyEnumerable<T>(head, tail);
+    }
+
+    public static IOption<INonEmptyEnumerable<T>> Create(IEnumerable<T> values)
+    {
+        if (values is T[] array)
+        {
+            return array.Length == 0
+                ? Option.Empty<INonEmptyEnumerable<T>>()
+                : Option.Valued(new NonEmptyEnumerable<T>(array));
+        }
+
+        var list = values.AsList();
+        return list.Count == 0
+            ? Option.Empty<INonEmptyEnumerable<T>>()
+            : Option.Valued(new NonEmptyEnumerable<T>(list));
+    }
+
+    public static IOption<INonEmptyEnumerable<T>> Create(IReadOnlyList<T> values)
+    {
+        if (values.Count == 0)
+            return Option.Empty<INonEmptyEnumerable<T>>();
+
+        if (values is T[] array)
+            return Option.Valued(new NonEmptyEnumerable<T>(array));
+
+        return Option.Valued(new NonEmptyEnumerable<T>(values.AsList()));
+    }
+
+    public static IOption<INonEmptyEnumerable<T>> CreateFlat(params IOption<T>[] values)
+    {
+        return Create(values.Flatten());
+    }
+
+    public static INonEmptyEnumerable<T> CreateFlat(INonEmptyEnumerable<T> head, params IEnumerable<T>[] tail)
+    {
+        return Create(head: head.Head, tail: head.Tail.Concat(tail.Flatten()));
+    }
+
+    #endregion static Create methods
 }

@@ -42,6 +42,15 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns the IEnumerable in case it is a List or creates a new List from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static T[] AsArray<T>(this IEnumerable<T> source)
+        {
+            return source as T[] ?? source.ToArray();
+        }
+
+        /// <summary>
         /// Returns all the items inside all the collections combined into 1 IEnumerable.
         /// </summary>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)

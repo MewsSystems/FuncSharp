@@ -37,6 +37,15 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns the IEnumerable in case it is a List or creates a new List from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static T[] AsArray<T>(this IEnumerable<T> source)
+        {
+            return source as T[] ?? source.ToArray();
+        }
+
+        /// <summary>
         /// Returns all the items inside all the collections combined into 1 IEnumerable.
         /// </summary>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)
@@ -196,12 +205,12 @@ namespace FuncSharp
 
         public static INonEmptyEnumerable<V> SelectMany<T, V>(this INonEmptyEnumerable<T> source, Func<T, INonEmptyEnumerable<V>> selector)
         {
-            return NonEmptyEnumerable.CreateFlat(head: selector(source.Head), tail: source.Tail.SelectMany(selector));
+            return NonEmptyEnumerable.CreateFlat(source.Select(selector));
         }
 
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
         {
-            return NonEmptyEnumerable.CreateFlat(source.Head, source.Tail.Flatten());
+            return NonEmptyEnumerable.CreateFlat(source);
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this T e, params IEnumerable<T>[] others)
