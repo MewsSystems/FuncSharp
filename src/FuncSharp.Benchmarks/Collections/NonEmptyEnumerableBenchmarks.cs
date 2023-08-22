@@ -92,5 +92,25 @@ namespace FuncSharp.Benchmarks
         {
             var x = _nonEmptyEnumerable.Concat(Enumerable.Repeat("2 potatoes", 3), "3 potatoes".ToEnumerable(), "4 potatoes".ToEnumerable());
         }
+
+        public INonEmptyEnumerable<T> Distinct()
+        {
+            return new NonEmptyEnumerable<T>(Enumerable.Distinct(this).ToArray());
+        }
+
+        public INonEmptyEnumerable<TResult> Distinct<TResult>(Func<T, TResult> selector)
+        {
+            return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, selector).Distinct().ToArray());
+        }
+
+        public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, TResult> func)
+        {
+            return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, func).ToArray());
+        }
+
+        public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, int, TResult> func)
+        {
+            return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, func).ToArray());
+        }
     }
 }
