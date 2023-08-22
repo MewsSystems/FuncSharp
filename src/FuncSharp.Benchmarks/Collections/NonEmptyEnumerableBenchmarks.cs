@@ -1,6 +1,7 @@
+using FuncSharp;
 using System.Collections.Generic;
-using System.Linq;
 using BenchmarkDotNet.Attributes;
+using Enumerable = System.Linq.Enumerable;
 
 namespace FuncSharp.Benchmarks
 {
@@ -57,49 +58,31 @@ namespace FuncSharp.Benchmarks
         }
 
         [Benchmark]
-        public void Option_CreateFlat_Params()
+        public void Option_CreateFlat_ParamsOfOptions()
         {
-            var tenStrings = NonEmptyEnumerable.CreateFlat("1 potato".ToOption(), "2 potatoes".ToOption(), "3 potatoes".ToOption(), "4 potatoes".ToOption(), "5 potatoes".ToOption(), "6 potatoes".ToOption(), "7 potatoes".ToOption(), "8 potatoes".ToOption(), "9 potatoes".ToOption(), "Also a longer string".ToOption());
+            var tenStrings = NonEmptyEnumerable.CreateFlat("1 potato".ToOption(), Option.Empty<string>(), "2 potatoes".ToOption(), Option.Empty<string>(), "3 potatoes".ToOption(), Option.Empty<string>(), "4 potatoes".ToOption(), Option.Empty<string>(), "5 potatoes".ToOption(), Option.Empty<string>(), "6 potatoes".ToOption(), Option.Empty<string>(), "7 potatoes".ToOption(), Option.Empty<string>(), "8 potatoes".ToOption(), Option.Empty<string>(), "9 potatoes".ToOption(), Option.Empty<string>(), "Also a longer string".ToOption());
         }
 
         [Benchmark]
-        public void CreateFlat_NonEmptyOfNonEmpty()
-        {
-            var tenStrings = NonEmptyEnumerable.CreateFlat(_nestedNonEmptyEnumerable);
-        }
-
-        [Benchmark]
-        public void CreateFlat_NonEmpty_params()
+        public void CreateFlat_NonEmpty_ParamsOfEnumerables()
         {
             var tenStrings = NonEmptyEnumerable.CreateFlat("1 potato".ToEnumerable(), Enumerable.Repeat("2 potatoes", 3), Enumerable.Repeat("3 potatoes", 2), "4 potatoes".ToEnumerable(), "5 potatoes".ToEnumerable());
         }
 
         [Benchmark]
-        public void SelectMany()
-        {
-            var x = _nonEmptyEnumerable.SelectMany(text => _nonEmptyEnumerable);
-        }
-
-        [Benchmark]
-        public void Flatten()
-        {
-            var x = _nestedNonEmptyEnumerable.Flatten();
-        }
-
-        [Benchmark]
-        public void Concat_Item_params()
+        public void Concat_SingleItem_paramsOfEnumerables()
         {
             var x = "1 potato".Concat(Enumerable.Repeat("2 potatoes", 3), "3 potatoes".ToEnumerable(), "4 potatoes".ToEnumerable());
         }
 
         [Benchmark]
-        public void Concat_NonEmpty_Items()
+        public void Concat_NonEmpty_ParamsOfItems()
         {
             var x = _nonEmptyEnumerable.Concat("1 more potato", "2 more potatoes", "3 more potatoes", "4 more potatoes", "5 more potatoes");
         }
 
         [Benchmark]
-        public void Concat_NonEmpty_Enumerables()
+        public void Concat_NonEmpty_ParamsOfEnumerables()
         {
             var x = _nonEmptyEnumerable.Concat(Enumerable.Repeat("2 potatoes", 3), "3 potatoes".ToEnumerable(), "4 potatoes".ToEnumerable());
         }
@@ -126,6 +109,18 @@ namespace FuncSharp.Benchmarks
         public void Select_WithIndex()
         {
             var x = _nonEmptyWithDuplicates.Select((text, i) => $"{text} - {i} - {text}");
+        }
+
+        [Benchmark]
+        public void SelectMany()
+        {
+            var x = _nonEmptyEnumerable.SelectMany(text => _nonEmptyEnumerable);
+        }
+
+        [Benchmark]
+        public void Flatten()
+        {
+            var x = _nestedNonEmptyEnumerable.Flatten();
         }
 
         [Benchmark]
