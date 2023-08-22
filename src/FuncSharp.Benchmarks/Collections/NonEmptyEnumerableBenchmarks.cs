@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
 
@@ -6,13 +7,23 @@ namespace FuncSharp.Benchmarks
     [MemoryDiagnoser]
     public class NonEmptyEnumerableBenchmarks
     {
+        private static List<string> _list;
         private static INonEmptyEnumerable<string> _nonEmptyEnumerable;
         private static INonEmptyEnumerable<INonEmptyEnumerable<string>> _nestedNonEmptyEnumerable;
+        private static INonEmptyEnumerable<string> _nonEmptyWithDuplicates;
 
         static NonEmptyEnumerableBenchmarks()
         {
+            _list = new List<string>{ "1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes", "6 potatoes", "7 potatoes", "8 potatoes", "9 potatoes", "Also a longer string"};
             _nonEmptyEnumerable = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes", "6 potatoes", "7 potatoes", "8 potatoes", "9 potatoes", "Also a longer string");
             _nestedNonEmptyEnumerable = NonEmptyEnumerable.Create(_nonEmptyEnumerable, _nonEmptyEnumerable);
+            _nonEmptyWithDuplicates = NonEmptyEnumerable.CreateFlat("1 potato".ToEnumerable(), Enumerable.Repeat("2 potatoes", 3), Enumerable.Repeat("3 potatoes", 2), "4 potatoes".ToEnumerable(), "5 potatoes".ToEnumerable());
+        }
+
+        [Benchmark]
+        public void AsNonEmpty()
+        {
+            _list.AsNonEmpty();
         }
 
         [Benchmark]
@@ -30,7 +41,7 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void Create_Head_Plus_ReadonlyList()
         {
-            var tenStrings = NonEmptyEnumerable.Create("1 potato", Enumerable.Repeat("2 potatoes", 9).ToList());
+            var tenStrings = NonEmptyEnumerable.Create("1 potato", _list);
         }
 
         [Benchmark]
@@ -42,7 +53,7 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void Option_Create_ReadonlyList()
         {
-            var tenStrings = NonEmptyEnumerable.Create<string>(Enumerable.Repeat("1 potato", 10).ToList());
+            var tenStrings = NonEmptyEnumerable.Create<string>(_list);
         }
 
         [Benchmark]
@@ -54,7 +65,7 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void CreateFlat_NonEmptyOfNonEmpty()
         {
-            var tenStrings = NonEmptyEnumerable.CreateFlat("1 potato".ToOption(), "2 potatoes".ToOption(), "3 potatoes".ToOption(), "4 potatoes".ToOption(), "5 potatoes".ToOption(), "6 potatoes".ToOption(), "7 potatoes".ToOption(), "8 potatoes".ToOption(), "9 potatoes".ToOption(), "Also a longer string".ToOption());
+            var tenStrings = NonEmptyEnumerable.CreateFlat(_nestedNonEmptyEnumerable);
         }
 
         [Benchmark]
@@ -93,24 +104,37 @@ namespace FuncSharp.Benchmarks
             var x = _nonEmptyEnumerable.Concat(Enumerable.Repeat("2 potatoes", 3), "3 potatoes".ToEnumerable(), "4 potatoes".ToEnumerable());
         }
 
-        public INonEmptyEnumerable<T> Distinct()
+        [Benchmark]
+        public void Distinct()
         {
-            return new NonEmptyEnumerable<T>(Enumerable.Distinct(this).ToArray());
+            var x = _nonEmptyWithDuplicates.Distinct();
         }
 
-        public INonEmptyEnumerable<TResult> Distinct<TResult>(Func<T, TResult> selector)
+        [Benchmark]
+        public void Distinct_WithFunc()
         {
-            return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, selector).Distinct().ToArray());
+            var x = _nonEmptyWithDuplicates.Distinct(text => $"{text}{text}");
         }
 
-        public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, TResult> func)
+        [Benchmark]
+        public void Select()
         {
-            return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, func).ToArray());
+            var x = _nonEmptyWithDuplicates.Select(text => $"{text}{text}");
         }
 
-        public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, int, TResult> func)
+        [Benchmark]
+        public void Select_WithIndex()
         {
-            return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, func).ToArray());
+            var x = _nonEmptyWithDuplicates.Select((text, i) => $"{text} - {i} - {text}");
+        }
+
+        [Benchmark]
+        public void Foreach()
+        {
+            foreach (var text in _nonEmptyWithDuplicates)
+            {
+                var y = $"{text} - i - {text}";
+            }
         }
     }
 }

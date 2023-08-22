@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FuncSharp;
 
-public interface INonEmptyEnumerable<out T>
+public interface INonEmptyEnumerable<out T> : IReadOnlyList<T>
 {
     T Head { get; }
 
