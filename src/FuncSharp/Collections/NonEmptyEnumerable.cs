@@ -195,5 +195,23 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
         return new NonEmptyEnumerable<T>(head: head.Head, tail: head.Tail.Concat(tail.Flatten()).ToArray());
     }
 
+    private static INonEmptyEnumerable<T> CreateFromIEnumerableOrNull(IEnumerable<T> values)
+    {
+        using(var enumerator = values.GetEnumerator())
+        {
+            if(!enumerator.MoveNext())
+                return null;
+
+            var head = enumerator.Current;
+            var tail = new List<T>();
+
+            while (enumerator.MoveNext())
+            {
+                tail.Add(enumerator.Current);
+            }
+            return new NonEmptyEnumerable<T>(head, tail);
+        }
+    }
+
     #endregion static Create methods
 }
