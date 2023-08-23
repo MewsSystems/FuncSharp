@@ -11,14 +11,20 @@ namespace FuncSharp
         /// </summary>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
         {
-            return source.SelectMany(o => o.ToList());
+            return source.Where(o => o.NonEmpty).Select(o => o.GetOrDefault());
         }
 
+        /// <summary>
+        /// Returns the max value of the enumerable or an empty option if it is empty.
+        /// </summary>
         public static IOption<TValue> SafeMax<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
         {
             return source.AsNonEmpty().Map(s => s.Max(selector));
         }
 
+        /// <summary>
+        /// Returns the min value of the enumerable or an empty option if it is empty.
+        /// </summary>
         public static IOption<TValue> SafeMin<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
         {
             return source.AsNonEmpty().Map(s => s.Min(selector));
@@ -29,12 +35,39 @@ namespace FuncSharp
         /// </summary>
         public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
-            var data = source.Where(predicate ?? (t => true)).Take(1).ToList();
-            if (data.Count == 0)
+            var filtered = predicate is not null ? source.Where(predicate) : source;
+            var data = filtered.Take(1).ToArray();
+            return data.Length == 0 ? Option.Empty<T>() : Option.Valued(data[0]);
+        }
+
+        /// <summary>
+        /// Returns first value or an empty option.
+        /// </summary>
+        public static IOption<T> FirstOptionUsingForeach<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        {
+            var filtered = predicate is not null ? source.Where(predicate) : source;
+            var data = filtered.Take(1);
+
+            foreach (var item in data)
             {
-                return Option.Empty<T>();
+                return Option.Valued(item);
             }
-            return Option.Valued(data.First());
+
+            return Option.Empty<T>();
+        }
+
+        /// <summary>
+        /// Returns first value or an empty option.
+        /// </summary>
+        public static IOption<T> FirstOptionUsingEnumerator<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        {
+            var filtered = predicate is not null ? source.Where(predicate) : source;
+            var data = filtered.Take(1);
+
+            using var enumerator = data.GetEnumerator();
+            return enumerator.MoveNext()
+                ? Option.Valued(enumerator.Current)
+                : Option.Empty<T>();
         }
 
         /// <summary>
@@ -50,12 +83,13 @@ namespace FuncSharp
         /// </summary>
         public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
-            var data = source.Where(predicate ?? (t => true)).Take(2).ToList();
-            if (data.Count == 2)
+            var filtered = predicate is not null ? source.Where(predicate) : source;
+            var data = filtered.Take(2).ToArray();
+            return data.Length switch
             {
-                return Option.Empty<T>();
-            }
-            return data.FirstOption();
+                1 => Option.Valued(data[0]),
+                _ => Option.Empty<T>()
+            };
         }
     }
 }

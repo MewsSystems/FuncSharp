@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -15,6 +16,12 @@ namespace FuncSharp
             return source is null
                 ? Option.Empty<INonEmptyEnumerable<T>>()
                 : NonEmptyEnumerable.Create(source);
+        }
+
+        [Obsolete("This is already a NonEmptyEnumerable.", error: true)]
+        public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this INonEmptyEnumerable<T> source)
+        {
+            throw new NotImplementedException();
         }
 
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)

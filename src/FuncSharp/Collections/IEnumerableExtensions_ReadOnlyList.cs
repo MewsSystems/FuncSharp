@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FuncSharp;
 
@@ -28,12 +27,9 @@ public static partial class IEnumerableExtensions
 
     public static T Single<T>(this IReadOnlyList<T> source)
     {
-        if (!source.IsSingle())
-        {
-            throw new ArgumentException("Source is not a single element.");
-        }
-
-        return source[0];
+        return !source.IsSingle()
+            ? throw new ArgumentException("Source is not a single element.")
+            : source[0];
     }
 
     public static IOption<T> SingleOption<T>(this IReadOnlyList<T> source)
@@ -85,8 +81,8 @@ public static partial class IEnumerableExtensions
 
     public static IOption<T> ElementAtOption<T>(this IReadOnlyList<T> source, NonNegativeInt index)
     {
-        return source.Count > index
-            ? Option.Valued(source[index])
+        return source.Count > index.Value
+            ? Option.Valued(source[index.Value])
             : Option.Empty<T>();
     }
 
