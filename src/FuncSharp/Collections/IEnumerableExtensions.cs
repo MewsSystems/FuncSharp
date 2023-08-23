@@ -37,6 +37,15 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns the IEnumerable in case it is a Array or creates a new Array from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static T[] AsArray<T>(this IEnumerable<T> source)
+        {
+            return source as T[] ?? source.ToArray();
+        }
+
+        /// <summary>
         /// Returns all the items inside all the collections combined into 1 IEnumerable.
         /// </summary>
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)
@@ -178,45 +187,29 @@ namespace FuncSharp
         [DebuggerStepThrough]
         public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this IEnumerable<T> source)
         {
-            if (source is null)
-            {
-                return Option.Empty<INonEmptyEnumerable<T>>();
-            }
-            return NonEmptyEnumerable.Create(source);
-        }
-
-        /// <summary>
-        /// Returns the nonEmptyEnumerable typed as IReadOnlyList.
-        /// </summary>
-        [DebuggerStepThrough]
-        public static IReadOnlyList<T> AsReadOnly<T>(this INonEmptyEnumerable<T> source)
-        {
-            return source;
-        }
-
-        public static INonEmptyEnumerable<V> SelectMany<T, V>(this INonEmptyEnumerable<T> source, Func<T, INonEmptyEnumerable<V>> selector)
-        {
-            return NonEmptyEnumerable.CreateFlat(source.Select(selector));
+            return source is null
+                ? Option.Empty<INonEmptyEnumerable<T>>()
+                : NonEmptyEnumerable.Create(source);
         }
 
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
         {
-            return NonEmptyEnumerable.CreateFlat(source);
+            return NonEmptyEnumerable<T>.Create(source.Head.Head, source.Head.Tail.Concat(source.Tail.Flatten()).ToArray());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this T e, params IEnumerable<T>[] others)
         {
-            return NonEmptyEnumerable.Create(e, others.Flatten());
+            return NonEmptyEnumerable.Create(e, others.Flatten().ToArray());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params T[] items)
         {
-            return source.Concat(items.AsEnumerable());
+            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params IEnumerable<T>[] items)
         {
-            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items));
+            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());
         }
 
         #endregion NonEmpty
