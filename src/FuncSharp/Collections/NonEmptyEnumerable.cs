@@ -75,12 +75,6 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
         Tail = tail;
     }
 
-    private NonEmptyEnumerable(T[] array)
-    {
-        Head = array[0];
-        Tail = array.AsSpan().Slice(1).ToArray();;
-    }
-
     public T Head { get; }
 
     public IReadOnlyList<T> Tail { get; }
@@ -109,12 +103,13 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
 
     public INonEmptyEnumerable<T> Distinct()
     {
-        return new NonEmptyEnumerable<T>(Enumerable.Distinct(this).ToArray());
+
+        return CreateFromArray(Enumerable.Distinct(this).ToArray());
     }
 
     public INonEmptyEnumerable<TResult> Distinct<TResult>(Func<T, TResult> selector)
     {
-        return new NonEmptyEnumerable<TResult>(Enumerable.Select(this, selector).Distinct().ToArray());
+        return CreateFromArray<TResult>(Enumerable.Select(this, selector).Distinct().ToArray());
     }
 
     public INonEmptyEnumerable<TResult> Select<TResult>(Func<T, TResult> func)
@@ -143,17 +138,17 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
 
     #region static Create methods
 
-    public static INonEmptyEnumerable<T> Create(T head, params T[] tail)
-    {
-        return new NonEmptyEnumerable<T>(head, tail);
-    }
-
     public static INonEmptyEnumerable<T> Create(T head, IEnumerable<T> tail)
     {
         if (tail is IReadOnlyList<T> list)
             return new NonEmptyEnumerable<T>(head, list);
 
         return new NonEmptyEnumerable<T>(head, tail.ToArray());
+    }
+
+    public static INonEmptyEnumerable<T> Create(T head, params T[] tail)
+    {
+        return new NonEmptyEnumerable<T>(head, tail);
     }
 
     public static INonEmptyEnumerable<T> Create(T head, IReadOnlyList<T> tail)
@@ -182,7 +177,7 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
     {
         return array.Length == 0
             ? Option.Empty<INonEmptyEnumerable<T>>()
-            : Option.Valued(new NonEmptyEnumerable<T>(array));
+            : Option.Valued(CreateFromArray(array));
     }
 
     public static IOption<INonEmptyEnumerable<T>> CreateFlat(params IOption<T>[] values)
@@ -193,6 +188,11 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
     public static INonEmptyEnumerable<T> CreateFlat(INonEmptyEnumerable<T> head, params IEnumerable<T>[] tail)
     {
         return new NonEmptyEnumerable<T>(head: head.Head, tail: head.Tail.Concat(tail.Flatten()).ToArray());
+    }
+
+    private static INonEmptyEnumerable<TResult> CreateFromArray<TResult>(TResult[] array)
+    {
+        return new NonEmptyEnumerable<TResult>(array[0], array.AsSpan().Slice(1).ToArray());
     }
 
     #endregion static Create methods
