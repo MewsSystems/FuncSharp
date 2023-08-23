@@ -1,0 +1,63 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".cs" #>
+<#@ include file="../Helpers.ttinclude" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace FuncSharp
+{
+    public static partial class IEnumerableExtensions
+    {
+<#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
+
+        /// <summary>
+        /// Converts the source to a new <#= i #>-dimensional data cube and aggregates the values in case of conflicting positions.
+        /// </summary>
+        public static <#= DataCubeType(i, valueType: "TResult") #> ToDataCube<T, <#= Types(i, name: "P") #>, TValue, TResult>(
+            this IEnumerable<T> source,
+<#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
+            Func<T, TValue> value,
+            Func<TValue, TResult> initialization,
+            Func<TResult, TValue, TResult> aggregation)
+        {
+            var dataCube = new <#= DataCubeType(i, valueType: "TResult") #>();
+            foreach (var v in source)
+            {
+                dataCube.SetOrElseUpdate<TValue>(<#= List(i, x => "p" + x + "(v)") #>, value(v), initialization, aggregation);
+            }
+            return dataCube;
+        }
+<#  } #>
+
+<#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
+
+        /// <summary>
+        /// Converts the source to a new <#= i #>-dimensional data cube.
+        /// </summary>
+        public static <#= DataCubeType(i) #> ToDataCube<T, <#= Types(i, name: "P") #>, TValue>(
+            this IEnumerable<T> source,
+<#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
+            Func<T, TValue> value)
+        {
+            return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, TValue>(source, <#= List(i, x => "p" + x) #>, value, a => a, aggregation: (a, b) => throw new ArgumentException("An item with the same key has already been added."));
+        }
+<#  } #>
+<#  for (var i = 1; i <= MaxCubeArity(); i++) { #>
+
+        /// <summary>
+        /// Converts the source to a new <#= i #>-dimensional data cube, in case of collisions, it aggregates the values to a collection.
+        /// </summary>
+        public static <#= DataCubeType(i, valueType: "IEnumerable<TValue>") #> ToCollectionDataCube<T, <#= Types(i, name: "P") #>, TValue>(
+            this IEnumerable<T> source,
+<#= Lines(i, x => Indent(12) + "Func<T, P" + x + "> p" + x, separator: ",") #>,
+            Func<T, TValue> value)
+        {
+            return ToDataCube<T, <#= Types(i, name: "P") #>, TValue, IEnumerable<TValue>>(source, <#= List(i, x => "p" + x) #>, value, a => Enumerable.Repeat(a, 1), (a, b) => a.Concat(new [] { b }));
+        }
+<#  } #>
+    }
+}
