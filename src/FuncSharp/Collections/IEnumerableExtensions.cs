@@ -194,22 +194,22 @@ namespace FuncSharp
 
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
         {
-            return NonEmptyEnumerable<T>.Create(source.Head.Head, source.Head.Tail.Concat(source.Tail.Flatten()));
+            return NonEmptyEnumerable<T>.Create(source.Head.Head, source.Head.Tail.Concat(source.Tail.Flatten()).ToArray());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this T e, params IEnumerable<T>[] others)
         {
-            return NonEmptyEnumerable.Create(e, others.Flatten());
+            return NonEmptyEnumerable.Create(e, others.Flatten().ToArray());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params T[] items)
         {
-            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items));
+            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());
         }
 
         public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params IEnumerable<T>[] items)
         {
-            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items));
+            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());
         }
 
         #endregion NonEmpty

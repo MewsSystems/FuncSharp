@@ -6,7 +6,7 @@ namespace FuncSharp.Benchmarks
     {
         public static void Main(string[] args)
         {
-            BenchmarkRunner.Run(typeof(NonEmptyEnumerableBenchmarks));
+            BenchmarkRunner.Run(typeof(Program).Assembly);
         }
     }
 }
