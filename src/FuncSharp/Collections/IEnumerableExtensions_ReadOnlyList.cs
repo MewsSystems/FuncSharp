@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FuncSharp;
 
-public static class IReadOnlyListExtensions
+public static partial class IEnumerableExtensions
 {
     public static bool NonEmpty<T>(this IReadOnlyList<T> source)
     {
