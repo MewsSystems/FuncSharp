@@ -33,38 +33,22 @@ namespace FuncSharp
         /// <summary>
         /// Returns first value or an empty option.
         /// </summary>
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
-            var filtered = predicate is not null ? source.Where(predicate) : source;
-            var data = filtered.Take(1).ToArray();
-            return data.Length == 0 ? Option.Empty<T>() : Option.Valued(data[0]);
+            return source.Where(predicate).FirstOption();
         }
 
         /// <summary>
         /// Returns first value or an empty option.
         /// </summary>
-        public static IOption<T> FirstOptionUsingForeach<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IOption<T> FirstOption<T>(this IEnumerable<T> source)
         {
-            var filtered = predicate is not null ? source.Where(predicate) : source;
-            var data = filtered.Take(1);
-
-            foreach (var item in data)
+            if (source is IReadOnlyList<T> list)
             {
-                return Option.Valued(item);
+                return list.FirstOption();
             }
 
-            return Option.Empty<T>();
-        }
-
-        /// <summary>
-        /// Returns first value or an empty option.
-        /// </summary>
-        public static IOption<T> FirstOptionUsingEnumerator<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
-        {
-            var filtered = predicate is not null ? source.Where(predicate) : source;
-            var data = filtered.Take(1);
-
-            using var enumerator = data.GetEnumerator();
+            using var enumerator = source.GetEnumerator();
             return enumerator.MoveNext()
                 ? Option.Valued(enumerator.Current)
                 : Option.Empty<T>();
@@ -73,23 +57,48 @@ namespace FuncSharp
         /// <summary>
         /// Returns last value or an empty option.
         /// </summary>
-        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
             return source.Reverse().FirstOption(predicate);
         }
 
         /// <summary>
+        /// Returns last value or an empty option.
+        /// </summary>
+        public static IOption<T> LastOption<T>(this IEnumerable<T> source)
+        {
+            return source is IReadOnlyList<T> list
+                ? list.LastOption()
+                : source.Reverse().FirstOption();
+        }
+
+        /// <summary>
         /// Returns the only value if the source contains just one value, otherwise an empty option.
         /// </summary>
-        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
-            var filtered = predicate is not null ? source.Where(predicate) : source;
-            var data = filtered.Take(2).ToArray();
-            return data.Length switch
+            return source.Where(predicate).SingleOption();
+        }
+
+        /// <summary>
+        /// Returns the only value if the source contains just one value, otherwise an empty option.
+        /// </summary>
+        public static IOption<T> SingleOption<T>(this IEnumerable<T> source)
+        {
+            if (source is IReadOnlyList<T> list)
             {
-                1 => Option.Valued(data[0]),
-                _ => Option.Empty<T>()
-            };
+                return list.SingleOption();
+            }
+
+            using var enumerator = source.GetEnumerator();
+            if (!enumerator.MoveNext())
+            {
+                return Option.Empty<T>();
+            }
+            var result = enumerator.Current;
+            return enumerator.MoveNext()
+                ? Option.Empty<T>()
+                : Option.Valued(result);
         }
     }
 }

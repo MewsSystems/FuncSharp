@@ -63,7 +63,7 @@ namespace FuncSharp
         public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T?> e)
             where T : struct
         {
-            return e.Where(v => v.HasValue).Select(v => v.Value);
+            return e.Where(item => item.HasValue).Select(item => item.Value);
         }
 
         public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T> e)
@@ -72,42 +72,42 @@ namespace FuncSharp
             return e.Where(v => v is not null);
         }
 
-        public static bool NonEmpty<T>(this IEnumerable<T> e)
+        public static bool NonEmpty<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
         {
             return e is not null && e.Any();
         }
 
-        public static bool IsEmpty<T>(this IEnumerable<T> e)
+        public static bool IsEmpty<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
         {
             return !e.NonEmpty();
         }
 
-        public static bool IsMultiple<T>(this IEnumerable<T> e)
+        public static bool IsMultiple<T>(this IEnumerable<T> e) // TODO - try using Enumerator, also Check IReadonlyList
         {
             return e is not null && e.Take(2).Count().SafeEquals(2);
         }
 
-        public static bool IsSingle<T>(this IEnumerable<T> e)
+        public static bool IsSingle<T>(this IEnumerable<T> e) // TODO - try using Enumerator, also Check IReadonlyList
         {
             return e is not null && e.Take(2).Count().SafeEquals(1);
         }
 
-        public static T Second<T>(this IEnumerable<T> e)
+        public static T Second<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
         {
             return e.ElementAt(1);
         }
 
-        public static T Third<T>(this IEnumerable<T> e)
+        public static T Third<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
         {
             return e.ElementAt(2);
         }
 
-        public static T Fourth<T>(this IEnumerable<T> e)
+        public static T Fourth<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
         {
             return e.ElementAt(3);
         }
 
-        public static T Fifth<T>(this IEnumerable<T> e)
+        public static T Fifth<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
         {
             return e.ElementAt(4);
         }
@@ -125,13 +125,16 @@ namespace FuncSharp
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
         {
             return first is null
-                ? items
-                : Enumerable.Concat(first, items);
+                ? items ?? Array.Empty<T>()
+                : Enumerable.Concat(first, items ?? Array.Empty<T>());
         }
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
         {
-            var othersResult = others.Select(o => o).ExceptNulls().Flatten();
+            var othersResult = others is null
+                ? Array.Empty<T>()
+                : others.SelectMany(o => o ?? Enumerable.Empty<T>());
+
             return first is null
                 ? othersResult
                 : Enumerable.Concat(first, othersResult);
