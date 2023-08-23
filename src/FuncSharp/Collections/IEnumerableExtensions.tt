@@ -42,7 +42,7 @@ namespace FuncSharp
         }
 
         /// <summary>
-        /// Returns the IEnumerable in case it is a List or creates a new List from it.
+        /// Returns the IEnumerable in case it is a Array or creates a new Array from it.
         /// </summary>
         [DebuggerStepThrough]
         public static T[] AsArray<T>(this IEnumerable<T> source)
