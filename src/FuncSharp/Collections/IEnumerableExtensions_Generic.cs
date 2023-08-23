@@ -12,7 +12,7 @@ namespace FuncSharp
         /// </summary>
         public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
-            return e.ToList().AsReadOnly();
+            return e.ToArray();
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace FuncSharp
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params T[] excludedItems)
         {
-            return e.Except(excludedItems.AsEnumerable());
+            return Enumerable.Except(e, excludedItems);
         }
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params IEnumerable<T>[] others)
@@ -124,12 +124,17 @@ namespace FuncSharp
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
         {
-            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), items);
+            return first is null
+                ? items
+                : Enumerable.Concat(first, items);
         }
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
         {
-            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), others.SelectMany(o => o ?? Enumerable.Empty<T>()));
+            var othersResult = others.Select(o => o).ExceptNulls().Flatten();
+            return first is null
+                ? othersResult
+                : Enumerable.Concat(first, othersResult);
         }
 
         /// <summary>
@@ -146,13 +151,32 @@ namespace FuncSharp
         /// </summary>
         public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
         {
-            var exceptions = source.AsReadOnlyList();
-            switch (exceptions.Count)
+            return Aggregate(source.AsReadOnlyList());
+        }
+
+        /// <summary>
+        /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
+        /// </summary>
+        public static IOption<Exception> Aggregate(this IReadOnlyList<Exception> source)
+        {
+            return source.Count switch
             {
-                case 0: return Option<Exception>.Empty;
-                case 1: return Option.Valued(exceptions[0]);
-                default: return Option.Valued(new AggregateException(exceptions));
-            }
+                0 => Option<Exception>.Empty,
+                1 => Option.Valued(source[0]),
+                _ => Option.Valued(new AggregateException(source))
+            };
+        }
+
+        /// <summary>
+        /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
+        /// </summary>
+        public static Exception Aggregate(this INonEmptyEnumerable<Exception> source)
+        {
+            return source.Count switch
+            {
+                1 => source[0],
+                _ => new AggregateException(source)
+            };
         }
     }
 }
