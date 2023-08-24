@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FuncSharp
@@ -8,7 +9,7 @@ namespace FuncSharp
     public static partial class IEnumerableExtensions
     {
         /// <summary>
-        /// Returns a ToList() juts of type IReadOnlyList.
+        /// Returns a ToArray() juts of type IReadOnlyList.
         /// </summary>
         public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
@@ -160,6 +161,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
         /// </summary>
+        [Pure]
         public static IOption<Exception> Aggregate(this IReadOnlyList<Exception> source)
         {
             return source.Count switch
@@ -173,6 +175,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
         /// </summary>
+        [Pure]
         public static Exception Aggregate(this INonEmptyEnumerable<Exception> source)
         {
             return source.Count switch

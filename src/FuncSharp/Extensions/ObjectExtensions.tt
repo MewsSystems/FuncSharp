@@ -6,33 +6,39 @@
 <#@ include file="../Helpers.ttinclude" #>
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
 namespace FuncSharp
 {
     public static class ObjectExtensions
     {
+        [Pure]
         public static INonEmptyEnumerable<T> ToEnumerable<T>(this T value)
         {
             return NonEmptyEnumerable.Create(value);
         }
 
+        [Pure]
         public static bool SafeEquals<T>(this T t, T other)
         {
             return Equals(t, other);
         }
 
+        [Pure]
         public static bool SafeNotEquals<T>(this T t, T other)
         {
             return !t.SafeEquals(other);
         }
 
+        [Pure]
         public static bool SafeEquals<T>(this T t, T? other)
             where T : struct
         {
             return ((T?)t).SafeEquals(other);
         }
 
+        [Pure]
         public static bool SafeEquals<T>(this T? t, T other)
             where T : struct
         {
@@ -46,6 +52,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)
             where A : class
         {
@@ -63,6 +70,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
             where A : class
         {
@@ -81,6 +89,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : class
         {
@@ -92,6 +101,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static async Task<B> MatchRefAsync<A, B>(this A a, Func<A, Task<B>> func, Func<Unit, Task<B>> otherwise)
             where A : class
         {
@@ -103,12 +113,14 @@ namespace FuncSharp
         }
 
         [Obsolete("Use Map instead.", error: true)]
+        [Pure]
         public static B MapRef<A, B>(this IOption<A> a, Func<A, B> func)
         {
             throw new NotImplementedException();
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B MapRef<A, B>(this A a, Func<A, B> func)
             where A : class
             where B : class
@@ -122,6 +134,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static async Task<B> MapRefAsync<A, B>(this A a, Func<A, Task<B>> func)
             where A : class
             where B : class
@@ -134,7 +147,8 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
-        public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
+        [Pure]
+         public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
             where A : class
             where B : struct
         {
@@ -145,6 +159,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B? MapRefToVal<A, B>(this A a, Func<A, B?> func)
             where A : class
             where B : struct
@@ -156,6 +171,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static void MatchVal<A>(this A? a, Action<A> action = null, Action<Unit> otherwise = null)
             where A : struct
         {
@@ -173,6 +189,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
             where A : struct
         {
@@ -180,6 +197,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : struct
         {
@@ -190,6 +208,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B? MapVal<A, B>(this A? a, Func<A, B> func)
             where A : struct
             where B : struct
@@ -201,6 +220,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B? MapVal<A, B>(this A? a, Func<A, B?> func)
             where A : struct
             where B : struct
@@ -212,6 +232,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static B MapValToRef<A, B>(this A? a, Func<A, B> func)
             where A : struct
             where B : class
@@ -223,6 +244,7 @@ namespace FuncSharp
         }
 
         [DebuggerStepThrough]
+        [Pure]
         public static async Task<B> MapValToRefAsync<A, B>(this A? a, Func<A, Task<B>> func)
             where A : struct
             where B : class
@@ -237,6 +259,7 @@ namespace FuncSharp
         /// <summary>
         /// Casts the specified object to the given type.
         /// </summary>
+        [Pure]
         public static IOption<A> As<A>(this object o)
             where A : class
         {
@@ -246,6 +269,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns string representation of the object. If the object is null, return the optionally specified null text.
         /// </summary>
+        [Pure]
         public static string SafeToString(this object o, string nullText = "null")
         {
             if (o == null)
@@ -258,6 +282,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
+        [Pure]
         public static IOption<A> ToOption<A>(this A value)
         {
             return Option.Create(value);
@@ -266,6 +291,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into a successful try.
         /// </summary>
+        [Pure]
         public static Try<A, E> ToTry<A, E>(this A value)
         {
             return Try.Success<A, E>(value);
@@ -274,6 +300,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified error into a try.
         /// </summary>
+        [Pure]
         public static Try<A, E> ToTry<A, E>(this E e)
         {
             return Try.Error<A, E>(e);
@@ -285,6 +312,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -308,6 +336,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
 <#     for (var j = 1; j <= i; j++) { #>
@@ -334,6 +363,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
         {
             return value.AsCoproduct(v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
@@ -344,6 +374,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
         {
             return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
@@ -352,6 +383,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, TResult> f" + j, separator: ",") #>,
@@ -371,6 +403,7 @@ namespace FuncSharp
         }
 
 
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, Task<TResult>> f" + j, separator: ",") #>,
@@ -392,6 +425,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Action<T> f" + j, separator: ",") #>,
@@ -412,6 +446,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T,Task> f" + j, separator: ",") #>,

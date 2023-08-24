@@ -13,9 +13,12 @@ namespace FuncSharp
         [DebuggerStepThrough]
         public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this IEnumerable<T> source)
         {
-            return source is null
-                ? Option.Empty<INonEmptyEnumerable<T>>()
-                : NonEmptyEnumerable.Create(source);
+            return source switch
+            {
+                null => Option.Empty<INonEmptyEnumerable<T>>(),
+                INonEmptyEnumerable<T> list => Option.Valued(list),
+                _ => NonEmptyEnumerable.Create(source)
+            };
         }
 
         [Obsolete("This is already a NonEmptyEnumerable.", error: true)]
