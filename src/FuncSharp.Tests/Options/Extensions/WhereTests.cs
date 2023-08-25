@@ -75,10 +75,10 @@ namespace FuncSharp.Tests.Options
 
             if (option.NonEmpty)
             {
-                Assert.Equal(map(option.Get()), whereResult.NonEmpty);
+                Assert.Equivalent(map(option.Get()), whereResult.NonEmpty);
                 if (whereResult.NonEmpty)
                 {
-                    Assert.Equal(option.Get(), whereResult.Get());
+                    Assert.Equivalent(option.Get(), whereResult.Get());
                 }
             }
             else

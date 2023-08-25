@@ -15,38 +15,38 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void GetOrZero()
         {
-            Assert.Equal(1, 1.ToOption().GetOrZero());
-            Assert.Equal(0, Option.Empty<int>().GetOrZero());
+            Assert.Equivalent(1, 1.ToOption().GetOrZero());
+            Assert.Equivalent(0, Option.Empty<int>().GetOrZero());
         }
 
         [Property]
         internal void GetOrZero_short(IOption<short> option)
         {
-            Assert.Equal(option.GetOrDefault(), option.GetOrZero());
+            Assert.Equivalent(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
         internal void GetOrZero_int(IOption<int> option)
         {
-            Assert.Equal(option.GetOrDefault(), option.GetOrZero());
+            Assert.Equivalent(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
         internal void GetOrZero_long(IOption<long> option)
         {
-            Assert.Equal(option.GetOrDefault(), option.GetOrZero());
+            Assert.Equivalent(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
         internal void GetOrZero_decimal(IOption<decimal> option)
         {
-            Assert.Equal(option.GetOrDefault(), option.GetOrZero());
+            Assert.Equivalent(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
         internal void GetOrZero_double(IOption<double> option)
         {
-            Assert.Equal(option.GetOrDefault(), option.GetOrZero());
+            Assert.Equivalent(option.GetOrDefault(), option.GetOrZero());
         }
     }
 }

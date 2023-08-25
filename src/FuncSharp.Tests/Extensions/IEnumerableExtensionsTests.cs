@@ -12,8 +12,8 @@ namespace FuncSharp.Tests
         {
             Assert.True(new List<int>().FirstOption().IsEmpty);
             Assert.True(new List<int>().LastOption().IsEmpty);
-            Assert.Equal(1.ToOption(), new List<int> { 1, 2, 3 }.FirstOption());
-            Assert.Equal(3.ToOption(), new List<int> { 1, 2, 3 }.LastOption());
+            Assert.Equivalent(1.ToOption(), new List<int> { 1, 2, 3 }.FirstOption());
+            Assert.Equivalent(3.ToOption(), new List<int> { 1, 2, 3 }.LastOption());
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace FuncSharp.Tests
             };
 
             var collectionDataCube = source.ToCollectionDataCube(s => s.ProductValue1, s => s.ProductValue2, s => s.ProductValue3);
-            Assert.Equal(new List<string> { "C", "D" }, collectionDataCube.Get("A", "B").GetOrNull());
+            Assert.Equivalent(new List<string> { "C", "D" }, collectionDataCube.Get("A", "B").GetOrNull());
         }
 
         [Fact]
@@ -39,8 +39,8 @@ namespace FuncSharp.Tests
             };
 
             var dataCube = source.ToDataCube(s => s.ProductValue2, s => s.ProductValue3);
-            Assert.Equal(new List<string> { "B", "C" }, dataCube.Domain1);
-            Assert.Equal(new List<string> { "D", "E" }, dataCube.Values);
+            Assert.Equivalent(new List<string> { "B", "C" }, dataCube.Domain1);
+            Assert.Equivalent(new List<string> { "D", "E" }, dataCube.Values);
 
             // A duplicit key throws exception.
             Assert.Throws<ArgumentException>(() => source.ToDataCube(s => s.ProductValue1, s => s.ProductValue3));
@@ -77,8 +77,8 @@ namespace FuncSharp.Tests
         {
             var e = new Exception();
 
-            Assert.Equal(Option.Empty<Exception>(), new List<Exception>().Aggregate());
-            Assert.Equal(e.ToOption(), new[] { e }.Aggregate());
+            Assert.Equivalent(Option.Empty<Exception>(), new List<Exception>().Aggregate());
+            Assert.Equivalent(e.ToOption(), new[] { e }.Aggregate());
             Assert.True(new[] { e, e, e }.Aggregate().Get() is AggregateException);
         }
     }

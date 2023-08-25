@@ -12,7 +12,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var list = new List<string> { "1 potato", "2 potatoes", "1 potato", "3 potatoes" };
             var result = list.Except("1 potato").ToArray();
 
-            Assert.Equal(2, result.Length);
+            Assert.Equivalent(2, result.Length);
             Assert.Equivalent(new [] { "2 potatoes", "3 potatoes" }, result);
         }
     }

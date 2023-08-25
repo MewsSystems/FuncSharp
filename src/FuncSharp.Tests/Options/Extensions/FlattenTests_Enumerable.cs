@@ -25,7 +25,7 @@ namespace FuncSharp.Tests.Options
             Assert.Single(Option.Valued(new [] { 42 }).Flatten(), 42);
             Assert.Single(Option.Valued(new [] { new ReferenceType(3) }).Flatten(), new ReferenceType(3));
 
-            Assert.Equal(
+            Assert.Equivalent(
                 Option.Valued(new [] { 42, 12, 3, 16, 49, 78 }).Flatten(),
                 new List<int> { 42, 12, 3, 16, 49, 78 }
             );
@@ -71,7 +71,7 @@ namespace FuncSharp.Tests.Options
             }
             else
             {
-                Assert.Equal(option.Get(), result);
+                Assert.Equivalent(option.Get(), result);
             }
         }
     }

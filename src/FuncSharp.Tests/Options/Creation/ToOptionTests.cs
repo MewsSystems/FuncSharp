@@ -83,11 +83,11 @@ namespace FuncSharp.Tests.Options
         private void AssertToOption<T>(T value)
         {
             var option = value.ToOption();
-            Assert.Equal(value is null, option.IsEmpty);
+            Assert.Equivalent(value is null, option.IsEmpty);
 
             if(value is not null)
             {
-                Assert.Equal(value, option.Get());
+                Assert.Equivalent(value, option.Get());
             }
         }
     }

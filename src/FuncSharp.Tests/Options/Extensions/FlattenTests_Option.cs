@@ -58,11 +58,11 @@ namespace FuncSharp.Tests.Options
         private void AssertFlatten<T>(IOption<T> first, IOption<T> second)
         {
             var result = first.Map(f => second).Flatten();
-            Assert.Equal(first.NonEmpty && second.NonEmpty, result.NonEmpty);
+            Assert.Equivalent(first.NonEmpty && second.NonEmpty, result.NonEmpty);
 
             if (result.NonEmpty)
             {
-                Assert.Equal(second.Get(), result.Get());
+                Assert.Equivalent(second.Get(), result.Get());
             }
         }
     }

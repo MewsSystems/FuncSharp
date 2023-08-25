@@ -12,9 +12,9 @@ namespace FuncSharp.Tests
             var p1 = Product3.Create(1, "foo", null as object);
             var p2 = Product3.Create(2, "bar", p1);
 
-            Assert.Equal("Product0()", p0.ToString());
-            Assert.Equal("Product3(1, foo, null)", p1.ToString());
-            Assert.Equal("Product3(2, bar, Product3(1, foo, null))", p2.ToString());
+            Assert.Equivalent("Product0()", p0.ToString());
+            Assert.Equivalent("Product3(1, foo, null)", p1.ToString());
+            Assert.Equivalent("Product3(2, bar, Product3(1, foo, null))", p2.ToString());
         }
 
         [Fact]
@@ -36,8 +36,8 @@ namespace FuncSharp.Tests
         public void ConstructionPreservesValues()
         {
             var p1 = Product2.Create(42, "foo");
-            Assert.Equal(42, p1.ProductValue1);
-            Assert.Equal("foo", p1.ProductValue2);
+            Assert.Equivalent(42, p1.ProductValue1);
+            Assert.Equivalent("foo", p1.ProductValue2);
         }
 
         [Fact]
@@ -45,10 +45,10 @@ namespace FuncSharp.Tests
         {
             var p1 = Product3.Create("foo", 42, "bar");
             Assert.NotNull(p1.ProductValues);
-            Assert.Equal(3, p1.ProductValues.Count());
-            Assert.Equal("foo", p1.ProductValues.ElementAt(0));
-            Assert.Equal(42, p1.ProductValues.ElementAt(1));
-            Assert.Equal("bar", p1.ProductValues.ElementAt(2));
+            Assert.Equivalent(3, p1.ProductValues.Count());
+            Assert.Equivalent("foo", p1.ProductValues.ElementAt(0));
+            Assert.Equivalent(42, p1.ProductValues.ElementAt(1));
+            Assert.Equivalent("bar", p1.ProductValues.ElementAt(2));
         }
 
         [Fact]

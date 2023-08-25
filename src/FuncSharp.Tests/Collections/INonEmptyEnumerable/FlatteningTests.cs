@@ -15,7 +15,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var third = NonEmptyEnumerable.Create("7 potatoes", "8 potatoes", "9 potatoes");
             var fourth = NonEmptyEnumerable.Create("10 potatoes");
             var result = NonEmptyEnumerable.CreateFlat(first, second, third, fourth);
-            Assert.Equal(10, result.Count);
+            Assert.Equivalent(10, result.Count);
             Assert.Equivalent(expected, result);
         }
 
@@ -31,7 +31,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             INonEmptyEnumerable<INonEmptyEnumerable<string>> nestedEnumerable = NonEmptyEnumerable.Create(first, second, third, fourth);
             var result = nestedEnumerable.Flatten();
 
-            Assert.Equal(10, result.Count);
+            Assert.Equivalent(10, result.Count);
             Assert.Equivalent(expected, result);
             Assert.Equivalent(NonEmptyEnumerable.CreateFlat(first, second, third, fourth), result);
         }

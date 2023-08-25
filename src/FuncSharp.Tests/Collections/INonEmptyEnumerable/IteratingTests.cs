@@ -12,7 +12,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes");
 
             var result = nonEmpty.Select(text => text.Substring(0, 3));
-            Assert.Equal(5, result.Count);
+            Assert.Equivalent(5, result.Count);
             Assert.Equivalent(expected, result);
         }
 
@@ -23,7 +23,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes");
 
             var result = nonEmpty.Select((text, index) => $"{text.Substring(0, 3)}-{index}");
-            Assert.Equal(5, result.Count);
+            Assert.Equivalent(5, result.Count);
             Assert.Equivalent(expected, result);
         }
 
@@ -34,7 +34,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes");
 
             var result = nonEmpty.SelectMany(text => NonEmptyEnumerable.Create(text, "something else"));
-            Assert.Equal(10, result.Count);
+            Assert.Equivalent(10, result.Count);
             Assert.Equivalent(expected, result);
         }
 
@@ -50,7 +50,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
                 result.Add(text);
             }
 
-            Assert.Equal(5, result.Count);
+            Assert.Equivalent(5, result.Count);
             Assert.Equivalent(expected, result);
         }
     }

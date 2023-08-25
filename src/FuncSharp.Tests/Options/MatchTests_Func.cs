@@ -24,7 +24,7 @@ namespace FuncSharp.Tests.Options
                     return 2;
                 }
             );
-            Assert.Equal(28, result1);
+            Assert.Equivalent(28, result1);
 
             var result2 = Option.Empty<int>().Match(
                 v =>
@@ -34,7 +34,7 @@ namespace FuncSharp.Tests.Options
                 },
                 _ => 4
             );
-            Assert.Equal(4, result2);
+            Assert.Equivalent(4, result2);
         }
 
         [Property]
@@ -90,11 +90,11 @@ namespace FuncSharp.Tests.Options
 
             if (option.IsEmpty)
             {
-                Assert.Equal(otherwise, result);
+                Assert.Equivalent(otherwise, result);
             }
             else
             {
-                Assert.Equal(map(option.GetOrDefault()), result);
+                Assert.Equivalent(map(option.GetOrDefault()), result);
             }
         }
     }

@@ -30,13 +30,13 @@ namespace FuncSharp.Tests.Options
         [Property]
         internal void FlatMapOrder_int(IOption<int> first, IOption<int> second)
         {
-            Assert.Equal(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
+            Assert.Equivalent(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
         }
 
         [Property]
         internal void FlatMapOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
         {
-            Assert.Equal(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
+            Assert.Equivalent(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
         }
 
         [Property]
@@ -81,11 +81,11 @@ namespace FuncSharp.Tests.Options
             OptionAssert.IsEmpty(flatMapToEmptyResult);
 
             var flatMapResult = option.FlatMap(x => Option.Valued(map(x)));
-            Assert.Equal(option.IsEmpty, flatMapResult.IsEmpty);
+            Assert.Equivalent(option.IsEmpty, flatMapResult.IsEmpty);
 
             if (option.NonEmpty)
             {
-                Assert.Equal(map(option.GetOrDefault()), flatMapResult.GetOrDefault());
+                Assert.Equivalent(map(option.GetOrDefault()), flatMapResult.GetOrDefault());
             }
         }
     }

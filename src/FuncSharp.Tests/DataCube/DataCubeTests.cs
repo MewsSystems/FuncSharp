@@ -17,10 +17,10 @@ namespace FuncSharp.Tests
                 i => i.ToString()
             );
 
-            Assert.Equal(3, c2.Values.Count());
-            Assert.Equal("1", c2.Get(1, -1).Get());
-            Assert.Equal("2", c2.Get(2, -2).Get());
-            Assert.Equal("3", c2.Get(3, -3).Get());
+            Assert.Equivalent(3, c2.Values.Count());
+            Assert.Equivalent("1", c2.Get(1, -1).Get());
+            Assert.Equivalent("2", c2.Get(2, -2).Get());
+            Assert.Equivalent("3", c2.Get(3, -3).Get());
         }
 
         [Fact]
@@ -32,8 +32,8 @@ namespace FuncSharp.Tests
             c1.Set(2, "bar", 123);
 
             Assert.False(c1.IsEmpty);
-            Assert.Equal(42, c1.Get(1, "foo").Get());
-            Assert.Equal(123, c1.Get(2, "bar").Get());
+            Assert.Equivalent(42, c1.Get(1, "foo").Get());
+            Assert.Equivalent(123, c1.Get(2, "bar").Get());
 
             var c2 = new DataCube2<object, object, int>();
             var o1 = new object();
@@ -43,8 +43,8 @@ namespace FuncSharp.Tests
             c2.Set(o2, o1, 123);
 
             Assert.False(c2.IsEmpty);
-            Assert.Equal(42, c2.Get(o1, o2).Get());
-            Assert.Equal(123, c2.Get(o2, o1).Get());
+            Assert.Equivalent(42, c2.Get(o1, o2).Get());
+            Assert.Equivalent(123, c2.Get(o2, o1).Get());
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace FuncSharp.Tests
             Assert.Contains(Position2.Create(1, "foo"), c.Positions);
 
             c.Set(2, "bar", 123);
-            Assert.Equal(2, c.Positions.Count());
+            Assert.Equivalent(2, c.Positions.Count());
             Assert.Contains(Position2.Create(1, "foo"), c.Positions);
             Assert.Contains(Position2.Create(2, "bar"), c.Positions);
         }
@@ -82,7 +82,7 @@ namespace FuncSharp.Tests
             Assert.Contains(43, c.Values);
 
             c.Set(2, "bar", 123);
-            Assert.Equal(2, c.Values.Count());
+            Assert.Equivalent(2, c.Values.Count());
             Assert.Contains(43, c.Values);
             Assert.Contains(123, c.Values);
         }
@@ -101,18 +101,18 @@ namespace FuncSharp.Tests
             Assert.Contains("foo", c.Domain2);
 
             c.Set(2, "bar", 123);
-            Assert.Equal(2, c.Domain1.Count());
+            Assert.Equivalent(2, c.Domain1.Count());
             Assert.Contains(1, c.Domain1);
             Assert.Contains(2, c.Domain1);
-            Assert.Equal(2, c.Domain2.Count());
+            Assert.Equivalent(2, c.Domain2.Count());
             Assert.Contains("foo", c.Domain2);
             Assert.Contains("bar", c.Domain2);
 
             c.Set(1, "bar", -42);
-            Assert.Equal(2, c.Domain1.Count());
+            Assert.Equivalent(2, c.Domain1.Count());
             Assert.Contains(1, c.Domain1);
             Assert.Contains(2, c.Domain1);
-            Assert.Equal(2, c.Domain2.Count());
+            Assert.Equivalent(2, c.Domain2.Count());
             Assert.Contains("foo", c.Domain2);
             Assert.Contains("bar", c.Domain2);
         }
@@ -140,15 +140,15 @@ namespace FuncSharp.Tests
             var c = new DataCube2<int, string, int>();
             c.Set(1, "foo", 42);
 
-            Assert.Equal(42, c.GetOrElseSet(Position2.Create(1, "foo"), _ => 123));
-            Assert.Equal(42, c.Get(1, "foo").Get());
-            Assert.Equal(42, c.GetOrElseSet(1, "foo", _ => 123));
-            Assert.Equal(42, c.Get(1, "foo").Get());
+            Assert.Equivalent(42, c.GetOrElseSet(Position2.Create(1, "foo"), _ => 123));
+            Assert.Equivalent(42, c.Get(1, "foo").Get());
+            Assert.Equivalent(42, c.GetOrElseSet(1, "foo", _ => 123));
+            Assert.Equivalent(42, c.Get(1, "foo").Get());
 
-            Assert.Equal(123, c.GetOrElseSet(Position2.Create(2, "bar"), _ => 123));
-            Assert.Equal(123, c.Get(2, "bar").Get());
-            Assert.Equal(456, c.GetOrElseSet(3, "baz", _ => 456));
-            Assert.Equal(456, c.Get(3, "baz").Get());
+            Assert.Equivalent(123, c.GetOrElseSet(Position2.Create(2, "bar"), _ => 123));
+            Assert.Equivalent(123, c.Get(2, "bar").Get());
+            Assert.Equivalent(456, c.GetOrElseSet(3, "baz", _ => 456));
+            Assert.Equivalent(456, c.Get(3, "baz").Get());
         }
 
         [Fact]
@@ -161,7 +161,7 @@ namespace FuncSharp.Tests
                 Assert.True(false);
                 return 0;
             });
-            Assert.Equal(123, c.Get(2, "bar").Get());
+            Assert.Equivalent(123, c.Get(2, "bar").Get());
 
             var updateInvoked = false;
             c.Set(1, "foo", 42);
@@ -171,7 +171,7 @@ namespace FuncSharp.Tests
                 return a + b;
             });
             Assert.True(updateInvoked);
-            Assert.Equal(42 + 123, c.Get(1, "foo").Get());
+            Assert.Equivalent(42 + 123, c.Get(1, "foo").Get());
         }
 
         [Fact]
@@ -188,15 +188,15 @@ namespace FuncSharp.Tests
             c.Set(1, 1, 1, 40);
 
             var sum = c.Transform(_ => Position0.Create(), (a, b) => a + b);
-            Assert.Equal(1 + 2 + 3 + 4 + 10 + 20 + 30 + 40, sum.Value.Get());
+            Assert.Equivalent(1 + 2 + 3 + 4 + 10 + 20 + 30 + 40, sum.Value.Get());
 
             var Position = c.Transform(_ => Position0.Create(), (a, b) => a * b);
-            Assert.Equal(1 * 2 * 3 * 4 * 10 * 20 * 30 * 40, Position.Value.Get());
+            Assert.Equivalent(1 * 2 * 3 * 4 * 10 * 20 * 30 * 40, Position.Value.Get());
 
             var firstDimensionSums = c.Transform(p => Position1.Create(p.ProductValue1), (a, b) => a + b);
-            Assert.Equal(2, firstDimensionSums.Values.Count());
-            Assert.Equal(1 + 2 + 3 + 4, firstDimensionSums.Get(0).Get());
-            Assert.Equal(10 + 20 + 30 + 40, firstDimensionSums.Get(1).Get());
+            Assert.Equivalent(2, firstDimensionSums.Values.Count());
+            Assert.Equivalent(1 + 2 + 3 + 4, firstDimensionSums.Get(0).Get());
+            Assert.Equivalent(10 + 20 + 30 + 40, firstDimensionSums.Get(1).Get());
         }
 
         [Fact]
@@ -219,10 +219,10 @@ namespace FuncSharp.Tests
                 (a, b) => a + b
             );
 
-            Assert.Equal(1111, transformed.Get(0, 0).Get());
-            Assert.Equal(1010, transformed.Get(0, 1).Get());
-            Assert.Equal(1100, transformed.Get(1, 0).Get());
-            Assert.Equal(1000, transformed.Get(1, 1).Get());
+            Assert.Equivalent(1111, transformed.Get(0, 0).Get());
+            Assert.Equivalent(1010, transformed.Get(0, 1).Get());
+            Assert.Equivalent(1100, transformed.Get(1, 0).Get());
+            Assert.Equivalent(1000, transformed.Get(1, 1).Get());
         }
 
         [Fact]
@@ -239,16 +239,16 @@ namespace FuncSharp.Tests
             c.Set(1, 1, 1, 40);
 
             var withoutFirstDimension = c.RollUpDimension1((a, b) => a + b);
-            Assert.Equal(4, withoutFirstDimension.Values.Count());
-            Assert.Equal(1 + 10, withoutFirstDimension.Get(0, 0).Get());
-            Assert.Equal(2 + 20, withoutFirstDimension.Get(0, 1).Get());
-            Assert.Equal(3 + 30, withoutFirstDimension.Get(1, 0).Get());
-            Assert.Equal(4 + 40, withoutFirstDimension.Get(1, 1).Get());
+            Assert.Equivalent(4, withoutFirstDimension.Values.Count());
+            Assert.Equivalent(1 + 10, withoutFirstDimension.Get(0, 0).Get());
+            Assert.Equivalent(2 + 20, withoutFirstDimension.Get(0, 1).Get());
+            Assert.Equivalent(3 + 30, withoutFirstDimension.Get(1, 0).Get());
+            Assert.Equivalent(4 + 40, withoutFirstDimension.Get(1, 1).Get());
 
             var thirdDimension = withoutFirstDimension.RollUpDimension1((a, b) => a + b);
-            Assert.Equal(2, thirdDimension.Values.Count());
-            Assert.Equal(1 + 10 + 3 + 30, thirdDimension.Get(0).Get());
-            Assert.Equal(2 + 20 + 4 + 40, thirdDimension.Get(1).Get());
+            Assert.Equivalent(2, thirdDimension.Values.Count());
+            Assert.Equivalent(1 + 10 + 3 + 30, thirdDimension.Get(0).Get());
+            Assert.Equivalent(2 + 20 + 4 + 40, thirdDimension.Get(1).Get());
         }
 
         [Fact]
@@ -265,21 +265,21 @@ namespace FuncSharp.Tests
             c.Set(1, 1, 1, 40);
 
             var firstDimensionSlices = c.SliceDimension1();
-            Assert.Equal(2, firstDimensionSlices.Values.Count());
+            Assert.Equivalent(2, firstDimensionSlices.Values.Count());
 
             var zeroSlice = firstDimensionSlices.Get(0).Get();
-            Assert.Equal(4, zeroSlice.Values.Count());
-            Assert.Equal(1, zeroSlice.Get(0, 0).Get());
-            Assert.Equal(2, zeroSlice.Get(0, 1).Get());
-            Assert.Equal(3, zeroSlice.Get(1, 0).Get());
-            Assert.Equal(4, zeroSlice.Get(1, 1).Get());
+            Assert.Equivalent(4, zeroSlice.Values.Count());
+            Assert.Equivalent(1, zeroSlice.Get(0, 0).Get());
+            Assert.Equivalent(2, zeroSlice.Get(0, 1).Get());
+            Assert.Equivalent(3, zeroSlice.Get(1, 0).Get());
+            Assert.Equivalent(4, zeroSlice.Get(1, 1).Get());
 
             var oneSlice = firstDimensionSlices.Get(1).Get();
-            Assert.Equal(4, oneSlice.Values.Count());
-            Assert.Equal(10, oneSlice.Get(0, 0).Get());
-            Assert.Equal(20, oneSlice.Get(0, 1).Get());
-            Assert.Equal(30, oneSlice.Get(1, 0).Get());
-            Assert.Equal(40, oneSlice.Get(1, 1).Get());
+            Assert.Equivalent(4, oneSlice.Values.Count());
+            Assert.Equivalent(10, oneSlice.Get(0, 0).Get());
+            Assert.Equivalent(20, oneSlice.Get(0, 1).Get());
+            Assert.Equivalent(30, oneSlice.Get(1, 0).Get());
+            Assert.Equivalent(40, oneSlice.Get(1, 1).Get());
         }
     }
 }

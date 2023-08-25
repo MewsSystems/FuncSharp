@@ -19,11 +19,11 @@ namespace FuncSharp.Tests.Options
             var emptyOption = Option.Empty<object>();
             var valuedOption = Option.Create(Unit.Value);
 
-            Assert.Equal(42, valuedOption.GetOrDefault(_ => 42));
-            Assert.Equal("asd", valuedOption.GetOrDefault(_ => "asd"));
+            Assert.Equivalent(42, valuedOption.GetOrDefault(_ => 42));
+            Assert.Equivalent("asd", valuedOption.GetOrDefault(_ => "asd"));
             Assert.Null(valuedOption.GetOrDefault(_ => (string)null));
 
-            Assert.Equal(0, emptyOption.GetOrDefault(_ => 14));
+            Assert.Equivalent(0, emptyOption.GetOrDefault(_ => 14));
             Assert.Null(emptyOption.GetOrDefault<int?>(_ => 14));
             Assert.Null(emptyOption.GetOrDefault(_ => "asd"));
         }
@@ -64,9 +64,9 @@ namespace FuncSharp.Tests.Options
         private void AssertGetOrDefaultWithFunc<T, TResult>(T value, Func<T, TResult> map)
         {
             var option = Option.Valued(value);
-            Assert.Equal(map(value), option.GetOrDefault(map));
+            Assert.Equivalent(map(value), option.GetOrDefault(map));
 
-            Assert.Equal(default(TResult), Option.Empty<T>().GetOrDefault(map));
+            Assert.Equivalent(default(TResult), Option.Empty<T>().GetOrDefault(map));
         }
     }
 }

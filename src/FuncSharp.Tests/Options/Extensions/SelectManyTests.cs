@@ -36,14 +36,14 @@ namespace FuncSharp.Tests.Options
                 from z in 3.ToOption()
                 select x + y + z;
 
-            Assert.Equal(6.ToOption(), sum);
+            Assert.Equivalent(6.ToOption(), sum);
 
             var emptySum =
                 from x in 1.ToOption()
                 from y in Option.Empty<int>()
                 select x + y;
 
-            Assert.Equal(Option.Empty<int>(), emptySum);
+            Assert.Equivalent(Option.Empty<int>(), emptySum);
 
             var filteredSum =
                 from x in 1.ToOption()
@@ -51,19 +51,19 @@ namespace FuncSharp.Tests.Options
                 where x > 100
                 select x + y;
 
-            Assert.Equal(Option.Empty<int>(), filteredSum);
+            Assert.Equivalent(Option.Empty<int>(), filteredSum);
         }
 
         [Property]
         internal void SelectManyOrder_int(IOption<int> first, IOption<int> second)
         {
-            Assert.Equal(first.SelectMany(f => second.Select(s => (f, s))), second.SelectMany(s => first.Select(f => (f, s))));
+            Assert.Equivalent(first.SelectMany(f => second.Select(s => (f, s))), second.SelectMany(s => first.Select(f => (f, s))));
         }
 
         [Property]
         internal void SelectManyOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
         {
-            Assert.Equal(first.SelectMany(f => second.Select(s => (f, s))), second.SelectMany(s => first.Select(f => (f, s))));
+            Assert.Equivalent(first.SelectMany(f => second.Select(s => (f, s))), second.SelectMany(s => first.Select(f => (f, s))));
         }
 
         [Property]
@@ -105,30 +105,30 @@ namespace FuncSharp.Tests.Options
         private void AssertSelectManyResult<T, TResult>(IOption<T> option, Func<T, TResult> map)
         {
             // SelectMany should always be the same as FlatMap.
-            Assert.Equal(option.FlatMap(x => Option.Valued(map(x))), option.SelectMany(x => Option.Valued(map(x))));
+            Assert.Equivalent(option.FlatMap(x => Option.Valued(map(x))), option.SelectMany(x => Option.Valued(map(x))));
 
             var selectManyToEmptyResult = option.SelectMany(x => Option.Empty<T>());
             OptionAssert.IsEmpty(selectManyToEmptyResult);
 
             var selectManyResult = option.SelectMany(x => Option.Valued(map(x)));
-            Assert.Equal(option.IsEmpty, selectManyResult.IsEmpty);
+            Assert.Equivalent(option.IsEmpty, selectManyResult.IsEmpty);
 
             if (option.NonEmpty)
             {
-                Assert.Equal(map(option.GetOrDefault()), selectManyResult.GetOrDefault());
+                Assert.Equivalent(map(option.GetOrDefault()), selectManyResult.GetOrDefault());
             }
 
             var linqResult =
                 from x in option
                 from y in Option.Valued(map(x))
                 select y;
-            Assert.Equal(selectManyResult, linqResult);
+            Assert.Equivalent(selectManyResult, linqResult);
 
             var emptyLinqResult =
                 from x in option
                 from y in Option.Empty<T>()
                 select y;
-            Assert.Equal(selectManyToEmptyResult, emptyLinqResult);
+            Assert.Equivalent(selectManyToEmptyResult, emptyLinqResult);
         }
     }
 }

@@ -16,15 +16,15 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void OrElse()
         {
-            Assert.Equal(1.ToOption(), 1.ToOption().OrElse(_ => 2.ToOption()));
-            Assert.Equal(2.ToOption(), Option.Empty<int>().OrElse(_ => 2.ToOption()));
+            Assert.Equivalent(1.ToOption(), 1.ToOption().OrElse(_ => 2.ToOption()));
+            Assert.Equivalent(2.ToOption(), Option.Empty<int>().OrElse(_ => 2.ToOption()));
 
-            Assert.Equal("asd".ToOption(), "asd".ToOption().OrElse(_ => "123".ToOption()));
-            Assert.Equal("123".ToOption(), Option.Empty<string>().OrElse(_ => "123".ToOption()));
+            Assert.Equivalent("asd".ToOption(), "asd".ToOption().OrElse(_ => "123".ToOption()));
+            Assert.Equivalent("123".ToOption(), Option.Empty<string>().OrElse(_ => "123".ToOption()));
 
-            Assert.Equal(new ReferenceType(3).ToOption(), Option.Empty<ReferenceType>().OrElse(_ => new ReferenceType(3).ToOption()));
-            Assert.Equal(new ReferenceTypeBase(4).ToOption(), Option.Empty<ReferenceType>().OrElse(_ => new ReferenceTypeBase(4).ToOption()));
-            Assert.Equal(new ReferenceTypeBase(5).ToOption(), Option.Empty<ReferenceTypeBase>().OrElse(_ => new ReferenceTypeBase(5).ToOption()));
+            Assert.Equivalent(new ReferenceType(3).ToOption(), Option.Empty<ReferenceType>().OrElse(_ => new ReferenceType(3).ToOption()));
+            Assert.Equivalent(new ReferenceTypeBase(4).ToOption(), Option.Empty<ReferenceType>().OrElse(_ => new ReferenceTypeBase(4).ToOption()));
+            Assert.Equivalent(new ReferenceTypeBase(5).ToOption(), Option.Empty<ReferenceTypeBase>().OrElse(_ => new ReferenceTypeBase(5).ToOption()));
         }
 
         [Property]
@@ -70,11 +70,11 @@ namespace FuncSharp.Tests.Options
             var result = option.OrElse(otherwise);
             if (option.NonEmpty)
             {
-                Assert.Equal(option, result);
+                Assert.Equivalent(option, result);
             }
             else
             {
-                Assert.Equal(otherwise(Unit.Value), result);
+                Assert.Equivalent(otherwise(Unit.Value), result);
             }
         }
     }

@@ -15,15 +15,15 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void GetOrElse()
         {
-            Assert.Equal(1, 1.ToOption().GetOrElse(2));
-            Assert.Equal(2, Option.Empty<int>().GetOrElse(2));
+            Assert.Equivalent(1, 1.ToOption().GetOrElse(2));
+            Assert.Equivalent(2, Option.Empty<int>().GetOrElse(2));
 
-            Assert.Equal("asd", "asd".ToOption().GetOrElse("123"));
-            Assert.Equal("123", Option.Empty<string>().GetOrElse("123"));
+            Assert.Equivalent("asd", "asd".ToOption().GetOrElse("123"));
+            Assert.Equivalent("123", Option.Empty<string>().GetOrElse("123"));
 
-            Assert.Equal(new ReferenceType(3), Option.Empty<ReferenceType>().GetOrElse(new ReferenceType(3)));
-            Assert.Equal(new ReferenceTypeBase(4), Option.Empty<ReferenceType>().GetOrElse(new ReferenceTypeBase(4)));
-            Assert.Equal(new ReferenceTypeBase(5), Option.Empty<ReferenceTypeBase>().GetOrElse(new ReferenceTypeBase(5)));
+            Assert.Equivalent(new ReferenceType(3), Option.Empty<ReferenceType>().GetOrElse(new ReferenceType(3)));
+            Assert.Equivalent(new ReferenceTypeBase(4), Option.Empty<ReferenceType>().GetOrElse(new ReferenceTypeBase(4)));
+            Assert.Equivalent(new ReferenceTypeBase(5), Option.Empty<ReferenceTypeBase>().GetOrElse(new ReferenceTypeBase(5)));
         }
 
         [Property]
@@ -69,11 +69,11 @@ namespace FuncSharp.Tests.Options
             var result = option.GetOrElse(otherwise);
             if (option.NonEmpty)
             {
-                Assert.Equal(option.Get(), result);
+                Assert.Equivalent(option.Get(), result);
             }
             else
             {
-                Assert.Equal(otherwise, result);
+                Assert.Equivalent(otherwise, result);
             }
         }
     }

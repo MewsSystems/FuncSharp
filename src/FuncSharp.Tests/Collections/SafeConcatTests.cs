@@ -14,7 +14,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes" };
             var result = "1 potato".ToEnumerable().SafeConcat("2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes").ToArray();
 
-            Assert.Equal(5, result.Length);
+            Assert.Equivalent(5, result.Length);
             Assert.Equivalent(expected, result);
         }
 
@@ -24,7 +24,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes" };
             var result = NullEnumerable.SafeConcat("2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes").ToArray();
 
-            Assert.Equal(4, result.Length);
+            Assert.Equivalent(4, result.Length);
             Assert.Equivalent(expected, result);
         }
 
@@ -34,7 +34,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes" };
             var nonEmpty = "1 potato".ToEnumerable().SafeConcat(new List<string> { "2 potatoes", "3 potatoes" }, new List<string> { "4 potatoes", "5 potatoes" }).ToArray();
 
-            Assert.Equal(5, nonEmpty.Length);
+            Assert.Equivalent(5, nonEmpty.Length);
             Assert.Equivalent(expected, nonEmpty);
         }
 
@@ -44,7 +44,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "4 potatoes", "5 potatoes" };
             var nonEmpty = NullEnumerable.SafeConcat(NullEnumerable, new List<string> { "4 potatoes", "5 potatoes" }, NullEnumerable).ToArray();
 
-            Assert.Equal(2, nonEmpty.Length);
+            Assert.Equivalent(2, nonEmpty.Length);
             Assert.Equivalent(expected, nonEmpty);
         }
     }

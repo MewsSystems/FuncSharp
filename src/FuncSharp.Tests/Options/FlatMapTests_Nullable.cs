@@ -65,11 +65,11 @@ namespace FuncSharp.Tests.Options
             OptionAssert.IsEmpty(flatMapToNull);
 
             var flatMapResult = option.FlatMap(x => map(x));
-            Assert.Equal(option.IsEmpty, flatMapResult.IsEmpty);
+            Assert.Equivalent(option.IsEmpty, flatMapResult.IsEmpty);
 
             if (option.NonEmpty)
             {
-                Assert.Equal(map(option.GetOrDefault()).Value, flatMapResult.GetOrDefault());
+                Assert.Equivalent(map(option.GetOrDefault()).Value, flatMapResult.GetOrDefault());
             }
         }
     }
