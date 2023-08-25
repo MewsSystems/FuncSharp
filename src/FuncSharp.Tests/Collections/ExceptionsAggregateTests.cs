@@ -5,10 +5,25 @@ using Xunit;
 
 namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 {
-    public class CustomException : Exception
+    public class CustomException : Exception, IEquatable<CustomException>
     {
         public CustomException(string message) : base(message)
         {
+        }
+
+        public bool Equals(CustomException other)
+        {
+            return other is not null && other.Message.SafeEquals(Message);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as CustomException);
+        }
+
+        public override int GetHashCode()
+        {
+            return Message.GetHashCode();
         }
     }
 
@@ -45,9 +60,14 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             CustomException[] array = Enumerable.Range(0, 10).Select(i => new CustomException($"{i} potatoes")).ToArray();
             INonEmptyEnumerable<Exception> nonEmpty = array.AsNonEmpty().Get();
 
-            OptionAssert.NonEmptyWithValue(new AggregateException(array), enumerable.Aggregate());
-            OptionAssert.NonEmptyWithValue(new AggregateException(array), array.Aggregate());
-            Assert.Equal(new AggregateException(array), nonEmpty.Aggregate());
+            OptionAssert.NonEmpty(enumerable.Aggregate());
+            Assert.Equal(array, ((AggregateException)enumerable.Aggregate().Get()).InnerExceptions);
+
+            OptionAssert.NonEmpty(array.Aggregate());
+            Assert.Equal(array, ((AggregateException)array.Aggregate().Get()).InnerExceptions);
+
+            Assert.NotNull(nonEmpty.Aggregate());
+            Assert.Equal(array, ((AggregateException)nonEmpty.Aggregate()).InnerExceptions);
         }
     }
 }
