@@ -5,26 +5,12 @@ using Xunit;
 
 namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 {
-    public class CustomException : Exception, IEquatable<CustomException>
+    public class CustomException : Exception
     {
-        public CustomException(string message) : base(message)
-        {
-        }
-
-        public bool Equals(CustomException other)
-        {
-            return other is not null && other.Message.SafeEquals(Message);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as CustomException);
-        }
-
-        public override int GetHashCode()
-        {
-            return Message.GetHashCode();
-        }
+        public CustomException(string message) : base(message) { }
+        public bool Equals(CustomException other) => other is not null && other.Message.SafeEquals(Message);
+        public override bool Equals(object obj) => Equals(obj as CustomException);
+        public override int GetHashCode() => Message.GetHashCode();
     }
 
     public class ExceptionsAggregateTests
