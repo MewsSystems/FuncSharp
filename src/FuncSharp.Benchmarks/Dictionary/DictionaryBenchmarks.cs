@@ -23,7 +23,7 @@ namespace FuncSharp.Benchmarks
         }
 
         [Benchmark]
-        public void Get_InValid()
+        public void Get_Invalid()
         {
             var x = Dictionary.Get(-14);
         }
