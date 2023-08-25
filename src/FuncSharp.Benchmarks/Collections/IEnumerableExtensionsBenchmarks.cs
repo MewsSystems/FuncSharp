@@ -92,27 +92,51 @@ namespace FuncSharp.Benchmarks
         // }
 
         [Benchmark]
-        public void NonEmpty_EnumeratedEnumerable()
+        public void IsMultiple_Stack()
         {
-            var x = StringStack_Many.Third();
+            var x = StringStack_Many.IsMultiple();
         }
 
         [Benchmark]
-        public void NonEmpty_Enumerable()
+        public void IsMultiple_Enumerable()
         {
-            var x = StringEnumerable.Third();
+            var x = StringEnumerable.IsMultiple();
         }
 
         [Benchmark]
-        public void NonEmpty_ArrayAsEnumerable()
+        public void IsMultiple_ArrayAsEnumerable()
         {
-            var x = StringEnumerable_Array.Third();
+            var x = StringEnumerable_Array.IsMultiple();
         }
 
         [Benchmark]
-        public void NonEmpty_Array()
+        public void IsMultiple_Array()
         {
-            var x = StringArray.Third();
+            var x = StringArray.IsMultiple();
+        }
+
+        [Benchmark]
+        public void IsSingle_Stack()
+        {
+            var x = StringStack_Many.IsSingle();
+        }
+
+        [Benchmark]
+        public void IsSingle_Enumerable()
+        {
+            var x = StringEnumerable.IsSingle();
+        }
+
+        [Benchmark]
+        public void IsSingle_ArrayAsEnumerable()
+        {
+            var x = StringEnumerable_Array.IsSingle();
+        }
+
+        [Benchmark]
+        public void IsSingle_Array()
+        {
+            var x = StringArray.IsSingle();
         }
     }
 }

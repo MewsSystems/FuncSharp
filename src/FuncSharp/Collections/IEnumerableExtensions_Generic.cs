@@ -73,24 +73,50 @@ namespace FuncSharp
             return e.Where(v => v is not null);
         }
 
-        public static bool NonEmpty<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
+        public static bool NonEmpty<T>(this IEnumerable<T> e)
         {
             return e is not null && e.Any();
         }
 
-        public static bool IsEmpty<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
+        public static bool IsEmpty<T>(this IEnumerable<T> e)
         {
             return !e.NonEmpty();
         }
 
-        public static bool IsMultiple<T>(this IEnumerable<T> e) // TODO - try using Enumerator, also Check IReadonlyList
+        public static bool IsMultiple<T>(this IEnumerable<T> e)
         {
-            return e is not null && e.Take(2).Count().SafeEquals(2);
+            switch (e)
+            {
+                case null:
+                    return false;
+                case IReadOnlyCollection<T> c1:
+                    return c1.Count > 1;
+                case ICollection<T> c2:
+                    return c2.Count > 1;
+                default:
+                {
+                    using var enumerator = e.GetEnumerator();
+                    return enumerator.MoveNext() && enumerator.MoveNext();
+                }
+            }
         }
 
-        public static bool IsSingle<T>(this IEnumerable<T> e) // TODO - try using Enumerator, also Check IReadonlyList
+        public static bool IsSingle<T>(this IEnumerable<T> e)
         {
-            return e is not null && e.Take(2).Count().SafeEquals(1);
+            switch (e)
+            {
+                case null:
+                    return false;
+                case IReadOnlyCollection<T> c1:
+                    return c1.Count == 1;
+                case ICollection<T> c2:
+                    return c2.Count == 1;
+                default:
+                {
+                    using var enumerator = e.GetEnumerator();
+                    return enumerator.MoveNext() && !enumerator.MoveNext();
+                }
+            }
         }
 
         public static T Second<T>(this IEnumerable<T> e)
