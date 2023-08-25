@@ -31,108 +31,126 @@ namespace FuncSharp.Benchmarks
             ArrayOfOptions = 0.ToOption().Concat(Enumerable.Range(1, 1000).Select(i => i.ToOption()), Enumerable.Repeat(Option.Empty<int>(), 1000)).OrderBy(x => Guid.NewGuid()).ToArray(); // randomized order
         }
 
-        // [Benchmark]
-        // public void SafeConcat_ParamsOfEnumerables()
-        // {
-        //     var x = StringArray.SafeConcat(StringArray, null, null, null, StringArray, null, null, null);
-        // }
-        //
-        // [Benchmark]
-        // public void SafeConcat_ParamsOfEnumerables_Enumerated()
-        // {
-        //     var x = StringArray.SafeConcat(StringArray, null, null, null, StringArray, null, null, null).ToArray();
-        // }
-        //
-        // [Benchmark]
-        // public void ExceptNulls_Nullable()
-        // {
-        //     var x = ArrayOfNullables.ExceptNulls();
-        // }
-        //
-        // [Benchmark]
-        // public void ExceptNulls_Nullable_Enumerated()
-        // {
-        //     var x = ArrayOfNullables.ExceptNulls().ToArray();
-        // }
-        //
-        // [Benchmark]
-        // public void Options_Flatten()
-        // {
-        //     var x = ArrayOfOptions.Flatten();
-        // }
-        //
-        // [Benchmark]
-        // public void Options_Flatten_Enumerated()
-        // {
-        //     var x = ArrayOfOptions.Flatten().ToArray();
-        // }
-        //
-        // [Benchmark]
-        // public void FirstOption()
-        // {
-        //     var x = StringEnumerable.FirstOption();
-        // }
-        //
-        // [Benchmark]
-        // public void SingleOption_Empty()
-        // {
-        //     var x = StringStack_Empty.SingleOption();
-        // }
-        //
-        // [Benchmark]
-        // public void SingleOption_Single()
-        // {
-        //     var x = StringStack_Single.SingleOption();
-        // }
-        //
-        // [Benchmark]
-        // public void SingleOption()
-        // {
-        //     var x = StringStack_Many.SingleOption();
-        // }
+        // Last Result - 25.8.2023 - 24.4 ns - 208 B
+        [Benchmark]
+        public void SafeConcat_ParamsOfEnumerables()
+        {
+            var x = StringArray.SafeConcat(StringArray, null, null, null, StringArray, null, null, null);
+        }
 
+        // Last Result - 25.8.2023 - 33823 ns - 81592 B
+        [Benchmark]
+        public void SafeConcat_ParamsOfEnumerables_Enumerated()
+        {
+            var x = StringArray.SafeConcat(StringArray, null, null, null, StringArray, null, null, null).ToArray();
+        }
+
+        // Last Result - 25.8.2023 - 21 ns - 104 B
+        [Benchmark]
+        public void ExceptNulls_Nullable()
+        {
+            var x = ArrayOfNullables.ExceptNulls();
+        }
+
+        // Last Result - 25.8.2023 - 13462 ns - 8608 B
+        [Benchmark]
+        public void ExceptNulls_Nullable_Enumerated()
+        {
+            var x = ArrayOfNullables.ExceptNulls().ToArray();
+        }
+
+        // Last Result - 25.8.2023 - 22 ns - 104 B
+        [Benchmark]
+        public void Options_Flatten()
+        {
+            var x = ArrayOfOptions.Flatten();
+        }
+
+        // Last Result - 25.8.2023 - 8666 ns - 8608 B
+        [Benchmark]
+        public void Options_Flatten_Enumerated()
+        {
+            var x = ArrayOfOptions.Flatten().ToArray();
+        }
+
+        // Last Result - 25.8.2023 - 35.1 ns - 128 B
+        [Benchmark]
+        public void FirstOption()
+        {
+            var x = StringEnumerable.FirstOption();
+        }
+
+        // Last Result - 25.8.2023 - 14.6 ns - 40 B
+        [Benchmark]
+        public void SingleOption_Empty()
+        {
+            var x = StringStack_Empty.SingleOption();
+        }
+
+        // Last Result - 25.8.2023 - 23.6 ns - 72 B
+        [Benchmark]
+        public void SingleOption_Single()
+        {
+            var x = StringStack_Single.SingleOption();
+        }
+
+        // Last Result - 25.8.2023 - 22.0 ns - 40 B
+        [Benchmark]
+        public void SingleOption()
+        {
+            var x = StringStack_Many.SingleOption();
+        }
+
+        // Last Result - 25.8.2023 - 1.4 ns - 0 B
         [Benchmark]
         public void IsMultiple_Stack()
         {
             var x = StringStack_Many.IsMultiple();
         }
 
+        // Last Result - 25.8.2023 - 53.8 ns - 144 B
         [Benchmark]
         public void IsMultiple_Enumerable()
         {
             var x = StringEnumerable.IsMultiple();
         }
 
+        // Last Result - 25.8.2023 - 6.9 ns - 0 B
         [Benchmark]
         public void IsMultiple_ArrayAsEnumerable()
         {
             var x = StringEnumerable_Array.IsMultiple();
         }
 
+        // Last Result - 25.8.2023 - 2.2 ns - 0 B
         [Benchmark]
         public void IsMultiple_Array()
         {
             var x = StringArray.IsMultiple();
         }
 
+        // Last Result - 25.8.2023 - 1.4 ns - 0 B
         [Benchmark]
         public void IsSingle_Stack()
         {
             var x = StringStack_Many.IsSingle();
         }
 
+        // Last Result - 25.8.2023 - 54.2 ns - 144 B
         [Benchmark]
         public void IsSingle_Enumerable()
         {
             var x = StringEnumerable.IsSingle();
         }
 
+        // Last Result - 25.8.2023 - 7.0 ns - 0 B
         [Benchmark]
         public void IsSingle_ArrayAsEnumerable()
         {
             var x = StringEnumerable_Array.IsSingle();
         }
 
+        // Last Result - 25.8.2023 - 2.2 ns - 0 B
         [Benchmark]
         public void IsSingle_Array()
         {
