@@ -63,22 +63,22 @@ public static partial class IEnumerableExtensions
     [Pure]
     public static T Second<T>(this IReadOnlyList<T> list)
     {
-        return list.ElementAt(1);
+        return list[1];
     }
 
     public static T Third<T>(this IReadOnlyList<T> list)
     {
-        return list.ElementAt(2);
+        return list[2];
     }
 
     public static T Fourth<T>(this IReadOnlyList<T> list)
     {
-        return list.ElementAt(3);
+        return list[3];
     }
 
     public static T Fifth<T>(this IReadOnlyList<T> list)
     {
-        return list.ElementAt(4);
+        return list[4];
     }
 
     [Pure]
