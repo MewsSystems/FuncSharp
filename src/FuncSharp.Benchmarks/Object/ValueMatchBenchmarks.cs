@@ -5,11 +5,11 @@ namespace FuncSharp.Benchmarks
     [MemoryDiagnoser]
     public class ValueMatchBenchmarks
     {
-        private static readonly TestEnum Value3;
+        private static readonly BenchmarkEnum Value3;
 
         static ValueMatchBenchmarks()
         {
-            Value3 = TestEnum.Value3;
+            Value3 = BenchmarkEnum.Value3;
         }
 
         // Last Result - 22.8.2023 - 17.3 ns - 144 B
@@ -17,11 +17,11 @@ namespace FuncSharp.Benchmarks
         public void ValueMatchWith5LambdasAndDefault()
         {
             var number = Value3.Match(
-                TestEnum.Value1, _ => 1,
-                TestEnum.Value2, _ => 2,
-                TestEnum.Value3, _ => 3,
-                TestEnum.Value4, _ => 4,
-                TestEnum.Value5, _ => 5,
+                BenchmarkEnum.Value1, _ => 1,
+                BenchmarkEnum.Value2, _ => 2,
+                BenchmarkEnum.Value3, _ => 3,
+                BenchmarkEnum.Value4, _ => 4,
+                BenchmarkEnum.Value5, _ => 5,
                 _ => 14
             );
         }
@@ -31,11 +31,11 @@ namespace FuncSharp.Benchmarks
         public void ValueMatchWith5Lambdas()
         {
             var number = Value3.Match(
-                TestEnum.Value1, _ => 1,
-                TestEnum.Value2, _ => 2,
-                TestEnum.Value3, _ => 3,
-                TestEnum.Value4, _ => 4,
-                TestEnum.Value5, _ => 5
+                BenchmarkEnum.Value1, _ => 1,
+                BenchmarkEnum.Value2, _ => 2,
+                BenchmarkEnum.Value3, _ => 3,
+                BenchmarkEnum.Value4, _ => 4,
+                BenchmarkEnum.Value5, _ => 5
             );
         }
 
@@ -44,9 +44,9 @@ namespace FuncSharp.Benchmarks
         public void ValueMatchWith3Lambdas()
         {
             var number = Value3.Match(
-                TestEnum.Value1, _ => 3,
-                TestEnum.Value2, _ => 3,
-                TestEnum.Value3, _ => 3
+                BenchmarkEnum.Value1, _ => 3,
+                BenchmarkEnum.Value2, _ => 3,
+                BenchmarkEnum.Value3, _ => 3
             );
         }
 
@@ -55,9 +55,9 @@ namespace FuncSharp.Benchmarks
         public void ValueMatchWith3Lambdas_ButTheFirstOneHits()
         {
             var number = Value3.Match(
-                TestEnum.Value3, _ => 3,
-                TestEnum.Value4, _ => 4,
-                TestEnum.Value5, _ => 5
+                BenchmarkEnum.Value3, _ => 3,
+                BenchmarkEnum.Value4, _ => 4,
+                BenchmarkEnum.Value5, _ => 5
             );
         }
 
@@ -66,7 +66,7 @@ namespace FuncSharp.Benchmarks
         public void ValueMatchWith1Lambda()
         {
             var number = Value3.Match(
-                TestEnum.Value3, _ => 3
+                BenchmarkEnum.Value3, _ => 3
             );
         }
 
@@ -76,11 +76,11 @@ namespace FuncSharp.Benchmarks
         {
             int number = Value3 switch
             {
-                TestEnum.Value1 => 1,
-                TestEnum.Value2 => 2,
-                TestEnum.Value3 => 3,
-                TestEnum.Value4 => 4,
-                TestEnum.Value5 => 5,
+                BenchmarkEnum.Value1 => 1,
+                BenchmarkEnum.Value2 => 2,
+                BenchmarkEnum.Value3 => 3,
+                BenchmarkEnum.Value4 => 4,
+                BenchmarkEnum.Value5 => 5,
                 _ => 14
             };
         }

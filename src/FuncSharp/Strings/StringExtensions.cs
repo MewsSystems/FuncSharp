@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace FuncSharp
@@ -8,80 +9,123 @@ namespace FuncSharp
         /// <summary>
         /// Returns a type-safe option of NonEmptyString in case the string is not empty nor whitespace.
         /// </summary>
+        [Pure]
         public static IOption<NonEmptyString> AsNonEmpty(this string s)
         {
             return NonEmptyString.Create(s);
         }
 
+        [Pure]
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, byte>(Byte.TryParse, s, style, format);
+            return Byte.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<byte>();
         }
 
+        [Pure]
         public static IOption<short> ToShort(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, short>(Int16.TryParse, s, style, format);
+            return Int16.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<short>();
         }
 
+        [Pure]
         public static IOption<int> ToInt(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, int>(Int32.TryParse, s, style, format);
+            return Int32.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<int>();
         }
 
+        [Pure]
         public static IOption<long> ToLong(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, long>(Int64.TryParse, s, style, format);
+            return Int64.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<long>();
         }
 
+        [Pure]
         public static IOption<float> ToFloat(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, float>(Single.TryParse, s, style, format);
+            return Single.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<float>();
         }
 
+        [Pure]
         public static IOption<double> ToDouble(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, double>(Double.TryParse, s, style, format);
+            return Double.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<double>();
         }
 
+        [Pure]
         public static IOption<decimal> ToDecimal(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
-            return Tryer.Invoke<string, NumberStyles, IFormatProvider, decimal>(Decimal.TryParse, s, style, format);
+            return Decimal.TryParse(s, style, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<decimal>();
         }
 
+        [Pure]
         public static IOption<bool> ToBool(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
-            return Tryer.Invoke<string, bool>(Boolean.TryParse, s);
+            return Boolean.TryParse(s, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<bool>();
         }
 
+        [Pure]
         public static IOption<DateTime> ToDateTime(this string s, IFormatProvider format = null, DateTimeStyles style = DateTimeStyles.None)
         {
-            return Tryer.Invoke<string, IFormatProvider, DateTimeStyles, DateTime>(DateTime.TryParse, s, format, style);
+            return DateTime.TryParse(s, format, style, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<DateTime>();
         }
 
+        [Pure]
         public static IOption<TimeSpan> ToTimeSpan(this string s, IFormatProvider format = null)
         {
-            return Tryer.Invoke<string, IFormatProvider, TimeSpan>(TimeSpan.TryParse, s, format);
+            return TimeSpan.TryParse(s, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<TimeSpan>();
         }
 
+        [Pure]
         public static IOption<TEnum> ToEnum<TEnum>(this string s, bool ignoreCase = false)
             where TEnum : struct
         {
-            if (s == null || s.Contains(","))
+            if (s == null || s.Contains(",") || !Enum.TryParse<TEnum>(s, ignoreCase, out var value))
             {
                 return Option.Empty<TEnum>();
             }
-            var enumValue = Tryer.Invoke<string, bool, TEnum>(Enum.TryParse<TEnum>, s, ignoreCase);
-            return enumValue.Where(v => Enum.IsDefined(typeof(TEnum), v) && v.ToString().Equals(s, StringComparison.InvariantCultureIgnoreCase));
+
+            if (!Enum.IsDefined(typeof(TEnum), value) || !value.ToString().Equals(s, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return Option.Empty<TEnum>();
+            }
+
+            return Option.Valued(value);
         }
 
+        [Pure]
         public static IOption<Guid> ToGuid(this string s)
         {
-            return Tryer.Invoke<string, Guid>(Guid.TryParse, s);
+            return Guid.TryParse(s, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<Guid>();
         }
 
+        [Pure]
         public static IOption<Guid> ToGuidExact(this string s, string format = "D")
         {
-            return Tryer.Invoke<string, string, Guid>(Guid.TryParseExact, s, format);
+            return Guid.TryParseExact(s, format, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<Guid>();
         }
     }
 }
