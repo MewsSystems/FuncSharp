@@ -15,7 +15,7 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void GetOrNull()
         {
-            Assert.Equivalent(new ReferenceType(14), new ReferenceType(14).ToOption().GetOrNull());
+            Assert.Equal(new ReferenceType(14), new ReferenceType(14).ToOption().GetOrNull());
             Assert.Null(Option.Valued<ReferenceType>(null).GetOrNull());
             Assert.Null(Option.Empty<ReferenceType>().GetOrNull());
         }
@@ -33,7 +33,7 @@ namespace FuncSharp.Tests.Options
             if (option.NonEmpty)
             {
                 Assert.NotNull(result);
-                Assert.Equivalent(option.GetOrDefault(), result);
+                Assert.Equal(option.GetOrDefault(), result);
             }
             else
             {

@@ -32,12 +32,12 @@ namespace FuncSharp.Tests
                 Product2.Create(2, true),
                 Product2.Create(3, false)
             );
-            Assert.Equivalent(3, m.Domain.Count());
+            Assert.Equal(3, m.Domain.Count());
             Assert.Contains(1, m.Domain);
             Assert.Contains(2, m.Domain);
             Assert.Contains(3, m.Domain);
 
-            Assert.Equivalent(2, m.Range.Count());
+            Assert.Equal(2, m.Range.Count());
             Assert.Contains(true, m.Range);
             Assert.Contains(false, m.Range);
         }
@@ -50,9 +50,9 @@ namespace FuncSharp.Tests
                 Product2.Create("bar", 456),
                 Product2.Create("baz", 789)
             );
-            Assert.Equivalent(123.ToOption(), m.Apply("foo"));
-            Assert.Equivalent(456.ToOption(), m.Apply("bar"));
-            Assert.Equivalent(789.ToOption(), m.Apply("baz"));
+            Assert.Equal(123.ToOption(), m.Apply("foo"));
+            Assert.Equal(456.ToOption(), m.Apply("bar"));
+            Assert.Equal(789.ToOption(), m.Apply("baz"));
             Assert.True(m.Apply("xyz").IsEmpty);
         }
 
@@ -64,11 +64,11 @@ namespace FuncSharp.Tests
                 Product2.Create(1, true)
             );
 
-            Assert.Equivalent(false.ToOption(), m.Apply(0));
-            Assert.Equivalent(true.ToOption(), m.Apply(1));
+            Assert.Equal(false.ToOption(), m.Apply(0));
+            Assert.Equal(true.ToOption(), m.Apply(1));
 
-            Assert.Equivalent(0.ToOption(), m.Inverse.Apply(false));
-            Assert.Equivalent(1.ToOption(), m.Inverse.Apply(true));
+            Assert.Equal(0.ToOption(), m.Inverse.Apply(false));
+            Assert.Equal(1.ToOption(), m.Inverse.Apply(true));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FuncSharp.Tests.Options
         [Property]
         internal void GetOrFalse_bool(IOption<bool> option)
         {
-            Assert.Equivalent(option.GetOrDefault(), option.GetOrFalse());
+            Assert.Equal(option.GetOrDefault(), option.GetOrFalse());
         }
     }
 }

@@ -70,7 +70,7 @@ namespace FuncSharp.Tests.Options
         private void AssertMapEmpty<T, TResult>(IOption<T> option, Func<Unit, TResult> map)
         {
             var result = option.MapEmpty(map);
-            Assert.Equivalent(option.NonEmpty, result.IsEmpty);
+            Assert.Equal(option.NonEmpty, result.IsEmpty);
             if (option.IsEmpty)
             {
                 OptionAssert.NonEmptyWithValue(map(Unit.Value), result);

@@ -47,7 +47,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 
             OptionAssert.NonEmptyWithValue(new AggregateException(array), enumerable.Aggregate());
             OptionAssert.NonEmptyWithValue(new AggregateException(array), array.Aggregate());
-            Assert.Equivalent(new AggregateException(array), nonEmpty.Aggregate());
+            Assert.Equal(new AggregateException(array), nonEmpty.Aggregate());
         }
     }
 }

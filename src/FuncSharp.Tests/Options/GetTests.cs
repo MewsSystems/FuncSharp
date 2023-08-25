@@ -16,8 +16,8 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void Get()
         {
-            Assert.Equivalent(42, 42.ToOption().Get());
-            Assert.Equivalent(42, (42 as int?).ToOption().Get());
+            Assert.Equal(42, 42.ToOption().Get());
+            Assert.Equal(42, (42 as int?).ToOption().Get());
             Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get());
             Assert.Throws<NullReferenceException>(() => Option.Empty<int>().Get(otherwise: _ => new NullReferenceException()));
         }
@@ -69,7 +69,7 @@ namespace FuncSharp.Tests.Options
             {
                 var result = option.Get(otherwise);
                 Assert.NotNull(result);
-                Assert.Equivalent(option.GetOrDefault(), result);
+                Assert.Equal(option.GetOrDefault(), result);
             }
             else
             {

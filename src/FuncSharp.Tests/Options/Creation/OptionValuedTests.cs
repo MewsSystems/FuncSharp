@@ -83,7 +83,7 @@ namespace FuncSharp.Tests.Options
         {
             var option = Option.Valued(value);
             Assert.True(option.NonEmpty);
-            Assert.Equivalent(value, option.Get());
+            Assert.Equal(value, option.Get());
         }
     }
 }

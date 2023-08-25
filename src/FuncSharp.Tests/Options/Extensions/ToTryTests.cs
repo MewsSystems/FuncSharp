@@ -17,23 +17,23 @@ namespace FuncSharp.Tests.Options
         {
             var success1 = 42.ToOption().ToTry(_ => "Error");
             Assert.True(success1.IsSuccess);
-            Assert.Equivalent(Option.Valued(42), success1.Success);
-            Assert.Equivalent(Option.Empty<string>(), success1.Error);
+            Assert.Equal(Option.Valued(42), success1.Success);
+            Assert.Equal(Option.Empty<string>(), success1.Error);
 
             var error1 = Option.Empty<int>().ToTry(_ => "Error");
             Assert.True(error1.IsError);
-            Assert.Equivalent(Option.Empty<int>(), error1.Success);
-            Assert.Equivalent(Option.Valued("Error"), error1.Error);
+            Assert.Equal(Option.Empty<int>(), error1.Success);
+            Assert.Equal(Option.Valued("Error"), error1.Error);
 
             var success2 = new ReferenceType(2).ToOption().ToTry(_ => "Error");
             Assert.True(success2.IsSuccess);
-            Assert.Equivalent(Option.Valued(new ReferenceType(2)), success2.Success);
-            Assert.Equivalent(Option.Empty<string>(), success2.Error);
+            Assert.Equal(Option.Valued(new ReferenceType(2)), success2.Success);
+            Assert.Equal(Option.Empty<string>(), success2.Error);
 
             var error2 = Option.Empty<ReferenceType>().ToTry(_ => "Error 2");
             Assert.True(error2.IsError);
-            Assert.Equivalent(Option.Empty<ReferenceType>(), error2.Success);
-            Assert.Equivalent(Option.Valued("Error 2"), error2.Error);
+            Assert.Equal(Option.Empty<ReferenceType>(), error2.Success);
+            Assert.Equal(Option.Valued("Error 2"), error2.Error);
         }
 
         [Property]
@@ -71,9 +71,9 @@ namespace FuncSharp.Tests.Options
             const string errorMessage = "Error message";
             var result = option.ToTry(_ => errorMessage);
 
-            Assert.Equivalent(option.NonEmpty, result.IsSuccess);
-            Assert.Equivalent(option.IsEmpty, result.IsError);
-            Assert.Equivalent(option, result.Success);
+            Assert.Equal(option.NonEmpty, result.IsSuccess);
+            Assert.Equal(option.IsEmpty, result.IsError);
+            Assert.Equal(option, result.Success);
 
             if (option.NonEmpty)
             {

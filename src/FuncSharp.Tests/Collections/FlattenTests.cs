@@ -13,8 +13,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var list = new List<IOption<string>> { Option.Empty<string>(), "1 potato".ToOption(), Option.Empty<string>(), "2 potatoes".ToOption(), Option.Empty<string>() };
             var result = list.Flatten().ToArray();
 
-            Assert.Equivalent(2, result.Length);
-            Assert.Equivalent(new [] { "1 potato", "2 potatoes" }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new [] { "1 potato", "2 potatoes" }, result);
         }
     }
 }

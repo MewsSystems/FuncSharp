@@ -41,8 +41,8 @@ namespace FuncSharp.Tests
         [Fact]
         public void Order()
         {
-            Assert.Equivalent(new[] { 1, 3, 5, 7, 11 }, P.Order(new[] { 7, 11, 3, 5, 1 }));
-            Assert.Equivalent(new[] { 11, 7, 5, 3, 1 }, P.Order(new[] { 7, 11, 3, 5, 1 }, Ordering.Descending));
+            Assert.Equal(new[] { 1, 3, 5, 7, 11 }, P.Order(new[] { 7, 11, 3, 5, 1 }));
+            Assert.Equal(new[] { 11, 7, 5, 3, 1 }, P.Order(new[] { 7, 11, 3, 5, 1 }, Ordering.Descending));
         }
     }
 }

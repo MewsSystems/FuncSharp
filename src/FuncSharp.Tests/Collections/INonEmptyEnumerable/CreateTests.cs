@@ -12,8 +12,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
         {
             var expected = new List<string> { "1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes", "6 potatoes", "7 potatoes", "8 potatoes", "9 potatoes", "Also a longer string" };
             var tenStrings = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes", "6 potatoes", "7 potatoes", "8 potatoes", "9 potatoes", "Also a longer string");
-            Assert.Equivalent(10, tenStrings.Count);
-            Assert.Equivalent(expected, tenStrings);
+            Assert.Equal(10, tenStrings.Count);
+            Assert.Equal(expected, tenStrings);
 
         }
 
@@ -23,8 +23,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "1 potato", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes"};
             IEnumerable<string> enumerable = Enumerable.Repeat("2 potatoes", 9);
             var tenStrings = NonEmptyEnumerable.Create("1 potato", enumerable);
-            Assert.Equivalent(10, tenStrings.Count);
-            Assert.Equivalent(expected, tenStrings);
+            Assert.Equal(10, tenStrings.Count);
+            Assert.Equal(expected, tenStrings);
         }
 
         [Fact]
@@ -33,8 +33,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "1 potato", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes"};
             Stack<string> stack = new Stack<string>(Enumerable.Repeat("2 potatoes", 9).ToList());
             var tenStrings = NonEmptyEnumerable.Create("1 potato", stack);
-            Assert.Equivalent(10, tenStrings.Count);
-            Assert.Equivalent(expected, tenStrings);
+            Assert.Equal(10, tenStrings.Count);
+            Assert.Equal(expected, tenStrings);
         }
 
         [Fact]
@@ -43,8 +43,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var expected = new List<string> { "1 potato", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes", "2 potatoes"};
             List<string> readOnlyList = Enumerable.Repeat("2 potatoes", 9).ToList();
             var tenStrings = NonEmptyEnumerable.Create("1 potato", readOnlyList);
-            Assert.Equivalent(10, tenStrings.Count);
-            Assert.Equivalent(expected, tenStrings);
+            Assert.Equal(10, tenStrings.Count);
+            Assert.Equal(expected, tenStrings);
         }
     }
 }

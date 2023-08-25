@@ -13,8 +13,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var list = new List<string> { null, "1 potato", null, "2 potatoes", null };
             var result = list.ExceptNulls().ToArray();
 
-            Assert.Equivalent(2, result.Length);
-            Assert.Equivalent(new [] { "1 potato", "2 potatoes" }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new [] { "1 potato", "2 potatoes" }, result);
         }
 
         [Fact]
@@ -25,8 +25,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var list = new List<Guid?> { null, guid1, null, guid2, null };
             Guid[] result = list.ExceptNulls().ToArray();
 
-            Assert.Equivalent(2, result.Length);
-            Assert.Equivalent(new [] { guid1, guid2 }, result);
+            Assert.Equal(2, result.Length);
+            Assert.Equal(new [] { guid1, guid2 }, result);
         }
     }
 }

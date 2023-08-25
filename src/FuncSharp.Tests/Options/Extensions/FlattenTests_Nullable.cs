@@ -53,11 +53,11 @@ namespace FuncSharp.Tests.Options
             where T : struct
         {
             var result = option.Flatten();
-            Assert.Equivalent(option.NonEmpty && option.Get() is not null, result.NonEmpty);
+            Assert.Equal(option.NonEmpty && option.Get() is not null, result.NonEmpty);
 
             if (option.NonEmpty)
             {
-                Assert.Equivalent(option.Get(), result.Get());
+                Assert.Equal(option.Get(), result.Get());
             }
         }
     }

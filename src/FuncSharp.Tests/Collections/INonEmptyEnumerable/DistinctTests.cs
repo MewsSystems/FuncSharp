@@ -12,8 +12,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes","1 potato", "2 potatoes", "3 potatoes","1 potato", "2 potatoes", "3 potatoes");
             var result = nonEmpty.Distinct();
             
-            Assert.Equivalent(3, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(3, result.Count);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -23,8 +23,8 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = NonEmptyEnumerable.Create("1 potato", "2 potatoes", "3 potatoes","1 potato", "2 potatoes", "3 potatoes","1 potato", "2 potatoes", "3 potatoes");
             var result = nonEmpty.Distinct(text => text.Substring(2));
 
-            Assert.Equivalent(2, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(2, result.Count);
+            Assert.Equal(expected, result);
         }
     }
 }

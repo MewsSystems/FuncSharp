@@ -10,37 +10,37 @@ namespace FuncSharp.Tests
         [Fact]
         public void Min()
         {
-            Assert.Equivalent(5, T.Min(new[] { 5 }));
-            Assert.Equivalent(1, T.Min(new[] { 7, 11, 3, 5, 1 }));
+            Assert.Equal(5, T.Min(new[] { 5 }));
+            Assert.Equal(1, T.Min(new[] { 7, 11, 3, 5, 1 }));
             Assert.Throws<InvalidOperationException>(() => T.Min(new int[0]));
         }
 
         [Fact]
         public void Max()
         {
-            Assert.Equivalent(5, T.Max(new[] { 5 }));
-            Assert.Equivalent(11, T.Max(new[] { 7, 11, 3, 5, 1 }));
+            Assert.Equal(5, T.Max(new[] { 5 }));
+            Assert.Equal(11, T.Max(new[] { 7, 11, 3, 5, 1 }));
             Assert.Throws<InvalidOperationException>(() => T.Max(new int[0]));
         }
 
         [Fact]
         public void Intervals()
         {
-            Assert.Equivalent("Ø", T.EmptyInterval.ToString());
-            Assert.Equivalent("Ø", T.OpenInterval(2, 1).ToString());
-            Assert.Equivalent("Ø", T.OpenInterval(1, 1).ToString());
-            Assert.Equivalent("Ø", T.OpenClosedInterval(1, 1).ToString());
-            Assert.Equivalent("Ø", T.ClosedInterval(2, 1).ToString());
-            Assert.Equivalent("[42]", T.SingleValueInterval(42).ToString());
-            Assert.Equivalent("(23, 42)", T.OpenInterval(23, 42).ToString());
-            Assert.Equivalent("[23, 42)", T.ClosedOpenInterval(23, 42).ToString());
-            Assert.Equivalent("(23, 42]", T.OpenClosedInterval(23, 42).ToString());
-            Assert.Equivalent("[23, 42]", T.ClosedInterval(23, 42).ToString());
-            Assert.Equivalent("(42, ∞)", T.OpenUnboundedInterval(42).ToString());
-            Assert.Equivalent("[42, ∞)", T.ClosedUnboundedInterval(42).ToString());
-            Assert.Equivalent("(-∞, 42)", T.UnboundedOpenInterval(42).ToString());
-            Assert.Equivalent("(-∞, 42]", T.UnboundedClosedInterval(42).ToString());
-            Assert.Equivalent("(-∞, ∞)", T.UnboundedInterval.ToString());
+            Assert.Equal("Ø", T.EmptyInterval.ToString());
+            Assert.Equal("Ø", T.OpenInterval(2, 1).ToString());
+            Assert.Equal("Ø", T.OpenInterval(1, 1).ToString());
+            Assert.Equal("Ø", T.OpenClosedInterval(1, 1).ToString());
+            Assert.Equal("Ø", T.ClosedInterval(2, 1).ToString());
+            Assert.Equal("[42]", T.SingleValueInterval(42).ToString());
+            Assert.Equal("(23, 42)", T.OpenInterval(23, 42).ToString());
+            Assert.Equal("[23, 42)", T.ClosedOpenInterval(23, 42).ToString());
+            Assert.Equal("(23, 42]", T.OpenClosedInterval(23, 42).ToString());
+            Assert.Equal("[23, 42]", T.ClosedInterval(23, 42).ToString());
+            Assert.Equal("(42, ∞)", T.OpenUnboundedInterval(42).ToString());
+            Assert.Equal("[42, ∞)", T.ClosedUnboundedInterval(42).ToString());
+            Assert.Equal("(-∞, 42)", T.UnboundedOpenInterval(42).ToString());
+            Assert.Equal("(-∞, 42]", T.UnboundedClosedInterval(42).ToString());
+            Assert.Equal("(-∞, ∞)", T.UnboundedInterval.ToString());
         }
 
         [Fact]
@@ -85,11 +85,11 @@ namespace FuncSharp.Tests
                 T.UnboundedInterval
             };
 
-            Assert.Equivalent(
+            Assert.Equal(
                 "Ø, (-∞, 3), (-∞, 3], (-∞, ∞), [1, 2), [1, 2], [1, 3), [1, 3], [1, ∞), (1, 2), (1, 2], (1, 3), (1, 3], (1, ∞), [2], [2, 3), [2, 3], (2, 3), (2, 3]",
                 String.Join(", ", T.Order(intervals, Ordering.Ascending))
             );
-            Assert.Equivalent(
+            Assert.Equal(
                 "(2, 3], (2, 3), [2, 3], [2, 3), [2], (1, ∞), (1, 3], (1, 3), (1, 2], (1, 2), [1, ∞), [1, 3], [1, 3), [1, 2], [1, 2), (-∞, ∞), (-∞, 3], (-∞, 3), Ø",
                 String.Join(", ", T.Order(intervals, Ordering.Descending))
             );
@@ -108,38 +108,38 @@ namespace FuncSharp.Tests
             var c3 = T.ClosedInterval(30, 50);
             var u = T.UnboundedInterval;
 
-            Assert.Equivalent(e, T.Intersect(e, e));
-            Assert.Equivalent(e, T.Intersect(e, s));
-            Assert.Equivalent(e, T.Intersect(e, o1));
-            Assert.Equivalent(e, T.Intersect(e, c1));
-            Assert.Equivalent(e, T.Intersect(e, u));
+            Assert.Equal(e, T.Intersect(e, e));
+            Assert.Equal(e, T.Intersect(e, s));
+            Assert.Equal(e, T.Intersect(e, o1));
+            Assert.Equal(e, T.Intersect(e, c1));
+            Assert.Equal(e, T.Intersect(e, u));
 
-            Assert.Equivalent(s, T.Intersect(s, s));
-            Assert.Equivalent(s, T.Intersect(s, o1));
-            Assert.Equivalent(e, T.Intersect(e, o2));
-            Assert.Equivalent(s, T.Intersect(s, c1));
-            Assert.Equivalent(s, T.Intersect(s, c2));
-            Assert.Equivalent(s, T.Intersect(s, u));
+            Assert.Equal(s, T.Intersect(s, s));
+            Assert.Equal(s, T.Intersect(s, o1));
+            Assert.Equal(e, T.Intersect(e, o2));
+            Assert.Equal(s, T.Intersect(s, c1));
+            Assert.Equal(s, T.Intersect(s, c2));
+            Assert.Equal(s, T.Intersect(s, u));
 
-            Assert.Equivalent(s, T.Intersect(o1, s));
-            Assert.Equivalent(o1, T.Intersect(o1, o1));
-            Assert.Equivalent(o1, T.Intersect(o1, T.OpenInterval(0, 100)));
-            Assert.Equivalent(o1, T.Intersect(o1, u));
-            Assert.Equivalent(T.OpenInterval(20, 30), T.Intersect(o1, o2));
-            Assert.Equivalent(e, T.Intersect(o1, o3));
-            Assert.Equivalent(o1, T.Intersect(o1, c1));
-            Assert.Equivalent(T.ClosedOpenInterval(20, 30), T.Intersect(o1, c2));
-            Assert.Equivalent(e, T.Intersect(o1, c3));
+            Assert.Equal(s, T.Intersect(o1, s));
+            Assert.Equal(o1, T.Intersect(o1, o1));
+            Assert.Equal(o1, T.Intersect(o1, T.OpenInterval(0, 100)));
+            Assert.Equal(o1, T.Intersect(o1, u));
+            Assert.Equal(T.OpenInterval(20, 30), T.Intersect(o1, o2));
+            Assert.Equal(e, T.Intersect(o1, o3));
+            Assert.Equal(o1, T.Intersect(o1, c1));
+            Assert.Equal(T.ClosedOpenInterval(20, 30), T.Intersect(o1, c2));
+            Assert.Equal(e, T.Intersect(o1, c3));
 
-            Assert.Equivalent(s, T.Intersect(c1, s));
-            Assert.Equivalent(c1, T.Intersect(c1, c1));
-            Assert.Equivalent(c1, T.Intersect(c1, T.ClosedInterval(0, 100)));
-            Assert.Equivalent(c1, T.Intersect(c1, u));
-            Assert.Equivalent(T.ClosedInterval(20, 30), T.Intersect(c1, c2));
-            Assert.Equivalent(T.SingleValueInterval(30), T.Intersect(c1, c3));
-            Assert.Equivalent(o1, T.Intersect(c1, o1));
-            Assert.Equivalent(T.OpenClosedInterval(20, 30), T.Intersect(c1, o2));
-            Assert.Equivalent(e, T.Intersect(c1, o3));
+            Assert.Equal(s, T.Intersect(c1, s));
+            Assert.Equal(c1, T.Intersect(c1, c1));
+            Assert.Equal(c1, T.Intersect(c1, T.ClosedInterval(0, 100)));
+            Assert.Equal(c1, T.Intersect(c1, u));
+            Assert.Equal(T.ClosedInterval(20, 30), T.Intersect(c1, c2));
+            Assert.Equal(T.SingleValueInterval(30), T.Intersect(c1, c3));
+            Assert.Equal(o1, T.Intersect(c1, o1));
+            Assert.Equal(T.OpenClosedInterval(20, 30), T.Intersect(c1, o2));
+            Assert.Equal(e, T.Intersect(c1, o3));
         }
 
         [Fact]
@@ -247,7 +247,7 @@ namespace FuncSharp.Tests
 
         private void AssertEqual(string expected, IntervalSet<int> intervalSet)
         {
-            Assert.Equivalent(expected, intervalSet.ToString());
+            Assert.Equal(expected, intervalSet.ToString());
         }
     }
 }

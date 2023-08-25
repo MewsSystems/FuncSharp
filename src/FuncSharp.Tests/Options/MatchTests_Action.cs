@@ -19,7 +19,7 @@ namespace FuncSharp.Tests.Options
             Option.Valued(14).Match(
                 v =>
                 {
-                    Assert.Equivalent(14, v);
+                    Assert.Equal(14, v);
                     wasCalled = true;
                 },
                 _ => Assert.Fail("Shouldn't be called.")
@@ -72,7 +72,7 @@ namespace FuncSharp.Tests.Options
                 v =>
                 {
                     Assert.NotNull(v);
-                    Assert.Equivalent(option.GetOrDefault(), v);
+                    Assert.Equal(option.GetOrDefault(), v);
                     flag1 = 14;
                 },
                 _ => flag2 = 2
@@ -80,12 +80,12 @@ namespace FuncSharp.Tests.Options
 
             if (option.IsEmpty)
             {
-                Assert.Equivalent(2, flag2);
+                Assert.Equal(2, flag2);
                 Assert.Null(flag1);
             }
             else
             {
-                Assert.Equivalent(14, flag1);
+                Assert.Equal(14, flag1);
                 Assert.Null(flag2);
             }
         }

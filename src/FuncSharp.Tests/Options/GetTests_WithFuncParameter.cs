@@ -16,8 +16,8 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void GetWithFunc()
         {
-            Assert.Equivalent(8, 4.ToOption().Get(i => i * 2));
-            Assert.Equivalent(18, (6 as int?).ToOption().Get(i => i * 3));
+            Assert.Equal(8, 4.ToOption().Get(i => i * 2));
+            Assert.Equal(18, (6 as int?).ToOption().Get(i => i * 3));
             Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get(i => i * 4));
             Assert.Throws<NullReferenceException>(() => Option.Empty<int>().Get(i => i * 4, _ => new NullReferenceException()));
         }
@@ -71,7 +71,7 @@ namespace FuncSharp.Tests.Options
             {
                 var result = option.Get(map, otherwise);
                 Assert.NotNull(result);
-                Assert.Equivalent(map(option.GetOrDefault()), result);
+                Assert.Equal(map(option.GetOrDefault()), result);
             }
             else
             {

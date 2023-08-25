@@ -16,9 +16,9 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void ToNullable_WithFunc()
         {
-            Assert.Equivalent(1, 2.ToOption().ToNullable(v => v / 2));
-            Assert.Equivalent(2, Unit.Value.ToOption().ToNullable(_ => 2));
-            Assert.Equivalent(3, ((int?)1).ToOption<int?>().ToNullable(v => v * 3));
+            Assert.Equal(1, 2.ToOption().ToNullable(v => v / 2));
+            Assert.Equal(2, Unit.Value.ToOption().ToNullable(_ => 2));
+            Assert.Equal(3, ((int?)1).ToOption<int?>().ToNullable(v => v * 3));
             Assert.Null(((int?)2).ToOption<int?>().ToNullable(v => (int?)null));
 
             Assert.Null(Option.Empty<Unit>().ToNullable(_ => 14));
@@ -76,7 +76,7 @@ namespace FuncSharp.Tests.Options
             if (option.NonEmpty)
             {
                 Assert.NotNull(result);
-                Assert.Equivalent(map(option.GetOrDefault()), result);
+                Assert.Equal(map(option.GetOrDefault()), result);
             }
             else
             {
@@ -90,7 +90,7 @@ namespace FuncSharp.Tests.Options
             var result = option.ToNullable(map);
             if (option.NonEmpty)
             {
-                Assert.Equivalent(map(option.GetOrDefault()), result);
+                Assert.Equal(map(option.GetOrDefault()), result);
             }
             else
             {

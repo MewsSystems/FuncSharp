@@ -16,15 +16,15 @@ namespace FuncSharp.Tests.Options
         internal void Equality()
         {
             // Equal value of same type
-            Assert.Equivalent(Option.Valued(14), Option.Valued(14));
-            Assert.Equivalent(Option.Valued(-6), Option.Valued(-6));
-            Assert.Equivalent(Option.Valued(Unit.Value), Option.Valued(Unit.Value));
-            Assert.Equivalent(Option.Valued(new ReferenceType(28167)), Option.Valued(new ReferenceType(28167)));
-            Assert.Equivalent(Option.Valued("ASDF123Q"), Option.Valued("ASDF123Q"));
+            Assert.Equal(Option.Valued(14), Option.Valued(14));
+            Assert.Equal(Option.Valued(-6), Option.Valued(-6));
+            Assert.Equal(Option.Valued(Unit.Value), Option.Valued(Unit.Value));
+            Assert.Equal(Option.Valued(new ReferenceType(28167)), Option.Valued(new ReferenceType(28167)));
+            Assert.Equal(Option.Valued("ASDF123Q"), Option.Valued("ASDF123Q"));
 
             // Empty option of same type
-            Assert.Equivalent(Option.Empty<int>(), Option.Empty<int>());
-            Assert.Equivalent(Option.Empty<ReferenceType>(), Option.Empty<ReferenceType>());
+            Assert.Equal(Option.Empty<int>(), Option.Empty<int>());
+            Assert.Equal(Option.Empty<ReferenceType>(), Option.Empty<ReferenceType>());
 
             // When using covariance, the type of the option is actually different, therefore equality is false.
             Assert.NotEqual<IOption<ReferenceTypeBase>>(Option.Empty<ReferenceType>(), Option.Empty<ReferenceTypeBase>());
@@ -90,11 +90,11 @@ namespace FuncSharp.Tests.Options
 
         private void AssertEquality<T>(IOption<T> first, IOption<T> second)
         {
-            Assert.Equivalent(first, first);
-            Assert.Equivalent(second, second);
+            Assert.Equal(first, first);
+            Assert.Equal(second, second);
 
             var shouldBeEqual = first.NonEmpty == second.NonEmpty && Equals(first.GetOrDefault(), second.GetOrDefault());
-            Assert.Equivalent(shouldBeEqual, first.Equals(second));
+            Assert.Equal(shouldBeEqual, first.Equals(second));
         }
     }
 }

@@ -15,8 +15,8 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void ToNullable()
         {
-            Assert.Equivalent(1, 1.ToOption().ToNullable());
-            Assert.Equivalent(2, ((int?)2).ToOption<int?>().ToNullable());
+            Assert.Equal(1, 1.ToOption().ToNullable());
+            Assert.Equal(2, ((int?)2).ToOption<int?>().ToNullable());
             Assert.Null(Option.Valued<int?>(null).ToNullable());
 
             Assert.Null(Option.Empty<int>().ToNullable());
@@ -78,7 +78,7 @@ namespace FuncSharp.Tests.Options
             if (option.NonEmpty)
             {
                 Assert.NotNull(result);
-                Assert.Equivalent(option.GetOrDefault(), result);
+                Assert.Equal(option.GetOrDefault(), result);
             }
             else
             {
@@ -92,7 +92,7 @@ namespace FuncSharp.Tests.Options
             var result = option.ToNullable();
             if (option.NonEmpty)
             {
-                Assert.Equivalent(option.GetOrDefault(), result);
+                Assert.Equal(option.GetOrDefault(), result);
             }
             else
             {

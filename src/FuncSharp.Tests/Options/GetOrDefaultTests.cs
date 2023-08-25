@@ -15,10 +15,10 @@ namespace FuncSharp.Tests.Options
         [Fact]
         public void GetOrDefault()
         {
-            Assert.Equivalent("asd", Option.Create("asd").GetOrDefault());
-            Assert.Equivalent(42, 42.ToOption().GetOrDefault());
+            Assert.Equal("asd", Option.Create("asd").GetOrDefault());
+            Assert.Equal(42, 42.ToOption().GetOrDefault());
 
-            Assert.Equivalent(0, Option.Empty<int>().GetOrDefault());
+            Assert.Equal(0, Option.Empty<int>().GetOrDefault());
             Assert.Null(Option.Empty<int?>().GetOrDefault());
             Assert.Null(Option.Empty<string>().GetOrDefault());
         }
@@ -56,9 +56,9 @@ namespace FuncSharp.Tests.Options
         private void AssertGetOrDefault<T>(T value)
         {
             var option = Option.Valued(value);
-            Assert.Equivalent(value, option.GetOrDefault());
+            Assert.Equal(value, option.GetOrDefault());
 
-            Assert.Equivalent(default(T), Option.Empty<T>().GetOrDefault());
+            Assert.Equal(default(T), Option.Empty<T>().GetOrDefault());
         }
     }
 }

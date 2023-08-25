@@ -69,16 +69,16 @@ namespace FuncSharp.Tests.Options
         private void AssertSelectResult<T, TResult>(IOption<T> option, Func<T, TResult> map)
         {
             var result = option.Select(map);
-            Assert.Equivalent(option.IsEmpty, result.IsEmpty);
+            Assert.Equal(option.IsEmpty, result.IsEmpty);
             if (option.NonEmpty)
             {
-                Assert.Equivalent(map(option.GetOrDefault()), result.GetOrDefault());
+                Assert.Equal(map(option.GetOrDefault()), result.GetOrDefault());
             }
 
             var linqResult =
                 from x in option
                 select map(x);
-            Assert.Equivalent(result, linqResult);
+            Assert.Equal(result, linqResult);
         }
     }
 }

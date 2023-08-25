@@ -70,11 +70,11 @@ namespace FuncSharp.Tests.Options
         private void AssertGetOrFalse<T>(IOption<T> option, Func<T, bool> map)
         {
             var result = option.GetOrFalse(map);
-            Assert.Equivalent(option.GetOrDefault(map), result);
+            Assert.Equal(option.GetOrDefault(map), result);
 
             if (option.NonEmpty)
             {
-                Assert.Equivalent(map(option.Get()), result);
+                Assert.Equal(map(option.Get()), result);
             }
             else
             {

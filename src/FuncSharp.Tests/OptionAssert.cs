@@ -39,6 +39,6 @@ public class OptionAssert
     public static void NonEmptyWithValue<T>(T expected, IOption<T> option, string message = null)
     {
         Assert.True(option.NonEmpty, message ?? "Option was expected to have a value, but was empty.");
-        Assert.Equivalent(expected, option.Get());
+        Assert.Equal(expected, option.Get());
     }
 }

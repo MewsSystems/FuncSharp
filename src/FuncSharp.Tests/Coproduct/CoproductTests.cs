@@ -12,17 +12,17 @@ namespace FuncSharp.Tests
             var c2 = Coproduct2.CreateSecond<string, int>(42);
             var c3 = Coproduct2.CreateSecond<string, string>("bar");
 
-            Assert.Equivalent(2, c1.CoproductArity);
-            Assert.Equivalent(2, c2.CoproductArity);
-            Assert.Equivalent(2, c3.CoproductArity);
+            Assert.Equal(2, c1.CoproductArity);
+            Assert.Equal(2, c2.CoproductArity);
+            Assert.Equal(2, c3.CoproductArity);
 
-            Assert.Equivalent(1, c1.CoproductDiscriminator);
-            Assert.Equivalent(2, c2.CoproductDiscriminator);
-            Assert.Equivalent(2, c2.CoproductDiscriminator);
+            Assert.Equal(1, c1.CoproductDiscriminator);
+            Assert.Equal(2, c2.CoproductDiscriminator);
+            Assert.Equal(2, c2.CoproductDiscriminator);
 
-            Assert.Equivalent("foo", c1.CoproductValue);
-            Assert.Equivalent(42, c2.CoproductValue);
-            Assert.Equivalent("bar", c3.CoproductValue);
+            Assert.Equal("foo", c1.CoproductValue);
+            Assert.Equal(42, c2.CoproductValue);
+            Assert.Equal("bar", c3.CoproductValue);
 
             Assert.True(c1.IsFirst);
             Assert.False(c1.IsSecond);
@@ -40,11 +40,11 @@ namespace FuncSharp.Tests
             var u1 = Coproduct2.CreateFirst<string, int>("foo");
             var u2 = Coproduct2.CreateSecond<string, int>(42);
 
-            Assert.Equivalent(Option.Valued("foo"), u1.First);
-            Assert.Equivalent(Option.Empty<int>(), u1.Second);
+            Assert.Equal(Option.Valued("foo"), u1.First);
+            Assert.Equal(Option.Empty<int>(), u1.Second);
 
-            Assert.Equivalent(Option.Empty<string>(), u2.First);
-            Assert.Equivalent(Option.Valued(42), u2.Second);
+            Assert.Equal(Option.Empty<string>(), u2.First);
+            Assert.Equal(Option.Valued(42), u2.Second);
         }
 
         [Fact]
