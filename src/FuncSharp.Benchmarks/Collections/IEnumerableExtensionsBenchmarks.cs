@@ -16,6 +16,8 @@ namespace FuncSharp.Benchmarks
         private static readonly IEnumerable<string> StringEnumerable_Array;
         private static readonly int?[] ArrayOfNullables;
         private static readonly IOption<int>[] ArrayOfOptions;
+        private static readonly Exception[] Exceptions;
+        private static readonly INonEmptyEnumerable<Exception> Exceptions_NonEmpty;
 
         static IEnumerableExtensionsBenchmarks()
         {
@@ -29,6 +31,15 @@ namespace FuncSharp.Benchmarks
 
             ArrayOfNullables = ((int?)0).Concat(Enumerable.Range(1, 1000).Select(i => (int?)i), Enumerable.Repeat<int?>(null, 1000)).OrderBy(x => Guid.NewGuid()).ToArray(); // randomized order
             ArrayOfOptions = 0.ToOption().Concat(Enumerable.Range(1, 1000).Select(i => i.ToOption()), Enumerable.Repeat(Option.Empty<int>(), 1000)).OrderBy(x => Guid.NewGuid()).ToArray(); // randomized order
+            Exceptions = Enumerable.Range(0, 10).Select(i => new Exception($"{i} potatoes")).ToArray();
+            Exceptions_NonEmpty = Exceptions.AsNonEmpty().Get();
+        }
+
+        // Last Result - 25.8.2023 - 528.4 ns - 16024 B
+        [Benchmark]
+        public void ToReadOnlyList()
+        {
+            var x = StringArray.ToReadOnlyList();
         }
 
         // Last Result - 25.8.2023 - 24.4 ns - 208 B
@@ -155,6 +166,20 @@ namespace FuncSharp.Benchmarks
         public void IsSingle_Array()
         {
             var x = StringArray.IsSingle();
+        }
+
+        // Last Result - 25.8.2023 - 121.5 ns - 416 B
+        [Benchmark]
+        public void AggregateExceptions_Array()
+        {
+            var x = Exceptions.Aggregate();
+        }
+
+        // Last Result - 25.8.2023 - 252.1 ns - 656 B
+        [Benchmark]
+        public void AggregateExceptions_NonEmpty()
+        {
+            var x = Exceptions_NonEmpty.Aggregate();
         }
     }
 }

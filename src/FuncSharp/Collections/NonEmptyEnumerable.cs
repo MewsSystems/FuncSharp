@@ -73,13 +73,14 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
     {
         Head = head;
         Tail = tail;
+        Count = Tail.Count + 1;
     }
 
     public T Head { get; }
 
     public IReadOnlyList<T> Tail { get; }
 
-    public int Count => Tail.Count + 1;
+    public int Count { get; }
 
     public T this[int index] => index switch
     {

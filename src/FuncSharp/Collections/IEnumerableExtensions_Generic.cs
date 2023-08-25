@@ -204,11 +204,11 @@ namespace FuncSharp
         [Pure]
         public static Exception Aggregate(this INonEmptyEnumerable<Exception> source)
         {
-            return source.Count switch
-            {
-                1 => source[0],
-                _ => new AggregateException(source)
-            };
+                return source.Count switch
+                {
+                    1 => source[0],
+                    _ => new AggregateException(source)
+                };
         }
     }
 }

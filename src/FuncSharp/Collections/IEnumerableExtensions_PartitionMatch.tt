@@ -18,7 +18,7 @@ namespace FuncSharp
         /// </summary>
         public static void PartitionMatch<#= TypeBracket(i) #>(
             this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Action<INonEmptyEnumerable<" + Type(x) + ">> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(12) + "Action<IReadOnlyList<" + Type(x) + ">> f" + x, separator: ",") #>)
         {
 <#= Lines(i, x => Indent(12) + "var list" + x + " = new List<T" + x + ">();") #>
 
@@ -29,7 +29,7 @@ namespace FuncSharp
                 );
             }
 
-<#= Lines(i, x => Indent(12) + "list" + x + ".AsNonEmpty().Match(f" + x + ");") #>
+<#= Lines(i, x => Indent(12) + "f" + x + "(list" + x + ");") #>
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace FuncSharp
         /// </summary>
         public static IReadOnlyList<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
             this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Func<INonEmptyEnumerable<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(12) + "Func<IReadOnlyList<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
         {
             var result = new List<TResult>();
 
