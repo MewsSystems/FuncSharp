@@ -77,7 +77,7 @@ namespace FuncSharp.Benchmarks
             var x = ArrayOfOptions.Flatten();
         }
 
-        // Last Result - 25.8.2023 - 8666 ns - 8608 B
+        // Last Result - 25.8.2023 - 8366 ns - 8608 B
         [Benchmark]
         public void Options_Flatten_Enumerated()
         {
@@ -154,7 +154,7 @@ namespace FuncSharp.Benchmarks
             var x = StringEnumerable.IsSingle();
         }
 
-        // Last Result - 25.8.2023 - 7.0 ns - 0 B
+        // Last Result - 25.8.2023 - 5.3 ns - 0 B
         [Benchmark]
         public void IsSingle_ArrayAsEnumerable()
         {
