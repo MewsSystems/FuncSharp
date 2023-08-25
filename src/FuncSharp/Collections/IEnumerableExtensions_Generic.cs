@@ -152,8 +152,8 @@ namespace FuncSharp
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
         {
             return first is null
-                ? items ?? Array.Empty<T>()
-                : Enumerable.Concat(first, items ?? Array.Empty<T>());
+                ? items
+                : Enumerable.Concat(first, items);
         }
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
