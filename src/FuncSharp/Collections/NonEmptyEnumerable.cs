@@ -132,7 +132,7 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
     /// <summary>
     /// Returns the NonEmptyEnumerable typed as IReadOnlyList.
     /// </summary>
-    public IReadOnlyList<T> AsReadonly()
+    public IReadOnlyList<T> AsReadOnly()
     {
         return this;
     }
