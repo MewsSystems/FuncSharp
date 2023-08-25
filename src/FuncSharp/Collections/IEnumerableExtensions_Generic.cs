@@ -89,10 +89,8 @@ namespace FuncSharp
             {
                 case null:
                     return false;
-                case IReadOnlyCollection<T> c1:
-                    return c1.Count > 1;
-                case ICollection<T> c2:
-                    return c2.Count > 1;
+                case IReadOnlyCollection<T> c:
+                    return c.Count > 1;
                 default:
                 {
                     using var enumerator = e.GetEnumerator();
@@ -109,8 +107,6 @@ namespace FuncSharp
                     return false;
                 case IReadOnlyCollection<T> c1:
                     return c1.Count == 1;
-                case ICollection<T> c2:
-                    return c2.Count == 1;
                 default:
                 {
                     using var enumerator = e.GetEnumerator();
