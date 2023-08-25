@@ -6,53 +6,45 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 {
     public class IsMultipleTests
     {
-        private static readonly IEnumerable<string> Enumerable_Null = null;
-        private static readonly IEnumerable<string> Enumerable_Empty;
-        private static readonly IEnumerable<string> Enumerable_Single;
-        private static readonly IEnumerable<string> Enumerable_Multiple;
-
-        private static readonly string[] Array_Null = null;
-        private static readonly string[] Array_Empty;
-        private static readonly string[] Array_Single;
-        private static readonly string[] Array_Multiple;
-
-        static IsMultipleTests()
-        {
-            Enumerable_Empty = Enumerable.Empty<string>();
-            Enumerable_Single = Enumerable.Range(0, 1).Select(i => $"{i} potatoes");
-            Enumerable_Multiple = Enumerable.Range(0, 10).Select(i => $"{i} potatoes");
-
-            Array_Empty = Enumerable_Empty.ToArray();
-            Array_Single = Enumerable_Single.ToArray();
-            Array_Multiple = Enumerable_Multiple.ToArray();
-        }
-
         [Fact]
         public void IsMultiple_null()
         {
-            Assert.False(Enumerable_Null.IsMultiple());
-            Assert.False(Array_Null.IsMultiple());
+            IEnumerable<string> enumerableNull = null;
+            string[] arrayNull = null;
+
+            Assert.False(enumerableNull.IsMultiple());
+            Assert.False(arrayNull.IsMultiple());
         }
 
         [Fact]
         public void IsMultiple_Empty()
         {
-            Assert.False(Enumerable_Empty.IsMultiple());
-            Assert.False(Array_Empty.IsMultiple());
+            IEnumerable<string> enumerableEmpty = Enumerable.Empty<string>();
+            string[] arrayEmpty = new string[]{};
+
+
+            Assert.False(enumerableEmpty.IsMultiple());
+            Assert.False(arrayEmpty.IsMultiple());
         }
 
         [Fact]
         public void IsMultiple_Single()
         {
-            Assert.False(Enumerable_Single.IsMultiple());
-            Assert.False(Array_Single.IsMultiple());
+            IEnumerable<string> enumerableSingle = Enumerable.Repeat("A potato", 1);
+            string[] arraySingle = new []{"A potato"};
+
+            Assert.False(enumerableSingle.IsMultiple());
+            Assert.False(arraySingle.IsMultiple());
         }
 
         [Fact]
         public void IsMultiple_Multiple()
         {
-            Assert.True(Enumerable_Multiple.IsMultiple());
-            Assert.True(Array_Multiple.IsMultiple());
+            IEnumerable<string> enumerableMultiple = Enumerable.Range(0, 10).Select(i => $"{i} potatoes");
+            string[] arrayMultiple = Enumerable.Range(0, 10).Select(i => $"{i} potatoes").ToArray();
+
+            Assert.True(enumerableMultiple.IsMultiple());
+            Assert.True(arrayMultiple.IsMultiple());
         }
     }
 }
