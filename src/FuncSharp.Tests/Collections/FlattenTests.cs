@@ -10,7 +10,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
         [Fact]
         public void Flatten()
         {
-            var list = new List<IOption<string>> { null, "1 potato".ToOption(), null, "2 potatoes".ToOption(), null };
+            var list = new List<IOption<string>> { Option.Empty<string>(), "1 potato".ToOption(), Option.Empty<string>(), "2 potatoes".ToOption(), Option.Empty<string>() };
             var result = list.Flatten().ToArray();
 
             Assert.Equivalent(2, result.Length);
