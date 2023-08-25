@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FuncSharp
 {
     public static partial class IEnumerableExtensions
     {
+        [Pure]
         public static PositiveInt Sum(this INonEmptyEnumerable<PositiveInt> values)
         {
             return PositiveInt.CreateUnsafe(values.Sum(v => v.Value));
         }
 
+        [Pure]
         public static PositiveDecimal Sum(this INonEmptyEnumerable<PositiveDecimal> values)
         {
             return PositiveDecimal.CreateUnsafe(values.Sum(v => v.Value));

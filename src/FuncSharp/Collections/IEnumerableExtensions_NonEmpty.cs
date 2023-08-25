@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FuncSharp
@@ -27,6 +28,7 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
+        [Pure]
         public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
         {
             return NonEmptyEnumerable<T>.Create(source.Head.Head, source.Head.Tail.Concat(source.Tail.Flatten()).ToArray());
@@ -37,6 +39,7 @@ namespace FuncSharp
             return NonEmptyEnumerable.Create(e, others.Flatten().ToArray());
         }
 
+        [Pure]
         public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params T[] items)
         {
             return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());

@@ -93,22 +93,22 @@ namespace FuncSharp
             return e is not null && e.Take(2).Count().SafeEquals(1);
         }
 
-        public static T Second<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
+        public static T Second<T>(this IEnumerable<T> e)
         {
             return e.ElementAt(1);
         }
 
-        public static T Third<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
+        public static T Third<T>(this IEnumerable<T> e)
         {
             return e.ElementAt(2);
         }
 
-        public static T Fourth<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
+        public static T Fourth<T>(this IEnumerable<T> e)
         {
             return e.ElementAt(3);
         }
 
-        public static T Fifth<T>(this IEnumerable<T> e) // TODO - Check IReadonlyList
+        public static T Fifth<T>(this IEnumerable<T> e)
         {
             return e.ElementAt(4);
         }

@@ -1,96 +1,122 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace FuncSharp;
 
 public static partial class IEnumerableExtensions
 {
-    public static bool NonEmpty<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static bool NonEmpty<T>(this IReadOnlyCollection<T> collection)
     {
-        return source is not null && source.Count > 0;
+        return collection is not null && collection.Count > 0;
     }
 
-    public static bool IsEmpty<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static bool IsEmpty<T>(this IReadOnlyCollection<T> collection)
     {
-        return !source.NonEmpty();
+        return !collection.NonEmpty();
     }
 
-    public static bool IsMultiple<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static bool IsMultiple<T>(this IReadOnlyCollection<T> collection)
     {
-        return source is not null && source.Count > 1;
+        return collection is not null && collection.Count > 1;
     }
 
-    public static bool IsSingle<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static bool IsSingle<T>(this IReadOnlyCollection<T> collection)
     {
-        return source is not null && source.Count == 1;
+        return collection is not null && collection.Count == 1;
     }
 
-    public static T Single<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static T Single<T>(this IReadOnlyList<T> list)
     {
-        return !source.IsSingle()
-            ? throw new ArgumentException("Source is not a single element.")
-            : source[0];
+        return list.Count == 1
+            ? list[0]
+            : throw new ArgumentException("Source is not a single element.");
     }
 
-    public static IOption<T> SingleOption<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static IOption<T> SingleOption<T>(this IReadOnlyList<T> list)
     {
-        return source.IsSingle()
-            ? Option.Valued(source[0])
+        return list.IsSingle()
+            ? Option.Valued(list[0])
             : Option.Empty<T>();
     }
 
-    public static T First<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static T First<T>(this IReadOnlyList<T> list)
     {
-        return source.IsEmpty()
-            ? throw new ArgumentException("Source is empty.")
-            : source[0];
+        return list.ElementAt(0);
     }
 
-    public static IOption<T> FirstOption<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static IOption<T> FirstOption<T>(this IReadOnlyList<T> list)
     {
-        return source.IsEmpty()
+        return list.IsEmpty()
             ? Option.Empty<T>()
-            : Option.Valued(source[0]);
+            : Option.Valued(list[0]);
     }
 
-    public static T Second<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static T Second<T>(this IReadOnlyList<T> list)
     {
-        return source.Count <= 1
-            ? throw new ArgumentException("Source has less than 2 elements.")
-            : source[1];
+        return list.ElementAt(1);
     }
 
-    public static T Last<T>(this IReadOnlyList<T> source)
+    public static T Third<T>(this IReadOnlyList<T> list)
     {
-        return source.Count == 0
+        return list.ElementAt(2);
+    }
+
+    public static T Fourth<T>(this IReadOnlyList<T> list)
+    {
+        return list.ElementAt(3);
+    }
+
+    public static T Fifth<T>(this IReadOnlyList<T> list)
+    {
+        return list.ElementAt(4);
+    }
+
+    [Pure]
+    public static T Last<T>(this IReadOnlyList<T> list)
+    {
+        return list.Count == 0
             ? throw new ArgumentException("Source is empty.")
-            : source[source.Count - 1];
+            : list[list.Count - 1];
     }
 
-    public static IOption<T> LastOption<T>(this IReadOnlyList<T> source)
+    [Pure]
+    public static IOption<T> LastOption<T>(this IReadOnlyList<T> list)
     {
-        return source.IsEmpty()
+        return list.IsEmpty()
             ? Option.Empty<T>()
-            : Option.Valued(source[source.Count - 1]);
+            : Option.Valued(list[list.Count - 1]);
     }
 
-    public static T ElementAt<T>(this IReadOnlyList<T> source, int index)
+    [Pure]
+    public static T ElementAt<T>(this IReadOnlyList<T> list, int index)
     {
-        return source[index];
+        return list[index];
     }
 
-    public static IOption<T> ElementAtOption<T>(this IReadOnlyList<T> source, NonNegativeInt index)
+    [Pure]
+    public static IOption<T> ElementAtOption<T>(this IReadOnlyList<T> list, NonNegativeInt index)
     {
-        return source.Count > index.Value
-            ? Option.Valued(source[index.Value])
+        return list.Count > index.Value
+            ? Option.Valued(list[index.Value])
             : Option.Empty<T>();
     }
 
-    public static int IndexOf<T>(this IReadOnlyList<T> source, T item)
+    [Pure]
+    public static int IndexOf<T>(this IReadOnlyList<T> list, T item)
     {
-        for (var i = 0; i < source.Count; i++)
+        for (var i = 0; i < list.Count; i++)
         {
-            if (source[i].SafeEquals(item))
+            if (list[i].SafeEquals(item))
             {
                 return i;
             }
