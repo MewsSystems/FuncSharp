@@ -33,7 +33,7 @@ public static partial class IEnumerableExtensions
     [Pure]
     public static T Single<T>(this IReadOnlyList<T> list)
     {
-        return list.Count == 1
+        return list.IsSingle()
             ? list[0]
             : throw new ArgumentException("Source is not a single element.");
     }
