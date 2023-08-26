@@ -12,7 +12,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = "1 potato".Concat(new List<string> { "2 potatoes", "3 potatoes" }, new List<string> { "4 potatoes", "5 potatoes" });
 
             Assert.Equal(5, nonEmpty.Count);
-            Assert.Equivalent(expected, nonEmpty);
+            Assert.Equal(expected, nonEmpty);
         }
 
         [Fact]
@@ -22,7 +22,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = "1 potato".ToEnumerable().Concat("2 potatoes", "3 potatoes", "4 potatoes", "5 potatoes");
 
             Assert.Equal(5, nonEmpty.Count);
-            Assert.Equivalent(expected, nonEmpty);
+            Assert.Equal(expected, nonEmpty);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var nonEmpty = "1 potato".ToEnumerable().Concat(new List<string> { "2 potatoes", "3 potatoes" }, new List<string> { "4 potatoes", "5 potatoes" });
 
             Assert.Equal(5, nonEmpty.Count);
-            Assert.Equivalent(expected, nonEmpty);
+            Assert.Equal(expected, nonEmpty);
         }
     }
 }

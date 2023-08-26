@@ -5,6 +5,8 @@ namespace FuncSharp;
 
 public struct NonPositiveInt
 {
+    public static readonly NonPositiveInt Zero = new(0);
+
     private NonPositiveInt(int value)
     {
         Value = value;
