@@ -10,7 +10,7 @@ namespace FuncSharp.Benchmarks
         private static readonly string ValidBool = "true";
         private static readonly string ValidByte = "214";
         private static readonly string ValidShort = "31592";
-        private static readonly string ValidDecimal = "2548.5";
+        private static readonly string ValidDecimal = "2548,5";
         private static readonly string ValidDateTime = "2022-01-13T16:25:35";
         private static readonly string ValidTimeSpan = "1.12:24:02";
         private static readonly string ValidEnum = BenchmarkEnum.Value4.ToString();
@@ -59,7 +59,7 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void ToByte_Valid()
         {
-            var x = ValidShort.ToByte();
+            var x = ValidByte.ToByte();
         }
 
         [Benchmark]
