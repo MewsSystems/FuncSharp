@@ -70,12 +70,7 @@ namespace FuncSharp
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
             where A : class
         {
-            if (a is not null)
-            {
-                return func(a);
-            }
-
-            return false;
+            return a is not null && func(a);
         }
 
         [Obsolete("Use Match instead.", error: true)]
@@ -186,9 +181,7 @@ namespace FuncSharp
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
             where A : struct
         {
-            return a is {} value
-                ? func(value)
-                : false;
+            return a is {} value && func(value);
         }
 
         [Pure]
