@@ -1,44 +1,53 @@
-﻿using System;
+﻿
+using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
 namespace FuncSharp
 {
     public static class ObjectExtensions
     {
+        [Pure]
         public static INonEmptyEnumerable<T> ToEnumerable<T>(this T value)
         {
             return NonEmptyEnumerable.Create(value);
         }
 
+        [Pure]
         public static bool SafeEquals<T>(this T t, T other)
         {
             return Equals(t, other);
         }
 
+        [Pure]
         public static bool SafeNotEquals<T>(this T t, T other)
         {
             return !t.SafeEquals(other);
         }
 
+        [Pure]
         public static bool SafeEquals<T>(this T t, T? other)
             where T : struct
         {
             return ((T?)t).SafeEquals(other);
         }
 
+        [Pure]
         public static bool SafeEquals<T>(this T? t, T other)
             where T : struct
         {
             return t.SafeEquals((T?)other);
         }
 
+        [Pure]
         [Obsolete("Use Match instead.", error: true)]
         public static void MatchRef<A>(this IOption<A> a, Action<A> action = null, Action<Unit> otherwise = null)
         {
             throw new NotImplementedException();
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)
             where A : class
@@ -56,6 +65,7 @@ namespace FuncSharp
             }
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
             where A : class
@@ -74,6 +84,7 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : class
@@ -85,6 +96,7 @@ namespace FuncSharp
             return otherwise(Unit.Value);
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static async Task<B> MatchRefAsync<A, B>(this A a, Func<A, Task<B>> func, Func<Unit, Task<B>> otherwise)
             where A : class
@@ -102,6 +114,7 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B MapRef<A, B>(this A a, Func<A, B> func)
             where A : class
@@ -115,6 +128,7 @@ namespace FuncSharp
             return null;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static async Task<B> MapRefAsync<A, B>(this A a, Func<A, Task<B>> func)
             where A : class
@@ -127,28 +141,29 @@ namespace FuncSharp
             return default;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
             where A : class
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a),
-                f => default(B?)
-            );
+            return a is not null
+                ? func(a)
+                : null;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B? MapRefToVal<A, B>(this A a, Func<A, B?> func)
             where A : class
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a),
-                f => null
-            );
+            return a is not null
+                ? func(a)
+                : null;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static void MatchVal<A>(this A? a, Action<A> action = null, Action<Unit> otherwise = null)
             where A : struct
@@ -166,56 +181,60 @@ namespace FuncSharp
             }
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
             where A : struct
         {
-            return MatchVal(a, func, _ => false);
+            return a is {} value
+                ? func(value)
+                : false;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => otherwise(Unit.Value)
-            );
+            return a is {} value
+                ? func(value)
+                : otherwise(Unit.Value);
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B? MapVal<A, B>(this A? a, Func<A, B> func)
             where A : struct
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => default(B?)
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B? MapVal<A, B>(this A? a, Func<A, B?> func)
             where A : struct
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => null
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static B MapValToRef<A, B>(this A? a, Func<A, B> func)
             where A : struct
             where B : class
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => null
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
+        [Pure]
         [DebuggerStepThrough]
         public static async Task<B> MapValToRefAsync<A, B>(this A? a, Func<A, Task<B>> func)
             where A : struct
@@ -231,6 +250,7 @@ namespace FuncSharp
         /// <summary>
         /// Casts the specified object to the given type.
         /// </summary>
+        [Pure]
         public static IOption<A> As<A>(this object o)
             where A : class
         {
@@ -240,6 +260,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns string representation of the object. If the object is null, return the optionally specified null text.
         /// </summary>
+        [Pure]
         public static string SafeToString(this object o, string nullText = "null")
         {
             if (o == null)
@@ -252,6 +273,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into an option.
         /// </summary>
+        [Pure]
         public static IOption<A> ToOption<A>(this A value)
         {
             return Option.Create(value);
@@ -260,6 +282,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified value into a successful try.
         /// </summary>
+        [Pure]
         public static Try<A, E> ToTry<A, E>(this A value)
         {
             return Try.Success<A, E>(value);
@@ -268,6 +291,7 @@ namespace FuncSharp
         /// <summary>
         /// Turns the specified error into a try.
         /// </summary>
+        [Pure]
         public static Try<A, E> ToTry<A, E>(this E e)
         {
             return Try.Error<A, E>(e);
@@ -278,6 +302,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct1<T1> AsCoproduct<T1>(this object value, Func<object, Coproduct1<T1>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -301,6 +326,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct1<T1> AsCoproduct<T1>(this object value, T1 t1, Func<object, Coproduct1<T1>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -323,6 +349,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct2<T1, object> AsSafeCoproduct<T1>(this object value)
         {
             return value.AsCoproduct(v => Coproduct2.CreateSecond<T1, object>(v));
@@ -333,6 +360,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct2<T1, object> AsSafeCoproduct<T1>(this object value, T1 t1)
         {
             return value.AsCoproduct(t1, null, v => Coproduct2.CreateSecond<T1, object>(v));
@@ -341,6 +369,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -357,7 +386,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -377,6 +406,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -395,6 +425,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -418,6 +449,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct2<T1, T2> AsCoproduct<T1, T2>(this object value, Func<object, Coproduct2<T1, T2>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -442,6 +474,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct2<T1, T2> AsCoproduct<T1, T2>(this object value, T1 t1, T2 t2, Func<object, Coproduct2<T1, T2>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -468,6 +501,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct3<T1, T2, object> AsSafeCoproduct<T1, T2>(this object value)
         {
             return value.AsCoproduct(v => Coproduct3.CreateThird<T1, T2, object>(v));
@@ -478,6 +512,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct3<T1, T2, object> AsSafeCoproduct<T1, T2>(this object value, T1 t1, T2 t2)
         {
             return value.AsCoproduct(t1, t2, null, v => Coproduct3.CreateThird<T1, T2, object>(v));
@@ -486,6 +521,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -507,7 +543,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -532,6 +568,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -556,6 +593,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -585,6 +623,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct3<T1, T2, T3> AsCoproduct<T1, T2, T3>(this object value, Func<object, Coproduct3<T1, T2, T3>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -610,6 +649,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct3<T1, T2, T3> AsCoproduct<T1, T2, T3>(this object value, T1 t1, T2 t2, T3 t3, Func<object, Coproduct3<T1, T2, T3>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -640,6 +680,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct4<T1, T2, T3, object> AsSafeCoproduct<T1, T2, T3>(this object value)
         {
             return value.AsCoproduct(v => Coproduct4.CreateFourth<T1, T2, T3, object>(v));
@@ -650,6 +691,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct4<T1, T2, T3, object> AsSafeCoproduct<T1, T2, T3>(this object value, T1 t1, T2 t2, T3 t3)
         {
             return value.AsCoproduct(t1, t2, t3, null, v => Coproduct4.CreateFourth<T1, T2, T3, object>(v));
@@ -658,6 +700,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -684,7 +727,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -714,6 +757,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -744,6 +788,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -779,6 +824,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct4<T1, T2, T3, T4> AsCoproduct<T1, T2, T3, T4>(this object value, Func<object, Coproduct4<T1, T2, T3, T4>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -805,6 +851,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct4<T1, T2, T3, T4> AsCoproduct<T1, T2, T3, T4>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, Func<object, Coproduct4<T1, T2, T3, T4>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -839,6 +886,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct5<T1, T2, T3, T4, object> AsSafeCoproduct<T1, T2, T3, T4>(this object value)
         {
             return value.AsCoproduct(v => Coproduct5.CreateFifth<T1, T2, T3, T4, object>(v));
@@ -849,6 +897,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct5<T1, T2, T3, T4, object> AsSafeCoproduct<T1, T2, T3, T4>(this object value, T1 t1, T2 t2, T3 t3, T4 t4)
         {
             return value.AsCoproduct(t1, t2, t3, t4, null, v => Coproduct5.CreateFifth<T1, T2, T3, T4, object>(v));
@@ -857,6 +906,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -888,7 +938,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -923,6 +973,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -959,6 +1010,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -1000,6 +1052,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct5<T1, T2, T3, T4, T5> AsCoproduct<T1, T2, T3, T4, T5>(this object value, Func<object, Coproduct5<T1, T2, T3, T4, T5>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -1027,6 +1080,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct5<T1, T2, T3, T4, T5> AsCoproduct<T1, T2, T3, T4, T5>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, Func<object, Coproduct5<T1, T2, T3, T4, T5>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -1065,6 +1119,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct6<T1, T2, T3, T4, T5, object> AsSafeCoproduct<T1, T2, T3, T4, T5>(this object value)
         {
             return value.AsCoproduct(v => Coproduct6.CreateSixth<T1, T2, T3, T4, T5, object>(v));
@@ -1075,6 +1130,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct6<T1, T2, T3, T4, T5, object> AsSafeCoproduct<T1, T2, T3, T4, T5>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, null, v => Coproduct6.CreateSixth<T1, T2, T3, T4, T5, object>(v));
@@ -1083,6 +1139,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -1119,7 +1176,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -1159,6 +1216,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -1201,6 +1259,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -1248,6 +1307,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct6<T1, T2, T3, T4, T5, T6> AsCoproduct<T1, T2, T3, T4, T5, T6>(this object value, Func<object, Coproduct6<T1, T2, T3, T4, T5, T6>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -1276,6 +1336,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct6<T1, T2, T3, T4, T5, T6> AsCoproduct<T1, T2, T3, T4, T5, T6>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, Func<object, Coproduct6<T1, T2, T3, T4, T5, T6>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -1318,6 +1379,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct7<T1, T2, T3, T4, T5, T6, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6>(this object value)
         {
             return value.AsCoproduct(v => Coproduct7.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
@@ -1328,6 +1390,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct7<T1, T2, T3, T4, T5, T6, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, null, v => Coproduct7.CreateSeventh<T1, T2, T3, T4, T5, T6, object>(v));
@@ -1336,6 +1399,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -1377,7 +1441,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -1422,6 +1486,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -1470,6 +1535,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -1523,6 +1589,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> AsCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, Func<object, Coproduct7<T1, T2, T3, T4, T5, T6, T7>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -1552,6 +1619,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct7<T1, T2, T3, T4, T5, T6, T7> AsCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, Func<object, Coproduct7<T1, T2, T3, T4, T5, T6, T7>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -1598,6 +1666,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value)
         {
             return value.AsCoproduct(v => Coproduct8.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
@@ -1608,6 +1677,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, null, v => Coproduct8.CreateEighth<T1, T2, T3, T4, T5, T6, T7, object>(v));
@@ -1616,6 +1686,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -1662,7 +1733,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -1712,6 +1783,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -1766,6 +1838,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -1825,6 +1898,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, Func<object, Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -1855,6 +1929,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, Func<object, Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -1905,6 +1980,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value)
         {
             return value.AsCoproduct(v => Coproduct9.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
@@ -1915,6 +1991,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, null, v => Coproduct9.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, object>(v));
@@ -1923,6 +2000,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -1974,7 +2052,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -2029,6 +2107,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -2089,6 +2168,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -2154,6 +2234,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, Func<object, Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -2185,6 +2266,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, Func<object, Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -2239,6 +2321,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value)
         {
             return value.AsCoproduct(v => Coproduct10.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
@@ -2249,6 +2332,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, null, v => Coproduct10.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, object>(v));
@@ -2257,6 +2341,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -2313,7 +2398,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -2373,6 +2458,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -2439,6 +2525,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -2510,6 +2597,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, Func<object, Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -2542,6 +2630,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, Func<object, Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -2600,6 +2689,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value)
         {
             return value.AsCoproduct(v => Coproduct11.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
@@ -2610,6 +2700,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, null, v => Coproduct11.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>(v));
@@ -2618,6 +2709,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -2679,7 +2771,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -2744,6 +2836,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -2816,6 +2909,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -2893,6 +2987,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, Func<object, Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -2926,6 +3021,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, Func<object, Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -2988,6 +3084,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value)
         {
             return value.AsCoproduct(v => Coproduct12.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
@@ -2998,6 +3095,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, null, v => Coproduct12.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, object>(v));
@@ -3006,6 +3104,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -3072,7 +3171,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -3142,6 +3241,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -3220,6 +3320,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -3303,6 +3404,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, Func<object, Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -3337,6 +3439,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, Func<object, Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -3403,6 +3506,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value)
         {
             return value.AsCoproduct(v => Coproduct13.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
@@ -3413,6 +3517,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, null, v => Coproduct13.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, object>(v));
@@ -3421,6 +3526,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -3492,7 +3598,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -3567,6 +3673,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -3651,6 +3758,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -3740,6 +3848,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, Func<object, Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -3775,6 +3884,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, Func<object, Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -3845,6 +3955,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value)
         {
             return value.AsCoproduct(v => Coproduct14.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
@@ -3855,6 +3966,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, null, v => Coproduct14.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, object>(v));
@@ -3863,6 +3975,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -3939,7 +4052,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -4019,6 +4132,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -4109,6 +4223,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -4204,6 +4319,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, Func<object, Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -4240,6 +4356,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, Func<object, Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -4314,6 +4431,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value)
         {
             return value.AsCoproduct(v => Coproduct15.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
@@ -4324,6 +4442,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, null, v => Coproduct15.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, object>(v));
@@ -4332,6 +4451,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -4413,7 +4533,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -4498,6 +4618,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -4594,6 +4715,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -4695,6 +4817,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this object value, Func<object, Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -4732,6 +4855,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, Func<object, Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -4810,6 +4934,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this object value)
         {
             return value.AsCoproduct(v => Coproduct16.CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, object>(v));
@@ -4820,6 +4945,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, null, v => Coproduct16.CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, object>(v));
@@ -4828,6 +4954,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -4914,7 +5041,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -5004,6 +5131,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -5106,6 +5234,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -5213,6 +5342,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this object value, Func<object, Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -5251,6 +5381,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, Func<object, Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -5333,6 +5464,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this object value)
         {
             return value.AsCoproduct(v => Coproduct17.CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, object>(v));
@@ -5343,6 +5475,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, null, v => Coproduct17.CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, object>(v));
@@ -5351,6 +5484,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -5442,7 +5576,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -5537,6 +5671,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -5645,6 +5780,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -5758,6 +5894,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(this object value, Func<object, Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -5797,6 +5934,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, Func<object, Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -5883,6 +6021,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(this object value)
         {
             return value.AsCoproduct(v => Coproduct18.CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, object>(v));
@@ -5893,6 +6032,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, null, v => Coproduct18.CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, object>(v));
@@ -5901,6 +6041,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -5997,7 +6138,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -6097,6 +6238,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -6211,6 +6353,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -6330,6 +6473,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(this object value, Func<object, Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -6370,6 +6514,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18, Func<object, Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -6460,6 +6605,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(this object value)
         {
             return value.AsCoproduct(v => Coproduct19.CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, object>(v));
@@ -6470,6 +6616,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, null, v => Coproduct19.CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, object>(v));
@@ -6478,6 +6625,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -6579,7 +6727,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -6684,6 +6832,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -6804,6 +6953,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -6929,6 +7079,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(this object value, Func<object, Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -6970,6 +7121,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18, T19 t19, Func<object, Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
@@ -7064,6 +7216,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
         /// the last place.
         /// </summary>
+        [Pure]
         public static Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(this object value)
         {
             return value.AsCoproduct(v => Coproduct20.CreateTwentieth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, object>(v));
@@ -7074,6 +7227,7 @@ namespace FuncSharp
         /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
         /// the value will be placed in the last place.
         /// </summary>
+        [Pure]
         public static Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18, T19 t19)
         {
             return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, null, v => Coproduct20.CreateTwentieth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, object>(v));
@@ -7082,6 +7236,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
+        [Pure]
         public static TResult Match<T, TResult>(
             this T value,
             T t1, Func<T, TResult> f1,
@@ -7188,7 +7343,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
 
-
+        [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
             this T value,
             T t1, Func<T, Task<TResult>> f1,
@@ -7298,6 +7453,7 @@ namespace FuncSharp
         /// <summary>
         /// Matches the value with the specified parameters and executes the corresponding function.
         /// </summary>
+        [Pure]
         public static void Match<T>(
             this T value,
             T t1, Action<T> f1,
@@ -7424,6 +7580,7 @@ namespace FuncSharp
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
 
+        [Pure]
         public static async Task MatchAsync<T>(
             this T value,
             T t1, Func<T,Task> f1,
@@ -7555,6 +7712,7 @@ namespace FuncSharp
         /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
         /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(this object value, Func<object, Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             switch (value) {
@@ -7597,6 +7755,7 @@ namespace FuncSharp
         /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
         /// the otherwise function).
         /// </summary>
+        [Pure]
         public static Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18, T19 t19, T20 t20, Func<object, Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> fallback = null, Func<Unit, Exception> otherwise = null)
         {
             if (Equals(value, t1))
