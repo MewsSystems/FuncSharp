@@ -254,6 +254,14 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        public static IReadOnlyList<A> Flatten<A>(this Option<INonEmptyEnumerable<A>> option)
+        {
+            return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty.
+        /// </summary>
         public static A[] Flatten<A>(this Option<A[]> option)
         {
             return option.GetOrElse(_ => Array.Empty<A>());
@@ -279,6 +287,14 @@ namespace FuncSharp
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
         public static IReadOnlyList<A> GetOrEmpty<A>(this Option<IReadOnlyList<A>> option)
+        {
+            return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty.
+        /// </summary>
+        public static IReadOnlyList<A> GetOrEmpty<A>(this Option<INonEmptyEnumerable<A>> option)
         {
             return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
         }
