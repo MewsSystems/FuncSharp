@@ -196,6 +196,13 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
+        public Option<B> As<B>()
+        {
+            return NonEmpty || Value is not B b
+                ? Option<B>.Empty
+                : Option.Valued(b);
+        }
+
         public IReadOnlyList<A> ToList()
         {
             if (NonEmpty)
