@@ -24,7 +24,7 @@ public struct NonPositiveDecimal
         return new(d1.Value + d2.Value);
     }
 
-    public static IOption<NonPositiveDecimal> Create(decimal value)
+    public static Option<NonPositiveDecimal> Create(decimal value)
     {
         return CreateNullable(value).ToOption();
     }

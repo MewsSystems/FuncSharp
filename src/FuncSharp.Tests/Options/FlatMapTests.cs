@@ -28,19 +28,19 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void FlatMapOrder_int(IOption<int> first, IOption<int> second)
+        internal void FlatMapOrder_int(Option<int> first, Option<int> second)
         {
             Assert.Equal(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
         }
 
         [Property]
-        internal void FlatMapOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
+        internal void FlatMapOrder_ReferenceType(Option<ReferenceType> first, Option<ReferenceType> second)
         {
             Assert.Equal(first.FlatMap(f => second.Map(s => (f, s))), second.FlatMap(s => first.Map(f => (f, s))));
         }
 
         [Property]
-        internal void FlatMap_int(IOption<int> option)
+        internal void FlatMap_int(Option<int> option)
         {
             AssertFlatMapResult(option, i => i * 2);
 
@@ -49,25 +49,25 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void FlatMap_decimal(IOption<decimal> option)
+        internal void FlatMap_decimal(Option<decimal> option)
         {
             AssertFlatMapResult(option, d => d * 2);
         }
 
         [Property]
-        internal void FlatMap_double(IOption<double> option)
+        internal void FlatMap_double(Option<double> option)
         {
             AssertFlatMapResult(option, d => d * 2);
         }
 
         [Property]
-        internal void FlatMap_bool(IOption<bool> option)
+        internal void FlatMap_bool(Option<bool> option)
         {
             AssertFlatMapResult(option, b => !b);
         }
 
         [Property]
-        internal void FlatMap_ReferenceType(IOption<ReferenceType> option)
+        internal void FlatMap_ReferenceType(Option<ReferenceType> option)
         {
             AssertFlatMapResult(option, d => new ReferenceType(d.Value * 2));
 
@@ -75,7 +75,7 @@ namespace FuncSharp.Tests.Options
             AssertFlatMapResult(option, d => d.Value * 2);
         }
 
-        private void AssertFlatMapResult<T, TResult>(IOption<T> option, Func<T, TResult> map)
+        private void AssertFlatMapResult<T, TResult>(Option<T> option, Func<T, TResult> map)
         {
             var flatMapToEmptyResult = option.FlatMap(x => Option.Empty<T>());
             OptionAssert.IsEmpty(flatMapToEmptyResult);

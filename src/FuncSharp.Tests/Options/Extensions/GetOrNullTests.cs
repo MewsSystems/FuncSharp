@@ -21,12 +21,12 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrNull_bool(IOption<ReferenceType> option)
+        internal void GetOrNull_bool(Option<ReferenceType> option)
         {
             AssertGetOrNull(option);
         }
 
-        private void AssertGetOrNull<T>(IOption<T> option)
+        private void AssertGetOrNull<T>(Option<T> option)
             where T: class
         {
             var result = option.GetOrNull();

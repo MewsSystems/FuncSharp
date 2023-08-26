@@ -28,44 +28,43 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrElseLazy_int(IOption<int> option)
+        internal void GetOrElseLazy_int(Option<int> option)
         {
             AssertGetOrElseLazy(option, _ => -14);
         }
 
         [Property]
-        internal void GetOrElseLazy_decimal(IOption<decimal> option)
+        internal void GetOrElseLazy_decimal(Option<decimal> option)
         {
             AssertGetOrElseLazy(option, _ => 2156.384m);
         }
 
         [Property]
-        internal void GetOrElseLazy_double(IOption<double> option)
+        internal void GetOrElseLazy_double(Option<double> option)
         {
             AssertGetOrElseLazy(option, _ => 2842.456);
         }
 
         [Property]
-        internal void GetOrElseLazy_bool(IOption<bool> option)
+        internal void GetOrElseLazy_bool(Option<bool> option)
         {
             AssertGetOrElseLazy(option, _ => true);
         }
 
         [Property]
-        internal void GetOrElseLazy_ReferenceType(IOption<ReferenceType> option)
+        internal void GetOrElseLazy_ReferenceType(Option<ReferenceType> option)
         {
             AssertGetOrElseLazy(option, _ => new ReferenceType(7));
-            AssertGetOrElseLazy(option, _ => new ReferenceTypeBase(11));
         }
 
         [Property]
-        internal void GetOrElseLazy_ReferenceTypeBase(IOption<ReferenceTypeBase> option)
+        internal void GetOrElseLazy_ReferenceTypeBase(Option<ReferenceTypeBase> option)
         {
             AssertGetOrElseLazy(option, _ => new ReferenceType(13));
             AssertGetOrElseLazy(option, _ => new ReferenceTypeBase(17));
         }
 
-        private void AssertGetOrElseLazy<T>(IOption<T> option, Func<Unit, T> otherwise)
+        private void AssertGetOrElseLazy<T>(Option<T> option, Func<Unit, T> otherwise)
         {
             var result = option.GetOrElse(otherwise);
             if (option.NonEmpty)

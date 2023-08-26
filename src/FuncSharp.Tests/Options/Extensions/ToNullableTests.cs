@@ -24,54 +24,54 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void ToNullable_int(IOption<int> option)
+        internal void ToNullable_int(Option<int> option)
         {
             AssertToNullable(option);
         }
 
         [Property]
-        internal void ToNullable_decimal(IOption<decimal> option)
+        internal void ToNullable_decimal(Option<decimal> option)
         {
             AssertToNullable(option);
         }
 
         [Property]
-        internal void ToNullable_double(IOption<double> option)
+        internal void ToNullable_double(Option<double> option)
         {
             AssertToNullable(option);
         }
 
         [Property]
-        internal void ToNullable_bool(IOption<bool> option)
+        internal void ToNullable_bool(Option<bool> option)
         {
             AssertToNullable(option);
         }
 
         [Property]
-        internal void ToNullable_nullableInt(IOption<int?> option)
+        internal void ToNullable_nullableInt(Option<int?> option)
         {
             AssertToNullableOnNullableOption(option);
         }
 
         [Property]
-        internal void ToNullable_nullabledecimal(IOption<decimal?> option)
+        internal void ToNullable_nullabledecimal(Option<decimal?> option)
         {
             AssertToNullableOnNullableOption(option);
         }
 
         [Property]
-        internal void ToNullable_nullabledouble(IOption<double?> option)
+        internal void ToNullable_nullabledouble(Option<double?> option)
         {
             AssertToNullableOnNullableOption(option);
         }
 
         [Property]
-        internal void ToNullable_nullablebool(IOption<bool?> option)
+        internal void ToNullable_nullablebool(Option<bool?> option)
         {
             AssertToNullableOnNullableOption(option);
         }
 
-        private void AssertToNullable<T>(IOption<T> option)
+        private void AssertToNullable<T>(Option<T> option)
             where T: struct
         {
             var result = option.ToNullable();
@@ -86,7 +86,7 @@ namespace FuncSharp.Tests.Options
             }
         }
 
-        private void AssertToNullableOnNullableOption<T>(IOption<T?> option)
+        private void AssertToNullableOnNullableOption<T>(Option<T?> option)
             where T: struct
         {
             var result = option.ToNullable();

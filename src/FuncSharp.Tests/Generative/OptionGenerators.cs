@@ -36,60 +36,60 @@ public class OptionGenerators
         ReferenceTypeBases = Arb.From(referenceTypeBaseGenerator.ToList().SometimesEmpty(), Shrinkers.Options.ReferenceTypeBaseList);
     }
 
-    public static Arbitrary<IOption<bool>> Bool { get; }
+    public static Arbitrary<Option<bool>> Bool { get; }
 
-    public static Arbitrary<IOption<bool?>> NullableBool { get; }
+    public static Arbitrary<Option<bool?>> NullableBool { get; }
 
-    public static Arbitrary<IOption<List<bool>>> Bools { get; }
+    public static Arbitrary<Option<List<bool>>> Bools { get; }
 
-    public static Arbitrary<IOption<short>> Short { get; }
+    public static Arbitrary<Option<short>> Short { get; }
 
-    public static Arbitrary<IOption<short?>> NullableShort { get; }
+    public static Arbitrary<Option<short?>> NullableShort { get; }
 
-    public static Arbitrary<IOption<List<short>>> Shorts { get; }
+    public static Arbitrary<Option<List<short>>> Shorts { get; }
 
-    public static Arbitrary<IOption<int>> Int { get; }
+    public static Arbitrary<Option<int>> Int { get; }
 
-    public static Arbitrary<IOption<int?>> NullableInt { get; }
+    public static Arbitrary<Option<int?>> NullableInt { get; }
 
-    public static Arbitrary<IOption<List<int>>> Ints { get; }
+    public static Arbitrary<Option<List<int>>> Ints { get; }
 
-    public static Arbitrary<IOption<long>> Long { get; }
+    public static Arbitrary<Option<long>> Long { get; }
 
-    public static Arbitrary<IOption<long?>> NullableLong { get; }
+    public static Arbitrary<Option<long?>> NullableLong { get; }
 
-    public static Arbitrary<IOption<List<long>>> Longs { get; }
+    public static Arbitrary<Option<List<long>>> Longs { get; }
 
-    public static Arbitrary<IOption<decimal>> Decimal { get; }
+    public static Arbitrary<Option<decimal>> Decimal { get; }
 
-    public static Arbitrary<IOption<decimal?>> NullableDecimal { get; }
+    public static Arbitrary<Option<decimal?>> NullableDecimal { get; }
 
-    public static Arbitrary<IOption<List<decimal>>> Decimals { get; }
+    public static Arbitrary<Option<List<decimal>>> Decimals { get; }
 
-    public static Arbitrary<IOption<double>> Double { get; }
+    public static Arbitrary<Option<double>> Double { get; }
 
-    public static Arbitrary<IOption<double?>> NullableDouble { get; }
+    public static Arbitrary<Option<double?>> NullableDouble { get; }
 
-    public static Arbitrary<IOption<List<double>>> Doubles { get; }
+    public static Arbitrary<Option<List<double>>> Doubles { get; }
 
-    public static Arbitrary<IOption<Unit>> Unit { get; }
+    public static Arbitrary<Option<Unit>> Unit { get; }
 
-    public static Arbitrary<IOption<List<Unit>>> Units { get; }
+    public static Arbitrary<Option<List<Unit>>> Units { get; }
 
-    public static Arbitrary<IOption<ReferenceType>> ReferenceType { get; }
+    public static Arbitrary<Option<ReferenceType>> ReferenceType { get; }
 
-    public static Arbitrary<IOption<List<ReferenceType>>> ReferenceTypes { get; }
+    public static Arbitrary<Option<List<ReferenceType>>> ReferenceTypes { get; }
 
-    public static Arbitrary<IOption<ReferenceTypeBase>> ReferenceTypeBase { get; }
+    public static Arbitrary<Option<ReferenceTypeBase>> ReferenceTypeBase { get; }
 
-    public static Arbitrary<IOption<List<ReferenceTypeBase>>> ReferenceTypeBases { get; }
+    public static Arbitrary<Option<List<ReferenceTypeBase>>> ReferenceTypeBases { get; }
 
-    private static Gen<IOption<T>> DefaultOptionGenerator<T>()
+    private static Gen<Option<T>> DefaultOptionGenerator<T>()
     {
         return Arb.From<T>().Generator.SometimesEmpty();
     }
 
-    private static Gen<IOption<List<T>>> DefaultOptionListGenerator<T>()
+    private static Gen<Option<List<T>>> DefaultOptionListGenerator<T>()
     {
         return Arb.From<T>().Generator.ToList().SometimesEmpty();
     }

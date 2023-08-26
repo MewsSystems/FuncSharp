@@ -27,7 +27,7 @@ namespace FuncSharp.Tests.Options
             Assert.Equal(Option.Empty<ReferenceType>(), Option.Empty<ReferenceType>());
 
             // When using covariance, the type of the option is actually different, therefore equality is false.
-            Assert.NotEqual<IOption<ReferenceTypeBase>>(Option.Empty<ReferenceType>(), Option.Empty<ReferenceTypeBase>());
+            Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Empty<ReferenceTypeBase>());
 
             // Different type.
             Assert.NotEqual<object>(Option.Valued<int>(1), Option.Valued<long>(1));
@@ -42,7 +42,7 @@ namespace FuncSharp.Tests.Options
             Assert.NotEqual(Option.Empty<string>(), Option.Valued<string>(null));
             Assert.NotEqual(Option.Empty<string>(), Option.Valued("ASDF"));
             Assert.NotEqual(Option.Empty<ReferenceType>(), Option.Valued(new ReferenceType(14)));
-            Assert.NotEqual(Option.Empty<ReferenceType>(), Option.Valued<ReferenceTypeBase>(null));
+            Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Valued<ReferenceTypeBase>(null));
 
             // Empty option and non-empty of different type
             Assert.NotEqual<object>(Option.Empty<int>(), Option.Valued<ReferenceTypeBase>(null));
@@ -59,36 +59,36 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Equality_int(IOption<int> first, IOption<int> second)
+        internal void Equality_int(Option<int> first, Option<int> second)
         {
             AssertEquality(first, second);
         }
 
         [Property]
-        internal void Equality_decimal(IOption<decimal> first, IOption<decimal> second)
+        internal void Equality_decimal(Option<decimal> first, Option<decimal> second)
         {
             AssertEquality(first, second);
         }
 
         [Property]
-        internal void Equality_double(IOption<double> first, IOption<double> second)
+        internal void Equality_double(Option<double> first, Option<double> second)
         {
             AssertEquality(first, second);
         }
 
         [Property]
-        internal void Equality_bool(IOption<bool> first, IOption<bool> second)
+        internal void Equality_bool(Option<bool> first, Option<bool> second)
         {
             AssertEquality(first, second);
         }
 
         [Property]
-        internal void Equality_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
+        internal void Equality_ReferenceType(Option<ReferenceType> first, Option<ReferenceType> second)
         {
             AssertEquality(first, second);
         }
 
-        private void AssertEquality<T>(IOption<T> first, IOption<T> second)
+        private void AssertEquality<T>(Option<T> first, Option<T> second)
         {
             Assert.Equal(first, first);
             Assert.Equal(second, second);

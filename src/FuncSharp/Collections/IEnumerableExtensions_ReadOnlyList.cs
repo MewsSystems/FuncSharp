@@ -39,7 +39,7 @@ public static partial class IEnumerableExtensions
     }
 
     [Pure]
-    public static IOption<T> SingleOption<T>(this IReadOnlyList<T> list)
+    public static Option<T> SingleOption<T>(this IReadOnlyList<T> list)
     {
         return list.IsSingle()
             ? Option.Valued(list[0])
@@ -53,7 +53,7 @@ public static partial class IEnumerableExtensions
     }
 
     [Pure]
-    public static IOption<T> FirstOption<T>(this IReadOnlyList<T> list)
+    public static Option<T> FirstOption<T>(this IReadOnlyList<T> list)
     {
         return list.IsEmpty()
             ? Option.Empty<T>()
@@ -90,7 +90,7 @@ public static partial class IEnumerableExtensions
     }
 
     [Pure]
-    public static IOption<T> LastOption<T>(this IReadOnlyList<T> list)
+    public static Option<T> LastOption<T>(this IReadOnlyList<T> list)
     {
         return list.IsEmpty()
             ? Option.Empty<T>()
@@ -104,7 +104,7 @@ public static partial class IEnumerableExtensions
     }
 
     [Pure]
-    public static IOption<T> ElementAtOption<T>(this IReadOnlyList<T> list, NonNegativeInt index)
+    public static Option<T> ElementAtOption<T>(this IReadOnlyList<T> list, NonNegativeInt index)
     {
         return list.Count > index.Value
             ? Option.Valued(list[index.Value])

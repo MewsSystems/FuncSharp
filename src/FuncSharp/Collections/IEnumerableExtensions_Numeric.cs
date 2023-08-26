@@ -18,12 +18,12 @@ namespace FuncSharp
             return PositiveDecimal.CreateUnsafe(values.Sum(v => v.Value));
         }
 
-        public static IOption<PositiveInt> SafeSum(this IEnumerable<PositiveInt> values)
+        public static Option<PositiveInt> SafeSum(this IEnumerable<PositiveInt> values)
         {
             return PositiveInt.Create(values.Sum(v => v.Value));
         }
 
-        public static IOption<PositiveDecimal> SafeSum(this IEnumerable<PositiveDecimal> values)
+        public static Option<PositiveDecimal> SafeSum(this IEnumerable<PositiveDecimal> values)
         {
             return PositiveDecimal.Create(values.Sum(v => v.Value));
         }

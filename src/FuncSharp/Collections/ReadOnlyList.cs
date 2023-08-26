@@ -22,17 +22,17 @@ public static class ReadOnlyList
         return values.Flatten().ToArray();
     }
 
-    public static IReadOnlyList<T> CreateFlat<T>(params IOption<T>[] values)
+    public static IReadOnlyList<T> CreateFlat<T>(params Option<T>[] values)
     {
         return values.Flatten().ToArray();
     }
 
-    public static IReadOnlyList<T> CreateFlat<T>(params IEnumerable<IOption<T>>[] values)
+    public static IReadOnlyList<T> CreateFlat<T>(params IEnumerable<Option<T>>[] values)
     {
         return values.Flatten().Flatten().ToArray();
     }
 
-    public static IReadOnlyList<T> CreateFlat<T>(params IOption<IEnumerable<T>>[] values)
+    public static IReadOnlyList<T> CreateFlat<T>(params Option<IEnumerable<T>>[] values)
     {
         return values.Flatten().Flatten().ToArray();
     }

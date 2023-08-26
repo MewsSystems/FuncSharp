@@ -6,9 +6,9 @@ namespace FuncSharp.Benchmarks
     [MemoryDiagnoser]
     public class ObjectExtensionsBenchmarks
     {
-        private static readonly TestEnum Enum = TestEnum.Value3;
-        private static readonly TestEnum? NullableEnum_Value = TestEnum.Value3;
-        private static readonly TestEnum? NullableEnum_Null = null;
+        private static readonly BenchmarkEnum Enum = BenchmarkEnum.Value3;
+        private static readonly BenchmarkEnum? NullableEnum_Value = BenchmarkEnum.Value3;
+        private static readonly BenchmarkEnum? NullableEnum_Null = null;
         private static readonly String String_Value = "Some text.";
         private static readonly String String_Null = null;
 
@@ -30,28 +30,28 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void MapRefToVal_Null()
         {
-            TestEnum? x = String_Null.MapRefToVal(e => Enum);
+            BenchmarkEnum? x = String_Null.MapRefToVal(e => Enum);
         }
 
         // Last Result - 26.8.2023 - 1.2 ns - 0 B
         [Benchmark]
         public void MapRefToVal_Value()
         {
-            TestEnum? x = String_Value.MapRefToVal(e => Enum);
+            BenchmarkEnum? x = String_Value.MapRefToVal(e => Enum);
         }
 
         // Last Result - 26.8.2023 - 0.4 ns - 0 B
         [Benchmark]
         public void MapRefToValToNullable_Null()
         {
-            TestEnum? x = String_Null.MapRefToVal(e => NullableEnum_Value);
+            BenchmarkEnum? x = String_Null.MapRefToVal(e => NullableEnum_Value);
         }
 
         // Last Result - 26.8.2023 - 1.4 ns - 0 B
         [Benchmark]
         public void MapRefToValToNullable_Value()
         {
-            TestEnum? x = String_Value.MapRefToVal(e => NullableEnum_Value);
+            BenchmarkEnum? x = String_Value.MapRefToVal(e => NullableEnum_Value);
         }
 
         // Last Result - 26.8.2023 - 0.6 ns - 0 B
@@ -72,42 +72,42 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void MatchVal_Null()
         {
-            TestEnum x = NullableEnum_Null.MatchVal(e => Enum, _ => Enum);
+            BenchmarkEnum x = NullableEnum_Null.MatchVal(e => Enum, _ => Enum);
         }
 
         // Last Result - 26.8.2023 - 2.0 ns - 0 B
         [Benchmark]
         public void MatchVal_Value()
         {
-            TestEnum x = NullableEnum_Value.MatchVal(e => Enum, _ => Enum);
+            BenchmarkEnum x = NullableEnum_Value.MatchVal(e => Enum, _ => Enum);
         }
 
         // Last Result - 26.8.2023 - 3.0 ns - 0 B
         [Benchmark]
         public void MapVal_Null()
         {
-            TestEnum? x = NullableEnum_Null.MapVal(e => Enum);
+            BenchmarkEnum? x = NullableEnum_Null.MapVal(e => Enum);
         }
 
         // Last Result - 26.8.2023 - 7.0 ns - 0 B
         [Benchmark]
         public void MapVal_Value()
         {
-            TestEnum? x = NullableEnum_Value.MapVal(e => Enum);
+            BenchmarkEnum? x = NullableEnum_Value.MapVal(e => Enum);
         }
 
         // Last Result - 26.8.2023 - 0.4 ns - 0 B
         [Benchmark]
         public void MapValToNullable_Null()
         {
-            TestEnum? x = NullableEnum_Null.MapVal(e => NullableEnum_Value);
+            BenchmarkEnum? x = NullableEnum_Null.MapVal(e => NullableEnum_Value);
         }
 
         // Last Result - 26.8.2023 - 1.8 ns - 0 B
         [Benchmark]
         public void MapValToNullable_Value()
         {
-            TestEnum? x = NullableEnum_Value.MapVal(e => NullableEnum_Value);
+            BenchmarkEnum? x = NullableEnum_Value.MapVal(e => NullableEnum_Value);
         }
 
         // Last Result - 26.8.2023 - 0.4 ns - 0 B

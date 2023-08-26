@@ -17,7 +17,7 @@ public readonly struct Digit
 
     public static bool operator !=(Digit left, Digit right) => !left.Equals(right);
 
-    public static IOption<Digit> Create(char value)
+    public static Option<Digit> Create(char value)
     {
         return CreateNullable(value).ToOption();
     }

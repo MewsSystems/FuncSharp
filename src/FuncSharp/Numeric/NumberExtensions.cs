@@ -2,7 +2,7 @@
 
 public static class NumberExtensions
 {
-    public static IOption<PositiveInt> AsPositive(this int value)
+    public static Option<PositiveInt> AsPositive(this int value)
     {
         return PositiveInt.Create(value);
     }
@@ -12,7 +12,7 @@ public static class NumberExtensions
         return PositiveInt.CreateUnsafe(value);
     }
 
-    public static IOption<NonNegativeInt> AsNonNegative(this int value)
+    public static Option<NonNegativeInt> AsNonNegative(this int value)
     {
         return NonNegativeInt.Create(value);
     }
@@ -22,7 +22,7 @@ public static class NumberExtensions
         return NonNegativeInt.CreateUnsafe(value);
     }
 
-    public static IOption<NonPositiveInt> AsNonPositive(this int value)
+    public static Option<NonPositiveInt> AsNonPositive(this int value)
     {
         return NonPositiveInt.Create(value);
     }
@@ -32,7 +32,7 @@ public static class NumberExtensions
         return NonPositiveInt.CreateUnsafe(value);
     }
 
-    public static IOption<PositiveDecimal> AsPositive(this decimal value)
+    public static Option<PositiveDecimal> AsPositive(this decimal value)
     {
         return PositiveDecimal.Create(value);
     }
@@ -42,7 +42,7 @@ public static class NumberExtensions
         return PositiveDecimal.CreateUnsafe(value);
     }
 
-    public static IOption<NonNegativeDecimal> AsNonNegative(this decimal value)
+    public static Option<NonNegativeDecimal> AsNonNegative(this decimal value)
     {
         return NonNegativeDecimal.Create(value);
     }
@@ -52,7 +52,7 @@ public static class NumberExtensions
         return NonNegativeDecimal.CreateUnsafe(value);
     }
 
-    public static IOption<NonPositiveDecimal> AsNonPositive(this decimal value)
+    public static Option<NonPositiveDecimal> AsNonPositive(this decimal value)
     {
         return NonPositiveDecimal.Create(value);
     }
@@ -72,12 +72,12 @@ public static class NumberExtensions
         return Divide(a, b).GetOrElse(otherwise);
     }
 
-    public static IOption<decimal> Divide(this int a, decimal b)
+    public static Option<decimal> Divide(this int a, decimal b)
     {
         return Divide((decimal)a, b);
     }
 
-    public static IOption<decimal> Divide(this decimal a, decimal b)
+    public static Option<decimal> Divide(this decimal a, decimal b)
     {
         return b.SafeNotEquals(0).MapTrue(_ => a / b);
     }

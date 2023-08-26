@@ -15,7 +15,7 @@ namespace FuncSharp.Benchmarks
         private static readonly IEnumerable<string> StringEnumerable;
         private static readonly IEnumerable<string> StringEnumerable_Array;
         private static readonly int?[] ArrayOfNullables;
-        private static readonly IOption<int>[] ArrayOfOptions;
+        private static readonly Option<int>[] ArrayOfOptions;
         private static readonly Exception[] Exceptions;
         private static readonly INonEmptyEnumerable<Exception> Exceptions_NonEmpty;
 

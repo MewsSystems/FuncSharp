@@ -35,7 +35,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static string GetOrElse(this IOption<NonEmptyString> option, string otherwise)
+        public static string GetOrElse(this Option<NonEmptyString> option, string otherwise)
         {
             if (option.NonEmpty)
             {
@@ -48,7 +48,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static string GetOrElse(this IOption<NonEmptyString> option, Func<Unit, string> otherwise)
+        public static string GetOrElse(this Option<NonEmptyString> option, Func<Unit, string> otherwise)
         {
             if (option.NonEmpty)
             {
@@ -61,7 +61,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static string GetOrElse(this IOption<string> option, NonEmptyString otherwise)
+        public static string GetOrElse(this Option<string> option, NonEmptyString otherwise)
         {
             if (option.NonEmpty)
             {
@@ -74,7 +74,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static string GetOrElse(this IOption<string> option, Func<Unit, NonEmptyString> otherwise)
+        public static string GetOrElse(this Option<string> option, Func<Unit, NonEmptyString> otherwise)
         {
             if (option.NonEmpty)
             {
@@ -87,7 +87,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<string> OrElse(this IOption<NonEmptyString> option, IOption<string> otherwise)
+        public static Option<string> OrElse(this Option<NonEmptyString> option, Option<string> otherwise)
         {
             if (option.NonEmpty)
             {
@@ -100,7 +100,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<string> OrElse(this IOption<NonEmptyString> option, Func<Unit, IOption<string>> otherwise)
+        public static Option<string> OrElse(this Option<NonEmptyString> option, Func<Unit, Option<string>> otherwise)
         {
             if (option.NonEmpty)
             {
@@ -113,7 +113,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<string> OrElse(this IOption<string> option, IOption<NonEmptyString> otherwise)
+        public static Option<string> OrElse(this Option<string> option, Option<NonEmptyString> otherwise)
         {
             if (option.NonEmpty)
             {
@@ -126,7 +126,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<string> OrElse(this IOption<string> option, Func<Unit, IOption<NonEmptyString>> otherwise)
+        public static Option<string> OrElse(this Option<string> option, Func<Unit, Option<NonEmptyString>> otherwise)
         {
             if (option.NonEmpty)
             {
@@ -139,7 +139,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<byte> ToByte(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
+        public static Option<byte> ToByte(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return byte.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -147,7 +147,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<short> ToShort(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
+        public static Option<short> ToShort(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return short.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -155,7 +155,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<int> ToInt(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
+        public static Option<int> ToInt(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return int.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -163,7 +163,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<long> ToLong(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
+        public static Option<long> ToLong(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
             return long.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -171,7 +171,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<float> ToFloat(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
+        public static Option<float> ToFloat(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
             return float.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -179,7 +179,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<double> ToDouble(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
+        public static Option<double> ToDouble(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
             return double.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -187,7 +187,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<decimal> ToDecimal(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
+        public static Option<decimal> ToDecimal(this NonEmptyString s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
             return decimal.TryParse(s.Value, style, format, out var value)
                 ? Option.Valued(value)
@@ -195,7 +195,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<bool> ToBool(this NonEmptyString s)
+        public static Option<bool> ToBool(this NonEmptyString s)
         {
             return bool.TryParse(s.Value, out var value)
                 ? Option.Valued(value)
@@ -203,7 +203,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<DateTime> ToDateTime(this NonEmptyString s, IFormatProvider format = null, DateTimeStyles style = DateTimeStyles.None)
+        public static Option<DateTime> ToDateTime(this NonEmptyString s, IFormatProvider format = null, DateTimeStyles style = DateTimeStyles.None)
         {
             return DateTime.TryParse(s.Value, format, style, out var value)
                 ? Option.Valued(value)
@@ -211,7 +211,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<TimeSpan> ToTimeSpan(this NonEmptyString s, IFormatProvider format = null)
+        public static Option<TimeSpan> ToTimeSpan(this NonEmptyString s, IFormatProvider format = null)
         {
             return TimeSpan.TryParse(s.Value, format, out var value)
                 ? Option.Valued(value)
@@ -219,7 +219,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<TEnum> ToEnum<TEnum>(this NonEmptyString s, bool ignoreCase = false)
+        public static Option<TEnum> ToEnum<TEnum>(this NonEmptyString s, bool ignoreCase = false)
             where TEnum : struct
         {
             if (s is null || s.Contains(",") || !Enum.TryParse<TEnum>(s, ignoreCase, out var value))
@@ -236,7 +236,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<Guid> ToGuid(this NonEmptyString s)
+        public static Option<Guid> ToGuid(this NonEmptyString s)
         {
             return Guid.TryParse(s.Value, out var value)
                 ? Option.Valued(value)
@@ -244,7 +244,7 @@ namespace FuncSharp
         }
 
         [Pure]
-        public static IOption<Guid> ToGuidExact(this NonEmptyString s, string format = "D")
+        public static Option<Guid> ToGuidExact(this NonEmptyString s, string format = "D")
         {
             return Guid.TryParseExact(s, format, out var value)
                 ? Option.Valued(value)

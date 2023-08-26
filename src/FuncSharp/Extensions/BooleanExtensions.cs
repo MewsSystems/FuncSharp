@@ -16,7 +16,7 @@ namespace FuncSharp
         /// <summary>
         /// If value is true, return result of map function as an option. Otherwise return an empty option.
         /// </summary>
-        public static IOption<T> MapTrue<T>(this bool value, Func<Unit, T> map)
+        public static Option<T> MapTrue<T>(this bool value, Func<Unit, T> map)
         {
             if (value)
             {
@@ -31,7 +31,7 @@ namespace FuncSharp
         /// <summary>
         /// If value is true, return result of map function as an option wrapped in a Task. Otherwise return an empty option wrapped in a Completed Task.
         /// </summary>
-        public static async Task<IOption<T>> MapTrueAsync<T>(this bool value, Func<Unit, Task<T>> map)
+        public static async Task<Option<T>> MapTrueAsync<T>(this bool value, Func<Unit, Task<T>> map)
         {
             if (value)
             {
@@ -46,7 +46,7 @@ namespace FuncSharp
         /// <summary>
         /// If value is true, return result of map function. Otherwise return an empty option.
         /// </summary>
-        public static IOption<T> FlatMapTrue<T>(this bool value, Func<Unit, IOption<T>> map)
+        public static Option<T> FlatMapTrue<T>(this bool value, Func<Unit, Option<T>> map)
         {
             if (value)
             {
@@ -61,7 +61,7 @@ namespace FuncSharp
         /// <summary>
         /// If value is true, return result of map functions as an Option wrapped in a Task. Otherwise return an empty option wrapped in a Completed Task.
         /// </summary>
-        public static async Task<IOption<T>> FlatMapTrueAsync<T>(this bool value, Func<Unit, Task<IOption<T>>> map)
+        public static async Task<Option<T>> FlatMapTrueAsync<T>(this bool value, Func<Unit, Task<Option<T>>> map)
         {
             if (value)
             {

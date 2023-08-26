@@ -20,6 +20,6 @@ namespace FuncSharp
         /// <summary>
         /// Returns value that the <paramref name="source"/> is mapped onto.
         /// </summary>
-        IOption<B> Apply(A source);
+        Option<B> Apply(A source);
     }
 }

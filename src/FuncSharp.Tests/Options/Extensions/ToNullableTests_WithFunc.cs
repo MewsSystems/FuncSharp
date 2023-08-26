@@ -26,14 +26,14 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void ToNullable_WithFunc_int(IOption<int> option)
+        internal void ToNullable_WithFunc_int(Option<int> option)
         {
             AssertToNullableWithFunc(option, i => i * 2);
             AssertToNullableWithFuncToNullable(option, i => (int?)i * 2);
         }
 
         [Property]
-        internal void ToNullable_WithFunc_nullableint(IOption<int?> option)
+        internal void ToNullable_WithFunc_nullableint(Option<int?> option)
         {
             AssertToNullableWithFunc(option, i => 14);
             AssertToNullableWithFuncToNullable(option, i => (int?)i * 2);
@@ -41,35 +41,35 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void ToNullable_WithFunc_decimal(IOption<decimal> option)
+        internal void ToNullable_WithFunc_decimal(Option<decimal> option)
         {
             AssertToNullableWithFunc(option, d => d * 2);
             AssertToNullableWithFuncToNullable(option, d => (decimal?)d * 2);
         }
 
         [Property]
-        internal void ToNullable_WithFunc_double(IOption<double> option)
+        internal void ToNullable_WithFunc_double(Option<double> option)
         {
             AssertToNullableWithFunc(option, d => d * 2);
             AssertToNullableWithFuncToNullable(option, d => (double?)d * 2);
         }
 
         [Property]
-        internal void ToNullable_WithFunc_bool(IOption<bool> option)
+        internal void ToNullable_WithFunc_bool(Option<bool> option)
         {
             AssertToNullableWithFunc(option, b => !b);
             AssertToNullableWithFuncToNullable(option, b => (bool?)!b);
         }
 
         [Property]
-        internal void ToNullable_WithFunc_ReferenceType(IOption<ReferenceType> option)
+        internal void ToNullable_WithFunc_ReferenceType(Option<ReferenceType> option)
         {
             AssertToNullableWithFunc(option, t => t.Value * 2);
             AssertToNullableWithFuncToNullable(option, t => (int?)t.Value * 2);
             AssertToNullableWithFuncToNullable(option, t => (int?)null);
         }
 
-        private void AssertToNullableWithFunc<T, TResult>(IOption<T> option, Func<T, TResult> map)
+        private void AssertToNullableWithFunc<T, TResult>(Option<T> option, Func<T, TResult> map)
             where TResult : struct
         {
             var result = option.ToNullable(map);
@@ -84,7 +84,7 @@ namespace FuncSharp.Tests.Options
             }
         }
 
-        private void AssertToNullableWithFuncToNullable<T, TResult>(IOption<T> option, Func<T, TResult?> map)
+        private void AssertToNullableWithFuncToNullable<T, TResult>(Option<T> option, Func<T, TResult?> map)
             where TResult : struct
         {
             var result = option.ToNullable(map);

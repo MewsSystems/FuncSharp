@@ -708,12 +708,12 @@ namespace FuncSharp
             get { return IsSecond; }
         }
 
-        public IOption<A> Success
+        public Option<A> Success
         {
             get { return First; }
         }
 
-        public IOption<E> Error
+        public Option<E> Error
         {
             get { return Second; }
         }

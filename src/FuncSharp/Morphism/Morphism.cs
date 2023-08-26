@@ -79,7 +79,7 @@ namespace FuncSharp
 
         private DataCube1<A, B> Mappings { get; }
 
-        public IOption<B> Apply(A source)
+        public Option<B> Apply(A source)
         {
             return Mappings.Get(source);
         }

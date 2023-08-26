@@ -8,22 +8,22 @@ namespace FuncSharp
         /// <summary>
         /// True value as an option.
         /// </summary>
-        public static IOption<bool> True { get; } = true.ToOption();
+        public static Option<bool> True { get; } = true.ToOption();
 
         /// <summary>
         /// False value as an option.
         /// </summary>
-        public static IOption<bool> False { get; } = false.ToOption();
+        public static Option<bool> False { get; } = false.ToOption();
 
         /// <summary>
         /// Unit value as an option.
         /// </summary>
-        public static IOption<Unit> Unit { get; } = FuncSharp.Unit.Value.ToOption();
+        public static Option<Unit> Unit { get; } = FuncSharp.Unit.Value.ToOption();
 
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
-        public static IOption<A> Create<A>(A value)
+        public static Option<A> Create<A>(A value)
         {
             if (value is not null)
             {
@@ -35,7 +35,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
-        public static IOption<A> Create<A>(A? value)
+        public static Option<A> Create<A>(A? value)
             where A : struct
         {
             if (value.HasValue)
@@ -48,7 +48,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an option with the specified value.
         /// </summary>
-        public static IOption<A> Valued<A>(A value)
+        public static Option<A> Valued<A>(A value)
         {
             return new Option<A>(value);
         }
@@ -56,13 +56,13 @@ namespace FuncSharp
         /// <summary>
         /// Returns an empty option.
         /// </summary>
-        public static IOption<A> Empty<A>()
+        public static Option<A> Empty<A>()
         {
             return Option<A>.Empty;
         }
     }
 
-    internal sealed class Option<A> : IOption<A>, IOption
+    public struct Option<A> : IOption
     {
         public Option(A value)
         {
@@ -70,7 +70,7 @@ namespace FuncSharp
             NonEmpty = true;
         }
 
-        private Option()
+        public Option()
         {
             Value = default;
             NonEmpty = false;
@@ -78,7 +78,7 @@ namespace FuncSharp
 
         public static readonly IReadOnlyList<A> EmptyList = new List<A>().AsReadOnly();
 
-        public static IOption<A> Empty { get; } = new Option<A>();
+        public static Option<A> Empty { get; } = new Option<A>();
 
         object IOption.Value => Value;
         bool IOption.IsEmpty => IsEmpty;
@@ -155,7 +155,7 @@ namespace FuncSharp
             return default(R);
         }
 
-        public IOption<B> Map<B>(Func<A, B> f)
+        public Option<B> Map<B>(Func<A, B> f)
         {
             if (NonEmpty)
             {
@@ -164,7 +164,7 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IOption<B> MapEmpty<B>(Func<Unit, B> f)
+        public Option<B> MapEmpty<B>(Func<Unit, B> f)
         {
             if (NonEmpty)
             {
@@ -173,7 +173,7 @@ namespace FuncSharp
             return new Option<B>(f(Unit.Value));
         }
 
-        public IOption<B> FlatMap<B>(Func<A, IOption<B>> f)
+        public Option<B> FlatMap<B>(Func<A, Option<B>> f)
         {
             if (NonEmpty)
             {
@@ -182,7 +182,7 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IOption<B> FlatMap<B>(Func<A, B?> f) where B : struct
+        public Option<B> FlatMap<B>(Func<A, B?> f) where B : struct
         {
             if (NonEmpty)
             {
@@ -221,29 +221,25 @@ namespace FuncSharp
 
         public static bool operator ==(Option<A> obj1, object obj2)
         {
-            return ReferenceEquals(obj1, null)
-                ? ReferenceEquals(obj2, null)
-                : obj1.Equals(obj2);
+            return obj1.Equals(obj2);
         }
 
         public static bool operator !=(Option<A> obj1, object obj2)
         {
-            return ReferenceEquals(obj1, null)
-                ? !ReferenceEquals(obj2, null)
-                : !obj1.Equals(obj2);
+            return !obj1.Equals(obj2);
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is IOption<A> other)
+            if (obj is Option<A> other)
             {
                 return NonEmpty == other.NonEmpty && Value.SafeEquals(other.GetOrDefault());
             }
-            if (typeof(A) == typeof(NonEmptyString) && obj is IOption<string> otherString)
+            if (typeof(A) == typeof(NonEmptyString) && obj is Option<string> otherString)
             {
                 return NonEmpty == otherString.NonEmpty && string.Equals(Value as NonEmptyString, otherString.GetOrDefault());
             }
-            if (typeof(A) == typeof(string) && obj is IOption<NonEmptyString> otherNonEmptyString)
+            if (typeof(A) == typeof(string) && obj is Option<NonEmptyString> otherNonEmptyString)
             {
                 return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.GetOrDefault(), Value);
             }

@@ -35,36 +35,36 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Match_int(IOption<int> option)
+        internal void Match_int(Option<int> option)
         {
             AssertMatch(option);
         }
 
         [Property]
-        internal void Match_decimal(IOption<decimal> option)
+        internal void Match_decimal(Option<decimal> option)
         {
             AssertMatch(option);
         }
 
         [Property]
-        internal void Match_double(IOption<double> option)
+        internal void Match_double(Option<double> option)
         {
             AssertMatch(option);
         }
 
         [Property]
-        internal void Match_bool(IOption<bool> option)
+        internal void Match_bool(Option<bool> option)
         {
             AssertMatch(option);
         }
 
         [Property]
-        internal void Match_ReferenceType(IOption<ReferenceType> option)
+        internal void Match_ReferenceType(Option<ReferenceType> option)
         {
             AssertMatch(option);
         }
 
-        private void AssertMatch<T>(IOption<T> option)
+        private void AssertMatch<T>(Option<T> option)
         {
             int? flag1 = null;
             int? flag2 = null;

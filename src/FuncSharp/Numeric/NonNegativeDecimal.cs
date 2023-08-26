@@ -35,7 +35,7 @@ public struct NonNegativeDecimal
         return new(d1.Value * d2.Value);
     }
 
-    public static IOption<NonNegativeDecimal> Create(decimal value)
+    public static Option<NonNegativeDecimal> Create(decimal value)
     {
         return CreateNullable(value).ToOption();
     }

@@ -27,44 +27,43 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrElse_int(IOption<int> value)
+        internal void GetOrElse_int(Option<int> value)
         {
             AssertGetOrElse(value, -14);
         }
 
         [Property]
-        internal void GetOrElse_decimal(IOption<decimal> value)
+        internal void GetOrElse_decimal(Option<decimal> value)
         {
             AssertGetOrElse(value, 2156.384m);
         }
 
         [Property]
-        internal void GetOrElse_double(IOption<double> value)
+        internal void GetOrElse_double(Option<double> value)
         {
             AssertGetOrElse(value, 2842.456);
         }
 
         [Property]
-        internal void GetOrElse_bool(IOption<bool> value)
+        internal void GetOrElse_bool(Option<bool> value)
         {
             AssertGetOrElse(value, true);
         }
 
         [Property]
-        internal void GetOrElse_ReferenceType(IOption<ReferenceType> option)
+        internal void GetOrElse_ReferenceType(Option<ReferenceType> option)
         {
             AssertGetOrElse(option, new ReferenceType(7));
-            AssertGetOrElse(option, new ReferenceTypeBase(11));
         }
 
         [Property]
-        internal void GetOrElse_ReferenceTypeBase(IOption<ReferenceTypeBase> option)
+        internal void GetOrElse_ReferenceTypeBase(Option<ReferenceTypeBase> option)
         {
             AssertGetOrElse(option, new ReferenceType(13));
             AssertGetOrElse(option, new ReferenceTypeBase(17));
         }
 
-        private void AssertGetOrElse<T>(IOption<T> option, T otherwise)
+        private void AssertGetOrElse<T>(Option<T> option, T otherwise)
         {
             var result = option.GetOrElse(otherwise);
             if (option.NonEmpty)

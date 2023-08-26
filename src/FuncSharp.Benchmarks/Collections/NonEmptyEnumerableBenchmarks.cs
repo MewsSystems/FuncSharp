@@ -8,11 +8,11 @@ namespace FuncSharp.Benchmarks
     public class NonEmptyEnumerableBenchmarks
     {
         private const string OnePotato = "1 potato";
-        private static readonly IOption<string> OnePotatoOption = OnePotato.ToOption();
+        private static readonly Option<string> OnePotatoOption = OnePotato.ToOption();
         private const string TwoPotatoes = "2 potatoes";
-        private static readonly IOption<string> TwoPotatoesOption = TwoPotatoes.ToOption();
+        private static readonly Option<string> TwoPotatoesOption = TwoPotatoes.ToOption();
         private const string ThreePotatoes = "3 potatoes";
-        private static readonly IOption<string> ThreePotatoesOption = ThreePotatoes.ToOption();
+        private static readonly Option<string> ThreePotatoesOption = ThreePotatoes.ToOption();
         private static readonly string[] Array;
         private static readonly List<string> List;
         private static readonly IReadOnlyList<string> ReadonlyList;
@@ -71,49 +71,49 @@ namespace FuncSharp.Benchmarks
         [Benchmark]
         public void AsNonEmpty()
         {
-            IOption<INonEmptyEnumerable<string>> x = List.AsNonEmpty();
+            Option<INonEmptyEnumerable<string>> x = List.AsNonEmpty();
         }
 
         // Last Result - 22.8.2023 - 15.7 ns - 0 B
         [Benchmark]
         public void Option_Create_From_EmptyEnumerable()
         {
-            IOption<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(Enumerable.Empty<string>());
+            Option<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(Enumerable.Empty<string>());
         }
 
         // Last Result - 22.8.2023 - 56.5 ns - 224 B
         [Benchmark]
         public void Option_Create_From_IEnumerable()
         {
-            IOption<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(Enumerable.Repeat(OnePotato, 5));
+            Option<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(Enumerable.Repeat(OnePotato, 5));
         }
 
         // Last Result - 22.8.2023 - 95.9 ns - 248 B
         [Benchmark]
         public void Option_Create_From_EnumeratedIEnumerable()
         {
-            IOption<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create<string>(Stack);
+            Option<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create<string>(Stack);
         }
 
         // Last Result - 22.8.2023 - 20.4 ns - 104 B
         [Benchmark]
         public void Option_Create_From_List()
         {
-            IOption<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(List);
+            Option<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(List);
         }
 
         // Last Result - 22.8.2023 - 11.2 ns - 104 B
         [Benchmark]
         public void Option_Create_From_Array()
         {
-            IOption<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(Array);
+            Option<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.Create(Array);
         }
 
         // Last Result - 22.8.2023 - 241.7 ns - 528 B
         [Benchmark]
         public void Option_CreateFlat_From_ParamsOfOptions()
         {
-            IOption<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.CreateFlat(OnePotatoOption, Option.Empty<string>(), TwoPotatoesOption, Option.Empty<string>(), ThreePotatoesOption, Option.Empty<string>());
+            Option<INonEmptyEnumerable<string>> x = NonEmptyEnumerable.CreateFlat(OnePotatoOption, Option.Empty<string>(), TwoPotatoesOption, Option.Empty<string>(), ThreePotatoesOption, Option.Empty<string>());
         }
 
         // Last Result - 22.8.2023 - 318.2 ns - 704 B

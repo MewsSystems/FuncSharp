@@ -23,7 +23,7 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetWithFunc_int(IOption<int> option)
+        internal void GetWithFunc_int(Option<int> option)
         {
             AssertGetWithFunc(option, i => i * 2);
             AssertGetWithFunc(option, i => i * 2, _ => new OutOfMemoryException());
@@ -32,39 +32,39 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetWithFunc_decimal(IOption<decimal> option)
+        internal void GetWithFunc_decimal(Option<decimal> option)
         {
             AssertGetWithFunc(option, i => i * 2);
             AssertGetWithFunc(option, i => i * 2, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void GetWithFunc_double(IOption<double> option)
+        internal void GetWithFunc_double(Option<double> option)
         {
             AssertGetWithFunc(option, i => i * 2);
             AssertGetWithFunc(option, i => i * 2, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void GetWithFunc_bool(IOption<bool> option)
+        internal void GetWithFunc_bool(Option<bool> option)
         {
             AssertGetWithFunc(option, b => !b);
             AssertGetWithFunc(option, b => !b, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void GetWithFunc_ReferenceType(IOption<ReferenceType> option)
+        internal void GetWithFunc_ReferenceType(Option<ReferenceType> option)
         {
             AssertGetWithFunc(option, d => new ReferenceType(d.Value * 2));
             AssertGetWithFunc(option, d => new ReferenceType(d.Value * 2), _ => new OutOfMemoryException());
         }
 
-       private void AssertGetWithFunc<T, TResult>(IOption<T> option, Func<T, TResult> map)
+       private void AssertGetWithFunc<T, TResult>(Option<T> option, Func<T, TResult> map)
         {
             AssertGetWithFunc<T, TResult, InvalidOperationException>(option, map);
         }
 
-        private void AssertGetWithFunc<T, TResult, TException>(IOption<T> option, Func<T, TResult> map, Func<Unit, TException> otherwise = null)
+        private void AssertGetWithFunc<T, TResult, TException>(Option<T> option, Func<T, TResult> map, Func<Unit, TException> otherwise = null)
             where TException : Exception
         {
             if(option.NonEmpty)

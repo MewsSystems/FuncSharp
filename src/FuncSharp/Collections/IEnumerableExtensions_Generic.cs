@@ -181,7 +181,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
         /// </summary>
-        public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
+        public static Option<Exception> Aggregate(this IEnumerable<Exception> source)
         {
             return Aggregate(source.AsReadOnlyList());
         }
@@ -190,13 +190,13 @@ namespace FuncSharp
         /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
         /// </summary>
         [Pure]
-        public static IOption<Exception> Aggregate(this IReadOnlyList<Exception> source)
+        public static Option<Exception> Aggregate(this IReadOnlyList<Exception> source)
         {
             return source.Count switch
             {
                 0 => Option<Exception>.Empty,
                 1 => Option.Valued(source[0]),
-                _ => Option.Valued(new AggregateException(source))
+                _ => Option.Valued<Exception>(new AggregateException(source))
             };
         }
 

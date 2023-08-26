@@ -39,7 +39,7 @@ public struct PositiveDecimal
         return new(d1.Value * d2.Value);
     }
 
-    public static IOption<PositiveDecimal> Create(decimal value)
+    public static Option<PositiveDecimal> Create(decimal value)
     {
         return CreateNullable(value).ToOption();
     }

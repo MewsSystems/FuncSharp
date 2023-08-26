@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Xunit;
 
 namespace FuncSharp.Tests.Strings;
@@ -81,8 +82,8 @@ public class StringExtensionTests
     public void ToFloat()
     {
         OptionAssert.NonEmptyWithValue(12f, "12".ToFloat());
-        OptionAssert.NonEmpty("12,628".ToFloat());
-        Assert.Equal(12.628f, "12,628".ToFloat().Get(), tolerance: 0.00005f);
+        OptionAssert.NonEmpty("12.628".ToFloat(new NumberFormatInfo()));
+        Assert.Equal(12.628f, "12.628".ToFloat(new NumberFormatInfo()).Get(), tolerance: 0.00005f);
         OptionAssert.NonEmpty("340282300000000000000000000000000000000".ToFloat());
         Assert.Equal(340282200000000000000000000000000000000f, "340282300000000000000000000000000000000".ToFloat().Get(), tolerance: 1000000000000000000000000000000000f);
 
@@ -97,8 +98,8 @@ public class StringExtensionTests
     public void ToDouble()
     {
         OptionAssert.NonEmptyWithValue(12d, "12".ToDouble());
-        OptionAssert.NonEmpty("12,628".ToDouble());
-        Assert.Equal(12.628d, "12,628".ToDouble().Get(), tolerance: 0.00005);
+        OptionAssert.NonEmpty("12.628".ToDouble(new NumberFormatInfo()));
+        Assert.Equal(12.628d, "12.628".ToDouble(new NumberFormatInfo()).Get(), tolerance: 0.00005);
 
         OptionAssert.IsEmpty(((string)null).ToDouble());
         OptionAssert.IsEmpty(string.Empty.ToDouble());
@@ -109,7 +110,7 @@ public class StringExtensionTests
     public void ToDecimal()
     {
         OptionAssert.NonEmptyWithValue(12m, "12".ToDecimal());
-        OptionAssert.NonEmptyWithValue(12.628m, "12,628".ToDecimal());
+        OptionAssert.NonEmptyWithValue(12.628m, "12.628".ToDecimal(new NumberFormatInfo()));
         OptionAssert.NonEmptyWithValue(79228162514264337593543950335m, "79228162514264337593543950335".ToDecimal());
 
         OptionAssert.IsEmpty(((string)null).ToDecimal());
