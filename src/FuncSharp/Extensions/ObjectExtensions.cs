@@ -49,6 +49,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)
             where A : class
         {
@@ -67,6 +68,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
             where A : class
         {
@@ -81,6 +83,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : class
         {
@@ -93,6 +96,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static async Task<B> MatchRefAsync<A, B>(this A a, Func<A, Task<B>> func, Func<Unit, Task<B>> otherwise)
             where A : class
         {
@@ -104,6 +108,7 @@ namespace FuncSharp
         }
 
         [Obsolete("Use Map instead.", error: true)]
+        [Pure]
         public static B MapRef<A, B>(this IOption<A> a, Func<A, B> func)
         {
             throw new NotImplementedException();
@@ -111,6 +116,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B MapRef<A, B>(this A a, Func<A, B> func)
             where A : class
             where B : class
@@ -125,6 +131,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static async Task<B> MapRefAsync<A, B>(this A a, Func<A, Task<B>> func)
             where A : class
             where B : class
@@ -138,7 +145,8 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
-        public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
+        [Pure]
+         public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
             where A : class
             where B : struct
         {
@@ -149,6 +157,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B? MapRefToVal<A, B>(this A a, Func<A, B?> func)
             where A : class
             where B : struct
@@ -160,6 +169,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static void MatchVal<A>(this A? a, Action<A> action = null, Action<Unit> otherwise = null)
             where A : struct
         {
@@ -178,6 +188,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
             where A : struct
         {
@@ -186,6 +197,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : struct
         {
@@ -196,6 +208,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B? MapVal<A, B>(this A? a, Func<A, B> func)
             where A : struct
             where B : struct
@@ -207,6 +220,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B? MapVal<A, B>(this A? a, Func<A, B?> func)
             where A : struct
             where B : struct
@@ -218,6 +232,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static B MapValToRef<A, B>(this A? a, Func<A, B> func)
             where A : struct
             where B : class
@@ -229,6 +244,7 @@ namespace FuncSharp
 
         [Pure]
         [DebuggerStepThrough]
+        [Pure]
         public static async Task<B> MapValToRefAsync<A, B>(this A? a, Func<A, Task<B>> func)
             where A : struct
             where B : class

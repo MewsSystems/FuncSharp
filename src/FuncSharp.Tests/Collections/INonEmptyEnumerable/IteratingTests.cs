@@ -13,7 +13,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 
             var result = nonEmpty.Select(text => text.Substring(0, 3));
             Assert.Equal(5, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 
             var result = nonEmpty.Select((text, index) => $"{text.Substring(0, 3)}-{index}");
             Assert.Equal(5, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
 
             var result = nonEmpty.SelectMany(text => NonEmptyEnumerable.Create(text, "something else"));
             Assert.Equal(10, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             }
 
             Assert.Equal(5, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(expected, result);
         }
     }
 }

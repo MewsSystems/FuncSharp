@@ -13,7 +13,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var result = nonEmpty.Distinct();
             
             Assert.Equal(3, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable
             var result = nonEmpty.Distinct(text => text.Substring(2));
 
             Assert.Equal(2, result.Count);
-            Assert.Equivalent(expected, result);
+            Assert.Equal(expected, result);
         }
     }
 }
