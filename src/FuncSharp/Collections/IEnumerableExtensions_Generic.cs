@@ -9,7 +9,7 @@ namespace FuncSharp
     public static partial class IEnumerableExtensions
     {
         /// <summary>
-        /// Returns a ToArray() juts of type IReadOnlyList.
+        /// Uses ToArray to generate an IReadOnlyList.
         /// </summary>
         public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
