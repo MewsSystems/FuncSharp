@@ -47,7 +47,6 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)
@@ -66,7 +65,6 @@ namespace FuncSharp
             }
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
@@ -81,7 +79,6 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
@@ -94,7 +91,6 @@ namespace FuncSharp
             return otherwise(Unit.Value);
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static async Task<B> MatchRefAsync<A, B>(this A a, Func<A, Task<B>> func, Func<Unit, Task<B>> otherwise)
@@ -114,7 +110,6 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B MapRef<A, B>(this A a, Func<A, B> func)
@@ -129,7 +124,6 @@ namespace FuncSharp
             return null;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static async Task<B> MapRefAsync<A, B>(this A a, Func<A, Task<B>> func)
@@ -143,7 +137,6 @@ namespace FuncSharp
             return default;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
          public static B? MapRefToVal<A, B>(this A a, Func<A, B> func)
@@ -155,7 +148,6 @@ namespace FuncSharp
                 : null;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B? MapRefToVal<A, B>(this A a, Func<A, B?> func)
@@ -167,7 +159,6 @@ namespace FuncSharp
                 : null;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static void MatchVal<A>(this A? a, Action<A> action = null, Action<Unit> otherwise = null)
@@ -186,7 +177,6 @@ namespace FuncSharp
             }
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
@@ -195,7 +185,6 @@ namespace FuncSharp
             return a is {} value && func(value);
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
@@ -206,7 +195,6 @@ namespace FuncSharp
                 : otherwise(Unit.Value);
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B? MapVal<A, B>(this A? a, Func<A, B> func)
@@ -218,7 +206,6 @@ namespace FuncSharp
                 : null;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B? MapVal<A, B>(this A? a, Func<A, B?> func)
@@ -230,7 +217,6 @@ namespace FuncSharp
                 : null;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static B MapValToRef<A, B>(this A? a, Func<A, B> func)
@@ -242,7 +228,6 @@ namespace FuncSharp
                 : null;
         }
 
-        [Pure]
         [DebuggerStepThrough]
         [Pure]
         public static async Task<B> MapValToRefAsync<A, B>(this A? a, Func<A, Task<B>> func)
