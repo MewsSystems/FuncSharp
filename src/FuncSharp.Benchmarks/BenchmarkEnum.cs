@@ -1,6 +1,6 @@
 namespace FuncSharp.Benchmarks
 {
-    public enum TestEnum
+    public enum BenchmarkEnum
     {
         Value1,
         Value2,
