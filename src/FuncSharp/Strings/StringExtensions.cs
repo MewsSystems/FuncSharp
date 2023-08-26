@@ -18,7 +18,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Byte.TryParse(s, style, format, out var value)
+            return byte.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<byte>();
         }
@@ -26,7 +26,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<short> ToShort(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Int16.TryParse(s, style, format, out var value)
+            return short.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<short>();
         }
@@ -34,7 +34,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<int> ToInt(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Int32.TryParse(s, style, format, out var value)
+            return int.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<int>();
         }
@@ -42,7 +42,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<long> ToLong(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {
-            return Int64.TryParse(s, style, format, out var value)
+            return long.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<long>();
         }
@@ -50,7 +50,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<float> ToFloat(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
-            return Single.TryParse(s, style, format, out var value)
+            return float.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<float>();
         }
@@ -58,7 +58,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<double> ToDouble(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands)
         {
-            return Double.TryParse(s, style, format, out var value)
+            return double.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<double>();
         }
@@ -66,7 +66,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<decimal> ToDecimal(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
-            return Decimal.TryParse(s, style, format, out var value)
+            return decimal.TryParse(s, style, format, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<decimal>();
         }
@@ -74,7 +74,7 @@ namespace FuncSharp
         [Pure]
         public static IOption<bool> ToBool(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Number)
         {
-            return Boolean.TryParse(s, out var value)
+            return bool.TryParse(s, out var value)
                 ? Option.Valued(value)
                 : Option.Empty<bool>();
         }
@@ -99,7 +99,7 @@ namespace FuncSharp
         public static IOption<TEnum> ToEnum<TEnum>(this string s, bool ignoreCase = false)
             where TEnum : struct
         {
-            if (s == null || s.Contains(",") || !Enum.TryParse<TEnum>(s, ignoreCase, out var value))
+            if (s is null || s.Contains(",") || !Enum.TryParse<TEnum>(s, ignoreCase, out var value))
             {
                 return Option.Empty<TEnum>();
             }
