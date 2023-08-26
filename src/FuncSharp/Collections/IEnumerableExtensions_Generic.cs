@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FuncSharp
@@ -8,11 +9,11 @@ namespace FuncSharp
     public static partial class IEnumerableExtensions
     {
         /// <summary>
-        /// Returns a ToList() juts of type IReadOnlyList.
+        /// Uses ToArray to generate an IReadOnlyList.
         /// </summary>
         public static IReadOnlyList<T> ToReadOnlyList<T>(this IEnumerable<T> e)
         {
-            return e.ToList().AsReadOnly();
+            return e.ToArray();
         }
 
         /// <summary>
@@ -22,6 +23,12 @@ namespace FuncSharp
         public static IReadOnlyList<T> AsReadOnlyList<T>(this IEnumerable<T> source)
         {
             return source as IReadOnlyList<T> ?? source.ToArray();
+        }
+
+        [Obsolete("This already is of type ReadOnlyList.", error: true)]
+        public static IReadOnlyList<T> AsReadOnlyList<T>(this IReadOnlyList<T> source)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -52,7 +59,7 @@ namespace FuncSharp
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params T[] excludedItems)
         {
-            return e.Except(excludedItems.AsEnumerable());
+            return Enumerable.Except(e, excludedItems);
         }
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params IEnumerable<T>[] others)
@@ -63,7 +70,7 @@ namespace FuncSharp
         public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T?> e)
             where T : struct
         {
-            return e.Where(v => v.HasValue).Select(v => v.Value);
+            return e.Where(item => item.HasValue).Select(item => item.Value);
         }
 
         public static IEnumerable<T> ExceptNulls<T>(this IEnumerable<T> e)
@@ -84,12 +91,34 @@ namespace FuncSharp
 
         public static bool IsMultiple<T>(this IEnumerable<T> e)
         {
-            return e is not null && e.Take(2).Count().SafeEquals(2);
+            switch (e)
+            {
+                case null:
+                    return false;
+                case IReadOnlyCollection<T> c:
+                    return c.Count > 1;
+                default:
+                {
+                    using var enumerator = e.GetEnumerator();
+                    return enumerator.MoveNext() && enumerator.MoveNext();
+                }
+            }
         }
 
         public static bool IsSingle<T>(this IEnumerable<T> e)
         {
-            return e is not null && e.Take(2).Count().SafeEquals(1);
+            switch (e)
+            {
+                case null:
+                    return false;
+                case IReadOnlyCollection<T> c1:
+                    return c1.Count == 1;
+                default:
+                {
+                    using var enumerator = e.GetEnumerator();
+                    return enumerator.MoveNext() && !enumerator.MoveNext();
+                }
+            }
         }
 
         public static T Second<T>(this IEnumerable<T> e)
@@ -124,12 +153,20 @@ namespace FuncSharp
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
         {
-            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), items);
+            return first is null
+                ? items
+                : Enumerable.Concat(first, items);
         }
 
         public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
         {
-            return Enumerable.Concat(first ?? Enumerable.Empty<T>(), others.SelectMany(o => o ?? Enumerable.Empty<T>()));
+            var othersResult = others is null
+                ? Array.Empty<T>()
+                : others.SelectMany(o => o ?? Enumerable.Empty<T>());
+
+            return first is null
+                ? othersResult
+                : Enumerable.Concat(first, othersResult);
         }
 
         /// <summary>
@@ -146,13 +183,34 @@ namespace FuncSharp
         /// </summary>
         public static IOption<Exception> Aggregate(this IEnumerable<Exception> source)
         {
-            var exceptions = source.AsReadOnlyList();
-            switch (exceptions.Count)
+            return Aggregate(source.AsReadOnlyList());
+        }
+
+        /// <summary>
+        /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
+        /// </summary>
+        [Pure]
+        public static IOption<Exception> Aggregate(this IReadOnlyList<Exception> source)
+        {
+            return source.Count switch
             {
-                case 0: return Option<Exception>.Empty;
-                case 1: return Option.Valued(exceptions[0]);
-                default: return Option.Valued(new AggregateException(exceptions));
-            }
+                0 => Option<Exception>.Empty,
+                1 => Option.Valued(source[0]),
+                _ => Option.Valued(new AggregateException(source))
+            };
+        }
+
+        /// <summary>
+        /// Aggregates the exceptions into an AggregateException. If there is a single exception, returns it directly.
+        /// </summary>
+        [Pure]
+        public static Exception Aggregate(this INonEmptyEnumerable<Exception> source)
+        {
+                return source.Count switch
+                {
+                    1 => source[0],
+                    _ => new AggregateException(source)
+                };
         }
     }
 }

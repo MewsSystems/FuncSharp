@@ -27,31 +27,31 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrDefault_int(int i)
+        internal void NonEmpty_int(int i)
         {
             AssertNonEmpty(i);
         }
 
         [Property]
-        internal void GetOrDefault_decimal(decimal option)
+        internal void NonEmpty_decimal(decimal option)
         {
             AssertNonEmpty(option);
         }
 
         [Property]
-        internal void GetOrDefault_double(double option)
+        internal void NonEmpty_double(double option)
         {
             AssertNonEmpty(option);
         }
 
         [Property]
-        internal void GetOrDefault_bool(bool option)
+        internal void NonEmpty_bool(bool option)
         {
             AssertNonEmpty(option);
         }
 
         [Property]
-        internal void GetOrDefault_ReferenceType(ReferenceType option)
+        internal void NonEmpty_ReferenceType(ReferenceType option)
         {
             AssertNonEmpty(option);
         }
