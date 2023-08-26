@@ -40,6 +40,7 @@ namespace FuncSharp
             return t.SafeEquals((T?)other);
         }
 
+        [Pure]
         [Obsolete("Use Match instead.", error: true)]
         public static void MatchRef<A>(this IOption<A> a, Action<A> action = null, Action<Unit> otherwise = null)
         {
@@ -69,12 +70,7 @@ namespace FuncSharp
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
             where A : class
         {
-            if (a is not null)
-            {
-                return func(a);
-            }
-
-            return false;
+            return a is not null && func(a);
         }
 
         [Obsolete("Use Match instead.", error: true)]
@@ -147,10 +143,9 @@ namespace FuncSharp
             where A : class
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a),
-                f => default(B?)
-            );
+            return a is not null
+                ? func(a)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -159,10 +154,9 @@ namespace FuncSharp
             where A : class
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a),
-                f => null
-            );
+            return a is not null
+                ? func(a)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -188,7 +182,7 @@ namespace FuncSharp
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
             where A : struct
         {
-            return MatchVal(a, func, _ => false);
+            return a is {} value && func(value);
         }
 
         [DebuggerStepThrough]
@@ -196,10 +190,9 @@ namespace FuncSharp
         public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => otherwise(Unit.Value)
-            );
+            return a is {} value
+                ? func(value)
+                : otherwise(Unit.Value);
         }
 
         [DebuggerStepThrough]
@@ -208,10 +201,9 @@ namespace FuncSharp
             where A : struct
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => default(B?)
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -220,10 +212,9 @@ namespace FuncSharp
             where A : struct
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => null
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -232,10 +223,9 @@ namespace FuncSharp
             where A : struct
             where B : class
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => null
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -389,7 +379,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -547,7 +536,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -732,7 +720,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -944,7 +931,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -1183,7 +1169,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -1449,7 +1434,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -1742,7 +1726,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -2062,7 +2045,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -2409,7 +2391,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -2783,7 +2764,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -3184,7 +3164,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -3612,7 +3591,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -4067,7 +4045,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -4549,7 +4526,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -5058,7 +5034,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -5594,7 +5569,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -6157,7 +6131,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -6747,7 +6720,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
@@ -7364,7 +7336,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(

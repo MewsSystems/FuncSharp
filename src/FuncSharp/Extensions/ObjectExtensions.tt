@@ -45,6 +45,7 @@ namespace FuncSharp
             return t.SafeEquals((T?)other);
         }
 
+        [Pure]
         [Obsolete("Use Match instead.", error: true)]
         public static void MatchRef<A>(this IOption<A> a, Action<A> action = null, Action<Unit> otherwise = null)
         {
@@ -74,12 +75,7 @@ namespace FuncSharp
         public static bool MatchRef<A>(this A a, Func<A, bool> func)
             where A : class
         {
-            if (a is not null)
-            {
-                return func(a);
-            }
-
-            return false;
+            return a is not null && func(a);
         }
 
         [Obsolete("Use Match instead.", error: true)]
@@ -152,10 +148,9 @@ namespace FuncSharp
             where A : class
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a),
-                f => default(B?)
-            );
+            return a is not null
+                ? func(a)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -164,10 +159,9 @@ namespace FuncSharp
             where A : class
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a),
-                f => null
-            );
+            return a is not null
+                ? func(a)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -193,7 +187,7 @@ namespace FuncSharp
         public static bool MatchVal<A>(this A? a, Func<A, bool> func)
             where A : struct
         {
-            return MatchVal(a, func, _ => false);
+            return a is {} value && func(value);
         }
 
         [DebuggerStepThrough]
@@ -201,10 +195,9 @@ namespace FuncSharp
         public static B MatchVal<A, B>(this A? a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => otherwise(Unit.Value)
-            );
+            return a is {} value
+                ? func(value)
+                : otherwise(Unit.Value);
         }
 
         [DebuggerStepThrough]
@@ -213,10 +206,9 @@ namespace FuncSharp
             where A : struct
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => default(B?)
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -225,10 +217,9 @@ namespace FuncSharp
             where A : struct
             where B : struct
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => null
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -237,10 +228,9 @@ namespace FuncSharp
             where A : struct
             where B : class
         {
-            return (a is not null).Match(
-                t => func(a.Value),
-                f => null
-            );
+            return a is {} value
+                ? func(value)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -401,7 +391,6 @@ namespace FuncSharp
             }
             throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
         }
-
 
         [Pure]
         public static async Task<TResult> MatchAsync<T, TResult>(
