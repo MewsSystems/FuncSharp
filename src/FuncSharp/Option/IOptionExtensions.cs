@@ -270,19 +270,33 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        [DebuggerStepThrough]
-        public static IReadOnlyList<T> GetOrEmpty<T>(this Option<IReadOnlyList<T>> source)
+        public static IEnumerable<A> GetOrEmpty<A>(this Option<IEnumerable<A>> option)
         {
-            return source.Match(s => s, _ => ReadOnlyList.Empty<T>());
+            return option.GetOrElse(_ => Enumerable.Empty<A>());
         }
 
         /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty enumerable.
+        /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        [DebuggerStepThrough]
-        public static IEnumerable<T> GetOrEmpty<T>(this Option<IEnumerable<T>> source)
+        public static IReadOnlyList<A> GetOrEmpty<A>(this Option<IReadOnlyList<A>> option)
         {
-            return source.Match(s => s, _ => Enumerable.Empty<T>());
+            return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty.
+        /// </summary>
+        public static A[] GetOrEmpty<A>(this Option<A[]> option)
+        {
+            return option.GetOrElse(_ => Array.Empty<A>());
+        }
+
+        /// <summary>
+        /// Returns the value if the option is nonempty, otherwise empty.
+        /// </summary>
+        public static List<A> GetOrEmpty<A>(this Option<List<A>> option)
+        {
+            return option.GetOrElse(_ => new List<A>());
         }
 
         /// <summary>
