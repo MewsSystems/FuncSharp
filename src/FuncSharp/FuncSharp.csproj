@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>7.0.0-preview.4.1</Version>
+    <Version>7.0.0-preview.5</Version>
     <AssemblyVersion>7.0.0</AssemblyVersion>
     <FileVersion>7.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Introduced a lot of functionality for NonEmptyString and another batch of Extensions.</PackageReleaseNotes>
+    <PackageReleaseNotes>Performance improvements, IOption interface removed. Option is a struct.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
