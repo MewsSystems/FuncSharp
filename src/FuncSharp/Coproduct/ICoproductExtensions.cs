@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace FuncSharp
@@ -50,7 +51,7 @@ namespace FuncSharp
         /// </summary>
         public static int CoproductHashCode(this ICoproduct c)
         {
-            return Structural.HashCode(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
+            return HashCode.Combine(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
         }
 
         /// <summary>

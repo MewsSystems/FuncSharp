@@ -6,11 +6,9 @@ namespace FuncSharp
     {
         public static IOption<V> Get<K, V>(this IReadOnlyDictionary<K, V> dictionary, K key)
         {
-            if (Equals(key, null))
-            {
-                return Option.Empty<V>();
-            }
-            return Tryer.Invoke<K, V>(dictionary.TryGetValue, key);
+            return key is not null && dictionary.TryGetValue(key, out var value)
+                ? Option.Valued(value)
+                : Option.Empty<V>();
         }
     }
 }
