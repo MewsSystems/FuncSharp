@@ -28,48 +28,48 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Where_short(IOption<short> option)
+        internal void Where_short(Option<short> option)
         {
             AssertWhere(option, i => i > 0);
         }
 
         [Property]
-        internal void Where_int(IOption<int> option)
+        internal void Where_int(Option<int> option)
         {
             AssertWhere(option, i => i > 1567);
         }
 
         [Property]
-        internal void Where_long(IOption<long> option)
+        internal void Where_long(Option<long> option)
         {
             AssertWhere(option, i => i < 1567);
         }
 
         [Property]
-        internal void Where_decimal(IOption<decimal> option)
+        internal void Where_decimal(Option<decimal> option)
         {
             AssertWhere(option, d => d < -1200);
         }
 
         [Property]
-        internal void Where_double(IOption<double> option)
+        internal void Where_double(Option<double> option)
         {
             AssertWhere(option, d => Math.Abs(d) > 14);
         }
 
         [Property]
-        internal void Where_bool(IOption<bool> option)
+        internal void Where_bool(Option<bool> option)
         {
             AssertWhere(option, b => !b);
         }
 
         [Property]
-        internal void Where_ReferenceType(IOption<ReferenceType> option)
+        internal void Where_ReferenceType(Option<ReferenceType> option)
         {
             AssertWhere(option, t => t.Value > 1567);
         }
 
-        private void AssertWhere<T>(IOption<T> option, Func<T, bool> map)
+        private void AssertWhere<T>(Option<T> option, Func<T, bool> map)
         {
             var whereResult = option.Where(x => map(x));
 

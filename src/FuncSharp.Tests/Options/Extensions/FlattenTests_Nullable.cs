@@ -26,30 +26,30 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Flatten_int(IOption<int?> option)
+        internal void Flatten_int(Option<int?> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_decimal(IOption<decimal?> option)
+        internal void Flatten_decimal(Option<decimal?> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_double(IOption<double?> option)
+        internal void Flatten_double(Option<double?> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_bool(IOption<bool?> option)
+        internal void Flatten_bool(Option<bool?> option)
         {
             AssertFlatten(option);
         }
 
-        private void AssertFlatten<T>(IOption<T?> option)
+        private void AssertFlatten<T>(Option<T?> option)
             where T : struct
         {
             var result = option.Flatten();

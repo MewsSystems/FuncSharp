@@ -109,7 +109,7 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 1; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
@@ -226,11 +226,11 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 2; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
@@ -375,15 +375,15 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 3; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
@@ -556,19 +556,19 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 4; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
@@ -769,23 +769,23 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 5; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
@@ -1014,27 +1014,27 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 6; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
@@ -1291,31 +1291,31 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 7; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
@@ -1600,35 +1600,35 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 8; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
@@ -1941,39 +1941,39 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 9; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
@@ -2314,43 +2314,43 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 10; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
@@ -2719,47 +2719,47 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 11; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
@@ -3156,51 +3156,51 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 12; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
@@ -3625,55 +3625,55 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 13; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
@@ -4126,59 +4126,59 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 14; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
@@ -4659,63 +4659,63 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 15; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued((T15)CoproductValue) : Option.Empty<T15>(); }
         }
@@ -5224,67 +5224,67 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 16; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued((T15)CoproductValue) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued((T16)CoproductValue) : Option.Empty<T16>(); }
         }
@@ -5821,71 +5821,71 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 17; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued((T15)CoproductValue) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued((T16)CoproductValue) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued((T17)CoproductValue) : Option.Empty<T17>(); }
         }
@@ -6450,75 +6450,75 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 18; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued((T15)CoproductValue) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued((T16)CoproductValue) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued((T17)CoproductValue) : Option.Empty<T17>(); }
         }
-        public IOption<T18> Eighteenth
+        public Option<T18> Eighteenth
         {
             get { return IsEighteenth ? Option.Valued((T18)CoproductValue) : Option.Empty<T18>(); }
         }
@@ -7111,79 +7111,79 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 19; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued((T15)CoproductValue) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued((T16)CoproductValue) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued((T17)CoproductValue) : Option.Empty<T17>(); }
         }
-        public IOption<T18> Eighteenth
+        public Option<T18> Eighteenth
         {
             get { return IsEighteenth ? Option.Valued((T18)CoproductValue) : Option.Empty<T18>(); }
         }
-        public IOption<T19> Nineteenth
+        public Option<T19> Nineteenth
         {
             get { return IsNineteenth ? Option.Valued((T19)CoproductValue) : Option.Empty<T19>(); }
         }
@@ -7804,83 +7804,83 @@ namespace FuncSharp
             get { return CoproductDiscriminator == 20; }
         }
 
-        public IOption<T1> First
+        public Option<T1> First
         {
             get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
         }
-        public IOption<T2> Second
+        public Option<T2> Second
         {
             get { return IsSecond ? Option.Valued((T2)CoproductValue) : Option.Empty<T2>(); }
         }
-        public IOption<T3> Third
+        public Option<T3> Third
         {
             get { return IsThird ? Option.Valued((T3)CoproductValue) : Option.Empty<T3>(); }
         }
-        public IOption<T4> Fourth
+        public Option<T4> Fourth
         {
             get { return IsFourth ? Option.Valued((T4)CoproductValue) : Option.Empty<T4>(); }
         }
-        public IOption<T5> Fifth
+        public Option<T5> Fifth
         {
             get { return IsFifth ? Option.Valued((T5)CoproductValue) : Option.Empty<T5>(); }
         }
-        public IOption<T6> Sixth
+        public Option<T6> Sixth
         {
             get { return IsSixth ? Option.Valued((T6)CoproductValue) : Option.Empty<T6>(); }
         }
-        public IOption<T7> Seventh
+        public Option<T7> Seventh
         {
             get { return IsSeventh ? Option.Valued((T7)CoproductValue) : Option.Empty<T7>(); }
         }
-        public IOption<T8> Eighth
+        public Option<T8> Eighth
         {
             get { return IsEighth ? Option.Valued((T8)CoproductValue) : Option.Empty<T8>(); }
         }
-        public IOption<T9> Ninth
+        public Option<T9> Ninth
         {
             get { return IsNinth ? Option.Valued((T9)CoproductValue) : Option.Empty<T9>(); }
         }
-        public IOption<T10> Tenth
+        public Option<T10> Tenth
         {
             get { return IsTenth ? Option.Valued((T10)CoproductValue) : Option.Empty<T10>(); }
         }
-        public IOption<T11> Eleventh
+        public Option<T11> Eleventh
         {
             get { return IsEleventh ? Option.Valued((T11)CoproductValue) : Option.Empty<T11>(); }
         }
-        public IOption<T12> Twelfth
+        public Option<T12> Twelfth
         {
             get { return IsTwelfth ? Option.Valued((T12)CoproductValue) : Option.Empty<T12>(); }
         }
-        public IOption<T13> Thirteenth
+        public Option<T13> Thirteenth
         {
             get { return IsThirteenth ? Option.Valued((T13)CoproductValue) : Option.Empty<T13>(); }
         }
-        public IOption<T14> Fourteenth
+        public Option<T14> Fourteenth
         {
             get { return IsFourteenth ? Option.Valued((T14)CoproductValue) : Option.Empty<T14>(); }
         }
-        public IOption<T15> Fifteenth
+        public Option<T15> Fifteenth
         {
             get { return IsFifteenth ? Option.Valued((T15)CoproductValue) : Option.Empty<T15>(); }
         }
-        public IOption<T16> Sixteenth
+        public Option<T16> Sixteenth
         {
             get { return IsSixteenth ? Option.Valued((T16)CoproductValue) : Option.Empty<T16>(); }
         }
-        public IOption<T17> Seventeenth
+        public Option<T17> Seventeenth
         {
             get { return IsSeventeenth ? Option.Valued((T17)CoproductValue) : Option.Empty<T17>(); }
         }
-        public IOption<T18> Eighteenth
+        public Option<T18> Eighteenth
         {
             get { return IsEighteenth ? Option.Valued((T18)CoproductValue) : Option.Empty<T18>(); }
         }
-        public IOption<T19> Nineteenth
+        public Option<T19> Nineteenth
         {
             get { return IsNineteenth ? Option.Valued((T19)CoproductValue) : Option.Empty<T19>(); }
         }
-        public IOption<T20> Twentieth
+        public Option<T20> Twentieth
         {
             get { return IsTwentieth ? Option.Valued((T20)CoproductValue) : Option.Empty<T20>(); }
         }

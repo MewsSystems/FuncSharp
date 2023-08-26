@@ -28,44 +28,43 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void OrElse_int(IOption<int> option)
+        internal void OrElse_int(Option<int> option)
         {
             AssertOrElse(option, _ => (-14).ToOption());
         }
 
         [Property]
-        internal void OrElse_decimal(IOption<decimal> option)
+        internal void OrElse_decimal(Option<decimal> option)
         {
             AssertOrElse(option, _ => 2156.384m.ToOption());
         }
 
         [Property]
-        internal void OrElse_double(IOption<double> option)
+        internal void OrElse_double(Option<double> option)
         {
             AssertOrElse(option, _ => 2842.456.ToOption());
         }
 
         [Property]
-        internal void OrElse_bool(IOption<bool> option)
+        internal void OrElse_bool(Option<bool> option)
         {
             AssertOrElse(option, _ => true.ToOption());
         }
 
         [Property]
-        internal void OrElse_ReferenceType(IOption<ReferenceType> option)
+        internal void OrElse_ReferenceType(Option<ReferenceType> option)
         {
             AssertOrElse(option, _ => new ReferenceType(7).ToOption());
-            AssertOrElse(option, _ => new ReferenceTypeBase(11).ToOption());
         }
 
         [Property]
-        internal void OrElse_ReferenceTypeBase(IOption<ReferenceTypeBase> option)
+        internal void OrElse_ReferenceTypeBase(Option<ReferenceTypeBase> option)
         {
-            AssertOrElse(option, _ => new ReferenceType(13).ToOption());
+            AssertOrElse(option, _ => new ReferenceType(13).ToOption<ReferenceTypeBase>());
             AssertOrElse(option, _ => new ReferenceTypeBase(17).ToOption());
         }
 
-        private void AssertOrElse<T>(IOption<T> option, Func<Unit, IOption<T>> otherwise)
+        private void AssertOrElse<T>(Option<T> option, Func<Unit, Option<T>> otherwise)
         {
             var result = option.OrElse(otherwise);
             if (option.NonEmpty)

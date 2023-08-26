@@ -1,11 +1,11 @@
 ﻿namespace FuncSharp
 {
-    public class Interval<A> : Product2<IOption<IntervalBound<A>>, IOption<IntervalBound<A>>>
+    public class Interval<A> : Product2<Option<IntervalBound<A>>, Option<IntervalBound<A>>>
     {
         /// <summary>
         /// Creates a new interval with the specified bounds.
         /// </summary>
-        internal Interval(IOption<IntervalBound<A>> lowerBound, IOption<IntervalBound<A>> upperBound, bool isEmpty)
+        internal Interval(Option<IntervalBound<A>> lowerBound, Option<IntervalBound<A>> upperBound, bool isEmpty)
             : base(lowerBound, upperBound)
         {
             IsEmpty = isEmpty;
@@ -14,7 +14,7 @@
         /// <summary>
         /// Lower bound of the interval.
         /// </summary>
-        public IOption<IntervalBound<A>> LowerBound
+        public Option<IntervalBound<A>> LowerBound
         {
             get { return ProductValue1; }
         }
@@ -22,7 +22,7 @@
         /// <summary>
         /// Upper bound of the interval.
         /// </summary>
-        public IOption<IntervalBound<A>> UpperBound
+        public Option<IntervalBound<A>> UpperBound
         {
             get { return ProductValue2; }
         }
@@ -30,7 +30,7 @@
         /// <summary>
         /// Value of the interval lower bound.
         /// </summary>
-        public IOption<A> LowerBoundValue
+        public Option<A> LowerBoundValue
         {
             get { return LowerBound.Map(l => l.Value); }
         }
@@ -38,7 +38,7 @@
         /// <summary>
         /// Value of the interval upper bound.
         /// </summary>
-        public IOption<A> UpperBoundValue
+        public Option<A> UpperBoundValue
         {
             get { return UpperBound.Map(l => l.Value); }
         }

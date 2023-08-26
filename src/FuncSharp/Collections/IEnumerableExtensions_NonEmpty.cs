@@ -12,7 +12,7 @@ namespace FuncSharp
         /// Returns a nonEmptyEnumerable in case the collection is nonempty. Otherwise returns empty option.
         /// </summary>
         [DebuggerStepThrough]
-        public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this IEnumerable<T> source)
+        public static Option<INonEmptyEnumerable<T>> AsNonEmpty<T>(this IEnumerable<T> source)
         {
             return source switch
             {
@@ -23,7 +23,7 @@ namespace FuncSharp
         }
 
         [Obsolete("This is already a NonEmptyEnumerable.", error: true)]
-        public static IOption<INonEmptyEnumerable<T>> AsNonEmpty<T>(this INonEmptyEnumerable<T> source)
+        public static Option<INonEmptyEnumerable<T>> AsNonEmpty<T>(this INonEmptyEnumerable<T> source)
         {
             throw new NotImplementedException();
         }

@@ -23,46 +23,46 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Get_int(IOption<int> option)
+        internal void Get_int(Option<int> option)
         {
             AssertGet<int, InvalidOperationException>(option);
             AssertGet(option, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void Get_decimal(IOption<decimal> option)
+        internal void Get_decimal(Option<decimal> option)
         {
             AssertGet(option);
             AssertGet(option, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void Get_double(IOption<double> option)
+        internal void Get_double(Option<double> option)
         {
             AssertGet(option);
             AssertGet(option, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void Get_bool(IOption<bool> option)
+        internal void Get_bool(Option<bool> option)
         {
             AssertGet(option);
             AssertGet(option, _ => new OutOfMemoryException());
         }
 
         [Property]
-        internal void Get_ReferenceType(IOption<ReferenceType> option)
+        internal void Get_ReferenceType(Option<ReferenceType> option)
         {
             AssertGet(option);
             AssertGet(option, _ => new OutOfMemoryException());
         }
 
-        private void AssertGet<T>(IOption<T> option)
+        private void AssertGet<T>(Option<T> option)
         {
             AssertGet<T, InvalidOperationException>(option);
         }
 
-        private void AssertGet<T, TException>(IOption<T> option, Func<Unit, TException> otherwise = null)
+        private void AssertGet<T, TException>(Option<T> option, Func<Unit, TException> otherwise = null)
             where TException : Exception
         {
             if(option.NonEmpty)

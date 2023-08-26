@@ -17,7 +17,7 @@ namespace FuncSharp.Tests.Options
         public void Flatten()
         {
             Assert.Empty(Option.Empty<List<int>>().Flatten());
-            Assert.Empty(Option.Empty<Stack<ReferenceType>>().Flatten());
+            Assert.Empty(Option.Empty<IEnumerable<ReferenceType>>().Flatten());
 
             Assert.Empty(Option.Valued(new int[]{}).Flatten());
             Assert.Empty(Option.Valued(new List<ReferenceType>()).Flatten());
@@ -32,36 +32,36 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Flatten_int(IOption<List<int>> option)
+        internal void Flatten_int(Option<List<int>> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_decimal(IOption<List<decimal>> option)
+        internal void Flatten_decimal(Option<List<decimal>> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_double(IOption<List<double>> option)
+        internal void Flatten_double(Option<List<double>> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_bool(IOption<List<bool>> option)
+        internal void Flatten_bool(Option<List<bool>> option)
         {
             AssertFlatten(option);
         }
 
         [Property]
-        internal void Flatten_referenceType(IOption<List<ReferenceType>> option)
+        internal void Flatten_referenceType(Option<List<ReferenceType>> option)
         {
             AssertFlatten(option);
         }
 
-        private void AssertFlatten<T>(IOption<List<T>> option)
+        private void AssertFlatten<T>(Option<List<T>> option)
         {
             var result = option.Flatten();
 

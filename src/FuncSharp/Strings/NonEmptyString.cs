@@ -34,7 +34,7 @@ public sealed class NonEmptyString : IEquatable<string>, IEquatable<NonEmptyStri
         return new NonEmptyString(value);
     }
 
-    public static IOption<NonEmptyString> Create(string value)
+    public static Option<NonEmptyString> Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {

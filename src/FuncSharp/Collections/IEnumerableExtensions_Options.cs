@@ -9,7 +9,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns values of the nonempty options.
         /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IOption<T>> source)
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<Option<T>> source)
         {
             return source.Where(o => o.NonEmpty).Select(o => o.GetOrDefault());
         }
@@ -17,7 +17,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the max value of the enumerable or an empty option if it is empty.
         /// </summary>
-        public static IOption<TValue> SafeMax<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
+        public static Option<TValue> SafeMax<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
         {
             return source.AsNonEmpty().Map(s => s.Max(selector));
         }
@@ -25,7 +25,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the min value of the enumerable or an empty option if it is empty.
         /// </summary>
-        public static IOption<TValue> SafeMin<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
+        public static Option<TValue> SafeMin<T, TValue>(this IEnumerable<T> source, Func<T, TValue> selector)
         {
             return source.AsNonEmpty().Map(s => s.Min(selector));
         }
@@ -33,7 +33,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns first value or an empty option.
         /// </summary>
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
             return source.Where(predicate).FirstOption();
         }
@@ -41,7 +41,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns first value or an empty option.
         /// </summary>
-        public static IOption<T> FirstOption<T>(this IEnumerable<T> source)
+        public static Option<T> FirstOption<T>(this IEnumerable<T> source)
         {
             if (source is IReadOnlyList<T> list)
             {
@@ -57,7 +57,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns last value or an empty option.
         /// </summary>
-        public static IOption<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
             return source.Reverse().FirstOption(predicate);
         }
@@ -65,7 +65,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns last value or an empty option.
         /// </summary>
-        public static IOption<T> LastOption<T>(this IEnumerable<T> source)
+        public static Option<T> LastOption<T>(this IEnumerable<T> source)
         {
             return source is IReadOnlyList<T> list
                 ? list.LastOption()
@@ -75,7 +75,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the only value if the source contains just one value, otherwise an empty option.
         /// </summary>
-        public static IOption<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        public static Option<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
             return source.Where(predicate).SingleOption();
         }
@@ -83,7 +83,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the only value if the source contains just one value, otherwise an empty option.
         /// </summary>
-        public static IOption<T> SingleOption<T>(this IEnumerable<T> source)
+        public static Option<T> SingleOption<T>(this IEnumerable<T> source)
         {
             if (source is IReadOnlyList<T> list)
             {

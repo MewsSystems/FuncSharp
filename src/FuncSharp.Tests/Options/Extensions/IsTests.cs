@@ -28,48 +28,48 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Is_short(IOption<short> option)
+        internal void Is_short(Option<short> option)
         {
             AssertIs(option, i => i > 0);
         }
 
         [Property]
-        internal void Is_int(IOption<int> option)
+        internal void Is_int(Option<int> option)
         {
             AssertIs(option, i => i > 1567);
         }
 
         [Property]
-        internal void Is_long(IOption<long> option)
+        internal void Is_long(Option<long> option)
         {
             AssertIs(option, i => i < 1567);
         }
 
         [Property]
-        internal void Is_decimal(IOption<decimal> option)
+        internal void Is_decimal(Option<decimal> option)
         {
             AssertIs(option, d => d < -1200);
         }
 
         [Property]
-        internal void Is_double(IOption<double> option)
+        internal void Is_double(Option<double> option)
         {
             AssertIs(option, d => Math.Abs(d) > 14);
         }
 
         [Property]
-        internal void Is_bool(IOption<bool> option)
+        internal void Is_bool(Option<bool> option)
         {
             AssertIs(option, b => !b);
         }
 
         [Property]
-        internal void Is_ReferenceType(IOption<ReferenceType> option)
+        internal void Is_ReferenceType(Option<ReferenceType> option)
         {
             AssertIs(option, t => t.Value > 1567);
         }
 
-        private void AssertIs<T>(IOption<T> option, Func<T, bool> map)
+        private void AssertIs<T>(Option<T> option, Func<T, bool> map)
         {
             var isResult = option.Is(x => map(x));
 

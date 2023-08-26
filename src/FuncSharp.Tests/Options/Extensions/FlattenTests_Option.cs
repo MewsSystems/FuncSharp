@@ -21,41 +21,41 @@ namespace FuncSharp.Tests.Options
             OptionAssert.IsEmpty(Option.Valued(Option.Empty<int>()).Flatten());
             OptionAssert.IsEmpty(Option.Valued(Option.Empty<ReferenceType>()).Flatten());
 
-            OptionAssert.IsEmpty(Option.Empty<IOption<int>>().Flatten());
-            OptionAssert.IsEmpty(Option.Empty<IOption<ReferenceType>>().Flatten());
+            OptionAssert.IsEmpty(Option.Empty<Option<int>>().Flatten());
+            OptionAssert.IsEmpty(Option.Empty<Option<ReferenceType>>().Flatten());
         }
 
         [Property]
-        internal void Flatten_int(IOption<int> first, IOption<int> second)
+        internal void Flatten_int(Option<int> first, Option<int> second)
         {
             AssertFlatten(first, second);
         }
 
         [Property]
-        internal void Flatten_decimal(IOption<decimal> first, IOption<decimal> second)
+        internal void Flatten_decimal(Option<decimal> first, Option<decimal> second)
         {
             AssertFlatten(first, second);
         }
 
         [Property]
-        internal void Flatten_double(IOption<double> first, IOption<double> second)
+        internal void Flatten_double(Option<double> first, Option<double> second)
         {
             AssertFlatten(first, second);
         }
 
         [Property]
-        internal void Flatten_bool(IOption<bool> first, IOption<bool> second)
+        internal void Flatten_bool(Option<bool> first, Option<bool> second)
         {
             AssertFlatten(first, second);
         }
 
         [Property]
-        internal void Flatten_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
+        internal void Flatten_ReferenceType(Option<ReferenceType> first, Option<ReferenceType> second)
         {
             AssertFlatten(first, second);
         }
 
-        private void AssertFlatten<T>(IOption<T> first, IOption<T> second)
+        private void AssertFlatten<T>(Option<T> first, Option<T> second)
         {
             var result = first.Map(f => second.Map(s => (f, s))).Flatten();
             Assert.Equal(first.NonEmpty && second.NonEmpty, result.NonEmpty);

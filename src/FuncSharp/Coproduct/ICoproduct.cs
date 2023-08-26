@@ -46,7 +46,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -90,7 +90,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -101,7 +101,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -149,7 +149,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -160,7 +160,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -171,7 +171,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -223,7 +223,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -234,7 +234,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -245,7 +245,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -256,7 +256,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -312,7 +312,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -323,7 +323,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -334,7 +334,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -345,7 +345,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -356,7 +356,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -416,7 +416,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -427,7 +427,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -438,7 +438,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -449,7 +449,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -460,7 +460,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -471,7 +471,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -535,7 +535,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -546,7 +546,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -557,7 +557,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -568,7 +568,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -579,7 +579,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -590,7 +590,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -601,7 +601,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -669,7 +669,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -680,7 +680,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -691,7 +691,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -702,7 +702,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -713,7 +713,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -724,7 +724,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -735,7 +735,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -746,7 +746,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -818,7 +818,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -829,7 +829,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -840,7 +840,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -851,7 +851,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -862,7 +862,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -873,7 +873,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -884,7 +884,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -895,7 +895,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -906,7 +906,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -982,7 +982,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -993,7 +993,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -1004,7 +1004,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -1015,7 +1015,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -1026,7 +1026,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -1037,7 +1037,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -1048,7 +1048,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -1059,7 +1059,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -1070,7 +1070,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -1081,7 +1081,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -1161,7 +1161,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -1172,7 +1172,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -1183,7 +1183,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -1194,7 +1194,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -1205,7 +1205,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -1216,7 +1216,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -1227,7 +1227,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -1238,7 +1238,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -1249,7 +1249,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -1260,7 +1260,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -1271,7 +1271,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -1355,7 +1355,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -1366,7 +1366,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -1377,7 +1377,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -1388,7 +1388,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -1399,7 +1399,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -1410,7 +1410,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -1421,7 +1421,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -1432,7 +1432,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -1443,7 +1443,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -1454,7 +1454,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -1465,7 +1465,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -1476,7 +1476,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -1564,7 +1564,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -1575,7 +1575,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -1586,7 +1586,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -1597,7 +1597,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -1608,7 +1608,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -1619,7 +1619,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -1630,7 +1630,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -1641,7 +1641,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -1652,7 +1652,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -1663,7 +1663,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -1674,7 +1674,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -1685,7 +1685,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -1696,7 +1696,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -1788,7 +1788,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -1799,7 +1799,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -1810,7 +1810,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -1821,7 +1821,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -1832,7 +1832,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -1843,7 +1843,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -1854,7 +1854,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -1865,7 +1865,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -1876,7 +1876,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -1887,7 +1887,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -1898,7 +1898,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -1909,7 +1909,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -1920,7 +1920,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -1931,7 +1931,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -2027,7 +2027,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -2038,7 +2038,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -2049,7 +2049,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -2060,7 +2060,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -2071,7 +2071,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -2082,7 +2082,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -2093,7 +2093,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -2104,7 +2104,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -2115,7 +2115,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -2126,7 +2126,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -2137,7 +2137,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -2148,7 +2148,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -2159,7 +2159,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -2170,7 +2170,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifteenth value.
@@ -2181,7 +2181,7 @@ namespace FuncSharp
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T15> Fifteenth { get; }
+        Option<T15> Fifteenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -2281,7 +2281,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -2292,7 +2292,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -2303,7 +2303,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -2314,7 +2314,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -2325,7 +2325,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -2336,7 +2336,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -2347,7 +2347,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -2358,7 +2358,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -2369,7 +2369,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -2380,7 +2380,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -2391,7 +2391,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -2402,7 +2402,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -2413,7 +2413,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -2424,7 +2424,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifteenth value.
@@ -2435,7 +2435,7 @@ namespace FuncSharp
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T15> Fifteenth { get; }
+        Option<T15> Fifteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixteenth value.
@@ -2446,7 +2446,7 @@ namespace FuncSharp
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T16> Sixteenth { get; }
+        Option<T16> Sixteenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -2550,7 +2550,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -2561,7 +2561,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -2572,7 +2572,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -2583,7 +2583,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -2594,7 +2594,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -2605,7 +2605,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -2616,7 +2616,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -2627,7 +2627,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -2638,7 +2638,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -2649,7 +2649,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -2660,7 +2660,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -2671,7 +2671,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -2682,7 +2682,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -2693,7 +2693,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifteenth value.
@@ -2704,7 +2704,7 @@ namespace FuncSharp
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T15> Fifteenth { get; }
+        Option<T15> Fifteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixteenth value.
@@ -2715,7 +2715,7 @@ namespace FuncSharp
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T16> Sixteenth { get; }
+        Option<T16> Sixteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventeenth value.
@@ -2726,7 +2726,7 @@ namespace FuncSharp
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T17> Seventeenth { get; }
+        Option<T17> Seventeenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -2834,7 +2834,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -2845,7 +2845,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -2856,7 +2856,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -2867,7 +2867,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -2878,7 +2878,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -2889,7 +2889,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -2900,7 +2900,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -2911,7 +2911,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -2922,7 +2922,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -2933,7 +2933,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -2944,7 +2944,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -2955,7 +2955,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -2966,7 +2966,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -2977,7 +2977,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifteenth value.
@@ -2988,7 +2988,7 @@ namespace FuncSharp
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T15> Fifteenth { get; }
+        Option<T15> Fifteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixteenth value.
@@ -2999,7 +2999,7 @@ namespace FuncSharp
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T16> Sixteenth { get; }
+        Option<T16> Sixteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventeenth value.
@@ -3010,7 +3010,7 @@ namespace FuncSharp
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T17> Seventeenth { get; }
+        Option<T17> Seventeenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighteenth value.
@@ -3021,7 +3021,7 @@ namespace FuncSharp
         /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T18> Eighteenth { get; }
+        Option<T18> Eighteenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -3133,7 +3133,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -3144,7 +3144,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -3155,7 +3155,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -3166,7 +3166,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -3177,7 +3177,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -3188,7 +3188,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -3199,7 +3199,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -3210,7 +3210,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -3221,7 +3221,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -3232,7 +3232,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -3243,7 +3243,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -3254,7 +3254,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -3265,7 +3265,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -3276,7 +3276,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifteenth value.
@@ -3287,7 +3287,7 @@ namespace FuncSharp
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T15> Fifteenth { get; }
+        Option<T15> Fifteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixteenth value.
@@ -3298,7 +3298,7 @@ namespace FuncSharp
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T16> Sixteenth { get; }
+        Option<T16> Sixteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventeenth value.
@@ -3309,7 +3309,7 @@ namespace FuncSharp
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T17> Seventeenth { get; }
+        Option<T17> Seventeenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighteenth value.
@@ -3320,7 +3320,7 @@ namespace FuncSharp
         /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T18> Eighteenth { get; }
+        Option<T18> Eighteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the nineteenth value.
@@ -3331,7 +3331,7 @@ namespace FuncSharp
         /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T19> Nineteenth { get; }
+        Option<T19> Nineteenth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
@@ -3447,7 +3447,7 @@ namespace FuncSharp
         /// Returns first value of the coproduct as an option. The option contains the first
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T1> First { get; }
+        Option<T1> First { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the second value.
@@ -3458,7 +3458,7 @@ namespace FuncSharp
         /// Returns second value of the coproduct as an option. The option contains the second
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T2> Second { get; }
+        Option<T2> Second { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the third value.
@@ -3469,7 +3469,7 @@ namespace FuncSharp
         /// Returns third value of the coproduct as an option. The option contains the third
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T3> Third { get; }
+        Option<T3> Third { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourth value.
@@ -3480,7 +3480,7 @@ namespace FuncSharp
         /// Returns fourth value of the coproduct as an option. The option contains the fourth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T4> Fourth { get; }
+        Option<T4> Fourth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifth value.
@@ -3491,7 +3491,7 @@ namespace FuncSharp
         /// Returns fifth value of the coproduct as an option. The option contains the fifth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T5> Fifth { get; }
+        Option<T5> Fifth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixth value.
@@ -3502,7 +3502,7 @@ namespace FuncSharp
         /// Returns sixth value of the coproduct as an option. The option contains the sixth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T6> Sixth { get; }
+        Option<T6> Sixth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventh value.
@@ -3513,7 +3513,7 @@ namespace FuncSharp
         /// Returns seventh value of the coproduct as an option. The option contains the seventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T7> Seventh { get; }
+        Option<T7> Seventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighth value.
@@ -3524,7 +3524,7 @@ namespace FuncSharp
         /// Returns eighth value of the coproduct as an option. The option contains the eighth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T8> Eighth { get; }
+        Option<T8> Eighth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the ninth value.
@@ -3535,7 +3535,7 @@ namespace FuncSharp
         /// Returns ninth value of the coproduct as an option. The option contains the ninth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T9> Ninth { get; }
+        Option<T9> Ninth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the tenth value.
@@ -3546,7 +3546,7 @@ namespace FuncSharp
         /// Returns tenth value of the coproduct as an option. The option contains the tenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T10> Tenth { get; }
+        Option<T10> Tenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eleventh value.
@@ -3557,7 +3557,7 @@ namespace FuncSharp
         /// Returns eleventh value of the coproduct as an option. The option contains the eleventh
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T11> Eleventh { get; }
+        Option<T11> Eleventh { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twelfth value.
@@ -3568,7 +3568,7 @@ namespace FuncSharp
         /// Returns twelfth value of the coproduct as an option. The option contains the twelfth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T12> Twelfth { get; }
+        Option<T12> Twelfth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the thirteenth value.
@@ -3579,7 +3579,7 @@ namespace FuncSharp
         /// Returns thirteenth value of the coproduct as an option. The option contains the thirteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T13> Thirteenth { get; }
+        Option<T13> Thirteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fourteenth value.
@@ -3590,7 +3590,7 @@ namespace FuncSharp
         /// Returns fourteenth value of the coproduct as an option. The option contains the fourteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T14> Fourteenth { get; }
+        Option<T14> Fourteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the fifteenth value.
@@ -3601,7 +3601,7 @@ namespace FuncSharp
         /// Returns fifteenth value of the coproduct as an option. The option contains the fifteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T15> Fifteenth { get; }
+        Option<T15> Fifteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the sixteenth value.
@@ -3612,7 +3612,7 @@ namespace FuncSharp
         /// Returns sixteenth value of the coproduct as an option. The option contains the sixteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T16> Sixteenth { get; }
+        Option<T16> Sixteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the seventeenth value.
@@ -3623,7 +3623,7 @@ namespace FuncSharp
         /// Returns seventeenth value of the coproduct as an option. The option contains the seventeenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T17> Seventeenth { get; }
+        Option<T17> Seventeenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the eighteenth value.
@@ -3634,7 +3634,7 @@ namespace FuncSharp
         /// Returns eighteenth value of the coproduct as an option. The option contains the eighteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T18> Eighteenth { get; }
+        Option<T18> Eighteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the nineteenth value.
@@ -3645,7 +3645,7 @@ namespace FuncSharp
         /// Returns nineteenth value of the coproduct as an option. The option contains the nineteenth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T19> Nineteenth { get; }
+        Option<T19> Nineteenth { get; }
 
         /// <summary>
         /// Returns whether the coproduct contains the twentieth value.
@@ -3656,7 +3656,7 @@ namespace FuncSharp
         /// Returns twentieth value of the coproduct as an option. The option contains the twentieth
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<T20> Twentieth { get; }
+        Option<T20> Twentieth { get; }
 
         /// <summary>
         /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result

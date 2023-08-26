@@ -28,37 +28,37 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void FlatMap_int(IOption<int> option)
+        internal void FlatMap_int(Option<int> option)
         {
             AssertFlatMapResult(option, i => (int?)i * 2);
         }
 
         [Property]
-        internal void FlatMap_decimal(IOption<decimal> option)
+        internal void FlatMap_decimal(Option<decimal> option)
         {
             AssertFlatMapResult(option, d => (decimal?)d * 2);
         }
 
         [Property]
-        internal void FlatMap_double(IOption<double> option)
+        internal void FlatMap_double(Option<double> option)
         {
             AssertFlatMapResult(option, d => (double?)d * 2);
         }
 
         [Property]
-        internal void FlatMap_bool(IOption<bool> option)
+        internal void FlatMap_bool(Option<bool> option)
         {
             AssertFlatMapResult(option, b => (bool?)!b);
         }
 
         [Property]
-        internal void FlatMap_ReferenceType(IOption<ReferenceType> option)
+        internal void FlatMap_ReferenceType(Option<ReferenceType> option)
         {
             // Also mapping from a revference type  to a nullable struct
             AssertFlatMapResult(option, d => (int?)d.Value * 2);
         }
 
-        private void AssertFlatMapResult<T, TResult>(IOption<T> option, Func<T, TResult?> map)
+        private void AssertFlatMapResult<T, TResult>(Option<T> option, Func<T, TResult?> map)
             where TResult : struct
         {
             var flatMapToNull = option.FlatMap(x => (TResult?)null);

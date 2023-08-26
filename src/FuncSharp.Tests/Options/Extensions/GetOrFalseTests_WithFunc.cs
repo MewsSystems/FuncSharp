@@ -26,48 +26,48 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_short(IOption<short> option)
+        internal void GetOrFalse_WithFunc_short(Option<short> option)
         {
             AssertGetOrFalse(option, i => i > 0);
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_int(IOption<int> option)
+        internal void GetOrFalse_WithFunc_int(Option<int> option)
         {
             AssertGetOrFalse(option, i => i > 1567);
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_long(IOption<long> option)
+        internal void GetOrFalse_WithFunc_long(Option<long> option)
         {
             AssertGetOrFalse(option, i => i < 1567);
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_decimal(IOption<decimal> option)
+        internal void GetOrFalse_WithFunc_decimal(Option<decimal> option)
         {
             AssertGetOrFalse(option, d => d < -1200);
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_double(IOption<double> option)
+        internal void GetOrFalse_WithFunc_double(Option<double> option)
         {
             AssertGetOrFalse(option, d => Math.Abs(d) > 14);
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_bool(IOption<bool> option)
+        internal void GetOrFalse_WithFunc_bool(Option<bool> option)
         {
             AssertGetOrFalse(option, b => !b);
         }
 
         [Property]
-        internal void GetOrFalse_WithFunc_ReferenceType(IOption<ReferenceType> option)
+        internal void GetOrFalse_WithFunc_ReferenceType(Option<ReferenceType> option)
         {
             AssertGetOrFalse(option, t => t.Value > 1567);
         }
 
-        private void AssertGetOrFalse<T>(IOption<T> option, Func<T, bool> map)
+        private void AssertGetOrFalse<T>(Option<T> option, Func<T, bool> map)
         {
             var result = option.GetOrFalse(map);
             Assert.Equal(option.GetOrDefault(map), result);

@@ -24,22 +24,22 @@ public static class NonEmptyEnumerable
         return NonEmptyEnumerable<T>.Create(head, tail);
     }
 
-    public static IOption<INonEmptyEnumerable<T>> Create<T>(List<T> values)
+    public static Option<INonEmptyEnumerable<T>> Create<T>(List<T> values)
     {
         return NonEmptyEnumerable<T>.Create(values);
     }
 
-    public static IOption<INonEmptyEnumerable<T>> Create<T>(T[] values)
+    public static Option<INonEmptyEnumerable<T>> Create<T>(T[] values)
     {
         return NonEmptyEnumerable<T>.Create(values);
     }
 
-    public static IOption<INonEmptyEnumerable<T>> Create<T>(IEnumerable<T> values)
+    public static Option<INonEmptyEnumerable<T>> Create<T>(IEnumerable<T> values)
     {
         return NonEmptyEnumerable<T>.Create(values);
     }
 
-    public static IOption<INonEmptyEnumerable<T>> CreateFlat<T>(params IOption<T>[] values)
+    public static Option<INonEmptyEnumerable<T>> CreateFlat<T>(params Option<T>[] values)
     {
         return NonEmptyEnumerable<T>.CreateFlat(values);
     }
@@ -154,7 +154,7 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
         return new NonEmptyEnumerable<T>(head, tail);
     }
 
-    public static IOption<INonEmptyEnumerable<T>> Create(IEnumerable<T> values)
+    public static Option<INonEmptyEnumerable<T>> Create(IEnumerable<T> values)
     {
         return values switch
         {
@@ -164,21 +164,21 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
         };
     }
 
-    public static IOption<INonEmptyEnumerable<T>> Create(List<T> list)
+    public static Option<INonEmptyEnumerable<T>> Create(List<T> list)
     {
         return list.Count == 0
             ? Option.Empty<INonEmptyEnumerable<T>>()
-            : Option.Valued(new NonEmptyEnumerable<T>(list[0], CollectionsMarshal.AsSpan(list).Slice(1).ToArray()));
+            : Option.Valued<INonEmptyEnumerable<T>>(new NonEmptyEnumerable<T>(list[0], CollectionsMarshal.AsSpan(list).Slice(1).ToArray()));
     }
 
-    public static IOption<INonEmptyEnumerable<T>> Create(T[] array)
+    public static Option<INonEmptyEnumerable<T>> Create(T[] array)
     {
         return array.Length == 0
             ? Option.Empty<INonEmptyEnumerable<T>>()
             : Option.Valued(CreateFromNonEmptyArray(array));
     }
 
-    public static IOption<INonEmptyEnumerable<T>> CreateFlat(params IOption<T>[] values)
+    public static Option<INonEmptyEnumerable<T>> CreateFlat(params Option<T>[] values)
     {
         return Create(values.Flatten());
     }

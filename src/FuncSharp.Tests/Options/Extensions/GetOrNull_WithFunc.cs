@@ -24,19 +24,19 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrNull_WithFunc_int(IOption<int> option)
+        internal void GetOrNull_WithFunc_int(Option<int> option)
         {
             AssertGetOrNullWithFunc(option, i => new ReferenceType(i * 2));
         }
 
         [Property]
-        internal void GetOrNull_WithFunc_ReferenceType(IOption<ReferenceType> option)
+        internal void GetOrNull_WithFunc_ReferenceType(Option<ReferenceType> option)
         {
             AssertGetOrNullWithFunc(option, d => new ReferenceType(d.Value * 3));
             AssertGetOrNullWithFunc(option, d => (ReferenceType)null);
         }
 
-        private void AssertGetOrNullWithFunc<T, TResult>(IOption<T> option, Func<T, TResult> map)
+        private void AssertGetOrNullWithFunc<T, TResult>(Option<T> option, Func<T, TResult> map)
             where TResult : class
         {
             var result = option.GetOrNull(map);

@@ -61,10 +61,10 @@ namespace FuncSharp.Examples
             int numberValue3 = numberWithException.Get(ex => new Exception("Error when retrieving number", innerException: ex));
 
             // Because try is a coproduct, you can check the value directly. On try, there are named properties for this.
-            IOption<int> successResult1 = number.Success;
-            IOption<int> successResult2 = number.First;
-            IOption<NetworkOperationError> errorResult = number.Error;
-            IOption<NetworkOperationError> errorResult2 = number.Second;
+            Option<int> successResult1 = number.Success;
+            Option<int> successResult2 = number.First;
+            Option<NetworkOperationError> errorResult = number.Error;
+            Option<NetworkOperationError> errorResult2 = number.Second;
         }
 
         private void AggregatingMultipleTriesIntoSingleResult()

@@ -38,36 +38,36 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Match_int(IOption<int> option)
+        internal void Match_int(Option<int> option)
         {
             AssertMatch(option, t => t * 7, otherwise: 5);
         }
 
         [Property]
-        internal void Match_decimal(IOption<decimal> option)
+        internal void Match_decimal(Option<decimal> option)
         {
             AssertMatch(option, t => t * 5, otherwise: 7);
         }
 
         [Property]
-        internal void Match_double(IOption<double> option)
+        internal void Match_double(Option<double> option)
         {
             AssertMatch(option, t => t * 3, otherwise: 11);
         }
 
         [Property]
-        internal void Match_bool(IOption<bool> option)
+        internal void Match_bool(Option<bool> option)
         {
             AssertMatch(option, b => !b, otherwise: (bool?)null);
         }
 
         [Property]
-        internal void Match_ReferenceType(IOption<ReferenceType> option)
+        internal void Match_ReferenceType(Option<ReferenceType> option)
         {
             AssertMatch(option, t => t.Value * 2, otherwise: 17);
         }
 
-        private void AssertMatch<T, TResult>(IOption<T> option, Func<T, TResult> map, TResult otherwise)
+        private void AssertMatch<T, TResult>(Option<T> option, Func<T, TResult> map, TResult otherwise)
         {
             var result = option.Match(
                 v =>

@@ -42,7 +42,7 @@ namespace FuncSharp
 
         [Pure]
         [Obsolete("Use Match instead.", error: true)]
-        public static void MatchRef<A>(this IOption<A> a, Action<A> action = null, Action<Unit> otherwise = null)
+        public static void MatchRef<A>(this Option<A> a, Action<A> action = null, Action<Unit> otherwise = null)
         {
             throw new NotImplementedException();
         }
@@ -74,7 +74,7 @@ namespace FuncSharp
         }
 
         [Obsolete("Use Match instead.", error: true)]
-        public static B MatchRef<A, B>(this IOption<A> a, Func<A, B> func, Func<Unit, B> otherwise)
+        public static B MatchRef<A, B>(this Option<A> a, Func<A, B> func, Func<Unit, B> otherwise)
         {
             throw new NotImplementedException();
         }
@@ -105,7 +105,7 @@ namespace FuncSharp
 
         [Obsolete("Use Map instead.", error: true)]
         [Pure]
-        public static B MapRef<A, B>(this IOption<A> a, Func<A, B> func)
+        public static B MapRef<A, B>(this Option<A> a, Func<A, B> func)
         {
             throw new NotImplementedException();
         }
@@ -245,7 +245,7 @@ namespace FuncSharp
         /// Casts the specified object to the given type.
         /// </summary>
         [Pure]
-        public static IOption<A> As<A>(this object o)
+        public static Option<A> As<A>(this object o)
             where A : class
         {
             return (o as A).ToOption();
@@ -268,7 +268,7 @@ namespace FuncSharp
         /// Turns the specified value into an option.
         /// </summary>
         [Pure]
-        public static IOption<A> ToOption<A>(this A value)
+        public static Option<A> ToOption<A>(this A value)
         {
             return Option.Create(value);
         }

@@ -4,58 +4,58 @@ using System.Linq;
 
 namespace FuncSharp.Examples
 {
-    public static class IOptionUsages
+    public static class OptionUsages
     {
         private static void CreatingOptionDirectly()
         {
             // Note that we explicitly specify types of variables in the following examples. However, in practice, we use var.
-            IOption<bool> emptyOption1 = Option.Empty<bool>();
+            Option<bool> emptyOption1 = Option.Empty<bool>();
             bool? emptyNullableBool = null;
-            IOption<bool> emptyOption2 = emptyNullableBool.ToOption();
-            IOption<bool> emptyOption3 = Option.Create(emptyNullableBool);
+            Option<bool> emptyOption2 = emptyNullableBool.ToOption();
+            Option<bool> emptyOption3 = Option.Create(emptyNullableBool);
 
-            IOption<bool> valuedOption1 = Option.Valued<bool>(false);
+            Option<bool> valuedOption1 = Option.Valued<bool>(false);
             bool? nullableBool = false;
-            IOption<bool> valuedOption2 = nullableBool.ToOption();
-            IOption<bool> valuedOption3 = Option.Create(nullableBool);
+            Option<bool> valuedOption2 = nullableBool.ToOption();
+            Option<bool> valuedOption3 = Option.Create(nullableBool);
 
             // Option.Valued can construct options with null value inside. Therefore it can cause confusion and is an anti-pattern.
-            IOption<object> valuedOptionWithNullInside2 = Option.Valued<object>(null);
-            IOption<bool?> valuedOptionWithNullInside1 = Option.Valued(emptyNullableBool);
-            IOption<bool?> valuedOptionWithFalse = Option.Valued(nullableBool);
+            Option<object> valuedOptionWithNullInside2 = Option.Valued<object>(null);
+            Option<bool?> valuedOptionWithNullInside1 = Option.Valued(emptyNullableBool);
+            Option<bool?> valuedOptionWithFalse = Option.Valued(nullableBool);
 
             // Instead, you can use option of an option. For example when updating a value of a nullable property.
             // Outer option defines whether we're changing value, inner option holds the value to assign.
-            IOption<IOption<bool>> notUpdating = Option.Empty<IOption<bool>>();
-            IOption<IOption<bool>> settingToTrue1 = Option.Create(true.ToOption());
-            IOption<IOption<bool>> settingToTrue2 = Option.Create(Option.Create(true));
-            IOption<IOption<bool>> settingToTrue3 = true.ToOption().ToOption();
-            IOption<IOption<bool>> settingToNull1 = Option.Create(Option.Empty<bool>());
-            IOption<IOption<bool>> settingToNull2 = Option.Empty<bool>().ToOption();
+            Option<Option<bool>> notUpdating = Option.Empty<Option<bool>>();
+            Option<Option<bool>> settingToTrue1 = Option.Create(true.ToOption());
+            Option<Option<bool>> settingToTrue2 = Option.Create(Option.Create(true));
+            Option<Option<bool>> settingToTrue3 = true.ToOption().ToOption();
+            Option<Option<bool>> settingToNull1 = Option.Create(Option.Empty<bool>());
+            Option<Option<bool>> settingToNull2 = Option.Empty<bool>().ToOption();
         }
 
-        public static IOption<decimal> Divide(decimal number, decimal divisor)
+        public static Option<decimal> Divide(decimal number, decimal divisor)
         {
             return divisor.ToOption().Where(d => d != 0).Map(d => number / d);
         }
 
         private static void TransformingOptionValuesWithMap(decimal number, decimal divisor)
         {
-            IOption<decimal> divisionResult = Divide(number, divisor);
-            IOption<decimal> roundedDivisionResult = divisionResult.Map(r => Math.Round(r));
-            IOption<string> stringifiedDivisionResult = divisionResult.Map(r => r.ToString());
+            Option<decimal> divisionResult = Divide(number, divisor);
+            Option<decimal> roundedDivisionResult = divisionResult.Map(r => Math.Round(r));
+            Option<string> stringifiedDivisionResult = divisionResult.Map(r => r.ToString());
         }
 
         private static void HandlingNestedOptionsWithFlatMap(decimal number, decimal firstDivisor, decimal secondDivisor)
         {
-            IOption<decimal> divisionResult = Divide(number, firstDivisor);
-            IOption<IOption<decimal>> resultOfDoubleDivision = divisionResult.Map(r => Divide(r, secondDivisor));
+            Option<decimal> divisionResult = Divide(number, firstDivisor);
+            Option<Option<decimal>> resultOfDoubleDivision = divisionResult.Map(r => Divide(r, secondDivisor));
 
             // This option has value if both the inner and the outer option have value.
-            IOption<decimal> flattenedResultOfDoubleDivision1 = resultOfDoubleDivision.Flatten();
+            Option<decimal> flattenedResultOfDoubleDivision1 = resultOfDoubleDivision.Flatten();
 
             // Same can be done with 1 call.
-            IOption<decimal> flattenedResultOfDoubleDivision2 = divisionResult.FlatMap(r => Divide(r, secondDivisor));
+            Option<decimal> flattenedResultOfDoubleDivision2 = divisionResult.FlatMap(r => Divide(r, secondDivisor));
         }
 
         private static void UsingOptionValueWithMatch(decimal number, decimal divisor)
@@ -100,7 +100,7 @@ namespace FuncSharp.Examples
 
         private static void HandlingCollectionsOfOptions(List<int> numbers, List<int> divisors)
         {
-            IEnumerable<IOption<decimal>> divisionResults = numbers.SelectMany(n => divisors.Select(d => Divide(n, d))).ToList();
+            IEnumerable<Option<decimal>> divisionResults = numbers.SelectMany(n => divisors.Select(d => Divide(n, d))).ToList();
 
             // These two lines produce equal results. But flatten is more readable and generally using Get is an anti-pattern as it is not safe.
             IEnumerable<decimal> successfulResults1 = divisionResults.Flatten();

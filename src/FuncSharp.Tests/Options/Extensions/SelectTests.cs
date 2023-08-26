@@ -31,7 +31,7 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Select_int(IOption<int> option)
+        internal void Select_int(Option<int> option)
         {
             AssertSelectResult(option, i => i * 2);
 
@@ -40,25 +40,25 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Select_decimal(IOption<decimal> option)
+        internal void Select_decimal(Option<decimal> option)
         {
             AssertSelectResult(option, d => d * 2);
         }
 
         [Property]
-        internal void Select_double(IOption<double> option)
+        internal void Select_double(Option<double> option)
         {
             AssertSelectResult(option, d => d * 2);
         }
 
         [Property]
-        internal void Select_bool(IOption<bool> option)
+        internal void Select_bool(Option<bool> option)
         {
             AssertSelectResult(option, b => !b);
         }
 
         [Property]
-        internal void Select_ReferenceType(IOption<ReferenceType> option)
+        internal void Select_ReferenceType(Option<ReferenceType> option)
         {
             AssertSelectResult(option, d => new ReferenceType(d.Value * 2));
 
@@ -66,7 +66,7 @@ namespace FuncSharp.Tests.Options
             AssertSelectResult(option, d => d.Value * 2);
         }
 
-        private void AssertSelectResult<T, TResult>(IOption<T> option, Func<T, TResult> map)
+        private void AssertSelectResult<T, TResult>(Option<T> option, Func<T, TResult> map)
         {
             var result = option.Select(map);
             Assert.Equal(option.IsEmpty, result.IsEmpty);

@@ -34,7 +34,7 @@ public struct PositiveInt
         return a.Multiply(b);
     }
 
-    public static IOption<PositiveInt> Create(int value)
+    public static Option<PositiveInt> Create(int value)
     {
         return CreateNullable(value).ToOption();
     }

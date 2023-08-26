@@ -5,7 +5,7 @@ namespace FuncSharp;
 
 public static class DigitExtensions
 {
-    public static IOption<Digit> AsDigit(this char value)
+    public static Option<Digit> AsDigit(this char value)
     {
         return Digit.Create(value);
     }

@@ -20,31 +20,31 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrZero_short(IOption<short> option)
+        internal void GetOrZero_short(Option<short> option)
         {
             Assert.Equal(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
-        internal void GetOrZero_int(IOption<int> option)
+        internal void GetOrZero_int(Option<int> option)
         {
             Assert.Equal(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
-        internal void GetOrZero_long(IOption<long> option)
+        internal void GetOrZero_long(Option<long> option)
         {
             Assert.Equal(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
-        internal void GetOrZero_decimal(IOption<decimal> option)
+        internal void GetOrZero_decimal(Option<decimal> option)
         {
             Assert.Equal(option.GetOrDefault(), option.GetOrZero());
         }
 
         [Property]
-        internal void GetOrZero_double(IOption<double> option)
+        internal void GetOrZero_double(Option<double> option)
         {
             Assert.Equal(option.GetOrDefault(), option.GetOrZero());
         }

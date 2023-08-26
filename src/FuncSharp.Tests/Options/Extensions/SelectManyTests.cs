@@ -55,19 +55,19 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void SelectManyOrder_int(IOption<int> first, IOption<int> second)
+        internal void SelectManyOrder_int(Option<int> first, Option<int> second)
         {
             Assert.Equal(first.SelectMany(f => second.Select(s => (f, s))), second.SelectMany(s => first.Select(f => (f, s))));
         }
 
         [Property]
-        internal void SelectManyOrder_ReferenceType(IOption<ReferenceType> first, IOption<ReferenceType> second)
+        internal void SelectManyOrder_ReferenceType(Option<ReferenceType> first, Option<ReferenceType> second)
         {
             Assert.Equal(first.SelectMany(f => second.Select(s => (f, s))), second.SelectMany(s => first.Select(f => (f, s))));
         }
 
         [Property]
-        internal void SelectMany_int(IOption<int> option)
+        internal void SelectMany_int(Option<int> option)
         {
             AssertSelectManyResult(option, i => i * 2);
 
@@ -76,25 +76,25 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void SelectMany_decimal(IOption<decimal> option)
+        internal void SelectMany_decimal(Option<decimal> option)
         {
             AssertSelectManyResult(option, d => d * 2);
         }
 
         [Property]
-        internal void SelectMany_double(IOption<double> option)
+        internal void SelectMany_double(Option<double> option)
         {
             AssertSelectManyResult(option, d => d * 2);
         }
 
         [Property]
-        internal void SelectMany_bool(IOption<bool> option)
+        internal void SelectMany_bool(Option<bool> option)
         {
             AssertSelectManyResult(option, b => !b);
         }
 
         [Property]
-        internal void SelectMany_ReferenceType(IOption<ReferenceType> option)
+        internal void SelectMany_ReferenceType(Option<ReferenceType> option)
         {
             AssertSelectManyResult(option, d => new ReferenceType(d.Value * 2));
 
@@ -102,7 +102,7 @@ namespace FuncSharp.Tests.Options
             AssertSelectManyResult(option, d => d.Value * 2);
         }
 
-        private void AssertSelectManyResult<T, TResult>(IOption<T> option, Func<T, TResult> map)
+        private void AssertSelectManyResult<T, TResult>(Option<T> option, Func<T, TResult> map)
         {
             // SelectMany should always be the same as FlatMap.
             Assert.Equal(option.FlatMap(x => Option.Valued(map(x))), option.SelectMany(x => Option.Valued(map(x))));

@@ -46,7 +46,7 @@ namespace FuncSharp
         /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #>
         /// value or is empty if the coproduct contains different value.
         /// </summary>
-        IOption<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
+        Option<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
 
 <#      } #>
 <#      if (i > 0) { #>

@@ -24,7 +24,7 @@ public struct NonPositiveInt
         return a.Sum(b);
     }
 
-    public static IOption<NonPositiveInt> Create(int value)
+    public static Option<NonPositiveInt> Create(int value)
     {
         return CreateNullable(value).ToOption();
     }

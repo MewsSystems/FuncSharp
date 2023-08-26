@@ -10,7 +10,7 @@ internal static class GeneratorExtensions
     /// <summary>
     /// Generates an empty option in 30% of the cases. Percentage can be configured by the double parameter.
     /// </summary>
-    internal static Gen<IOption<T>> SometimesEmpty<T>(this Gen<T> generator, double emptyChance = 0.3)
+    internal static Gen<Option<T>> SometimesEmpty<T>(this Gen<T> generator, double emptyChance = 0.3)
     {
         if (emptyChance <= 0 || emptyChance >= 1)
         {

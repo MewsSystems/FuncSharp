@@ -37,36 +37,36 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void FlatMap_int(IOption<int> option)
+        internal void FlatMap_int(Option<int> option)
         {
             AssertToTry(option);
         }
 
         [Property]
-        internal void FlatMap_decimal(IOption<decimal> option)
+        internal void FlatMap_decimal(Option<decimal> option)
         {
             AssertToTry(option);
         }
 
         [Property]
-        internal void FlatMap_double(IOption<double> option)
+        internal void FlatMap_double(Option<double> option)
         {
             AssertToTry(option);
         }
 
         [Property]
-        internal void FlatMap_bool(IOption<bool> option)
+        internal void FlatMap_bool(Option<bool> option)
         {
             AssertToTry(option);
         }
 
         [Property]
-        internal void FlatMap_ReferenceType(IOption<ReferenceType> option)
+        internal void FlatMap_ReferenceType(Option<ReferenceType> option)
         {
             AssertToTry(option);
         }
 
-        private void AssertToTry<T>(IOption<T> option)
+        private void AssertToTry<T>(Option<T> option)
         {
             const string errorMessage = "Error message";
             var result = option.ToTry(_ => errorMessage);

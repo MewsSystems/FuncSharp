@@ -7,8 +7,8 @@ public class NonEmptyStringTests
     [Fact]
     public void OptionEqualityTest()
     {
-        IOption<NonEmptyString> valued1 = Option.Valued(NonEmptyString.CreateUnsafe("ASDF123"));
-        IOption<string> valued2 = Option.Valued("ASDF123");
+        Option<NonEmptyString> valued1 = Option.Valued(NonEmptyString.CreateUnsafe("ASDF123"));
+        Option<string> valued2 = Option.Valued("ASDF123");
         Assert.True(valued1.Equals(valued2));
         Assert.True(valued2.Equals(valued1));
         Assert.True(object.Equals(valued1, valued2));
@@ -21,15 +21,15 @@ public class NonEmptyStringTests
         Assert.False(object.Equals(differentNonEmptyStringOption, differentStringOption));
         Assert.False(object.Equals(differentStringOption, differentNonEmptyStringOption));
 
-        IOption<NonEmptyString> empty1 = Option.Empty<NonEmptyString>();
-        IOption<string> empty2 = Option.Empty<string>();
+        Option<NonEmptyString> empty1 = Option.Empty<NonEmptyString>();
+        Option<string> empty2 = Option.Empty<string>();
         Assert.True(empty1.Equals(empty2));
         Assert.True(empty2.Equals(empty1));
         Assert.True(object.Equals(empty1, empty2));
         Assert.True(object.Equals(empty2, empty1));
 
-        IOption<NonEmptyString> valuedWithNull1 = Option.Valued<NonEmptyString>(null);
-        IOption<string> valuedWithNull2 = Option.Valued<string>(null);
+        Option<NonEmptyString> valuedWithNull1 = Option.Valued<NonEmptyString>(null);
+        Option<string> valuedWithNull2 = Option.Valued<string>(null);
         Assert.True(valuedWithNull1.Equals(valuedWithNull2));
         Assert.True(valuedWithNull2.Equals(valuedWithNull1));
         Assert.True(object.Equals(valuedWithNull1, valuedWithNull2));

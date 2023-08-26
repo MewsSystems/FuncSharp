@@ -29,36 +29,36 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void Map_int(IOption<int> option)
+        internal void Map_int(Option<int> option)
         {
             AssertMapEmpty(option);
         }
 
         [Property]
-        internal void Map_decimal(IOption<decimal> option)
+        internal void Map_decimal(Option<decimal> option)
         {
             AssertMapEmpty(option);
         }
 
         [Property]
-        internal void Map_double(IOption<double> option)
+        internal void Map_double(Option<double> option)
         {
             AssertMapEmpty(option);
         }
 
         [Property]
-        internal void Map_bool(IOption<bool> option)
+        internal void Map_bool(Option<bool> option)
         {
             AssertMapEmpty(option);
         }
 
         [Property]
-        internal void Map_ReferenceType(IOption<ReferenceType> option)
+        internal void Map_ReferenceType(Option<ReferenceType> option)
         {
             AssertMapEmpty(option);
         }
 
-        private void AssertMapEmpty<T>(IOption<T> option)
+        private void AssertMapEmpty<T>(Option<T> option)
         {
             AssertMapEmpty(option, _ => (ReferenceType)null);
             AssertMapEmpty(option, _ => new ReferenceType(6));
@@ -67,7 +67,7 @@ namespace FuncSharp.Tests.Options
             AssertMapEmpty(option, _ => (int?)null);
         }
 
-        private void AssertMapEmpty<T, TResult>(IOption<T> option, Func<Unit, TResult> map)
+        private void AssertMapEmpty<T, TResult>(Option<T> option, Func<Unit, TResult> map)
         {
             var result = option.MapEmpty(map);
             Assert.Equal(option.NonEmpty, result.IsEmpty);

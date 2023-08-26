@@ -24,43 +24,43 @@ namespace FuncSharp.Tests.Options
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_short(IOption<short> option)
+        internal void GetOrZero_WithFunc_short(Option<short> option)
         {
             Assert.Equal(option.GetOrDefault(i => i * 2), option.GetOrZero(i => i * 2));
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_int(IOption<int> option)
+        internal void GetOrZero_WithFunc_int(Option<int> option)
         {
             Assert.Equal(option.GetOrDefault(i => i * 3), option.GetOrZero(i => i * 3));
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_long(IOption<long> option)
+        internal void GetOrZero_WithFunc_long(Option<long> option)
         {
             Assert.Equal(option.GetOrDefault(i => i * 4), option.GetOrZero(i => i * 4));
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_decimal(IOption<decimal> option)
+        internal void GetOrZero_WithFunc_decimal(Option<decimal> option)
         {
             Assert.Equal(option.GetOrDefault(d => d * 5), option.GetOrZero(d => d * 5));
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_double(IOption<double> option)
+        internal void GetOrZero_WithFunc_double(Option<double> option)
         {
             Assert.Equal(option.GetOrDefault(d => d * 6), option.GetOrZero(d => d * 6));
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_bool(IOption<bool> option)
+        internal void GetOrZero_WithFunc_bool(Option<bool> option)
         {
             Assert.Equal(option.GetOrDefault(b => b ? 2 : 17), option.GetOrZero(b => b ? 2 : 17));
         }
 
         [Property]
-        internal void GetOrZero_WithFunc_ReferenceType(IOption<ReferenceType> option)
+        internal void GetOrZero_WithFunc_ReferenceType(Option<ReferenceType> option)
         {
             Assert.Equal(option.GetOrDefault(t => t.Value * 3), option.GetOrZero(t => t.Value * 3));
         }
