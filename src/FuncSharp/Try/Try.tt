@@ -17,17 +17,17 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new try with a successful result.
         /// </summary>
-        public static Try<A, E> Success<A, E>(A success)
+        public static Try<TSuccess, TError> Success<TSuccess, TError>(TSuccess success)
         {
-            return new Try<A, E>(success);
+            return new Try<TSuccess, TError>(success);
         }
 
         /// <summary>
         /// Creates a new try with an error result.
         /// </summary>
-        public static Try<A, E> Error<A, E>(E error)
+        public static Try<TSuccess, TError> Error<TSuccess, TError>(TError error)
         {
-            return new Try<A, E>(error);
+            return new Try<TSuccess, TError>(error);
         }
 
         /// <summary>
@@ -51,16 +51,16 @@ namespace FuncSharp
         /// Tries the specified action and returns a successful try if it succeeds. Otherwise in case of the specified exception,
         /// returns an erroneous try.
         /// </summary>
-        public static Try<A, TException> Catch<A, TException>(Func<Unit, A> f)
+        public static Try<TSuccess, TException> Catch<TSuccess, TException>(Func<Unit, TSuccess> f)
             where TException : Exception
         {
             try
             {
-                return Success<A, TException>(f(Unit.Value));
+                return Success<TSuccess, TException>(f(Unit.Value));
             }
             catch (TException e)
             {
-                return Error<A, TException>(e);
+                return Error<TSuccess, TException>(e);
             }
         }
 
@@ -109,7 +109,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using the specified function.
         /// </summary>
-        public static R Aggregate<A, E, R>(IEnumerable<Try<A, E>> tries, Func<IReadOnlyList<A>, R> success, Func<IReadOnlyList<E>, R> error)
+        public static TResult Aggregate<TSuccess, TError, TResult>(IEnumerable<Try<TSuccess, TError>> tries, Func<IReadOnlyList<TSuccess>, TResult> success, Func<IReadOnlyList<TError>, TResult> error)
         {
             var enumeratedTries = tries.ToList();
             if (enumeratedTries.All(t => t.IsSuccess))
@@ -123,24 +123,24 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static Try<IReadOnlyList<A>, IReadOnlyList<E>> Aggregate<A, E>(IEnumerable<Try<A, E>> tries)
+        public static Try<IReadOnlyList<TSuccess>, IReadOnlyList<TError>> Aggregate<TSuccess, TError>(IEnumerable<Try<TSuccess, TError>> tries)
         {
             return Aggregate(
                 tries,
-                success: results => Success<IReadOnlyList<A>, IReadOnlyList<E>>(results),
-                error: errors => Error<IReadOnlyList<A>, IReadOnlyList<E>>(errors)
+                success: results => Success<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(results),
+                error: errors => Error<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(errors)
             );
         }
 
         /// <summary>
         /// Aggregates a collection of tries into a try of collection.
         /// </summary>
-        public static Try<IReadOnlyList<A>, IReadOnlyList<E>> Aggregate<A, E>(IEnumerable<Try<A, IReadOnlyList<E>>> tries)
+        public static Try<IReadOnlyList<TSuccess>, IReadOnlyList<TError>> Aggregate<TSuccess, TError>(IEnumerable<Try<TSuccess, IReadOnlyList<TError>>> tries)
         {
             return Aggregate(
                 tries,
-                success: results => Success<IReadOnlyList<A>, IReadOnlyList<E>>(results),
-                error: errors => Error<IReadOnlyList<A>, IReadOnlyList<E>>(errors.SelectMany(e => e).ToList())
+                success: results => Success<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(results),
+                error: errors => Error<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(errors.SelectMany(e => e).ToList())
             );
         }
 <#  for (var i = 2; i < MaxFuncArity(); i++) { #>
@@ -148,7 +148,7 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by the specified function.
         /// </summary>
-        public static R Aggregate<<#= Types(i, name: "A") #>, E, R>(<#= List(i, x => $"Try<{Type(x, name: "A")}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success, Func<IReadOnlyList<E>, R> error)
+        public static TResult Aggregate<<#= Types(i, name: "TSuccess") #>, TError, TResult>(<#= List(i, x => $"Try<{Type(x, name: "TSuccess")}, TError> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success, Func<IReadOnlyList<TError>, TResult> error)
         {
             if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
             {
@@ -162,24 +162,24 @@ namespace FuncSharp
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static Try<R, IReadOnlyList<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, E> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        public static Try<TResult, IReadOnlyList<TError>> Aggregate<<#= Types(i, name: "TSuccess") #>, TResult, TError>(<#= List(i, x => $"Try<TSuccess{x}, TError> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
-                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IReadOnlyList<E>>(success(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<R, IReadOnlyList<E>>(errors)
+                success: (<#= List(i, x => $"s{x}") #>) => Success<TResult, IReadOnlyList<TError>>(success(<#= List(i, x => $"s{x}") #>)),
+                error: errors => Error<TResult, IReadOnlyList<TError>>(errors)
             );
         }
 
         /// <summary>
         /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
         /// </summary>
-        public static Try<R, IReadOnlyList<E>> Aggregate<<#= Types(i, name: "A") #>, R, E>(<#= List(i, x => $"Try<A{x}, IReadOnlyList<E>> t{x}") #>, Func<<#= Types(i, name: "A") #>, R> success)
+        public static Try<TResult, IReadOnlyList<TError>> Aggregate<<#= Types(i, name: "TSuccess") #>, TResult, TError>(<#= List(i, x => $"Try<TSuccess{x}, IReadOnlyList<TError>> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success)
         {
             return Aggregate(
                 <#= List(i, x => $"t{x}") #>,
-                success: (<#= List(i, x => $"s{x}") #>) => Success<R, IReadOnlyList<E>>(success(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<R, IReadOnlyList<E>>(errors.SelectMany(e => e).ToList())
+                success: (<#= List(i, x => $"s{x}") #>) => Success<TResult, IReadOnlyList<TError>>(success(<#= List(i, x => $"s{x}") #>)),
+                error: errors => Error<TResult, IReadOnlyList<TError>>(errors.SelectMany(e => e).ToList())
             );
         }
 <#  } #>
@@ -200,67 +200,67 @@ namespace FuncSharp
         }
     }
 
-    public struct Try<A, E>
+    public struct Try<TSuccess, TError>
     {
-        public Try(A success)
+        public Try(TSuccess success)
         {
             IsSuccess = true;
             Success = Option.Valued(success);
             IsError = false;
-            Error = Option.Empty<E>();
+            Error = Option.Empty<TError>();
         }
 
-        public Try(E error)
+        public Try(TError error)
         {
             IsSuccess = false;
-            Success = Option.Empty<A>();
+            Success = Option.Empty<TSuccess>();
             IsError = true;
             Error = Option.Valued(error);
         }
 
         public bool IsSuccess { get; }
         public bool IsError { get; }
-        public Option<A> Success { get; }
-        public Option<E> Error { get; }
+        public Option<TSuccess> Success { get; }
+        public Option<TError> Error { get; }
 
         /// <summary>
         /// Maps the success into another type if the try succeeded.
         /// </summary>
         [Pure]
-        public Try<B, E> Map<B>(Func<A, B> f)
+        public Try<TSuccessTarget, TError> Map<TSuccessTarget>(Func<TSuccess, TSuccessTarget> f)
         {
             return IsSuccess
-                ? new Try<B, E>(f(Success.GetOrDefault()))
-                : new Try<B, E>(Error.GetOrDefault());
+                ? new Try<TSuccessTarget, TError>(f(Success.GetOrDefault()))
+                : new Try<TSuccessTarget, TError>(Error.GetOrDefault());
         }
 
         /// <summary>
         /// Maps the both the succees and the error into another types. Each function is called only when applicable.
         /// </summary>
         [Pure]
-        public Try<B, F> Map<B, F>(Func<A, B> success, Func<E, F> error)
+        public Try<TSuccessTarget, TErrorTarget> Map<TSuccessTarget, TErrorTarget>(Func<TSuccess, TSuccessTarget> success, Func<TError, TErrorTarget> error)
         {
             return IsSuccess
-                ? new Try<B, F>(success(Success.GetOrDefault()))
-                : new Try<B, F>(error(Error.GetOrDefault()));
+                ? new Try<TSuccessTarget, TErrorTarget>(success(Success.GetOrDefault()))
+                : new Try<TSuccessTarget, TErrorTarget>(error(Error.GetOrDefault()));
         }
 
         /// <summary>
         /// Maps the error into another type if the try did not succeed.
         /// </summary>
         [Pure]
-        public Try<A, F> MapError<F>(Func<E, F> f)
+        public Try<TSuccess, TErrorTarget> MapError<TErrorTarget>(Func<TError, TErrorTarget> f)
         {
             return IsSuccess
-                ? new Try<A, F>(Success.GetOrDefault())
-                : new Try<A, F>(f(Error.GetOrDefault()));
+                ? new Try<TSuccess, TErrorTarget>(Success.GetOrDefault())
+                : new Try<TSuccess, TErrorTarget>(f(Error.GetOrDefault()));
         }
 
         /// <summary>
         /// Returns result of the applicable function. Success when try succeeded. Error when not.
         /// </summary>
         [Pure]
-        public TResult Match<TResult>(Func<A, TResult> ifSuccess, Func<E, TResult> ifError)
+        public TResult Match<TResult>(Func<TSuccess, TResult> ifSuccess, Func<TError, TResult> ifError)
         {
             return IsSuccess
                 ? ifSuccess(Success.GetOrDefault())
@@ -271,7 +271,7 @@ namespace FuncSharp
         /// Invokes the applicable function. Success when try succeeded. Error when not.
         /// </summary>
         [Pure]
-        public void Match(Action<A> ifSuccess = null, Action<E> ifError = null)
+        public void Match(Action<TSuccess> ifSuccess = null, Action<TError> ifError = null)
         {
             if (IsSuccess)
                 ifSuccess?.Invoke(Success.GetOrDefault());
