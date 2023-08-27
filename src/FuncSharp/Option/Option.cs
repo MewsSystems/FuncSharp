@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace FuncSharp
 {
@@ -8,21 +9,25 @@ namespace FuncSharp
         /// <summary>
         /// True value as an option.
         /// </summary>
+        [Pure]
         public static Option<bool> True { get; } = true.ToOption();
 
         /// <summary>
         /// False value as an option.
         /// </summary>
+        [Pure]
         public static Option<bool> False { get; } = false.ToOption();
 
         /// <summary>
         /// Unit value as an option.
         /// </summary>
+        [Pure]
         public static Option<Unit> Unit { get; } = FuncSharp.Unit.Value.ToOption();
 
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
+        [Pure]
         public static Option<A> Create<A>(A value)
         {
             if (value is not null)
@@ -35,6 +40,7 @@ namespace FuncSharp
         /// <summary>
         /// Creates a new option based on the specified value. Returns option with the value if is is non-null, empty otherwise.
         /// </summary>
+        [Pure]
         public static Option<A> Create<A>(A? value)
             where A : struct
         {
@@ -48,6 +54,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an option with the specified value.
         /// </summary>
+        [Pure]
         public static Option<A> Valued<A>(A value)
         {
             return new Option<A>(value);
@@ -56,6 +63,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns an empty option.
         /// </summary>
+        [Pure]
         public static Option<A> Empty<A>()
         {
             return Option<A>.Empty;
@@ -86,10 +94,13 @@ namespace FuncSharp
 
         private A Value { get; }
 
+        [Pure]
         public bool NonEmpty { get; }
 
+        [Pure]
         public bool IsEmpty => !NonEmpty;
 
+        [Pure]
         public R Match<R>(Func<A, R> ifNonEmpty, Func<Unit, R> ifEmpty)
         {
             if (NonEmpty)
@@ -99,6 +110,7 @@ namespace FuncSharp
             return ifEmpty(Unit.Value);
         }
 
+        [Pure]
         public void Match(Action<A> ifNonEmpty = null, Action<Unit> ifEmpty = null)
         {
             if (NonEmpty)
@@ -117,6 +129,7 @@ namespace FuncSharp
             }
         }
 
+        [Pure]
         public R Get<R>(Func<A, R> func, Func<Unit, Exception> otherwise = null)
         {
             if (NonEmpty)
@@ -130,6 +143,7 @@ namespace FuncSharp
             throw new InvalidOperationException("An empty option does not have a value.");
         }
 
+        [Pure]
         public A Get(Func<Unit, Exception> otherwise = null)
         {
             if (NonEmpty)
@@ -143,11 +157,13 @@ namespace FuncSharp
             throw new InvalidOperationException("An empty option does not have a value.");
         }
 
+        [Pure]
         public A GetOrDefault()
         {
             return Value;
         }
 
+        [Pure]
         public R GetOrDefault<R>(Func<A, R> func)
         {
             if (NonEmpty)
@@ -155,6 +171,7 @@ namespace FuncSharp
             return default(R);
         }
 
+        [Pure]
         public Option<B> Map<B>(Func<A, B> f)
         {
             if (NonEmpty)
@@ -164,6 +181,7 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
+        [Pure]
         public Option<B> MapEmpty<B>(Func<Unit, B> f)
         {
             if (NonEmpty)
@@ -173,6 +191,7 @@ namespace FuncSharp
             return new Option<B>(f(Unit.Value));
         }
 
+        [Pure]
         public Option<B> FlatMapEmpty<B>(Func<Unit, Option<B>> f)
         {
             if (NonEmpty)
@@ -182,6 +201,7 @@ namespace FuncSharp
             return f(Unit.Value);
         }
 
+        [Pure]
         public Option<B> FlatMap<B>(Func<A, Option<B>> f)
         {
             if (NonEmpty)
@@ -191,6 +211,7 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
+        [Pure]
         public Option<B> FlatMap<B>(Func<A, B?> f) where B : struct
         {
             if (NonEmpty)
@@ -205,15 +226,28 @@ namespace FuncSharp
             return Option<B>.Empty;
         }
 
-        public IReadOnlyList<A> ToList()
+        [Pure]
+        public IEnumerable<A> AsEnumerable()
         {
             if (NonEmpty)
-            {
-                return new[] { Value };
-            }
-            return EmptyList;
+                yield return Value;
         }
 
+        [Pure]
+        public IEnumerable<A> AsEnumerable2() // Todo - Keep only 1 - the benchmark winner
+        {
+            return AsReadOnlyList();
+        }
+
+        [Pure]
+        public IReadOnlyList<A> AsReadOnlyList()
+        {
+            return NonEmpty
+                ? new[] { Value }
+                : EmptyList;
+        }
+
+        [Pure]
         public override string ToString()
         {
             if (NonEmpty)
@@ -223,21 +257,25 @@ namespace FuncSharp
             return "Empty";
         }
 
+        [Pure]
         public override int GetHashCode()
         {
             return HashCode.Combine(Value, NonEmpty);
         }
 
+        [Pure]
         public static bool operator ==(Option<A> obj1, object obj2)
         {
             return obj1.Equals(obj2);
         }
 
+        [Pure]
         public static bool operator !=(Option<A> obj1, object obj2)
         {
             return !obj1.Equals(obj2);
         }
 
+        [Pure]
         public override bool Equals(object obj)
         {
             if (obj is Option<A> other)

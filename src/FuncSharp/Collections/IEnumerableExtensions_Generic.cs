@@ -29,6 +29,7 @@ namespace FuncSharp
         /// Returns the array in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
         /// </summary>
         [DebuggerStepThrough]
+        [Pure]
         public static IReadOnlyList<T> AsReadOnlyList<T>(this T[] source)
         {
             return source;
@@ -38,16 +39,17 @@ namespace FuncSharp
         /// Returns the list in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
         /// </summary>
         [DebuggerStepThrough]
+        [Pure]
         public static IReadOnlyList<T> AsReadOnlyList<T>(this List<T> source)
         {
             return source;
         }
 
-        // [Obsolete("This already is of type ReadOnlyList.", error: true)]
-        // public static IReadOnlyList<T> AsReadOnlyList<T>(this IReadOnlyList<T> source)
-        // {
-        //     throw new NotImplementedException();
-        // }
+        [Obsolete("This already is of type ReadOnlyList.", error: true)]
+        public static IReadOnlyList<T> AsReadOnlyList<T>(this IReadOnlyList<T> source)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Returns the IEnumerable in case it is a List or creates a new List from it.
@@ -65,14 +67,6 @@ namespace FuncSharp
         public static T[] AsArray<T>(this IEnumerable<T> source)
         {
             return source as T[] ?? source.ToArray();
-        }
-
-        /// <summary>
-        /// Returns all the items inside all the collections combined into 1 IEnumerable.
-        /// </summary>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> e)
-        {
-            return e.SelectMany(i => i);
         }
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> e, params T[] excludedItems)
@@ -95,16 +89,6 @@ namespace FuncSharp
             where T : class
         {
             return e.Where(v => v is not null);
-        }
-
-        public static bool NonEmpty<T>(this IEnumerable<T> e)
-        {
-            return e is not null && e.Any();
-        }
-
-        public static bool IsEmpty<T>(this IEnumerable<T> e)
-        {
-            return !e.NonEmpty();
         }
 
         public static bool IsMultiple<T>(this IEnumerable<T> e)
@@ -157,34 +141,6 @@ namespace FuncSharp
         public static T Fifth<T>(this IEnumerable<T> e)
         {
             return e.ElementAt(4);
-        }
-
-        public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params T[] items)
-        {
-            return Enumerable.Concat(first, items);
-        }
-
-        public static IEnumerable<T> Concat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
-        {
-            return Enumerable.Concat(first, others.Flatten());
-        }
-
-        public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params T[] items)
-        {
-            return first is null
-                ? items
-                : Enumerable.Concat(first, items);
-        }
-
-        public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> first, params IEnumerable<T>[] others)
-        {
-            var othersResult = others is null
-                ? Array.Empty<T>()
-                : others.SelectMany(o => o ?? Enumerable.Empty<T>());
-
-            return first is null
-                ? othersResult
-                : Enumerable.Concat(first, othersResult);
         }
 
         /// <summary>

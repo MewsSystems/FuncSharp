@@ -7,18 +7,6 @@ namespace FuncSharp;
 public static partial class IEnumerableExtensions
 {
     [Pure]
-    public static bool NonEmpty<T>(this IReadOnlyCollection<T> collection)
-    {
-        return collection is not null && collection.Count > 0;
-    }
-
-    [Pure]
-    public static bool IsEmpty<T>(this IReadOnlyCollection<T> collection)
-    {
-        return !collection.NonEmpty();
-    }
-
-    [Pure]
     public static bool IsMultiple<T>(this IReadOnlyCollection<T> collection)
     {
         return collection is not null && collection.Count > 1;
