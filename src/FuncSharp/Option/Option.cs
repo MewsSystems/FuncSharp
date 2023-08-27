@@ -227,19 +227,6 @@ namespace FuncSharp
         }
 
         [Pure]
-        public IEnumerable<A> AsEnumerable()
-        {
-            if (NonEmpty)
-                yield return Value;
-        }
-
-        [Pure]
-        public IEnumerable<A> AsEnumerable2() // Todo - Keep only 1 - the benchmark winner
-        {
-            return AsReadOnlyList();
-        }
-
-        [Pure]
         public IReadOnlyList<A> AsReadOnlyList()
         {
             return NonEmpty

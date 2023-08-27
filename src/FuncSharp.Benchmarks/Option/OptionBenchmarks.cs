@@ -159,18 +159,18 @@ namespace FuncSharp.Benchmarks
             EmptyOption.Match(_ => true, _ => false);
         }
 
-        // Last Result - 22.8.2023 - 4.6 ns - 32 B
+        // Last Result - 27.8.2023 - 3.1 ns - 32 B
         [Benchmark]
-        public void ToList_NonEmpty()
+        public void AsReadOnlyList_NonEmpty()
         {
-            NonEmptyOption.ToList();
+            NonEmptyOption.AsReadOnlyList();
         }
 
-        // Last Result - 22.8.2023 - 2.4 ns - 0 B
+        // Last Result - 27.8.2023 - 0.3 ns - 0 B
         [Benchmark]
-        public void ToList_Empty()
+        public void AsReadOnlyList_Empty()
         {
-            EmptyOption.ToList();
+            EmptyOption.AsReadOnlyList();
         }
     }
 }
