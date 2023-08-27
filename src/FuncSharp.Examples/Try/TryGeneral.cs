@@ -48,7 +48,7 @@ namespace FuncSharp.Examples
                 _ => Console.Write("Operation failed, try again.")
             );
             number.Match(n => Console.Write($"Operation successful, result is: {n}."));
-            number.Match(ifSecond: _ => Console.Write("Operation failed, try again."));
+            number.Match(ifError: _ => Console.Write("Operation failed, try again."));
 
             // Get method will throw an exception for unsuccessful tries that have exception as the error. Using it is an anti-pattern.
             // You should rather use Match to branch your code into individual cases where each case is guaranteed to work.
@@ -62,9 +62,7 @@ namespace FuncSharp.Examples
 
             // Because try is a coproduct, you can check the value directly. On try, there are named properties for this.
             Option<int> successResult1 = number.Success;
-            Option<int> successResult2 = number.First;
             Option<NetworkOperationError> errorResult = number.Error;
-            Option<NetworkOperationError> errorResult2 = number.Second;
         }
 
         private void AggregatingMultipleTriesIntoSingleResult()

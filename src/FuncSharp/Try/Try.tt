@@ -199,52 +199,78 @@ namespace FuncSharp
         }
     }
 
-    public class Try<A, E> : Coproduct2<A, E>
+    public class Try<A, E>
     {
         public Try(A success)
-            : base(success)
         {
+            IsSuccess = true;
+            Success = Option.Valued(success);
+            IsError = false;
+            Error = Option.Empty<E>();
         }
 
         public Try(E error)
-            : base(error)
         {
+            IsSuccess = false;
+            Success = Option.Empty<A>();
+            IsError = true;
+            Error = Option.Valued(error);
         }
 
-        public bool IsSuccess
-        {
-            get { return IsFirst; }
-        }
+        public bool IsSuccess { get; }
+        public bool IsError { get; }
+        public Option<A> Success { get; }
+        public Option<E> Error { get; }
 
-        public bool IsError
-        {
-            get { return IsSecond; }
-        }
-
-        public Option<A> Success
-        {
-            get { return First; }
-        }
-
-        public Option<E> Error
-        {
-            get { return Second; }
-        }
-
+        /// <summary>
+        /// Maps the success into another type if the try succeeded.
+        /// </summary>
         public Try<B, E> Map<B>(Func<A, B> f)
         {
-            return Match(
-                s => Try.Success<B, E>(f(s)),
-                e => Try.Error<B, E>(e)
-            );
+            return IsSuccess
+                ? new Try<B, E>(f(Success.GetOrDefault()))
+                : new Try<B, E>(Error.GetOrDefault());
         }
 
+        /// <summary>
+        /// Maps the both the succees and the error into another types. Each function is called only when applicable.
+        /// </summary>
+        public Try<B, F> Map<B, F>(Func<A, B> success, Func<E, F> error)
+        {
+            return IsSuccess
+                ? new Try<B, F>(success(Success.GetOrDefault()))
+                : new Try<B, F>(error(Error.GetOrDefault()));
+        }
+
+        /// <summary>
+        /// Maps the error into another type if the try did not succeed.
+        /// </summary>
         public Try<A, F> MapError<F>(Func<E, F> f)
         {
-            return Match(
-                s => Try.Success<A, F>(s),
-                e => Try.Error<A, F>(f(e))
-            );
+            return IsSuccess
+                ? new Try<A, F>(Success.GetOrDefault())
+                : new Try<A, F>(f(Error.GetOrDefault()));
+        }
+
+        /// <summary>
+        /// Returns result of the applicable function. Success when try succeeded. Error when not.
+        /// </summary>
+        public TResult Match<TResult>(Func<A, TResult> ifSuccess, Func<E, TResult> ifError)
+        {
+            return IsSuccess
+                ? ifSuccess(Success.GetOrDefault())
+                : ifError(Error.GetOrDefault());
+        }
+
+        /// <summary>
+        /// Invokes the applicable function. Success when try succeeded. Error when not.
+        /// </summary>
+        public void Match(Action<A> ifSuccess = null, Action<E> ifError = null)
+        {
+            if (IsSuccess)
+                ifSuccess?.Invoke(Success.GetOrDefault());
+            else
+                ifError?.Invoke(Error.GetOrDefault());
         }
     }
 }
