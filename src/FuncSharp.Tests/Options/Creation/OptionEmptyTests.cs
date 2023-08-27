@@ -1,5 +1,4 @@
 ﻿using FsCheck;
-using FsCheck.Xunit;
 using FuncSharp.Tests.Generative;
 using Xunit;
 
