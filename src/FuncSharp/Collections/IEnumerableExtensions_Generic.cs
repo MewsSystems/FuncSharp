@@ -45,10 +45,20 @@ public static partial class IEnumerableExtensions
         return source;
     }
 
+    /// <summary>
+    /// Returns the list in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
+    /// </summary>
+    [DebuggerStepThrough]
+    [Pure]
+    public static IReadOnlyList<T> AsReadOnlyList<T>(this INonEmptyEnumerable<T> source)
+    {
+        return source;
+    }
+
     [Obsolete("This already is of type ReadOnlyList.", error: true)]
     public static IReadOnlyList<T> AsReadOnlyList<T>(this IReadOnlyList<T> source)
     {
-        throw new NotImplementedException();
+        return source;
     }
 
     /// <summary>

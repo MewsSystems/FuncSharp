@@ -128,15 +128,6 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
         return new NonEmptyEnumerable<TResult>(headResult.Head, headResult.Tail.Concat(Tail.SelectMany(selector)).ToArray());
     }
 
-    /// <summary>
-    /// Returns the NonEmptyEnumerable typed as IReadOnlyList.
-    /// </summary>
-    [Pure]
-    public IReadOnlyList<T> AsReadOnly()
-    {
-        return this;
-    }
-
     #region static Create methods
 
     public static INonEmptyEnumerable<T> Create(T head, IEnumerable<T> tail)
