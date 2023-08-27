@@ -1,8 +1,7 @@
-﻿namespace FuncSharp
+﻿namespace FuncSharp;
+
+public enum IntervalBoundType
 {
-    public enum IntervalBoundType
-    {
-        Open,
-        Closed
-    }
+    Open,
+    Closed
 }

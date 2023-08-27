@@ -1,12 +1,11 @@
 using BenchmarkDotNet.Running;
 
-namespace FuncSharp.Benchmarks
+namespace FuncSharp.Benchmarks;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            BenchmarkRunner.Run(typeof(Program).Assembly);
-        }
+        BenchmarkRunner.Run(typeof(Program).Assembly);
     }
 }
