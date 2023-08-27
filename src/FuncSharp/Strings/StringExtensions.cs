@@ -18,7 +18,7 @@ public static class StringExtensions
     [Obsolete("This is already a nonempty string", error: true)]
     public static Option<NonEmptyString> AsNonEmpty(this NonEmptyString s)
     {
-        throw new NotImplementedException();
+        return Option.Valued(s);
     }
 
     [Pure]

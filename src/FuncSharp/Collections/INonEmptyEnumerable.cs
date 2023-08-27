@@ -25,7 +25,4 @@ public interface INonEmptyEnumerable<out T> : IReadOnlyList<T>
 
     [Pure]
     INonEmptyEnumerable<TResult> SelectMany<TResult>(Func<T, INonEmptyEnumerable<TResult>> selector);
-
-    [Pure]
-    IReadOnlyList<T> AsReadOnly();
 }

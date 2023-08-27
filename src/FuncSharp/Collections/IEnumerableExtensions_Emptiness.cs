@@ -25,7 +25,7 @@ public static partial class IEnumerableExtensions
     [Obsolete("This is already a NonEmptyEnumerable.", error: true)]
     public static Option<INonEmptyEnumerable<T>> AsNonEmpty<T>(this INonEmptyEnumerable<T> source)
     {
-        throw new NotImplementedException();
+        return Option.Valued(source);
     }
 
     public static bool NonEmpty<T>(this IEnumerable<T> e)
