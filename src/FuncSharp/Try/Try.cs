@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -686,7 +687,7 @@ namespace FuncSharp
         }
     }
 
-    public class Try<A, E>
+    public struct Try<A, E>
     {
         public Try(A success)
         {
@@ -712,6 +713,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the success into another type if the try succeeded.
         /// </summary>
+        [Pure]
         public Try<B, E> Map<B>(Func<A, B> f)
         {
             return IsSuccess
@@ -722,6 +724,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the both the succees and the error into another types. Each function is called only when applicable.
         /// </summary>
+        [Pure]
         public Try<B, F> Map<B, F>(Func<A, B> success, Func<E, F> error)
         {
             return IsSuccess
@@ -732,6 +735,7 @@ namespace FuncSharp
         /// <summary>
         /// Maps the error into another type if the try did not succeed.
         /// </summary>
+        [Pure]
         public Try<A, F> MapError<F>(Func<E, F> f)
         {
             return IsSuccess
@@ -742,6 +746,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns result of the applicable function. Success when try succeeded. Error when not.
         /// </summary>
+        [Pure]
         public TResult Match<TResult>(Func<A, TResult> ifSuccess, Func<E, TResult> ifError)
         {
             return IsSuccess
@@ -752,6 +757,7 @@ namespace FuncSharp
         /// <summary>
         /// Invokes the applicable function. Success when try succeeded. Error when not.
         /// </summary>
+        [Pure]
         public void Match(Action<A> ifSuccess = null, Action<E> ifError = null)
         {
             if (IsSuccess)
