@@ -68,6 +68,14 @@ namespace FuncSharp
         }
 
         /// <summary>
+        /// Returns value of the option if it has value. If not, returns empty string.
+        /// </summary>
+        public static string GetOrEmpty(this Option<string> option)
+        {
+            return option.GetOrElse(string.Empty);
+        }
+
+        /// <summary>
         /// Returns value of the option if it has value. If not, returns zero.
         /// </summary>
         public static short GetOrZero(this Option<short> option)
