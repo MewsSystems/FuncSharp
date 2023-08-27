@@ -79,31 +79,31 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        public static IReadOnlyCollection<Value> Flatten<Key, Value>(this Option<Dictionary<Key, Value>> option)
+        public static IReadOnlyCollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<Dictionary<Key, Value>> option)
         {
             return option.NonEmpty
-                ? option.GetOrDefault().Values
-                : ReadOnlyList.Empty<Value>();
+                ? option.GetOrDefault()
+                : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
         }
 
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        public static ICollection<Value> Flatten<Key, Value>(this Option<IDictionary<Key, Value>> option)
+        public static ICollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IDictionary<Key, Value>> option)
         {
             return option.NonEmpty
-                ? option.GetOrDefault().Values
-                : Array.Empty<Value>();
+                ? option.GetOrDefault()
+                : ReadOnlyList<KeyValuePair<Key, Value>>.EmptyReadOnlyCollection;
         }
 
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        public static IEnumerable<Value> Flatten<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
+        public static IReadOnlyCollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
         {
             return option.NonEmpty
-                ? option.GetOrDefault().Values
-                : Enumerable.Empty<Value>();
+                ? option.GetOrDefault()
+                : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
         }
 
         /// <summary>
@@ -189,31 +189,31 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        public static IReadOnlyCollection<Value> GetOrEmpty<Key, Value>(this Option<Dictionary<Key, Value>> option)
+        public static IReadOnlyCollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<Dictionary<Key, Value>> option)
         {
             return option.NonEmpty
-                ? option.GetOrDefault().Values
-                : ReadOnlyList.Empty<Value>();
+                ? option.GetOrDefault()
+                : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
         }
 
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        public static ICollection<Value> GetOrEmpty<Key, Value>(this Option<IDictionary<Key, Value>> option)
+        public static ICollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IDictionary<Key, Value>> option)
         {
             return option.NonEmpty
-                ? option.GetOrDefault().Values
-                : Array.Empty<Value>();
+                ? option.GetOrDefault()
+                : ReadOnlyList<KeyValuePair<Key, Value>>.EmptyReadOnlyCollection;
         }
 
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
-        public static IEnumerable<Value> GetOrEmpty<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
+        public static IReadOnlyCollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
         {
             return option.NonEmpty
-                ? option.GetOrDefault().Values
-                : Enumerable.Empty<Value>();
+                ? option.GetOrDefault()
+                : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
         }
 
         /// <summary>

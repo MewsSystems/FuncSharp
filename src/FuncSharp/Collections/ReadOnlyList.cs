@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace FuncSharp;
@@ -65,5 +66,6 @@ public static class ReadOnlyList
 
 public class ReadOnlyList<T>
 {
-    public static readonly IReadOnlyList<T> Empty = new List<T>().AsReadOnly();
+    public static readonly ReadOnlyCollection<T> EmptyReadOnlyCollection = new List<T>().AsReadOnly();
+    public static readonly IReadOnlyList<T> Empty = EmptyReadOnlyCollection;
 }
