@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Various UX improvements to extensions of all kinds.</PackageReleaseNotes>
+    <PackageReleaseNotes>IOption interface is gone. Option is a struct, Try is a struct. Various types have been introduced such as NonEmptyString, NonEmptyEnumerable, PositiveInt etc. A lot of extensions reworked.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
