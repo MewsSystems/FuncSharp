@@ -159,7 +159,9 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
         return values switch
         {
             List<T> list => Create(list),
-            T[] array => Create(array),
+            T[] array => array.Length == 0
+                ? Option.Empty<INonEmptyEnumerable<T>>()
+                : Option.Valued<INonEmptyEnumerable<T>>(new NonEmptyEnumerable<T>(array[0], array.Skip(1).ToArray())), // This is here, because you can theoretically have array of a more specific type passed in as an array of a less specific type. That would then crash as you try to make a Span out of it. Because the type would not match.
             _ => Create(values.ToArray())
         };
     }
