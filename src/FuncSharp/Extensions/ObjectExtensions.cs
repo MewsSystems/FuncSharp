@@ -40,13 +40,6 @@ namespace FuncSharp
             return t.SafeEquals((T?)other);
         }
 
-        [Pure]
-        [Obsolete("Use Match instead.", error: true)]
-        public static void MatchRef<A>(this Option<A> a, Action<A> action = null, Action<Unit> otherwise = null)
-        {
-            throw new NotImplementedException();
-        }
-
         [DebuggerStepThrough]
         [Pure]
         public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)
@@ -73,12 +66,6 @@ namespace FuncSharp
             return a is not null && func(a);
         }
 
-        [Obsolete("Use Match instead.", error: true)]
-        public static B MatchRef<A, B>(this Option<A> a, Func<A, B> func, Func<Unit, B> otherwise)
-        {
-            throw new NotImplementedException();
-        }
-
         [DebuggerStepThrough]
         [Pure]
         public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
@@ -101,13 +88,6 @@ namespace FuncSharp
                 return await func(a);
             }
             return await otherwise(Unit.Value);
-        }
-
-        [Obsolete("Use Map instead.", error: true)]
-        [Pure]
-        public static B MapRef<A, B>(this Option<A> a, Func<A, B> func)
-        {
-            throw new NotImplementedException();
         }
 
         [DebuggerStepThrough]
@@ -269,6 +249,15 @@ namespace FuncSharp
         /// </summary>
         [Pure]
         public static Option<A> ToOption<A>(this A value)
+        {
+            return Option.Create(value);
+        }
+
+        /// <summary>
+        /// Turns the specified value into an option.
+        /// </summary>
+        public static Option<A> ToOption<A>(this A? value)
+            where A : struct
         {
             return Option.Create(value);
         }

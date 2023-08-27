@@ -28,26 +28,38 @@ namespace FuncSharp
             throw new NotImplementedException();
         }
 
+        public static bool NonEmpty<T>(this IEnumerable<T> e)
+        {
+            return e is not null && e.Any();
+        }
+
+        public static bool IsEmpty<T>(this IEnumerable<T> e)
+        {
+            return !e.NonEmpty();
+        }
+
         [Pure]
-        public static INonEmptyEnumerable<T> Flatten<T>(this INonEmptyEnumerable<INonEmptyEnumerable<T>> source)
+        public static bool NonEmpty<T>(this IReadOnlyCollection<T> collection)
         {
-            return NonEmptyEnumerable<T>.Create(source.Head.Head, source.Head.Tail.Concat(source.Tail.Flatten()).ToArray());
-        }
-
-        public static INonEmptyEnumerable<T> Concat<T>(this T e, params IEnumerable<T>[] others)
-        {
-            return NonEmptyEnumerable.Create(e, others.Flatten().ToArray());
+            return collection is not null && collection.Count > 0;
         }
 
         [Pure]
-        public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params T[] items)
+        public static bool IsEmpty<T>(this IReadOnlyCollection<T> collection)
         {
-            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());
+            return !collection.NonEmpty();
         }
 
-        public static INonEmptyEnumerable<T> Concat<T>(this INonEmptyEnumerable<T> source, params IEnumerable<T>[] items)
+        [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
+        public static bool NonEmpty<T>(this INonEmptyEnumerable<T> source)
         {
-            return NonEmptyEnumerable.Create(source.Head, source.Tail.Concat(items).ToArray());
+            return true;
+        }
+
+        [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
+        public static bool IsEmpty<T>(this INonEmptyEnumerable<T> source)
+        {
+            return false;
         }
     }
 }

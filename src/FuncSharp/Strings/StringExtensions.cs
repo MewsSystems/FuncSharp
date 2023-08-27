@@ -15,6 +15,12 @@ namespace FuncSharp
             return NonEmptyString.Create(s);
         }
 
+        [Obsolete("This is already a nonempty string", error: true)]
+        public static Option<NonEmptyString> AsNonEmpty(this NonEmptyString s)
+        {
+            throw new NotImplementedException();
+        }
+
         [Pure]
         public static Option<byte> ToByte(this string s, IFormatProvider format = null, NumberStyles style = NumberStyles.Integer)
         {

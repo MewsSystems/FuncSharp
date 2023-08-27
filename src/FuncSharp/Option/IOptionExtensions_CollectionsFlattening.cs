@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FuncSharp
@@ -19,6 +20,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyList<A> Flatten<A>(this Option<IReadOnlyList<A>> option)
         {
             return option.NonEmpty
@@ -29,6 +31,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyCollection<A> Flatten<A>(this Option<IReadOnlyCollection<A>> option)
         {
             return option.NonEmpty
@@ -39,6 +42,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyList<A> Flatten<A>(this Option<INonEmptyEnumerable<A>> option)
         {
             return option.NonEmpty
@@ -49,6 +53,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static A[] Flatten<A>(this Option<A[]> option)
         {
             return option.NonEmpty
@@ -59,6 +64,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static List<A> Flatten<A>(this Option<List<A>> option)
         {
             return option.NonEmpty
@@ -69,6 +75,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IEnumerable<Value> Flatten<Key, Value>(this Option<IGrouping<Key, Value>> option)
         {
             return option.NonEmpty
@@ -79,6 +86,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyCollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<Dictionary<Key, Value>> option)
         {
             return option.NonEmpty
@@ -89,6 +97,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static ICollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IDictionary<Key, Value>> option)
         {
             return option.NonEmpty
@@ -99,6 +108,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyCollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
         {
             return option.NonEmpty
@@ -129,6 +139,7 @@ namespace FuncSharp
          /// <summary>
          /// Returns the value if the option is nonempty, otherwise empty.
          /// </summary>
+         [Pure]
          public static IReadOnlyList<A> GetOrEmpty<A>(this Option<IReadOnlyList<A>> option)
          {
              return option.NonEmpty
@@ -139,6 +150,7 @@ namespace FuncSharp
          /// <summary>
          /// Returns the value if the option is nonempty, otherwise empty.
          /// </summary>
+         [Pure]
          public static IReadOnlyCollection<A> GetOrEmpty<A>(this Option<IReadOnlyCollection<A>> option)
          {
              return option.NonEmpty
@@ -149,6 +161,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyList<A> GetOrEmpty<A>(this Option<INonEmptyEnumerable<A>> option)
         {
             return option.NonEmpty
@@ -159,6 +172,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static A[] GetOrEmpty<A>(this Option<A[]> option)
         {
             return option.NonEmpty
@@ -169,6 +183,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static List<A> GetOrEmpty<A>(this Option<List<A>> option)
         {
             return option.NonEmpty
@@ -179,6 +194,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IEnumerable<Value> GetOrEmpty<Key, Value>(this Option<IGrouping<Key, Value>> option)
         {
             return option.NonEmpty
@@ -189,6 +205,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyCollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<Dictionary<Key, Value>> option)
         {
             return option.NonEmpty
@@ -199,6 +216,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static ICollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IDictionary<Key, Value>> option)
         {
             return option.NonEmpty
@@ -209,6 +227,7 @@ namespace FuncSharp
         /// <summary>
         /// Returns the value if the option is nonempty, otherwise empty.
         /// </summary>
+        [Pure]
         public static IReadOnlyCollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
         {
             return option.NonEmpty
