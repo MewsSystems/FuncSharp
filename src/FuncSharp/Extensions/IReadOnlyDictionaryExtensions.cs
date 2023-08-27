@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+public static class IReadOnlyDictionaryExtensions
 {
-    public static class IReadOnlyDictionaryExtensions
+    [Pure]
+    public static Option<V> Get<K, V>(this IReadOnlyDictionary<K, V> dictionary, K key)
     {
-        [Pure]
-        public static Option<V> Get<K, V>(this IReadOnlyDictionary<K, V> dictionary, K key)
-        {
-            return key is not null && dictionary.TryGetValue(key, out var value)
-                ? Option.Valued(value)
-                : Option.Empty<V>();
-        }
+        return key is not null && dictionary.TryGetValue(key, out var value)
+            ? Option.Valued(value)
+            : Option.Empty<V>();
     }
 }

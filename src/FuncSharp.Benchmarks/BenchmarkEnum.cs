@@ -1,11 +1,10 @@
-namespace FuncSharp.Benchmarks
+namespace FuncSharp.Benchmarks;
+
+public enum BenchmarkEnum
 {
-    public enum BenchmarkEnum
-    {
-        Value1,
-        Value2,
-        Value3,
-        Value4,
-        Value5
-    }
+    Value1,
+    Value2,
+    Value3,
+    Value4,
+    Value5
 }
