@@ -25,11 +25,29 @@ namespace FuncSharp
             return source as IReadOnlyList<T> ?? source.ToArray();
         }
 
-        [Obsolete("This already is of type ReadOnlyList.", error: true)]
-        public static IReadOnlyList<T> AsReadOnlyList<T>(this IReadOnlyList<T> source)
+        /// <summary>
+        /// Returns the array in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IReadOnlyList<T> AsReadOnlyList<T>(this T[] source)
         {
-            throw new NotImplementedException();
+            return source;
         }
+
+        /// <summary>
+        /// Returns the list in case it is a ReadOnlyList or creates a new ReadOnlyList from it.
+        /// </summary>
+        [DebuggerStepThrough]
+        public static IReadOnlyList<T> AsReadOnlyList<T>(this List<T> source)
+        {
+            return source;
+        }
+
+        // [Obsolete("This already is of type ReadOnlyList.", error: true)]
+        // public static IReadOnlyList<T> AsReadOnlyList<T>(this IReadOnlyList<T> source)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         /// <summary>
         /// Returns the IEnumerable in case it is a List or creates a new List from it.

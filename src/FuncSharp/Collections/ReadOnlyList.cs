@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace FuncSharp;
@@ -37,6 +38,26 @@ public static class ReadOnlyList
         return values.Flatten().Flatten().ToArray();
     }
 
+    public static IReadOnlyList<T> CreateFlat<T>(params Option<IReadOnlyList<T>>[] values)
+    {
+        return values.Flatten().Flatten().ToArray();
+    }
+
+    public static IReadOnlyList<T> CreateFlat<T>(params Option<List<T>>[] values)
+    {
+        return values.Flatten().Flatten().ToArray();
+    }
+
+    public static IReadOnlyList<T> CreateFlat<T>(params Option<T[]>[] values)
+    {
+        return values.Flatten().Flatten().ToArray();
+    }
+
+    public static IReadOnlyList<T> CreateFlat<T>(params Option<INonEmptyEnumerable<T>>[] values)
+    {
+        return values.Flatten().Flatten().ToArray();
+    }
+
     public static IReadOnlyList<T> Empty<T>()
     {
         return ReadOnlyList<T>.Empty;
@@ -45,5 +66,6 @@ public static class ReadOnlyList
 
 public class ReadOnlyList<T>
 {
-    public static readonly IReadOnlyList<T> Empty = new List<T>().AsReadOnly();
+    public static readonly ReadOnlyCollection<T> EmptyReadOnlyCollection = new List<T>().AsReadOnly();
+    public static readonly IReadOnlyList<T> Empty = EmptyReadOnlyCollection;
 }

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FuncSharp
 {
-    public static class OptionExtensions
+    public static partial class OptionExtensions
     {
         /// <summary>
         /// Turns the option into a nullable value.
@@ -68,6 +65,14 @@ namespace FuncSharp
             where R : class
         {
             return option.GetOrDefault(func);
+        }
+
+        /// <summary>
+        /// Returns value of the option if it has value. If not, returns empty string.
+        /// </summary>
+        public static string GetOrEmpty(this Option<string> option)
+        {
+            return option.GetOrElse(string.Empty);
         }
 
         /// <summary>
@@ -233,70 +238,6 @@ namespace FuncSharp
             where A : struct
         {
             return option.FlatMap(a => a.ToOption());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static IEnumerable<A> Flatten<A>(this Option<IEnumerable<A>> option)
-        {
-            return option.GetOrElse(_ => Enumerable.Empty<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static IReadOnlyList<A> Flatten<A>(this Option<IReadOnlyList<A>> option)
-        {
-            return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static A[] Flatten<A>(this Option<A[]> option)
-        {
-            return option.GetOrElse(_ => Array.Empty<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static List<A> Flatten<A>(this Option<List<A>> option)
-        {
-            return option.GetOrElse(_ => new List<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static IEnumerable<A> GetOrEmpty<A>(this Option<IEnumerable<A>> option)
-        {
-            return option.GetOrElse(_ => Enumerable.Empty<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static IReadOnlyList<A> GetOrEmpty<A>(this Option<IReadOnlyList<A>> option)
-        {
-            return option.GetOrElse(_ => ReadOnlyList.Empty<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static A[] GetOrEmpty<A>(this Option<A[]> option)
-        {
-            return option.GetOrElse(_ => Array.Empty<A>());
-        }
-
-        /// <summary>
-        /// Returns the value if the option is nonempty, otherwise empty.
-        /// </summary>
-        public static List<A> GetOrEmpty<A>(this Option<List<A>> option)
-        {
-            return option.GetOrElse(_ => new List<A>());
         }
 
         /// <summary>

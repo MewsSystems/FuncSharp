@@ -173,6 +173,15 @@ namespace FuncSharp
             return new Option<B>(f(Unit.Value));
         }
 
+        public Option<B> FlatMapEmpty<B>(Func<Unit, Option<B>> f)
+        {
+            if (NonEmpty)
+            {
+                return Option<B>.Empty;
+            }
+            return f(Unit.Value);
+        }
+
         public Option<B> FlatMap<B>(Func<A, Option<B>> f)
         {
             if (NonEmpty)
