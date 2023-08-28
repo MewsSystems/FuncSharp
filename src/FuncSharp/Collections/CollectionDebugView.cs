@@ -11,13 +11,13 @@ namespace FuncSharp;
 /// <typeparam name="T"></typeparam>
 internal class CollectionDebugView<T>
 {
-    private readonly IEnumerable<T> collection;
+    private readonly IEnumerable<T> _collection;
 
     public CollectionDebugView(IEnumerable<T> collection)
     {
-        this.collection = collection ?? throw new ArgumentNullException("collection");
+        _collection = collection ?? throw new ArgumentNullException(nameof(collection));
     }
 
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-    public T[] Items => collection.ToArray();
+    public T[] Items => _collection.ToArray();
 }
