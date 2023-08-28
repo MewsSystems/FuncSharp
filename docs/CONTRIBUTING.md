@@ -138,6 +138,12 @@ Updating, improving and correcting the documentation
 
 ## Styleguides
 ### Commit Messages
-<!-- TODO
 
--->
+We propose a recommended approach for composing and comprehending commits: 
+
+```
+"This commit will <YOUR_COMMIT_MESSAGE>"
+``` 
+serving as a clear template. For instance, a commit could be `"This commit will <Introduce new data type>"`, providing a concise insight into the purpose of the commit.
+
+Your contributions play a pivotal role in enhancing our project. By following these commit message guidelines, you actively contribute to the project's clarity and accessibility. Thank you for being part of our collaborative community!
