@@ -90,8 +90,6 @@ public class EqualityTests
 
     private void AssertEquality<T>(Option<T> first, Option<T> second)
     {
-#pragma warning disable CS1718
-
         AssertAreEqual(first, first);
         AssertAreEqual(second, second);
 
@@ -99,9 +97,6 @@ public class EqualityTests
         Assert.Equal(shouldBeEqual, first.Equals(second));
         Assert.Equal(shouldBeEqual, first == second);
         Assert.Equal(!shouldBeEqual, first != second);
-
-#pragma warning restore CS1718
-
     }
 
     private void AssertAreEqual<T>(Option<T> first, Option<T> second)
