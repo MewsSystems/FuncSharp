@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FsCheck.Xunit;
 using Xunit;
 
@@ -27,6 +28,15 @@ public class DigitTests
         OptionAssert.IsEmpty(char.MaxValue.AsDigit());
     }
 
+    [Fact]
+    internal void FilterDigits()
+    {
+        Assert.Equal(
+            new byte[] { 1, 2, 3, 8, 7, 6, 5, 9, },
+            "ASD 1 some spaces 2 with numbers 38 7 in between .6 ?:`'!@(#*&$%&^!@)$_  them59".FilterDigits().Select(d => d.Value)
+        );
+    }
+
     [Property]
     internal void AllNumbersSucceed(int number)
     {
@@ -35,7 +45,7 @@ public class DigitTests
     }
 
     [Property]
-    internal void AsPositive(char c)
+    internal void AllCharsSucceed(char c)
     {
         var result = c.AsDigit();
         Assert.Equal(char.IsDigit(c), result.NonEmpty);
