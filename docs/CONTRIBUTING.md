@@ -125,10 +125,18 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/MewsSy
 <!-- You might want to create an issue template for enhancement suggestions that can be used as a guide and that defines the structure of the information to be included. If you do so, reference it here in the description. -->
 
 ### Your First Code Contribution
-<!-- TODO
-include Setup of env, IDE and typical getting started instructions?
 
--->
+#### Environment setup
+
+All You need is a .NET 6 SDK, an IDE of your choice and you're good to go! 🎉
+
+#### Choose an issue
+
+Browse through the current list of issues and select one that captures your interest. Reach out to the repository maintainers to get the issue assigned to you!
+
+#### Submit a pull request
+
+Spot a minor enhancement you could make? Or are you already addressing an existing issue? Initiate a pull request, providing a comprehensive yet concise overview. The maintainers will promptly review and consider your contributions!
 
 ### Improving The Documentation
 <!-- TODO
