@@ -16,46 +16,46 @@ public class EqualityTests
     internal void Equality()
     {
         // Equal value of same type
-        Assert.Equal(Option.Valued(14), Option.Valued(14));
-        Assert.Equal(Option.Valued(-6), Option.Valued(-6));
-        Assert.Equal(Option.Valued(Unit.Value), Option.Valued(Unit.Value));
-        Assert.Equal(Option.Valued(new ReferenceType(28167)), Option.Valued(new ReferenceType(28167)));
-        Assert.Equal(Option.Valued("ASDF123Q"), Option.Valued("ASDF123Q"));
+        AssertAreEqual(Option.Valued(14), Option.Valued(14));
+        AssertAreEqual(Option.Valued(-6), Option.Valued(-6));
+        AssertAreEqual(Option.Valued(Unit.Value), Option.Valued(Unit.Value));
+        AssertAreEqual(Option.Valued(new ReferenceType(28167)), Option.Valued(new ReferenceType(28167)));
+        AssertAreEqual(Option.Valued("ASDF123Q"), Option.Valued("ASDF123Q"));
 
         // Empty option of same type
-        Assert.Equal(Option.Empty<int>(), Option.Empty<int>());
-        Assert.Equal(Option.Empty<ReferenceType>(), Option.Empty<ReferenceType>());
+        AssertAreEqual(Option.Empty<int>(), Option.Empty<int>());
+        AssertAreEqual(Option.Empty<ReferenceType>(), Option.Empty<ReferenceType>());
 
         // When using covariance, the type of the option is actually different, therefore equality is false.
-        Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Empty<ReferenceTypeBase>());
+        AssertAreNotEqual(Option.Empty<ReferenceType>(), Option.Empty<ReferenceTypeBase>());
 
         // Different type.
-        Assert.NotEqual<object>(Option.Valued<int>(1), Option.Valued<long>(1));
-        Assert.NotEqual<object>(Option.Empty<int>(), Option.Empty<decimal>());
-        Assert.NotEqual<object>(Option.Empty<decimal>(), Option.Empty<ReferenceType>());
-        Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Empty<string>());
+        AssertAreNotEqual(Option.Valued<int>(1), Option.Valued<long>(1));
+        AssertAreNotEqual(Option.Empty<int>(), Option.Empty<decimal>());
+        AssertAreNotEqual(Option.Empty<decimal>(), Option.Empty<ReferenceType>());
+        AssertAreNotEqual(Option.Empty<ReferenceType>(), Option.Empty<string>());
 
         // Empty and non-empty
-        Assert.NotEqual(Option.Empty<int?>(), Option.Valued((int?)null));
-        Assert.NotEqual(Option.Empty<int>(), Option.Valued(0));
-        Assert.NotEqual(Option.Empty<int>(), Option.Valued(1));
-        Assert.NotEqual(Option.Empty<string>(), Option.Valued<string>(null));
-        Assert.NotEqual(Option.Empty<string>(), Option.Valued("ASDF"));
-        Assert.NotEqual(Option.Empty<ReferenceType>(), Option.Valued(new ReferenceType(14)));
-        Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Valued<ReferenceTypeBase>(null));
+        AssertAreNotEqual(Option.Empty<int?>(), Option.Valued((int?)null));
+        AssertAreNotEqual(Option.Empty<int>(), Option.Valued(0));
+        AssertAreNotEqual(Option.Empty<int>(), Option.Valued(1));
+        AssertAreNotEqual(Option.Empty<string>(), Option.Valued<string>(null));
+        AssertAreNotEqual(Option.Empty<string>(), Option.Valued("ASDF"));
+        AssertAreNotEqual(Option.Empty<ReferenceType>(), Option.Valued(new ReferenceType(14)));
+        AssertAreNotEqual(Option.Empty<ReferenceType>(), Option.Valued<ReferenceTypeBase>(null));
 
         // Empty option and non-empty of different type
-        Assert.NotEqual<object>(Option.Empty<int>(), Option.Valued<ReferenceTypeBase>(null));
-        Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Valued(1));
-        Assert.NotEqual<object>(Option.Empty<ReferenceType>(), Option.Valued("ASDF"));
+        AssertAreNotEqual(Option.Empty<int>(), Option.Valued<ReferenceTypeBase>(null));
+        AssertAreNotEqual(Option.Empty<ReferenceType>(), Option.Valued(1));
+        AssertAreNotEqual(Option.Empty<ReferenceType>(), Option.Valued("ASDF"));
 
         // Both non-empty, but different values.
-        Assert.NotEqual(Option.Valued(14), Option.Valued(-6));
-        Assert.NotEqual(Option.Valued(-6), Option.Valued(0));
-        Assert.NotEqual(Option.Valued(new ReferenceType(28167)), Option.Valued(new ReferenceType(-5)));
-        Assert.NotEqual(Option.Valued(new ReferenceType(28167)), Option.Valued<ReferenceType>(null));
-        Assert.NotEqual(Option.Valued("ASDF123Q"), Option.Valued("Other string"));
-        Assert.NotEqual(Option.Valued("ASDF123Q"), Option.Valued<string>(null));
+        AssertAreNotEqual(Option.Valued(14), Option.Valued(-6));
+        AssertAreNotEqual(Option.Valued(-6), Option.Valued(0));
+        AssertAreNotEqual(Option.Valued(new ReferenceType(28167)), Option.Valued(new ReferenceType(-5)));
+        AssertAreNotEqual(Option.Valued(new ReferenceType(28167)), Option.Valued<ReferenceType>(null));
+        AssertAreNotEqual(Option.Valued("ASDF123Q"), Option.Valued("Other string"));
+        AssertAreNotEqual(Option.Valued("ASDF123Q"), Option.Valued<string>(null));
     }
 
     [Property]
@@ -90,10 +90,26 @@ public class EqualityTests
 
     private void AssertEquality<T>(Option<T> first, Option<T> second)
     {
-        Assert.Equal(first, first);
-        Assert.Equal(second, second);
+        AssertAreEqual(first, first);
+        AssertAreEqual(second, second);
 
         var shouldBeEqual = first.NonEmpty == second.NonEmpty && Equals(first.GetOrDefault(), second.GetOrDefault());
         Assert.Equal(shouldBeEqual, first.Equals(second));
+        Assert.Equal(shouldBeEqual, first == second);
+        Assert.Equal(!shouldBeEqual, first != second);
+    }
+
+    private void AssertAreEqual<T>(Option<T> first, Option<T> second)
+    {
+        Assert.Equal(first, second);
+        Assert.True(first == second);
+        Assert.False(first != second);
+    }
+
+    private void AssertAreNotEqual(object first, object second)
+    {
+        Assert.NotEqual(first, second);
+        Assert.False(first == second);
+        Assert.True(first != second);
     }
 }

@@ -4,14 +4,14 @@ namespace FuncSharp;
 
 public readonly struct Digit
 {
-    private readonly int value;
-
-    private Digit(int value)
+    private Digit(byte value)
     {
-        this.value = value;
+        Value = value;
     }
 
-    public static implicit operator int(Digit i) => i.value;
+    public byte Value { get; }
+    public static implicit operator byte(Digit i) => i.Value;
+    public static implicit operator int(Digit i) => i.Value;
 
     public static bool operator ==(Digit left, Digit right) => left.Equals(right);
 
@@ -31,22 +31,17 @@ public readonly struct Digit
 
     public static Digit? CreateNullable(char value)
     {
-        if (char.IsDigit(value))
-        {
-            return new Digit(int.Parse(value.ToString()));
-        }
-        else
-        {
-            return null;
-        }
+        return char.IsDigit(value)
+            ? new Digit(byte.Parse(value.ToString()))
+            : null;
     }
 
-    public override bool Equals(object obj) => obj is Digit other && value.SafeEquals(other.value);
+    public override bool Equals(object obj) => obj is Digit other && Value.SafeEquals(other.Value);
 
-    public override int GetHashCode() => value.GetHashCode();
+    public override int GetHashCode() => Value.GetHashCode();
 
     public override string ToString()
     {
-        return value.ToString();
+        return Value.ToString();
     }
 }
