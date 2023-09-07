@@ -31,16 +31,20 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns first value or an empty option.
+    /// Returns the first element inside the list or an empty option if the list is empty.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
     {
         return source.Where(predicate).FirstOption();
     }
 
     /// <summary>
-    /// Returns first value or an empty option.
+    /// Returns the first element inside the list or an empty option if the list is empty.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     public static Option<T> FirstOption<T>(this IEnumerable<T> source)
     {
         if (source is IReadOnlyList<T> list)
@@ -55,21 +59,32 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns last value or an empty option.
+    /// Returns the last element inside the list or an empty option if the list is empty.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
     {
-        return source.Reverse().FirstOption(predicate);
+        // TODO - call FirstOption instead of copy-pasted code.
+        using var enumerator = source.Where(predicate).Reverse().GetEnumerator();
+        return enumerator.MoveNext()
+            ? Option.Valued(enumerator.Current)
+            : Option.Empty<T>();
     }
 
     /// <summary>
-    /// Returns last value or an empty option.
+    /// Returns the first element inside the list or an empty option if the list is empty.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source)
     {
-        return source is IReadOnlyList<T> list
-            ? list.LastOption()
-            : source.Reverse().FirstOption();
+        if (source is IReadOnlyList<T> list)
+            return list.LastOption();
+
+        // TODO - call FirstOption instead of copy-pasted code.
+        using var enumerator = source.Reverse().GetEnumerator();
+        return enumerator.MoveNext()
+            ? Option.Valued(enumerator.Current)
+            : Option.Empty<T>();
     }
 
     /// <summary>

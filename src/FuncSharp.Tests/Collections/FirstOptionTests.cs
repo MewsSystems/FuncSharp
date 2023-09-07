@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -7,6 +8,7 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable;
 public class FirstOptionTests
 {
     [Fact]
+    [Obsolete]
     public void FirstOption_Empty()
     {
         IEnumerable<string> enumerable = Enumerable.Empty<string>();
@@ -20,6 +22,7 @@ public class FirstOptionTests
     }
 
     [Fact]
+    [Obsolete]
     public void FirstOption_Single()
     {
         IEnumerable<string> enumerable = Enumerable.Repeat("A potato", 1);
@@ -36,6 +39,7 @@ public class FirstOptionTests
     }
 
     [Fact]
+    [Obsolete]
     public void FirstOption_Multiple()
     {
         IEnumerable<string> enumerable = Enumerable.Range(0, 10).Select(i => $"{i} potatoes");

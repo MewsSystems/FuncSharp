@@ -40,6 +40,11 @@ public static partial class IEnumerableExtensions
         return list.ElementAt(0);
     }
 
+    /// <summary>
+    /// Returns the first element inside the list or an empty option if the list is empty.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="list"/> parameter is null.</exception>
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     [Pure]
     public static Option<T> FirstOption<T>(this IReadOnlyList<T> list)
     {
@@ -77,10 +82,14 @@ public static partial class IEnumerableExtensions
             : list[list.Count - 1];
     }
 
+    /// <summary>
+    /// Returns the last element inside the list or an empty option if the list is empty.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="list"/> parameter is null.</exception>
     [Pure]
     public static Option<T> LastOption<T>(this IReadOnlyList<T> list)
     {
-        return list.IsEmpty()
+        return list.Count == 0
             ? Option.Empty<T>()
             : Option.Valued(list[list.Count - 1]);
     }

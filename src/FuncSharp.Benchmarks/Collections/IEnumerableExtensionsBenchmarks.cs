@@ -86,6 +86,7 @@ public class IEnumerableExtensionsBenchmarks
 
     // Last Result - 25.8.2023 - 35.1 ns - 128 B
     [Benchmark]
+    [Obsolete]
     public void FirstOption()
     {
         var x = StringEnumerable.FirstOption();
