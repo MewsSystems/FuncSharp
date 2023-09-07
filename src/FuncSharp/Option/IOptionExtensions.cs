@@ -7,6 +7,26 @@ namespace FuncSharp;
 public static partial class OptionExtensions
 {
     /// <summary>
+    /// Gets the value inside the option or the default value for the type.
+    /// </summary>
+    [Pure]
+    public static T GetOrDefault<T>(this Option<T> option)
+    {
+        return option.Value;
+    }
+
+    /// <summary>
+    /// Gets the value inside the option mapped using the function provided. For empty option returns the default value for the result type.
+    /// </summary>
+    [Pure]
+    public static R GetOrDefault<T, R>(this Option<T> option, Func<T, R> func)
+    {
+        if (option.NonEmpty)
+            return func(option.Value);
+        return default(R);
+    }
+
+    /// <summary>
     /// Turns the option into a nullable value.
     /// </summary>
     [Pure]

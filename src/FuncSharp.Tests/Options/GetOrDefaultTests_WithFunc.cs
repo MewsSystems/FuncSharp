@@ -24,7 +24,7 @@ public class GetOrDefaultTests_WithFunc
         Assert.Null(valuedOption.GetOrDefault(_ => (string)null));
 
         Assert.Equal(0, emptyOption.GetOrDefault(_ => 14));
-        Assert.Null(emptyOption.GetOrDefault<int?>(_ => 14));
+        Assert.Null(emptyOption.GetOrDefault(_ => (int?)14));
         Assert.Null(emptyOption.GetOrDefault(_ => "asd"));
     }
 

@@ -13,7 +13,7 @@ public static partial class OptionExtensions
     public static IEnumerable<A> Flatten<A>(this Option<IEnumerable<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Enumerable.Empty<A>();
     }
 
@@ -24,7 +24,7 @@ public static partial class OptionExtensions
     public static IReadOnlyList<A> Flatten<A>(this Option<IReadOnlyList<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<A>();
     }
 
@@ -35,7 +35,7 @@ public static partial class OptionExtensions
     public static IReadOnlyCollection<A> Flatten<A>(this Option<IReadOnlyCollection<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<A>();
     }
 
@@ -46,7 +46,7 @@ public static partial class OptionExtensions
     public static IReadOnlyList<A> Flatten<A>(this Option<INonEmptyEnumerable<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<A>();
     }
 
@@ -57,7 +57,7 @@ public static partial class OptionExtensions
     public static A[] Flatten<A>(this Option<A[]> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Array.Empty<A>();
     }
 
@@ -68,7 +68,7 @@ public static partial class OptionExtensions
     public static List<A> Flatten<A>(this Option<List<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : new List<A>();
     }
 
@@ -79,7 +79,7 @@ public static partial class OptionExtensions
     public static IEnumerable<Value> Flatten<Key, Value>(this Option<IGrouping<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Enumerable.Empty<Value>();
     }
 
@@ -90,7 +90,7 @@ public static partial class OptionExtensions
     public static IReadOnlyCollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<Dictionary<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
     }
 
@@ -101,7 +101,7 @@ public static partial class OptionExtensions
     public static ICollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IDictionary<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList<KeyValuePair<Key, Value>>.EmptyReadOnlyCollection;
     }
 
@@ -112,7 +112,7 @@ public static partial class OptionExtensions
     public static IReadOnlyCollection<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
     }
 
@@ -122,7 +122,7 @@ public static partial class OptionExtensions
     public static IEnumerable<KeyValuePair<Key, Value>> Flatten<Key, Value>(this Option<IEnumerable<KeyValuePair<Key, Value>>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Enumerable.Empty<KeyValuePair<Key, Value>>();
     }
 
@@ -132,7 +132,7 @@ public static partial class OptionExtensions
     public static IEnumerable<A> GetOrEmpty<A>(this Option<IEnumerable<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Enumerable.Empty<A>();
     }
 
@@ -143,7 +143,7 @@ public static partial class OptionExtensions
     public static IReadOnlyList<A> GetOrEmpty<A>(this Option<IReadOnlyList<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<A>();
     }
 
@@ -154,7 +154,7 @@ public static partial class OptionExtensions
     public static IReadOnlyCollection<A> GetOrEmpty<A>(this Option<IReadOnlyCollection<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<A>();
     }
 
@@ -165,7 +165,7 @@ public static partial class OptionExtensions
     public static IReadOnlyList<A> GetOrEmpty<A>(this Option<INonEmptyEnumerable<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<A>();
     }
 
@@ -176,7 +176,7 @@ public static partial class OptionExtensions
     public static A[] GetOrEmpty<A>(this Option<A[]> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Array.Empty<A>();
     }
 
@@ -187,7 +187,7 @@ public static partial class OptionExtensions
     public static List<A> GetOrEmpty<A>(this Option<List<A>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : new List<A>();
     }
 
@@ -198,7 +198,7 @@ public static partial class OptionExtensions
     public static IEnumerable<Value> GetOrEmpty<Key, Value>(this Option<IGrouping<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Enumerable.Empty<Value>();
     }
 
@@ -209,7 +209,7 @@ public static partial class OptionExtensions
     public static IReadOnlyCollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<Dictionary<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
     }
 
@@ -220,7 +220,7 @@ public static partial class OptionExtensions
     public static ICollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IDictionary<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList<KeyValuePair<Key, Value>>.EmptyReadOnlyCollection;
     }
 
@@ -231,7 +231,7 @@ public static partial class OptionExtensions
     public static IReadOnlyCollection<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IReadOnlyDictionary<Key, Value>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : ReadOnlyList.Empty<KeyValuePair<Key, Value>>();
     }
 
@@ -241,7 +241,7 @@ public static partial class OptionExtensions
     public static IEnumerable<KeyValuePair<Key, Value>> GetOrEmpty<Key, Value>(this Option<IEnumerable<KeyValuePair<Key, Value>>> option)
     {
         return option.NonEmpty
-            ? option.GetOrDefault()
+            ? option.Value
             : Enumerable.Empty<KeyValuePair<Key, Value>>();
     }
 }

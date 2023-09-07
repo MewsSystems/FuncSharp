@@ -92,7 +92,7 @@ public struct Option<A> : IOption
     bool IOption.IsEmpty => IsEmpty;
     bool IOption.NonEmpty => NonEmpty;
 
-    private A Value { get; }
+    internal A Value { get; }
 
     [Pure]
     public bool NonEmpty { get; }
@@ -155,20 +155,6 @@ public struct Option<A> : IOption
             throw otherwise(Unit.Value);
         }
         throw new InvalidOperationException("An empty option does not have a value.");
-    }
-
-    [Pure]
-    public A GetOrDefault()
-    {
-        return Value;
-    }
-
-    [Pure]
-    public R GetOrDefault<R>(Func<A, R> func)
-    {
-        if (NonEmpty)
-            return func(Value);
-        return default(R);
     }
 
     [Pure]

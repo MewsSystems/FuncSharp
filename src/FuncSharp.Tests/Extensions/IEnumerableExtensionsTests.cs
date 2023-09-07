@@ -26,7 +26,7 @@ public class IEnumerableExtensionsTests
         };
 
         var collectionDataCube = source.ToCollectionDataCube(s => s.ProductValue1, s => s.ProductValue2, s => s.ProductValue3);
-        Assert.Equal(new List<string> { "C", "D" }, collectionDataCube.Get("A", "B").GetOrNull());
+        Assert.Equal(new List<string> { "C", "D" }, collectionDataCube.Get("A", "B").Get());
     }
 
     [Fact]
