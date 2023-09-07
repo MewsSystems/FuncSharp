@@ -32,45 +32,47 @@ public static partial class IEnumerableExtensions
         return source.ToOption();
     }
 
-    // /// <summary>
-    // /// Returns true if the collection contains at least one  element.
-    // /// </summary>
-    // /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
-    // public static bool NonEmpty<T>(this IEnumerable<T> source)
-    // {
-    //     return source.Any();
-    // }
-    //
-    // /// <summary>
-    // /// Returns true if the collection contains no elements.
-    // /// </summary>
-    // /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
-    // public static bool IsEmpty<T>(this IEnumerable<T> source)
-    // {
-    //     return !source.Any();
-    // }
-    //
-    // /// <summary>
-    // /// Returns true if the collection contains at least one  element.
-    // /// </summary>
-    // /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
-    // [Pure]
-    // public static bool NonEmpty<T>(this IReadOnlyCollection<T> source)
-    // {
-    //     ArgumentNullException.ThrowIfNull(source, nameof(source));
-    //     return source.Count > 0;
-    // }
-    //
-    // /// <summary>
-    // /// Returns true if the collection contains no elements.
-    // /// </summary>
-    // /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
-    // [Pure]
-    // public static bool IsEmpty<T>(this IReadOnlyCollection<T> source)
-    // {
-    //     ArgumentNullException.ThrowIfNull(source, nameof(source));
-    //     return source.Count == 0;
-    // }
+    /*
+    /// <summary>
+    /// Returns true if the collection contains at least one element.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
+    public static bool NonEmpty<T>(this IEnumerable<T> source)
+    {
+        return source.Any();
+    }
+
+    /// <summary>
+    /// Returns true if the collection contains no elements.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
+    public static bool IsEmpty<T>(this IEnumerable<T> source)
+    {
+        return !source.Any();
+    }
+
+    /// <summary>
+    /// Returns true if the collection contains at least one element.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
+    [Pure]
+    public static bool NonEmpty<T>(this IReadOnlyCollection<T> source)
+    {
+        ArgumentNullException.ThrowIfNull(source, nameof(source));
+        return source.Count > 0;
+    }
+
+    /// <summary>
+    /// Returns true if the collection contains no elements.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
+    [Pure]
+    public static bool IsEmpty<T>(this IReadOnlyCollection<T> source)
+    {
+        ArgumentNullException.ThrowIfNull(source, nameof(source));
+        return source.Count == 0;
+    }
+*/
 
     [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
     public static bool NonEmpty<T>(this INonEmptyEnumerable<T> source)

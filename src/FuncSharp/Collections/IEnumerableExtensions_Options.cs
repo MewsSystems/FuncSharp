@@ -32,7 +32,7 @@ public static partial class IEnumerableExtensions
 
     /*
     /// <summary>
-    /// Returns the first element inside the list or an empty option if the list is empty.
+    /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
@@ -41,7 +41,7 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns the first element inside the list or an empty option if the list is empty.
+    /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> FirstOption<T>(this IEnumerable<T> source)
@@ -58,7 +58,7 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns the last element inside the list or an empty option if the list is empty.
+    /// Returns the last element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
@@ -67,7 +67,7 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns the first element inside the list or an empty option if the list is empty.
+    /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source)
