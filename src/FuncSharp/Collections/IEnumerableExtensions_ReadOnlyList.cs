@@ -40,17 +40,17 @@ public static partial class IEnumerableExtensions
         return list.ElementAt(0);
     }
 
-    /// <summary>
-    /// Returns the first element inside the list or an empty option if the list is empty.
-    /// </summary>
-    /// <exception cref="System.ArgumentNullException">The <paramref name="list"/> parameter is null.</exception>
-    [Pure]
-    public static Option<T> FirstOption<T>(this IReadOnlyList<T> list)
-    {
-        return list.Count == 0
-            ? Option.Empty<T>()
-            : Option.Valued(list[0]);
-    }
+    // /// <summary>
+    // /// Returns the first element inside the list or an empty option if the list is empty.
+    // /// </summary>
+    // /// <exception cref="System.ArgumentNullException">The <paramref name="list"/> parameter is null.</exception>
+    // [Pure]
+    // public static Option<T> FirstOption<T>(this IReadOnlyList<T> list)
+    // {
+    //     return list.Count == 0
+    //         ? Option.Empty<T>()
+    //         : Option.Valued(list[0]);
+    // }
 
     [Pure]
     public static T Second<T>(this IReadOnlyList<T> list)
@@ -81,17 +81,17 @@ public static partial class IEnumerableExtensions
             : list[list.Count - 1];
     }
 
-    /// <summary>
-    /// Returns the last element inside the list or an empty option if the list is empty.
-    /// </summary>
-    /// <exception cref="System.ArgumentNullException">The <paramref name="list"/> parameter is null.</exception>
-    [Pure]
-    public static Option<T> LastOption<T>(this IReadOnlyList<T> list)
-    {
-        return list.Count == 0
-            ? Option.Empty<T>()
-            : Option.Valued(list[list.Count - 1]);
-    }
+    // /// <summary>
+    // /// Returns the last element inside the list or an empty option if the list is empty.
+    // /// </summary>
+    // /// <exception cref="System.ArgumentNullException">The <paramref name="list"/> parameter is null.</exception>
+    // [Pure]
+    // public static Option<T> LastOption<T>(this IReadOnlyList<T> list)
+    // {
+    //     return list.Count == 0
+    //         ? Option.Empty<T>()
+    //         : Option.Valued(list[list.Count - 1]);
+    // }
 
     [Pure]
     public static T ElementAt<T>(this IReadOnlyList<T> list, int index)
