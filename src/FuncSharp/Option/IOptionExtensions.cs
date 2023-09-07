@@ -7,6 +7,26 @@ namespace FuncSharp;
 public static partial class OptionExtensions
 {
     /// <summary>
+    /// Gets the value inside the option or the default value for the type.
+    /// </summary>
+    [Pure]
+    public static T GetOrDefault<T>(this Option<T> option)
+    {
+        return option.Value;
+    }
+
+    /// <summary>
+    /// Gets the value inside the option mapped using the function provided. For empty option returns the default value for the result type.
+    /// </summary>
+    [Pure]
+    public static R GetOrDefault<T, R>(this Option<T> option, Func<T, R> func)
+    {
+        if (option.NonEmpty)
+            return func(option.Value);
+        return default(R);
+    }
+
+    /// <summary>
     /// Turns the option into a nullable value.
     /// </summary>
     [Pure]
@@ -14,7 +34,7 @@ public static partial class OptionExtensions
         where A : struct
     {
         if (option.NonEmpty)
-            return option.GetOrDefault();
+            return option.Value;
         return null;
     }
 
@@ -26,7 +46,7 @@ public static partial class OptionExtensions
         where A : struct
     {
         if (option.NonEmpty)
-            return option.GetOrDefault();
+            return option.Value;
         return null;
     }
 
@@ -38,7 +58,7 @@ public static partial class OptionExtensions
         where B : struct
     {
         if (option.NonEmpty)
-            return func(option.GetOrDefault());
+            return func(option.Value);
         return null;
     }
 
@@ -50,7 +70,7 @@ public static partial class OptionExtensions
         where B : struct
     {
         if (option.NonEmpty)
-            return func(option.GetOrDefault());
+            return func(option.Value);
         return null;
     }
 
@@ -61,7 +81,7 @@ public static partial class OptionExtensions
     public static T GetOrNull<T>(this Option<T> option)
         where T : class
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -89,7 +109,7 @@ public static partial class OptionExtensions
     [Pure]
     public static short GetOrZero(this Option<short> option)
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -107,7 +127,7 @@ public static partial class OptionExtensions
     [Pure]
     public static int GetOrZero(this Option<int> option)
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -125,7 +145,7 @@ public static partial class OptionExtensions
     [Pure]
     public static long GetOrZero(this Option<long> option)
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -143,7 +163,7 @@ public static partial class OptionExtensions
     [Pure]
     public static decimal GetOrZero(this Option<decimal> option)
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -161,7 +181,7 @@ public static partial class OptionExtensions
     [Pure]
     public static double GetOrZero(this Option<double> option)
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -179,7 +199,7 @@ public static partial class OptionExtensions
     [Pure]
     public static bool GetOrFalse(this Option<bool> option)
     {
-        return option.GetOrDefault();
+        return option.Value;
     }
 
     /// <summary>
@@ -200,7 +220,7 @@ public static partial class OptionExtensions
     {
         if (option.NonEmpty)
         {
-            return option.GetOrDefault();
+            return option.Value;
         }
         return otherwise;
     }
@@ -214,7 +234,7 @@ public static partial class OptionExtensions
     {
         if (option.NonEmpty)
         {
-            return option.GetOrDefault();
+            return option.Value;
         }
         return otherwise(Unit.Value);
     }
@@ -301,7 +321,7 @@ public static partial class OptionExtensions
     [Pure]
     public static Option<A> Where<A>(this Option<A> option, Func<A, bool> predicate)
     {
-        if (option.IsEmpty || !predicate(option.GetOrDefault()))
+        if (option.IsEmpty || !predicate(option.Value))
         {
             return Option.Empty<A>();
         }
@@ -315,7 +335,7 @@ public static partial class OptionExtensions
     public static bool Is<A>(this Option<A> option, Func<A, bool> predicate)
     {
         if (option.NonEmpty)
-            return predicate(option.GetOrDefault());
+            return predicate(option.Value);
         return false;
     }
 
@@ -326,7 +346,7 @@ public static partial class OptionExtensions
     public static Try<A, E> ToTry<A, E>(this Option<A> option, Func<Unit, E> e)
     {
         if (option.NonEmpty)
-            return Try.Success<A, E>(option.GetOrDefault());
+            return Try.Success<A, E>(option.Value);
 
         return Try.Error<A, E>(e(Unit.Value));
     }
@@ -340,7 +360,7 @@ public static partial class OptionExtensions
     {
         if (option.NonEmpty)
         {
-            return Option.Valued(await f(option.GetOrDefault()));
+            return Option.Valued(await f(option.Value));
         }
         else
         {
@@ -353,7 +373,7 @@ public static partial class OptionExtensions
     {
         if (option.NonEmpty)
         {
-            await ifFirst(option.GetOrDefault());
+            await ifFirst(option.Value);
         }
         else
         {
@@ -366,7 +386,7 @@ public static partial class OptionExtensions
     {
         if (option.NonEmpty)
         {
-            return await ifFirst(option.GetOrDefault());
+            return await ifFirst(option.Value);
         }
         else
         {
@@ -383,7 +403,7 @@ public static partial class OptionExtensions
     {
         if (option.NonEmpty)
         {
-            return await f(option.GetOrDefault());
+            return await f(option.Value);
         }
         else
         {

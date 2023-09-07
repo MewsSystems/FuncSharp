@@ -230,8 +230,8 @@ namespace FuncSharp
         public Try<TSuccessTarget, TError> Map<TSuccessTarget>(Func<TSuccess, TSuccessTarget> f)
         {
             return IsSuccess
-                ? new Try<TSuccessTarget, TError>(f(Success.GetOrDefault()))
-                : new Try<TSuccessTarget, TError>(Error.GetOrDefault());
+                ? new Try<TSuccessTarget, TError>(f(Success.Value))
+                : new Try<TSuccessTarget, TError>(Error.Value);
         }
 
         /// <summary>
@@ -241,8 +241,8 @@ namespace FuncSharp
         public Try<TSuccessTarget, TErrorTarget> Map<TSuccessTarget, TErrorTarget>(Func<TSuccess, TSuccessTarget> success, Func<TError, TErrorTarget> error)
         {
             return IsSuccess
-                ? new Try<TSuccessTarget, TErrorTarget>(success(Success.GetOrDefault()))
-                : new Try<TSuccessTarget, TErrorTarget>(error(Error.GetOrDefault()));
+                ? new Try<TSuccessTarget, TErrorTarget>(success(Success.Value))
+                : new Try<TSuccessTarget, TErrorTarget>(error(Error.Value));
         }
 
         /// <summary>
@@ -252,8 +252,8 @@ namespace FuncSharp
         public Try<TSuccess, TErrorTarget> MapError<TErrorTarget>(Func<TError, TErrorTarget> f)
         {
             return IsSuccess
-                ? new Try<TSuccess, TErrorTarget>(Success.GetOrDefault())
-                : new Try<TSuccess, TErrorTarget>(f(Error.GetOrDefault()));
+                ? new Try<TSuccess, TErrorTarget>(Success.Value)
+                : new Try<TSuccess, TErrorTarget>(f(Error.Value));
         }
 
         /// <summary>
@@ -263,8 +263,8 @@ namespace FuncSharp
         public TResult Match<TResult>(Func<TSuccess, TResult> ifSuccess, Func<TError, TResult> ifError)
         {
             return IsSuccess
-                ? ifSuccess(Success.GetOrDefault())
-                : ifError(Error.GetOrDefault());
+                ? ifSuccess(Success.Value)
+                : ifError(Error.Value);
         }
 
         /// <summary>
@@ -274,9 +274,9 @@ namespace FuncSharp
         public void Match(Action<TSuccess> ifSuccess = null, Action<TError> ifError = null)
         {
             if (IsSuccess)
-                ifSuccess?.Invoke(Success.GetOrDefault());
+                ifSuccess?.Invoke(Success.Value);
             else
-                ifError?.Invoke(Error.GetOrDefault());
+                ifError?.Invoke(Error.Value);
         }
     }
 }

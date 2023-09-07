@@ -39,7 +39,7 @@ public static class NonEmptyStringExtensions
     {
         if (option.NonEmpty)
         {
-            return option.GetOrDefault();
+            return option.Value;
         }
         else
         {
@@ -52,7 +52,7 @@ public static class NonEmptyStringExtensions
     {
         if (option.NonEmpty)
         {
-            return option.GetOrDefault();
+            return option.Value;
         }
         else
         {
@@ -65,7 +65,7 @@ public static class NonEmptyStringExtensions
     {
         if (option.NonEmpty)
         {
-            return option.GetOrDefault();
+            return option.Value;
         }
         else
         {
@@ -78,7 +78,7 @@ public static class NonEmptyStringExtensions
     {
         if (option.NonEmpty)
         {
-            return option.GetOrDefault();
+            return option.Value;
         }
         else
         {

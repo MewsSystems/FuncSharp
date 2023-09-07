@@ -92,7 +92,7 @@ public struct Option<A> : IOption
     bool IOption.IsEmpty => IsEmpty;
     bool IOption.NonEmpty => NonEmpty;
 
-    private A Value { get; }
+    internal A Value { get; }
 
     [Pure]
     public bool NonEmpty { get; }
@@ -155,20 +155,6 @@ public struct Option<A> : IOption
             throw otherwise(Unit.Value);
         }
         throw new InvalidOperationException("An empty option does not have a value.");
-    }
-
-    [Pure]
-    public A GetOrDefault()
-    {
-        return Value;
-    }
-
-    [Pure]
-    public R GetOrDefault<R>(Func<A, R> func)
-    {
-        if (NonEmpty)
-            return func(Value);
-        return default(R);
     }
 
     [Pure]
@@ -267,15 +253,15 @@ public struct Option<A> : IOption
     {
         if (obj is Option<A> other)
         {
-            return NonEmpty == other.NonEmpty && Value.SafeEquals(other.GetOrDefault());
+            return NonEmpty == other.NonEmpty && Value.SafeEquals(other.Value);
         }
         if (typeof(A) == typeof(NonEmptyString) && obj is Option<string> otherString)
         {
-            return NonEmpty == otherString.NonEmpty && string.Equals(Value as NonEmptyString, otherString.GetOrDefault());
+            return NonEmpty == otherString.NonEmpty && string.Equals(Value as NonEmptyString, otherString.Value);
         }
         if (typeof(A) == typeof(string) && obj is Option<NonEmptyString> otherNonEmptyString)
         {
-            return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.GetOrDefault(), Value);
+            return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.Value, Value);
         }
         return false;
     }
