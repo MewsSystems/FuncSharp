@@ -84,12 +84,12 @@ public class IEnumerableExtensionsBenchmarks
         var x = ArrayOfOptions.Flatten().ToArray();
     }
 
-    // Last Result - 25.8.2023 - 35.1 ns - 128 B
-    [Benchmark]
-    public void FirstOption()
-    {
-        var x = StringEnumerable.FirstOption();
-    }
+    // //Last Result - 25.8.2023 - 35.1 ns - 128 B
+    // [Benchmark]
+    // public void FirstOption()
+    // {
+    //     var x = StringEnumerable.FirstOption();
+    // }
 
     // Last Result - 25.8.2023 - 14.6 ns - 40 B
     [Benchmark]

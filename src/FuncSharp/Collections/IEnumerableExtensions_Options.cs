@@ -30,17 +30,20 @@ public static partial class IEnumerableExtensions
         return source.AsNonEmpty().Map(s => s.Min(selector));
     }
 
+    /*
     /// <summary>
-    /// Returns first value or an empty option.
+    /// Returns the first element satisfying the predicate or an empty option if no such element exists.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
     {
         return source.Where(predicate).FirstOption();
     }
 
     /// <summary>
-    /// Returns first value or an empty option.
+    /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> FirstOption<T>(this IEnumerable<T> source)
     {
         if (source is IReadOnlyList<T> list)
@@ -55,22 +58,26 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns last value or an empty option.
+    /// Returns the last element satisfying the predicate or an empty option if no such element exists.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
     {
         return source.Reverse().FirstOption(predicate);
     }
 
     /// <summary>
-    /// Returns last value or an empty option.
+    /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
+    /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source)
     {
-        return source is IReadOnlyList<T> list
-            ? list.LastOption()
-            : source.Reverse().FirstOption();
+        if (source is IReadOnlyList<T> list)
+            return list.LastOption();
+
+        return source.Reverse().FirstOption();
     }
+    */
 
     /// <summary>
     /// Returns the only value if the source contains just one value, otherwise an empty option.
