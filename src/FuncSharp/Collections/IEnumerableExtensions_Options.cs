@@ -30,7 +30,6 @@ public static partial class IEnumerableExtensions
         return source.AsNonEmpty().Map(s => s.Min(selector));
     }
 
-    /*
     /// <summary>
     /// Returns the first element satisfying the predicate or an empty option if no such element exists.
     /// </summary>
@@ -77,7 +76,6 @@ public static partial class IEnumerableExtensions
 
         return source.Reverse().FirstOption();
     }
-    */
 
     /// <summary>
     /// Returns the only value if the source contains just one value, otherwise an empty option.
