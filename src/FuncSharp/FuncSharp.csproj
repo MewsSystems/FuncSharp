@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>7.0.1</Version>
-    <AssemblyVersion>7.0.1</AssemblyVersion>
-    <FileVersion>7.0.1</FileVersion>
+    <Version>8.0.0</Version>
+    <AssemblyVersion>8.0.0</AssemblyVersion>
+    <FileVersion>8.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Originally written by Honza Široký.</Description>
     <Authors>Mews, Honza Široký</Authors>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>IOption interface is gone. Option is a struct, Try is a struct. Various types have been introduced such as NonEmptyString, NonEmptyEnumerable, PositiveInt etc. A lot of extensions reworked.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed handling of nulls from collection methods. Also banned some method overloads resulting in a collection with value of null.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
