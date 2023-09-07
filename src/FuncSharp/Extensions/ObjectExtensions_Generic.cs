@@ -46,10 +46,7 @@ namespace FuncSharp
         {
             if (a is not null)
             {
-                if (action is not null)
-                {
-                    action(a);
-                }
+                action?.Invoke(a);
             }
             else if (otherwise is not null)
             {
@@ -70,11 +67,9 @@ namespace FuncSharp
         public static B MatchRef<A, B>(this A a, Func<A, B> func, Func<Unit, B> otherwise)
             where A : class
         {
-            if (a is not null)
-            {
-                return func(a);
-            }
-            return otherwise(Unit.Value);
+            return a is not null
+                ? func(a)
+                : otherwise(Unit.Value);
         }
 
         [DebuggerStepThrough]
@@ -82,11 +77,9 @@ namespace FuncSharp
         public static async Task<B> MatchRefAsync<A, B>(this A a, Func<A, Task<B>> func, Func<Unit, Task<B>> otherwise)
             where A : class
         {
-            if (a is not null)
-            {
-                return await func(a);
-            }
-            return await otherwise(Unit.Value);
+            return a is not null
+                ? await func(a)
+                : await otherwise(Unit.Value);
         }
 
         [DebuggerStepThrough]
@@ -95,12 +88,9 @@ namespace FuncSharp
             where A : class
             where B : class
         {
-            if (a is not null)
-            {
-                return func(a);
-            }
-
-            return null;
+            return a is not null
+                ? func(a)
+                : null;
         }
 
         [DebuggerStepThrough]
@@ -109,11 +99,9 @@ namespace FuncSharp
             where A : class
             where B : class
         {
-            if (a is not null)
-            {
-                return await func(a);
-            }
-            return default;
+            return a is not null
+                ? await func(a)
+                : default;
         }
 
         [DebuggerStepThrough]
@@ -145,10 +133,7 @@ namespace FuncSharp
         {
             if (a is not null)
             {
-                if (action is not null)
-                {
-                    action(a.Value);
-                }
+                action?.Invoke(a.Value);
             }
             else if (otherwise is not null)
             {
@@ -213,11 +198,9 @@ namespace FuncSharp
             where A : struct
             where B : class
         {
-            if (a is not null)
-            {
-                return await func(a.Value);
-            }
-            return default;
+            return a is not null
+                ? await func(a.Value)
+                : default;
         }
 
         /// <summary>
@@ -236,11 +219,9 @@ namespace FuncSharp
         [Pure]
         public static string SafeToString(this object o, string nullText = "null")
         {
-            if (o == null)
-            {
-                return nullText;
-            }
-            return o.ToString();
+            return o == null
+                ? nullText
+                : o.ToString();
         }
 
         /// <summary>
