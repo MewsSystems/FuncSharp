@@ -36,7 +36,7 @@ public static partial class IEnumerableExtensions
     /// Returns true if the collection contains at least one  element.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
-    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 20th of September 2023", error: true)]
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     public static bool NonEmpty<T>(this IEnumerable<T> source)
     {
         return source.Any();
@@ -46,7 +46,7 @@ public static partial class IEnumerableExtensions
     /// Returns true if the collection contains no elements.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
-    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 20th of September 2023", error: true)]
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     public static bool IsEmpty<T>(this IEnumerable<T> source)
     {
         return !source.Any();
@@ -57,7 +57,7 @@ public static partial class IEnumerableExtensions
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     [Pure]
-    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 20th of September 2023", error: true)]
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     public static bool NonEmpty<T>(this IReadOnlyCollection<T> source)
     {
         ArgumentNullException.ThrowIfNull(source, nameof(source));
@@ -69,7 +69,7 @@ public static partial class IEnumerableExtensions
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     [Pure]
-    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 20th of September 2023", error: true)]
+    [Obsolete("This method is obsolete because there were breaking changes and some people might put a null into this method expecting it to work. It will be made non-obsolete on 13th of September 2023", error: true)]
     public static bool IsEmpty<T>(this IReadOnlyCollection<T> source)
     {
         ArgumentNullException.ThrowIfNull(source, nameof(source));
