@@ -32,7 +32,7 @@ public static partial class IEnumerableExtensions
 
     /*
     /// <summary>
-    /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
+    /// Returns the first element satisfying the predicate or an empty option if no such element exists.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> FirstOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
@@ -58,7 +58,7 @@ public static partial class IEnumerableExtensions
     }
 
     /// <summary>
-    /// Returns the last element inside the enumerable or an empty option if the enumerable is empty.
+    /// Returns the last element satisfying the predicate or an empty option if no such element exists.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
