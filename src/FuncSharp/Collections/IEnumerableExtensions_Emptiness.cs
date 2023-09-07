@@ -32,7 +32,6 @@ public static partial class IEnumerableExtensions
         return source.ToOption();
     }
 
-    /*
     /// <summary>
     /// Returns true if the collection contains at least one element.
     /// </summary>
@@ -72,7 +71,6 @@ public static partial class IEnumerableExtensions
         ArgumentNullException.ThrowIfNull(source, nameof(source));
         return source.Count == 0;
     }
-*/
 
     [Obsolete("This is a NonEmptyEnumerable. It's not empty.", error: true)]
     public static bool NonEmpty<T>(this INonEmptyEnumerable<T> source)
