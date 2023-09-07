@@ -11,7 +11,7 @@ public static partial class IEnumerableExtensions
     /// </summary>
     public static IEnumerable<T> Flatten<T>(this IEnumerable<Option<T>> source)
     {
-        return source.Where(o => o.NonEmpty).Select(o => o.GetOrDefault());
+        return source.Where(o => o.NonEmpty).Select(o => o.Value);
     }
 
     /// <summary>
