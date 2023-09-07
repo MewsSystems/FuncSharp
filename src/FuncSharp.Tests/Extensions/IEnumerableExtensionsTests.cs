@@ -8,7 +8,6 @@ namespace FuncSharp.Tests;
 public class IEnumerableExtensionsTests
 {
     [Fact]
-    [Obsolete]
     public void FirstOption()
     {
         Assert.True(new List<int>().FirstOption().IsEmpty);
