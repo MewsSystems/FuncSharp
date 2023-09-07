@@ -39,6 +39,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IEnumerableExtensions_DataCubes.cs</LastGenOutput>
     </None>
+    <None Update="Extensions\ObjectExtensions_ValueMatch.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectExtensions_ValueMatch.cs</LastGenOutput>
+    </None>
+    <None Update="Extensions\ObjectExtensions_Coproduct.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectExtensions_Coproduct.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Update="Coproduct\Coproduct.tt">
@@ -72,10 +80,6 @@
     <None Update="Extensions\FuncExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FuncExtensions.cs</LastGenOutput>
-    </None>
-    <None Update="Extensions\ObjectExtensions.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ObjectExtensions.cs</LastGenOutput>
     </None>
     <None Update="Product\IProduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -135,11 +139,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>FuncExtensions.tt</DependentUpon>
     </Compile>
-    <Compile Update="Extensions\ObjectExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ObjectExtensions.tt</DependentUpon>
-    </Compile>
     <Compile Update="Product\IProduct.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -169,6 +168,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>IEnumerableExtensions_DataCubes.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\ObjectExtensions_ValueMatch.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ObjectExtensions_ValueMatch.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extensions\ObjectExtensions_Coproduct.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ObjectExtensions_Coproduct.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
