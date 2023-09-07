@@ -340,7 +340,10 @@ public class TotalOrder<A> : PartialOrder<A>
         // Thanks to interval ordering, results of the union are formed of continuous sequences of intervals in the ordered interval collection.
         foreach (var interval in orderedIntervals)
         {
-            var result = results.LastOption().Where(r => Intersects(r, interval) || Complements(r.UpperBound, interval.LowerBound));
+            var lastOption = results.Count == 0
+                ? Option.Empty<Interval<A>>()
+                : Option.Valued(results[results.Count - 1]);
+            var result = lastOption.Where(r => Intersects(r, interval) || Complements(r.UpperBound, interval.LowerBound));
 
             // If the interval should be part of the result, replace the result with a new extended result. Otherwise, initialize a new result.
             result.Match(

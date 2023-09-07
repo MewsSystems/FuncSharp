@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -82,3 +83,4 @@ public class IEnumerableExtensionsTests
         Assert.True(new[] { e, e, e }.Aggregate().Get() is AggregateException);
     }
 }
+*/

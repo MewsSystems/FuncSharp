@@ -30,6 +30,7 @@ public static partial class IEnumerableExtensions
         return source.AsNonEmpty().Map(s => s.Min(selector));
     }
 
+    /*
     /// <summary>
     /// Returns the first element inside the enumerable or an empty option if the enumerable is empty.
     /// </summary>
@@ -45,10 +46,10 @@ public static partial class IEnumerableExtensions
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> FirstOption<T>(this IEnumerable<T> source)
     {
-        // if (source is IReadOnlyList<T> list)
-        // {
-        //     return list.FirstOption();
-        // }
+        if (source is IReadOnlyList<T> list)
+        {
+            return list.FirstOption();
+        }
 
         using var enumerator = source.GetEnumerator();
         return enumerator.MoveNext()
@@ -71,11 +72,12 @@ public static partial class IEnumerableExtensions
     /// <exception cref="System.ArgumentNullException">The <paramref name="source"/> parameter is null.</exception>
     public static Option<T> LastOption<T>(this IEnumerable<T> source)
     {
-        // if (source is IReadOnlyList<T> list)
-        //     return list.LastOption();
+        if (source is IReadOnlyList<T> list)
+            return list.LastOption();
 
         return source.Reverse().FirstOption();
     }
+    */
 
     /// <summary>
     /// Returns the only value if the source contains just one value, otherwise an empty option.
