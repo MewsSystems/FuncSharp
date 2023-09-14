@@ -23,18 +23,6 @@ public static class NonEmptyStringExtensions
     }
 
     [Pure]
-    public static string SafeSubstring(this NonEmptyString s, int length)
-    {
-        return s?.Substring(length);
-    }
-
-    [Pure]
-    public static string SafeSubstring(this NonEmptyString s, int start, int length)
-    {
-        return s?.Substring(start, length);
-    }
-
-    [Pure]
     public static string GetOrElse(this Option<NonEmptyString> option, string otherwise)
     {
         if (option.NonEmpty)
