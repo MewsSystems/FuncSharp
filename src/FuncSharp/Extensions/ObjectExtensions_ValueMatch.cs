@@ -9,6 +9,24 @@ namespace FuncSharp
     public static partial class ObjectExtensions
     {
         /// <summary>
+        /// Matches the value with the specified parameters and returns result of the corresponding value.
+        /// </summary>
+        [Pure]
+        public static TResult Match<T, TResult>(
+            this T value,
+            T t1, TResult f1,
+            TResult otherwise = default(TResult))
+        where T: IEquatable<T>
+        {
+            if (value is not null && value.Equals(t1))
+            {
+                return f1;
+            }
+
+            return otherwise;
+        }
+        
+        /// <summary>
         /// Matches the value with the specified parameters and returns result of the corresponding function.
         /// </summary>
         [Pure]
