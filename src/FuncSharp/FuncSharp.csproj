@@ -47,6 +47,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjectExtensions_Coproduct.cs</LastGenOutput>
     </None>
+    <None Update="Collections\IEnumerableExtensions_Tuples.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnumerableExtensions_Tuples.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Update="Coproduct\Coproduct.tt">
@@ -178,6 +182,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ObjectExtensions_Coproduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Collections\IEnumerableExtensions_Tuples.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IEnumerableExtensions_Tuples.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
