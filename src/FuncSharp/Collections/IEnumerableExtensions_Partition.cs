@@ -9,19 +9,19 @@ public static partial class IEnumerableExtensions
     /// <summary>
     /// Splits the items in a collection into 2 collection based on the condition provided.
     /// </summary>
-    public static (IReadOnlyList<T> Passing, IReadOnlyList<T> Violating) Partition<T>(this IEnumerable<T> e, Func<T, bool> predicate)
+    public static (IReadOnlyList<T> Passing, IReadOnlyList<T> Violating) Partition<T>(this IEnumerable<T> values, Func<T, bool> predicate)
     {
         var passing = new List<T>();
         var violating = new List<T>();
-        foreach (var i in e)
+        foreach (var value in values)
         {
-            if (predicate(i))
+            if (predicate(value))
             {
-                passing.Add(i);
+                passing.Add(value);
             }
             else
             {
-                violating.Add(i);
+                violating.Add(value);
             }
         }
         return (passing, violating);
