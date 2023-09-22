@@ -31,9 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\readme.md" Pack="true" PackagePath="\" />
-    <None Update="Collections\IEnumerableExtensions_PartitionMatch.tt">
+    <None Update="Collections\IEnumerableExtensions_Coproducts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IEnumerableExtensions_PartitionMatch.cs</LastGenOutput>
+      <LastGenOutput>IEnumerableExtensions_Coproducts.cs</LastGenOutput>
     </None>
     <None Update="Collections\IEnumerableExtensions_DataCubes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -159,10 +159,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Try.tt</DependentUpon>
     </Compile>
-    <Compile Update="Collections\IEnumerableExtensions_PartitionMatch.cs">
+    <Compile Update="Collections\IEnumerableExtensions_Coproducts.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>IEnumerableExtensions_PartitionMatch.tt</DependentUpon>
+      <DependentUpon>IEnumerableExtensions_Coproducts.tt</DependentUpon>
     </Compile>
     <Compile Update="Collections\IEnumerableExtensions_DataCubes.cs">
       <DesignTime>True</DesignTime>
