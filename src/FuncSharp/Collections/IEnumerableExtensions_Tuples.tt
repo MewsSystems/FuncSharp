@@ -1,0 +1,29 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".cs" #>
+<#@ include file="../Helpers.ttinclude" #>
+using System.Collections.Generic;
+
+namespace FuncSharp;
+
+public static partial class IEnumerableExtensions
+{
+<#  for (var i = 2; i < MaxArity(); i++) { #>
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (<#= List(i, x => $"IReadOnlyList<T{x}>") #>) Unpack<<#= Types(i, name: "T") #>>(this IEnumerable<(<#= List(i, x => $"T{x}") #>)> source)
+    {
+<#= Lines(i, x => $"{Indent(8)}var list{x} = new List<T{x}>();") #>
+
+        foreach (var tuple in source)
+        {
+<#= Lines(i, x => $"{Indent(12)}list{x}.Add(tuple.Item{x});") #>
+        }
+
+        return (<#= List(i, x => $"list{x}") #>);
+    }
+<#  } #>
+}
