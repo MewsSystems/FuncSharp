@@ -7,47 +7,46 @@
 using System;
 using System.Collections.Generic;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+/// <summary>
+/// A type that is a compound of other types. Can be understood as a cartesian product of types, e.g. T1 × T2 × T3.
+/// Therefore instances of a product type consist of values of the compound types, e.g. T1 value1, T2 value2 and T3 value3.
+/// This interface represents the most abstract definition of a product type with unknown compound types and unknown arity.
+/// </summary>
+public interface IProduct
 {
     /// <summary>
-    /// A type that is a compound of other types. Can be understood as a cartesian product of types, e.g. T1 × T2 × T3.
-    /// Therefore instances of a product type consist of values of the compound types, e.g. T1 value1, T2 value2 and T3 value3.
-    /// This interface represents the most abstract definition of a product type with unknown compound types and unknown arity.
+    /// Values of the product.
     /// </summary>
-    public interface IProduct
-    {
-        /// <summary>
-        /// Values of the product.
-        /// </summary>
-        IEnumerable<object> ProductValues { get; }
-    }
+    IEnumerable<object> ProductValues { get; }
+}
 <#  for (var i = 0; i < MaxArity(); i++) { #>
 
-    /// <summary>
-    /// A <#= i #>-dimensional strongly-typed product.
-    /// </summary>
-    public interface <#= ProductType(i, name: "out T") #> : IProduct
-    {
+/// <summary>
+/// A <#= i #>-dimensional strongly-typed product.
+/// </summary>
+public interface <#= ProductType(i, name: "out T") #> : IProduct
+{
 <#      for (var j = 1; j <= i; j++) { #>
-        /// <summary>
-        /// Value of the product in the dimension <#= j #>.
-        /// </summary>
-        <#= Type(j) #> <#= ProductProperty(j) #> { get; }
+    /// <summary>
+    /// Value of the product in the dimension <#= j #>.
+    /// </summary>
+    <#= Type(j) #> <#= ProductProperty(j) #> { get; }
 
 <#      } #>
 <#      if (i <= MaxFuncArity()) { #>
-        /// <summary>
-        /// Invokes the specified function with the product values as its parameters and returns its result.
-        /// </summary>
-        R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f);
+    /// <summary>
+    /// Invokes the specified function with the product values as its parameters and returns its result.
+    /// </summary>
+    R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f);
 <#          if (i > 0) { #>
 
-        /// <summary>
-        /// Invokes the specified function with the product values as its parameters.
-        /// </summary>
-        void Match(Action<<#= Types(i, appendSeparator: false) #>> f);
+    /// <summary>
+    /// Invokes the specified function with the product values as its parameters.
+    /// </summary>
+    void Match(Action<<#= Types(i, appendSeparator: false) #>> f);
 <#          } #>
 <#      } #>
-    }
-<#  } #>
 }
+<#  } #>

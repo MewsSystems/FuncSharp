@@ -9,84 +9,83 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+public static partial class ObjectExtensions
 {
-    public static partial class ObjectExtensions
-    {
 <# for (var i = 1; i < MaxArity(); i++) { #>
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback 
-        /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
-        /// </summary>
-        [Pure]
-        public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
-        {
-            switch (value) {
+    /// <summary>
+    /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place
+    /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback
+    /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+    /// </summary>
+    [Pure]
+    public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
+    {
+        switch (value) {
 <#= Lines(i, j => Indent(16) + "case " + Type(j) + " " + Value(j) + ": return Coproduct" + i + ".Create" + GetOrdinal(j) + TypeBracket(i) + "(" + Value(j) + ");") #>
-            }
-
-            if (fallback != null)
-            {
-                return fallback(value);
-            }
-            if (otherwise != null)
-            {
-                throw otherwise(Unit.Value);
-            }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified types.");
         }
 
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional coproduct as a result of value match against the parameters. The specified value will
-        /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value, 
-        /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by 
-        /// the otherwise function).
-        /// </summary>
-        [Pure]
-        public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
+        if (fallback != null)
         {
-<#     for (var j = 1; j <= i; j++) { #>
-            if (Equals(value, <#= Value(j) #>))
-            {
-                return Coproduct<#= i #>.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
-            }
-<#     } #>
-            if (fallback != null)
-            {
-                return fallback(value);
-            }
-            if (otherwise != null)
-            {
-                throw otherwise(Unit.Value);
-            }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+            return fallback(value);
         }
+        if (otherwise != null)
+        {
+            throw otherwise(Unit.Value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified types.");
+    }
+
+    /// <summary>
+    /// Creates a new <#= i #>-dimensional coproduct as a result of value match against the parameters. The specified value will
+    /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value,
+    /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by
+    /// the otherwise function).
+    /// </summary>
+    [Pure]
+    public static <#= CoproductImplType(i) #> AsCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>, Func<object, <#= CoproductImplType(i) #>> fallback = null, Func<Unit, Exception> otherwise = null)
+    {
+<#     for (var j = 1; j <= i; j++) { #>
+        if (Equals(value, <#= Value(j) #>))
+        {
+            return Coproduct<#= i #>.Create<#= GetOrdinal(j) #><#= TypeBracket(i) #>((<#= Type(j) #>)value);
+        }
+<#     } #>
+        if (fallback != null)
+        {
+            return fallback(value);
+        }
+        if (otherwise != null)
+        {
+            throw otherwise(Unit.Value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+    }
 
 <#     if (i + 1 < MaxArity()) { #>
 <#         var safeTypeBracket = "<" + Types(i, appendSeparator: true) + "object>"; #>
-        /// <summary>
-        /// Creates a new <#= i + 1 #>-dimensional coproduct as a result of type match. The specified value will be on the first place 
-        /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in 
-        /// the last place.
-        /// </summary>
-        [Pure]
-        public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
-        {
-            return value.AsCoproduct(v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
-        }
+    /// <summary>
+    /// Creates a new <#= i + 1 #>-dimensional coproduct as a result of type match. The specified value will be on the first place
+    /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in
+    /// the last place.
+    /// </summary>
+    [Pure]
+    public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value)
+    {
+        return value.AsCoproduct(v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
+    }
 
-        /// <summary>
-        /// Creates a new <#= i + 1 #>-dimensional coproduct as a result of value match against the parameters. The specified value will
-        /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then 
-        /// the value will be placed in the last place.
-        /// </summary>
-        [Pure]
-        public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
-        {
-            return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
-        }
+    /// <summary>
+    /// Creates a new <#= i + 1 #>-dimensional coproduct as a result of value match against the parameters. The specified value will
+    /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then
+    /// the value will be placed in the last place.
+    /// </summary>
+    [Pure]
+    public static <#= "Coproduct" + (i + 1) + safeTypeBracket #> AsSafeCoproduct<#= TypeBracket(i) #>(this object value, <#= Parameters(i) #>)
+    {
+        return value.AsCoproduct(<#= Values(i) #>, null, v => Coproduct<#= i + 1 #>.Create<#= GetOrdinal(i + 1) #><#= safeTypeBracket #>(v));
+    }
 <#     } #>
 <#    } #>
-    }
 }

@@ -6,48 +6,47 @@
 <#@ include file="../Helpers.ttinclude" #>
 using System;
 
-namespace FuncSharp
-{
+namespace FuncSharp;
+
 <# for (var i = 0; i <= MaxCubeArity(); i++) { #>
+/// <summary>
+/// A <#= i #>-dimensional relation.
+/// </summary>
+public class Relation<#= i #><#= TypeBracket(i, name: "P") #> : Relation<<#= PositionType(i) #>, <#= DataCubeType(i, valueType: "Unit") #>>
+{
     /// <summary>
-    /// A <#= i #>-dimensional relation.
+    /// Creates an empty <#= i #>-dimensional relation.
     /// </summary>
-    public class Relation<#= i #><#= TypeBracket(i, name: "P") #> : Relation<<#= PositionType(i) #>, <#= DataCubeType(i, valueType: "Unit") #>>
+    public Relation<#= i #>()
+        : base()
     {
-        /// <summary>
-        /// Creates an empty <#= i #>-dimensional relation.
-        /// </summary>
-        public Relation<#= i #>()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Returns whether the relation contains the specified position.
-        /// </summary>
-        public bool Contains(<#= Parameters(i, name: "P") #>)
-        {
-            return Contains(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
-        }
-
-        /// <summary>
-        /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
-        /// </summary>
-        public bool Set(<#= Parameters(i, name: "P") #>)
-        {
-            return Set(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
-        }
-<#      if (i > 0) { #>
-
-        /// <summary>
-        /// For each relation, invokes the specified function.
-        /// </summary>
-        public void ForEach(Action<#= TypeBracket(i, name: "P") #> a)
-        {
-            ForEach(p => a(<#= Properties(i, name: "ProductValue", accessor: "p.") #>));
-        }
-<#      } #>
     }
 
-<# } #>
+    /// <summary>
+    /// Returns whether the relation contains the specified position.
+    /// </summary>
+    public bool Contains(<#= Parameters(i, name: "P") #>)
+    {
+        return Contains(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
+    }
+
+    /// <summary>
+    /// Adds the specified position to the relation. Returns true if it was added, false if it was already present.
+    /// </summary>
+    public bool Set(<#= Parameters(i, name: "P") #>)
+    {
+        return Set(Position<#= i #>.Create(<#= Values(i, name: "P") #>));
+    }
+<#      if (i > 0) { #>
+
+    /// <summary>
+    /// For each relation, invokes the specified function.
+    /// </summary>
+    public void ForEach(Action<#= TypeBracket(i, name: "P") #> a)
+    {
+        ForEach(p => a(<#= Properties(i, name: "ProductValue", accessor: "p.") #>));
+    }
+<#      } #>
 }
+
+<# } #>
