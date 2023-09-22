@@ -37,7 +37,7 @@ public abstract class CoproductBase : ICoproduct
         return this.CoproductToString();
     }
 
-    protected T GetCoproductValue<T>()
+	protected T GetCoproductValue<T>()
     {
         if (CoproductValue is T)
         {
@@ -49,7 +49,7 @@ public abstract class CoproductBase : ICoproduct
 
 /// <summary>
 /// A 0-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct0 : CoproductBase, ICoproduct0
 {
     protected Coproduct0()
@@ -75,7 +75,7 @@ public static class Coproduct1
 
 /// <summary>
 /// A 1-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct1<T1> : CoproductBase, ICoproduct1<T1>
 {
     /// <summary>
@@ -180,7 +180,7 @@ public static class Coproduct2
 
 /// <summary>
 /// A 2-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct2<T1, T2> : CoproductBase, ICoproduct2<T1, T2>
 {
     /// <summary>
@@ -317,7 +317,7 @@ public static class Coproduct3
 
 /// <summary>
 /// A 3-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct3<T1, T2, T3> : CoproductBase, ICoproduct3<T1, T2, T3>
 {
     /// <summary>
@@ -486,7 +486,7 @@ public static class Coproduct4
 
 /// <summary>
 /// A 4-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct4<T1, T2, T3, T4> : CoproductBase, ICoproduct4<T1, T2, T3, T4>
 {
     /// <summary>
@@ -687,7 +687,7 @@ public static class Coproduct5
 
 /// <summary>
 /// A 5-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct5<T1, T2, T3, T4, T5> : CoproductBase, ICoproduct5<T1, T2, T3, T4, T5>
 {
     /// <summary>
@@ -920,7 +920,7 @@ public static class Coproduct6
 
 /// <summary>
 /// A 6-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct6<T1, T2, T3, T4, T5, T6> : CoproductBase, ICoproduct6<T1, T2, T3, T4, T5, T6>
 {
     /// <summary>
@@ -1185,7 +1185,7 @@ public static class Coproduct7
 
 /// <summary>
 /// A 7-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct7<T1, T2, T3, T4, T5, T6, T7> : CoproductBase, ICoproduct7<T1, T2, T3, T4, T5, T6, T7>
 {
     /// <summary>
@@ -1482,7 +1482,7 @@ public static class Coproduct8
 
 /// <summary>
 /// A 8-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct8<T1, T2, T3, T4, T5, T6, T7, T8> : CoproductBase, ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>
 {
     /// <summary>
@@ -1811,7 +1811,7 @@ public static class Coproduct9
 
 /// <summary>
 /// A 9-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9> : CoproductBase, ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
 {
     /// <summary>
@@ -2172,7 +2172,7 @@ public static class Coproduct10
 
 /// <summary>
 /// A 10-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : CoproductBase, ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
 {
     /// <summary>
@@ -2565,7 +2565,7 @@ public static class Coproduct11
 
 /// <summary>
 /// A 11-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : CoproductBase, ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
 {
     /// <summary>
@@ -2990,7 +2990,7 @@ public static class Coproduct12
 
 /// <summary>
 /// A 12-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : CoproductBase, ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
 {
     /// <summary>
@@ -3447,7 +3447,7 @@ public static class Coproduct13
 
 /// <summary>
 /// A 13-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : CoproductBase, ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
 {
     /// <summary>
@@ -3936,7 +3936,7 @@ public static class Coproduct14
 
 /// <summary>
 /// A 14-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : CoproductBase, ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
 {
     /// <summary>
@@ -4457,7 +4457,7 @@ public static class Coproduct15
 
 /// <summary>
 /// A 15-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : CoproductBase, ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
 {
     /// <summary>
@@ -5010,7 +5010,7 @@ public static class Coproduct16
 
 /// <summary>
 /// A 16-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : CoproductBase, ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
 {
     /// <summary>
@@ -5595,7 +5595,7 @@ public static class Coproduct17
 
 /// <summary>
 /// A 17-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : CoproductBase, ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
 {
     /// <summary>
@@ -6212,7 +6212,7 @@ public static class Coproduct18
 
 /// <summary>
 /// A 18-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18> : CoproductBase, ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
 {
     /// <summary>
@@ -6861,7 +6861,7 @@ public static class Coproduct19
 
 /// <summary>
 /// A 19-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19> : CoproductBase, ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
 {
     /// <summary>
@@ -7542,7 +7542,7 @@ public static class Coproduct20
 
 /// <summary>
 /// A 20-dimensional immutable coproduct.
-/// </summary> 
+/// </summary>
 public class Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20> : CoproductBase, ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>
 {
     /// <summary>
@@ -8077,3 +8077,4 @@ public class Coproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
     }
 
 }
+

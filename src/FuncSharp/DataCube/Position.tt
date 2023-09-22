@@ -4,61 +4,60 @@
 <#@ import namespace="System.Linq" #>
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
-namespace FuncSharp
-{
+namespace FuncSharp;
+
 <#  for (var i = 0; i <= MaxProductArity(); i++) { #>
 <#      if (i > 0) { #>
+/// <summary>
+/// A factory for <#= i #>-dimensional data cube positions.
+/// </summary>
+public static class Position<#= i #>
+{
     /// <summary>
-    /// A factory for <#= i #>-dimensional data cube positions.
+    /// Creates a new <#= i #>-dimensional data cube position.
     /// </summary>
-    public static class Position<#= i #>
+    public static <#= PositionType(i) #> Create<#= TypeBracket(i, name: "P") #>(<#= Parameters(i, name: "P") #>)
     {
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional data cube position.
-        /// </summary>
-        public static <#= PositionType(i) #> Create<#= TypeBracket(i, name: "P") #>(<#= Parameters(i, name: "P") #>)
-        {
-            return new Position<#= i + TypeBracket(i, name: "P") #>(<#= Values(i, name: "p") #>);
-        }
-
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional canonical product.
-        /// </summary>
-        public static <#= PositionType(i) #> Create<#= TypeBracket(i, name: "P") #>(<#= ProductType(i, name: "P") #> p)
-        {
-            return Create(<#= Properties(i, name: "p.ProductValue") #>);
-        }
+        return new Position<#= i + TypeBracket(i, name: "P") #>(<#= Values(i, name: "p") #>);
     }
 
-<#      } #>
     /// <summary>
-    /// A <#= i #>-dimensional data cube position.
+    /// Creates a new <#= i #>-dimensional canonical product.
     /// </summary>
-    public sealed class <#= PositionType(i) #> : <#= ProductImplType(i, name: "P") #>
+    public static <#= PositionType(i) #> Create<#= TypeBracket(i, name: "P") #>(<#= ProductType(i, name: "P") #> p)
     {
-        public Position<#= i #>(<#= Parameters(i, name: "P") #>)
-            : base(<#= Values(i, name: "p") #>)
-        {
-        }
+        return Create(<#= Properties(i, name: "p.ProductValue") #>);
+    }
+}
+
+<#      } #>
+/// <summary>
+/// A <#= i #>-dimensional data cube position.
+/// </summary>
+public sealed class <#= PositionType(i) #> : <#= ProductImplType(i, name: "P") #>
+{
+    public Position<#= i #>(<#= Parameters(i, name: "P") #>)
+        : base(<#= Values(i, name: "p") #>)
+    {
+    }
 
 <#      for (var j = 1; j <= i; j++) { #>
 
-        public <#= PositionType(i, except: j) #> ExceptValue<#= j #>
-        {
-            get { return Position<#= i - 1 #>.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
-        }
+    public <#= PositionType(i, except: j) #> ExceptValue<#= j #>
+    {
+        get { return Position<#= i - 1 #>.Create(<#= Properties(i, name: "ProductValue", except: j) #>); }
+    }
 <#      } #>
 <#      if (i == 0) { #>
 
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional data cube position.
-        /// </summary>
-        public static new <#= PositionType(i) #> Create<#= TypeBracket(i, name: "P") #>(<#= Parameters(i, name: "P") #>)
-        {
-            return new <#= PositionType(i) #>(<#= Values(i, name: "p") #>);
-        }
-<#      } #>
+    /// <summary>
+    /// Creates a new <#= i #>-dimensional data cube position.
+    /// </summary>
+    public static new <#= PositionType(i) #> Create<#= TypeBracket(i, name: "P") #>(<#= Parameters(i, name: "P") #>)
+    {
+        return new <#= PositionType(i) #>(<#= Values(i, name: "p") #>);
     }
+<#      } #>
+}
 
 <#  } #>
-}

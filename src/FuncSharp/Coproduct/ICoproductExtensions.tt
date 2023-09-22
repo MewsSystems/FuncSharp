@@ -4,65 +4,65 @@
 <#@ import namespace="System.Linq" #>
 <#@ output extension=".cs" #>
 <#@ include file="../Helpers.ttinclude" #>
+using System;
 using System.Collections.Generic;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+public static class ICoproductExtensions
 {
-    public static class ICoproductExtensions
+    private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
     {
-        private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
-        {
-<#= Lines(MaxArity() - 1, x => Indent(12) + "{ " + x + ", \"" + GetOrdinal(x) + "\" }", separator: ",") #>
-        };
+<#= Lines(MaxArity() - 1, x => Indent(8) + "{ " + x + ", \"" + GetOrdinal(x) + "\" }", separator: ",") #>
+    };
 
-        /// <summary>
-        /// Returns ordinal corresponding to the number.
-        /// </summary>
-        public static string GetOrdinal(int i)
-        {
-            return Ordinals.ContainsKey(i) ? Ordinals[i] : i + "th";
-        }
+    /// <summary>
+    /// Returns ordinal corresponding to the number.
+    /// </summary>
+    public static string GetOrdinal(int i)
+    {
+        return Ordinals.ContainsKey(i) ? Ordinals[i] : i + "th";
+    }
 
-        /// <summary>
-        /// Canonical representation of the coproduct.
-        /// </summary>
-        public static IProduct3<int, int, object> CoproductRepresentation(this ICoproduct c)
-        {
-            return Product3.Create(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
-        }
+    /// <summary>
+    /// Canonical representation of the coproduct.
+    /// </summary>
+    public static IProduct3<int, int, object> CoproductRepresentation(this ICoproduct c)
+    {
+        return Product3.Create(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
+    }
 
-        /// <summary>
-        /// Returns hash code of the specified coproduct.
-        /// </summary>
-        public static int CoproductHashCode(this ICoproduct c)
-        {
-            return Structural.HashCode(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
-        }
+    /// <summary>
+    /// Returns hash code of the specified coproduct.
+    /// </summary>
+    public static int CoproductHashCode(this ICoproduct c)
+    {
+        return HashCode.Combine(c.CoproductArity, c.CoproductDiscriminator, c.CoproductValue);
+    }
 
-        /// <summary>
-        /// Returns whether the two specified coproducts are structurally equal. Note that two nulls are 
-        /// considered structurally equal coproducts.
-        /// </summary>
-        public static bool CoproductEquals(this ICoproduct c1, object that)
+    /// <summary>
+    /// Returns whether the two specified coproducts are structurally equal. Note that two nulls are
+    /// considered structurally equal coproducts.
+    /// </summary>
+    public static bool CoproductEquals(this ICoproduct c1, object that)
+    {
+        if (that is ICoproduct c2 && c1 is not null && c1.GetType() == c2.GetType())
         {
-            if (that is ICoproduct c2 && c1 is not null && c1.GetType() == c2.GetType())
-            {
-                return c1.CoproductRepresentation().Equals(c2.CoproductRepresentation());
-            }
-            return c1 == that;
+            return c1.CoproductRepresentation().Equals(c2.CoproductRepresentation());
         }
+        return c1 == that;
+    }
 
-        /// <summary>
-        /// Returns string representation of the specified coproduct type.
-        /// </summary>
-        public static string CoproductToString(this ICoproduct c)
-        {
-            return
-                c.GetType().SimpleName() + "(" +
-                    GetOrdinal(c.CoproductDiscriminator) + "(" +
-                        c.CoproductValue.SafeToString() +
-                    ")" +
-                ")";
-        }
+    /// <summary>
+    /// Returns string representation of the specified coproduct type.
+    /// </summary>
+    public static string CoproductToString(this ICoproduct c)
+    {
+        return
+            c.GetType().SimpleName() + "(" +
+                GetOrdinal(c.CoproductDiscriminator) + "(" +
+                    c.CoproductValue.SafeToString() +
+                ")" +
+            ")";
     }
 }

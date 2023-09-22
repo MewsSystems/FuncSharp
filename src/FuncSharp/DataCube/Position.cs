@@ -1,4 +1,5 @@
-﻿namespace FuncSharp;
+﻿
+namespace FuncSharp;
 
 /// <summary>
 /// A 0-dimensional data cube position.
@@ -471,3 +472,4 @@ public sealed class Position8<P1, P2, P3, P4, P5, P6, P7, P8> : Product8<P1, P2,
         get { return Position7.Create(ProductValue1, ProductValue2, ProductValue3, ProductValue4, ProductValue5, ProductValue6, ProductValue7); }
     }
 }
+

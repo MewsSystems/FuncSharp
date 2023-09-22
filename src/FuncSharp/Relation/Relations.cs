@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace FuncSharp;
 
@@ -259,3 +260,4 @@ public class Relation6<P1, P2, P3, P4, P5, P6> : Relation<Position6<P1, P2, P3, 
         ForEach(p => a(p.ProductValue1, p.ProductValue2, p.ProductValue3, p.ProductValue4, p.ProductValue5, p.ProductValue6));
     }
 }
+
