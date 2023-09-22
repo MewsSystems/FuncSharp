@@ -18,18 +18,18 @@ public static partial class IEnumerableExtensions
     /// </summary>
     public static void PartitionMatch<#= TypeBracket(i) #>(
         this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Action<IReadOnlyList<" + Type(x) + ">> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(8) + "Action<IReadOnlyList<" + Type(x) + ">> f" + x, separator: ",") #>)
     {
-<#= Lines(i, x => Indent(12) + "var list" + x + " = new List<T" + x + ">();") #>
+<#= Lines(i, x => Indent(8) + "var list" + x + " = new List<T" + x + ">();") #>
 
         foreach (var c in source)
         {
             c.Match(
-<#= Lines(i, x => Indent(20) + "c" + x + " => list" + x + ".Add(c" + x + ")", separator: ",") #>
+<#= Lines(i, x => Indent(16) + "c" + x + " => list" + x + ".Add(c" + x + ")", separator: ",") #>
             );
         }
 
-<#= Lines(i, x => Indent(12) + "f" + x + "(list" + x + ");") #>
+<#= Lines(i, x => Indent(8) + "f" + x + "(list" + x + ");") #>
     }
 
     /// <summary>
@@ -37,15 +37,34 @@ public static partial class IEnumerableExtensions
     /// </summary>
     public static IReadOnlyList<TResult> PartitionMatch<<#= FuncTypes(i) #>>(
         this IEnumerable<<#= CoproductType(i) #>> source,
-<#= Lines(i, x => Indent(12) + "Func<IReadOnlyList<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
+<#= Lines(i, x => Indent(8) + "Func<IReadOnlyList<" + Type(x) + ">, IEnumerable<TResult>> f" + x, separator: ",") #>)
     {
         var result = new List<TResult>();
 
         source.PartitionMatch(
-<#= Lines(i, x => Indent(16) + "c" + x + " => result.AddRange(f" + x + "(c" + x + "))", separator: ",") #>
+<#= Lines(i, x => Indent(12) + "c" + x + " => result.AddRange(f" + x + "(c" + x + "))", separator: ",") #>
         );
 
         return result;
     }
+
+<#      if (i > 1) { #>
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (<#= List(i, x => $"IReadOnlyList<T{x}>") #>) Partition<<#= Types(i, name: "T") #>>(this IEnumerable<<#= CoproductType(i) #>> source)
+    {
+<#= Lines(i, x => $"{Indent(8)}var list{x} = new List<T{x}>();") #>
+
+        foreach (var c in source)
+        {
+            c.Match(
+<#= Lines(i, x => $"{Indent(16)}c{x} => list{x}.Add(c{x})", separator: ",") #>
+            );
+        }
+
+        return (<#= List(i, x => $"list{x}") #>);
+    }
+<#      } #>
 <#  } #>
 }
