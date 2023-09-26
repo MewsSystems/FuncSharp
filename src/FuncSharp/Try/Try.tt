@@ -10,273 +10,272 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+public static class Try
 {
-    public static class Try
+    /// <summary>
+    /// Creates a new try with a successful result.
+    /// </summary>
+    public static Try<TSuccess, TError> Success<TSuccess, TError>(TSuccess success)
     {
-        /// <summary>
-        /// Creates a new try with a successful result.
-        /// </summary>
-        public static Try<TSuccess, TError> Success<TSuccess, TError>(TSuccess success)
+        return new Try<TSuccess, TError>(success);
+    }
+
+    /// <summary>
+    /// Creates a new try with an error result.
+    /// </summary>
+    public static Try<TSuccess, TError> Error<TSuccess, TError>(TError error)
+    {
+        return new Try<TSuccess, TError>(error);
+    }
+
+    /// <summary>
+    /// Tries the specified action and returns its result if it succeeds. Otherwise in case of the specified exception,
+    /// returns result of the recovery function.
+    /// </summary>
+    public static TResult Catch<TResult, TException>(Func<Unit, TResult> action, Func<TException, TResult> recover)
+        where TException : Exception
+    {
+        try
         {
-            return new Try<TSuccess, TError>(success);
+            return action(Unit.Value);
         }
-
-        /// <summary>
-        /// Creates a new try with an error result.
-        /// </summary>
-        public static Try<TSuccess, TError> Error<TSuccess, TError>(TError error)
+        catch (TException e)
         {
-            return new Try<TSuccess, TError>(error);
-        }
-
-        /// <summary>
-        /// Tries the specified action and returns its result if it succeeds. Otherwise in case of the specified exception,
-        /// returns result of the recovery function.
-        /// </summary>
-        public static TResult Catch<TResult, TException>(Func<Unit, TResult> action, Func<TException, TResult> recover)
-            where TException : Exception
-        {
-            try
-            {
-                return action(Unit.Value);
-            }
-            catch (TException e)
-            {
-                return recover(e);
-            }
-        }
-
-        /// <summary>
-        /// Tries the specified action and returns a successful try if it succeeds. Otherwise in case of the specified exception,
-        /// returns an erroneous try.
-        /// </summary>
-        public static Try<TSuccess, TException> Catch<TSuccess, TException>(Func<Unit, TSuccess> f)
-            where TException : Exception
-        {
-            try
-            {
-                return Success<TSuccess, TException>(f(Unit.Value));
-            }
-            catch (TException e)
-            {
-                return Error<TSuccess, TException>(e);
-            }
-        }
-
-        /// <summary>
-        /// Tries to await the specified asynchronous action which returns a successful try wrapped in a <see cref="System.Threading.Tasks.Task"/>.
-        /// Otherwise, in case of an <see cref="System.Exception"/>, an erroneous try wrapped in a <see cref="System.Threading.Tasks.Task"/> is returned,
-        /// however this does not apply to <see cref="System.OperationCanceledException"/> and its inheritors.
-        /// </summary>
-        /// <exception cref="System.OperationCanceledException">
-        /// The <paramref name="action"/> delegate has been canceled.
-        /// </exception>
-        public static async Task<Try<TResult, TException>> CatchAsync<TResult, TException>(Func<Unit, Task<TResult>> action)
-            where TException : Exception
-        {
-            try
-            {
-                return Try.Success<TResult, TException>(await action(Unit.Value));
-            }
-            catch (TException e) when (!e.IsOrContainsOperationCanceledException())
-            {
-                return Try.Error<TResult, TException>(e);
-            }
-        }
-
-        /// <summary>
-        /// Tries to await the specified asynchronous action which returns a successful try wrapped in a <see cref="System.Threading.Tasks.Task"/>.
-        /// Otherwise, in case of an <see cref="System.Exception"/>, an erroneous try wrapped in a <see cref="System.Threading.Tasks.Task"/> is returned,
-        /// however this does not apply to <see cref="System.OperationCanceledException"/> and its inheritors.
-        /// </summary>
-        /// <exception cref="System.OperationCanceledException">
-        /// The <paramref name="action"/> delegate has been canceled.
-        /// </exception>
-        public static async Task<TResult> CatchAsync<TResult, TException>(Func<Unit, Task<TResult>> action, Func<TException, Task<TResult>> recover)
-            where TException : Exception
-        {
-            try
-            {
-                return await action(Unit.Value);
-            }
-            catch (TException e) when (!e.IsOrContainsOperationCanceledException())
-            {
-                return await recover(e);
-            }
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using the specified function.
-        /// </summary>
-        public static TResult Aggregate<TSuccess, TError, TResult>(IEnumerable<Try<TSuccess, TError>> tries, Func<IReadOnlyList<TSuccess>, TResult> success, Func<IReadOnlyList<TError>, TResult> error)
-        {
-            var enumeratedTries = tries.ToList();
-            if (enumeratedTries.All(t => t.IsSuccess))
-            {
-                return success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
-            }
-
-            return error(enumeratedTries.Select(t => t.Error).Flatten().ToList());
-        }
-
-        /// <summary>
-        /// Aggregates a collection of tries into a try of collection.
-        /// </summary>
-        public static Try<IReadOnlyList<TSuccess>, IReadOnlyList<TError>> Aggregate<TSuccess, TError>(IEnumerable<Try<TSuccess, TError>> tries)
-        {
-            return Aggregate(
-                tries,
-                success: results => Success<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(results),
-                error: errors => Error<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(errors)
-            );
-        }
-
-        /// <summary>
-        /// Aggregates a collection of tries into a try of collection.
-        /// </summary>
-        public static Try<IReadOnlyList<TSuccess>, IReadOnlyList<TError>> Aggregate<TSuccess, TError>(IEnumerable<Try<TSuccess, IReadOnlyList<TError>>> tries)
-        {
-            return Aggregate(
-                tries,
-                success: results => Success<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(results),
-                error: errors => Error<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(errors.SelectMany(e => e).ToList())
-            );
-        }
-<#  for (var i = 2; i < MaxFuncArity(); i++) { #>
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by the specified function.
-        /// </summary>
-        public static TResult Aggregate<<#= Types(i, name: "TSuccess") #>, TError, TResult>(<#= List(i, x => $"Try<{Type(x, name: "TSuccess")}, TError> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success, Func<IReadOnlyList<TError>, TResult> error)
-        {
-            if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
-            {
-                return success(<#= List(i, x => $"t{x}.Success.Get()") #>);
-            }
-
-            var errors = new[] { <#= List(i, x => $"t{x}.Error") #> };
-            return error(errors.Flatten().ToList());
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
-        /// </summary>
-        public static Try<TResult, IReadOnlyList<TError>> Aggregate<<#= Types(i, name: "TSuccess") #>, TResult, TError>(<#= List(i, x => $"Try<TSuccess{x}, TError> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success)
-        {
-            return Aggregate(
-                <#= List(i, x => $"t{x}") #>,
-                success: (<#= List(i, x => $"s{x}") #>) => Success<TResult, IReadOnlyList<TError>>(success(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<TResult, IReadOnlyList<TError>>(errors)
-            );
-        }
-
-        /// <summary>
-        /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
-        /// </summary>
-        public static Try<TResult, IReadOnlyList<TError>> Aggregate<<#= Types(i, name: "TSuccess") #>, TResult, TError>(<#= List(i, x => $"Try<TSuccess{x}, IReadOnlyList<TError>> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success)
-        {
-            return Aggregate(
-                <#= List(i, x => $"t{x}") #>,
-                success: (<#= List(i, x => $"s{x}") #>) => Success<TResult, IReadOnlyList<TError>>(success(<#= List(i, x => $"s{x}") #>)),
-                error: errors => Error<TResult, IReadOnlyList<TError>>(errors.SelectMany(e => e).ToList())
-            );
-        }
-<#  } #>
-
-        private static bool IsOrContainsOperationCanceledException(this Exception exception)
-        {
-            if (exception is OperationCanceledException)
-            {
-                return true;
-            }
-
-            if (exception.InnerException is not null)
-            {
-                return IsOrContainsOperationCanceledException(exception.InnerException);
-            }
-
-            return false;
+            return recover(e);
         }
     }
 
-    public struct Try<TSuccess, TError>
+    /// <summary>
+    /// Tries the specified action and returns a successful try if it succeeds. Otherwise in case of the specified exception,
+    /// returns an erroneous try.
+    /// </summary>
+    public static Try<TSuccess, TException> Catch<TSuccess, TException>(Func<Unit, TSuccess> f)
+        where TException : Exception
     {
-        public Try(TSuccess success)
+        try
         {
-            IsSuccess = true;
-            Success = Option.Valued(success);
-            IsError = false;
-            Error = Option.Empty<TError>();
+            return Success<TSuccess, TException>(f(Unit.Value));
+        }
+        catch (TException e)
+        {
+            return Error<TSuccess, TException>(e);
+        }
+    }
+
+    /// <summary>
+    /// Tries to await the specified asynchronous action which returns a successful try wrapped in a <see cref="System.Threading.Tasks.Task"/>.
+    /// Otherwise, in case of an <see cref="System.Exception"/>, an erroneous try wrapped in a <see cref="System.Threading.Tasks.Task"/> is returned,
+    /// however this does not apply to <see cref="System.OperationCanceledException"/> and its inheritors.
+    /// </summary>
+    /// <exception cref="System.OperationCanceledException">
+    /// The <paramref name="action"/> delegate has been canceled.
+    /// </exception>
+    public static async Task<Try<TResult, TException>> CatchAsync<TResult, TException>(Func<Unit, Task<TResult>> action)
+        where TException : Exception
+    {
+        try
+        {
+            return Try.Success<TResult, TException>(await action(Unit.Value));
+        }
+        catch (TException e) when (!e.IsOrContainsOperationCanceledException())
+        {
+            return Try.Error<TResult, TException>(e);
+        }
+    }
+
+    /// <summary>
+    /// Tries to await the specified asynchronous action which returns a successful try wrapped in a <see cref="System.Threading.Tasks.Task"/>.
+    /// Otherwise, in case of an <see cref="System.Exception"/>, an erroneous try wrapped in a <see cref="System.Threading.Tasks.Task"/> is returned,
+    /// however this does not apply to <see cref="System.OperationCanceledException"/> and its inheritors.
+    /// </summary>
+    /// <exception cref="System.OperationCanceledException">
+    /// The <paramref name="action"/> delegate has been canceled.
+    /// </exception>
+    public static async Task<TResult> CatchAsync<TResult, TException>(Func<Unit, Task<TResult>> action, Func<TException, Task<TResult>> recover)
+        where TException : Exception
+    {
+        try
+        {
+            return await action(Unit.Value);
+        }
+        catch (TException e) when (!e.IsOrContainsOperationCanceledException())
+        {
+            return await recover(e);
+        }
+    }
+
+    /// <summary>
+    /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors using the specified function.
+    /// </summary>
+    public static TResult Aggregate<TSuccess, TError, TResult>(IEnumerable<Try<TSuccess, TError>> tries, Func<IReadOnlyList<TSuccess>, TResult> success, Func<IReadOnlyList<TError>, TResult> error)
+    {
+        var enumeratedTries = tries.ToList();
+        if (enumeratedTries.All(t => t.IsSuccess))
+        {
+            return success(enumeratedTries.Select(t => t.Success).Flatten().ToList());
         }
 
-        public Try(TError error)
+        return error(enumeratedTries.Select(t => t.Error).Flatten().ToList());
+    }
+
+    /// <summary>
+    /// Aggregates a collection of tries into a try of collection.
+    /// </summary>
+    public static Try<IReadOnlyList<TSuccess>, IReadOnlyList<TError>> Aggregate<TSuccess, TError>(IEnumerable<Try<TSuccess, TError>> tries)
+    {
+        return Aggregate(
+            tries,
+            success: results => Success<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(results),
+            error: errors => Error<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(errors)
+        );
+    }
+
+    /// <summary>
+    /// Aggregates a collection of tries into a try of collection.
+    /// </summary>
+    public static Try<IReadOnlyList<TSuccess>, IReadOnlyList<TError>> Aggregate<TSuccess, TError>(IEnumerable<Try<TSuccess, IReadOnlyList<TError>>> tries)
+    {
+        return Aggregate(
+            tries,
+            success: results => Success<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(results),
+            error: errors => Error<IReadOnlyList<TSuccess>, IReadOnlyList<TError>>(errors.SelectMany(e => e).ToList())
+        );
+    }
+<#  for (var i = 2; i < MaxFuncArity(); i++) { #>
+
+    /// <summary>
+    /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates the errors by the specified function.
+    /// </summary>
+    public static TResult Aggregate<<#= Types(i, name: "TSuccess") #>, TError, TResult>(<#= List(i, x => $"Try<{Type(x, name: "TSuccess")}, TError> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success, Func<IReadOnlyList<TError>, TResult> error)
+    {
+        if (<#= List(i, x => $"t{x}.IsSuccess", separator: " && ") #>)
         {
-            IsSuccess = false;
-            Success = Option.Empty<TSuccess>();
-            IsError = true;
-            Error = Option.Valued(error);
+            return success(<#= List(i, x => $"t{x}.Success.Get()") #>);
         }
 
-        public bool IsSuccess { get; }
-        public bool IsError { get; }
-        public Option<TSuccess> Success { get; }
-        public Option<TError> Error { get; }
+        var errors = new[] { <#= List(i, x => $"t{x}.Error") #> };
+        return error(errors.Flatten().ToList());
+    }
 
-        /// <summary>
-        /// Maps the success into another type if the try succeeded.
-        /// </summary>
-        [Pure]
-        public Try<TSuccessTarget, TError> Map<TSuccessTarget>(Func<TSuccess, TSuccessTarget> f)
+    /// <summary>
+    /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+    /// </summary>
+    public static Try<TResult, IReadOnlyList<TError>> Aggregate<<#= Types(i, name: "TSuccess") #>, TResult, TError>(<#= List(i, x => $"Try<TSuccess{x}, TError> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success)
+    {
+        return Aggregate(
+            <#= List(i, x => $"t{x}") #>,
+            success: (<#= List(i, x => $"s{x}") #>) => Success<TResult, IReadOnlyList<TError>>(success(<#= List(i, x => $"s{x}") #>)),
+            error: errors => Error<TResult, IReadOnlyList<TError>>(errors)
+        );
+    }
+
+    /// <summary>
+    /// Aggregates the tries using the specified function if all of them are successful. Otherwise aggregates all errors into error result by concatenation.
+    /// </summary>
+    public static Try<TResult, IReadOnlyList<TError>> Aggregate<<#= Types(i, name: "TSuccess") #>, TResult, TError>(<#= List(i, x => $"Try<TSuccess{x}, IReadOnlyList<TError>> t{x}") #>, Func<<#= Types(i, name: "TSuccess") #>, TResult> success)
+    {
+        return Aggregate(
+            <#= List(i, x => $"t{x}") #>,
+            success: (<#= List(i, x => $"s{x}") #>) => Success<TResult, IReadOnlyList<TError>>(success(<#= List(i, x => $"s{x}") #>)),
+            error: errors => Error<TResult, IReadOnlyList<TError>>(errors.SelectMany(e => e).ToList())
+        );
+    }
+<#  } #>
+
+    private static bool IsOrContainsOperationCanceledException(this Exception exception)
+    {
+        if (exception is OperationCanceledException)
         {
-            return IsSuccess
-                ? new Try<TSuccessTarget, TError>(f(Success.Value))
-                : new Try<TSuccessTarget, TError>(Error.Value);
+            return true;
         }
 
-        /// <summary>
-        /// Maps the both the succees and the error into another types. Each function is called only when applicable.
-        /// </summary>
-        [Pure]
-        public Try<TSuccessTarget, TErrorTarget> Map<TSuccessTarget, TErrorTarget>(Func<TSuccess, TSuccessTarget> success, Func<TError, TErrorTarget> error)
+        if (exception.InnerException is not null)
         {
-            return IsSuccess
-                ? new Try<TSuccessTarget, TErrorTarget>(success(Success.Value))
-                : new Try<TSuccessTarget, TErrorTarget>(error(Error.Value));
+            return IsOrContainsOperationCanceledException(exception.InnerException);
         }
 
-        /// <summary>
-        /// Maps the error into another type if the try did not succeed.
-        /// </summary>
-        [Pure]
-        public Try<TSuccess, TErrorTarget> MapError<TErrorTarget>(Func<TError, TErrorTarget> f)
-        {
-            return IsSuccess
-                ? new Try<TSuccess, TErrorTarget>(Success.Value)
-                : new Try<TSuccess, TErrorTarget>(f(Error.Value));
-        }
+        return false;
+    }
+}
 
-        /// <summary>
-        /// Returns result of the applicable function. Success when try succeeded. Error when not.
-        /// </summary>
-        [Pure]
-        public TResult Match<TResult>(Func<TSuccess, TResult> ifSuccess, Func<TError, TResult> ifError)
-        {
-            return IsSuccess
-                ? ifSuccess(Success.Value)
-                : ifError(Error.Value);
-        }
+public struct Try<TSuccess, TError>
+{
+    public Try(TSuccess success)
+    {
+        IsSuccess = true;
+        Success = Option.Valued(success);
+        IsError = false;
+        Error = Option.Empty<TError>();
+    }
 
-        /// <summary>
-        /// Invokes the applicable function. Success when try succeeded. Error when not.
-        /// </summary>
-        [Pure]
-        public void Match(Action<TSuccess> ifSuccess = null, Action<TError> ifError = null)
-        {
-            if (IsSuccess)
-                ifSuccess?.Invoke(Success.Value);
-            else
-                ifError?.Invoke(Error.Value);
-        }
+    public Try(TError error)
+    {
+        IsSuccess = false;
+        Success = Option.Empty<TSuccess>();
+        IsError = true;
+        Error = Option.Valued(error);
+    }
+
+    public bool IsSuccess { get; }
+    public bool IsError { get; }
+    public Option<TSuccess> Success { get; }
+    public Option<TError> Error { get; }
+
+    /// <summary>
+    /// Maps the success into another type if the try succeeded.
+    /// </summary>
+    [Pure]
+    public Try<TSuccessTarget, TError> Map<TSuccessTarget>(Func<TSuccess, TSuccessTarget> f)
+    {
+        return IsSuccess
+            ? new Try<TSuccessTarget, TError>(f(Success.Value))
+            : new Try<TSuccessTarget, TError>(Error.Value);
+    }
+
+    /// <summary>
+    /// Maps the both the succees and the error into another types. Each function is called only when applicable.
+    /// </summary>
+    [Pure]
+    public Try<TSuccessTarget, TErrorTarget> Map<TSuccessTarget, TErrorTarget>(Func<TSuccess, TSuccessTarget> success, Func<TError, TErrorTarget> error)
+    {
+        return IsSuccess
+            ? new Try<TSuccessTarget, TErrorTarget>(success(Success.Value))
+            : new Try<TSuccessTarget, TErrorTarget>(error(Error.Value));
+    }
+
+    /// <summary>
+    /// Maps the error into another type if the try did not succeed.
+    /// </summary>
+    [Pure]
+    public Try<TSuccess, TErrorTarget> MapError<TErrorTarget>(Func<TError, TErrorTarget> f)
+    {
+        return IsSuccess
+            ? new Try<TSuccess, TErrorTarget>(Success.Value)
+            : new Try<TSuccess, TErrorTarget>(f(Error.Value));
+    }
+
+    /// <summary>
+    /// Returns result of the applicable function. Success when try succeeded. Error when not.
+    /// </summary>
+    [Pure]
+    public TResult Match<TResult>(Func<TSuccess, TResult> ifSuccess, Func<TError, TResult> ifError)
+    {
+        return IsSuccess
+            ? ifSuccess(Success.Value)
+            : ifError(Error.Value);
+    }
+
+    /// <summary>
+    /// Invokes the applicable function. Success when try succeeded. Error when not.
+    /// </summary>
+    [Pure]
+    public void Match(Action<TSuccess> ifSuccess = null, Action<TError> ifError = null)
+    {
+        if (IsSuccess)
+            ifSuccess?.Invoke(Success.Value);
+        else
+            ifError?.Invoke(Error.Value);
     }
 }

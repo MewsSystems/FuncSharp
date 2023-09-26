@@ -212,6 +212,10 @@ public struct Option<A> : IOption
         return Option<B>.Empty;
     }
 
+    /// <summary>
+    /// For empty option, returns an empty list.<br/>
+    /// For non-empty option, returns a single-item list with the option value.
+    /// </summary>
     [Pure]
     public IReadOnlyList<A> AsReadOnlyList()
     {

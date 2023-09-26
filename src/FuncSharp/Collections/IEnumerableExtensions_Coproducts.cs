@@ -42,6 +42,7 @@ public static partial class IEnumerableExtensions
         return result;
     }
 
+
     /// <summary>
     /// For each partition (collection of n-th coproduct elements), invokes the specified function.
     /// </summary>
@@ -81,6 +82,25 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>) Partition<T1, T2>(this IEnumerable<ICoproduct2<T1, T2>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2)
+            );
+        }
+
+        return (list1, list2);
     }
 
     /// <summary>
@@ -128,6 +148,27 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>) Partition<T1, T2, T3>(this IEnumerable<ICoproduct3<T1, T2, T3>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3)
+            );
+        }
+
+        return (list1, list2, list3);
     }
 
     /// <summary>
@@ -181,6 +222,29 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>) Partition<T1, T2, T3, T4>(this IEnumerable<ICoproduct4<T1, T2, T3, T4>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4)
+            );
+        }
+
+        return (list1, list2, list3, list4);
     }
 
     /// <summary>
@@ -240,6 +304,31 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>) Partition<T1, T2, T3, T4, T5>(this IEnumerable<ICoproduct5<T1, T2, T3, T4, T5>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5);
     }
 
     /// <summary>
@@ -305,6 +394,33 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>) Partition<T1, T2, T3, T4, T5, T6>(this IEnumerable<ICoproduct6<T1, T2, T3, T4, T5, T6>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6);
     }
 
     /// <summary>
@@ -376,6 +492,35 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>) Partition<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<ICoproduct7<T1, T2, T3, T4, T5, T6, T7>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7);
     }
 
     /// <summary>
@@ -453,6 +598,37 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>) Partition<T1, T2, T3, T4, T5, T6, T7, T8>(this IEnumerable<ICoproduct8<T1, T2, T3, T4, T5, T6, T7, T8>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8);
     }
 
     /// <summary>
@@ -536,6 +712,39 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEnumerable<ICoproduct9<T1, T2, T3, T4, T5, T6, T7, T8, T9>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9);
     }
 
     /// <summary>
@@ -625,6 +834,41 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEnumerable<ICoproduct10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10);
     }
 
     /// <summary>
@@ -720,6 +964,43 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IEnumerable<ICoproduct11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11);
     }
 
     /// <summary>
@@ -821,6 +1102,45 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IEnumerable<ICoproduct12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12);
     }
 
     /// <summary>
@@ -928,6 +1248,47 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IEnumerable<ICoproduct13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13);
     }
 
     /// <summary>
@@ -1041,6 +1402,49 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IEnumerable<ICoproduct14<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14);
     }
 
     /// <summary>
@@ -1160,6 +1564,51 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>, IReadOnlyList<T15>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IEnumerable<ICoproduct15<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+        var list15 = new List<T15>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14),
+                c15 => list15.Add(c15)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14, list15);
     }
 
     /// <summary>
@@ -1285,6 +1734,53 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>, IReadOnlyList<T15>, IReadOnlyList<T16>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this IEnumerable<ICoproduct16<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+        var list15 = new List<T15>();
+        var list16 = new List<T16>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14),
+                c15 => list15.Add(c15),
+                c16 => list16.Add(c16)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14, list15, list16);
     }
 
     /// <summary>
@@ -1416,6 +1912,55 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>, IReadOnlyList<T15>, IReadOnlyList<T16>, IReadOnlyList<T17>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>(this IEnumerable<ICoproduct17<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+        var list15 = new List<T15>();
+        var list16 = new List<T16>();
+        var list17 = new List<T17>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14),
+                c15 => list15.Add(c15),
+                c16 => list16.Add(c16),
+                c17 => list17.Add(c17)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14, list15, list16, list17);
     }
 
     /// <summary>
@@ -1553,6 +2098,57 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>, IReadOnlyList<T15>, IReadOnlyList<T16>, IReadOnlyList<T17>, IReadOnlyList<T18>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>(this IEnumerable<ICoproduct18<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+        var list15 = new List<T15>();
+        var list16 = new List<T16>();
+        var list17 = new List<T17>();
+        var list18 = new List<T18>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14),
+                c15 => list15.Add(c15),
+                c16 => list16.Add(c16),
+                c17 => list17.Add(c17),
+                c18 => list18.Add(c18)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14, list15, list16, list17, list18);
     }
 
     /// <summary>
@@ -1696,6 +2292,59 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>, IReadOnlyList<T15>, IReadOnlyList<T16>, IReadOnlyList<T17>, IReadOnlyList<T18>, IReadOnlyList<T19>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>(this IEnumerable<ICoproduct19<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+        var list15 = new List<T15>();
+        var list16 = new List<T16>();
+        var list17 = new List<T17>();
+        var list18 = new List<T18>();
+        var list19 = new List<T19>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14),
+                c15 => list15.Add(c15),
+                c16 => list16.Add(c16),
+                c17 => list17.Add(c17),
+                c18 => list18.Add(c18),
+                c19 => list19.Add(c19)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14, list15, list16, list17, list18, list19);
     }
 
     /// <summary>
@@ -1845,5 +2494,60 @@ public static partial class IEnumerableExtensions
         );
 
         return result;
+    }
+
+    /// <summary>
+    /// Takes a collection of coproducts, partitions them into collections and returns those collections.
+    /// </summary>
+    public static (IReadOnlyList<T1>, IReadOnlyList<T2>, IReadOnlyList<T3>, IReadOnlyList<T4>, IReadOnlyList<T5>, IReadOnlyList<T6>, IReadOnlyList<T7>, IReadOnlyList<T8>, IReadOnlyList<T9>, IReadOnlyList<T10>, IReadOnlyList<T11>, IReadOnlyList<T12>, IReadOnlyList<T13>, IReadOnlyList<T14>, IReadOnlyList<T15>, IReadOnlyList<T16>, IReadOnlyList<T17>, IReadOnlyList<T18>, IReadOnlyList<T19>, IReadOnlyList<T20>) Partition<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(this IEnumerable<ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>> source)
+    {
+        var list1 = new List<T1>();
+        var list2 = new List<T2>();
+        var list3 = new List<T3>();
+        var list4 = new List<T4>();
+        var list5 = new List<T5>();
+        var list6 = new List<T6>();
+        var list7 = new List<T7>();
+        var list8 = new List<T8>();
+        var list9 = new List<T9>();
+        var list10 = new List<T10>();
+        var list11 = new List<T11>();
+        var list12 = new List<T12>();
+        var list13 = new List<T13>();
+        var list14 = new List<T14>();
+        var list15 = new List<T15>();
+        var list16 = new List<T16>();
+        var list17 = new List<T17>();
+        var list18 = new List<T18>();
+        var list19 = new List<T19>();
+        var list20 = new List<T20>();
+
+        foreach (var c in source)
+        {
+            c.Match(
+                c1 => list1.Add(c1),
+                c2 => list2.Add(c2),
+                c3 => list3.Add(c3),
+                c4 => list4.Add(c4),
+                c5 => list5.Add(c5),
+                c6 => list6.Add(c6),
+                c7 => list7.Add(c7),
+                c8 => list8.Add(c8),
+                c9 => list9.Add(c9),
+                c10 => list10.Add(c10),
+                c11 => list11.Add(c11),
+                c12 => list12.Add(c12),
+                c13 => list13.Add(c13),
+                c14 => list14.Add(c14),
+                c15 => list15.Add(c15),
+                c16 => list16.Add(c16),
+                c17 => list17.Add(c17),
+                c18 => list18.Add(c18),
+                c19 => list19.Add(c19),
+                c20 => list20.Add(c20)
+            );
+        }
+
+        return (list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12, list13, list14, list15, list16, list17, list18, list19, list20);
     }
 }

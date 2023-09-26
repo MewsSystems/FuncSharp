@@ -76,33 +76,4 @@ public static partial class IEnumerableExtensions
 
         return source.Reverse().FirstOption();
     }
-
-    /// <summary>
-    /// Returns the only value if the source contains just one value, otherwise an empty option.
-    /// </summary>
-    public static Option<T> SingleOption<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-    {
-        return source.Where(predicate).SingleOption();
-    }
-
-    /// <summary>
-    /// Returns the only value if the source contains just one value, otherwise an empty option.
-    /// </summary>
-    public static Option<T> SingleOption<T>(this IEnumerable<T> source)
-    {
-        if (source is IReadOnlyList<T> list)
-        {
-            return list.SingleOption();
-        }
-
-        using var enumerator = source.GetEnumerator();
-        if (!enumerator.MoveNext())
-        {
-            return Option.Empty<T>();
-        }
-        var result = enumerator.Current;
-        return enumerator.MoveNext()
-            ? Option.Empty<T>()
-            : Option.Valued(result);
-    }
 }

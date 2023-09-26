@@ -7,77 +7,76 @@
 using System;
 using System.Threading.Tasks;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+/// <summary>
+/// A type that represents a disjunction of types, choice from multiple different types e.g. T1 or T2 or T3.
+/// </summary>
+public interface ICoproduct
 {
     /// <summary>
-    /// A type that represents a disjunction of types, choice from multiple different types e.g. T1 or T2 or T3.
+    /// Arity of the coproduct type. Should be non-negative.
     /// </summary>
-    public interface ICoproduct
-    {
-        /// <summary>
-        /// Arity of the coproduct type. Should be non-negative.
-        /// </summary>
-        int CoproductArity { get; }
+    int CoproductArity { get; }
 
-        /// <summary>
-        /// Discriminator of the coproduct type value. Should be in interval [1, CoproductArity].
-        /// </summary>
-        int CoproductDiscriminator { get; }
+    /// <summary>
+    /// Discriminator of the coproduct type value. Should be in interval [1, CoproductArity].
+    /// </summary>
+    int CoproductDiscriminator { get; }
 
-        /// <summary>
-        /// Value of the coproduct type no matter which one of the possible values it is.
-        /// </summary>
-        object CoproductValue { get; }
-    }
+    /// <summary>
+    /// Value of the coproduct type no matter which one of the possible values it is.
+    /// </summary>
+    object CoproductValue { get; }
+}
 
 <#  for (var i = 0; i < MaxArity(); i++) { #>
-    /// <summary>
-    /// A <#= i #>-dimensional strongly-typed coproduct.
-    /// </summary>
-    public interface <#= CoproductType(i, name: "T") #> : ICoproduct
-    {
+/// <summary>
+/// A <#= i #>-dimensional strongly-typed coproduct.
+/// </summary>
+public interface <#= CoproductType(i, name: "T") #> : ICoproduct
+{
 <#      for (var j = 1; j <= i; j++) { #>
-        /// <summary>
-        /// Returns whether the coproduct contains the <#= GetLowerOrdinal(j) #> value.
-        /// </summary>
-        bool Is<#= GetOrdinal(j) #> { get; }
+    /// <summary>
+    /// Returns whether the coproduct contains the <#= GetLowerOrdinal(j) #> value.
+    /// </summary>
+    bool Is<#= GetOrdinal(j) #> { get; }
 
-        /// <summary>
-        /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #>
-        /// value or is empty if the coproduct contains different value.
-        /// </summary>
-        Option<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
+    /// <summary>
+    /// Returns <#= GetLowerOrdinal(j) #> value of the coproduct as an option. The option contains the <#= GetLowerOrdinal(j) #>
+    /// value or is empty if the coproduct contains different value.
+    /// </summary>
+    Option<<#= Type(j) #>> <#= GetOrdinal(j) #> { get; }
 
 <#      } #>
 <#      if (i > 0) { #>
-        /// <summary>
-        /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
-        /// of the <paramref name="ifFirst" /> function.
-        /// </summary>
-        R Match<R>(
-<#= Lines(i, x => Indent(12) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>);
+    /// <summary>
+    /// Returns result of a function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+    /// of the <paramref name="ifFirst" /> function.
+    /// </summary>
+    R Match<R>(
+<#= Lines(i, x => Indent(8) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>);
 
-        /// <summary>
-        /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
-        /// of the <paramref name="ifFirst" /> function.
-        /// </summary>
-        Task<R> MatchAsync<R>(
-<#= Lines(i, x => Indent(12) + "Func<T" + x + ", Task<R>> " + IfIth(x), separator: ",") #>);
-        /// <summary>
-        /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
-        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
-        /// </summary>
-        void Match(
-<#= Lines(i, x => Indent(12) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>);
+    /// <summary>
+    /// Returns result of an async function that matches the coproduct value. E.g. if the coproduct is the first value, returns result
+    /// of the <paramref name="ifFirst" /> function.
+    /// </summary>
+    Task<R> MatchAsync<R>(
+<#= Lines(i, x => Indent(8) + "Func<T" + x + ", Task<R>> " + IfIth(x), separator: ",") #>);
+    /// <summary>
+    /// Executes the function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+    /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+    /// </summary>
+    void Match(
+<#= Lines(i, x => Indent(8) + "Action<T" + x + "> " + IfIth(x) + " = null", separator: ",") #>);
 
-        /// <summary>
-        /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
-        /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
-        /// </summary>
-        Task MatchAsync(
-<#= Lines(i, x => Indent(12) + "Func<T" + x + ", Task> " + IfIth(x), separator: ",") #>);
+    /// <summary>
+    /// Executes the async function that matches the coproduct value. E.g. if the coproduct is the first value, executes
+    /// the <paramref name="ifFirst" /> function. If the function that should be executed is null, does nothing.
+    /// </summary>
+    Task MatchAsync(
+<#= Lines(i, x => Indent(8) + "Func<T" + x + ", Task> " + IfIth(x), separator: ",") #>);
 <#      } #>
-    }
+}
 
 <#  } #>
-}

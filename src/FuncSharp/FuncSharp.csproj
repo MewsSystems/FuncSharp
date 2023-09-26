@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>8.0.0-preview.1</Version>
+    <Version>8.0.0-preview.3</Version>
     <AssemblyVersion>8.0.0</AssemblyVersion>
     <FileVersion>8.0.0</FileVersion>
     <PackageId>FuncSharp</PackageId>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Removed handling of nulls from collection methods. Also banned some method overloads resulting in a collection with value of null.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed more collection methods that were handling nulls so that we can update the usages in Mews and bring it back.</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -31,9 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\readme.md" Pack="true" PackagePath="\" />
-    <None Update="Collections\IEnumerableExtensions_PartitionMatch.tt">
+    <None Update="Collections\IEnumerableExtensions_Coproducts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IEnumerableExtensions_PartitionMatch.cs</LastGenOutput>
+      <LastGenOutput>IEnumerableExtensions_Coproducts.cs</LastGenOutput>
     </None>
     <None Update="Collections\IEnumerableExtensions_DataCubes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -46,6 +46,10 @@
     <None Update="Extensions\ObjectExtensions_Coproduct.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjectExtensions_Coproduct.cs</LastGenOutput>
+    </None>
+    <None Update="Collections\IEnumerableExtensions_Tuples.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IEnumerableExtensions_Tuples.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -159,10 +163,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Try.tt</DependentUpon>
     </Compile>
-    <Compile Update="Collections\IEnumerableExtensions_PartitionMatch.cs">
+    <Compile Update="Collections\IEnumerableExtensions_Coproducts.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>IEnumerableExtensions_PartitionMatch.tt</DependentUpon>
+      <DependentUpon>IEnumerableExtensions_Coproducts.tt</DependentUpon>
     </Compile>
     <Compile Update="Collections\IEnumerableExtensions_DataCubes.cs">
       <DesignTime>True</DesignTime>
@@ -178,6 +182,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ObjectExtensions_Coproduct.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Collections\IEnumerableExtensions_Tuples.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IEnumerableExtensions_Tuples.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FuncSharp;
 
-public static class CoproductExtensions
+public static class ICoproductExtensions
 {
     private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
     {
@@ -55,7 +55,7 @@ public static class CoproductExtensions
     }
 
     /// <summary>
-    /// Returns whether the two specified coproducts are structurally equal. Note that two nulls are 
+    /// Returns whether the two specified coproducts are structurally equal. Note that two nulls are
     /// considered structurally equal coproducts.
     /// </summary>
     public static bool CoproductEquals(this ICoproduct c1, object that)
@@ -74,9 +74,9 @@ public static class CoproductExtensions
     {
         return
             c.GetType().SimpleName() + "(" +
-            GetOrdinal(c.CoproductDiscriminator) + "(" +
-            c.CoproductValue.SafeToString() +
-            ")" +
+                GetOrdinal(c.CoproductDiscriminator) + "(" +
+                    c.CoproductValue.SafeToString() +
+                ")" +
             ")";
     }
 }

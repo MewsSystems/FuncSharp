@@ -9,160 +9,159 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+/// <summary>
+/// Base class and factory of canonical product types.
+/// </summary>
+public abstract class ProductBase : IProduct
 {
-    /// <summary>
-    /// Base class and factory of canonical product types.
-    /// </summary>
-    public abstract class ProductBase : IProduct
+    public abstract IEnumerable<object> ProductValues { get; }
+
+    private int? HashCode { get; set; }
+
+    public override int GetHashCode()
     {
-        public abstract IEnumerable<object> ProductValues { get; }
-
-        private int? HashCode { get; set; }
-
-        public override int GetHashCode()
-        {
-            return HashCode ?? (HashCode = ProductHashCode()).Value;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return ProductEquals(obj);
-        }
-
-        public override string ToString()
-        {
-            var b = new StringBuilder(GetType().SimpleName() + "(");
-
-            var prefix = "";
-            foreach (var value in ProductValues)
-            {
-                b.Append(prefix);
-                b.Append(value.SafeToString());
-                prefix = ", ";
-            }
-
-            b.Append(")");
-            return b.ToString();
-        }
-
-        protected abstract int ProductHashCode();
-
-        protected abstract bool ProductEquals(object obj);
+        return HashCode ?? (HashCode = ProductHashCode()).Value;
     }
+
+    public override bool Equals(object obj)
+    {
+        return ProductEquals(obj);
+    }
+
+    public override string ToString()
+    {
+        var b = new StringBuilder(GetType().SimpleName() + "(");
+
+        var prefix = "";
+        foreach (var value in ProductValues)
+        {
+            b.Append(prefix);
+            b.Append(value.SafeToString());
+            prefix = ", ";
+        }
+
+        b.Append(")");
+        return b.ToString();
+    }
+
+    protected abstract int ProductHashCode();
+
+    protected abstract bool ProductEquals(object obj);
+}
 
 <#  for (var i = 0; i <= MaxProductArity(); i++) { #>
 <#      if (i > 0) { #>
+/// <summary>
+/// A factory for <#= i #>-dimensional strongly-typed immutable products.
+/// </summary>
+public static class Product<#= i #>
+{
     /// <summary>
-    /// A factory for <#= i #>-dimensional strongly-typed immutable products.
+    /// Creates a new <#= i #>-dimensional canonical product.
     /// </summary>
-    public static class Product<#= i #>
+    public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
     {
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional canonical product.
-        /// </summary>
-        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
-        {
-            return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
-        }
-
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional canonical product.
-        /// </summary>
-        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
-        {
-            if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
-            {
-                return p;
-            }
-
-            return Create(<#= Properties(i, name: "p.ProductValue") #>);
-        }
+        return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
     }
 
-<#      } #>
     /// <summary>
-    /// A <#= i #>-dimensional strongly-typed immutable product.
+    /// Creates a new <#= i #>-dimensional canonical product.
     /// </summary>
-    public class <#= ProductImplType(i) #> : ProductBase, <#= ProductType(i) #>
+    public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
     {
-        public Product<#= i #>(<#= Parameters(i) #>)
+        if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
         {
-<#      for (var j = 1; j <= i; j++) { #>
-            <#= ProductProperty(j) #> = <#= Value(j) #>;
-<#      } #>
+            return p;
         }
+
+        return Create(<#= Properties(i, name: "p.ProductValue") #>);
+    }
+}
+
+<#      } #>
+/// <summary>
+/// A <#= i #>-dimensional strongly-typed immutable product.
+/// </summary>
+public class <#= ProductImplType(i) #> : ProductBase, <#= ProductType(i) #>
+{
+    public Product<#= i #>(<#= Parameters(i) #>)
+    {
+<#      for (var j = 1; j <= i; j++) { #>
+        <#= ProductProperty(j) #> = <#= Value(j) #>;
+<#      } #>
+    }
 <#      for (var j = 1; j <= i; j++) { #>
 
-        public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
+    public <#= Type(j) #> <#= ProductProperty(j) #> { get; }
 <#      } #>
 
-        public override IEnumerable<object> ProductValues
+    public override IEnumerable<object> ProductValues
+    {
+        get
         {
-            get
-            {
 <#      if (i > 0) { #>
 <#          for (var j = 1; j <= i; j++) { #>
-                yield return <#= ProductProperty(j) #>;
+            yield return <#= ProductProperty(j) #>;
 <#          } #>
 <#      } else { #>
-                return Enumerable.Empty<object>();
+            return Enumerable.Empty<object>();
 <#      } #>
-            }
         }
+    }
 <#      if (i == 0) { #>
 
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional canonical product.
-        /// </summary>
-        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
+    /// <summary>
+    /// Creates a new <#= i #>-dimensional canonical product.
+    /// </summary>
+    public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= Parameters(i) #>)
+    {
+        return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
+    }
+
+    /// <summary>
+    /// Creates a new <#= i #>-dimensional canonical product.
+    /// </summary>
+    public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
+    {
+        if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
         {
-            return new Product<#= i + TypeBracket(i) #>(<#= Values(i) #>);
+            return p;
         }
 
-        /// <summary>
-        /// Creates a new <#= i #>-dimensional canonical product.
-        /// </summary>
-        public static <#= ProductType(i) #> Create<#= TypeBracket(i) #>(<#= ProductType(i) #> p)
-        {
-            if (Equals(p.GetType(), typeof(<#= ProductImplType(i) #>)))
-            {
-                return p;
-            }
-
-            return Create(<#= Properties(i, name: "p.ProductValue") #>);
-        }
+        return Create(<#= Properties(i, name: "p.ProductValue") #>);
+    }
 <#      } #>
 <#      if (i <= MaxFuncArity()) { #>
 
-        public R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f)
-        {
-            return f(<#= Properties(i, name: "ProductValue") #>);
-        }
+    public R Match<R>(Func<<#= Types(i, appendSeparator: true) #>R> f)
+    {
+        return f(<#= Properties(i, name: "ProductValue") #>);
+    }
 <#          if (i > 0) { #>
 
-        public void Match(Action<<#= Types(i) #>> f)
-        {
-            f(<#= Properties(i, name: "ProductValue") #>);
-        }
+    public void Match(Action<<#= Types(i) #>> f)
+    {
+        f(<#= Properties(i, name: "ProductValue") #>);
+    }
 <#          } #>
 <#      } #>
 
-        protected override int ProductHashCode()
-        {
-            return ValueTuple.Create(<#= Properties(i, name: "ProductValue") #>).GetHashCode();
-        }
-
-        protected override bool ProductEquals(object obj)
-        {
-            return
-                obj is <#= ProductType(i) #> p &&
-<#          for (var j = 1; j <= i; j++) { #>
-                Equals(<#= ProductProperty(j) #>, p.<#= ProductProperty(j) #>) &&
-<#          } #>
-                Equals(GetType(), p.GetType());
-        }
+    protected override int ProductHashCode()
+    {
+        return ValueTuple.Create(<#= Properties(i, name: "ProductValue") #>).GetHashCode();
     }
 
-<#  } #>
+    protected override bool ProductEquals(object obj)
+    {
+        return
+            obj is <#= ProductType(i) #> p &&
+<#          for (var j = 1; j <= i; j++) { #>
+            Equals(<#= ProductProperty(j) #>, p.<#= ProductProperty(j) #>) &&
+<#          } #>
+            Equals(GetType(), p.GetType());
+    }
 }
+
+<#  } #>

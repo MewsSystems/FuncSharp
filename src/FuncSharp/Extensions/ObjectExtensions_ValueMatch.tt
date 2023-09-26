@@ -9,96 +9,95 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+public static partial class ObjectExtensions
 {
-    public static partial class ObjectExtensions
-    {
 <# for (var i = 1; i < MaxArity(); i++) { #>
-        /// <summary>
-        /// Matches the value with the specified parameters and returns result of the corresponding function.
-        /// </summary>
-        [Pure]
-        public static TResult Match<T, TResult>(
-            this T value,
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding function.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
 <#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, TResult> f" + j, separator: ",") #>,
-            Func<T, TResult> otherwise = null)
-        {
+        Func<T, TResult> otherwise = null)
+    {
 <#     for (var j = 1; j <= i; j++) { #>
-            if (Equals(value, <#= Value(j) #>))
-            {
-                return f<#= j #>(value);
-            }
-<#     } #>
-            if (otherwise != null)
-            {
-                return otherwise(value);
-            }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
-        }
-
-        [Pure]
-        public static async Task<TResult> MatchAsync<T, TResult>(
-            this T value,
-<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, Task<TResult>> f" + j, separator: ",") #>,
-            Func<T, Task<TResult>> otherwise = null)
+        if (Equals(value, <#= Value(j) #>))
         {
-<#     for (var j = 1; j <= i; j++) { #>
-            if (Equals(value, <#= Value(j) #>))
-            {
-                return await f<#= j #>(value);
-            }
-<#     } #>
-            if (otherwise != null)
-            {
-                return await otherwise(value);
-            }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+            return f<#= j #>(value);
         }
-
-        /// <summary>
-        /// Matches the value with the specified parameters and executes the corresponding function.
-        /// </summary>
-        [Pure]
-        public static void Match<T>(
-            this T value,
-<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Action<T> f" + j, separator: ",") #>,
-            Action<T> otherwise = null)
+<#     } #>
+        if (otherwise != null)
         {
-<#     for (var j = 1; j <= i; j++) { #>
-            if (Equals(value, <#= Value(j) #>))
-            {
-                f<#= j #>(value);
-                return;
-            }
-<#     } #>
-            if (otherwise != null)
-            {
-                otherwise(value);
-                return;
-            }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+            return otherwise(value);
         }
-
-        [Pure]
-        public static async Task MatchAsync<T>(
-            this T value,
-<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T,Task> f" + j, separator: ",") #>,
-            Func<T, Task> otherwise = null)
-        {
-<#     for (var j = 1; j <= i; j++) { #>
-            if (Equals(value, <#= Value(j) #>))
-            {
-                await f<#= j #>(value);
-                return;
-            }
-<#     } #>
-            if (otherwise != null)
-            {
-                await otherwise(value);
-                return;
-            }
-            throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
-        }
-<# } #>
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
     }
+
+    [Pure]
+    public static async Task<TResult> MatchAsync<T, TResult>(
+        this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T, Task<TResult>> f" + j, separator: ",") #>,
+        Func<T, Task<TResult>> otherwise = null)
+    {
+<#     for (var j = 1; j <= i; j++) { #>
+        if (Equals(value, <#= Value(j) #>))
+        {
+            return await f<#= j #>(value);
+        }
+<#     } #>
+        if (otherwise != null)
+        {
+            return await otherwise(value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and executes the corresponding function.
+    /// </summary>
+    [Pure]
+    public static void Match<T>(
+        this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Action<T> f" + j, separator: ",") #>,
+        Action<T> otherwise = null)
+    {
+<#     for (var j = 1; j <= i; j++) { #>
+        if (Equals(value, <#= Value(j) #>))
+        {
+            f<#= j #>(value);
+            return;
+        }
+<#     } #>
+        if (otherwise != null)
+        {
+            otherwise(value);
+            return;
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+    }
+
+    [Pure]
+    public static async Task MatchAsync<T>(
+        this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", Func<T,Task> f" + j, separator: ",") #>,
+        Func<T, Task> otherwise = null)
+    {
+<#     for (var j = 1; j <= i; j++) { #>
+        if (Equals(value, <#= Value(j) #>))
+        {
+            await f<#= j #>(value);
+            return;
+        }
+<#     } #>
+        if (otherwise != null)
+        {
+            await otherwise(value);
+            return;
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
+    }
+<# } #>
 }

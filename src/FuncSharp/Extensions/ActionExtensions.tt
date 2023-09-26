@@ -6,23 +6,22 @@
 <#@ include file="../Helpers.ttinclude" #>
 using System;
 
-namespace FuncSharp
+namespace FuncSharp;
+
+public static class ActionExtensions
 {
-    public static class ActionExtensions
-    {
 <#  for (var i = 0; i < Math.Min(16, MaxArity()); i++) { #>
-        /// <summary>
-        /// Converts the specified action to a function returning a unit.
-        /// </summary>
-        public static <#= FuncType(i, resultTypeName: "Unit") #> ToFunc<#= TypeBracket(i) #>(this Action<#= TypeBracket(i) #> a)
+    /// <summary>
+    /// Converts the specified action to a function returning a unit.
+    /// </summary>
+    public static <#= FuncType(i, resultTypeName: "Unit") #> ToFunc<#= TypeBracket(i) #>(this Action<#= TypeBracket(i) #> a)
+    {
+        return (<#= Values(i) #>) =>
         {
-            return (<#= Values(i) #>) =>
-            {
-                a(<#= Values(i) #>);
-                return Unit.Value;
-            };
-        }
+            a(<#= Values(i) #>);
+            return Unit.Value;
+        };
+    }
 
 <# } #>
-    }
 }
