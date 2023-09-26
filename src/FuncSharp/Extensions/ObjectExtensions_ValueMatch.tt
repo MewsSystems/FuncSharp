@@ -36,6 +36,25 @@ public static partial class ObjectExtensions
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the <#= i #> specified values.");
     }
 
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+<#= Lines(i, j => Indent(12) + "T " + Value(j) + ", TResult f" + j, separator: ",") #>,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+<#     for (var j = 1; j <= i; j++) { #>
+        if (value is not null && value.Equals(<#= Value(j) #>))
+        {
+            return f<#= j #>;
+        }
+<#     } #>
+        return otherwise;
+    }
+
     [Pure]
     public static async Task<TResult> MatchAsync<T, TResult>(
         this T value,

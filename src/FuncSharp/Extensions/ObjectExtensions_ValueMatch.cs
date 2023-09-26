@@ -28,6 +28,23 @@ public static partial class ObjectExtensions
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
     }
 
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        return otherwise;
+    }
+
     [Pure]
     public static async Task<TResult> MatchAsync<T, TResult>(
         this T value,
@@ -108,6 +125,28 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 2 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -212,6 +251,33 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 3 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -338,6 +404,38 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 4 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -486,6 +584,43 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 5 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -656,6 +791,48 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 6 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -848,6 +1025,53 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 7 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -1062,6 +1286,58 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 8 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -1298,6 +1574,63 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 9 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -1556,6 +1889,68 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 10 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -1836,6 +2231,73 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 11 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -2138,6 +2600,78 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 12 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -2462,6 +2996,83 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 13 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -2808,6 +3419,88 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 14 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -3176,6 +3869,93 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 15 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+            T t15, TResult f15,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        if (value is not null && value.Equals(t15))
+        {
+            return f15;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -3566,6 +4346,98 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 16 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+            T t15, TResult f15,
+            T t16, TResult f16,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        if (value is not null && value.Equals(t15))
+        {
+            return f15;
+        }
+        if (value is not null && value.Equals(t16))
+        {
+            return f16;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -3978,6 +4850,103 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 17 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+            T t15, TResult f15,
+            T t16, TResult f16,
+            T t17, TResult f17,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        if (value is not null && value.Equals(t15))
+        {
+            return f15;
+        }
+        if (value is not null && value.Equals(t16))
+        {
+            return f16;
+        }
+        if (value is not null && value.Equals(t17))
+        {
+            return f17;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -4412,6 +5381,108 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 18 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+            T t15, TResult f15,
+            T t16, TResult f16,
+            T t17, TResult f17,
+            T t18, TResult f18,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        if (value is not null && value.Equals(t15))
+        {
+            return f15;
+        }
+        if (value is not null && value.Equals(t16))
+        {
+            return f16;
+        }
+        if (value is not null && value.Equals(t17))
+        {
+            return f17;
+        }
+        if (value is not null && value.Equals(t18))
+        {
+            return f18;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -4868,6 +5939,113 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 19 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+            T t15, TResult f15,
+            T t16, TResult f16,
+            T t17, TResult f17,
+            T t18, TResult f18,
+            T t19, TResult f19,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        if (value is not null && value.Equals(t15))
+        {
+            return f15;
+        }
+        if (value is not null && value.Equals(t16))
+        {
+            return f16;
+        }
+        if (value is not null && value.Equals(t17))
+        {
+            return f17;
+        }
+        if (value is not null && value.Equals(t18))
+        {
+            return f18;
+        }
+        if (value is not null && value.Equals(t19))
+        {
+            return f19;
+        }
+        return otherwise;
     }
 
     [Pure]
@@ -5346,6 +6524,118 @@ public static partial class ObjectExtensions
             return otherwise(value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 20 specified values.");
+    }
+
+    /// <summary>
+    /// Matches the value with the specified parameters and returns result of the corresponding value.
+    /// </summary>
+    [Pure]
+    public static TResult Match<T, TResult>(
+        this T value,
+            T t1, TResult f1,
+            T t2, TResult f2,
+            T t3, TResult f3,
+            T t4, TResult f4,
+            T t5, TResult f5,
+            T t6, TResult f6,
+            T t7, TResult f7,
+            T t8, TResult f8,
+            T t9, TResult f9,
+            T t10, TResult f10,
+            T t11, TResult f11,
+            T t12, TResult f12,
+            T t13, TResult f13,
+            T t14, TResult f14,
+            T t15, TResult f15,
+            T t16, TResult f16,
+            T t17, TResult f17,
+            T t18, TResult f18,
+            T t19, TResult f19,
+            T t20, TResult f20,
+        TResult otherwise = default(TResult))
+    where T: IEquatable<T>
+    {
+        if (value is not null && value.Equals(t1))
+        {
+            return f1;
+        }
+        if (value is not null && value.Equals(t2))
+        {
+            return f2;
+        }
+        if (value is not null && value.Equals(t3))
+        {
+            return f3;
+        }
+        if (value is not null && value.Equals(t4))
+        {
+            return f4;
+        }
+        if (value is not null && value.Equals(t5))
+        {
+            return f5;
+        }
+        if (value is not null && value.Equals(t6))
+        {
+            return f6;
+        }
+        if (value is not null && value.Equals(t7))
+        {
+            return f7;
+        }
+        if (value is not null && value.Equals(t8))
+        {
+            return f8;
+        }
+        if (value is not null && value.Equals(t9))
+        {
+            return f9;
+        }
+        if (value is not null && value.Equals(t10))
+        {
+            return f10;
+        }
+        if (value is not null && value.Equals(t11))
+        {
+            return f11;
+        }
+        if (value is not null && value.Equals(t12))
+        {
+            return f12;
+        }
+        if (value is not null && value.Equals(t13))
+        {
+            return f13;
+        }
+        if (value is not null && value.Equals(t14))
+        {
+            return f14;
+        }
+        if (value is not null && value.Equals(t15))
+        {
+            return f15;
+        }
+        if (value is not null && value.Equals(t16))
+        {
+            return f16;
+        }
+        if (value is not null && value.Equals(t17))
+        {
+            return f17;
+        }
+        if (value is not null && value.Equals(t18))
+        {
+            return f18;
+        }
+        if (value is not null && value.Equals(t19))
+        {
+            return f19;
+        }
+        if (value is not null && value.Equals(t20))
+        {
+            return f20;
+        }
+        return otherwise;
     }
 
     [Pure]
