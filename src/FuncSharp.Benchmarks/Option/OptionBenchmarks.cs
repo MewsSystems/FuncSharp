@@ -2,6 +2,11 @@ using BenchmarkDotNet.Attributes;
 
 namespace FuncSharp.Benchmarks;
 
+public class ReferenceType
+{
+    public string Text { get; set; }
+}
+
 [MemoryDiagnoser]
 public class OptionBenchmarks
 {
@@ -9,13 +14,16 @@ public class OptionBenchmarks
     private static readonly string StringValue;
     private static readonly Option<string> NonEmptyOption;
     private static readonly Option<string> EmptyOption;
+    private static readonly Option<ReferenceType> ReferenceTypeNonEmptyOption;
+    private static readonly Option<ReferenceType> ReferenceTypeEmptyOption;
 
     static OptionBenchmarks()
     {
         Object = new object();
         StringValue = "Some String";
         NonEmptyOption = "non-empty".ToOption();
-        EmptyOption = Option.Empty<string>();
+        ReferenceTypeNonEmptyOption = Option.Valued(new ReferenceType { Text= "non-empty" });
+        ReferenceTypeEmptyOption = Option.Empty<ReferenceType>();
     }
 
     // Last Result - 22.8.2023 - 11.6 ns - 80 B
@@ -171,5 +179,47 @@ public class OptionBenchmarks
     public void AsReadOnlyList_Empty()
     {
         EmptyOption.AsReadOnlyList();
+    }
+
+    // Last Result - 11.10.2023 - 1.82 ns - 0 B
+    [Benchmark]
+    public void MapPlusGetOrNull_WithFunc_NonEmpty()
+    {
+        var text = ReferenceTypeNonEmptyOption.Map(value => value.Text).GetOrNull();
+    }
+
+    // Last Result - 11.10.2023 - 3.61 ns - 0 B
+    [Benchmark]
+    public void MapPlusGetOrNull_WithFunc_Empty()
+    {
+        var text = ReferenceTypeEmptyOption.Map(value => value.Text).GetOrNull();
+    }
+
+    // Last Result - 11.10.2023 - 1.66 ns - 0 B
+    [Benchmark]
+    public void GetOrNull_WithFunc_NonEmpty()
+    {
+        var text = ReferenceTypeNonEmptyOption.GetOrNull(value => value.Text);
+    }
+
+    // Last Result - 11.10.2023 - 0.60 ns - 0 B
+    [Benchmark]
+    public void GetOrNull_WithFunc_Empty()
+    {
+        var text = ReferenceTypeEmptyOption.GetOrNull(value => value.Text);
+    }
+
+    // Last Result - 11.10.2023 - 0.08 ns - 0 B
+    [Benchmark]
+    public void GetOrNull_WithFunc_VanillaCsharp_NonEmpty()
+    {
+        var text = ReferenceTypeNonEmptyOption.GetOrNull()?.Text;
+    }
+
+    // Last Result - 11.10.2023 - 0.07 ns - 0 B
+    [Benchmark]
+    public void GetOrNull_WithFunc_VanillaCsharp_Empty()
+    {
+        var text = ReferenceTypeEmptyOption.GetOrNull()?.Text;
     }
 }
