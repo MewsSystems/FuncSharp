@@ -113,16 +113,15 @@ public static class TryExtensions
     public static T Get<T, E>(this Try<T, IReadOnlyList<E>> value)
         where E : Exception
     {
-        return value.Match(
-            s => s,
-            (Func<IReadOnlyList<Exception>, T>)(e =>
-            {
-                if (e.IsSingle())
-                {
-                    ExceptionDispatchInfo.Capture(e[0]).Throw();
-                }
-                throw new AggregateException(e);
-            })
-        );
+        if (value.IsSuccess)
+            return value.Success.Value;
+
+        var exceptions = value.Error.Value;
+        if (exceptions.Count == 1)
+        {
+            ExceptionDispatchInfo.Capture(exceptions[0]).Throw();
+        }
+
+        throw new AggregateException(exceptions);
     }
 }
