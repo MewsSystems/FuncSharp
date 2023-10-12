@@ -101,6 +101,34 @@ public static partial class IEnumerableExtensions
         return e.Where(v => v is not null);
     }
 
+    public static bool IsMultiple<T>(this IEnumerable<T> e)
+    {
+        switch (e)
+        {
+            case IReadOnlyCollection<T> c:
+                return c.Count > 1;
+            default:
+            {
+                using var enumerator = e.GetEnumerator();
+                return enumerator.MoveNext() && enumerator.MoveNext();
+            }
+        }
+    }
+
+    public static bool IsSingle<T>(this IEnumerable<T> e)
+    {
+        switch (e)
+        {
+            case IReadOnlyCollection<T> c1:
+                return c1.Count == 1;
+            default:
+            {
+                using var enumerator = e.GetEnumerator();
+                return enumerator.MoveNext() && !enumerator.MoveNext();
+            }
+        }
+    }
+
     public static T Second<T>(this IEnumerable<T> e)
     {
         return e.ElementAt(1);

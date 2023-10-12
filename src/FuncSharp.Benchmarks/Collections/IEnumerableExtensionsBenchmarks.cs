@@ -91,82 +91,82 @@ public class IEnumerableExtensionsBenchmarks
         var x = StringEnumerable.FirstOption();
     }
 
-    // // Last Result - 25.8.2023 - 14.6 ns - 40 B
-    // [Benchmark]
-    // public void SingleOption_Empty()
-    // {
-    //     var x = StringStack_Empty.SingleOption();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 23.6 ns - 72 B
-    // [Benchmark]
-    // public void SingleOption_Single()
-    // {
-    //     var x = StringStack_Single.SingleOption();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 22.0 ns - 40 B
-    // [Benchmark]
-    // public void SingleOption()
-    // {
-    //     var x = StringStack_Many.SingleOption();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 1.4 ns - 0 B
-    // [Benchmark]
-    // public void IsMultiple_Stack()
-    // {
-    //     var x = StringStack_Many.IsMultiple();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 53.8 ns - 144 B
-    // [Benchmark]
-    // public void IsMultiple_Enumerable()
-    // {
-    //     var x = StringEnumerable.IsMultiple();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 6.9 ns - 0 B
-    // [Benchmark]
-    // public void IsMultiple_ArrayAsEnumerable()
-    // {
-    //     var x = StringEnumerable_Array.IsMultiple();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 2.2 ns - 0 B
-    // [Benchmark]
-    // public void IsMultiple_Array()
-    // {
-    //     var x = StringArray.IsMultiple();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 1.4 ns - 0 B
-    // [Benchmark]
-    // public void IsSingle_Stack()
-    // {
-    //     var x = StringStack_Many.IsSingle();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 54.2 ns - 144 B
-    // [Benchmark]
-    // public void IsSingle_Enumerable()
-    // {
-    //     var x = StringEnumerable.IsSingle();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 5.3 ns - 0 B
-    // [Benchmark]
-    // public void IsSingle_ArrayAsEnumerable()
-    // {
-    //     var x = StringEnumerable_Array.IsSingle();
-    // }
-    //
-    // // Last Result - 25.8.2023 - 2.2 ns - 0 B
-    // [Benchmark]
-    // public void IsSingle_Array()
-    // {
-    //     var x = StringArray.IsSingle();
-    // }
+    // Last Result - 25.8.2023 - 14.6 ns - 40 B
+    [Benchmark]
+    public void SingleOption_Empty()
+    {
+        var x = StringStack_Empty.SingleOption();
+    }
+
+    // Last Result - 25.8.2023 - 23.6 ns - 72 B
+    [Benchmark]
+    public void SingleOption_Single()
+    {
+        var x = StringStack_Single.SingleOption();
+    }
+
+    // Last Result - 25.8.2023 - 22.0 ns - 40 B
+    [Benchmark]
+    public void SingleOption()
+    {
+        var x = StringStack_Many.SingleOption();
+    }
+
+    // Last Result - 25.8.2023 - 1.4 ns - 0 B
+    [Benchmark]
+    public void IsMultiple_Stack()
+    {
+        var x = StringStack_Many.IsMultiple();
+    }
+
+    // Last Result - 25.8.2023 - 53.8 ns - 144 B
+    [Benchmark]
+    public void IsMultiple_Enumerable()
+    {
+        var x = StringEnumerable.IsMultiple();
+    }
+
+    // Last Result - 25.8.2023 - 6.9 ns - 0 B
+    [Benchmark]
+    public void IsMultiple_ArrayAsEnumerable()
+    {
+        var x = StringEnumerable_Array.IsMultiple();
+    }
+
+    // Last Result - 25.8.2023 - 2.2 ns - 0 B
+    [Benchmark]
+    public void IsMultiple_Array()
+    {
+        var x = StringArray.IsMultiple();
+    }
+
+    // Last Result - 25.8.2023 - 1.4 ns - 0 B
+    [Benchmark]
+    public void IsSingle_Stack()
+    {
+        var x = StringStack_Many.IsSingle();
+    }
+
+    // Last Result - 25.8.2023 - 54.2 ns - 144 B
+    [Benchmark]
+    public void IsSingle_Enumerable()
+    {
+        var x = StringEnumerable.IsSingle();
+    }
+
+    // Last Result - 25.8.2023 - 5.3 ns - 0 B
+    [Benchmark]
+    public void IsSingle_ArrayAsEnumerable()
+    {
+        var x = StringEnumerable_Array.IsSingle();
+    }
+
+    // Last Result - 25.8.2023 - 2.2 ns - 0 B
+    [Benchmark]
+    public void IsSingle_Array()
+    {
+        var x = StringArray.IsSingle();
+    }
 
     // Last Result - 25.8.2023 - 121.5 ns - 416 B
     [Benchmark]
