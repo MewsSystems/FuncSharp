@@ -76,11 +76,23 @@ public class NonEmptyEnumerable<T> : IReadOnlyList<T>, INonEmptyEnumerable<T>
 
     public int Count { get; }
 
-    public T this[int index] => index switch
+    public T this[int index]
     {
-        0 => Head,
-        _ => Tail[index - 1]
-    };
+        get
+        {
+            if (index < 0 || index >= Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            return index switch
+            {
+                0 => Head,
+                _ => Tail[index - 1]
+            };
+        }
+        set => throw new NotSupportedException("Cannot modify items within NonEmptyEnumerable.");
+    }
 
     public IEnumerator<T> GetEnumerator()
     {
