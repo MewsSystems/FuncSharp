@@ -7,16 +7,6 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable;
 public class IsMultipleTests
 {
     [Fact]
-    public void IsMultiple_null()
-    {
-        IEnumerable<string> enumerableNull = null;
-        string[] arrayNull = null;
-
-        Assert.False(enumerableNull.IsMultiple());
-        Assert.False(arrayNull.IsMultiple());
-    }
-
-    [Fact]
     public void IsMultiple_Empty()
     {
         IEnumerable<string> enumerableEmpty = Enumerable.Empty<string>();

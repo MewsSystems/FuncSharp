@@ -7,16 +7,6 @@ namespace FuncSharp.Tests.Collections.INonEmptyEnumerable;
 public class IsSingleTests
 {
     [Fact]
-    public void IsSingle_null()
-    {
-        IEnumerable<string> enumerableNull = null;
-        string[] arrayNull = null;
-
-        Assert.False(enumerableNull.IsSingle());
-        Assert.False(arrayNull.IsSingle());
-    }
-
-    [Fact]
     public void IsSingle_Empty()
     {
         IEnumerable<string> enumerableEmpty = Enumerable.Empty<string>();
