@@ -9,19 +9,19 @@ public static partial class IEnumerableExtensions
     [Pure]
     public static bool IsMultiple<T>(this IReadOnlyCollection<T> collection)
     {
-        return collection is not null && collection.Count > 1;
+        return collection.Count > 1;
     }
 
     [Pure]
     public static bool IsSingle<T>(this IReadOnlyCollection<T> collection)
     {
-        return collection is not null && collection.Count == 1;
+        return collection.Count == 1;
     }
 
     [Pure]
     public static T Single<T>(this IReadOnlyList<T> list)
     {
-        return list.IsSingle()
+        return list.Count == 1
             ? list[0]
             : throw new ArgumentException("Source is not a single element.");
     }
@@ -29,7 +29,7 @@ public static partial class IEnumerableExtensions
     [Pure]
     public static Option<T> SingleOption<T>(this IReadOnlyList<T> list)
     {
-        return list.IsSingle()
+        return list.Count == 1
             ? Option.Valued(list[0])
             : Option.Empty<T>();
     }

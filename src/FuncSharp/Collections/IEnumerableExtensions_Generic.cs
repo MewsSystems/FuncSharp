@@ -105,8 +105,6 @@ public static partial class IEnumerableExtensions
     {
         switch (e)
         {
-            case null:
-                return false;
             case IReadOnlyCollection<T> c:
                 return c.Count > 1;
             default:
@@ -121,8 +119,6 @@ public static partial class IEnumerableExtensions
     {
         switch (e)
         {
-            case null:
-                return false;
             case IReadOnlyCollection<T> c1:
                 return c1.Count == 1;
             default:
