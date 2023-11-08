@@ -52,8 +52,7 @@ public abstract class CoproductBase : ICoproduct
     }
 }
 
-<# for (var i = 0; i < MaxArity(); i++) { #>
-<#     if (i > 0) { #>
+<# for (var i = 2; i < MaxArity(); i++) { #>
 /// <summary>
 /// Factory for <#= i #>-dimensional immutable coproducts.
 /// </summary>
@@ -71,7 +70,6 @@ public static class Coproduct<#= i #>
 <#        } #>
 }
 
-<#     } #>
 /// <summary>
 /// A <#= i #>-dimensional immutable coproduct.
 /// </summary>
@@ -120,13 +118,23 @@ public class <#= CoproductImplType(i) #> : CoproductBase, <#= CoproductType(i) #
     }
 <#    } #>
 
+    public <#= CoproductImplType(i, "R") #> Map<#= TypeBracket(i, "R") #>(
+<#= Lines(i, x => Indent(8) + "Func<T" + x + ", R" + x + "> " + IfIth(x), separator: ",") #>)
+    {
+        switch (CoproductDiscriminator)
+        {
+<#= Lines(i, x => Indent(12) + "case " + x + ": return Coproduct" + i + ".Create" + GetOrdinal(x) + TypeBracket(i, "R") + "(" + IfIth(x) + "((" + Type(x) + ")CoproductValue));") #>
+            default: throw new InvalidOperationException();
+        }
+    }
+
     public R Match<R>(
 <#= Lines(i, x => Indent(8) + "Func<T" + x + ", R> " + IfIth(x), separator: ",") #>)
     {
         switch (CoproductDiscriminator)
         {
 <#= Lines(i, x => Indent(12) + "case " + x + ": return " + IfIth(x) + "((" + Type(x) + ")CoproductValue);") #>
-            default: return default(R);
+            default: throw new InvalidOperationException();
         }
     }
 
@@ -136,7 +144,7 @@ public class <#= CoproductImplType(i) #> : CoproductBase, <#= CoproductType(i) #
         switch (CoproductDiscriminator)
         {
 <#= Lines(i, x => Indent(12) + "case " + x + ": return await " + IfIth(x) + "((" + Type(x) + ")CoproductValue);") #>
-            default: return await Task.FromResult(default(R));
+            default: throw new InvalidOperationException();
         }
     }
 
@@ -156,7 +164,6 @@ public class <#= CoproductImplType(i) #> : CoproductBase, <#= CoproductType(i) #
         {
 <#= Lines(i, x => Indent(12) + "case " + x + ": await (" + IfIth(x) + "?.Invoke((" + Type(x) + ")CoproductValue) ?? Task.CompletedTask); break;") #>
         }
-        await Task.CompletedTask;
     }
 
 <#    } else { #>
