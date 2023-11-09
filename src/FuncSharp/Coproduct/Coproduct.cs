@@ -48,6 +48,112 @@ public abstract class CoproductBase : ICoproduct
 }
 
 /// <summary>
+/// Factory for 1-dimensional immutable coproducts.
+/// </summary>
+public static class Coproduct1
+{
+    /// <summary>
+    /// Creates a new 1-dimensional coproduct with the first value.
+    /// </summary>
+    public static Coproduct1<T1> CreateFirst<T1>(T1 value)
+    {
+        return new Coproduct1<T1>(value);
+    }
+
+}
+
+/// <summary>
+/// A 1-dimensional immutable coproduct.
+/// </summary>
+public class Coproduct1<T1> : CoproductBase, ICoproduct1<T1>
+{
+    /// <summary>
+    /// Creates a new 1-dimensional coproduct with the specified value on the first position.
+    /// </summary>
+    public Coproduct1(T1 firstValue)
+        : this(1, firstValue)
+    {
+    }
+
+    /// <summary>
+    /// Creates a new 1-dimensional coproduct based on the specified source.
+    /// </summary>
+    public Coproduct1(ICoproduct1<T1> source)
+        : this(source.CoproductDiscriminator, source.CoproductValue)
+    {
+    }
+
+    /// <summary>
+    /// Creates a new 1-dimensional coproduct.
+    /// </summary>
+    /// <param name="discriminator">Discriminator of the value from interval [1, arity].</param>
+    /// <param name="value">Value of the coproduct on the position defined by the discriminator.</param>
+    protected Coproduct1(int discriminator, object value)
+        : base(1, discriminator, value)
+    {
+    }
+
+    public bool IsFirst
+    {
+        get { return CoproductDiscriminator == 1; }
+    }
+
+    public Option<T1> First
+    {
+        get { return IsFirst ? Option.Valued((T1)CoproductValue) : Option.Empty<T1>(); }
+    }
+
+    public Coproduct1<R1> Map<R1>(
+        Func<T1, R1> ifFirst)
+    {
+        switch (CoproductDiscriminator)
+        {
+            case 1: return Coproduct1.CreateFirst<R1>(ifFirst((T1)CoproductValue));
+            default: throw new InvalidOperationException();
+        }
+    }
+
+    public R Match<R>(
+        Func<T1, R> ifFirst)
+    {
+        switch (CoproductDiscriminator)
+        {
+            case 1: return ifFirst((T1)CoproductValue);
+            default: throw new InvalidOperationException();
+        }
+    }
+
+    public async Task<R> MatchAsync<R>(
+        Func<T1, Task<R>> ifFirst)
+    {
+        switch (CoproductDiscriminator)
+        {
+            case 1: return await ifFirst((T1)CoproductValue);
+            default: throw new InvalidOperationException();
+        }
+    }
+
+    public void Match(
+        Action<T1> ifFirst = null)
+    {
+        switch (CoproductDiscriminator)
+        {
+            case 1: ifFirst?.Invoke((T1)CoproductValue); break;
+        }
+    }
+
+    public async Task MatchAsync(
+        Func<T1, Task> ifFirst)
+    {
+        switch (CoproductDiscriminator)
+        {
+            case 1: await (ifFirst?.Invoke((T1)CoproductValue) ?? Task.CompletedTask); break;
+        }
+    }
+
+}
+
+/// <summary>
 /// Factory for 2-dimensional immutable coproducts.
 /// </summary>
 public static class Coproduct2

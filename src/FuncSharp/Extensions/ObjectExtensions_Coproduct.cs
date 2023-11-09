@@ -9,6 +9,74 @@ namespace FuncSharp;
 public static partial class ObjectExtensions
 {
     /// <summary>
+    /// Creates a new 1-dimensional coproduct as a result of type match. The specified value will be on the first place
+    /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback
+    /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+    /// </summary>
+    [Pure]
+    public static Coproduct1<T1> AsCoproduct<T1>(this object value, Func<object, Coproduct1<T1>> fallback = null, Func<Unit, Exception> otherwise = null)
+    {
+        switch (value) {
+                case T1 t1: return Coproduct1.CreateFirst<T1>(t1);
+        }
+
+        if (fallback != null)
+        {
+            return fallback(value);
+        }
+        if (otherwise != null)
+        {
+            throw otherwise(Unit.Value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified types.");
+    }
+
+    /// <summary>
+    /// Creates a new 1-dimensional coproduct as a result of value match against the parameters. The specified value will
+    /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value,
+    /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by
+    /// the otherwise function).
+    /// </summary>
+    [Pure]
+    public static Coproduct1<T1> AsCoproduct<T1>(this object value, T1 t1, Func<object, Coproduct1<T1>> fallback = null, Func<Unit, Exception> otherwise = null)
+    {
+        if (Equals(value, t1))
+        {
+            return Coproduct1.CreateFirst<T1>((T1)value);
+        }
+        if (fallback != null)
+        {
+            return fallback(value);
+        }
+        if (otherwise != null)
+        {
+            throw otherwise(Unit.Value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 1 specified values.");
+    }
+
+    /// <summary>
+    /// Creates a new 2-dimensional coproduct as a result of type match. The specified value will be on the first place
+    /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in
+    /// the last place.
+    /// </summary>
+    [Pure]
+    public static Coproduct2<T1, object> AsSafeCoproduct<T1>(this object value)
+    {
+        return value.AsCoproduct(v => Coproduct2.CreateSecond<T1, object>(v));
+    }
+
+    /// <summary>
+    /// Creates a new 2-dimensional coproduct as a result of value match against the parameters. The specified value will
+    /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then
+    /// the value will be placed in the last place.
+    /// </summary>
+    [Pure]
+    public static Coproduct2<T1, object> AsSafeCoproduct<T1>(this object value, T1 t1)
+    {
+        return value.AsCoproduct(t1, null, v => Coproduct2.CreateSecond<T1, object>(v));
+    }
+    /// <summary>
     /// Creates a new 2-dimensional coproduct as a result of type match. The specified value will be on the first place
     /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback
     /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
