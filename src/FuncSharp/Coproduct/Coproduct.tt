@@ -52,7 +52,7 @@ public abstract class CoproductBase : ICoproduct
     }
 }
 
-<# for (var i = 2; i < MaxArity(); i++) { #>
+<# for (var i = 1; i < MaxArity(); i++) { #>
 /// <summary>
 /// Factory for <#= i #>-dimensional immutable coproducts.
 /// </summary>

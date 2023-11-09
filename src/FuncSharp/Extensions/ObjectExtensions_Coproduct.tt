@@ -13,7 +13,7 @@ namespace FuncSharp;
 
 public static partial class ObjectExtensions
 {
-<# for (var i = 2; i < MaxArity(); i++) { #>
+<# for (var i = 1; i < MaxArity(); i++) { #>
     /// <summary>
     /// Creates a new <#= i #>-dimensional coproduct as a result of type match. The specified value will be on the first place
     /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback
