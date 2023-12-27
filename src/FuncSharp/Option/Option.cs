@@ -257,7 +257,7 @@ public struct Option<A> : IOption
     {
         if (obj is Option<A> other)
         {
-            return NonEmpty == other.NonEmpty && Value.SafeEquals(other.Value);
+            return NonEmpty == other.NonEmpty && Equals(Value, other.Value);
         }
         if (typeof(A) == typeof(NonEmptyString) && obj is Option<string> otherString)
         {
