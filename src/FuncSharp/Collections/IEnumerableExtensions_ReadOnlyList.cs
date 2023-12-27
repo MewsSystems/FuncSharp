@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.Contracts;
 
 namespace FuncSharp;
@@ -112,7 +113,7 @@ public static partial class IEnumerableExtensions
     {
         for (var i = 0; i < list.Count; i++)
         {
-            if (list[i].SafeEquals(item))
+            if (Equals(list[i], item))
             {
                 return i;
             }

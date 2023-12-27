@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace FuncSharp.Tests.Collections.INonEmptyEnumerable;
+namespace FuncSharp.Tests.Collections;
 
 public class IsMultipleTests
 {

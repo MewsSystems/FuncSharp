@@ -13,32 +13,6 @@ namespace FuncSharp
             return NonEmptyEnumerable.Create(value);
         }
 
-        [Pure]
-        public static bool SafeEquals<T>(this T t, T other)
-        {
-            return Equals(t, other);
-        }
-
-        [Pure]
-        public static bool SafeNotEquals<T>(this T t, T other)
-        {
-            return !t.SafeEquals(other);
-        }
-
-        [Pure]
-        public static bool SafeEquals<T>(this T t, T? other)
-            where T : struct
-        {
-            return ((T?)t).SafeEquals(other);
-        }
-
-        [Pure]
-        public static bool SafeEquals<T>(this T? t, T other)
-            where T : struct
-        {
-            return t.SafeEquals((T?)other);
-        }
-
         [DebuggerStepThrough]
         [Pure]
         public static void MatchRef<A>(this A a, Action<A> action = null, Action<Unit> otherwise = null)

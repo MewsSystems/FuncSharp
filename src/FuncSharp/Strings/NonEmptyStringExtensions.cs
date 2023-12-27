@@ -7,22 +7,6 @@ namespace FuncSharp;
 public static class NonEmptyStringExtensions
 {
     [Pure]
-    public static bool SafeEquals(this NonEmptyString value, string other)
-    {
-        if (value is null)
-            return other is null;
-        return value.Value.SafeEquals(other);
-    }
-
-    [Pure]
-    public static bool SafeNotEquals(this NonEmptyString value, string other)
-    {
-        if (value is null)
-            return other is not null;
-        return value.Value.SafeNotEquals(other);
-    }
-
-    [Pure]
     public static string GetOrElse(this Option<NonEmptyString> option, string otherwise)
     {
         if (option.NonEmpty)

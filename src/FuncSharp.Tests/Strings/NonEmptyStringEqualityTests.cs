@@ -47,8 +47,6 @@ public class NonEmptyStringTests
         Assert.True(nonEmptyString == text);
         Assert.True(text.Equals(nonEmptyString));
         Assert.True(nonEmptyString.Equals(text));
-        Assert.True(text.SafeEquals(nonEmptyString));
-        Assert.True(nonEmptyString.SafeEquals(text));
         Assert.False(object.Equals(text, nonEmptyString)); // Unfortunately string doesn't override the default Equals method to compare with IEquatable<string> therefore this is false.
         Assert.True(object.Equals(nonEmptyString, text));
 
@@ -58,15 +56,11 @@ public class NonEmptyStringTests
         Assert.False(differentString.Equals(differentNonEmptyString));
         Assert.False(differentNonEmptyString == differentString);
         Assert.False(differentString == differentNonEmptyString);
-        Assert.False(differentNonEmptyString.SafeEquals(differentString));
-        Assert.False(differentString.SafeEquals(differentNonEmptyString));
         Assert.False(object.Equals(differentNonEmptyString, differentString));
         Assert.False(object.Equals(differentString, differentNonEmptyString));
 
         NonEmptyString null1 = null;
         string null2 = null;
-        Assert.True(null1.SafeEquals(null2));
-        Assert.True(null2.SafeEquals(null1));
         Assert.True(null1 == null2);
         Assert.True(null2 == null1);
         Assert.True(object.Equals(null1, null2));

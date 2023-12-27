@@ -36,7 +36,7 @@ public readonly struct Digit
             : null;
     }
 
-    public override bool Equals(object obj) => obj is Digit other && Value.SafeEquals(other.Value);
+    public override bool Equals(object obj) => obj is Digit other && Value == other.Value;
 
     public override int GetHashCode() => Value.GetHashCode();
 
