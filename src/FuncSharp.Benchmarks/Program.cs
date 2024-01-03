@@ -6,6 +6,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        BenchmarkRunner.Run(typeof(ValueMatchBenchmarks));
+        BenchmarkRunner.Run(typeof(Program).Assembly);
     }
 }
