@@ -253,18 +253,6 @@ public struct Option<A> : IOption, IEquatable<Option<A>>
     }
 
     [Pure]
-    public static bool operator ==(Option<A> option1, object obj2)
-    {
-        return option1.Equals(obj2);
-    }
-
-    [Pure]
-    public static bool operator !=(Option<A> option1, object obj2)
-    {
-        return !option1.Equals(obj2);
-    }
-
-    [Pure]
     public bool Equals(Option<A> other)
     {
         return NonEmpty == other.NonEmpty && EqualityComparer<A>.Default.Equals(Value, other.Value);
