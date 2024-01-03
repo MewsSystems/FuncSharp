@@ -70,7 +70,7 @@ public static class Option
     }
 }
 
-public struct Option<A> : IOption
+public struct Option<A> : IOption, IEquatable<Option<A>>
 {
     public Option(A value)
     {
@@ -241,15 +241,33 @@ public struct Option<A> : IOption
     }
 
     [Pure]
-    public static bool operator ==(Option<A> obj1, object obj2)
+    public static bool operator ==(Option<A> option1, Option<A> option2)
     {
-        return obj1.Equals(obj2);
+        return option1.Equals(option2);
     }
 
     [Pure]
-    public static bool operator !=(Option<A> obj1, object obj2)
+    public static bool operator !=(Option<A> option1, Option<A> option2)
     {
-        return !obj1.Equals(obj2);
+        return !option1.Equals(option2);
+    }
+
+    [Pure]
+    public static bool operator ==(Option<A> option1, object obj2)
+    {
+        return option1.Equals(obj2);
+    }
+
+    [Pure]
+    public static bool operator !=(Option<A> option1, object obj2)
+    {
+        return !option1.Equals(obj2);
+    }
+
+    [Pure]
+    public bool Equals(Option<A> other)
+    {
+        return NonEmpty == other.NonEmpty && EqualityComparer<A>.Default.Equals(Value, other.Value);
     }
 
     [Pure]
@@ -257,15 +275,15 @@ public struct Option<A> : IOption
     {
         if (obj is Option<A> other)
         {
-            return NonEmpty == other.NonEmpty && Equals(Value, other.Value);
+            return Equals(other);
         }
         if (typeof(A) == typeof(NonEmptyString) && obj is Option<string> otherString)
         {
-            return NonEmpty == otherString.NonEmpty && string.Equals(Value as NonEmptyString, otherString.Value);
+            return NonEmpty == otherString.NonEmpty && string.Equals(otherString.Value, (Value as NonEmptyString).Value);
         }
         if (typeof(A) == typeof(string) && obj is Option<NonEmptyString> otherNonEmptyString)
         {
-            return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.Value, Value);
+            return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.Value.Value, Value);
         }
         return false;
     }
