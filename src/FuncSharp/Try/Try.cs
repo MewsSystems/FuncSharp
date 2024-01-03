@@ -687,7 +687,7 @@ public static class Try
     }
 }
 
-public struct Try<TSuccess, TError>
+public struct Try<TSuccess, TError> : IEquatable<Try<TSuccess, TError>>
 {
     public Try(TSuccess success)
     {
@@ -764,5 +764,35 @@ public struct Try<TSuccess, TError>
             ifSuccess?.Invoke(Success.Value);
         else
             ifError?.Invoke(Error.Value);
+    }
+
+    [Pure]
+    public static bool operator ==(Try<TSuccess, TError> left, Try<TSuccess, TError> right)
+    {
+        return left.Equals(right);
+    }
+
+    [Pure]
+    public static bool operator !=(Try<TSuccess, TError> left, Try<TSuccess, TError> right)
+    {
+        return !left.Equals(right);
+    }
+
+    [Pure]
+    public bool Equals(Try<TSuccess, TError> other)
+    {
+        return IsSuccess == other.IsSuccess && IsError == other.IsError && Success.Equals(other.Success) && Error.Equals(other.Error);
+    }
+
+    [Pure]
+    public override bool Equals(object obj)
+    {
+        return obj is Try<TSuccess, TError> other && Equals(other);
+    }
+
+    [Pure]
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(IsSuccess, IsError, Success, Error);
     }
 }

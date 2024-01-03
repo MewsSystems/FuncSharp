@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace FuncSharp;
 
-public struct PositiveLong
+public struct PositiveLong : IEquatable<PositiveLong>
 {
     public static readonly PositiveLong One = new(1);
 
@@ -67,5 +67,30 @@ public struct PositiveLong
     public override string ToString()
     {
         return Value.ToString();
+    }
+    
+    public static bool operator ==(PositiveLong left, PositiveLong right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(PositiveLong left, PositiveLong right)
+    {
+        return !left.Equals(right);
+    }
+
+    public bool Equals(PositiveLong other)
+    {
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is PositiveLong other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value.GetHashCode();
     }
 }

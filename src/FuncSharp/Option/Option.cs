@@ -267,11 +267,11 @@ public struct Option<A> : IOption, IEquatable<Option<A>>
         }
         if (typeof(A) == typeof(NonEmptyString) && obj is Option<string> otherString)
         {
-            return NonEmpty == otherString.NonEmpty && string.Equals(otherString.Value, (Value as NonEmptyString).Value);
+            return NonEmpty == otherString.NonEmpty && string.Equals(otherString.Value, Value as NonEmptyString);
         }
         if (typeof(A) == typeof(string) && obj is Option<NonEmptyString> otherNonEmptyString)
         {
-            return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.Value.Value, Value);
+            return NonEmpty == otherNonEmptyString.NonEmpty && string.Equals(otherNonEmptyString.Value, Value);
         }
         return false;
     }

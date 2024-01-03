@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace FuncSharp;
 
-public struct NonPositiveShort
+public struct NonPositiveShort : IEquatable<NonPositiveShort>
 {
     public static readonly NonPositiveShort Zero = new(0);
 
@@ -52,5 +52,30 @@ public struct NonPositiveShort
     public override string ToString()
     {
         return Value.ToString();
+    }
+
+    public static bool operator ==(NonPositiveShort left, NonPositiveShort right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(NonPositiveShort left, NonPositiveShort right)
+    {
+        return !left.Equals(right);
+    }
+
+    public bool Equals(NonPositiveShort other)
+    {
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is NonPositiveShort other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value.GetHashCode();
     }
 }
