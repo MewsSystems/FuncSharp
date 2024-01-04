@@ -60,4 +60,17 @@ public class NonPositiveLongTests
             Assert.Throws<ArgumentException>(() => number.AsUnsafeNonPositive());
         }
     }
+
+    [Property]
+    internal void Equality(long first, long second)
+    {
+        var numbersAreEqual = first == second;
+        var firstOption = first.AsNonPositive();
+        var secondOption = second.AsNonPositive();
+        var bothOptionsEmpty = firstOption.IsEmpty && secondOption.IsEmpty;
+        if (!bothOptionsEmpty)
+        {
+            Assert.Equal(numbersAreEqual, firstOption == secondOption);
+        }
+    }
 }

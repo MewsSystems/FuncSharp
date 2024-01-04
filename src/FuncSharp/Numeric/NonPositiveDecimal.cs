@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace FuncSharp;
 
-public struct NonPositiveDecimal
+public struct NonPositiveDecimal : IEquatable<NonPositiveDecimal>
 {
     public static readonly NonPositiveDecimal Zero = new(0m);
 
@@ -52,5 +52,30 @@ public struct NonPositiveDecimal
     public override string ToString()
     {
         return Value.ToString();
+    }
+
+    public static bool operator ==(NonPositiveDecimal left, NonPositiveDecimal right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(NonPositiveDecimal left, NonPositiveDecimal right)
+    {
+        return !left.Equals(right);
+    }
+
+    public bool Equals(NonPositiveDecimal other)
+    {
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is NonPositiveDecimal other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value.GetHashCode();
     }
 }

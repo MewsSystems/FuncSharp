@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace FuncSharp;
 
-public struct PositiveDecimal
+public struct PositiveDecimal : IEquatable<PositiveDecimal>
 {
     public static readonly PositiveDecimal One = new(1m);
 
@@ -72,5 +72,30 @@ public struct PositiveDecimal
     public override string ToString()
     {
         return Value.ToString();
+    }
+
+    public static bool operator ==(PositiveDecimal left, PositiveDecimal right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(PositiveDecimal left, PositiveDecimal right)
+    {
+        return !left.Equals(right);
+    }
+
+    public bool Equals(PositiveDecimal other)
+    {
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is PositiveDecimal other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value.GetHashCode();
     }
 }

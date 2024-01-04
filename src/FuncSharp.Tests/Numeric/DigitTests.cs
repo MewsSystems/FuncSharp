@@ -29,6 +29,22 @@ public class DigitTests
     }
 
     [Fact]
+    internal void Equality()
+    {
+        Assert.Equal('0'.AsDigit(), '0'.AsDigit());
+        Assert.Equal('1'.AsDigit(), '1'.AsDigit());
+        Assert.Equal('2'.AsDigit(), '2'.AsDigit());
+        Assert.Equal('3'.AsDigit(), '3'.AsDigit());
+        Assert.Equal('4'.AsDigit(), '4'.AsDigit());
+
+        Assert.NotEqual('0'.AsDigit(), '9'.AsDigit());
+        Assert.NotEqual('1'.AsDigit(), '8'.AsDigit());
+        Assert.NotEqual('2'.AsDigit(), '7'.AsDigit());
+        Assert.NotEqual('3'.AsDigit(), '6'.AsDigit());
+        Assert.NotEqual('4'.AsDigit(), '5'.AsDigit());
+    }
+
+    [Fact]
     internal void FilterDigits()
     {
         Assert.Equal(

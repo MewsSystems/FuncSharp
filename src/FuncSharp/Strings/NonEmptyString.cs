@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace FuncSharp;
@@ -24,6 +25,7 @@ public sealed class NonEmptyString : IEquatable<string>, IEquatable<NonEmptyStri
         return CreateUnsafe(s);
     }
 
+    [return: NotNull]
     public static NonEmptyString CreateUnsafe(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
@@ -97,24 +99,42 @@ public sealed class NonEmptyString : IEquatable<string>, IEquatable<NonEmptyStri
 
     public override int GetHashCode()
     {
-        return Value.GetHashCode();
+        return (Value != null ? Value.GetHashCode() : 0);
+    }
+
+    public static bool operator ==(NonEmptyString left, NonEmptyString right)
+    {
+        if (left is null)
+            return right is null;
+
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(NonEmptyString left, NonEmptyString right)
+    {
+        if (left is null)
+            return right is not null;
+
+        return !left.Equals(right);
     }
 
     public override bool Equals(object obj)
     {
-        return ReferenceEquals(this, obj) ||
-               obj is NonEmptyString otherNonEmpty && Equals(otherNonEmpty) ||
+        return obj is NonEmptyString otherNonEmpty && Equals(otherNonEmpty) ||
                obj is string otherString && Equals(otherString);
     }
 
     public bool Equals(string other)
     {
-        return Value.Equals(other);
+        if (ReferenceEquals(null, other))
+            return false;
+        return ReferenceEquals(Value, other) || Value == other;
     }
 
     public bool Equals(NonEmptyString other)
     {
-        return Value.Equals(other?.Value);
+        return Equals(other?.Value);
+
     }
 
     public override string ToString()

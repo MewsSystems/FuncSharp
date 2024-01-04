@@ -60,4 +60,17 @@ public class NonPositiveShortTests
             Assert.Throws<ArgumentException>(() => number.AsUnsafeNonPositive());
         }
     }
+
+    [Property]
+    internal void Equality(short first, short second)
+    {
+        var numbersAreEqual = first == second;
+        var firstOption = first.AsNonPositive();
+        var secondOption = second.AsNonPositive();
+        var bothOptionsEmpty = firstOption.IsEmpty && secondOption.IsEmpty;
+        if (!bothOptionsEmpty)
+        {
+            Assert.Equal(numbersAreEqual, firstOption == secondOption);
+        }
+    }
 }
