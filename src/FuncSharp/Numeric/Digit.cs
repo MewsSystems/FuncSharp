@@ -2,7 +2,7 @@ using System;
 
 namespace FuncSharp;
 
-public readonly struct Digit
+public readonly struct Digit : IEquatable<Digit>
 {
     private Digit(byte value)
     {
@@ -12,10 +12,6 @@ public readonly struct Digit
     public byte Value { get; }
     public static implicit operator byte(Digit i) => i.Value;
     public static implicit operator int(Digit i) => i.Value;
-
-    public static bool operator ==(Digit left, Digit right) => left.Equals(right);
-
-    public static bool operator !=(Digit left, Digit right) => !left.Equals(right);
 
     public static Option<Digit> Create(char value)
     {
@@ -36,9 +32,24 @@ public readonly struct Digit
             : null;
     }
 
-    public override bool Equals(object obj) => obj is Digit other && Value == other.Value;
+    public static bool operator ==(Digit left, Digit right) => left.Equals(right);
 
-    public override int GetHashCode() => Value.GetHashCode();
+    public static bool operator !=(Digit left, Digit right) => !left.Equals(right);
+
+    public override bool Equals(object obj)
+    {
+        return obj is Digit other && Equals(other);
+    }
+
+    public bool Equals(Digit other)
+    {
+        return Value == other.Value;
+    }
+
+    public override int GetHashCode()
+    {
+        return Value.GetHashCode();
+    }
 
     public override string ToString()
     {
