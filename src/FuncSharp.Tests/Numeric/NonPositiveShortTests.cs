@@ -62,7 +62,7 @@ public class NonPositiveShortTests
     }
 
     [Property]
-    internal void Equality(long first, long second)
+    internal void Equality(short first, short second)
     {
         var numbersAreEqual = first == second;
         var firstOption = first.AsNonPositive();
