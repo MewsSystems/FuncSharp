@@ -369,7 +369,7 @@ public static partial class OptionExtensions
     }
 
     [Pure]
-    public static async Task MatchAsync<A>(this Option<A> option, Func<A, Task> ifFirst, Func<Unit, Task> ifSecond)
+    public static async Task MatchAsync<A>(this Option<A> option, Func<A, Task> ifFirst, Func<Unit, Task> ifSecond = null)
     {
         if (option.NonEmpty)
         {
@@ -377,7 +377,10 @@ public static partial class OptionExtensions
         }
         else
         {
-            await ifSecond(Unit.Value);
+            if (ifSecond != null)
+            {
+                await ifSecond(Unit.Value);
+            }
         }
     }
 
