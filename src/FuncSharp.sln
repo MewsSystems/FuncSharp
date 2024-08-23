@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Examples", "FuncS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncSharp.Benchmarks", "FuncSharp.Benchmarks\FuncSharp.Benchmarks.csproj", "{5F3E2D07-7A4B-43C4-965F-68319D6388E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{82E5D417-88F4-4CA5-9CB5-E48CE32951E6}"
+	ProjectSection(SolutionItems) = preProject
+		..\license.txt = ..\license.txt
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
