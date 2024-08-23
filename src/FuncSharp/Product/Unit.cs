@@ -1,9 +1,12 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace FuncSharp;
 
 /// <summary>
 /// The Unit type (product of zero types). It has only one instance.
 /// </summary>
+[JsonConverter(typeof(UnitJsonConverter))]
 public sealed class Unit : Product0
 {
     private Unit()
