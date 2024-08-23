@@ -200,6 +200,7 @@ public static class Try
     }
 }
 
+[System.Text.Json.Serialization.JsonConverterAttribute(typeof(TryConverterFactory))]
 public struct Try<TSuccess, TError> : IEquatable<Try<TSuccess, TError>>
 {
     public Try(TSuccess success)
