@@ -4,7 +4,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
     <IsPackable>false</IsPackable>
-    <LangVersion>10</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FsCheck.Xunit" Version="2.16.6" />

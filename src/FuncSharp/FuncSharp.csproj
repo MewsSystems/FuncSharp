@@ -22,7 +22,6 @@
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>10</LangVersion>
     <Product>FuncSharp</Product>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
