@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -2295,6 +2294,174 @@ public static partial class ObjectExtensions
             throw otherwise(Unit.Value);
         }
         throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 20 specified values.");
+    }
+
+    /// <summary>
+    /// Creates a new 21-dimensional coproduct as a result of type match. The specified value will be on the first place
+    /// whose type matches type of the value. If none of the types matches type of the value, then the value will be placed in
+    /// the last place.
+    /// </summary>
+    [Pure]
+    public static Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(this object value)
+    {
+        return value.AsCoproduct(v => Coproduct21.CreateTwentyFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, object>(v));
+    }
+
+    /// <summary>
+    /// Creates a new 21-dimensional coproduct as a result of value match against the parameters. The specified value will
+    /// be on the first place whose corresponding parameter equals the value. If none of the parameters equals the value, then
+    /// the value will be placed in the last place.
+    /// </summary>
+    [Pure]
+    public static Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, object> AsSafeCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18, T19 t19, T20 t20)
+    {
+        return value.AsCoproduct(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, null, v => Coproduct21.CreateTwentyFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, object>(v));
+    }
+    /// <summary>
+    /// Creates a new 21-dimensional coproduct as a result of type match. The specified value will be on the first place
+    /// whose type matches type of the value. If none of the types matches type of the value, returns result of the fallback
+    /// function. In case when the fallback is null, throws an exception (optionally created by the otherwise function).
+    /// </summary>
+    [Pure]
+    public static Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(this object value, Func<object, Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>> fallback = null, Func<Unit, Exception> otherwise = null)
+    {
+        switch (value) {
+                case T1 t1: return Coproduct21.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t1);
+                case T2 t2: return Coproduct21.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t2);
+                case T3 t3: return Coproduct21.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t3);
+                case T4 t4: return Coproduct21.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t4);
+                case T5 t5: return Coproduct21.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t5);
+                case T6 t6: return Coproduct21.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t6);
+                case T7 t7: return Coproduct21.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t7);
+                case T8 t8: return Coproduct21.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t8);
+                case T9 t9: return Coproduct21.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t9);
+                case T10 t10: return Coproduct21.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t10);
+                case T11 t11: return Coproduct21.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t11);
+                case T12 t12: return Coproduct21.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t12);
+                case T13 t13: return Coproduct21.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t13);
+                case T14 t14: return Coproduct21.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t14);
+                case T15 t15: return Coproduct21.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t15);
+                case T16 t16: return Coproduct21.CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t16);
+                case T17 t17: return Coproduct21.CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t17);
+                case T18 t18: return Coproduct21.CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t18);
+                case T19 t19: return Coproduct21.CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t19);
+                case T20 t20: return Coproduct21.CreateTwentieth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t20);
+                case T21 t21: return Coproduct21.CreateTwentyFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(t21);
+        }
+
+        if (fallback != null)
+        {
+            return fallback(value);
+        }
+        if (otherwise != null)
+        {
+            throw otherwise(Unit.Value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 21 specified types.");
+    }
+
+    /// <summary>
+    /// Creates a new 21-dimensional coproduct as a result of value match against the parameters. The specified value will
+    /// be on the first place whose corresponding parameter equals the value. If none of the parameters matches the value,
+    /// returns result of the fallback function. In case when the fallback is null, throws an exception (optionally created by
+    /// the otherwise function).
+    /// </summary>
+    [Pure]
+    public static Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21> AsCoproduct<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(this object value, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15, T16 t16, T17 t17, T18 t18, T19 t19, T20 t20, T21 t21, Func<object, Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>> fallback = null, Func<Unit, Exception> otherwise = null)
+    {
+        if (Equals(value, t1))
+        {
+            return Coproduct21.CreateFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T1)value);
+        }
+        if (Equals(value, t2))
+        {
+            return Coproduct21.CreateSecond<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T2)value);
+        }
+        if (Equals(value, t3))
+        {
+            return Coproduct21.CreateThird<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T3)value);
+        }
+        if (Equals(value, t4))
+        {
+            return Coproduct21.CreateFourth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T4)value);
+        }
+        if (Equals(value, t5))
+        {
+            return Coproduct21.CreateFifth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T5)value);
+        }
+        if (Equals(value, t6))
+        {
+            return Coproduct21.CreateSixth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T6)value);
+        }
+        if (Equals(value, t7))
+        {
+            return Coproduct21.CreateSeventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T7)value);
+        }
+        if (Equals(value, t8))
+        {
+            return Coproduct21.CreateEighth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T8)value);
+        }
+        if (Equals(value, t9))
+        {
+            return Coproduct21.CreateNinth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T9)value);
+        }
+        if (Equals(value, t10))
+        {
+            return Coproduct21.CreateTenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T10)value);
+        }
+        if (Equals(value, t11))
+        {
+            return Coproduct21.CreateEleventh<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T11)value);
+        }
+        if (Equals(value, t12))
+        {
+            return Coproduct21.CreateTwelfth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T12)value);
+        }
+        if (Equals(value, t13))
+        {
+            return Coproduct21.CreateThirteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T13)value);
+        }
+        if (Equals(value, t14))
+        {
+            return Coproduct21.CreateFourteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T14)value);
+        }
+        if (Equals(value, t15))
+        {
+            return Coproduct21.CreateFifteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T15)value);
+        }
+        if (Equals(value, t16))
+        {
+            return Coproduct21.CreateSixteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T16)value);
+        }
+        if (Equals(value, t17))
+        {
+            return Coproduct21.CreateSeventeenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T17)value);
+        }
+        if (Equals(value, t18))
+        {
+            return Coproduct21.CreateEighteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T18)value);
+        }
+        if (Equals(value, t19))
+        {
+            return Coproduct21.CreateNineteenth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T19)value);
+        }
+        if (Equals(value, t20))
+        {
+            return Coproduct21.CreateTwentieth<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T20)value);
+        }
+        if (Equals(value, t21))
+        {
+            return Coproduct21.CreateTwentyFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>((T21)value);
+        }
+        if (fallback != null)
+        {
+            return fallback(value);
+        }
+        if (otherwise != null)
+        {
+            throw otherwise(Unit.Value);
+        }
+        throw new ArgumentException("The value " + value.SafeToString() + " does not match any of the 21 specified values.");
     }
 
 }
