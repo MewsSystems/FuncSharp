@@ -1,7 +1,7 @@
 ﻿<#+
     public int MaxArity()
     {
-        return 21;
+        return 22;
     }
 
     public int MaxProductArity()
@@ -103,7 +103,7 @@
     {
         return NaryType("Coproduct", i, name);
     }
-    
+
     public string DataCubeType(int i, int? except = null, string positionType = "P", string valueType = "TValue")
     {
         return "DataCube" + (i - (except.HasValue ? 1 : 0)) + "<" + Types(i, name: positionType, except: except, appendSeparator: true) + valueType + ">";
@@ -129,7 +129,7 @@
         return Type(i, name: name).ToLowerInvariant();
     }
 
-    public string Values(int i, string name = "T", int? except = null) 
+    public string Values(int i, string name = "T", int? except = null)
     {
         return Types(i, name: name).ToLowerInvariant();
     }
@@ -154,7 +154,7 @@
         return Property(i, "ProductValue", accessor);
     }
 
-    public string Properties(int i, string name = "Value", string accessor = "", int? except = null, bool appendSeparator = false) 
+    public string Properties(int i, string name = "Value", string accessor = "", int? except = null, bool appendSeparator = false)
     {
         return List(i, x => Property(x, name, accessor), except, appendSeparator: appendSeparator);
     }

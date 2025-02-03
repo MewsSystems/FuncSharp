@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.Threading.Tasks;
 
@@ -3762,8 +3761,6 @@ public interface ICoproduct20<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
         Func<T20, Task> ifTwentieth);
 }
 
-
-
 /// <summary>
 /// A 21-dimensional strongly-typed coproduct.
 /// </summary>
@@ -3990,12 +3987,12 @@ public interface ICoproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
     Option<T20> Twentieth { get; }
 
     /// <summary>
-    /// Returns whether the coproduct contains the twenty-first value.
+    /// Returns whether the coproduct contains the twentyfirst value.
     /// </summary>
     bool IsTwentyFirst { get; }
 
     /// <summary>
-    /// Returns twenty-first value of the coproduct as an option. The option contains the twenty-first
+    /// Returns twentyfirst value of the coproduct as an option. The option contains the twentyfirst
     /// value or is empty if the coproduct contains different value.
     /// </summary>
     Option<T21> TwentyFirst { get; }

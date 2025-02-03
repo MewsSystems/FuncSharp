@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.Threading.Tasks;
 
@@ -8793,7 +8792,7 @@ public static class Coproduct21
     }
 
     /// <summary>
-    /// Creates a new 21-dimensional coproduct with the twenty-first value.
+    /// Creates a new 21-dimensional coproduct with the twentyfirst value.
     /// </summary>
     public static Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21> CreateTwentyFirst<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>(T21 value)
     {
@@ -8968,10 +8967,10 @@ public class Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
     }
 
     /// <summary>
-    /// Creates a new 21-dimensional coproduct with the specified value on the twentieth position.
+    /// Creates a new 21-dimensional coproduct with the specified value on the twentyfirst position.
     /// </summary>
-    public Coproduct21(T21 twentiethValue)
-        : this(21, twentiethValue)
+    public Coproduct21(T21 twentyfirstValue)
+        : this(21, twentyfirstValue)
     {
     }
 
@@ -9412,3 +9411,4 @@ public class Coproduct21<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
     }
 
 }
+
