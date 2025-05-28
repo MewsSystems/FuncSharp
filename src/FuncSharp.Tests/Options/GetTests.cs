@@ -18,7 +18,8 @@ public class GetTests
     {
         Assert.Equal(42, 42.ToOption().Get());
         Assert.Equal(42, (42 as int?).ToOption().Get());
-        Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get());
+        var exception = Assert.Throws<InvalidOperationException>(() => Option.Empty<int>().Get());
+        Assert.Contains(nameof(Int32), exception.Message);
         Assert.Throws<NullReferenceException>(() => Option.Empty<int>().Get(otherwise: _ => new NullReferenceException()));
     }
 
@@ -73,7 +74,12 @@ public class GetTests
         }
         else
         {
-            Assert.Throws<TException>(() => option.Get(otherwise));
+            var exception = Assert.Throws<TException>(() => option.Get(otherwise));
+
+            if (typeof(TException) == typeof(InvalidOperationException))
+            {
+                Assert.Contains(typeof(T).Name, exception.Message);
+            }
         }
     }
 }

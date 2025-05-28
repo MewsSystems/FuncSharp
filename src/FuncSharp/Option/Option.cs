@@ -140,7 +140,7 @@ public struct Option<A> : IOption, IEquatable<Option<A>>
         {
             throw otherwise(Unit.Value);
         }
-        throw new InvalidOperationException("An empty option does not have a value.");
+        throw new InvalidOperationException($"An empty option does not have a value of type '{typeof(A).Name}'");
     }
 
     [Pure]
@@ -154,7 +154,7 @@ public struct Option<A> : IOption, IEquatable<Option<A>>
         {
             throw otherwise(Unit.Value);
         }
-        throw new InvalidOperationException("An empty option does not have a value.");
+        throw new InvalidOperationException($"An empty option does not have a value of type '{typeof(A).Name}'");
     }
 
     [Pure]
