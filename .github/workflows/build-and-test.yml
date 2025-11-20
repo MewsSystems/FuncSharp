@@ -39,17 +39,14 @@ jobs:
     - name: Build
       run: dotnet build --configuration $config --no-restore
     
-    - name: Test (.NET 8)
-      run: dotnet test --no-restore --no-build --configuration $config --framework net8.0 --logger "trx;LogFileName=test-results-net8.trx" || true
-    
-    - name: Test (.NET 10)
-      run: dotnet test --no-restore --no-build --configuration $config --framework net10.0 --logger "trx;LogFileName=test-results-net10.trx" || true
+    - name: Test
+      run: dotnet test --no-restore --no-build --configuration $config --logger "trx;LogFileName=test-results.trx" || true
 
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()
       with:
         name: Mews.FuncSharp Tests report
-        path: "**/test-results-*.trx"
+        path: "**/test-results.trx"
         reporter: dotnet-trx
         fail-on-error: true
