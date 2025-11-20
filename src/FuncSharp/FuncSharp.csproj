@@ -2,9 +2,9 @@
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>CS1591</NoWarn>
-    <Version>10.0.4</Version>
-    <AssemblyVersion>10.0.4</AssemblyVersion>
-    <FileVersion>10.0.4</FileVersion>
+    <Version>10.0.5</Version>
+    <AssemblyVersion>10.0.5</AssemblyVersion>
+    <FileVersion>10.0.5</FileVersion>
     <PackageId>FuncSharp</PackageId>
     <Description>A C# library with main purpose to reduce boilerplate code and avoid bugs thanks to stronger typing. Utilizes many concepts from functional programming languages that are also applicable in C#. Originally written by Honza Široký.</Description>
     <Authors>Mews, Honza Široký</Authors>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/MewsSystems/FuncSharp</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Added type of Option to Empty exception to improve trazebility.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added NET10.0 compatability</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/MewsSystems/FuncSharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -21,7 +21,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
     <Product>FuncSharp</Product>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
