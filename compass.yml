@@ -1,0 +1,18 @@
+name: FuncSharp
+id: ari:cloud:compass:9cb80e14-6d83-4419-a743-3b8c78b0bf7f:component/4cc129c1-d8a1-41b8-bb4e-b20a5e598709/0a3fdcad-2a64-4194-aee9-6580a88e5b20
+description: Functional programming in C#.
+configVersion: 1
+typeId: SERVICE
+ownerId: null
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/MewsSystems/FuncSharp
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:c#
+  - source:github
+customFields: null
