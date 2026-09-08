@@ -1,5 +1,20 @@
 # FuncSharp - Functional C&#35;
 
+> [!WARNING]
+> **FuncSharp is out of support.** The repository is no longer maintained. The published [NuGet packages](https://www.nuget.org/packages/FuncSharp/) remain available.
+>
+> If you like the concepts, check out **[StrongTypes](https://github.com/KaliCZ/StrongTypes)**. It carries them forward (`Option` as `Maybe<T>`, `Try` as `Result<T, TError>`, plus `NonEmptyString`, `NonEmptyEnumerable<T>`, the numeric wrappers and intervals) with a few improvements:
+>
+> - Built on .NET 10 and C# 14.
+> - Nullable reference types throughout: `TryCreate` returns `NonEmptyString?` rather than `Option<NonEmptyString>`.
+> - Pattern matching is supported: `if (maybe.Value is { } v)` and `if (result.Error is { } e)`.
+> - Generic numeric wrappers: `Positive<T>` over any `INumber<T>` replaces `PositiveInt`, `PositiveLong`, `PositiveDecimal`, …
+> - End-to-end support with no extra work: use the types in your requests, logic and DB models and it works.
+>   - JSON: `System.Text.Json` converters ship with the types, so invalid JSON fails at deserialization.
+>   - Database: the types can be stored directly in EF Core entities via the EfCore package.
+>   - OpenAPI: the generated schema matches the wire JSON, so frontend clients get the right types, via the OpenApi.Microsoft or OpenApi.Swashbuckle package.
+> - Roslyn analyzers with code fixes shipped inside the package.
+
 <p align="center">
     <a href="https://mews.com">
         <img alt="Mews" height="100px" src="https://user-images.githubusercontent.com/435787/129971779-2c64348e-05a3-49d0-b026-91913ffd68dc.png">
