@@ -9,10 +9,10 @@
 > - Nullable reference types throughout: `TryCreate` returns `NonEmptyString?` rather than `Option<NonEmptyString>`.
 > - Pattern matching is supported: `if (maybe.Value is { } v)` and `if (result.Error is { } e)`.
 > - Generic numeric wrappers: `Positive<T>` over any `INumber<T>` replaces `PositiveInt`, `PositiveLong`, `PositiveDecimal`, …
-> - End-to-end support with no extra work: use the types in your requests, logic and DB models and it works.
->   - JSON: `System.Text.Json` converters ship with the types, so invalid JSON fails at deserialization.
->   - Database: the types can be stored directly in EF Core entities via the EfCore package.
->   - OpenAPI: the generated schema matches the wire JSON, so frontend clients get the right types, via the OpenApi.Microsoft or OpenApi.Swashbuckle package.
+> - The same types work end to end - in your requests, your logic and your DB models. JSON needs nothing; EF Core and OpenAPI have companion packages to install and register:
+>   - JSON: the `System.Text.Json` converters are attached to the types via `[JsonConverter]`, so nothing needs registering and invalid JSON fails at deserialization.
+>   - Database: [`Kalicz.StrongTypes.EfCore`](https://www.nuget.org/packages/Kalicz.StrongTypes.EfCore/) provides the EF Core value converters that map the wrappers to their underlying column types - see its [setup docs](https://github.com/KaliCZ/StrongTypes/blob/main/src/StrongTypes.EfCore/readme.md).
+>   - OpenAPI: [`Kalicz.StrongTypes.OpenApi.Microsoft`](https://www.nuget.org/packages/Kalicz.StrongTypes.OpenApi.Microsoft/) ([setup](https://github.com/KaliCZ/StrongTypes/blob/main/src/StrongTypes.OpenApi.Microsoft/readme.md)) and [`Kalicz.StrongTypes.OpenApi.Swashbuckle`](https://www.nuget.org/packages/Kalicz.StrongTypes.OpenApi.Swashbuckle/) ([setup](https://github.com/KaliCZ/StrongTypes/blob/main/src/StrongTypes.OpenApi.Swashbuckle/readme.md)) make the generated schema match the wire JSON, so generated clients get the right types.
 > - Roslyn analyzers with code fixes shipped inside the package.
 
 <p align="center">
