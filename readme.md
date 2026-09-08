@@ -1,5 +1,20 @@
 # FuncSharp - Functional C&#35;
 
+> [!WARNING]
+> **FuncSharp is out of support.** The repository is no longer maintained. The published [NuGet packages](https://www.nuget.org/packages/FuncSharp/) remain available.
+>
+> If you like the concepts, check out **[StrongTypes](https://github.com/KaliCZ/StrongTypes)**. It carries them forward (`Option` as `Maybe<T>`, `Try` as `Result<T, TError>`, plus `NonEmptyString`, `NonEmptyEnumerable<T>`, the numeric wrappers and intervals) with a few improvements:
+>
+> - Built on .NET 10 and C# 14.
+> - Nullable reference types throughout: `TryCreate` returns `NonEmptyString?` rather than `Option<NonEmptyString>`.
+> - Pattern matching is supported: `if (maybe.Value is { } v)` and `if (result.Error is { } e)`.
+> - Generic numeric wrappers: `Positive<T>` over any `INumber<T>` replaces `PositiveInt`, `PositiveLong`, `PositiveDecimal`, …
+> - The same types work end to end - in your requests, your logic and your DB models. JSON needs nothing; EF Core and OpenAPI have companion packages to install and register:
+>   - JSON: the `System.Text.Json` converters are attached to the types via `[JsonConverter]`, so nothing needs registering and invalid JSON fails at deserialization.
+>   - Database: [`Kalicz.StrongTypes.EfCore`](https://www.nuget.org/packages/Kalicz.StrongTypes.EfCore/) provides the EF Core value converters that map the wrappers to their underlying column types - see its [setup docs](https://github.com/KaliCZ/StrongTypes/blob/main/src/StrongTypes.EfCore/readme.md).
+>   - OpenAPI: [`Kalicz.StrongTypes.OpenApi.Microsoft`](https://www.nuget.org/packages/Kalicz.StrongTypes.OpenApi.Microsoft/) ([setup](https://github.com/KaliCZ/StrongTypes/blob/main/src/StrongTypes.OpenApi.Microsoft/readme.md)) and [`Kalicz.StrongTypes.OpenApi.Swashbuckle`](https://www.nuget.org/packages/Kalicz.StrongTypes.OpenApi.Swashbuckle/) ([setup](https://github.com/KaliCZ/StrongTypes/blob/main/src/StrongTypes.OpenApi.Swashbuckle/readme.md)) make the generated schema match the wire JSON, so generated clients get the right types.
+> - Roslyn analyzers with code fixes shipped inside the package.
+
 <p align="center">
     <a href="https://mews.com">
         <img alt="Mews" height="100px" src="https://user-images.githubusercontent.com/435787/129971779-2c64348e-05a3-49d0-b026-91913ffd68dc.png">
